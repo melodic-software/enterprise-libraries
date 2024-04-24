@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Constants" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Constants\Enterprise.Constants.csproj" />
     <ProjectReference Include="..\Enterprise.Logging\Enterprise.Logging.csproj" />
   </ItemGroup>
 

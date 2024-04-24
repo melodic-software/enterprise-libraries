@@ -35,19 +35,19 @@ public class ValidationExceptionHandler : IExceptionHandler
 
         if (useJson)
         {
-            await CreateJsonResponse(httpContext, cancellationToken, dictionary);
+            await CreateJsonResponseAsync(httpContext, cancellationToken, dictionary);
         }
         else
         {
             // TODO: Serialize to XML and set Content-Type appropriately (application/xml)
             // For now, we're just going to return JSON.
-            await CreateJsonResponse(httpContext, cancellationToken, dictionary);
+            await CreateJsonResponseAsync(httpContext, cancellationToken, dictionary);
         }
 
         return true;
     }
 
-    private static async Task CreateJsonResponse(HttpContext httpContext, CancellationToken cancellationToken, Dictionary<string, string[]> dictionary)
+    private static async Task CreateJsonResponseAsync(HttpContext httpContext, CancellationToken cancellationToken, Dictionary<string, string[]> dictionary)
     {
         JsonSerializerOptions serializerOptions = JsonSerializerOptionsService.GetDefaultOptions();
         await httpContext.Response.WriteAsJsonAsync(dictionary, serializerOptions, cancellationToken: cancellationToken);

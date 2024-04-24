@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Enterprise.MultiTenancy\Enterprise.MultiTenancy.csproj" />
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
   </ItemGroup>

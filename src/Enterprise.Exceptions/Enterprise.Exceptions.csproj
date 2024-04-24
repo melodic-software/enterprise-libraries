@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Validation\Enterprise.Validation.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.1" />
   </ItemGroup>
 
 </Project>

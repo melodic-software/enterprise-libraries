@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Constants\Enterprise.Constants.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Constants" Version="1.0.0-preview.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Enterprise.Mapping\Enterprise.Mapping.csproj" />
   </ItemGroup>
 

@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Constants\Enterprise.Constants.csproj" />
-    <ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Constants" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
   </ItemGroup>
 
 </Project>

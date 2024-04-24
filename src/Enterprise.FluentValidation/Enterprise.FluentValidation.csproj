@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Enterprise.Exceptions\Enterprise.Exceptions.csproj" />
-    <ProjectReference Include="..\Enterprise.Validation\Enterprise.Validation.csproj" />
   </ItemGroup>
 
 </Project>

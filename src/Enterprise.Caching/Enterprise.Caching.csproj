@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />
+    <!--<ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />-->
     <ProjectReference Include="..\Enterprise.Library.Core\Enterprise.Library.Core.csproj" />
     <ProjectReference Include="..\Enterprise.Reflection\Enterprise.Reflection.csproj" />
   </ItemGroup>

@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Enterprise.DesignPatterns\Enterprise.DesignPatterns.csproj" />
     <ProjectReference Include="..\Enterprise.Messages.Core\Enterprise.Messages.Core.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
   </ItemGroup>
 
 </Project>

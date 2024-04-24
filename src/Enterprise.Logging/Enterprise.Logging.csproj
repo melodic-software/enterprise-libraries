@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.TextEncoding" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.22.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -19,11 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Hosting\Enterprise.Hosting.csproj" />
-    <ProjectReference Include="..\Enterprise.Logging.Core\Enterprise.Logging.Core.csproj" />
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
-    <ProjectReference Include="..\Enterprise.TextEncoding\Enterprise.TextEncoding.csproj" />
   </ItemGroup>
 
 </Project>

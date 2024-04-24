@@ -22,6 +22,8 @@
     <PackageReference Include="IdentityModel" Version="7.0.0" />
     <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.2.0" />
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
+    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.4" />
@@ -74,11 +76,9 @@
     <ProjectReference Include="..\Enterprise.MultiTenancy.AspNetCore\Enterprise.MultiTenancy.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Quartz\Enterprise.Quartz.csproj" />
     <ProjectReference Include="..\Enterprise.Redis\Enterprise.Redis.csproj" />
-    <ProjectReference Include="..\Enterprise.Serialization.Json\Enterprise.Serialization.Json.csproj" />
     <ProjectReference Include="..\Enterprise.Serilog.AspNetCore\Enterprise.Serilog.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Sqlite\Enterprise.Sqlite.csproj" />
     <ProjectReference Include="..\Enterprise.Traceability\Enterprise.Traceability.csproj" />
-    <ProjectReference Include="..\Enterprise.Validation\Enterprise.Validation.csproj" />
   </ItemGroup>
 
 </Project>

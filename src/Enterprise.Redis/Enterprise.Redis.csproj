@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Enterprise.Caching\Enterprise.Caching.csproj" />
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
   </ItemGroup>
 
 </Project>

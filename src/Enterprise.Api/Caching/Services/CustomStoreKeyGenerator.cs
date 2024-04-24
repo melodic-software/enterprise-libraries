@@ -23,12 +23,12 @@ public class CustomStoreKeyGenerator : IStoreKeyGenerator
 
     public async Task<StoreKey> GenerateStoreKey(StoreKeyContext context)
     {
-        StoreKey storeKey = await EnrichDefaultStoreKey(context);
+        StoreKey storeKey = await EnrichDefaultStoreKeyAsync(context);
         //StoreKey customStoreKey = await GenerateCustomStoreKey(context);
         return storeKey;
     }
 
-    private async Task<StoreKey> EnrichDefaultStoreKey(StoreKeyContext context)
+    private async Task<StoreKey> EnrichDefaultStoreKeyAsync(StoreKeyContext context)
     {
         StoreKey storeKey = await _defaultStoreKeyGenerator.GenerateStoreKey(context);
 
