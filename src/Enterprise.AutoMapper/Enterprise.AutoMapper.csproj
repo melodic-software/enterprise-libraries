@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.Api.Client\Enterprise.Api.Client.csproj" />
+    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
+    <ProjectReference Include="..\Enterprise.Queries\Enterprise.Queries.csproj" />
+    <ProjectReference Include="..\Enterprise.Reflection\Enterprise.Reflection.csproj" />
+  </ItemGroup>
+
+</Project>

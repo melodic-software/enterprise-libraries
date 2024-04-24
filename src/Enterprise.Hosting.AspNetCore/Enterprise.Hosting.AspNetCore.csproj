@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title>Enterprise Hosting (ASP.NET Core)</Title>
+    <Description>Contains components that extend and configure .NET core hosting in ASP.NET Core apps.</Description>
+    <PackageTags>Hosting AspNetCore</PackageTags>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
+  <ItemGroup>
+	<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.Hosting\Enterprise.Hosting.csproj" />
+    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
+    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
+  </ItemGroup>
+
+</Project>

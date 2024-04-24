@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />
+    <ProjectReference Include="..\Enterprise.MultiTenancy\Enterprise.MultiTenancy.csproj" />
+    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
+  </ItemGroup>
+
+</Project>

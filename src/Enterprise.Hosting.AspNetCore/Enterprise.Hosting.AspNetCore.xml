@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Hosting.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Hosting.AspNetCore.Configuration.IISConfigService">
+            <summary>
+            ASP.NET Core applications are by default self-hosted.
+            If we want to host our applications on IIS, we need to configure an IIS integration that will eventually help us with the deployment to IIS.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Hosting.AspNetCore.Options.IISIntegrationOptions.AutomaticAuthentication">
+            <summary>
+            When set to true, the authentication middleware sets the HttpContext.User and responds to generic challenges.
+            If false, the authentication middleware only provides an identity (HttpContext.User) and responds to challenges
+            when explicitly requested by the authentication scheme.
+            NOTE: Windows authentication must be enabled in IIS for automatic authentication to function.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Hosting.AspNetCore.Options.IISIntegrationOptions.AuthenticationDisplayName">
+            <summary>
+            Sets the display name shown to users on login pages.
+            The default is null.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Hosting.AspNetCore.Options.IISIntegrationOptions.ForwardClientCertificate">
+            <summary>
+            The HttpContext.Connection.ClientCertificate (ITLSConnectionFeature) is populated when this is set to true,
+            AND the "MS-ASPNETCORE-CLIENTCERT" request header is present.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.ApplicationServices\Enterprise.ApplicationServices.csproj" />
+    <ProjectReference Include="..\Enterprise.Caching\Enterprise.Caching.csproj" />
+    <ProjectReference Include="..\Enterprise.DomainDrivenDesign\Enterprise.DomainDrivenDesign.csproj" />
+    <ProjectReference Include="..\Enterprise.Events\Enterprise.Events.csproj" />
+    <ProjectReference Include="..\Enterprise.Exceptions\Enterprise.Exceptions.csproj" />
+    <ProjectReference Include="..\Enterprise.FluentValidation\Enterprise.FluentValidation.csproj" />
+    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
+    <ProjectReference Include="..\Enterprise.Reflection\Enterprise.Reflection.csproj" />
+  </ItemGroup>
+
+</Project>

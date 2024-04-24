@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.DateTimes\Enterprise.DateTimes.csproj" />
+    <ProjectReference Include="..\Enterprise.DomainDrivenDesign\Enterprise.DomainDrivenDesign.csproj" />
+    <ProjectReference Include="..\Enterprise.Exceptions\Enterprise.Exceptions.csproj" />
+    <ProjectReference Include="..\Enterprise.Patterns.Outbox\Enterprise.Patterns.Outbox.csproj" />
+    <ProjectReference Include="..\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
+    <ProjectReference Include="..\Enterprise.Serialization.Json\Enterprise.Serialization.Json.csproj" />
+  </ItemGroup>
+
+</Project>

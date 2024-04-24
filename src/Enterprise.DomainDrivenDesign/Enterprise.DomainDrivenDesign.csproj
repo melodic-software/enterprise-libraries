@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DomainServices\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<ProjectReference Include="..\Enterprise.Domain\Enterprise.Domain.csproj" />-->
+    <ProjectReference Include="..\Enterprise.EventSourcing\Enterprise.EventSourcing.csproj" />
+    <ProjectReference Include="..\Enterprise.ValueObjects\Enterprise.ValueObjects.csproj" />
+  </ItemGroup>
+
+</Project>
