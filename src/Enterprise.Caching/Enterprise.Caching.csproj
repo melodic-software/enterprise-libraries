@@ -4,16 +4,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>Enterprise Caching</Title>
+    <Description>Provides and registers pre-built caching services that can be used in any .NET application.</Description>
+    <PackageTags></PackageTags>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstractions\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.2" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
   </ItemGroup>
 
 </Project>
