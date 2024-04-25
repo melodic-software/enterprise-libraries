@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Enterprise.Reflection.Attributes\Enterprise.Reflection.Attributes.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
   </ItemGroup>
 
 </Project>

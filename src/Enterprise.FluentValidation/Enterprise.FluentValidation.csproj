@@ -8,10 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Exceptions\Enterprise.Exceptions.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.2" />
   </ItemGroup>
 
 </Project>

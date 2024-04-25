@@ -11,13 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.2" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.2" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!--<ProjectReference Include="..\Enterprise.DI.Core\Enterprise.DI.Core.csproj" />-->
-    <ProjectReference Include="..\Enterprise.Library.Core\Enterprise.Library.Core.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection\Enterprise.Reflection.csproj" />
   </ItemGroup>
 
 </Project>

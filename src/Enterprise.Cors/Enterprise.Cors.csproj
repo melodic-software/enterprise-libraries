@@ -11,8 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
-    <ProjectReference Include="..\Enterprise.Reflection\Enterprise.Reflection.csproj" />
   </ItemGroup>
 
 </Project>

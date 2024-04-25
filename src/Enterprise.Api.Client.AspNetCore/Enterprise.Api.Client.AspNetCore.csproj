@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Api.Client\Enterprise.Api.Client.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Api.Client" Version="1.0.0-preview.2" />
   </ItemGroup>
 
 </Project>

@@ -17,12 +17,12 @@ public class CustomETagGenerator : IETagGenerator
 
     public async Task<ETag> GenerateETag(StoreKey storeKey, string responseBodyContent)
     {
-        ETag eTag = await GenerateDefaultETag(storeKey, responseBodyContent);
+        ETag eTag = await GenerateDefaultETagAsync(storeKey, responseBodyContent);
         //ETag customETag = await GenerateCustomETag(storeKey, responseBodyContent);
         return eTag;
     }
 
-    private async Task<ETag> GenerateDefaultETag(StoreKey storeKey, string responseBodyContent)
+    private async Task<ETag> GenerateDefaultETagAsync(StoreKey storeKey, string responseBodyContent)
     {
         ETag? eTag = await _defaultStrongETagGenerator.GenerateETag(storeKey, responseBodyContent);
 

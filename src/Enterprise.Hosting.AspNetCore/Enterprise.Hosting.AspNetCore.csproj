@@ -16,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Hosting\Enterprise.Hosting.csproj" />
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
   </ItemGroup>
 
