@@ -103,9 +103,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.ModularMonoliths
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Monitoring", "src\Enterprise.Monitoring\Enterprise.Monitoring.csproj", "{304B6644-9ACD-44AA-9067-261033386EEB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MultiTenancy", "src\Enterprise.MultiTenancy\Enterprise.MultiTenancy.csproj", "{7F3AF5D4-591B-4E95-972D-7AFD5668FC23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MultiTenancy-TEMP", "src\Enterprise.MultiTenancy\Enterprise.MultiTenancy-TEMP.csproj", "{7F3AF5D4-591B-4E95-972D-7AFD5668FC23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MultiTenancy.AspNetCore", "src\Enterprise.MultiTenancy.AspNetCore\Enterprise.MultiTenancy.AspNetCore.csproj", "{C92A4409-2ED9-4EFF-A228-BFDDE7F8D0F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MultiTenancy.AspNetCore-TEMP", "src\Enterprise.MultiTenancy.AspNetCore\Enterprise.MultiTenancy.AspNetCore-TEMP.csproj", "{C92A4409-2ED9-4EFF-A228-BFDDE7F8D0F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.NLog", "src\Enterprise.NLog\Enterprise.NLog.csproj", "{FBECAE53-61AF-49BB-B403-21E9822A21B4}"
 EndProject
