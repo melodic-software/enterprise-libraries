@@ -10,11 +10,8 @@
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Melodic.Enterprise.Api.Client" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.4" />
+    <PackageReference Include="Melodic.Enterprise.Queries" Version="1.0.0-preview.7" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Queries\Enterprise.Queries.csproj" />
   </ItemGroup>
 
 </Project>
