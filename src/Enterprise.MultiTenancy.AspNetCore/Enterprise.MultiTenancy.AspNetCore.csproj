@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Enterprise.MultiTenancy\Enterprise.MultiTenancy.csproj" />
-    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
   </ItemGroup>
 
 </Project>

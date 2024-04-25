@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.DI\Enterprise.DI.csproj" />
-    <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
+    <PackageReference Include="Melodic.Enterprise.DI" Version="1.0.0-preview.3" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.4" />
   </ItemGroup>
 
 </Project>
