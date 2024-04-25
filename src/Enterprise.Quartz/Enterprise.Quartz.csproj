@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.16" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.17" />
     <PackageReference Include="Quartz.Extensions.Hosting" Version="3.8.1" />
   </ItemGroup>
 

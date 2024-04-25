@@ -1,5 +1,5 @@
-﻿using Enterprise.MultiTenancy.Abstractions;
-using Enterprise.MultiTenancy.Options;
+﻿using Enterprise.Multitenancy.Abstractions;
+using Enterprise.Multitenancy.Options;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.AspNetCore.MultiTenancy

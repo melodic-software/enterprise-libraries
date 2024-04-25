@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Enterprise.EntityFramework.Properties;
-using Enterprise.MultiTenancy.Abstractions;
+using Enterprise.Multitenancy.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;

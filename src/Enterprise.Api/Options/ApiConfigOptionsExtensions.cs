@@ -16,7 +16,7 @@ using Enterprise.Logging.Providers;
 using Enterprise.Logging.TraceListeners;
 using Enterprise.MediatR.Options;
 using Enterprise.Monitoring.Health.Options;
-using Enterprise.MultiTenancy.Options;
+using Enterprise.Multitenancy.Options;
 using Enterprise.Quartz.Options;
 using Enterprise.Redis.Options;
 using Enterprise.Serilog.Options;
