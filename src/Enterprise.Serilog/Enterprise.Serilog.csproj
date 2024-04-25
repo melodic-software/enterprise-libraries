@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Destructurama.Attributed" Version="4.0.0" />
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Logging" Version="1.0.0-preview.5" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
@@ -18,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Logging\Enterprise.Logging.csproj" />
     <ProjectReference Include="..\Enterprise.MediatR\Enterprise.MediatR.csproj" />
   </ItemGroup>
 

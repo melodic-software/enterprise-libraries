@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.EventSourcing" Version="1.0.0-preview.5" />
     <PackageReference Include="Melodic.Enterprise.ValueObjects" Version="1.0.0-preview.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.EventSourcing\Enterprise.EventSourcing.csproj" />
   </ItemGroup>
 
 </Project>

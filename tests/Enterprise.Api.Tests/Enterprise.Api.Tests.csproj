@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Testing.AspNetCore" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="xunit" Version="2.7.1" />
@@ -25,7 +26,6 @@
 
   <ItemGroup>
   	<ProjectReference Include="..\..\src\Enterprise.Api\Enterprise.Api.csproj" />
-  	<ProjectReference Include="..\..\src\Enterprise.Testing.AspNetCore\Enterprise.Testing.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

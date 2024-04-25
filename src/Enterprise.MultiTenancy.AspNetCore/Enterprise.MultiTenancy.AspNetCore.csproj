@@ -12,10 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.MultiTenancy\Enterprise.MultiTenancy.csproj" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy" Version="1.0.0-preview.5" />
   </ItemGroup>
 
 </Project>
