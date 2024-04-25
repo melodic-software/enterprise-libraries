@@ -1,4 +1,4 @@
-﻿using Enterprise.MultiTenancy.AspNetCore.Constants;
+﻿using Enterprise.Multitenancy.AspNetCore.Constants;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

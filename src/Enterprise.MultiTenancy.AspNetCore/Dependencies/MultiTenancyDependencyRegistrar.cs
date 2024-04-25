@@ -1,7 +1,7 @@
 ﻿using Enterprise.DI.Core.Registration;
-using Enterprise.MultiTenancy.Abstractions;
+using Enterprise.Multitenancy.Abstractions;
 using Enterprise.Multitenancy.AspNetCore.Services;
-using Enterprise.MultiTenancy.Options;
+using Enterprise.Multitenancy.Options;
 using Enterprise.Options.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

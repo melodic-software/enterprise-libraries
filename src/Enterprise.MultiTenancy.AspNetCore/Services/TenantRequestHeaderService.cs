@@ -1,5 +1,5 @@
-﻿using Enterprise.MultiTenancy.Abstractions;
-using Enterprise.MultiTenancy.Exceptions;
+﻿using Enterprise.Multitenancy.Abstractions;
+using Enterprise.Multitenancy.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
