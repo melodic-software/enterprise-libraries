@@ -24,6 +24,7 @@
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.4" />
+    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.8" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.5" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.1" />
@@ -77,7 +78,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.AutoMapper\Enterprise.AutoMapper.csproj" />
     <ProjectReference Include="..\Enterprise.Serilog.AspNetCore\Enterprise.Serilog.AspNetCore.csproj" />
   </ItemGroup>
 
