@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Enterprise.Logging.Core\Enterprise.Logging.Core.csproj" />
+    <ProjectReference Include="..\..\src\Enterprise.Serilog\Enterprise.Serilog.csproj" />
   </ItemGroup>
 
 </Project>
