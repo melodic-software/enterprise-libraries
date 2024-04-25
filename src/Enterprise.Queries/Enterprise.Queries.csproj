@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.6" />
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.DomainDrivenDesign\Enterprise.DomainDrivenDesign.csproj" />
   </ItemGroup>
 
 </Project>

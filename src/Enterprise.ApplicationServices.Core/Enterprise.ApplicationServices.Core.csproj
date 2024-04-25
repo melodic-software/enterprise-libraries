@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.6" />
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Messages.Core" Version="1.0.0-preview.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Events.Facade\Enterprise.Events.Facade.csproj" />
   </ItemGroup>
 
 </Project>

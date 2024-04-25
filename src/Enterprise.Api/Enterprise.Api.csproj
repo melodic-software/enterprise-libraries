@@ -29,6 +29,7 @@
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.5" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.2" />
+    <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.6" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.5" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.5" />
@@ -76,7 +77,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Enterprise.AutoMapper\Enterprise.AutoMapper.csproj" />
-    <ProjectReference Include="..\Enterprise.Logging.AspNetCore\Enterprise.Logging.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.MultiTenancy.AspNetCore\Enterprise.MultiTenancy.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Serilog.AspNetCore\Enterprise.Serilog.AspNetCore.csproj" />
   </ItemGroup>
