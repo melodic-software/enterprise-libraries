@@ -1,4 +1,4 @@
-﻿namespace Enterprise.MultiTenancy.Exceptions
+﻿namespace Enterprise.Multitenancy.Exceptions
 {
     /// <summary>
     /// This exception is thrown when a request to get a tenant ID has been made, and it can't be resolved.

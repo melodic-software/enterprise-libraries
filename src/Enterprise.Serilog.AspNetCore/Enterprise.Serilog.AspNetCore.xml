@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Serilog.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Serilog.AspNetCore.Lifecycle.AspNetCoreLifecycleManager">
+            <summary>
+            Manages the lifecycle for ASP.NET Core applications, ensuring Serilog is properly flushed on shutdown.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Serilog.AspNetCore.Lifecycle.AspNetCoreLifecycleManager.Initialize(Microsoft.Extensions.Hosting.IHostApplicationLifetime)">
+            <summary>
+            Initializes lifecycle management for ASP.NET Core applications.
+            This method registers an action to flush Serilog logs when the application is stopping.
+            </summary>
+            <param name="appLifetime">The application lifetime management service.</param>
+        </member>
+        <member name="T:Enterprise.Serilog.AspNetCore.Lifecycle.LifecycleHostedService">
+            <summary>
+            A hosted service that initializes the <see cref="T:Enterprise.Serilog.AspNetCore.Lifecycle.AspNetCoreLifecycleManager"/> when the application starts.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Serilog.AspNetCore.Lifecycle.LifecycleHostedService.#ctor(Microsoft.Extensions.Hosting.IHostApplicationLifetime)">
+            <summary>
+            Creates a new instance of the <see cref="T:Enterprise.Serilog.AspNetCore.Lifecycle.LifecycleHostedService"/>.
+            </summary>
+            <param name="appLifetime">The application lifetime management service.</param>
+        </member>
+        <member name="M:Enterprise.Serilog.AspNetCore.Lifecycle.LifecycleHostedService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Called when the application host is ready to start the service.
+            </summary>
+            <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+        </member>
+        <member name="M:Enterprise.Serilog.AspNetCore.Lifecycle.LifecycleHostedService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is performing a graceful shutdown.
+            </summary>
+            <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
+        </member>
+    </members>
+</doc>

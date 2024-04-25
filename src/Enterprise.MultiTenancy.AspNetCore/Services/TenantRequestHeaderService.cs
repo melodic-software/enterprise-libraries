@@ -3,9 +3,9 @@ using Enterprise.MultiTenancy.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
-using static Enterprise.MultiTenancy.AspNetCore.Constants.TenantConstants;
+using static Enterprise.Multitenancy.AspNetCore.Constants.TenantConstants;
 
-namespace Enterprise.MultiTenancy.AspNetCore.Services;
+namespace Enterprise.Multitenancy.AspNetCore.Services;
 
 /// <summary>
 /// This implementation allows for clients to impersonate any tenant if they know the tenant ID.

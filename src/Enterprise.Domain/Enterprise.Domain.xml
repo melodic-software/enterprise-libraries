@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Domain.Events.IClearDomainEvents">
+            <summary>
+            Provides a mechanism for clearing domain events.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Events.IClearDomainEvents.ClearDomainEvents">
+            <summary>
+            Clear the collection of domain events.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Domain.Events.IGetDomainEvents">
+            <summary>
+            Allows implementations to expose a collection of domain events.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Events.IGetDomainEvents.GetDomainEvents">
+            <summary>
+            Get the collection of domain events.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Domain.Events.IRecordDomainEvents">
+            <summary>
+            Implementations allow for public recording of domain events.
+            Some paradigms like domain driven design suggest that this functionality should not be publicly accessible.
+            In those cases, this interface should not be used. The recording should be encapsulated internally and triggered by use case specific methods.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Domain.Events.Model.Abstract.IDomainEvent">
+            <summary>
+            Represents an event that happened within the system that is of importance to the business.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.Domain.Events.Raising.IRaiseDomainEvents">
+            <summary>
+            Raises domain events and optionally executes callbacks using an external callback service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raise domain events and execute any registered callbacks associated with each event.
+            </summary>
+            <param name="domainEvents"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raise domain events and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="domainEvent"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents">
+            <summary>
+            Raises domain events recorded by entities and optionally executes callbacks using an external callback service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raise domain events recorded by each entity and execute any registered callbacks associated with each event.
+            </summary>
+            <param name="entities"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raise domain events recorded by the entity and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="entity"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvent(Enterprise.Patterns.ResultPattern.Errors.IError)">
+            <summary>
+            Translate the error to a <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> event.
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvents(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Translate the errors to <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> events.
+            </summary>
+            <param name="errors"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Domain.Validation.Ensure">
+            <summary>
+            Provides guard clause methods for validating strings.
+            These methods throw exceptions when validation fails, preventing further execution.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Domain.Validation.Ensure.NotNullOrEmpty(System.String,System.String)">
+            <summary>
+            Validates that a given string is not null or empty.
+            </summary>
+            <param name="value">The string to validate.</param>
+            <param name="paramName">
+            The name of the parameter being validated, captured automatically.
+            This is used in the exception message to identify the failing parameter.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the input string is null or empty.
+            </exception>
+        </member>
+        <member name="M:Enterprise.Domain.Validation.Ensure.NotNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Validates that a given string is not null, empty, or composed only of white-space characters.
+            </summary>
+            <param name="value">The string to validate.</param>
+            <param name="paramName">
+            The name of the parameter being validated, captured automatically.
+            This is used in the exception message to identify the failing parameter.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the input string is null, empty, or white-space.
+            </exception>
+        </member>
+    </members>
+</doc>

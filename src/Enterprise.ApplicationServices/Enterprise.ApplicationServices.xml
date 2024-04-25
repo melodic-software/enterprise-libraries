@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.ApplicationServices</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.ApplicationServices.CommandHandlers.CommandHandlerResolver.GetHandlerFor``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.QueryHandlers.QueryHandlerResolver.GetQueryHandler``2(``0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.ApplicationServices.QueryHandlers.SimpleQueryHandler`2">
+            <summary>
+            Most query handler implementations end up being pretty thin...
+            Some pragmatic approaches involve writing the data access code directly in the handler, but this violates clean architecture.
+            One solution is to use a prebuilt handler implementation which requires a query logic implementation.
+            We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.QueryHandlers.SimpleQueryHandler`2.#ctor(Enterprise.Events.Facade.Abstract.IEventServiceFacade,Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic{`0,`1})">
+            <summary>
+            Most query handler implementations end up being pretty thin and add a lot of overhead.
+            A pragmatic approach to this would be to just write the data access code directly in the handler, but this violates clean architecture.
+            One solution that retains clean architecture is to use a prebuilt handler implementation which requires an implementation of a query logic abstraction.
+            We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
+            </summary>
+            <param name="eventServiceFacade"></param>
+            <param name="queryLogic"></param>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.QueryHandlers.SimpleQueryHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

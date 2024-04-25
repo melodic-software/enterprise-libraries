@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Library.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Library.Core.Extensions.ListExtensions.AddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Adds the elements of the specified collection to the end of the <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <param name="list">The list to which elements will be added. Must not be null.</param>
+            <param name="items">The collection of elements to add to the list. Must not be null.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if either <paramref name="list"/> or <paramref name="items"/> is null.</exception>
+            <exception cref="T:System.NotSupportedException">Thrown if <paramref name="list"/> is an array, as arrays cannot be resized.</exception>
+            <remarks>
+            If <paramref name="list"/> is an instance of <see cref="T:System.Collections.Generic.List`1"/>, this method uses the more efficient <see cref="T:System.Collections.Generic.List`1"/>.AddRange method.
+            If not, it adds items one by one using <see cref="T:System.Collections.Generic.IList`1"/>.Add method.
+            This method does not support adding items to arrays as they are fixed size.
+            </remarks>
+        </member>
+    </members>
+</doc>

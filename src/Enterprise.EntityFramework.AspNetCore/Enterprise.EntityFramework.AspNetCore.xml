@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.EntityFramework.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventQueueConstants.DomainEventQueueKey">
+            <summary>
+            Key for accessing the domain events queue stored in the HTTP context.
+            </summary>
+        </member>
+        <member name="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1">
+            <summary>
+            Middleware that raises queued domain events after the HTTP response has finished being sent to the client.
+            In most cases, the handlers deal with side effects and external integration event publications.
+            Side effects would potentially involve updates to other aggregate roots within the same bounded context.
+            This could be considered a form of eventual consistency within the context boundary.
+            This requires registration of <see cref="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventInterceptor"/> or the separate use of <see cref="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventQueueService"/>.
+            Use this OR <see cref="T:Enterprise.EntityFramework.Outbox.OutboxMessagesInterceptor"/> which internally uses <see cref="T:Enterprise.EntityFramework.Outbox.OutboxMessagePersistenceService"/>. Do not use BOTH!
+            The alternative approach is in process, the primary difference being that it has to be processed before the response is returned.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Enterprise.Domain.Events.Raising.IRaiseDomainEvents,Enterprise.Patterns.Outbox.Factory.OutboxMessageFactory,Microsoft.Extensions.Logging.ILogger{Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1"/> class.
+            </summary>
+            <param name="next">The next request delegate in the middleware pipeline.</param>
+            <param name="outboxMessageFactory"></param>
+            <param name="logger"></param>
+            <param name="eventRaiser"></param>
+        </member>
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,`0)">
+            <summary>
+            Registers a delegate to raise domain events.
+            The added behavior will only execute when the HTTP response has finished being sent to the client.
+            </summary>
+            <param name="httpContext"></param>
+            <param name="dbContext"></param>
+        </member>
+        <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationService.EnsureNoPendingMigrations``1(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            This ensures that migrations must be run before the application has been deployed and can start up.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="app"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+    </members>
+</doc>

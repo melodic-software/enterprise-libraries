@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Constants</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.Constants.RequestHeaderConstants.SecChUa">
+            <summary>
+            The Sec-CH-UA header, short for "Client Hints User-Agent", is part of the User-Agent Client Hints (UA-CH) feature.
+            It provides a more privacy-conscious and structured way for browsers to communicate information
+            about the user's device and browser to web servers.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Constants.RequestHeaderConstants.XForwardedFor">
+            <summary>
+            The X-Forwarded-For header is used to identify the originating IP address of a client connecting to
+            a web server through an HTTP proxy or load balancer.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Constants.RequestHeaderConstants.XClientSslProtocol">
+            <summary>
+            The x-client-ssl-protocol header is often used to specify the SSL/TLS protocol version that a client used to establish a connection.
+            This can be useful for logging, analytics, or enforcing security policies.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Monitoring</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Monitoring.Health.Model.UriGroup.#ctor(System.String,System.Net.Http.HttpMethod,System.String)">
+            <summary>
+            Create a new URI group.
+            </summary>
+            <param name="uri">The URI to use in the health check.</param>
+            <param name="httpMethod">Defaults to GET.</param>
+            <param name="name">This will be used as the health check name.</param>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.UrlPatternName">
+            <summary>
+            This is the path / resource that will be exposed
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.AllowAnonymous">
+            <summary>
+            If enabled, calls to the health check endpoint will not require authentication.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.OpenIdConnectAuthority">
+            <summary>
+            If provided, a health check will be enabled for the OpenIdConnect provider.
+            This is typically a security token service like "IdentityServer".
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.RedisConnectionString">
+            <summary>
+            If provided, a health check will be enabled for Redis.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.RabbitMqOptions">
+            <summary>
+            The options for configuring a RabbitMQ health check.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.SqlConnectionString">
+            <summary>
+            If provided, a SQL Server health check will be enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.UrlGroup">
+            <summary>
+            When populated, a health check will be added for each URI.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.AddHealthChecks">
+            <summary>
+            Allows for custom registrations of health checks specific to the executing application.
+            These can be entity framework DB contexts, SQL server databases, etc.
+            </summary>
+        </member>
+    </members>
+</doc>

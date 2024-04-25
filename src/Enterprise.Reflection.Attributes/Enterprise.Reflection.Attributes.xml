@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Reflection.Attributes</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Reflection.Attributes.Assemblies.AutoLoadAttribute">
+            <summary>
+            Indicates that an assembly should be automatically loaded.
+            </summary>
+        </member>
+    </members>
+</doc>

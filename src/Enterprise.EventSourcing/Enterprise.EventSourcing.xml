@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.EventSourcing</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.EventSourcing.Entities.IEventSourcedEntity">
+            <summary>
+            Defines the interface for entities that use event sourcing for state management
+            Such entities maintain their state by applying a sequence of events and can reconstitute their state from these events.
+            It extends basic entity capabilities with methods specific to event sourcing.
+            These include loading from history, applying events as state changes, and managing uncommitted changes.
+            </summary>
+            <summary>
+            An event-sourced entity combines the capabilities of a domain entity with event application and history management.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EventSourcing.Entities.IEventSourcedEntity.LoadFromHistory(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.Model.Abstract.IDomainEvent})">
+            <summary>
+            Loads the entity's state from a historical sequence of domain events.
+            This method is used to rehydrate an entity to its current state by replaying its event history.
+            </summary>
+            <param name="history">The enumerable collection of domain events.</param>
+        </member>
+        <member name="M:Enterprise.EventSourcing.Entities.IEventSourcedEntity.TakeSnapshot">
+            <summary>
+            Takes a snapshot of the aggregate's current state.
+            </summary>
+            <returns>A snapshot representing the state of the aggregate.</returns>
+        </member>
+        <member name="M:Enterprise.EventSourcing.Entities.IEventSourcedEntity.ApplySnapshot(Enterprise.EventSourcing.ISnapshot)">
+            <summary>
+            Applies a snapshot to restore the aggregate's state.
+            </summary>
+            <param name="snapshot">The snapshot to apply.</param>
+        </member>
+        <member name="M:Enterprise.EventSourcing.Entities.IEventSourcedEntity.GetUncommittedChanges">
+            <summary>
+            Retrieves a read-only list of uncommitted domain events.
+            These are events that have occurred within the entity since the last time changes were committed.
+            </summary>
+            <returns>A read-only list of uncommitted domain events.</returns>
+        </member>
+        <member name="M:Enterprise.EventSourcing.Entities.IEventSourcedEntity.MarkChangesAsCommitted">
+            <summary>
+            Marks all uncommitted domain events as committed, effectively clearing the list of uncommitted events.
+            This is typically called after the events have been successfully persisted.
+            </summary>
+        </member>
+        <member name="T:Enterprise.EventSourcing.IApplyDomainEvent">
+            <summary>
+            Implementations can apply domain events to themselves, changing their state according to the event's data.
+            This allows for state changes to be driven by the application of (domain) events.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EventSourcing.IApplyDomainEvent.Apply(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
+            <summary>
+            Applies a domain event.
+            Implementations should update internal state based on the event's data.
+            This method is central to the event sourcing pattern, encapsulating the logic for state transitions triggered by events.
+            </summary>
+            <param name="domainEvent">The domain event to apply.</param>
+        </member>
+        <member name="P:Enterprise.EventSourcing.ISnapshot.Version">
+            <summary>
+            Gets the version recorded at the time of the snapshot.
+            </summary>
+        </member>
+        <member name="T:Enterprise.EventSourcing.ISnapshot`1">
+            <summary>
+            Represents a snapshot of state at a specific version.
+            </summary>
+            <typeparam name="TId">The type of the identifier.</typeparam>
+        </member>
+        <member name="P:Enterprise.EventSourcing.ISnapshot`1.Id">
+            <summary>
+            Gets the unique identifier.
+            This is typically an aggregate root (entity) ID.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Sqlite</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.Sqlite.Constants.ConnectionStrings.InMemory">
+            <summary>
+            This connection string creates a truly temporary database for the duration of a single connection,
+            without sharing capability between different connections.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Sqlite.Constants.ConnectionStrings.InMemoryFile">
+            <summary>
+            This connection string creates a temporary in-memory database that can be shared across multiple connections.
+            This makes it more suitable for scenarios where data sharing between connections is required.
+            </summary>
+        </member>
+    </members>
+</doc>

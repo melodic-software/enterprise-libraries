@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Patterns.Outbox</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Patterns.Outbox.Model.MinimalOutboxMessage">
+            <summary>
+            A condensed representation of the outbox message used for processing the outbox message and persisting the status metadata.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxOptions.IntervalInSeconds">
+            <summary>
+            Determines how often the background job should run.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxOptions.BatchSize">
+            <summary>
+            Determines many items will be loaded and processed in a single run.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.RegularExpressions</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.RegularExpressions.Patterns.RegexPatterns.EmailAddressPrefixInner">
+            <summary>
+            Regular expression that matches the inner characters inside an email prefix (before the @ sign).
+            The first and last characters are omitted.
+            This requires at least two characters before the @ sign.
+            </summary>
+        </member>
+    </members>
+</doc>

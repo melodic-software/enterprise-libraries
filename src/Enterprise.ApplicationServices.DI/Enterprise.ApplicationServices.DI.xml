@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.ApplicationServices.DI</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.ApplicationServices.DI.Extensions.QueryHandlerRegistrationExtensions.RegisterQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery{``0,``1}},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Register a query handler.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
+            <param name="factory"></param>
+            <param name="serviceLifetime"></param>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.DI.Extensions.QueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register a simple query handler.
+            This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.DI.Extensions.QueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic{``0,``1}},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Register a simple query handler.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
+            <param name="queryLogicFactory"></param>
+            <param name="serviceLifetime"></param>
+        </member>
+    </members>
+</doc>

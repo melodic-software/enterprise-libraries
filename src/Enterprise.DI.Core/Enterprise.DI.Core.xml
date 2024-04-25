@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.DI.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.DI.Core.Lifetime.Attributes.Abstract.ServiceRegistrationAttribute">
+            <summary>
+            Abstract attribute to define common properties for service lifetime registration.
+            </summary>
+        </member>
+        <member name="P:Enterprise.DI.Core.Lifetime.Attributes.Abstract.ServiceRegistrationAttribute.AsMatchingInterface">
+            <summary>
+            Gets a value indicating whether the class should be registered as a service for its matching interface only.
+            When set to true, the class is registered as a service for the interface that matches its name, 
+            ignoring other implemented interfaces.
+            </summary>
+        </member>
+        <member name="P:Enterprise.DI.Core.Lifetime.Attributes.Abstract.ServiceRegistrationAttribute.AsImplementedInterfaces">
+            <summary>
+            Gets a value indicating whether the class should be registered as a service for all interfaces it implements.
+            This is the default behavior. When set to true, the class is registered as a service for each interface it implements.
+            </summary>
+        </member>
+        <member name="P:Enterprise.DI.Core.Lifetime.Attributes.Abstract.ServiceRegistrationAttribute.AsSelf">
+            <summary>
+            Gets a value indicating whether the class should be registered as a service under its own type.
+            When set to true, the class is registered as a service under its own type.
+            </summary>
+        </member>
+        <member name="T:Enterprise.DI.Core.Lifetime.Attributes.ScopedServiceAttribute">
+            <summary>
+            Attribute to indicate that a class should be registered with a scoped lifetime in the DI container.
+            </summary>
+        </member>
+        <member name="T:Enterprise.DI.Core.Lifetime.Attributes.SingletonServiceAttribute">
+            <summary>
+            Attribute to indicate that a class should be registered with a singleton lifetime in the DI container.
+            </summary>
+        </member>
+        <member name="T:Enterprise.DI.Core.Lifetime.Attributes.TransientServiceAttribute">
+            <summary>
+            Attribute to indicate that a class should be registered with a transient lifetime in the DI container.
+            </summary>
+        </member>
+        <member name="T:Enterprise.DI.Core.Registration.ExcludeRegistrationsAttribute">
+            <summary>
+            Decorate types with this attribute to ensure that any DI registrations are not automatically registered.
+            This is primarily concerned with classes that implement <see cref="T:Enterprise.DI.Core.Registration.IRegisterServices"/>.
+            </summary>
+        </member>
+        <member name="T:Enterprise.DI.Core.Registration.RegistrationContext`1">
+            <summary>
+            Provides a context for fluent service registration, allowing for easy addition of services and decorators.
+            </summary>
+            <typeparam name="TService">The type of service to be registered.</typeparam>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Provides a context for fluent service registration, allowing for easy addition of services and decorators.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddSingleton``1">
+            <summary>
+            Registers a singleton service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddSingleton(System.Func{System.IServiceProvider,`0})">
+            <summary>
+            Registers a singleton service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddScoped``1">
+            <summary>
+            Registers a scoped service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddScoped(System.Func{System.IServiceProvider,`0})">
+            <summary>
+            Registers a scoped service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddTransient``1">
+            <summary>
+            Registers a transient service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddTransient(System.Func{System.IServiceProvider,`0})">
+            <summary>
+            Registers a transient service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.Add``1(Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Registers a service of the specified type with a specific implementation type and service lifetime.
+            </summary>
+            <typeparam name="TImplementation">The implementation type of the service to be registered.</typeparam>
+            <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.Add(System.Func{System.IServiceProvider,`0},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Registers a service of the specified type with a factory method for creating the service instance and service lifetime.
+            </summary>
+            <param name="implementationFactory">The factory method used to create the service instance.</param>
+            <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.Add(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <summary>
+            Registers a service using a pre-configured ServiceDescriptor.
+            </summary>
+            <param name="serviceDescriptor">The ServiceDescriptor that encapsulates all the information to register the service.</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.WithDecorators(System.Func{System.IServiceProvider,`0,`0}[])">
+            <summary>
+            Registers decorators for the service, each taking the service instance and IServiceProvider as parameters.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.WithDecorators(System.Func{System.IServiceProvider,System.Func{`0,`0}}[])">
+            <summary>
+            Registers decorators for the service, each represented as a factory function.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.WithDecorator``1(System.Func{System.IServiceProvider,`0,``0})">
+            <summary>
+            Registers a single decorator for the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.ServiceCollectionExtensions.RegisterOpenGeneric``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Registers an open generic type with the dependency injection (DI) container.
+            </summary>
+            <typeparam name="T">The generic interface or class type to be registered.</typeparam>
+            <typeparam name="T2">The concrete type that implements or derives from <typeparamref name="T"/>.</typeparam>
+            <param name="services">The IServiceCollection to add the service to.</param>
+            <param name="serviceLifetime">Specifies the lifetime of the service in the DI container.</param>
+            <exception cref="T:System.ArgumentException">Thrown if either <typeparamref name="T"/> or <typeparamref name="T2"/> are not open generic types.</exception>
+        </member>
+    </members>
+</doc>

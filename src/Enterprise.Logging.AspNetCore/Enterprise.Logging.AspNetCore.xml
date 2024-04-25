@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Logging.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="P:Enterprise.Logging.AspNetCore.Http.HttpLoggingConfigOptions.EnableHttpLogging">
+            <summary>
+            https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-logging
+            HTTP Logging is a middleware that logs information about incoming HTTP requests and HTTP responses.
+            It can reduce the performance of an app, especially when logging the request and response bodies.
+            It can potentially log personally identifiable information (PII). Consider the risk and avoid logging sensitive information.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Logging.AspNetCore.Options.LoggingMiddlewareConfigOptions.UseProviders">
+            <summary>
+            Configure the specific provider available for use in the application.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Logging.AspNetCore.Middleware.LoggingMiddlewareService.RegisterLoggingMiddlewareServices(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+            <summary>
+            This registers the logging related services that are specific to an ASP.NET Core application.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Enterprise.Logging.AspNetCore.Middleware.LoggingMiddlewareService.UseLogging(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Add the logging middleware to the request pipeline.
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="P:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConfigOptions.EnableW3CLogging">
+            <summary>
+            https://learn.microsoft.com/en-us/aspnet/core/fundamentals/w3c-logger
+            W3CLogger is a middleware that writes log files in the W3C standard format. The logs contain information about HTTP requests and HTTP responses.
+            It can reduce the performance of an app, especially when logging the request and response bodies.
+            It can potentially log personally identifiable information (PII). Consider the risk and avoid logging sensitive information.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConfigOptions.W3CLogFileApplicationName">
+            <summary>
+            This is the name of the application that will be included in the log file name.
+            Example: {ApplicationName}-W3C20230906.0000.txt
+            This must be set if W3C logging is enabled.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConstants.LogDirectoryName">
+            <summary>
+            Example directory for Windows:
+            C:\Users\{username}\AppData\Local\logs
+            </summary>
+        </member>
+        <member name="M:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConstants.GetFileNamePrefix(System.String)">
+            <summary>
+            The resulting file will look like this: {ApplicationName}-W3C20230906.0000.txt
+            </summary>
+            <param name="applicationName"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConstants.FileSizeLimitInBytes">
+            <summary>
+            This is the file size limitations.
+            5,242,880 bytes = 5.24288 megabytes
+            </summary>
+        </member>
+        <member name="F:Enterprise.Logging.AspNetCore.W3C.W3CLoggingConstants.FlushIntervalInSeconds">
+            <summary>
+            This is the interval that logs should be flushed / written.
+            </summary>
+        </member>
+    </members>
+</doc>

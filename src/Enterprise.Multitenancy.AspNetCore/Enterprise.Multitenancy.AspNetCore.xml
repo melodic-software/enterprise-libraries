@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Multitenancy.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Multitenancy.AspNetCore.Services.TenantRequestHeaderService">
+            <summary>
+            This implementation allows for clients to impersonate any tenant if they know the tenant ID.
+            In real applications, the tenant ID should be set based on secure authentication data (claims).
+            TODO: Implement a version of this that uses JWT, API lookup (cached), or claims data.
+            </summary>
+        </member>
+    </members>
+</doc>

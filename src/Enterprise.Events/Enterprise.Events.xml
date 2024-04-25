@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Events</name>
+    </assembly>
+    <members>
+        <member name="P:Enterprise.Events.Model.Event.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Enterprise.Events.Model.Event.DateOccurred">
+            <inheritdoc />
+        </member>
+        <member name="P:Enterprise.Events.Model.IEvent.Id">
+            <summary>
+            The unique identifier for the event.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Events.Model.IEvent.DateOccurred">
+            <summary>
+            The date and time the event occurred.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.Decoration.EventHandlerDecoratorBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.Decoration.EventHandlerDecoratorBase`1.HandleAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.DynamicDispatchingEventHandlerResolver.ResolveAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.EventHandlerBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.EventHandlerBase`1.HandleAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.EventHandlerResolverBase.ResolveAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.EventHandlerResolverBase.ResolveAsync``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Handlers.ReflectionEventHandlerResolver.ResolveAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.Events.Services.Raising.Abstract.IRaiseEvents">
+            <summary>
+            Raises events and optionally executes callbacks using an external callback service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Abstract.IRaiseEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raises events and executes any registered callbacks associated with each event.
+            </summary>
+            <param name="events"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Abstract.IRaiseEvents.RaiseAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            Raise an event and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="event"></param>
+            <param name="callbackService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Abstractions.IClearCallbacks.ClearCallbacks">
+            <summary>
+            Clears any registered callbacks.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Abstractions.IGetRegisteredCallbacks.GetRegisteredCallbacks">
+            <summary>
+            Get the current collection of callback registrations.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks.RaiseCallbacks(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
+            <summary>
+            Raise the callbacks for each of the events in the collection.
+            </summary>
+            <param name="events"></param>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks.RaiseCallbacks``1(``0)">
+            <summary>
+            Raise callbacks for a single event.
+            </summary>
+            <typeparam name="TEvent"></typeparam>
+            <param name="event"></param>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRegisterEventCallbacks.RegisterEventCallback``1(System.Action{``0})">
+            <summary>
+            Register a delegate to react to events that have been raised during use case execution.
+            These are typically domain events.
+            </summary>
+            <typeparam name="TEvent">The type of event.</typeparam>
+            <param name="action">The action to invoke when the event is raised.</param>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.EventCallbackRaiser.RaiseCallbacks(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.EventCallbackRaiser.RaiseCallbacks``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.EventCallbackRegistrar.RegisterEventCallback``1(System.Action{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.EventCallbackRegistrar.GetRegisteredCallbacks">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.EventCallbackRegistrar.ClearCallbacks">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.Events.Services.Raising.Callbacks.Facade.EventCallbackService">
+            <summary>
+            This is a simple facade service that aggregates the registration and raising of event callbacks.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Facade.EventCallbackService.#ctor(Enterprise.Events.Services.Raising.Callbacks.Facade.Abstractions.IEventCallbackRegistrar,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <summary>
+            This is a simple facade service that aggregates the registration and raising of event callbacks.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.Abstract.EventCallback`1.IsFor(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.Abstract.EventCallback`1.Execute(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.Abstract.EventCallback`1.Execute(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.Abstract.EventCallback`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.Abstract.EventCallback`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="P:Enterprise.Events.Services.Raising.Callbacks.Model.IEventCallback.HasBeenExecuted">
+            <summary>
+            Has the callback already been executed?
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.IEventCallback.IsFor(Enterprise.Events.Model.IEvent)">
+            <summary>
+            Is the callback action for the specified event type?
+            </summary>
+            <param name="event"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.IEventCallback.Execute(Enterprise.Events.Model.IEvent)">
+            <summary>
+            Execute the callback.
+            </summary>
+            <param name="event"></param>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.Callbacks.Model.IEventCallback`1.Execute(`0)">
+            <summary>
+            Execute the callback.
+            </summary>
+            <param name="event"></param>
+        </member>
+        <member name="M:Enterprise.Events.Services.Raising.EventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -245,9 +245,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-middleware.yaml = .azure\enterprise-middleware.yaml
 		.azure\enterprise-modular-monoliths.yaml = .azure\enterprise-modular-monoliths.yaml
 		.azure\enterprise-monitoring.yaml = .azure\enterprise-monitoring.yaml
-		.azure\enterprise-nlog.yaml = .azure\enterprise-nlog.yaml
-		.azure\enterprise-multitenancy.yaml = .azure\enterprise-multitenancy.yaml
 		.azure\enterprise-multitenancy-aspnetcore.yaml = .azure\enterprise-multitenancy-aspnetcore.yaml
+		.azure\enterprise-multitenancy.yaml = .azure\enterprise-multitenancy.yaml
+		.azure\enterprise-nlog.yaml = .azure\enterprise-nlog.yaml
 		.azure\enterprise-noda-time.yaml = .azure\enterprise-noda-time.yaml
 		.azure\enterprise-options-core.yaml = .azure\enterprise-options-core.yaml
 		.azure\enterprise-options-DI.yaml = .azure\enterprise-options-DI.yaml
@@ -278,6 +278,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-validation.yaml = .azure\enterprise-validation.yaml
 		.azure\enterprise-value-objects.yaml = .azure\enterprise-value-objects.yaml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Multitenancy", "src\Enterprise.Multitenancy\Enterprise.Multitenancy.csproj", "{5C4B6431-1A0C-42BD-83A0-AB65B66C1152}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Multitenancy.AspNetCore", "src\Enterprise.Multitenancy.AspNetCore\Enterprise.Multitenancy.AspNetCore.csproj", "{DB35E5FA-C779-487A-8E19-5CFA3FF975A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -637,6 +641,14 @@ Global
 		{6B5D5099-B7BF-485E-A503-F272B029FB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B5D5099-B7BF-485E-A503-F272B029FB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B5D5099-B7BF-485E-A503-F272B029FB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C4B6431-1A0C-42BD-83A0-AB65B66C1152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C4B6431-1A0C-42BD-83A0-AB65B66C1152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C4B6431-1A0C-42BD-83A0-AB65B66C1152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C4B6431-1A0C-42BD-83A0-AB65B66C1152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB35E5FA-C779-487A-8E19-5CFA3FF975A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB35E5FA-C779-487A-8E19-5CFA3FF975A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB35E5FA-C779-487A-8E19-5CFA3FF975A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB35E5FA-C779-487A-8E19-5CFA3FF975A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -730,6 +742,8 @@ Global
 		{E6A846E0-349E-4159-9310-DB8F777D93B3} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
 		{140EC65C-C18A-4ECA-B7D8-4A289BB4B0DC} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
 		{6B5D5099-B7BF-485E-A503-F272B029FB8A} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
+		{5C4B6431-1A0C-42BD-83A0-AB65B66C1152} = {EF615ADD-76DF-4EFD-9E78-7B271BB42034}
+		{DB35E5FA-C779-487A-8E19-5CFA3FF975A8} = {EF615ADD-76DF-4EFD-9E78-7B271BB42034}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}

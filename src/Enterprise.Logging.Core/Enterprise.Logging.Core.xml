@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Logging.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Logging.Core.Diagnostics.TimedOperation.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the TimedOperation class, starting the timing process.
+            </summary>
+            <param name="logger"></param>
+            <param name="logLevel"></param>
+            <param name="messageTemplate"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:Enterprise.Logging.Core.Loggers.PreStartupConsoleLogger">
+            <summary>
+            A simple console logger used by the PreStartupLogger to log messages before the main logger is available.
+            Supports a basic form of structured logging.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupConsoleLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+            Logs the specified message at the given log level.
+            </summary>
+            <param name="logLevel">The severity level of the log message.</param>
+            <param name="eventId">The event ID of the log message.</param>
+            <param name="state">The state associated with the log message.</param>
+            <param name="exception">The exception associated with the log message, if any.</param>
+            <param name="formatter">The function to create a string message from the state and exception.</param>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupConsoleLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Checks if the given log level is enabled.
+            </summary>
+            <param name="logLevel">The log level to check.</param>
+            <returns>True if logging is enabled for the specified log level, otherwise false.</returns>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupConsoleLogger.BeginScope``1(``0)">
+            <summary>
+            Begins a logical operation scope.
+            </summary>
+            <param name="state">The state to use for the scope.</param>
+            <returns>A disposable object that ends the logical operation scope on dispose.</returns>
+        </member>
+        <member name="T:Enterprise.Logging.Core.Loggers.PreStartupLogger">
+            <summary>
+            A logger used during the application startup phase before the dependency injection container is fully set up.
+            This logger should only be used before the service provider/application has been built.
+            For logging after the application startup, resolve an <see cref="T:Microsoft.Extensions.Logging.ILogger"/> instance through the DI container.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.Core.Loggers.PreStartupLogger.Instance">
+            <summary>
+            Gets the singleton instance of the PreStartupLogger.
+            Warning: This logger is intended for use only during the initial startup phase of the application.
+            Once the application and its service provider are fully built, the preferred approach is to resolve an ILogger from the DI container.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupLogger.BeginScope``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Enterprise.Logging.Core.Loggers.PreStartupLogger.SetLogger(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Sets the DI-managed ILogger to be used by the PreStartupLogger, transitioning from the initial
+            console logging to using the fully configured logger provided by the DI container.
+            </summary>
+            <param name="logger">The ILogger instance to use for logging.</param>
+        </member>
+    </members>
+</doc>

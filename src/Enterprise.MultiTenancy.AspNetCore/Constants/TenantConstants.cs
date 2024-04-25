@@ -1,4 +1,4 @@
-﻿namespace Enterprise.MultiTenancy.AspNetCore.Constants;
+﻿namespace Enterprise.Multitenancy.AspNetCore.Constants;
 
 public class TenantConstants
 {

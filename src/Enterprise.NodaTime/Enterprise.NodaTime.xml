@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.NodaTime</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.NodaTime.Model.NodaUniversalDateTime">
+            <summary>
+            Represents a date and time in Universal Coordinated Time (UTC) using NodaTime.
+            Inherits functionality from UniversalDateTime and extends it to work with NodaTime types.
+            </summary>
+        </member>
+        <member name="P:Enterprise.NodaTime.Model.NodaUniversalDateTime.Instant">
+            <summary>
+            Gets the Instant representing the moment in UTC.
+            </summary>
+        </member>
+        <member name="M:Enterprise.NodaTime.Model.NodaUniversalDateTime.#ctor">
+            <summary>
+            Initializes a new instance of the NodaUniversalDateTime class set to the current UTC date and time.
+            </summary>
+        </member>
+        <member name="M:Enterprise.NodaTime.Model.NodaUniversalDateTime.From(NodaTime.ZonedDateTime)">
+            <summary>
+            Creates a NodaUniversalDateTime from a ZonedDateTime, converting it to UTC if necessary.
+            </summary>
+            <param name="zonedDateTime">The ZonedDateTime to convert.</param>
+            <returns>A NodaUniversalDateTime instance representing the same point in time in UTC.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if zonedDateTime is null.</exception>
+        </member>
+        <member name="T:Enterprise.NodaTime.Utc.EnsureUtcService">
+            <summary>
+            Service to ensure that DateTime and DateTimeOffset values are converted to UTC.
+            This service uses Noda Time for reliable date and time conversions.
+            </summary>
+        </member>
+        <member name="M:Enterprise.NodaTime.Utc.EnsureUtcService.EnsureUtc(System.DateTime)">
+            <summary>
+            Converts a DateTime to UTC.
+            If the DateTime is of kind 'Unspecified', it is treated as local time.
+            If the DateTime is of kind 'Utc', it is returned without modification.
+            </summary>
+            <param name="dateTime">The DateTime to convert.</param>
+            <returns>The DateTime converted to UTC.</returns>
+        </member>
+        <member name="M:Enterprise.NodaTime.Utc.EnsureUtcService.EnsureUtc(System.DateTimeOffset)">
+            <summary>
+            Ensures that a DateTimeOffset represents the same instant in UTC.
+            </summary>
+            <param name="dateTimeOffset">The DateTimeOffset to convert.</param>
+            <returns>A DateTimeOffset adjusted to UTC.</returns>
+        </member>
+    </members>
+</doc>

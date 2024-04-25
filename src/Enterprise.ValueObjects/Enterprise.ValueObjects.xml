@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.ValueObjects</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.ValueObjects.Model.ValueObject">
+            <summary>
+            An immutable object with no conceptual identity that is defined solely by properties and their values.
+            Two value objects are equal if their values are the same (structural equality).
+            They encapsulate primitive types and combats primitive obsession, promoting more expressive code.
+            Child classes should ensure that all properties are immutable and that equality checks consider the structural characteristics of complex and nested objects.
+            NOTE: For most cases in C# 10+, consider using `readonly record struct` for simpler value object implementations.
+            See: https://nietras.com/2021/06/14/csharp-10-record-struct/
+            </summary>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.ValueObjects.Model.ValueObject"/> class.
+            Using Lazy&lt;T&gt; for hash code computation defers the calculation until it is actually needed
+            and caches the result, enhancing performance for objects that are compared frequently.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.op_Equality(Enterprise.ValueObjects.Model.ValueObject,Enterprise.ValueObjects.Model.ValueObject)">
+            <summary>
+            Equality operator override.
+            Returns true if both value objects are equal.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.op_Inequality(Enterprise.ValueObjects.Model.ValueObject,Enterprise.ValueObjects.Model.ValueObject)">
+            <summary>
+            Inequality operator override.
+            Returns true if value objects are not equal.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.CompareTo(Enterprise.ValueObjects.Model.ValueObject)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.CompareTo(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.Equals(Enterprise.ValueObjects.Model.ValueObject)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.Equals(System.Object)">
+            <summary>
+            Overrides the default object equality check by comparing types and value-based equality components.
+            </summary>
+            <param name="other">The object to compare with this instance.</param>
+            <returns>True if the objects are equal, otherwise false.</returns>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.GetHashCode">
+            <summary>
+            Generates a hash code based on the atomic values defining the object.
+            This method uses deferred execution to compute the hash code only once, caching it for subsequent use,
+            thus providing a performance benefit in environments where objects are compared frequently.
+            </summary>
+            <returns>The computed hash code as an integer.</returns>
+        </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.GetEqualityComponents">
+            <summary>
+            Returns the atomic values that define the object.
+            Child classes must implement this method to return all properties that contribute to equality.
+            Collections and nested complex objects should be immutable and properly implement equality checks to
+            maintain value object semantics.
+            </summary>
+            <returns>An IEnumerable of objects representing the atomic components of this value object.</returns>
+        </member>
+    </members>
+</doc>

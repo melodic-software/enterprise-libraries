@@ -3,7 +3,7 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.MultiTenancy.Options;
+namespace Enterprise.Multitenancy.Options;
 
 public class MultiTenancyConfigOptionsRegistrar : IRegisterOptions
 {

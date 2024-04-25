@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Reflection</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Reflection.Assemblies.AssemblyFilterPredicates">
+            <summary>
+            Provides common predicate functions for filtering assemblies based on their names.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.AssemblyLoadConstants">
+            <summary>
+            Contains constants related to assembly loading.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.AssemblyLoader">
+            <summary>
+            Facilitates loading of assemblies based on specific criteria.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadAllAssemblies">
+            <summary>
+            Loads all assemblies from the current application domain.
+            This works at startup if you want to view ALL assemblies.
+            Dynamically loaded assemblies are not returned.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadAllAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+            <summary>
+            Loads assemblies that match a given filter predicate.
+            This works at startup if you want to view ALL assemblies.
+            Dynamically loaded assemblies are not returned.
+            The filter predicate is commonly used to apply a whitelist (ex: x => x.Name.StartsWith("MySolution")),
+            or a blacklist (ex: x => !x.Name.StartsWith("System.").
+            </summary>
+            <param name="filterPredicate">A predicate used to determine which assemblies to load.</param>
+            <returns>A list of loaded assemblies that match the filter predicate.</returns>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadSolutionAssemblies">
+            <summary>
+            Load all assemblies in the base directory of the current app domain.
+            This will return dynamically loaded assemblies as long as they are under the aforementioned directory.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadSolutionAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+            <summary>
+            Load all assemblies in the base directory of the current app domain.
+            This will return dynamically loaded assemblies as long as they are under the aforementioned directory.
+            The filter predicate is commonly used to apply a whitelist (ex: x => x.Name.StartsWith("MySolution"))
+            or a blacklist (ex: x => !x.Name.StartsWith("System.").
+            </summary>
+            <param name="filterPredicate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.AssemblyLoadEventService">
+            <summary>
+            Provides the ability to attach event handlers to the assembly load event.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoadEventService.HandleOnAssemblyLoad(System.AssemblyLoadEventHandler)">
+            <summary>
+            Attaches a handler to the event that is fired when an assembly is loaded for the first time.
+            Since assemblies are lazily loaded, this is a way to execute some behavior for a specific assembly at the time it is loaded.
+            Some assemblies may have already been loaded, depending on when this is called.
+            </summary>
+            <param name="eventHandler">The event handler to attach.</param>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.LoadedAssemblyService">
+            <summary>
+            Provides functionality to retrieve already loaded assemblies from the current application domain.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.LoadedAssemblyService.GetFromCurrentAppDomain">
+            <summary>
+            Retrieves all assemblies that are currently loaded in the application domain.
+            Assemblies are lazily loaded into the app domain.
+            This means it is possible that not all assemblies will be returned depending on when this method is called.
+            Assemblies will not be returned unless a call has been made to a method or class in the assembly.
+            </summary>
+            <returns>An array of assemblies that are currently loaded.</returns>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.ReferencedAssemblyService">
+            <summary>
+            Provides methods to access assemblies referenced by the entry assembly.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Reflection.Assemblies.ReferencedAssemblyService.GetEntryAssemblyReferences">
+            <summary>
+            Retrieves the assemblies directly referenced by the entry assembly of the current application.
+            Typically this is the main application (web project, API, windows service, etc.).
+            This only works with direct references. It doesn't pull in chained references.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

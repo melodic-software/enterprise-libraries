@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.MediatR</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.EnableMediatR">
+            <summary>
+            Determines if MediatR services will be registered.
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.GetServicesFromAssemblies">
+            <summary>
+            Delegate that provides the assemblies containing the MediatR handlers.
+            These implement IRequestHandler, INotificationHandler, etc.
+            </summary>
+        </member>
+    </members>
+</doc>

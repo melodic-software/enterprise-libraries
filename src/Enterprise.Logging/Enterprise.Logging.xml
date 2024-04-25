@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Logging</name>
+    </assembly>
+    <members>
+        <member name="P:Enterprise.Logging.Options.LoggingConfigOptions.AddLogFilters">
+            <summary>
+            A custom configuration delegate for configuring log filters (in code).
+            It is recommended to use configuration (appSettings.json) over in code configuration.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.Options.LoggingConfigOptions.CustomConfigureLogging">
+            <summary>
+            Completely customize logging configuration.
+            If this is provided, all the logging configuration defaults will not be configured.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.Options.LoggingConfigOptions.ConfigureExtendedServices">
+            <summary>
+            This is used internally in the logging configuration setup.
+            It is an extension point that can be used to register additional services.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.Providers.LoggingProviderConfigOptions.EnableConsole">
+            <summary>
+            This is useful in local environments but also in cloud environments where console output is captured.
+            Containerized applications will also have log output.
+            https://learn.microsoft.com/en-us/dotnet/core/extensions/console-log-formatter
+            </summary>
+        </member>
+        <member name="F:Enterprise.Logging.Providers.LoggingProviderConfigOptions.ConfigureProviders">
+            <summary>
+            Configure the specific provider service(s) available for use in the application.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Logging.TraceListeners.TraceListenerConfigOptions.LogFileApplicationName">
+            <summary>
+            The name of the application that is safe to use for file system operations.
+            Folder names, file names, etc.
+            </summary>
+        </member>
+    </members>
+</doc>

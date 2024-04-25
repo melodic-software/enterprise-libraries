@@ -1,0 +1,605 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Patterns.ResultPattern</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Error">
+            <summary>
+            An error that has occurred in the domain layer, or one that has been captured and translated in the application service layer.
+            This error class can be used with factory creation methods along with the Result pattern objects.
+            Derived types can be created, but may create too much additional complexity or overhead.
+            A base for each descriptor can be applied if desired.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Code">
+            <summary>
+            A short human-readable code for the error.
+            Examples: "User.NotFound", "Payment.NotReceived", "Subscription.Inactive", etc.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Message">
+            <summary>
+            The human-readable message explaining the error.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Descriptors">
+            <summary>
+            One or more descriptors for the type, quality, and kind of error.
+            Most errors typically have only one.
+            This can help application components in the presentation layer present the best possible response.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Metadata">
+            <summary>
+            An optional dictionary for passing along additional information.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.Error.None">
+            <summary>
+            This uses the "null object" pattern to represent a non error.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorDedupeService">
+            <summary>
+            Provides services for deduplicating errors.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.ErrorDedupeService.DedupeErrors(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Deduplicates a collection of errors based on their code, message, and descriptor count.
+            </summary>
+            <param name="errors">The collection of errors to deduplicate.</param>
+            <returns>A collection of deduplicated errors.</returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor">
+            <summary>
+            Describes the type, quality, and kind of error.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.NoError">
+            <summary>
+            This is used as a default value to represent the absence of an error.
+            The "null object" pattern can be applied with an error instance with this descriptor, which helps reduce null checks.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Validation">
+            <summary>
+            These errors occur when client input does not meet validation rules.
+            Examples: format errors, range violations, missing required fields, etc.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Permission">
+            <summary>
+            These errors occur when a user or system component attempts to perform an operation
+            for which they do not have the necessary permissions or rights.
+            They're forbidden to take the action.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.BusinessRule">
+            <summary>
+            These errors occur when an operation violates domain-specific business rules or logic.
+            These are typically used to enforce invariants within the domain.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.NotFound">
+            <summary>
+            This error occurs when required entities or resources are not found.
+            This is commonly used in scenarios like database lookups.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Conflict">
+            <summary>
+            These errors are specific conflicts like concurrency, or uniqueness constraints.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorFilterService">
+            <summary>
+            Provides services for filtering errors.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.ErrorFilterService.FilterInvalid(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Filters out invalid errors that do not contain a code, message, or any descriptors.
+            An error is considered invalid if the code is the default, and does not contain a message or descriptors.
+            </summary>
+            <param name="errors">The collection of errors to filter.</param>
+            <returns>A collection of valid errors.</returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Extensions.ErrorCollectionExtensions">
+            <summary>
+            Provides extension methods for collections of IError.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.IError">
+            <summary>
+            An error that has occurred within the context of the domain.
+            These are typically aggregated and raised in the application service layer.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Code">
+            <summary>
+            A constant descriptor for the error.
+            Examples: "Entity.NotFound", "User.AlreadyRegistered", "Schedule.Conflict", etc.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Message">
+            <summary>
+            The human-readable message that describes the validation issue.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Descriptors">
+            <summary>
+            One or more error types that describe the error.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Else``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},``0})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Else``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},``0)">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ElseAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{``0}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ElseAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Threading.Tasks.Task{``0})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Else``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Else``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Else``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},Enterprise.Patterns.ResultPattern.Errors.IError)">
+            <summary>
+            If the state is error, the provided <paramref name="error"/> is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="error">The error to return.</param>
+            <returns>The given <paramref name="error"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ElseAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ElseAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ElseAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Match``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,``1},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},``1})">
+            <summary>
+            Executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onError"/> and <paramref name="onValue"/> functions.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onError">The function to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.MatchAsync``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{``1}})">
+            <summary>
+            Asynchronously executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onError"/> and <paramref name="onValue"/> functions.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onError">The function to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.MatchFirst``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,``1},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,``1})">
+            <summary>
+            Executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onError"/> and <paramref name="onValue"/> functions.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onError">The function to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.MatchFirstAsync``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            Asynchronously executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onError"/> and <paramref name="onValue"/> functions.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onError">The function to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Switch``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Action{``0},System.Action{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onError">The action to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.SwitchAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onError">The action to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.SwitchFirst``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Action{``0},System.Action{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onError">The action to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.SwitchFirstAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,System.Threading.Tasks.Task})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onError">The action to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Then``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,Enterprise.Patterns.ResultPattern.Model.Result{``1}})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onValue"/> function.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original errors.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Then``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,``1})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onValue"/> function.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original errors.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.Then``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Action{``0})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided <paramref name="action"/> is invoked.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="action">The action to execute if the state is a value.</param>
+            <returns>The original <paramref name="result"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ThenAsync``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``1}}})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onValue"/> function.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original errors.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ThenAsync``2(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <typeparam name="TNextValue">The type of the result from invoking the <paramref name="onValue"/> function.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original errors.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Extensions.ResultExtensions.ThenAsync``1(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            If the state of <paramref name="result"/> is a value, the provided <paramref name="action"/> is executed asynchronously.
+            </summary>
+            <typeparam name="TValue">The type of the underlying value in the <paramref name="result"/>.</typeparam>
+            <param name="result">The <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</param>
+            <param name="action">The action to execute if the state is a value.</param>
+            <returns>The original <paramref name="result"/>.</returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Model.Result">
+            <summary>
+            Represents a generic operation result, encapsulating success or failure, with associated error information.
+            This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
+            These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value">
+            <summary>
+            Gets the value of the result. 
+            Throws InvalidOperationException if the result is a failure.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when the result is a failure and this property is accessed.</exception>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.From(`0)">
+            <summary>
+            Creates a new instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/> with a value.
+            </summary>
+            <param name="value">The value to wrap.</param>
+            <returns>An instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/> containing the provided value.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Else(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Else(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Else(Enterprise.Patterns.ResultPattern.Errors.IError)">
+            <summary>
+            If the state is error, the provided <paramref name="error"/> is returned.
+            </summary>
+            <param name="error">The error to return.</param>
+            <returns>The given <paramref name="error"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Else(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},`0})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Else(`0)">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <param name="onError">The value to return if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ElseAsync(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{`0}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ElseAsync(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ElseAsync(System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}}})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ElseAsync(System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            If the state is error, the provided <paramref name="error"/> is awaited and returned.
+            </summary>
+            <param name="error">The error to return if the state is error.</param>
+            <returns>The result from awaiting the given <paramref name="error"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ElseAsync(System.Threading.Tasks.Task{`0})">
+            <summary>
+            If the state is error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <param name="onError">The function to execute if the state is error.</param>
+            <returns>The result from calling <paramref name="onError"/> if state is error; otherwise the original <see cref="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Match``1(System.Func{`0,``0},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},``0})">
+            <summary>
+            Executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onError">The function to execute if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.MatchAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Asynchronously executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            If the state is an error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The asynchronous function to execute if the state is a value.</param>
+            <param name="onError">The asynchronous function to execute if the state is an error.</param>
+            <returns>A task representing the asynchronous operation that yields the result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.MatchFirst``1(System.Func{`0,``0},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,``0})">
+            <summary>
+            Executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            If the state is an error, the provided function <paramref name="onFirstError"/> is executed using the first error, and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <param name="onFirstError">The function to execute with the first error if the state is an error.</param>
+            <returns>The result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.MatchFirstAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Asynchronously executes the appropriate function based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            If the state is an error, the provided function <paramref name="onFirstError"/> is executed asynchronously using the first error, and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The asynchronous function to execute if the state is a value.</param>
+            <param name="onFirstError">The asynchronous function to execute with the first error if the state is an error.</param>
+            <returns>A task representing the asynchronous operation that yields the result of the executed function.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Switch(System.Action{`0},System.Action{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError}})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onError">The action to execute if the state is an error.</param>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.SwitchAsync(System.Func{`0,System.Threading.Tasks.Task},System.Func{System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError},System.Threading.Tasks.Task})">
+            <summary>
+            Asynchronously executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onError"/> is executed asynchronously.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed asynchronously.
+            </summary>
+            <param name="onValue">The asynchronous action to execute if the state is a value.</param>
+            <param name="onError">The asynchronous action to execute if the state is an error.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.SwitchFirst(System.Action{`0},System.Action{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onFirstError"/> is executed using the first error as input.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed.
+            </summary>
+            <param name="onValue">The action to execute if the state is a value.</param>
+            <param name="onFirstError">The action to execute with the first error if the state is an error.</param>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.SwitchFirstAsync(System.Func{`0,System.Threading.Tasks.Task},System.Func{Enterprise.Patterns.ResultPattern.Errors.IError,System.Threading.Tasks.Task})">
+            <summary>
+            Asynchronously executes the appropriate action based on the state of the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/>.
+            If the state is an error, the provided action <paramref name="onFirstError"/> is executed asynchronously using the first error as input.
+            If the state is a value, the provided action <paramref name="onValue"/> is executed asynchronously.
+            </summary>
+            <param name="onValue">The asynchronous action to execute if the state is a value.</param>
+            <param name="onFirstError">The asynchronous action to execute with the first error if the state is an error.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Then``1(System.Func{`0,Enterprise.Patterns.ResultPattern.Model.Result{``0}})">
+            <summary>
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original <see cref="N:Enterprise.Patterns.ResultPattern.Errors"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Then(System.Action{`0})">
+            <summary>
+            If the state is a value, the provided <paramref name="action"/> is invoked.
+            </summary>
+            <param name="action">The action to execute if the state is a value.</param>
+            <returns>The original <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.Then``1(System.Func{`0,``0})">
+            <summary>
+            If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original <see cref="N:Enterprise.Patterns.ResultPattern.Errors"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ThenAsync``1(System.Func{`0,System.Threading.Tasks.Task{Enterprise.Patterns.ResultPattern.Model.Result{``0}}})">
+            <summary>
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original <see cref="N:Enterprise.Patterns.ResultPattern.Errors"/>.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ThenAsync(System.Func{`0,System.Threading.Tasks.Task})">
+            <summary>
+            If the state is a value, the provided <paramref name="action"/> is invoked asynchronously.
+            </summary>
+            <param name="action">The action to execute if the state is a value.</param>
+            <returns>The original <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> instance.</returns>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.ThenAsync``1(System.Func{`0,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
+            </summary>
+            <typeparam name="TNextValue">The type of the result.</typeparam>
+            <param name="onValue">The function to execute if the state is a value.</param>
+            <returns>The result from calling <paramref name="onValue"/> if state is value; otherwise the original <see cref="N:Enterprise.Patterns.ResultPattern.Errors"/>.</returns>
+        </member>
+    </members>
+</doc>

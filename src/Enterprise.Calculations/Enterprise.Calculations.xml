@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Calculations</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Calculations.Calculation`1">
+            <summary>
+            Represents a generic calculation with a result and a predefined status.
+            </summary>
+            <typeparam name="TResult">The type of the result of the calculation.</typeparam>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.Result">
+            <summary>
+            Gets the result of the calculation.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.Status">
+            <summary>
+            Gets the status of the calculation.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.Reason">
+            <summary>
+            A detailed reason that explains the status.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.Exception">
+            <summary>
+            Gets the exception that occurred when the calculation was made (if applicable).
+            </summary>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.DateCompleted">
+            <summary>
+            The date and time the calculation was made.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Calculations.Calculation`1.WasSuccessful">
+            <summary>
+            Indicates whether the calculation was successful.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Calculations.CalculationStatus.Successful">
+            <summary>
+            The calculation completed successfully.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Calculations.CalculationStatus.Failed">
+            <summary>
+            The calculation did not complete successfully.
+            This is typically due to an exception.
+            </summary>
+        </member>
+    </members>
+</doc>

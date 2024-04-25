@@ -5,7 +5,7 @@ using System.Reflection;
 namespace Enterprise.Api.ModelBinding;
 
 /// <summary>
-/// A custom model binder for binding comma-separated string values to enumerable types such as IEnumerable<T> and List<T>.
+/// A custom model binder for binding comma-separated string values to enumerable types such as IEnumerable&lt;T&gt; and List&lt;T&gt;.
 /// </summary>
 public class GenericEnumerableModelBinder : IModelBinder
 {
@@ -96,7 +96,7 @@ public class GenericEnumerableModelBinder : IModelBinder
     }
 
     /// <summary>
-    /// Binds a collection type like List<T> by splitting comma-separated values and converting them to the element type.
+    /// Binds a collection type like List&lt;T&gt; by splitting comma-separated values and converting them to the element type.
     /// </summary>
     /// <param name="valueProviderResult">The value provider result containing the comma-separated values.</param>
     /// <param name="listType">The type of the list to be bound.</param>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Options</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Options.CollectionClearer.ClearCollections(System.Object,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            This checks if the options has any IEnumerable properties.
+            It first looks for a "Clear" method, and alternatively attempts to re-instantiate the collection using its default constructor.
+            This assumes collections have a parameterless constructor, which night b
+            </summary>
+            <param name="instance"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Enterprise.Options.DynamicOptionsMonitor`1">
+            <summary>
+            This dynamically monitors configuration options of a specific type.
+            This should be used for any options that need to be retrieved after the DI container has been created.
+            Use <see cref="T:Enterprise.Options.Core.Singleton.OptionsInstanceService"/> when the application has not yet been built.
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+        </member>
+    </members>
+</doc>

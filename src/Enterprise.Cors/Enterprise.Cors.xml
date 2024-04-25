@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Cors</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Cors.Config.CorsConfigService.ConfigureCors(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configure CORS (Cross-Origin Resource Sharing).
+            This is a mechanism to give or restrict access rights to applications from different domains.
+            </summary>
+            <param name="services"></param>
+            <param name="environment"></param>
+            <param name="configuration"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="P:Enterprise.Cors.Config.CorsConfigService.RelaxedCorsConfiguration">
+            <summary>
+            This allows any origin, HTTP method or header. It should not be used in production environments.
+            </summary>
+        </member>
+    </members>
+</doc>

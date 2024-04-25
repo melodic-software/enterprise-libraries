@@ -98,7 +98,6 @@ public partial class Result<T> : Result, IResult<T>
     /// <summary>
     /// Creates a new instance of <see cref="Result{T}"/> with a value.
     /// </summary>
-    /// <typeparam name="T">The type of the value.</typeparam>
     /// <param name="value">The value to wrap.</param>
     /// <returns>An instance of <see cref="Result{T}"/> containing the provided value.</returns>
     public static Result<T> From(T? value)

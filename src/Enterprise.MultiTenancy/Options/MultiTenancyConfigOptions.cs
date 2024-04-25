@@ -1,8 +1,8 @@
-﻿namespace Enterprise.MultiTenancy.Options
+﻿namespace Enterprise.Multitenancy.Options
 {
     public class MultiTenancyConfigOptions
     {
-        public const string ConfigSectionKey = "Custom:MultiTenancy";
+        public const string ConfigSectionKey = "Custom:Multitenancy";
 
         /// <summary>
         /// Determines if multi tenancy related services are registered.

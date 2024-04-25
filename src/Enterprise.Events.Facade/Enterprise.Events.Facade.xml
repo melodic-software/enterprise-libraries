@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Events.Facade</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Events.Facade.Services.EventServiceFacade">
+            <summary>
+            <see cref="T:Enterprise.Events.Facade.Services.EventServiceFacade"/> centralizes event-related functionalities for ease of use.
+            It wraps the event raising and callback handling, delegating to specific services.
+            This approach simplifies event management in the application by providing a cleaner
+            and more streamlined interface, reducing direct dependencies on multiple event services.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.GetRegisteredCallbacks">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RegisterEventCallback``1(System.Action{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.ClearCallbacks">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseCallbacks(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseCallbacks``1(``0)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

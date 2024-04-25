@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.DataShaping</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.DataShaping.Extensions.DataShapingExtensions.ShapeData``1(``0)">
+            <summary>
+            This simply converts the source object to an ExpandoObject.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

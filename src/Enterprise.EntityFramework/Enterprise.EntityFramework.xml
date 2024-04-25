@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.EntityFramework.EntityTypeBuilding.Sql.AlternateKeyPropertyExtensions.DefaultAlternateKeyColumnName">
+            <summary>
+            Constant for the default standard column name used for alternate keys.
+            This value is used for local domain references, and is what external systems would reference.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.EntityTypeBuilding.Sql.AlternateKeyPropertyExtensions.HasAlternateKey``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String,System.Action{Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder{System.Object}})">
+            <summary>
+            Configures the alternate key for a given entity, allowing for custom column naming and further configuration.
+            </summary>
+            <typeparam name="T">The entity type being configured.</typeparam>
+            <param name="builder">The EntityTypeBuilder instance for the entity.</param>
+            <param name="alternateKeyPropertySelector">Expression to select the alternate key property.</param>
+            <param name="alternateKeyColumnName">Optional. Name of the column for the alternate key in the database.</param>
+            <param name="configureAlternateKeyProperty">Optional. Action to further configure the alternate key property.</param>
+            <remarks>
+            This method sets the selected property as an alternate key and allows for custom column naming and additional configuration.
+            The alternate key property will be configured to not generate values automatically in the database.
+            </remarks>
+        </member>
+        <member name="T:Enterprise.EntityFramework.EntityTypeBuilding.Sql.EntityTypeBuilderExtensions">
+            <summary>
+            Extension methods for EntityTypeBuilder to add and configure audit properties.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.EntityTypeBuilding.Sql.EntityTypeBuilderExtensions.AddAuditDateShadowProperties(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder,Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.CreationDateAuditPropertyConfig,Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.DateModifiedPropertyConfig)">
+            <summary>
+            Adds and configures audit shadow properties for creation and modification dates.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PrimaryKeyPropertyExtensions.HasPrimaryKey``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String)">
+            <summary>
+            Configures the primary key for a given entity, using either a property selector or a property name.
+            </summary>
+            <typeparam name="T">The entity type being configured.</typeparam>
+            <param name="builder">The EntityTypeBuilder instance for the entity.</param>
+            <param name="primaryKeyPropertySelector">Expression to select the primary key property.</param>
+            <param name="primaryKeyPropertyName">Name of the shadow primary key property.</param>
+            <remarks>
+            If a property name is provided, it configures a shadow property as the primary key. If a selector is provided, it uses the selected property.
+            The primary key property will be configured with auto-incrementing behavior.
+            </remarks>
+        </member>
+        <member name="T:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig">
+            <summary>
+            Base configuration for audit date properties in an entity.
+            </summary>
+        </member>
+        <member name="P:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig.DefaultSql">
+            <summary>
+            This is a SQL expression to resolve a default value.
+            </summary>
+        </member>
+        <member name="P:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig.ApplyDefaultToNullable">
+            <summary>
+            Default values are not supplied to nullable properties unless explicitly specified.
+            </summary>
+        </member>
+        <member name="P:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig.IsShadowProperty">
+            <summary>
+            Determines if this is a shadow property.
+            This will need to be set if the model does not have a property member matching the name.
+            </summary>
+        </member>
+        <member name="P:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig.PropertyName">
+            <summary>
+            This is the name of the entity property.
+            </summary>
+        </member>
+        <member name="P:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.AuditDatePropertyConfig.IsNullable">
+            <summary>
+            Defines the nullability.
+            This is mostly geared towards shadow properties.
+            For regular properties, reflection is used to determine property type nullability.
+            If the property type nullability can be determined, this value is ignored.
+            </summary>
+        </member>
+        <member name="T:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.CreationDateAuditPropertyConfig">
+            <summary>
+            Configuration for creation date audit property.
+            </summary>
+        </member>
+        <member name="T:Enterprise.EntityFramework.EntityTypeBuilding.Sql.PropertyConfig.DateModifiedPropertyConfig">
+            <summary>
+            Configuration for date modified audit property.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.EntityTypeBuilding.Sql.StandardKeyPropertyExtensions.HasStandardKeys``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0},System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String,System.Action{Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder{System.Object}})">
+            <summary>
+            Configures standard key properties for an entity, including a shadow primary key and an alternate key.
+            The shadow primary key is the typical auto-incrementing integer PK used in relational databases.
+            We typically use a GUID property on the model as an alternate key in the database, but others can be provided.
+            This is done to prevent exposure of internal database implementation details and to optimize SQL performance.
+            External systems would also reference this GUID and not the database integer PK.
+            </summary>
+            <typeparam name="T">The entity type being configured.</typeparam>
+            <param name="builder">The builder providing a fluent API for configuring the entity.</param>
+            <param name="primaryKeyPropertyName">The name of the shadow property to be used as the primary key.</param>
+            <param name="alternateKeyPropertySelector">An expression to select property on the entity that will be used as the alternate key.</param>
+            <param name="alternateKeyColumnName">The name for the column when creating the alternate key, if different from the default.</param>
+            <param name="configureAlternateKeyProperty">Allows for further configuration of the alternate key.</param>
+        </member>
+        <member name="M:Enterprise.EntityFramework.EntityTypeBuilding.Sql.StandardKeyPropertyExtensions.HasStandardKeys``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.String,System.Action{Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder{System.Object}})">
+            <summary>
+            Configures the standard keys for an entity, defining both the primary and alternate keys using provided selectors.
+            </summary>
+            <typeparam name="T">The type of the entity being configured.</typeparam>
+            <param name="builder">The builder used to configure the entity.</param>
+            <param name="primaryKeyPropertySelector">An expression that identifies the property to be used as the primary key.</param>
+            <param name="alternateKeyPropertySelector">An expression that identifies the property to be used as the alternate key.</param>
+            <param name="alternateKeyColumnName">Optional. Specifies the column name for the alternate key in the database. If not provided, a default name is used.</param>
+            <param name="configureAlternateKeyProperty">Optional. A callback to further configure the alternate key property, such as setting column type or constraints.</param>
+            <remarks>
+            This method simplifies the key configuration process by allowing the primary and alternate keys to be set in a single call.
+            The primary key is typically an auto-incrementing integer, while the alternate key is often a GUID that can be exposed to external systems.
+            This method ensures that the entity's keys are configured according to standard practices, with the alternate key often serving as a stable reference for external integration.
+            </remarks>
+        </member>
+        <member name="M:Enterprise.EntityFramework.Extensions.PropertyBuilderExtensions.ConvertColor(Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder{System.Drawing.Color})">
+            <summary>
+            Use a value converter for the Color struct.
+            The string value is persisted in the provider, and is converted back to a struct using the persisted name from the provider.
+            </summary>
+            <param name="propertyBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.EntityFramework.Outbox.OutboxMessagePersistenceService">
+            <summary>
+            Adds domain events as outbox messages.
+            We should only write events to the outbox that downstream systems care about.
+            The integration event object should also be separated from the domain event.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.Outbox.OutboxMessagePersistenceService.AddDomainEventsAsOutboxMessages(Microsoft.EntityFrameworkCore.DbContext,Microsoft.Extensions.Logging.ILogger,Enterprise.Patterns.Outbox.Factory.OutboxMessageFactory)">
+            <summary>
+            Add any domain events recorded on entity objects as outbox messages in the same transaction.
+            This only adds the events as outbox messages. A separate call should be made to save changes.
+            </summary>
+            <param name="dbContext"></param>
+            <param name="logger"></param>
+            <param name="outboxMessageFactory"></param>
+        </member>
+        <member name="M:Enterprise.EntityFramework.Outbox.OutboxMessagePersistenceService.AddOutboxMessages(Microsoft.EntityFrameworkCore.DbContext,System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Patterns.Outbox.Factory.OutboxMessageFactory)">
+            <summary>
+            Add any domain events as outbox messages in the same transaction.
+            This only adds the events as outbox messages. A separate call should be made to save changes.
+            </summary>
+            <param name="dbContext"></param>
+            <param name="domainEvents"></param>
+            <param name="outboxMessageFactory"></param>
+        </member>
+        <member name="F:Enterprise.EntityFramework.Schema.DataSchemaConstants.DefaultNameLength">
+            <summary>
+            This is a default for anything that has a "name".
+            </summary>
+        </member>
+        <member name="F:Enterprise.EntityFramework.Schema.DataSchemaConstants.DefaultNvarcharLength">
+            <summary>
+            This would be the default for an NVARCHAR.
+            </summary>
+        </member>
+        <member name="M:Enterprise.EntityFramework.Services.TrackedEntityService.GetDomainEventsFromTrackedEntities(Microsoft.EntityFrameworkCore.DbContext,Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+            <summary>
+            Aggregate domain events from aggregate root entities currently being tracked by the db context.
+            By default, events are cleared after retrieval to prevent potential errors involving duplicate events.
+            </summary>
+            <param name="dbContext"></param>
+            <param name="logger"></param>
+            <param name="clearDomainEvents"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.EntityFramework.ValueComparers.JsonValueComparer`1">
+            <summary>
+            Use this for SQLite since it doesn't support JSON columns yet.
+            Otherwise, just call .ToJson() on the owned entity instead.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+    </members>
+</doc>

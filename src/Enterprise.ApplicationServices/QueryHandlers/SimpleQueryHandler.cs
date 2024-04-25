@@ -22,8 +22,6 @@ public class SimpleQueryHandler<TQuery, TResponse> : QueryHandlerBase<TQuery, TR
     /// One solution that retains clean architecture is to use a prebuilt handler implementation which requires an implementation of a query logic abstraction.
     /// We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
     /// </summary>
-    /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
     /// <param name="eventServiceFacade"></param>
     /// <param name="queryLogic"></param>
     public SimpleQueryHandler(IEventServiceFacade eventServiceFacade, IQueryLogic<TQuery, TResponse> queryLogic) : base(eventServiceFacade)

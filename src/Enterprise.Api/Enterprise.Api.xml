@@ -1,0 +1,794 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Api</name>
+    </assembly>
+    <members>
+        <member name="F:Enterprise.Api.ContentNegotiation.Constants.VendorMediaTypeConstants.HypermediaXml">
+            <summary>
+            This cannot be used with dynamic or anonymous types
+            unless a custom XML output formatter has been added to handle dynamic serialization.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Controllers.ActionConstraints.RequestHeaderMatchesMediaTypeAttribute">
+            <summary>
+            The API controller action will only execute when the specified media type(s) are present in the "Content-Type" request header.
+            This action constraint deals with routing, and doesn't have anything to do with input or output formatters.
+            Be sure to apply the [Consumes] attribute to the same controller action method as it restricts what an action can consume.
+            The [Consumes] attribute has to do with the media types for the input formatter.
+            The [Produces] attribute simply states that the media type can be produced on output (does not impact routing).
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter">
+            <summary>
+            Action filter that restricts the action's availability to the development environment.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter"/> class.
+            </summary>
+            <param name="environment">Provides information about the web hosting environment an application is running in.</param>
+            <param name="logger">Represents a type used to perform logging.</param>
+        </member>
+        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Called before the action method executes.
+            </summary>
+            <param name="context">The action executing context.</param>
+        </member>
+        <member name="M:Enterprise.Api.Controllers.Formatters.FormatterConfigService.Configure(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            This configures System.Text.Json-based formatters.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Enterprise.Api.Controllers.Formatters.FormatterConfigService.ConfigureJsonOptions(Microsoft.AspNetCore.Mvc.JsonOptions)">
+            <summary>
+            These JSON options are under the Microsoft.AspNetCore.Mvc namespace.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="T:Enterprise.Api.Controllers.Formatters.Output.Custom.MediaTypeVersionDelegatingFormatter">
+            <summary>
+            The API can return a 406 status code if the MvcOptions property ReturnHttpNotAcceptable is set to true, and a media type version strategy is used.
+            When enabled, this can cause problems with generated Swagger documentation. Consider setting it to false and relying on this formatter to handle the 406 responses.
+            This output formatter compensates by removing any versioning parameter and delegating the modified context to the existing formatters.
+            This should be registered last so that all dynamically added output formatters can be referenced.
+            If there are no formatters than can handle the media type, a 406 response is generated.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Controllers.Formatters.Output.Custom.MediaTypeVersionDelegatingFormatter.#ctor(System.Collections.Generic.IList{Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter},System.String)">
+            <summary>
+            The API can return a 406 status code if the MvcOptions property ReturnHttpNotAcceptable is set to true, and a media type version strategy is used.
+            When enabled, this can cause problems with generated Swagger documentation. Consider setting it to false and relying on this formatter to handle the 406 responses.
+            This output formatter compensates by removing any versioning parameter and delegating the modified context to the existing formatters.
+            This should be registered last so that all dynamically added output formatters can be referenced.
+            If there are no formatters than can handle the media type, a 406 response is generated.
+            </summary>
+            <param name="formatters"></param>
+            <param name="versioningParameterName"></param>
+        </member>
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.EnableControllers">
+            <summary>
+            Toggles the registration of controller services.
+            Consider disabling this if using minimal APIs.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.EnableGlobalAuthorizeFilter">
+            <summary>
+            This essentially adds the [Authorize] attribute to all controllers.
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.ControllerAssemblyTypes">
+            <summary>
+            If you have controllers in another project, you can add one or more type references here.
+            Typically, this is a custom static class called "AssemblyReference" with no implementation.
+            The type reference is used to get the assembly reference, which is added as an application part.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.FormatterConfigOptions">
+            <summary>
+            Options for configuring input and output formatters.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.ErrorHandling.Domain.ErrorsExtensions.GetMeaningful(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Filter out errors that do not have anything meaningful to display or return.
+            These are errors that have a code or message specified.
+            </summary>
+            <param name="errors"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Enterprise.Api.ErrorHandling.Options.ErrorHandlingConfigOptions.InternalServerErrorResponseDetailMessage">
+            <summary>
+            This is the friendly message that will be returned when internal server errors occur (500 status code).
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.ErrorHandling.ProblemDetailsMiddleware.HellangMiddlewareDelegates.IsProblem(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            This is using the default behavior, with some exceptions.
+            Specific status codes will not result in a problem details response.
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Events.ApiConfigEvents.ClearStartupHandlers">
+            <summary>
+            Clears all handlers except for those that may be wired up to the <see cref="E:Enterprise.Api.Events.ApiConfigEvents.ConfigurationErrorOccurred"/> event.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Events.ApiConfigEvents.ClearHandlers">
+            <summary>
+            Clears all event handlers to prevent memory leaks or unintended behavior after app shutdown.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Middleware.Custom.AppMiddlewareRegistrar.UseAppMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Automatically resolves instances of <see cref="T:Enterprise.Api.Middleware.Custom.IRegisterAppMiddleware"/> and invokes the registration method.
+            This allows for automatic wiring up of application specific middleware in the request pipeline.
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Enterprise.Api.Middleware.Custom.IRegisterAppMiddleware.RegisterAppMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Registers application specific middleware components in the request pipeline.
+            </summary>
+            <param name="app">The web application used for registration.</param>
+        </member>
+        <member name="T:Enterprise.Api.Middleware.IgnoreFaviconMiddleware">
+            <summary>
+            Most browsers default to requesting a favicon whenever the user visits a new website.
+            This can trigger custom middleware an additional time, causing confusion.
+            
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Middleware.IgnoreFaviconMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.RootRedirectMiddleware})">
+            <summary>
+            Most browsers default to requesting a favicon whenever the user visits a new website.
+            This can trigger custom middleware an additional time, causing confusion.
+            
+            </summary>
+            <param name="next"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Enterprise.Api.Middleware.RootRedirectMiddleware">
+            <summary>
+            This redirects to swagger middleware for requests to the root resource under certain conditions.
+            This middleware should only be registered if swagger documentation middleware has been registered.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Middleware.UserLoggingScopeMiddleware">
+            <summary>
+            If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Middleware.UserLoggingScopeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.UserLoggingScopeMiddleware})">
+            <summary>
+            If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Minimal.EndpointRouteBuilding.EndpointRouteBuilderExtensions">
+            <summary>
+            Provides extension methods for adding endpoints to an <see cref="T:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder"/> with environment-specific visibility.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Minimal.EndpointRouteBuilding.EndpointRouteBuilderExtensions.MapDevOnlyEndpoint(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Maps a minimal API endpoint that is only available in the development environment.
+            </summary>
+            <param name="endpoints">The route builder to add the endpoint to.</param>
+            <param name="pattern">The URL pattern for the route.</param>
+            <param name="handler">The route handler delegate.</param>
+            <returns>An endpoint convention builder that can be used to further configure the endpoint, if the environment condition is met.</returns>
+        </member>
+        <member name="M:Enterprise.Api.Minimal.EndpointRouteBuilding.EndpointRouteBuilderExtensions.MapEnvironmentSpecificEndpoint(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate,System.String[])">
+            <summary>
+            Maps a minimal API endpoint that is available only in specified environments.
+            This method provides flexibility to restrict endpoint availability to any set of environments defined by the allowedEnvironments parameter.
+            Additional configuration can be applied to the route handler via the optional configure parameter.
+            </summary>
+            <param name="endpoints">The route builder to add the endpoint to.</param>
+            <param name="pattern">The URL pattern for the route.</param>
+            <param name="handler">The route handler delegate.</param>
+            <param name="allowedEnvironments">An array of environment names where the endpoint should be available.</param>
+            <returns>An endpoint convention builder that can be used to further configure the endpoint, if the environment condition is met.</returns>
+        </member>
+        <member name="T:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder">
+            <summary>
+            A custom model binder for binding comma-separated string values to enumerable types such as IEnumerable&lt;T&gt; and List&lt;T&gt;.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)">
+            <summary>
+            Asynchronously binds an incoming value to an enumerable model.
+            </summary>
+            <param name="bindingContext">The context for the model binding.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.BindNonCollectionType(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,System.Type,System.ComponentModel.TypeConverter)">
+            <summary>
+            Binds a non-collection enumerable type by splitting comma-separated values and converting them to the element type.
+            </summary>
+            <param name="valueProviderResult">The value provider result containing the comma-separated values.</param>
+            <param name="elementType">The type of the elements in the enumerable.</param>
+            <param name="converter">The type converter for the element type.</param>
+            <returns>An array of the bound elements.</returns>
+        </member>
+        <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.BindListType(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,System.Type,System.ComponentModel.TypeConverter)">
+            <summary>
+            Binds a collection type like List&lt;T&gt; by splitting comma-separated values and converting them to the element type.
+            </summary>
+            <param name="valueProviderResult">The value provider result containing the comma-separated values.</param>
+            <param name="listType">The type of the list to be bound.</param>
+            <param name="converter">The type converter for the element type.</param>
+            <returns>A list of the bound elements.</returns>
+        </member>
+        <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.SplitString(System.String)">
+            <summary>
+            Splits a string by commas into an array of strings, removing empty entries.
+            </summary>
+            <param name="input">The string to be split.</param>
+            <returns>An array of split strings.</returns>
+        </member>
+        <member name="T:Enterprise.Api.Options.ApiConfigOptions">
+            <summary>
+            Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Options.ApiConfigOptions.DeferredConfigurations">
+            <summary>
+            Holds deferred configuration actions that are to be executed later in the application lifecycle.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Options.ApiConfigOptions.WebApplicationOptions">
+            <summary>
+            Contains the options for web application that override all other configuration sources.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Options.ApiConfigOptions.Events">
+            <summary>
+            Allows for wiring up handlers to specific lifecycle events in the API configuration.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Options.ApiConfigOptions.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of <see cref="T:Enterprise.Api.Options.ApiConfigOptions"/> with specified command line arguments.
+            </summary>
+            <param name="args">The command line arguments provided to the application.</param>
+        </member>
+        <member name="M:Enterprise.Api.Options.ApiConfigOptions.ConfigureEventHandlers(System.Action{Enterprise.Api.Events.ApiConfigEvents})">
+            <summary>
+            Configures the event handlers for specific application events.
+            Use multicast delegates for adding handlers to ensure all registered handlers are invoked.
+            </summary>
+            <param name="configureHandlers">An action that configures the event handlers.</param>
+        </member>
+        <member name="M:Enterprise.Api.Options.ApiConfigOptions.Configure``1(System.Action{``0})">
+            <summary>
+            Configures options of a specific type.
+            </summary>
+            <typeparam name="TOptions">The options type to be configured.</typeparam>
+            <param name="configureOptions">The configuration action to be applied.</param>
+        </member>
+        <member name="M:Enterprise.Api.Options.ApiConfigOptions.Configure``1(System.Action{``0,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment})">
+            <summary>
+            Configures options of a specific type with access to the configuration and web hosting environment.
+            </summary>
+            <typeparam name="TOptions">The options type to be configured.</typeparam>
+            <param name="configureOptions">The configuration action to be applied that includes access to the application's configuration and environment.</param>
+        </member>
+        <member name="M:Enterprise.Api.Options.ApiConfigOptions.ExecuteDeferredConfigurations(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Executes all deferred configurations using the provided configuration and web hosting environment.
+            </summary>
+            <param name="configuration">The application's configuration.</param>
+            <param name="environment">The web hosting environment.</param>
+        </member>
+        <member name="M:Enterprise.Api.Options.DefaultOptionsService.RegisterDefaults">
+            <summary>
+            Specify default object instances.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Options.SharedConfigOptions.ApplicationName">
+            <summary>
+            This is the name of the application.
+            Examples: "Configuration.API", "Billing.Service", etc.
+            This is what will appear in logs, and other non display uses.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Options.SharedConfigOptions.ApplicationDisplayName">
+            <summary>
+            This is the friendly display name of the application.
+            Examples: "Configuration API", "Billing Service", etc.
+            This will be used for Swagger configuration, etc.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Options.SharedConfigOptions.OAuthAuthority">
+            <summary>
+            The trusted OAuth authority.
+            This will be used for API security, and Swagger configuration.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Options.SharedConfigOptionsService.ConfigureShared(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Use the shared config to set or override specific values.
+            This enables setting multiple dependent config values with a singular set of config entries.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:Enterprise.Api.Performance.LogRequestDurationAttribute">
+            <summary>
+            This was left here for demonstration purposes.
+            DI is difficult with attributes, requiring something like the service locator anti-pattern.
+            This specific example relies on the HttpContext to get access to the service provider.
+            See <see cref="T:Enterprise.Api.Performance.LogRequestDurationFilter"/> for a better way to apply this in a web API.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Performance.LogRequestDurationFilter">
+            <summary>
+            This is an action filter that records and logs the total request duration in milliseconds.
+            Be sure to apply this using the ServiceFilter attribute.
+            https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.servicefilterattribute?view=aspnetcore-8.0
+            To apply this globally see <see cref="T:Enterprise.Api.Performance.LogRequestDurationMiddleware"/>.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Routing.RoutePartials.VersionSegment">
+            <summary>
+            This can be used to construct a versioned resource identifier.
+            For example: [Route("api/v{version:apiVersion}/[controller]")]
+            You may need to define multiple routes if you want to allow for URLs without a version qualifier to fall back to version 1.0.
+            NOTE: It shouldn't be used by itself.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Security.Authorization.Options.AuthorizationDefaultExtensions.AddDefaultPolicy(Microsoft.AspNetCore.Authorization.AuthorizationBuilder)">
+            <summary>
+            This is the policy applied when an [Authorize] attribute has been applied,
+            or an [AllowAnonymous] attribute is present and no policy has been specified.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Enterprise.Api.Security.Authorization.Options.AuthorizationDefaultExtensions.AddDefaultFallbackPolicy(Microsoft.AspNetCore.Authorization.AuthorizationBuilder)">
+            <summary>
+            This is the policy applied when no [Authorize] attribute is applied AND no [AllowAnonymous] attribute is present.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Enterprise.Api.Security.Authorization.Options.AuthorizationDefaultExtensions.AddDefaultPolicy(Microsoft.AspNetCore.Authorization.AuthorizationOptions)">
+            <summary>
+            This is the policy applied when an [Authorize] attribute has been applied,
+            or an [AllowAnonymous] attribute is present and no policy has been specified.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Enterprise.Api.Security.Authorization.Options.AuthorizationDefaultExtensions.AddDefaultFallbackPolicy(Microsoft.AspNetCore.Authorization.AuthorizationOptions)">
+            <summary>
+            This is the policy applied when no [Authorize] attribute is applied AND no [AllowAnonymous] attribute is present.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Enterprise.Api.Security.OAuth.Extensions.OAuth2Extensions.AddOAuth2Introspection(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            NOTE: use this OR "AddJwtBearer" - not both
+            https://github.com/IdentityModel/IdentityModel.AspNetCore.OAuth2Introspection
+            This involves reference tokens, and increases load on the identity server AND the API
+            because the API has to make a call for every request
+            </summary>
+            <param name="authBuilder"></param>
+            <param name="authority"></param>
+            <param name="clientId"></param>
+            <param name="clientSecret"></param>
+            <param name="cacheDurationInMinutes"></param>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.Authority">
+            <summary>
+            The API is configured to trust tokens generated by the identity provider / security token service at this URL:
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.Audience">
+            <summary>
+            The audience is a token claim that contains the name of the application it is meant for.
+            This was created by Microsoft and is not part of the OAuth2 standard.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.NameClaimType">
+            <summary>
+            The claim used for the name of the logged-in user.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ValidTokenTypes">
+            <summary>
+            These are the valid token types that are used during token validation.
+            By default, only "at+jwt" format is supported.
+            This ensures we're only accepting JWT tokens, which prevents so-called "JWT" confusion attacks.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ConfigureJwtBearerOptions">
+            <summary>
+            A custom delegate that allows for complete customization of JwtBearerOptions.
+            NOTE: if this is provided, all the default configuration is ignored.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Serialization.SerializationConfigService.ConfigureJsonOptions(Microsoft.AspNetCore.Http.Json.JsonOptions)">
+            <summary>
+            These JSON options are under the Microsoft.AspNetCore.Http.Json namespace.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="T:Enterprise.Api.Startup.WebApi">
+            <summary>
+            Configure services, request pipeline middleware, and startup the API.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[],System.Action{Enterprise.Api.Options.ApiConfigOptions})">
+            <summary>
+            Configures the application's services and request pipeline.
+            </summary>
+            <param name="args">The command-line arguments passed to the application.</param>
+            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Options.ApiConfigOptions"/>.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilder(Enterprise.Api.Options.ApiConfigOptions)">
+            <summary>
+            Create the WebApplicationBuilder.
+            This calls into the default builder creation method which registers logging providers, and other service defaults.
+            https://github.com/dotnet/aspnetcore/blob/main/src/DefaultBuilder/src/WebHost.cs#L155
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.AddServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+            <summary>
+            Add services to the container.
+            This includes framework services, and application specific services.
+            </summary>
+            <param name="builder"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplication(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+            <summary>
+            Build the application.
+            All services must be registered before this is called.
+            Any attempts to add additional services will result in an exception.
+            </summary>
+            <param name="builder"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.Extensions.Hosting.IHostApplicationBuilder,Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Options.ApiConfigOptions)">
+            <summary>
+            Configure the HTTP request (middleware) pipeline.
+            </summary>
+            <param name="builder"></param>
+            <param name="app"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApplicationBuilderExtensions.ConfigureServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            Configure and register services with the DI container.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApplicationExtensions.ConfigureRequestPipeline(Microsoft.AspNetCore.Builder.WebApplication,Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
+            <summary>
+            Configure the request pipeline (middleware).
+            </summary>
+            <param name="app"></param>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.Attributes.DevOnlySwaggerFilterAttribute">
+            <summary>
+            Specifies that the controller or action should only be included in Swagger documentation
+            when the application is running in the development environment.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.Attributes.EnvironmentSwaggerFilterAttribute">
+            <summary>
+            Specifies that the controller or action should only be included in Swagger documentation
+            when the application is running in specific environments.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.DocumentFilters.EnvironmentFilter">
+            <summary>
+            Filters out Swagger endpoints that are not intended for use outside the development environment.
+            This includes endpoints decorated with <see cref="T:Enterprise.Api.Swagger.Attributes.EnvironmentSwaggerFilterAttribute"/>
+            and minimal API endpoints associated with <see cref="T:Enterprise.Api.Swagger.MinimalApis.EnvironmentSwaggerFilterMetadata"/>.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.DocumentFilters.EnvironmentFilter.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Swagger.DocumentFilters.EnvironmentFilter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Swagger.DocumentFilters.EnvironmentFilter"/> class.
+            </summary>
+            <param name="webHostEnvironment">The web hosting environment to check.</param>
+            <param name="filterLogger">The logger to use for logging the filtering actions.</param>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.DocumentFilters.EnvironmentFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies the filter to the specified Swagger document, removing endpoints that should not be visible
+            in non-development environments based on custom attribute and metadata checks.
+            </summary>
+            <param name="swaggerDoc">The Swagger document to modify.</param>
+            <param name="context">The document filter context providing access to additional metadata.</param>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.MinimalApis.EnvironmentSwaggerFilterMetadata">
+            <summary>
+            Represents metadata for minimal API endpoints that specifies the endpoint should only be included
+            in Swagger documentation when the application is running in specific environments.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.OperationFilters.NonApplicableParamFilter">
+            <summary>
+            A filter for removing non-applicable parameters, such as the Accept header, from Swagger documentation.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.OperationFilters.NonApplicableParamFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the filter to a specific operation within the Swagger documentation.
+            </summary>
+            <param name="operation">The operation being documented.</param>
+            <param name="context">The context providing metadata for the operation.</param>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.OperationFilters.RemoveVersionParamsFilter">
+            <summary>
+            A Swagger operation filter that removes version parameters from the Swagger documentation.
+            This filter supports both minimal API endpoints and traditional MVC API controllers by checking
+            the presence of versioning information in the route template and operation parameters.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.OperationFilters.RemoveVersionParamsFilter.#ctor(System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Swagger.OperationFilters.RemoveVersionParamsFilter"/> class.
+            </summary>
+            <param name="mediaTypeVersioningEnabled">Indicates whether media type versioning is enabled.</param>
+            <param name="allVersionNames">A list of all parameter names used for versioning.</param>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.OperationFilters.RemoveVersionParamsFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the filter to a specific operation within the Swagger documentation.
+            This method checks if the operation is associated with a route that includes versioning
+            and removes version parameters accordingly.
+            </summary>
+            <param name="operation">The operation being documented.</param>
+            <param name="context">The context providing metadata for the operation.</param>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.OperationFilters.SetDefaultVersionParamValueFilter">
+            <summary>
+            A Swagger operation filter that sets default values for version parameters in the Swagger documentation.
+            This filter is designed to work with both minimal API endpoints and traditional MVC API controllers.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.OperationFilters.SetDefaultVersionParamValueFilter.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Swagger.OperationFilters.SetDefaultVersionParamValueFilter"/> class.
+            </summary>
+            <param name="allVersionNames">A list of all parameter names used for versioning.</param>
+        </member>
+        <member name="F:Enterprise.Api.Swagger.OperationFilters.SetDefaultVersionParamValueFilter.DocumentVersionRegexPattern">
+            <summary>
+            Regular expression pattern to match document version identifiers (e.g., "v1", "v2").
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.OperationFilters.SetDefaultVersionParamValueFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the filter to a specific operation within the Swagger documentation.
+            Sets the default API version based on the version metadata associated with the operation.
+            </summary>
+            <param name="operation">The operation being documented.</param>
+            <param name="context">The context providing metadata for the operation.</param>
+        </member>
+        <member name="T:Enterprise.Api.Swagger.Options.SwaggerConfigOptions">
+            <summary>
+            The options for Swagger configuration in the application.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ConfigSectionKey">
+            <summary>
+            Key for the configuration section related to Swagger settings.
+            To preventing duplication, some of these values may be set or overridden with the "shared" config settings.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableSwagger">
+            <summary>
+            Swagger is enabled by default.
+            It can never be enabled in a production environment (for security purposes).
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.Authority">
+            <summary>
+            The token security service that is the centralized token authority.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthAppName">
+            <summary>
+            The OAuth application name.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthAudience">
+            <summary>
+            The OAuth audience.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthClientId">
+            <summary>
+            The OAuth client for the swagger documentation page.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthClientSecret">
+            <summary>
+            The OAuth client secret.
+            This may or not be required depending on the OAuth flow.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthScopes">
+            <summary>
+            The available OAuth scopes.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableAuthorizationCodeFlow">
+            <summary>
+            Determines if the OpenAPiOAuthFlow.AuthorizationCode flow is enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableImplicitFlow">
+            <summary>
+            Determines if the OpenAPiOAuthFlow.Implicit flow is enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableClientCredentialsFlow">
+            <summary>
+            Determines if the OpenAPiOAuthFlow.ClientCredentials flow is enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnablePasswordFlow">
+            <summary>
+            Determines if the OpenAPiOAuthFlow.Password flow is enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.UsePkce">
+            <summary>
+            Use Proof Key for Code Exchange.
+            This only applies to authorization code flows.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ApplicationName">
+            <summary>
+            The application name.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ApplicationDescription">
+            <summary>
+            A brief (optional) description of the application.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.GetApiClientAssembly">
+            <summary>
+            Used to retrieve XML comments for models contained in a separate API client project/assembly.
+            NOTE: an XML documentation file must be generated by the target project.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.PostConfigure">
+            <summary>
+            An optional extensibility hook for adding application specific customizations.
+            These can include operation filters, document filters, etc.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.CustomConfigure">
+            <summary>
+            This allows for complete control over how swagger is configured.
+            If provided, the prebuilt default will not be applied.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.CanConfigureOAuth">
+            <summary>
+            Have the required OAuth configuration settings been set?
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.#ctor">
+            <summary>
+            Create a new <see cref="T:Enterprise.Api.Swagger.Options.SwaggerConfigOptions"/> with the default settings.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.Services.ConflictingActionResolver.ResolveSimple(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            This isn't a great solution.
+            In most cases, using the [ApiExplorerSettings(IgnoreApi = true)] is a better workaround
+            along with the use of operation filters.
+            </summary>
+            <param name="apiDescriptions"></param>
+            <param name="logger"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Swagger.SwaggerConfigService.UseSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            This will add the middleware to the pipeline that generates the OpenAPI specification,
+            and the middleware that uses that spec to generate the Swagger UI.
+            Swagger can conditionally be enabled/disabled via configuration, but can never be enabled in production (for security reasons).
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Enterprise.Api.Validation.ValidationProblemExtensions.ToValidationProblem(Microsoft.AspNetCore.Mvc.ValidationProblemDetails)">
+            <summary>
+            Translates the validation problem details instance to a <see cref="T:Microsoft.AspNetCore.Http.HttpResults.ValidationProblem"/> result.
+            </summary>
+            <param name="problemDetails"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Enterprise.Api.Versioning.Constants.VersioningConstants.VersionQueryStringParameterName">
+            <summary>
+            The default name used by the reader is "api-version".
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Versioning.Constants.VersioningConstants.MediaTypeVersionParameterName">
+            <summary>
+            This is the .NET default.
+            Example: "application/json;v=2.0".
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Versioning.Constants.VersioningConstants.VersionGroupNameFormat">
+            <summary>
+            This is the versioning format for the group name.
+            This will generate a three digit scheme prefixed by a "v".
+            Versions v000 -> v999 are supported.
+            This number represents the "MAJOR" version incremented when there is a breaking change.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Versioning.Constants.VersioningConstants.VersionUriTemplate">
+            <summary>
+            This is the API route template for the URI segment that contains a version identifier.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Versioning.Constants.VersioningConstants.VersionedAcceptHeader(System.String,System.String)">
+            <summary>
+            Versioning via the accept header involves appending a version identifier suffix separated by a semicolon.
+            For example: "application/json;version=v1";
+            </summary>
+            <param name="acceptHeaderValue"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Api.Versioning.Constants.VersioningConstants.VersionedVendorMediaType(System.String,System.String,System.String,System.String)">
+            <summary>
+            Create a versioned vendor media type.
+            For example: "application/vnd.acme.book.v1+json"
+            </summary>
+            <param name="companyName"></param>
+            <param name="subType"></param>
+            <param name="version"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.DefaultApiVersion">
+            <summary>
+            This is the default version of the API when one is not specified.
+            Ensure this default is properly configured when older versions become deprecated or removed.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableUrlVersioning">
+            <summary>
+            Enables support for versioning via a url segment (like Google and Facebook) -> "api/v1/resource".
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableQueryStringVersioning">
+            <summary>
+            Enables specifying the version via a query string parameter.
+            This is the out-of-the-box default .NET strategy.
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableHeaderVersioning">
+            <summary>
+            This uses a custom HTTP header.
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableMediaTypeVersioning">
+            <summary>
+            Defaults to "application/json;v=2.0" but can be specified in the constructor (something like "version" or "v").
+            Defaults to true.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.AutoMapper</name>
+    </assembly>
+    <members>
+        <member name="P:Enterprise.AutoMapper.Options.AutoMapperConfigOptions.EnableAutoMapper">
+            <summary>
+            Determines if AutoMapper services will be registered.
+            Defaults to true.
+            </summary>
+        </member>
+        <member name="P:Enterprise.AutoMapper.Options.AutoMapperConfigOptions.GetMappingProfileAssemblies">
+            <summary>
+            Delegate that provides the assemblies containing the AutoMapper profiles.
+            </summary>
+        </member>
+    </members>
+</doc>

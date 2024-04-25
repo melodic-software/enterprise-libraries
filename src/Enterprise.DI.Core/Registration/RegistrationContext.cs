@@ -14,7 +14,6 @@ public class RegistrationContext<TService> where TService : class
     /// <summary>
     /// Provides a context for fluent service registration, allowing for easy addition of services and decorators.
     /// </summary>
-    /// <typeparam name="TService">The type of service to be registered.</typeparam>
     public RegistrationContext(IServiceCollection services)
     {
         _services = services;

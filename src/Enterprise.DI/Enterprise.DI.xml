@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.DI</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.DI.Registration.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Func{System.Reflection.Assembly[]})">
+            <summary>
+            Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.IRegisterServices"/> and invokes the registration method.
+            This allows for automatic wiring up of services in the DI container.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="getAssemblies"></param>
+        </member>
+    </members>
+</doc>

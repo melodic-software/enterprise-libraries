@@ -1,4 +1,4 @@
-﻿namespace Enterprise.MultiTenancy.Abstractions
+﻿namespace Enterprise.Multitenancy.Abstractions
 {
     /// <summary>
     /// Implementations know how to retrieve the tenant ID.

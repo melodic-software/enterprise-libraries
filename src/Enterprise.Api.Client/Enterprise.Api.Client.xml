@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Api.Client</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Api.Client.Hypermedia.HypermediaDto`1">
+            <summary>
+            This is a hypermedia result contract that includes the resulting resource representation AND hypermedia links.
+            NOTE: This is technically an envelope object, which breaks REST.
+            TODO: Come back and fix this. Is there a way to do this without an envelope?
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Enterprise.Api.Client.Hypermedia.HypermediaLinkDto.Href">
+            <summary>
+            Contains the URI to be invoked to execute this action.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Client.Hypermedia.HypermediaLinkDto.Rel">
+            <summary>
+            Identifies the type of action.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Client.Hypermedia.HypermediaLinkDto.Method">
+            <summary>
+            Defines the HTTP method to use.
+            </summary>
+        </member>
+    </members>
+</doc>

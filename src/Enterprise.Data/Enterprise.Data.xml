@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Data</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Data.Relational.IDbConnectionFactory.CreateConnectionAsync">
+            <summary>
+            Create a database connection.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

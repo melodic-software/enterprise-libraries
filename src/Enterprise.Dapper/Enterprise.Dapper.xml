@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Dapper</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Dapper.TypeHandlers.DateOnlyTypeHandler">
+            <summary>
+            Dapper doesn't support DateOnly types out of the box.
+            This type handler handles materialization into memory and setting values for persistence.
+            </summary>
+        </member>
+    </members>
+</doc>

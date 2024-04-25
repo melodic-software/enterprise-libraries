@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Applications.DI</name>
+    </assembly>
+    <members>
+        <member name="M:Enterprise.Applications.DI.Registration.Options.OptionsRegistrar.AutoRegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Func{System.Reflection.Assembly[]})">
+            <summary>
+            Automatically resolves instances of <see cref="T:Enterprise.Options.Core.Abstract.IRegisterOptions"/> and invokes the registration method.
+            This allows for automatic wiring up of options in the DI container.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="getAssemblies"></param>
+        </member>
+        <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Func{System.Reflection.Assembly[]})">
+            <summary>
+            Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.IRegisterServices"/> and invokes the registration method.
+            This allows for automatic wiring up of services in the DI container.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="getAssemblies"></param>
+        </member>
+        <member name="T:Enterprise.Applications.DI.Startup.AssemblyAutoLoader">
+            <summary>
+            Provides functionality to automatically load assemblies based on specific conditions.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyAutoLoader.LoadAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+            <summary>
+            Loads assemblies based on a specified filter predicate. If an exception occurs during loading,
+            the method will attempt to load all solution assemblies as a fallback.
+            </summary>
+            <param name="filterPredicate">A function to determine which assemblies should be loaded. If null, all assemblies are considered.</param>
+            <returns>An array of loaded assemblies.</returns>
+        </member>
+        <member name="T:Enterprise.Applications.DI.Startup.AssemblyPathProcessor">
+            <summary>
+            Processes assembly paths and loads assemblies that meet specific criteria.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.ProcessAssemblyPaths(System.Func{System.Reflection.AssemblyName,System.Boolean},System.String[],System.Reflection.MetadataLoadContext)">
+            <summary>
+            Processes the specified assembly paths and loads them using a filter predicate and a metadata load context.
+            </summary>
+            <param name="filterPredicate">A function to filter assembly names for loading.</param>
+            <param name="assemblyPaths">The paths of assemblies to consider.</param>
+            <param name="metadataLoadContext">The context used for loading assembly metadata without affecting the main application domain.</param>
+            <returns>An array of successfully loaded assemblies.</returns>
+        </member>
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.SkipAssembly(System.Func{System.Reflection.AssemblyName,System.Boolean},System.String,System.Reflection.MetadataLoadContext,System.Reflection.AssemblyName)">
+            <summary>
+            Determines whether an assembly should be skipped based on the filter predicate, its path, metadata context, and its name.
+            </summary>
+            <param name="filterPredicate">The filter predicate applied to assembly names.</param>
+            <param name="assemblyPath">The file path of the assembly.</param>
+            <param name="metadataLoadContext">The metadata load context for assembly inspection.</param>
+            <param name="assemblyName">The name of the assembly being considered.</param>
+            <returns>True if the assembly should be skipped; otherwise, false.</returns>
+        </member>
+        <member name="T:Enterprise.Applications.DI.Startup.MetadataLoadContextService">
+            <summary>
+            Provides a way to create and manage a metadata load context that facilitates assembly inspection without loading them into the application domain.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Applications.DI.Startup.MetadataLoadContextService.CreateMetadataLoadContext(System.String[])">
+            <summary>
+            Creates a metadata load context for the specified assembly paths.
+            This allows inspection of assemblies without loading them into the main application domain.
+            </summary>
+            <param name="assemblyPaths">Paths to assemblies to be loaded for inspection.</param>
+            <returns>A new metadata load context configured with specified assemblies.</returns>
+        </member>
+    </members>
+</doc>

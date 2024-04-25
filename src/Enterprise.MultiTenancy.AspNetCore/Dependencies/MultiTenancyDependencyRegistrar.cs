@@ -1,6 +1,6 @@
 ﻿using Enterprise.DI.Core.Registration;
 using Enterprise.MultiTenancy.Abstractions;
-using Enterprise.MultiTenancy.AspNetCore.Services;
+using Enterprise.Multitenancy.AspNetCore.Services;
 using Enterprise.MultiTenancy.Options;
 using Enterprise.Options.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Enterprise.MultiTenancy.AspNetCore.Dependencies;
+namespace Enterprise.Multitenancy.AspNetCore.Dependencies;
 
 public class MultiTenancyDependencyRegistrar : IRegisterServices
 {
