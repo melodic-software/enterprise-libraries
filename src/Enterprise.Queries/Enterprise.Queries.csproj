@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.20" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.21" />
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.18" />
     <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.18" />
   </ItemGroup>
