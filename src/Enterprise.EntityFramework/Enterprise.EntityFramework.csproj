@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.DateTimes" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.1" />
@@ -15,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.DateTimes\Enterprise.DateTimes.csproj" />
     <ProjectReference Include="..\Enterprise.DomainDrivenDesign\Enterprise.DomainDrivenDesign.csproj" />
     <ProjectReference Include="..\Enterprise.Patterns.Outbox\Enterprise.Patterns.Outbox.csproj" />
   </ItemGroup>

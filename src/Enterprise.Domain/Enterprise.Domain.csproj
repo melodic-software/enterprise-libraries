@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Events\Enterprise.Events.csproj" />
   </ItemGroup>
 
 </Project>

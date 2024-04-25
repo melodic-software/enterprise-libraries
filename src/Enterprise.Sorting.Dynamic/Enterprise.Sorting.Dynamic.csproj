@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.12" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Sorting\Enterprise.Sorting.csproj" />
+    <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.3" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.13" />
   </ItemGroup>
 
 </Project>

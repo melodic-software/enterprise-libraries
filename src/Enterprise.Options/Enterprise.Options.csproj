@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.2" />
+    <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Options.Core\Enterprise.Options.Core.csproj" />
   </ItemGroup>
 
 </Project>

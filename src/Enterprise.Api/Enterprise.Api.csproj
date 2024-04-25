@@ -22,6 +22,10 @@
     <PackageReference Include="IdentityModel" Version="7.0.0" />
     <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.2.0" />
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
+    <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.2" />
+    <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.1" />
+    <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.2" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.1" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.2" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.1" />
@@ -67,12 +71,8 @@
     <ProjectReference Include="..\Enterprise.Applications.DI\Enterprise.Applications.DI.csproj" />
     <ProjectReference Include="..\Enterprise.AutoMapper\Enterprise.AutoMapper.csproj" />
     <ProjectReference Include="..\Enterprise.Cors\Enterprise.Cors.csproj" />
-    <ProjectReference Include="..\Enterprise.DataShaping\Enterprise.DataShaping.csproj" />
-    <ProjectReference Include="..\Enterprise.Files\Enterprise.Files.csproj" />
     <ProjectReference Include="..\Enterprise.Hosting.AspNetCore\Enterprise.Hosting.AspNetCore.csproj" />
-    <ProjectReference Include="..\Enterprise.Http.AspNetCore\Enterprise.Http.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Logging.AspNetCore\Enterprise.Logging.AspNetCore.csproj" />
-    <ProjectReference Include="..\Enterprise.Middleware.AspNetCore\Enterprise.Middleware.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Monitoring\Enterprise.Monitoring.csproj" />
     <ProjectReference Include="..\Enterprise.MultiTenancy.AspNetCore\Enterprise.MultiTenancy.AspNetCore.csproj" />
     <ProjectReference Include="..\Enterprise.Quartz\Enterprise.Quartz.csproj" />

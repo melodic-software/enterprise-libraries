@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.3" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enterprise.Caching\Enterprise.Caching.csproj" />
     <ProjectReference Include="..\Enterprise.Options\Enterprise.Options.csproj" />
   </ItemGroup>
 
