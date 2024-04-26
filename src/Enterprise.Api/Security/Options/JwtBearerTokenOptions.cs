@@ -28,7 +28,10 @@ public class JwtBearerTokenOptions
     /// By default, only "at+jwt" format is supported.
     /// This ensures we're only accepting JWT tokens, which prevents so-called "JWT" confusion attacks.
     /// </summary>
-    public List<string> ValidTokenTypes { get; set; } = [SecurityConstants.AccessTokenInJwtFormatType];
+    public HashSet<string> ValidTokenTypes { get; set; } = new(StringComparer.OrdinalIgnoreCase)
+    {
+        SecurityConstants.AccessTokenInJwtFormatType
+    };
 
     /// <summary>
     /// A custom delegate that allows for complete customization of JwtBearerOptions.

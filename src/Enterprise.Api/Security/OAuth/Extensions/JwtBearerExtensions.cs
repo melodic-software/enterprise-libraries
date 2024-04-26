@@ -33,7 +33,7 @@ public static class JwtBearerExtensions
             bool requireHttpsMetadata = environment.IsProduction();
             string validIssuer = jwtBearerTokenOptions.Authority;
             string validAudience = jwtBearerTokenOptions.Audience;
-            List<string> validTypes = jwtBearerTokenOptions.ValidTokenTypes;
+            HashSet<string> validTypes = jwtBearerTokenOptions.ValidTokenTypes;
             string nameClaimType = jwtBearerTokenOptions.NameClaimType ?? JwtClaimTypes.Name;
             string roleClaimType = JwtClaimTypes.Role;
 

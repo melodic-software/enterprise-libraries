@@ -429,7 +429,7 @@
             <param name="args">The command-line arguments passed to the application.</param>
             <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Options.ApiConfigOptions"/>.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilder(Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Options.ApiConfigOptions)">
             <summary>
             Create the WebApplicationBuilder.
             This calls into the default builder creation method which registers logging providers, and other service defaults.
@@ -438,7 +438,7 @@
             <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.AddServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
             <summary>
             Add services to the container.
             This includes framework services, and application specific services.
@@ -446,7 +446,7 @@
             <param name="builder"></param>
             <param name="options"></param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplication(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
             <summary>
             Build the application.
             All services must be registered before this is called.

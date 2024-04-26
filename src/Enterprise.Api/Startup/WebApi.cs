@@ -14,7 +14,7 @@ namespace Enterprise.Api.Startup;
 /// </summary>
 public class WebApi
 {
-    public static Task RunAsync(string[] args) => RunAsync(args, _ => { });
+    public static async Task RunAsync(string[] args) => await RunAsync(args, _ => { });
 
     /// <summary>
     /// Configures the application's services and request pipeline.
@@ -37,15 +37,15 @@ public class WebApi
 
             await options.Events.RaisePreConfigurationCompleted(args);
 
-            WebApplicationBuilder builder = await CreateBuilder(options);
+            WebApplicationBuilder builder = await CreateBuilderAsync(options);
 
             // Execute deferred configurations with the actual configuration and environment.
             PreStartupLogger.Instance.LogInformation("Executing deferred option configuration.");
             options.ExecuteDeferredConfigurations(builder.Configuration, builder.Environment);
             PreStartupLogger.Instance.LogInformation("Deferred option configuration complete.");
 
-            await AddServices(builder, options);
-            WebApplication app = await BuildApplication(builder, options);
+            await AddServicesAsync(builder, options);
+            WebApplication app = await BuildApplicationAsync(builder, options);
 
             await ConfigureRequestPipelineAsync(builder, app, options);
 
@@ -54,7 +54,7 @@ public class WebApi
 
             RegisterLifetimeEventHandlers(app, options, stopwatch);
 
-            await RunApplication(app);
+            await RunApplicationAsync(app);
         }
         catch (Exception ex)
         {
@@ -71,7 +71,7 @@ public class WebApi
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    private static async Task<WebApplicationBuilder> CreateBuilder(ApiConfigOptions options)
+    private static async Task<WebApplicationBuilder> CreateBuilderAsync(ApiConfigOptions options)
     {
         PreStartupLogger.Instance.LogInformation("Creating the WebApplicationBuilder.");
         WebApplicationBuilder builder = WebApplication.CreateBuilder(options.WebApplicationOptions);
@@ -86,7 +86,7 @@ public class WebApi
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="options"></param>
-    private static async Task AddServices(WebApplicationBuilder builder, ApiConfigOptions options)
+    private static async Task AddServicesAsync(WebApplicationBuilder builder, ApiConfigOptions options)
     {
         PreStartupLogger.Instance.LogInformation("Adding services to the DI container.");
         builder.ConfigureServices();
@@ -102,7 +102,7 @@ public class WebApi
     /// <param name="builder"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    private static async Task<WebApplication> BuildApplication(WebApplicationBuilder builder, ApiConfigOptions options)
+    private static async Task<WebApplication> BuildApplicationAsync(WebApplicationBuilder builder, ApiConfigOptions options)
     {
         PreStartupLogger.Instance.LogInformation("Building the application.");
 
@@ -163,7 +163,7 @@ public class WebApi
         app.Logger.LogInformation("Application lifetime event handler registration complete.");
     }
 
-    private static async Task RunApplication(WebApplication app)
+    private static async Task RunApplicationAsync(WebApplication app)
     {
         using IDisposable? disposable = MiddlewareAnalysisConfigService.GetDiagnosticListener(app);
         app.Logger.LogInformation("Running the application.");
