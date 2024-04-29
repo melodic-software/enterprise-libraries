@@ -4,5 +4,16 @@
         <name>Enterprise.Validation</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.Validation.Extensions.ArgumentExtensions.NotNull``1(``0,System.String)">
+            <summary>
+            Ensure that the provided value is not null.
+            This is essentially a guard clause.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="name"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
     </members>
 </doc>

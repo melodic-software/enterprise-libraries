@@ -6,37 +6,36 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 
-namespace Enterprise.Options.DI
+namespace Enterprise.Options.DI;
+
+public static class OptionsRegistrar
 {
-    public static class OptionsRegistrar
+    /// <summary>
+    /// Automatically resolves instances of <see cref="IRegisterOptions"/> and invokes the registration method.
+    /// This allows for automatic wiring up of options in the DI container.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="getAssemblies"></param>
+    public static void AutoRegisterOptions(this IServiceCollection services, IConfiguration configuration, Func<Assembly[]>? getAssemblies = null)
     {
-        /// <summary>
-        /// Automatically resolves instances of <see cref="IRegisterOptions"/> and invokes the registration method.
-        /// This allows for automatic wiring up of options in the DI container.
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="configuration"></param>
-        /// <param name="getAssemblies"></param>
-        public static void AutoRegisterOptions(this IServiceCollection services, IConfiguration configuration, Func<Assembly[]>? getAssemblies = null)
-        {
-            PreStartupLogger.Instance.LogInformation("Auto registering options with the DI container.");
+        PreStartupLogger.Instance.LogInformation("Auto registering options with the DI container.");
 
-            RegistrationMethodInvocationService.InvokeUsing(
-                new RegistrationMethodConfig(
-                    typeof(IRegisterOptions),
-                    nameof(IRegisterOptions.RegisterOptions),
-                    MethodParamsAreValid,
-                    [services, configuration],
-                    getAssemblies: getAssemblies
-                )
-            );
+        RegistrationMethodInvocationService.InvokeUsing(
+            new RegistrationMethodConfig(
+                typeof(IRegisterOptions),
+                nameof(IRegisterOptions.RegisterOptions),
+                MethodParamsAreValid,
+                [services, configuration],
+                getAssemblies: getAssemblies
+            )
+        );
 
-            PreStartupLogger.Instance.LogInformation("Auto option registration complete.");
-        }
-
-        private static bool MethodParamsAreValid(ParameterInfo[] methodParameters) =>
-            methodParameters.Length == 2 &&
-            methodParameters[0].ParameterType == typeof(IServiceCollection) &&
-            methodParameters[1].ParameterType == typeof(IConfiguration);
+        PreStartupLogger.Instance.LogInformation("Auto option registration complete.");
     }
+
+    private static bool MethodParamsAreValid(ParameterInfo[] methodParameters) =>
+        methodParameters.Length == 2 &&
+        methodParameters[0].ParameterType == typeof(IServiceCollection) &&
+        methodParameters[1].ParameterType == typeof(IConfiguration);
 }

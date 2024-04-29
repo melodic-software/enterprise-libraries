@@ -8,50 +8,49 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Enterprise.NodaTime.Dependencies
+namespace Enterprise.NodaTime.Dependencies;
+
+internal class NodaTimeServiceRegistrar : IRegisterServices
 {
-    internal class NodaTimeServiceRegistrar : IRegisterServices
+    public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
-        {
-            ReplaceRegistrations(services);
+        ReplaceRegistrations(services);
 
-            // With the application of the interface segregation principle, these smaller specific services may be requested.
-            // Instead of creating separate instances of each, we are just delegating to the existing services that implement the composite interface.
-            // These may already be registered, but we can safely use the TryAdd to prevent duplication.
-            services.TryAddSingleton<IDateTimeNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeProvider>());
-            services.TryAddSingleton<IDateTimeUtcNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeProvider>());
-            services.TryAddSingleton<IDateTimeOffsetNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeOffsetProvider>());
-            services.TryAddSingleton<IDateTimeOffsetUtcNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeOffsetProvider>());
-        }
+        // With the application of the interface segregation principle, these smaller specific services may be requested.
+        // Instead of creating separate instances of each, we are just delegating to the existing services that implement the composite interface.
+        // These may already be registered, but we can safely use the TryAdd to prevent duplication.
+        services.TryAddSingleton<IDateTimeNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeProvider>());
+        services.TryAddSingleton<IDateTimeUtcNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeProvider>());
+        services.TryAddSingleton<IDateTimeOffsetNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeOffsetProvider>());
+        services.TryAddSingleton<IDateTimeOffsetUtcNowProvider>(provider => provider.GetRequiredService<ICurrentDateTimeOffsetProvider>());
+    }
 
-        private static void ReplaceRegistrations(IServiceCollection services)
-        {
-            // Replace base registrations (if they exist) with these.
+    private static void ReplaceRegistrations(IServiceCollection services)
+    {
+        // Replace base registrations (if they exist) with these.
 
-            // TODO: Update the enterprise DI package with an extension method that simplifies this replacement syntax.
-            // TODO: Consider adding logging support, so it is clear what has been registered and when.
+        // TODO: Update the enterprise DI package with an extension method that simplifies this replacement syntax.
+        // TODO: Consider adding logging support, so it is clear what has been registered and when.
 
-            services.Replace(
-                new ServiceDescriptor(
-                    typeof(ICurrentDateTimeProvider),
-                    typeof(CurrentDateTimeProvider),
-                    ServiceLifetime.Singleton)
-            );
+        services.Replace(
+            new ServiceDescriptor(
+                typeof(ICurrentDateTimeProvider),
+                typeof(CurrentDateTimeProvider),
+                ServiceLifetime.Singleton)
+        );
 
-            services.Replace(
-                new ServiceDescriptor(
-                    typeof(ICurrentDateTimeOffsetProvider),
-                    typeof(CurrentDateTimeOffsetProvider),
-                    ServiceLifetime.Singleton)
-            );
+        services.Replace(
+            new ServiceDescriptor(
+                typeof(ICurrentDateTimeOffsetProvider),
+                typeof(CurrentDateTimeOffsetProvider),
+                ServiceLifetime.Singleton)
+        );
 
-            services.Replace(
-                new ServiceDescriptor(
-                    typeof(IEnsureUtcService),
-                    typeof(EnsureUtcService),
-                    ServiceLifetime.Singleton)
-            );
-        }
+        services.Replace(
+            new ServiceDescriptor(
+                typeof(IEnsureUtcService),
+                typeof(EnsureUtcService),
+                ServiceLifetime.Singleton)
+        );
     }
 }

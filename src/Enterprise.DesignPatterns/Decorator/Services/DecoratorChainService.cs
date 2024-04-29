@@ -22,7 +22,9 @@ public class DecoratorChainService : IDecoratorChainService
 
         while (current is IDecorate<T> decorator)
         {
-            if (currentIndex == index) return current;
+            if (currentIndex == index)
+                return current;
+
             currentIndex++;
             current = decorator.Decorated;
         }

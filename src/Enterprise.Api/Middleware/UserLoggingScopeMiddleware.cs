@@ -30,7 +30,7 @@ public class UserLoggingScopeMiddleware
         {
             ClaimsPrincipal user = context.User;
 
-            string? identityName = user.Identity?.Name ?? "N/A";
+            string identityName = user.Identity?.Name ?? "N/A";
             string? subject = user.Claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Subject)?.Value;
 
             using (_logger.BeginScope("User: {User}, SubjectId: {Subject}", identityName, subject))

@@ -4,9 +4,39 @@
         <name>Enterprise.Patterns.Outbox</name>
     </assembly>
     <members>
-        <member name="T:Enterprise.Patterns.Outbox.Model.MinimalOutboxMessage">
+        <member name="P:Enterprise.Patterns.Outbox.Model.EventOutboxMessage.Type">
+            <summary>
+            The type name of the event.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.EventOutboxMessage.JsonContent">
+            <summary>
+            The serialized JSON representation of the event data.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.Outbox.Model.MinimalEventOutboxMessage">
             <summary>
             A condensed representation of the outbox message used for processing the outbox message and persisting the status metadata.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.Id">
+            <summary>
+            The unique identifier for the outbox message.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.DateCreated">
+            <summary>
+            The date and time the outbox message was created.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.DateProcessed">
+            <summary>
+            The date and time the outbox message was processed.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.Error">
+            <summary>
+            An error message describing a failure that occured during an attempt to process the outbox message.
             </summary>
         </member>
         <member name="P:Enterprise.Patterns.Outbox.Model.OutboxOptions.IntervalInSeconds">

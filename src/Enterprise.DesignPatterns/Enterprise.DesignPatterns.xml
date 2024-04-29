@@ -86,9 +86,6 @@
         <member name="M:Enterprise.DesignPatterns.Decorator.Services.DecoratorDepthService.GetDepthOfDecorator``1(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.DesignPatterns.Decorator.Services.DecoratorHierarchyService.GetParentDecorator``1(``0)">
-            <inheritdoc />
-        </member>
         <member name="M:Enterprise.DesignPatterns.Decorator.Services.DecoratorHierarchyService.GetChildDecorator``1(``0)">
             <inheritdoc />
         </member>

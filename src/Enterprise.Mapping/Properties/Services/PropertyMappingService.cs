@@ -41,7 +41,7 @@ public class PropertyMappingService : IPropertyMappingService
         Dictionary<string, PropertyMappingValue> mappingDictionary = GetPropertyMapping<TSource, TDestination>();
 
         // The string is separated by commas, so we split it.
-        string[]? propertyNamesSplit = propertyNames.Split(Comma);
+        string[] propertyNamesSplit = propertyNames.Split(Comma);
 
         // Trim the values.
         string[] trimmedPropertyNames = propertyNamesSplit.Select(s => s.Trim()).ToArray();

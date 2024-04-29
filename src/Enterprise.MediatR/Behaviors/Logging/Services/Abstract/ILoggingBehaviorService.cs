@@ -1,7 +1,7 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.MediatR.Behaviors.Services.Abstract;
+namespace Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
 
 public interface ILoggingBehaviorService
 {

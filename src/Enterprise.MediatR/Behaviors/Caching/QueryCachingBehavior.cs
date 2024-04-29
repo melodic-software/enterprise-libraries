@@ -4,7 +4,7 @@ using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.MediatR.Behaviors;
+namespace Enterprise.MediatR.Behaviors.Caching;
 
 internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : ICachedQuery
@@ -23,9 +23,9 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
     {
         // This is an example of the "cache aside" pattern.
 
-        TResponse? cachedResult = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
+        var cachedResult = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
 
-        string name = typeof(TRequest).Name;
+        var name = typeof(TRequest).Name;
 
         if (cachedResult is not null)
         {
@@ -35,7 +35,7 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
 
         _logger.LogInformation("Cache miss for {Query}", name);
 
-        TResponse result = await next();
+        var result = await next();
 
         if (result.IsSuccess)
         {

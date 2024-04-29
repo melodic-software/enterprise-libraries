@@ -3,16 +3,16 @@ using Enterprise.FluentValidation.Services;
 using FluentValidation;
 using MediatR;
 
-namespace Enterprise.MediatR.Behaviors;
+namespace Enterprise.MediatR.Behaviors.Validation;
 
 // TODO: Can we consolidate this with the other logging decorator(s)?
-public class FluentValidationBehavior<TRequest, TResponse>
+public class CommandFluentValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IBaseCommand
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators;
 
-    public FluentValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+    public CommandFluentValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators.ToList();
     }

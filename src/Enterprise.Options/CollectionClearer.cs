@@ -8,6 +8,8 @@ namespace Enterprise.Options;
 
 public static class CollectionClearer
 {
+    private const string MethodName = "Clear";
+
     /// <summary>
     /// This checks if the options has any IEnumerable properties.
     /// It first looks for a "Clear" method, and alternatively attempts to re-instantiate the collection using its default constructor.
@@ -35,7 +37,7 @@ public static class CollectionClearer
 
             Type propertyValueType = propertyValue.GetType();
 
-            MethodInfo? clearMethod = propertyValueType.GetMethod("Clear");
+            MethodInfo? clearMethod = propertyValueType.GetMethod(MethodName);
 
             if (clearMethod != null)
             {

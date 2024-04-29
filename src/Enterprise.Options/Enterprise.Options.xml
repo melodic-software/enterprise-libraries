@@ -4,6 +4,20 @@
         <name>Enterprise.Options</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.Options.ChangeNotifier`1.Subscribe(System.Action{`0,System.String})">
+            <summary>
+            Subscribe to change notifications.
+            The provided action will be executed when a change occurs.
+            </summary>
+            <param name="onChange"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Options.ChangeNotifier`1.NotifySubscribers(`0)">
+            <summary>
+            Notify subscribers that the options have changed.
+            </summary>
+            <param name="options">The current options value.</param>
+        </member>
         <member name="M:Enterprise.Options.CollectionClearer.ClearCollections(System.Object,Microsoft.Extensions.Logging.ILogger)">
             <summary>
             This checks if the options has any IEnumerable properties.

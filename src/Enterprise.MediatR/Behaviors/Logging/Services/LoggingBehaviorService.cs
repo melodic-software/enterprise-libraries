@@ -1,8 +1,8 @@
-﻿using Enterprise.MediatR.Behaviors.Services.Abstract;
+﻿using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Errors;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.MediatR.Behaviors.Services;
+namespace Enterprise.MediatR.Behaviors.Logging.Services;
 
 public class LoggingBehaviorService : ILoggingBehaviorService
 {

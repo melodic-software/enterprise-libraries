@@ -5,25 +5,25 @@ using Enterprise.Serialization.Json;
 
 namespace Enterprise.Patterns.Outbox.Factory;
 
-public class OutboxMessageFactory
+public class EventOutboxMessageFactory
 {
     private readonly ISerializeJson _jsonSerializer;
     private readonly IDateTimeUtcNowProvider _dateTimeProvider;
 
-    public OutboxMessageFactory(ISerializeJson jsonSerializer, IDateTimeUtcNowProvider dateTimeProvider)
+    public EventOutboxMessageFactory(ISerializeJson jsonSerializer, IDateTimeUtcNowProvider dateTimeProvider)
     {
         _jsonSerializer = jsonSerializer;
         _dateTimeProvider = dateTimeProvider;
     }
 
-    public IReadOnlyCollection<OutboxMessage> CreateFrom(IReadOnlyCollection<IEvent> values)
+    public IReadOnlyCollection<EventOutboxMessage> CreateFrom(IReadOnlyCollection<IEvent> values)
     {
         if (!values.Any())
-            return new List<OutboxMessage>();
+            return new List<EventOutboxMessage>();
 
-        // Projecting domain events into outbox message instances.
-        List<OutboxMessage> outboxMessages = values
-            .Select(value => new OutboxMessage(
+        // Projecting events into outbox message instances.
+        List<EventOutboxMessage> outboxMessages = values
+            .Select(value => new EventOutboxMessage(
                 Guid.NewGuid(),
                 value.GetType().Name,
                 _jsonSerializer.Serialize(value),

@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.16" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.9" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.9" />
   </ItemGroup>
 
 </Project>

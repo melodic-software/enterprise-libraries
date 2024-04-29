@@ -5,15 +5,14 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Logging.Options
+namespace Enterprise.Logging.Options;
+
+public class LoggingConfigOptionsRegistrar : IRegisterOptions
 {
-    public class LoggingConfigOptionsRegistrar : IRegisterOptions
+    public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
-        {
-            services.RegisterOptions<LoggingConfigOptions>(configuration, LoggingConfigOptions.ConfigSectionKey);
-            services.RegisterOptions<LoggingProviderConfigOptions>(configuration, LoggingProviderConfigOptions.ConfigSectionKey);
-            services.RegisterOptions<TraceListenerConfigOptions>(configuration, TraceListenerConfigOptions.ConfigSectionKey);
-        }
+        services.RegisterOptions<LoggingConfigOptions>(configuration, LoggingConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<LoggingProviderConfigOptions>(configuration, LoggingProviderConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<TraceListenerConfigOptions>(configuration, TraceListenerConfigOptions.ConfigSectionKey);
     }
 }

@@ -1,19 +1,36 @@
-﻿namespace Enterprise.Patterns.Outbox.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class OutboxMessage
+namespace Enterprise.Patterns.Outbox.Model;
+
+public abstract class OutboxMessage
 {
+    /// <summary>
+    /// The unique identifier for the outbox message.
+    /// </summary>
     public Guid Id { get; set; }
-    public string Type { get; set; }
-    public string JsonContent { get; set; }
+
+    /// <summary>
+    /// The date and time (in UTC) the outbox message was created.
+    /// </summary>
     public DateTime? DateCreated { get; set; }
+
+    /// <summary>
+    /// The date and time (in UTC) the outbox message was processed.
+    /// </summary>
     public DateTime? DateProcessed { get; set; }
+
+    /// <summary>
+    /// An error message describing a failure that occured during an attempt to process the outbox message.
+    /// </summary>
     public string? Error { get; set; }
 
-    public OutboxMessage(Guid id, string type, string jsonContent, DateTime? dateCreated)
+    protected OutboxMessage(Guid id, DateTime? dateCreated)
     {
         Id = id;
         DateCreated = dateCreated;
-        Type = type;
-        JsonContent = jsonContent;
     }
 }

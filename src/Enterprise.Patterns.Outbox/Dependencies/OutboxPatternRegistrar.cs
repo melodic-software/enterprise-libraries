@@ -16,7 +16,7 @@ internal class OutboxPatternRegistrar : IRegisterServices
         {
             ISerializeJson jsonSerializer = new OutboxMessageContentSerializer();
             IDateTimeUtcNowProvider dateTimeProvider = provider.GetRequiredService<IDateTimeUtcNowProvider>();
-            OutboxMessageFactory outboxMessageFactory = new OutboxMessageFactory(jsonSerializer, dateTimeProvider);
+            EventOutboxMessageFactory outboxMessageFactory = new EventOutboxMessageFactory(jsonSerializer, dateTimeProvider);
             return outboxMessageFactory;
         });
     }

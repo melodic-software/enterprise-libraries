@@ -18,7 +18,7 @@ public static class SortingExtensions
         string orderByString = string.Empty;
 
         // the orderBy string is separated by a comma, so we split it
-        string[]? orderBySplit = orderBy.Split(Comma);
+        string[] orderBySplit = orderBy.Split(Comma);
 
         // trim the orderBy clause, as it might contain leading or trailing spaces
         string[] trimmedOrderBySplit = orderBySplit.Select(x => x.Trim()).ToArray();

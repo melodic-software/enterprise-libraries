@@ -6,22 +6,16 @@ namespace Enterprise.DesignPatterns.Decorator.Services;
 internal class DecoratorHierarchyService : IDecoratorHierarchyService
 {
     /// <inheritdoc />
-    public T? GetParentDecorator<T>(T current) where T : class
+    public T? GetChildDecorator<T>(T current) where T : class
     {
-        T? previous = null;
+        if (current is not IDecorate<T> decorator)
+            return null;
 
-        while (current is IDecorate<T> decorator)
-        {
-            previous = current;
-            current = decorator.Decorated;
-        }
+        T child = decorator.Decorated;
 
-        return previous;
-    }
+        if (child is IDecorate<T> childDecorator)
+            return childDecorator as T;
 
-    /// <inheritdoc />
-    public T GetChildDecorator<T>(T current) where T : class
-    {
-        throw new NotImplementedException();
+        return null;
     }
 }

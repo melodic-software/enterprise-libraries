@@ -1,10 +1,12 @@
-﻿using Enterprise.MediatR.Behaviors;
-using Enterprise.MediatR.Options;
+﻿using Enterprise.MediatR.Options;
 using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Enterprise.Options.Core.Singleton;
+using Enterprise.MediatR.Behaviors.Logging;
+using Enterprise.MediatR.Behaviors.Validation;
+using Enterprise.MediatR.Behaviors.Caching;
 
 namespace Enterprise.MediatR.Config;
 
@@ -28,8 +30,9 @@ public static class MediatRConfigService
 
             mediatRConfiguration.RegisterServicesFromAssemblies(assemblies);
 
-            mediatRConfiguration.AddOpenBehavior(typeof(LoggingBehavior<,>));
-            mediatRConfiguration.AddOpenBehavior(typeof(FluentValidationBehavior<,>));
+            mediatRConfiguration.AddOpenBehavior(typeof(GlobalRequestLoggingBehavior<,>), ServiceLifetime.Scoped);
+            mediatRConfiguration.AddOpenBehavior(typeof(UseCaseLoggingBehavior<,>));
+            mediatRConfiguration.AddOpenBehavior(typeof(CommandFluentValidationBehavior<,>));
             mediatRConfiguration.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
         });
     }

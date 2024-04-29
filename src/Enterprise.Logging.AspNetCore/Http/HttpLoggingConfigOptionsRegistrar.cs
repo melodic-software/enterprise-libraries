@@ -3,13 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Extensions;
 
-namespace Enterprise.Logging.AspNetCore.Http
+namespace Enterprise.Logging.AspNetCore.Http;
+
+public class HttpLoggingConfigOptionsRegistrar : IRegisterOptions
 {
-    public class HttpLoggingConfigOptionsRegistrar : IRegisterOptions
+    public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
-        {
-            services.RegisterOptions<HttpLoggingConfigOptions>(configuration, HttpLoggingConfigOptions.ConfigSectionKey);
-        }
+        services.RegisterOptions<HttpLoggingConfigOptions>(configuration, HttpLoggingConfigOptions.ConfigSectionKey);
     }
 }

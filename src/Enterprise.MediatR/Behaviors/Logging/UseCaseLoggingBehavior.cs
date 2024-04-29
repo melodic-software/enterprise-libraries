@@ -1,13 +1,13 @@
 ﻿using Enterprise.ApplicationServices.Core.UseCases;
-using Enterprise.MediatR.Behaviors.Services;
-using Enterprise.MediatR.Behaviors.Services.Abstract;
+using Enterprise.MediatR.Behaviors.Logging.Services;
+using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.MediatR.Behaviors;
+namespace Enterprise.MediatR.Behaviors.Logging;
 
-public class LoggingBehavior<TRequest, TResponse>
+public class UseCaseLoggingBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IUseCase
     where TResponse : Result
@@ -15,12 +15,12 @@ public class LoggingBehavior<TRequest, TResponse>
     private readonly ILogger<TRequest> _logger;
     private readonly ILoggingBehaviorService _loggingBehaviorService;
 
-    public LoggingBehavior(ILogger<TRequest> logger) : this(logger, new LoggingBehaviorService())
+    public UseCaseLoggingBehavior(ILogger<TRequest> logger) : this(logger, new LoggingBehaviorService())
     {
 
     }
 
-    public LoggingBehavior(ILogger<TRequest> logger, ILoggingBehaviorService loggingBehaviorService)
+    public UseCaseLoggingBehavior(ILogger<TRequest> logger, ILoggingBehaviorService loggingBehaviorService)
     {
         _logger = logger;
         _loggingBehaviorService = loggingBehaviorService;
@@ -31,6 +31,8 @@ public class LoggingBehavior<TRequest, TResponse>
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(request);
+
         string typeName = request.GetType().Name;
 
         // TODO: Do we want to look at dynamic "command" vs "query" detail in the structured logs or is use case qualifier good enough?
@@ -50,7 +52,7 @@ public class LoggingBehavior<TRequest, TResponse>
             {
                 _loggingBehaviorService.LogApplicationServiceError(_logger, result.Errors, typeName);
             }
-            
+
             return result;
         }
         catch (Exception exception)
