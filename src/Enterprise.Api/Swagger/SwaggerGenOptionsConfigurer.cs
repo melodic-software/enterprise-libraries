@@ -77,7 +77,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             // Swashbuckle tries to just use the class name as a simple schemaId,
             // however if you have two classes in different namespaces with the same name this will not work
             // this outputs full assembly qualified names for models under the "schemas" area at the bottom of the Swagger UI
-            options.CustomSchemaIds(type => type.FullName);
+            options.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
             options.DescribeAllParametersInCamelCase();
 
             options.AddSecurity(_swaggerConfigOptions);

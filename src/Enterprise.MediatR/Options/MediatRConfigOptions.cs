@@ -1,4 +1,9 @@
 ﻿using System.Reflection;
+using Enterprise.MediatR.Behaviors;
+using Enterprise.MediatR.Behaviors.Caching;
+using Enterprise.MediatR.Behaviors.Logging;
+using Enterprise.MediatR.Behaviors.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.MediatR.Options;
 
@@ -16,5 +21,28 @@ public class MediatRConfigOptions
     /// Delegate that provides the assemblies containing the MediatR handlers.
     /// These implement IRequestHandler, INotificationHandler, etc.
     /// </summary>
-    public Func<Assembly[]>? GetServicesFromAssemblies { get; set; } = null;
+    public Func<Assembly[]>? GetAssemblies { get; set; } = null;
+
+    /// <summary>
+    /// Allows for providing a custom behavior pipeline.
+    /// This will override any default behavior, so be sure to include all behaviors needed for the application in a specific order.
+    /// </summary>
+    public List<BehaviorRegistration> BehaviorRegistrations = [];
+
+    /// <summary>
+    /// This allows for complete customization and control over the MediatR config.
+    /// None of the default configuration is used, so everything must be completely configured.
+    /// </summary>
+    public Action<MediatRServiceConfiguration>? CustomConfigure = null;
+
+    /// <summary>
+    /// These are the default behavior registrations.
+    /// </summary>
+    public readonly List<BehaviorRegistration> DefaultBehaviorRegistrations =
+    [
+        new(typeof(RequestLoggingBehavior<,>), ServiceLifetime.Scoped),
+        new (typeof(UseCaseLoggingBehavior<,>)),
+        new (typeof(CommandFluentValidationBehavior<,>)),
+        new (typeof(QueryCachingBehavior<,>))
+    ];
 }

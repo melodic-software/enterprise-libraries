@@ -5,13 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Logging;
 
-public class GlobalRequestLoggingBehavior<TRequest, TResponse> :
+public class RequestLoggingBehavior<TRequest, TResponse> :
     IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-    private readonly ILogger<GlobalRequestLoggingBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogger<RequestLoggingBehavior<TRequest, TResponse>> _logger;
 
-    public GlobalRequestLoggingBehavior(ILogger<GlobalRequestLoggingBehavior<TRequest, TResponse>> logger)
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResponse>> logger)
     {
         _logger = logger;
     }

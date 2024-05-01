@@ -25,7 +25,7 @@ internal class DefaultExceptionHandler : IExceptionHandler
         {
             Status = (int)HttpStatusCode.InternalServerError,
             Type = exception.GetType().Name,
-            Title = "An unexpected error occurred",
+            Title = "An unexpected error occurred.",
             Detail = exception.Message,
             Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
         };

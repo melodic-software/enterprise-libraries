@@ -3,10 +3,8 @@ using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Enterprise.MediatR.Behaviors;
 using Enterprise.Options.Core.Singleton;
-using Enterprise.MediatR.Behaviors.Logging;
-using Enterprise.MediatR.Behaviors.Validation;
-using Enterprise.MediatR.Behaviors.Caching;
 
 namespace Enterprise.MediatR.Config;
 
@@ -20,21 +18,9 @@ public static class MediatRConfigService
         if (!options.EnableMediatR)
             return;
 
-        // TODO: This fallback isn't ideal, as it could load a lot of assemblies we don't need.
-        // We should try to find a more performant option to fall back to.
-        Func<Assembly[]> getAssemblies = options.GetServicesFromAssemblies ?? GetAssemblies;
+        Action<MediatRServiceConfiguration> configure = options.CustomConfigure ?? DefaultConfigure(options);
 
-        services.AddMediatR(mediatRConfiguration =>
-        {
-            Assembly[] assemblies = getAssemblies();
-
-            mediatRConfiguration.RegisterServicesFromAssemblies(assemblies);
-
-            mediatRConfiguration.AddOpenBehavior(typeof(GlobalRequestLoggingBehavior<,>), ServiceLifetime.Scoped);
-            mediatRConfiguration.AddOpenBehavior(typeof(UseCaseLoggingBehavior<,>));
-            mediatRConfiguration.AddOpenBehavior(typeof(CommandFluentValidationBehavior<,>));
-            mediatRConfiguration.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
-        });
+        services.AddMediatR(configure);
     }
 
     private static Assembly[] GetAssemblies()
@@ -42,5 +28,28 @@ public static class MediatRConfigService
         Assembly[] assemblies = AssemblyLoader.LoadSolutionAssemblies(AssemblyFilterPredicates.ThatAreNotMicrosoft);
 
         return assemblies;
+    }
+
+    private static Action<MediatRServiceConfiguration> DefaultConfigure(MediatRConfigOptions options)
+    {
+        // TODO: This fallback isn't ideal, as it could load a lot of assemblies we don't need.
+        // We should try to find a more performant option to fall back to.
+        Func<Assembly[]> getAssemblies = options.GetAssemblies ?? GetAssemblies;
+        List<BehaviorRegistration> behaviorRegistrations = options.BehaviorRegistrations;
+
+        if (!behaviorRegistrations.Any())
+            behaviorRegistrations = options.DefaultBehaviorRegistrations;
+
+        return mediatRConfiguration =>
+        {
+            Assembly[] assemblies = getAssemblies();
+
+            mediatRConfiguration.RegisterServicesFromAssemblies(assemblies);
+
+            foreach (BehaviorRegistration behaviorRegistration in behaviorRegistrations)
+            {
+                mediatRConfiguration.AddOpenBehavior(behaviorRegistration.Type, behaviorRegistration.ServiceLifetime);
+            }
+        };
     }
 }
