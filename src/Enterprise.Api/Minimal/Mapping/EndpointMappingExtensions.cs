@@ -8,6 +8,12 @@ namespace Enterprise.Api.Minimal.Mapping;
 
 public static class EndpointMappingExtensions
 {
+    /// <summary>
+    /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="assemblies"></param>
+    /// <returns></returns>
     public static IServiceCollection AddEndpoints(this IServiceCollection services, params Assembly[] assemblies)
     {
         ServiceDescriptor[] serviceDescriptors = assemblies
@@ -22,6 +28,12 @@ public static class EndpointMappingExtensions
         return services;
     }
 
+    /// <summary>
+    /// Retrieves all registered instances of <see cref="IMapEndpoint"/> and invokes the endpoint mapping behavior for each one that is registered.
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="routeGroupBuilder"></param>
+    /// <returns></returns>
     public static IApplicationBuilder MapEndpoints(this WebApplication app, RouteGroupBuilder? routeGroupBuilder = null)
     {
         IEnumerable<IMapEndpoint> endpointMappers = app.Services.GetRequiredService<IEnumerable<IMapEndpoint>>();
