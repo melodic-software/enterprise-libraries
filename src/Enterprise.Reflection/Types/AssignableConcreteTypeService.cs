@@ -19,9 +19,11 @@ public static class AssignableConcreteTypeService
         IEnumerable<TypeInfo> definedTypes = assembly.DefinedTypes;
 
         List<TypeInfo> types = definedTypes
-            .Where(x =>
-                x is { IsAbstract: false, IsInterface: false } &&
-                type.IsAssignableFrom(x)
+            .Where(typeInfo =>
+                typeInfo is { IsAbstract: false, IsInterface: false } &&
+                type.IsAssignableFrom(typeInfo)
+                // TODO: Should we be using IsAssignableTo() here?
+                // Maybe if the type is an abstraction like an interface?
             )
             .ToList();
 
