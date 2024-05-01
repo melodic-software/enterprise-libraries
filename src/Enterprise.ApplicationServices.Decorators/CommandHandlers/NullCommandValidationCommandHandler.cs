@@ -13,9 +13,9 @@ public class NullCommandValidationCommandHandler<T> : CommandHandlerDecoratorBas
 
     }
 
-    public override Task HandleAsync(T? command)
+    public override Task HandleAsync(T? command, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(command);
-        return Decorated.HandleAsync(command);
+        return Decorated.HandleAsync(command, cancellationToken);
     }
 }

@@ -17,15 +17,15 @@ public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleComm
     }
 
     /// <inheritdoc />
-    public Task HandleAsync(IBaseCommand command)
+    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         T typedCommand = (T)command;
-        return HandleAsync(typedCommand);
+        return HandleAsync(typedCommand, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task HandleAsync(T command);
+    public abstract Task HandleAsync(T command, CancellationToken cancellationToken);
 
     /// <inheritdoc />
     public void ClearCallbacks()

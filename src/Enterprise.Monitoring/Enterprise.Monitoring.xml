@@ -43,6 +43,11 @@
             If provided, a SQL Server health check will be enabled.
             </summary>
         </member>
+        <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.PostgresConnectionString">
+            <summary>
+            If provided, a Postgres health check will be enabled.
+            </summary>
+        </member>
         <member name="P:Enterprise.Monitoring.Health.Options.HealthCheckConfigOptions.UrlGroup">
             <summary>
             When populated, a health check will be added for each URI.

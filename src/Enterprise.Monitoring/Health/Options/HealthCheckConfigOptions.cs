@@ -40,6 +40,11 @@ public class HealthCheckConfigOptions
     public string? SqlConnectionString { get; set; }
 
     /// <summary>
+    /// If provided, a Postgres health check will be enabled.
+    /// </summary>
+    public string? PostgresConnectionString { get; set; }
+
+    /// <summary>
     /// When populated, a health check will be added for each URI.
     /// </summary>
     public List<UriGroup> UrlGroup { get; set; } = [];

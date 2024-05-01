@@ -20,7 +20,7 @@
             The alternative approach is in process, the primary difference being that it has to be processed before the response is returned.
             </summary>
         </member>
-        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Enterprise.Domain.Events.Raising.IRaiseDomainEvents,Enterprise.Patterns.Outbox.Factory.OutboxMessageFactory,Microsoft.Extensions.Logging.ILogger{Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware{`0}})">
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Enterprise.Domain.Events.Raising.IRaiseDomainEvents,Enterprise.Patterns.Outbox.Factory.EventOutboxMessageFactory,Microsoft.Extensions.Logging.ILogger{Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware{`0}})">
             <summary>
             Initializes a new instance of the <see cref="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1"/> class.
             </summary>

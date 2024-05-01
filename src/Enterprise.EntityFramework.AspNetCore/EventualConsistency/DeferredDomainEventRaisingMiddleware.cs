@@ -28,7 +28,7 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
 {
     private readonly RequestDelegate _next;
     private readonly IRaiseDomainEvents _eventRaiser;
-    private readonly OutboxMessageFactory _outboxMessageFactory;
+    private readonly EventOutboxMessageFactory _outboxMessageFactory;
     private readonly ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> _logger;
 
     /// <summary>
@@ -41,7 +41,7 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
     public DeferredDomainEventRaisingMiddleware(
         RequestDelegate next,
         IRaiseDomainEvents eventRaiser,
-        OutboxMessageFactory outboxMessageFactory,
+        EventOutboxMessageFactory outboxMessageFactory,
         ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> logger)
     {
         _next = next;
@@ -74,14 +74,14 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
         // We pass the transaction into the delegate, so it won't be disposed when the request ends.
         httpContext.Response.OnCompleted(async () =>
         {
-            await ProcessDomainEvents(httpContext, dbContext, transaction);
+            await ProcessDomainEventsAsync(httpContext, dbContext, transaction);
         });
 
         // Continue processing the next middleware in the pipeline.
         await _next(httpContext);
     }
 
-    private async Task ProcessDomainEvents(HttpContext httpContext, TDbContext dbContext, IDbContextTransaction transaction)
+    private async Task ProcessDomainEventsAsync(HttpContext httpContext, TDbContext dbContext, IDbContextTransaction transaction)
     {
         try
         {

@@ -21,6 +21,12 @@ public static class HealthCheckConfigService
 
         IHealthChecksBuilder healthCheckBuilder = builder.Services.AddHealthChecks();
 
+        if (!string.IsNullOrWhiteSpace(options.SqlConnectionString))
+            healthCheckBuilder.AddSqlServer(options.SqlConnectionString);
+
+        if (!string.IsNullOrWhiteSpace(options.PostgresConnectionString))
+            healthCheckBuilder.AddNpgSql(options.PostgresConnectionString);
+
         if (!string.IsNullOrWhiteSpace(options.OpenIdConnectAuthority))
             healthCheckBuilder.AddIdentityServer(new Uri(options.OpenIdConnectAuthority));
 
@@ -39,9 +45,6 @@ public static class HealthCheckConfigService
             });
         }
 
-        if (!string.IsNullOrWhiteSpace(options.SqlConnectionString))
-            healthCheckBuilder.AddSqlServer(options.SqlConnectionString);
-
         foreach (UriGroup group in options.UrlGroup)
             healthCheckBuilder.AddUrlGroup(new Uri(group.Uri), group.HttpMethod, group.Name);
 
@@ -58,6 +61,7 @@ public static class HealthCheckConfigService
         IEndpointConventionBuilder builder = app.MapHealthChecks(options.UrlPatternName, new()
         {
             // This will write JSON data in the HTTP response to the health check endpoint.
+            // This comes from the AspNetCore.HealthChecks.UI.Client package.
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 

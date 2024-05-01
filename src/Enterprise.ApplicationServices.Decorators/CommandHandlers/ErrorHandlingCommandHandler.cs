@@ -18,11 +18,11 @@ public class ErrorHandlingCommandHandler<T> : CommandHandlerDecoratorBase<T>
         _logger = logger;
     }
 
-    public override Task HandleAsync(T command)
+    public override Task HandleAsync(T command, CancellationToken cancellationToken)
     {
         try
         {
-            return Decorated.HandleAsync(command);
+            return Decorated.HandleAsync(command, cancellationToken);
         }
         catch (Exception exception)
         {

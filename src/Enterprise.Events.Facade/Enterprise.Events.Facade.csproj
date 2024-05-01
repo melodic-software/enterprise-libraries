@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.19" />
-    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.30" />
-    <PackageReference Include="Melodic.Enterprise.Events.Decorators" Version="1.0.0-preview.19" />
+    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.31" />
+    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.31" />
+    <PackageReference Include="Melodic.Enterprise.Events.Decorators" Version="1.0.0-preview.31" />
   </ItemGroup>
 
 </Project>
