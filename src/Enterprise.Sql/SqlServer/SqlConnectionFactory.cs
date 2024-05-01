@@ -15,7 +15,7 @@ public class SqlConnectionFactory : IDbConnectionFactory
         _connectionString = connectionString;
     }
 
-    public async Task<IDbConnection> CreateConnectionAsync()
+    public async ValueTask<IDbConnection> OpenConnectionAsync()
     {
         SqlConnection connection = new SqlConnection(_connectionString);
 

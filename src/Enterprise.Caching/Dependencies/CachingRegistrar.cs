@@ -5,6 +5,7 @@ using Enterprise.Library.Core.Services.Abstract;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.Caching.Dependencies;
 
@@ -12,7 +13,7 @@ internal class CachingRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton(provider =>
+        services.TryAddSingleton(provider =>
         {
             // This will require a registration of IDistributedCache.
             IDistributedCache distributedCache = provider.GetRequiredService<IDistributedCache>();

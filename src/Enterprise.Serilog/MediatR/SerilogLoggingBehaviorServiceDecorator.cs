@@ -1,4 +1,4 @@
-﻿using Enterprise.MediatR.Behaviors.Services.Abstract;
+﻿using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Errors;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;

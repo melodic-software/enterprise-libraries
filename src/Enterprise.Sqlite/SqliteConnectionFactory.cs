@@ -14,7 +14,7 @@ public class SqliteConnectionFactory : IDbConnectionFactory
         _connectionString = connectionString;
     }
 
-    public async Task<IDbConnection> CreateConnectionAsync()
+    public async ValueTask<IDbConnection> OpenConnectionAsync()
     {
         SqliteConnection connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();

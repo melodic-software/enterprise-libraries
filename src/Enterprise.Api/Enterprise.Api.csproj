@@ -28,7 +28,7 @@
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.19" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.17" />
-    <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.20" />
+    <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.30" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.19" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.20" />
@@ -38,7 +38,7 @@
     <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.25" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.17" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.19" />
-    <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.16" />
+    <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.30" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.4" />

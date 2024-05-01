@@ -21,7 +21,8 @@ public static class OutboxMessagePersistenceService
     /// <param name="dbContext"></param>
     /// <param name="logger"></param>
     /// <param name="outboxMessageFactory"></param>
-    public static IReadOnlyCollection<OutboxMessage> AddDomainEventsAsOutboxMessages(DbContext dbContext, ILogger logger, OutboxMessageFactory outboxMessageFactory)
+    public static IReadOnlyCollection<OutboxMessage> AddDomainEventsAsOutboxMessages(DbContext dbContext,
+        ILogger logger, EventOutboxMessageFactory outboxMessageFactory)
     {
         IReadOnlyCollection<IDomainEvent> domainEvents = GetDomainEventsFromTrackedEntities(dbContext, logger);
         IReadOnlyCollection<OutboxMessage> outboxMessages = AddOutboxMessages(dbContext, domainEvents, outboxMessageFactory);
@@ -35,7 +36,8 @@ public static class OutboxMessagePersistenceService
     /// <param name="dbContext"></param>
     /// <param name="domainEvents"></param>
     /// <param name="outboxMessageFactory"></param>
-    public static IReadOnlyCollection<OutboxMessage> AddOutboxMessages(DbContext dbContext, IReadOnlyCollection<IDomainEvent> domainEvents, OutboxMessageFactory outboxMessageFactory)
+    public static IReadOnlyCollection<OutboxMessage> AddOutboxMessages(DbContext dbContext,
+        IReadOnlyCollection<IDomainEvent> domainEvents, EventOutboxMessageFactory outboxMessageFactory)
     {
         // Create outbox messages from the domain event collection.
         IReadOnlyCollection<OutboxMessage> outboxMessages = outboxMessageFactory.CreateFrom(domainEvents);

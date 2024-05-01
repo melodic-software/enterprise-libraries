@@ -1,5 +1,5 @@
-﻿using Enterprise.MediatR.Behaviors.Services;
-using Enterprise.MediatR.Behaviors.Services.Abstract;
+﻿using Enterprise.MediatR.Behaviors.Logging.Services;
+using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

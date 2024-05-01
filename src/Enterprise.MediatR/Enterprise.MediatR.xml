@@ -13,10 +13,27 @@
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.GetServicesFromAssemblies">
+        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.GetAssemblies">
             <summary>
             Delegate that provides the assemblies containing the MediatR handlers.
             These implement IRequestHandler, INotificationHandler, etc.
+            </summary>
+        </member>
+        <member name="F:Enterprise.MediatR.Options.MediatRConfigOptions.BehaviorRegistrations">
+            <summary>
+            Allows for providing a custom behavior pipeline.
+            This will override any default behavior, so be sure to include all behaviors needed for the application in a specific order.
+            </summary>
+        </member>
+        <member name="F:Enterprise.MediatR.Options.MediatRConfigOptions.CustomConfigure">
+            <summary>
+            This allows for complete customization and control over the MediatR config.
+            None of the default configuration is used, so everything must be completely configured.
+            </summary>
+        </member>
+        <member name="F:Enterprise.MediatR.Options.MediatRConfigOptions.DefaultBehaviorRegistrations">
+            <summary>
+            These are the default behavior registrations.
             </summary>
         </member>
     </members>

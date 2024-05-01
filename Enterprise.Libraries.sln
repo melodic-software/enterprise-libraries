@@ -327,9 +327,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{C6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patterns", "Patterns", "{C3FA00F0-238E-4C37-9A4F-F36B2D2ED344}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Patterns.Repository", "src\Enterprise.Patterns.Repository\Enterprise.Patterns.Repository.csproj", "{1B8FB499-5D55-4EDE-BF06-F96310596CEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Patterns.Repository", "src\Enterprise.Patterns.Repository\Enterprise.Patterns.Repository.csproj", "{1B8FB499-5D55-4EDE-BF06-F96310596CEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Patterns.ServiceLocator", "src\Enterprise.Patterns.ServiceLocator\Enterprise.Patterns.ServiceLocator.csproj", "{04937C34-0A2B-4B40-B801-9F040C2710E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Patterns.ServiceLocator", "src\Enterprise.Patterns.ServiceLocator\Enterprise.Patterns.ServiceLocator.csproj", "{04937C34-0A2B-4B40-B801-9F040C2710E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

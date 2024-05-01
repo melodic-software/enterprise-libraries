@@ -22,7 +22,7 @@ internal class EntityFrameworkDependencyRegistrar : IRegisterServices
         services.AddScoped(provider =>
         {
             ILogger<OutboxMessagesInterceptor> logger = provider.GetRequiredService<ILogger<OutboxMessagesInterceptor>>();
-            OutboxMessageFactory factory = provider.GetRequiredService<OutboxMessageFactory>();
+            EventOutboxMessageFactory factory = provider.GetRequiredService<EventOutboxMessageFactory>();
 
             return new OutboxMessagesInterceptor(logger, factory);
         });

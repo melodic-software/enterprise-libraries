@@ -8,9 +8,9 @@ namespace Enterprise.EntityFramework.Outbox;
 public sealed class OutboxMessagesInterceptor : SaveChangesInterceptor
 {
     private readonly ILogger<OutboxMessagesInterceptor> _logger;
-    private readonly OutboxMessageFactory _outboxMessageFactory;
+    private readonly EventOutboxMessageFactory _outboxMessageFactory;
 
-    public OutboxMessagesInterceptor(ILogger<OutboxMessagesInterceptor> logger, OutboxMessageFactory outboxMessageFactory)
+    public OutboxMessagesInterceptor(ILogger<OutboxMessagesInterceptor> logger, EventOutboxMessageFactory outboxMessageFactory)
     {
         _logger = logger;
         _outboxMessageFactory = outboxMessageFactory;
