@@ -52,6 +52,10 @@ public class Result : IResult
     }
 }
 
+/// <summary>
+/// This is the generic variant of <see cref="Result"/> that specifies a typed value.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public partial class Result<T> : Result, IResult<T>
 {
     private const string FailedResultValueAccessErrorMessage = "Cannot access the value of a failed result.";

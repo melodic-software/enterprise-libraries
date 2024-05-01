@@ -12,8 +12,9 @@ public interface IHandleCommand
     /// Handle the command.
     /// </summary>
     /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task HandleAsync(IBaseCommand command);
+    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken);
 }
 
 /// <summary>
@@ -26,8 +27,9 @@ public interface IHandleCommand<in T> : IHandleCommand, IApplicationService wher
     /// Handle the command.
     /// </summary>
     /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task HandleAsync(T command);
+    Task HandleAsync(T command, CancellationToken cancellationToken);
 }
 
 /// <summary>
@@ -47,6 +49,7 @@ public interface IHandleCommand<in TCommand, TResponse>
     /// Handle the command.
     /// </summary>
     /// <param name="command"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResponse> HandleAsync(TCommand command);
+    Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

@@ -11,7 +11,7 @@ public interface IEvent : IMessage, INotification
     public Guid Id { get; }
 
     /// <summary>
-    /// The date and time the event occurred.
+    /// The date and time the event occurred (in UTC).
     /// </summary>
     public DateTimeOffset DateOccurred { get; }
 }

@@ -17,7 +17,7 @@ public static class ErrorResultFactory
 
         errors = ErrorDedupeService.DedupeErrors(errors).ToList();
 
-        int statusCode = ErrorStatusCodeMapper.CreateStatusCode(errors, httpContext);
+        int statusCode = ErrorStatusCodeService.GetStatusCode(errors, httpContext);
 
         IReadOnlyCollection<IError> scopedErrors = ErrorFilterService.FilterBy(statusCode, errors);
 

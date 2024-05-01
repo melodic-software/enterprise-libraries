@@ -37,7 +37,7 @@
             <param name="httpContext"></param>
             <param name="dbContext"></param>
         </member>
-        <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationService.EnsureNoPendingMigrations``1(Microsoft.AspNetCore.Builder.WebApplication)">
+        <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationService.EnsureNoPendingMigrationsAsync``1(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
             This ensures that migrations must be run before the application has been deployed and can start up.
             </summary>

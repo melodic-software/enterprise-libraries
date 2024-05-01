@@ -27,7 +27,7 @@ public static class ErrorActionResultFactory
 
         errors = ErrorDedupeService.DedupeErrors(errors).ToList();
 
-        int statusCode = ErrorStatusCodeMapper.CreateStatusCode(errors, httpContext);
+        int statusCode = ErrorStatusCodeService.GetStatusCode(errors, httpContext);
 
         IEnumerable<IError> scopedErrors = ErrorFilterService.FilterBy(statusCode, errors);
 

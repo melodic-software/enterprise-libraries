@@ -3,10 +3,20 @@
 public abstract class Event : IEvent
 {
     /// <inheritdoc />
-    public Guid Id { get; protected set; }
+    public Guid Id { get; init; }
 
     /// <inheritdoc />
-    public DateTimeOffset DateOccurred { get; protected set; }
+    public DateTimeOffset DateOccurred { get; init; }
+
+    protected Event() : this(Guid.NewGuid(), DateTimeOffset.UtcNow)
+    {
+
+    }
+
+    protected Event(DateTimeOffset dateOccurred) : this(Guid.NewGuid(), dateOccurred)
+    {
+
+    }
 
     protected Event(Guid id, DateTimeOffset dateOccurred)
     {
@@ -15,13 +25,5 @@ public abstract class Event : IEvent
 
         Id = id;
         DateOccurred = dateOccurred;
-    }
-
-    protected Event(DateTimeOffset dateOccurred) : this(Guid.NewGuid(), dateOccurred)
-    {
-    }
-
-    protected Event() : this(Guid.NewGuid(), DateTimeOffset.UtcNow)
-    {
     }
 }

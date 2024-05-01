@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Async\Parallelization\" />
     <Folder Include="Async\Tasks\" />
     <Folder Include="Files\" />
     <Folder Include="Async\BackgroundWorkers\" />

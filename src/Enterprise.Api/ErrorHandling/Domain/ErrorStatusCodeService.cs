@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Enterprise.Api.ErrorHandling.Domain;
 
-public static class ErrorStatusCodeMapper
+public static class ErrorStatusCodeService
 {
-    public static int CreateStatusCode(IReadOnlyCollection<IError> errors, HttpContext context)
+    public static int GetStatusCode(IReadOnlyCollection<IError> errors, HttpContext context)
     {
         if (errors.ContainsNotFound())
         {

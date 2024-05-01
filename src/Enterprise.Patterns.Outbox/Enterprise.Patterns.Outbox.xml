@@ -26,12 +26,12 @@
         </member>
         <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.DateCreated">
             <summary>
-            The date and time the outbox message was created.
+            The date and time (in UTC) the outbox message was created.
             </summary>
         </member>
         <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.DateProcessed">
             <summary>
-            The date and time the outbox message was processed.
+            The date and time (in UTC) the outbox message was processed.
             </summary>
         </member>
         <member name="P:Enterprise.Patterns.Outbox.Model.OutboxMessage.Error">

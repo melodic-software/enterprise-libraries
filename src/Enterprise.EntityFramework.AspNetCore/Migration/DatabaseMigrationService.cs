@@ -17,7 +17,7 @@ public static class DatabaseMigrationService
     /// <param name="app"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static async Task EnsureNoPendingMigrations<T>(WebApplication app) where T : DbContext
+    public static async Task EnsureNoPendingMigrationsAsync<T>(WebApplication app) where T : DbContext
     {
         if (app.Environment.IsDevelopment())
             return;
@@ -53,7 +53,7 @@ public static class DatabaseMigrationService
         }
     }
 
-    public static async Task Migrate<T>(WebApplication app) where T : DbContext
+    public static async Task MigrateAsync<T>(WebApplication app) where T : DbContext
     {
         DbContextResolutionResult<T>? dbContextResult = null;
 

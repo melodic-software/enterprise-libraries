@@ -20,6 +20,10 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId
     {
     }
 
+    public IReadOnlyList<IDomainEvent> GetDomainEvents() => DomainEvents.ToList().AsReadOnly();
+
+    public void ClearDomainEvents() => DomainEvents.Clear();
+
     /// <summary>
     /// Record a domain event that has occurred within the aggregate boundary.
     /// </summary>
@@ -28,10 +32,6 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId
     {
         DomainEvents.Add(domainEvent);
     }
-
-    public IReadOnlyList<IDomainEvent> GetDomainEvents() => DomainEvents.AsReadOnly();
-
-    public void ClearDomainEvents() => DomainEvents.Clear();
 }
 
 public class AggregateRoot : AggregateRoot<Guid>

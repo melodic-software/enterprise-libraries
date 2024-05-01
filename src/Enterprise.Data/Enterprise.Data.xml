@@ -4,9 +4,9 @@
         <name>Enterprise.Data</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Data.Relational.IDbConnectionFactory.CreateConnectionAsync">
+        <member name="M:Enterprise.Data.Relational.IDbConnectionFactory.OpenConnectionAsync">
             <summary>
-            Create a database connection.
+            Open a database connection.
             </summary>
             <returns></returns>
         </member>

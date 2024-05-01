@@ -4,65 +4,29 @@ namespace Enterprise.Patterns.ResultPattern.Model;
 
 public partial class Result<T>
 {
-    /// <summary>
-    /// Executes the appropriate function based on the state of the <see cref="Result{T}"/>.
-    /// If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
-    /// If the state is an error, the provided function <paramref name="onError"/> is executed and its result is returned.
-    /// </summary>
-    /// <typeparam name="TNextValue">The type of the result.</typeparam>
-    /// <param name="onValue">The function to execute if the state is a value.</param>
-    /// <param name="onError">The function to execute if the state is an error.</param>
-    /// <returns>The result of the executed function.</returns>
-    public TNextValue Match<TNextValue>(Func<T, TNextValue> onValue, Func<IEnumerable<IError>, TNextValue> onError)
+    public TOut Match<TOut>(Func<T, TOut> onSuccess, Func<IEnumerable<IError>, TOut> onError)
     {
-        return IsFailure ? onError(Errors.ToList()) : onValue(Value);
+        return IsSuccess ? onSuccess(Value) : onError(Errors.ToList());
     }
 
-    /// <summary>
-    /// Asynchronously executes the appropriate function based on the state of the <see cref="Result{T}"/>.
-    /// If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
-    /// If the state is an error, the provided function <paramref name="onError"/> is executed asynchronously and its result is returned.
-    /// </summary>
-    /// <typeparam name="TNextValue">The type of the result.</typeparam>
-    /// <param name="onValue">The asynchronous function to execute if the state is a value.</param>
-    /// <param name="onError">The asynchronous function to execute if the state is an error.</param>
-    /// <returns>A task representing the asynchronous operation that yields the result of the executed function.</returns>
-    public async Task<TNextValue> MatchAsync<TNextValue>(Func<T, Task<TNextValue>> onValue, Func<IEnumerable<IError>, Task<TNextValue>> onError)
+    public async Task<TOut> MatchAsync<TOut>(Func<T, Task<TOut>> onSuccess, Func<IEnumerable<IError>, Task<TOut>> onError)
     {
-        if (IsFailure)
-            return await onError(Errors).ConfigureAwait(false);
+        if (IsSuccess)
+            return await onSuccess(Value).ConfigureAwait(false);
 
-        return await onValue(Value).ConfigureAwait(false);
+        return await onError(Errors).ConfigureAwait(false);
     }
 
-    /// <summary>
-    /// Executes the appropriate function based on the state of the <see cref="Result{T}"/>.
-    /// If the state is a value, the provided function <paramref name="onValue"/> is executed and its result is returned.
-    /// If the state is an error, the provided function <paramref name="onFirstError"/> is executed using the first error, and its result is returned.
-    /// </summary>
-    /// <typeparam name="TNextValue">The type of the result.</typeparam>
-    /// <param name="onValue">The function to execute if the state is a value.</param>
-    /// <param name="onFirstError">The function to execute with the first error if the state is an error.</param>
-    /// <returns>The result of the executed function.</returns>
-    public TNextValue MatchFirst<TNextValue>(Func<T, TNextValue> onValue, Func<IError, TNextValue> onFirstError)
+    public TOut MatchFirst<TOut>(Func<T, TOut> onSuccess, Func<IError, TOut> onFirstError)
     {
-        return IsFailure ? onFirstError(FirstError) : onValue(Value);
+        return IsSuccess ? onSuccess(Value) : onFirstError(FirstError);
     }
 
-    /// <summary>
-    /// Asynchronously executes the appropriate function based on the state of the <see cref="Result{T}"/>.
-    /// If the state is a value, the provided function <paramref name="onValue"/> is executed asynchronously and its result is returned.
-    /// If the state is an error, the provided function <paramref name="onFirstError"/> is executed asynchronously using the first error, and its result is returned.
-    /// </summary>
-    /// <typeparam name="TNextValue">The type of the result.</typeparam>
-    /// <param name="onValue">The asynchronous function to execute if the state is a value.</param>
-    /// <param name="onFirstError">The asynchronous function to execute with the first error if the state is an error.</param>
-    /// <returns>A task representing the asynchronous operation that yields the result of the executed function.</returns>
-    public async Task<TNextValue> MatchFirstAsync<TNextValue>(Func<T, Task<TNextValue>> onValue, Func<IError, Task<TNextValue>> onFirstError)
+    public async Task<TOut> MatchFirstAsync<TOut>(Func<T, Task<TOut>> onSuccess, Func<IError, Task<TOut>> onFirstError)
     {
-        if (IsFailure)
-            return await onFirstError(FirstError).ConfigureAwait(false);
+        if (IsSuccess)
+            return await onSuccess(Value).ConfigureAwait(false);
 
-        return await onValue(Value).ConfigureAwait(false);
+        return await onFirstError(FirstError).ConfigureAwait(false);
     }
 }

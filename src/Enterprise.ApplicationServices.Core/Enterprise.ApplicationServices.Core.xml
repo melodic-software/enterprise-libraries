@@ -4,19 +4,19 @@
         <name>Enterprise.ApplicationServices.Core</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.HandleAsync(`0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand">
@@ -24,11 +24,12 @@
             Handles commands.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand,System.Threading.CancellationToken)">
             <summary>
             Handle the command.
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1">
@@ -37,11 +38,12 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1.HandleAsync(`0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <summary>
             Handle the command.
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`2">
@@ -55,11 +57,12 @@
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`2.HandleAsync(`0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <summary>
             Handle the command.
             </summary>
             <param name="command"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IResolveCommandHandler">

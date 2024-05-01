@@ -17,7 +17,7 @@
         </member>
         <member name="P:Enterprise.Events.Model.IEvent.DateOccurred">
             <summary>
-            The date and time the event occurred.
+            The date and time the event occurred (in UTC).
             </summary>
         </member>
         <member name="M:Enterprise.Events.Services.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">

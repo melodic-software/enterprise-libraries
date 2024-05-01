@@ -12,15 +12,15 @@ public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCom
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command)
+    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         T typedCommand = (T)command;
-        await HandleAsync(typedCommand);
+        await HandleAsync(typedCommand, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task HandleAsync(T command);
+    public abstract Task HandleAsync(T command, CancellationToken cancellationToken);
 }
 
 public abstract class CommandHandlerBase<TCommand, TResponse>
@@ -33,19 +33,19 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
     }
 
     /// <inheritdoc />
-    Task IHandleCommand<TCommand>.HandleAsync(TCommand command)
+    Task IHandleCommand<TCommand>.HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
-        return HandleAsync(command);
+        return HandleAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command)
+    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         TCommand typedCommand = (TCommand)command;
-        await HandleAsync(typedCommand);
+        await HandleAsync(typedCommand, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TCommand command);
+    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

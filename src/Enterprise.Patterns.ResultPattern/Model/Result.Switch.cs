@@ -4,77 +4,47 @@ namespace Enterprise.Patterns.ResultPattern.Model;
 
 public partial class Result<T>
 {
-    /// <summary>
-    /// Executes the appropriate action based on the state of the <see cref="Result{T}"/>.
-    /// If the state is an error, the provided action <paramref name="onError"/> is executed.
-    /// If the state is a value, the provided action <paramref name="onValue"/> is executed.
-    /// </summary>
-    /// <param name="onValue">The action to execute if the state is a value.</param>
-    /// <param name="onError">The action to execute if the state is an error.</param>
-    public void Switch(Action<T> onValue, Action<IEnumerable<IError>> onError)
+    public void Switch(Action<T> onSuccess, Action<IEnumerable<IError>> onError)
     {
-        if (IsFailure)
+        if (IsSuccess)
         {
-            onError(Errors);
+            onSuccess(Value);
             return;
         }
 
-        onValue(Value);
+        onError(Errors);
     }
 
-    /// <summary>
-    /// Asynchronously executes the appropriate action based on the state of the <see cref="Result{T}"/>.
-    /// If the state is an error, the provided action <paramref name="onError"/> is executed asynchronously.
-    /// If the state is a value, the provided action <paramref name="onValue"/> is executed asynchronously.
-    /// </summary>
-    /// <param name="onValue">The asynchronous action to execute if the state is a value.</param>
-    /// <param name="onError">The asynchronous action to execute if the state is an error.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    public async Task SwitchAsync(Func<T, Task> onValue, Func<IEnumerable<IError>, Task> onError)
+    public async Task SwitchAsync(Func<T, Task> onSuccess, Func<IEnumerable<IError>, Task> onError)
     {
-        if (IsFailure)
+        if (IsSuccess)
         {
-            await onError(Errors).ConfigureAwait(false);
+            await onSuccess(Value).ConfigureAwait(false);
             return;
         }
 
-        await onValue(Value).ConfigureAwait(false);
+        await onError(Errors).ConfigureAwait(false);
     }
 
-    /// <summary>
-    /// Executes the appropriate action based on the state of the <see cref="Result{T}"/>.
-    /// If the state is an error, the provided action <paramref name="onFirstError"/> is executed using the first error as input.
-    /// If the state is a value, the provided action <paramref name="onValue"/> is executed.
-    /// </summary>
-    /// <param name="onValue">The action to execute if the state is a value.</param>
-    /// <param name="onFirstError">The action to execute with the first error if the state is an error.</param>
-    public void SwitchFirst(Action<T> onValue, Action<IError> onFirstError)
+    public void SwitchFirst(Action<T> onSuccess, Action<IError> onFirstError)
     {
-        if (IsFailure)
+        if (IsSuccess)
         {
-            onFirstError(FirstError);
+            onSuccess(Value);
             return;
         }
-
-        onValue(Value);
+        
+        onFirstError(FirstError);
     }
 
-    /// <summary>
-    /// Asynchronously executes the appropriate action based on the state of the <see cref="Result{T}"/>.
-    /// If the state is an error, the provided action <paramref name="onFirstError"/> is executed asynchronously using the first error as input.
-    /// If the state is a value, the provided action <paramref name="onValue"/> is executed asynchronously.
-    /// </summary>
-    /// <param name="onValue">The asynchronous action to execute if the state is a value.</param>
-    /// <param name="onFirstError">The asynchronous action to execute with the first error if the state is an error.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    public async Task SwitchFirstAsync(Func<T, Task> onValue, Func<IError, Task> onFirstError)
+    public async Task SwitchFirstAsync(Func<T, Task> onSuccess, Func<IError, Task> onFirstError)
     {
-        if (IsFailure)
+        if (IsSuccess)
         {
-            await onFirstError(FirstError).ConfigureAwait(false);
+            await onSuccess(Value).ConfigureAwait(false);
             return;
         }
 
-        await onValue(Value).ConfigureAwait(false);
+        await onFirstError(FirstError).ConfigureAwait(false);
     }
 }
