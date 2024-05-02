@@ -4,7 +4,7 @@
         <name>Enterprise.MediatR</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Services.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
             <inheritdoc />
         </member>
         <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.EnableMediatR">

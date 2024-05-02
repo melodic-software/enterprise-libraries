@@ -1,7 +1,7 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Decoration.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Services.Handlers;
-using Enterprise.Events.Services.Handlers.Decoration;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Decorators.EventHandlers;

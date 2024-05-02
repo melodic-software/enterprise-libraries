@@ -1,6 +1,6 @@
 ﻿using Enterprise.DI.Core.Registration;
 using Enterprise.Domain.Events.Raising;
-using Enterprise.Events.Services.Dispatching.Abstract;
+using Enterprise.Events.Dispatching.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

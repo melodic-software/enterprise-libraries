@@ -1,8 +1,8 @@
 ﻿using Enterprise.Domain.Events.Model.Abstract;
+using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Services.Dispatching.Abstract;
-using Enterprise.Events.Services.Raising;
-using Enterprise.Events.Services.Raising.Callbacks.Abstractions;
+using Enterprise.Events.Raising;
+using Enterprise.Events.Raising.Callbacks.Abstractions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;

@@ -1,4 +1,4 @@
-﻿using Enterprise.Events.Services.Raising.Callbacks.Abstractions;
+﻿using Enterprise.Events.Raising.Callbacks.Abstractions;
 
 namespace Enterprise.Domain.Events.Raising;
 

@@ -1,7 +1,7 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
-using Enterprise.Events.Services.Dispatching.Abstract;
-using Enterprise.Events.Services.Handlers;
+using Enterprise.Events.Dispatching.Abstract;
+using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.MediatR.Options;
 using Enterprise.Options.Core.Singleton;
 using MediatR;

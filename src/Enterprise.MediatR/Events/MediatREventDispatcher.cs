@@ -1,8 +1,9 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Events.Dispatching;
+using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Services.Dispatching;
-using Enterprise.Events.Services.Handlers;
-using Enterprise.Events.Services.Raising.Callbacks.Abstractions;
+using Enterprise.Events.Raising.Callbacks.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using static Enterprise.Reflection.Types.GenericInterfaceTypeService;

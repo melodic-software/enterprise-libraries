@@ -421,6 +421,18 @@
             This ensures we're only accepting JWT tokens, which prevents so-called "JWT" confusion attacks.
             </summary>
         </member>
+        <member name="F:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ValidIssuers">
+            <summary>
+            Allows for defining multiple valid issuers, which may be needed if there are different URIs or port mappings.
+            When empty, the <see cref="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.Authority"/> value will be used.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.RequireHttpsMetadata">
+            <summary>
+            HTTPs metadata will only be required in the production environment unless this is set.
+            If an explicit value is set here, it will be honored.
+            </summary>
+        </member>
         <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ConfigureJwtBearerOptions">
             <summary>
             A custom delegate that allows for complete customization of JwtBearerOptions.

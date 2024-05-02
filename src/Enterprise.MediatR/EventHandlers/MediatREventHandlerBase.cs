@@ -1,5 +1,5 @@
-﻿using Enterprise.Events.Model;
-using Enterprise.Events.Services.Handlers;
+﻿using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Model;
 using MediatR;
 
 namespace Enterprise.MediatR.EventHandlers;
