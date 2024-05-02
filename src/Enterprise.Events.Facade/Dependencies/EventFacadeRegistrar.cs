@@ -2,8 +2,8 @@
 using Enterprise.Domain.Events.Raising;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Facade.Services;
-using Enterprise.Events.Services.Raising.Abstract;
-using Enterprise.Events.Services.Raising.Callbacks.Facade.Abstractions;
+using Enterprise.Events.Raising.Abstract;
+using Enterprise.Events.Raising.Callbacks.Facade.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

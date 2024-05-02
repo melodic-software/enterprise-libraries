@@ -1,8 +1,8 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Decorators.EventHandlers;
+using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Services.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
