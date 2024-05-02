@@ -51,5 +51,8 @@ internal static class EndpointConfigService
         // TODO: Create options object for minimal API endpoints.
         // Automatic resolution, list of assemblies, OR one off registrations.
         EndpointMapper.MapEndpoints(app);
+
+        // TODO: Figure out how best to use this with route group builders.
+        app.MapEndpoints();
     }
 }

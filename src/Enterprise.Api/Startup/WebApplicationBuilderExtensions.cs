@@ -55,7 +55,7 @@ public static class WebApplicationBuilderExtensions
 
         builder.Services.ConfigureControllers(builder.Configuration);
 
-        builder.Services.ConfigureCaching(builder.Configuration);
+        builder.Services.ConfigureCaching(builder.Environment, builder.Configuration);
         builder.Services.ConfigureResponseCaching();
         builder.Services.ConfigureOutputCaching();
 

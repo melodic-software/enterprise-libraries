@@ -2,6 +2,7 @@
 using Enterprise.Redis.Config;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,14 +10,14 @@ namespace Enterprise.Api.Caching;
 
 public static class CachingConfigService
 {
-    public static void ConfigureCaching(this IServiceCollection services, IConfiguration configuration)
+    public static void ConfigureCaching(this IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
     {
         // Uncomment for in memory (local/non-distributed) caching.
         //services.AddMemoryCache();
 
         // Configuration for "IDistributedCache" references.
 
-        services.ConfigureRedis(configuration);
+        services.ConfigureRedis(environment, configuration);
 
         // This is an alternate configuration for "IDistributedCache" (not likely going to be used).
         // SQL traffic is not reduced - REDIS is better served for reducing SQL overhead.
