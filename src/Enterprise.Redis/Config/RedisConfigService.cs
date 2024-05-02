@@ -1,5 +1,4 @@
-﻿using System;
-using Enterprise.Exceptions;
+﻿using Enterprise.Exceptions;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Singleton;
 using Enterprise.Redis.Options;

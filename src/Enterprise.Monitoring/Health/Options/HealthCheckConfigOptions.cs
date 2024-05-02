@@ -25,6 +25,13 @@ public class HealthCheckConfigOptions
     public string? OpenIdConnectAuthority { get; set; } = null;
 
     /// <summary>
+    /// Sets an explicit name for the authority. If one is not provided, a generic name will be used.
+    /// If a value of "identity-server" is provided, the specific health check registration for identity server will be used.
+    /// If any other provider is named, a URL group will be used to register the health check.
+    /// </summary>
+    public string? OpenIdConnectAuthorityName { get; set; } = null;
+
+    /// <summary>
     /// If provided, a health check will be enabled for Redis.
     /// </summary>
     public string? RedisConnectionString { get; set; }

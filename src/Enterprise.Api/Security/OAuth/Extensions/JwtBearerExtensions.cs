@@ -30,12 +30,18 @@ public static class JwtBearerExtensions
         {
             string authority = jwtBearerTokenOptions.Authority;
             string audience = jwtBearerTokenOptions.Audience;
-            bool requireHttpsMetadata = environment.IsProduction();
-            string validIssuer = jwtBearerTokenOptions.Authority;
+            bool requireHttpsMetadata = jwtBearerTokenOptions.RequireHttpsMetadata ?? environment.IsProduction();
             string validAudience = jwtBearerTokenOptions.Audience;
             HashSet<string> validTypes = jwtBearerTokenOptions.ValidTokenTypes;
             string nameClaimType = jwtBearerTokenOptions.NameClaimType ?? JwtClaimTypes.Name;
             string roleClaimType = JwtClaimTypes.Role;
+
+            HashSet<string> validIssuers = jwtBearerTokenOptions.ValidIssuers;
+
+            if (!validIssuers.Any())
+            {
+                validIssuers.Add(authority);
+            }
 
             authBuilder.AddJwtBearer(authenticationScheme: JwtBearerAuthenticationScheme, options =>
             {
@@ -52,7 +58,9 @@ public static class JwtBearerExtensions
                     ValidateAudience = false,
 
                     //ValidateIssuerSigningKey = true,
-                    ValidIssuer = validIssuer,
+                    //ValidIssuer = validIssuer,
+                    ValidIssuers = validIssuers,
+
                     ValidAudience = validAudience,
 
                     ValidTypes = validTypes,

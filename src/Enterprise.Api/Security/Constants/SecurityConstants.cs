@@ -13,6 +13,7 @@ public static class SecurityConstants
     public const string DefaultAuthPolicyName = "DefaultAuthPolicy";
     public const string DefaultJwtNameClaimType = "email"; // TODO: Shouldn't this be JwtClaimTypes.Name?
     public const string JwtBearerAuthenticationScheme = JwtBearerDefaults.AuthenticationScheme; // "Bearer"
+    public const string OpenIdConnectDiscoveryUriSegment = ".well-known/openid-configuration";
 
     public const string DemoAuthority = "https://demo.duendesoftware.com";
     public const string DemoAudience = "api";

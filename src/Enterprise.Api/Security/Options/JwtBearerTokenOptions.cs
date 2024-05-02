@@ -34,6 +34,18 @@ public class JwtBearerTokenOptions
     };
 
     /// <summary>
+    /// Allows for defining multiple valid issuers, which may be needed if there are different URIs or port mappings.
+    /// When empty, the <see cref="Authority"/> value will be used.
+    /// </summary>
+    public HashSet<string> ValidIssuers = [];
+
+    /// <summary>
+    /// HTTPs metadata will only be required in the production environment unless this is set.
+    /// If an explicit value is set here, it will be honored.
+    /// </summary>
+    public bool? RequireHttpsMetadata { get; set; }
+
+    /// <summary>
     /// A custom delegate that allows for complete customization of JwtBearerOptions.
     /// NOTE: if this is provided, all the default configuration is ignored.
     /// </summary>

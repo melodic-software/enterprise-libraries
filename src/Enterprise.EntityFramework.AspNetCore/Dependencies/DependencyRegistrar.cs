@@ -1,5 +1,4 @@
 ﻿using Enterprise.DI.Core.Registration;
-using Enterprise.EntityFramework.AspNetCore.Concurrency;
 using Enterprise.EntityFramework.AspNetCore.EventualConsistency;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

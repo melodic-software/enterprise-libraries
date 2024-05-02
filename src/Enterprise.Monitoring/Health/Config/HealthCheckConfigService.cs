@@ -14,6 +14,9 @@ public static class HealthCheckConfigService
 {
     // TODO: explore more here: https://app.pluralsight.com/library/courses/asp-dot-net-core-health-checks/table-of-contents
 
+    private const string DefaultOpenIdConnectAuthorityName = "identity-provider";
+    private const string IdentityServerAuthorityName = "identity-server";
+
     public static void ConfigureHealthChecks(this IHostApplicationBuilder builder, IConfiguration configuration)
     {
         HealthCheckConfigOptions options = OptionsInstanceService.Instance
@@ -27,8 +30,7 @@ public static class HealthCheckConfigService
         if (!string.IsNullOrWhiteSpace(options.PostgresConnectionString))
             healthCheckBuilder.AddNpgSql(options.PostgresConnectionString);
 
-        if (!string.IsNullOrWhiteSpace(options.OpenIdConnectAuthority))
-            healthCheckBuilder.AddIdentityServer(new Uri(options.OpenIdConnectAuthority));
+        RegisterIdentityProviderHealthCheck(options, healthCheckBuilder);
 
         if (!string.IsNullOrWhiteSpace(options.RedisConnectionString))
             healthCheckBuilder.AddRedis(options.RedisConnectionString);
@@ -67,8 +69,25 @@ public static class HealthCheckConfigService
 
         if (options.AllowAnonymous)
         {
-            // any calls to the health check endpoint will not require authentication
+            // Any calls to the health check endpoint will not require authentication.
             builder.AllowAnonymous();
+        }
+    }
+
+    private static void RegisterIdentityProviderHealthCheck(HealthCheckConfigOptions options, IHealthChecksBuilder healthCheckBuilder)
+    {
+        if (string.IsNullOrWhiteSpace(options.OpenIdConnectAuthority))
+            return;
+
+        string openIdConnectAuthorityName = options.OpenIdConnectAuthorityName?.Trim().ToLowerInvariant() ?? DefaultOpenIdConnectAuthorityName;
+
+        if (openIdConnectAuthorityName is IdentityServerAuthorityName)
+        {
+            healthCheckBuilder.AddIdentityServer(new Uri(options.OpenIdConnectAuthority));
+        }
+        else
+        {
+            healthCheckBuilder.AddUrlGroup(new Uri(options.OpenIdConnectAuthority), HttpMethod.Get, openIdConnectAuthorityName);
         }
     }
 }
