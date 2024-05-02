@@ -13,10 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.34" />
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.41" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.31" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.32" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
