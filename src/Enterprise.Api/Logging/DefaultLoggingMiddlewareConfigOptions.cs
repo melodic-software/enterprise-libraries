@@ -1,4 +1,4 @@
-﻿using Enterprise.Logging.AspNetCore.Options;
+﻿using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Serilog.AspNetCore.Config;
 
 namespace Enterprise.Api.Logging;

@@ -1,5 +1,5 @@
 ﻿using Enterprise.Api.Logging;
-using Enterprise.Logging.AspNetCore.Options;
+using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Logging.Providers;
 using Enterprise.Logging.Options;
 using Enterprise.Options.Core.Singleton;

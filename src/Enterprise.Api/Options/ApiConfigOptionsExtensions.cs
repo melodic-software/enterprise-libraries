@@ -8,7 +8,7 @@ using Enterprise.AutoMapper.Options;
 using Enterprise.Cors.Options;
 using Enterprise.Hosting.AspNetCore.Options;
 using Enterprise.Logging.AspNetCore.Http;
-using Enterprise.Logging.AspNetCore.Options;
+using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Logging.AspNetCore.Telemetry;
 using Enterprise.Logging.AspNetCore.W3C;
 using Enterprise.Logging.Options;
