@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 using Enterprise.MediatR.Behaviors;
 using Enterprise.MediatR.Behaviors.Caching;
 using Enterprise.MediatR.Behaviors.Logging;
@@ -18,10 +19,11 @@ public class MediatRConfigOptions
     public bool EnableMediatR { get; set; } = true;
 
     /// <summary>
-    /// Delegate that provides the assemblies containing the MediatR handlers.
+    /// This is a collection of assemblies that contain MediatR handlers.
     /// These implement IRequestHandler, INotificationHandler, etc.
+    /// If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
     /// </summary>
-    public Func<Assembly[]>? GetAssemblies { get; set; } = null;
+    public List<Assembly> Assemblies { get; } = [];
 
     /// <summary>
     /// Allows for providing a custom behavior pipeline.

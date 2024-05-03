@@ -1,9 +1,11 @@
-﻿using Enterprise.AutoMapper.Options;
+﻿using System.Reflection;
+using Enterprise.AutoMapper.Options;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Singleton;
 using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+using Microsoft.Extensions.Logging;
 using static Enterprise.Reflection.Assemblies.AssemblyFilterPredicates;
 
 namespace Enterprise.AutoMapper;
@@ -18,20 +20,28 @@ public static class AutoMapperConfigService
         if (!options.EnableAutoMapper)
             return;
 
-        // TODO: This isn't a great fallback, as it could load a ton of assemblies.
-        // We should try and provide a more performant fallback.
-        options.GetMappingProfileAssemblies ??= GetDefaultAssemblies;
+        Assembly[] assemblies = options.Assemblies.ToArray();
+        bool explicitAssembliesSpecified = assemblies.Any();
 
-        Assembly[] allAssemblies = options.GetMappingProfileAssemblies.Invoke();
+        if (!explicitAssembliesSpecified)
+        {
+            PreStartupLogger.Instance.LogInformation("Explicit assemblies containing automapper profiles have not been specified. Loading solution assemblies.");
+            assemblies = AssemblyLoader.LoadSolutionAssemblies(ThatAreNotMicrosoft).ToArray();
+        }
 
-        allAssemblies = AddEnterpriseAssembly(allAssemblies);
+        assemblies = AddEnterpriseAssembly(assemblies);
 
-        services.AddAutoMapper(allAssemblies);
-    }
+        if (explicitAssembliesSpecified)
+        {
+            PreStartupLogger.Instance.LogInformation("Registering mapping profiles for the explicitly defined assemblies.");
 
-    private static Assembly[] GetDefaultAssemblies()
-    {
-        return AssemblyLoader.LoadSolutionAssemblies(ThatAreNotMicrosoft).ToArray();
+            foreach (Assembly assembly in assemblies)
+            {
+                PreStartupLogger.Instance.LogInformation(assembly.FullName);
+            }
+        }
+
+        services.AddAutoMapper(assemblies);
     }
 
     private static Assembly[] AddEnterpriseAssembly(Assembly[] allAssemblies)

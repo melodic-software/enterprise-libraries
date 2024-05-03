@@ -12,7 +12,8 @@ public class AutoMapperConfigOptions
     public bool EnableAutoMapper { get; set; } = true;
 
     /// <summary>
-    /// Delegate that provides the assemblies containing the AutoMapper profiles.
+    /// This is a collection of assemblies that contain mapping profiles.
+    /// If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
     /// </summary>
-    public Func<Assembly[]>? GetMappingProfileAssemblies { get; set; } = null;
+    public List<Assembly> Assemblies { get; } = [];
 }
