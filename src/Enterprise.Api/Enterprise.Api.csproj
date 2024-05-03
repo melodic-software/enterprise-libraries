@@ -22,7 +22,7 @@
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.34" />
-    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.50" />
+    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.54" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.34" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.17" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
@@ -35,7 +35,7 @@
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.33" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.45" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.52" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.56" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.31" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.33" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.30" />
@@ -63,7 +63,7 @@
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.EventLog" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
   </ItemGroup>
