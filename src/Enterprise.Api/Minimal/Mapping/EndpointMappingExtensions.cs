@@ -47,7 +47,7 @@ public static class EndpointMappingExtensions
         ServiceDescriptor[] serviceDescriptors = assemblies
             .SelectMany(a => a.GetTypes())
             .Where(type => type is { IsAbstract: false, IsInterface: false } &&
-                           type.IsAssignableFrom(typeof(IMapEndpoint)))
+                           type.IsAssignableTo(typeof(IMapEndpoint)))
             .Select(type => ServiceDescriptor.Transient(typeof(IMapEndpoint), type))
             .ToArray();
 
