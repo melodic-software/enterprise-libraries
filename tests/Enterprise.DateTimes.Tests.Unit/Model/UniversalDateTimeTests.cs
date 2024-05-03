@@ -1,9 +1,9 @@
-using Enterprise.DateTimes.Model;
+﻿using Enterprise.DateTimes.Model;
 using Enterprise.DateTimes.Utc;
 using Moq;
 using static Enterprise.DateTimes.Formatting.DateTimeFormatStrings;
 
-namespace Enterprise.DateTimes.Tests.Model;
+namespace Enterprise.DateTimes.Tests.Unit.Model;
 
 public class UniversalDateTimeTests
 {

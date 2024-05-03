@@ -2,9 +2,7 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Options;
-
-// TODO: Move this to Enterprise.Reflection library.
+namespace Enterprise.Reflection.Collections;
 
 public static class CollectionClearer
 {
@@ -57,9 +55,9 @@ public static class CollectionClearer
                 else
                 {
                     logger?.LogWarning(
-                        "Property \"{PropertyName}\" on type \"{OptionsTypeName}\" is a collection without a Clear method " +
+                        "Property \"{PropertyName}\" on type \"{OptionsTypeName}\" is a collection without a \"{MethodName}\" method " +
                         "or parameterless constructor and cannot be automatically cleared.",
-                        property.Name, optionsType.Name
+                        property.Name, optionsType.Name, MethodName
                     );
                 }
             }

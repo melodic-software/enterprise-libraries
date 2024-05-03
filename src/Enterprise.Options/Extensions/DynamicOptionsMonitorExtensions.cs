@@ -47,8 +47,10 @@ public static class DynamicOptionsMonitorExtensions
 
             dynamicOptionsMonitor.OnChange(options =>
             {
-                // This service is intended to be used for initial app startup.
+                // This singleton service is intended to be used for initial app startup and should not be used after the DI service provider has been built.
                 // In case anything does reference it after, we can specify new/updated instances to reduce bugs.
+                // This will lock the instance, meaning it can no longer be reconfigured with the singleton service.
+                // Updates to the config after this point must be done via an IOptionsUpdater<T> OR directly via DynamicOptionsMonitor<T>.
                 OptionsInstanceService.Instance.UseInstance(options);
             });
 

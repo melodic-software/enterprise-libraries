@@ -18,15 +18,6 @@
             </summary>
             <param name="options">The current options value.</param>
         </member>
-        <member name="M:Enterprise.Options.CollectionClearer.ClearCollections(System.Object,Microsoft.Extensions.Logging.ILogger)">
-            <summary>
-            This checks if the options has any IEnumerable properties.
-            It first looks for a "Clear" method, and alternatively attempts to re-instantiate the collection using its default constructor.
-            This assumes collections have a parameterless constructor, which night b
-            </summary>
-            <param name="instance"></param>
-            <param name="logger"></param>
-        </member>
         <member name="T:Enterprise.Options.DynamicOptionsMonitor`1">
             <summary>
             This dynamically monitors configuration options of a specific type.

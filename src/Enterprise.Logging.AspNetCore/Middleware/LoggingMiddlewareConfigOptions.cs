@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Enterprise.Logging.AspNetCore.Options;
+namespace Enterprise.Logging.AspNetCore.Middleware;
 
 public class LoggingMiddlewareConfigOptions
 {

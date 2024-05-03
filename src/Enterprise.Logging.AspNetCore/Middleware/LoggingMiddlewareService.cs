@@ -1,5 +1,4 @@
 ﻿using Enterprise.Logging.AspNetCore.Http;
-using Enterprise.Logging.AspNetCore.Options;
 using Enterprise.Logging.AspNetCore.Telemetry;
 using Enterprise.Logging.AspNetCore.W3C;
 using Microsoft.AspNetCore.Builder;

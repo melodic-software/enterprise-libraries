@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Enterprise.Api.Tests.Demo.Middleware;
+namespace Enterprise.Api.Tests.Unit.Demo.Middleware;
 
 public class SecurityHeadersMiddleware
 {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
-namespace Enterprise.Api.Tests.Demo.Middleware.Tests;
+namespace Enterprise.Api.Tests.Unit.Demo.Middleware.Tests;
 
 public class SecurityHeadersMiddlewareTest
 {

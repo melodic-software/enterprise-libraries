@@ -1,4 +1,4 @@
-using Enterprise.Api.Middleware;
+﻿using Enterprise.Api.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
 
-namespace Enterprise.Api.Tests;
+namespace Enterprise.Api.Tests.Unit;
 
 public class RootRedirectMiddlewareTests
 {

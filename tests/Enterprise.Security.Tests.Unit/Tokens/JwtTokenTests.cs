@@ -3,7 +3,7 @@ using Enterprise.Security.Tokens;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
 
-namespace Enterprise.Security.Tests.Tokens;
+namespace Enterprise.Security.Tests.Unit.Tokens;
 
 public class JwtTokenTests
 {

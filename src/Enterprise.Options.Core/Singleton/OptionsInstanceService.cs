@@ -13,8 +13,8 @@ namespace Enterprise.Options.Core.Singleton;
 /// </summary>
 public class OptionsInstanceService
 {
-    private static readonly Lazy<OptionsInstanceService> Lazy = new(() => new OptionsInstanceService());
-    public static OptionsInstanceService Instance => Lazy.Value;
+    private static readonly Lazy<OptionsInstanceService> _lazy = new(() => new OptionsInstanceService());
+    public static OptionsInstanceService Instance => _lazy.Value;
 
     private ConcurrentDictionary<Type, Func<IConfiguration, string?, object>> InitialDelegateDictionary { get; } = new();
     private ConcurrentDictionary<Type, List<Action<object>>> AdditionalActionDictionary { get; } = new();

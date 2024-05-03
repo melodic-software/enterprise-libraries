@@ -13,10 +13,11 @@
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.GetAssemblies">
+        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.Assemblies">
             <summary>
-            Delegate that provides the assemblies containing the MediatR handlers.
+            This is a collection of assemblies that contain MediatR handlers.
             These implement IRequestHandler, INotificationHandler, etc.
+            If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
             </summary>
         </member>
         <member name="F:Enterprise.MediatR.Options.MediatRConfigOptions.BehaviorRegistrations">

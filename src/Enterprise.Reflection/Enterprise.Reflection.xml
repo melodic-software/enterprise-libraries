@@ -95,5 +95,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Enterprise.Reflection.Collections.CollectionClearer.ClearCollections(System.Object,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            This checks if the options has any IEnumerable properties.
+            It first looks for a "Clear" method, and alternatively attempts to re-instantiate the collection using its default constructor.
+            This assumes collections have a parameterless constructor, which night b
+            </summary>
+            <param name="instance"></param>
+            <param name="logger"></param>
+        </member>
     </members>
 </doc>
