@@ -1,14 +1,18 @@
-﻿using Asp.Versioning;
+﻿using System.Reflection;
+using Asp.Versioning;
 using Enterprise.Api.Minimal.EndpointSelection;
 using Enterprise.Api.Minimal.Mapping;
 using Enterprise.Api.Minimal.Options;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Singleton;
+using Enterprise.Reflection.Assemblies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using static Enterprise.Reflection.Assemblies.AssemblyFilterPredicates;
 
 namespace Enterprise.Api.Minimal;
 
@@ -31,6 +35,8 @@ internal static class EndpointConfigService
 
             return matcherPolicy;
         });
+
+        services.AddEndpoints(minimalApiConfigOptions.EndpointAssemblies);
     }
 
     internal static void MapEndpoints(this WebApplication app)
@@ -46,13 +52,36 @@ internal static class EndpointConfigService
             app.Logger.LogInformation("Minimal API endpoints have been disabled.");
             return;
         }
+        
+        List<Assembly> endpointAssemblies = configOptions.EndpointAssemblies;
+        bool explicitAssembliesDefined = endpointAssemblies.Any();
 
-        // TODO: Provide configuration about HOW this happens.
-        // TODO: Create options object for minimal API endpoints.
-        // Automatic resolution, list of assemblies, OR one off registrations.
-        EndpointMapper.MapEndpoints(app);
+        if (!explicitAssembliesDefined)
+        {
+            PreStartupLogger.Instance.LogInformation(
+                "Explicit assemblies containing minimal API endpoints have not been specified. " +
+                "Loading solution assemblies."
+            );
+            
+            endpointAssemblies = AssemblyLoader
+                .LoadSolutionAssemblies(ThatAreNotMicrosoft)
+                .ToList();
+        }
 
-        // TODO: Figure out how best to use this with route group builders.
-        app.MapEndpoints();
+        if (explicitAssembliesDefined)
+        {
+            PreStartupLogger.Instance.LogInformation("Registering minimal API endpoints for the explicitly defined assemblies.");
+
+            foreach (Assembly assembly in endpointAssemblies)
+            {
+                PreStartupLogger.Instance.LogInformation(assembly.FullName);
+            }
+        }
+
+        // This uses the IMapEndpoints static interface method.
+        EndpointMapper.MapEndpoints(app, endpointAssemblies);
+        
+        // This uses pre-registered services of IMapEndpoint
+        EndpointMappingExtensions.MapEndpoints(app, null);
     }
 }

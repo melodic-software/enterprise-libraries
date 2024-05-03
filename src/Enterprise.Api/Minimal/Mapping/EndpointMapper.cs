@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using System.Reflection;
+﻿using System.Reflection;
 using Enterprise.Reflection.Assemblies;
+using Microsoft.AspNetCore.Builder;
 using static Enterprise.Reflection.Assemblies.AssemblyFilterPredicates;
 using static Enterprise.Reflection.Types.AssignableConcreteTypeService;
 

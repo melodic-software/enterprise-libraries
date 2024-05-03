@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Enterprise.Api.Minimal.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.Api.Minimal.Mapping;
@@ -12,10 +13,37 @@ public static class EndpointMappingExtensions
     /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddEndpoints(this IServiceCollection services, MinimalApiConfigOptions options)
+    {
+        return services.AddEndpoints(options.EndpointAssemblies);
+    }
+
+    /// <summary>
+    /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="assemblies"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddEndpoints(this IServiceCollection services, List<Assembly> assemblies)
+    {
+        return services.AddEndpoints(assemblies.ToArray());
+    }
+
+    /// <summary>
+    /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
+    /// </summary>
+    /// <param name="services"></param>
     /// <param name="assemblies"></param>
     /// <returns></returns>
     public static IServiceCollection AddEndpoints(this IServiceCollection services, params Assembly[] assemblies)
     {
+        if (!assemblies.Any())
+        {
+            return services;
+        }
+
         ServiceDescriptor[] serviceDescriptors = assemblies
             .SelectMany(a => a.GetTypes())
             .Where(type => type is { IsAbstract: false, IsInterface: false } &&
