@@ -20,42 +20,6 @@ public class RegistrationContext<TService> where TService : class
     }
 
     /// <summary>
-    /// Registers a singleton service of the specified implementation type.
-    /// </summary>
-    public RegistrationContext<TService> AddSingleton<TImplementation>() where TImplementation : class, TService =>
-        Add<TImplementation>(ServiceLifetime.Singleton);
-
-    /// <summary>
-    /// Registers a singleton service with a factory for creating the service.
-    /// </summary>
-    public RegistrationContext<TService> AddSingleton(Func<IServiceProvider, TService> implementationFactory) =>
-        Add(implementationFactory, ServiceLifetime.Singleton);
-
-    /// <summary>
-    /// Registers a scoped service of the specified implementation type.
-    /// </summary>
-    public RegistrationContext<TService> AddScoped<TImplementation>() where TImplementation : class, TService =>
-        Add<TImplementation>(ServiceLifetime.Scoped);
-
-    /// <summary>
-    /// Registers a scoped service with a factory for creating the service.
-    /// </summary>
-    public RegistrationContext<TService> AddScoped(Func<IServiceProvider, TService> implementationFactory) =>
-        Add(implementationFactory, ServiceLifetime.Scoped);
-
-    /// <summary>
-    /// Registers a transient service of the specified implementation type.
-    /// </summary>
-    public RegistrationContext<TService> AddTransient<TImplementation>()
-        where TImplementation : class, TService => Add<TImplementation>(ServiceLifetime.Transient);
-
-    /// <summary>
-    /// Registers a transient service with a factory for creating the service.
-    /// </summary>
-    public RegistrationContext<TService> AddTransient(Func<IServiceProvider, TService> implementationFactory) =>
-        Add(implementationFactory, ServiceLifetime.Transient);
-
-    /// <summary>
     /// Registers a service of the specified type with a specific implementation type and service lifetime.
     /// </summary>
     /// <typeparam name="TImplementation">The implementation type of the service to be registered.</typeparam>
@@ -68,6 +32,22 @@ public class RegistrationContext<TService> where TService : class
         Type implementationType = typeof(TImplementation);
         ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
         _services.Add(serviceDescriptor);
+        return this;
+    }
+
+    /// <summary>
+    /// Registers a service of the specified type with a specific implementation type and service lifetime if it hasn't already been registered.
+    /// </summary>
+    /// <typeparam name="TImplementation">The implementation type of the service to be registered.</typeparam>
+    /// <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+    /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+    public RegistrationContext<TService> TryAdd<TImplementation>(ServiceLifetime serviceLifetime)
+        where TImplementation : class, TService
+    {
+        Type serviceType = typeof(TService);
+        Type implementationType = typeof(TImplementation);
+        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        _services.TryAdd(serviceDescriptor);
         return this;
     }
 
@@ -86,6 +66,20 @@ public class RegistrationContext<TService> where TService : class
     }
 
     /// <summary>
+    /// Registers a service of the specified type with a factory method for creating the service instance and service lifetime if it hasn't already been registered.
+    /// </summary>
+    /// <param name="implementationFactory">The factory method used to create the service instance.</param>
+    /// <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+    /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+    public RegistrationContext<TService> TryAdd(Func<IServiceProvider, TService> implementationFactory, ServiceLifetime serviceLifetime)
+    {
+        Type serviceType = typeof(TService);
+        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
+        _services.TryAdd(serviceDescriptor);
+        return this;
+    }
+
+    /// <summary>
     /// Registers a service using a pre-configured ServiceDescriptor.
     /// </summary>
     /// <param name="serviceDescriptor">The ServiceDescriptor that encapsulates all the information to register the service.</param>
@@ -93,6 +87,17 @@ public class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> Add(ServiceDescriptor serviceDescriptor)
     {
         _services.Add(serviceDescriptor);
+        return this;
+    }
+
+    /// <summary>
+    /// Registers a service using a pre-configured ServiceDescriptor if it hasn't already been registered.
+    /// </summary>
+    /// <param name="serviceDescriptor">The ServiceDescriptor that encapsulates all the information to register the service.</param>
+    /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+    public RegistrationContext<TService> TryAdd(ServiceDescriptor serviceDescriptor)
+    {
+        _services.TryAdd(serviceDescriptor);
         return this;
     }
 
@@ -155,6 +160,7 @@ public class RegistrationContext<TService> where TService : class
     private ServiceDescriptor GetServiceDescriptor()
     {
         ServiceDescriptor? serviceDescriptor = _services.FirstOrDefault(d => d.ServiceType == typeof(TService));
+
         if (serviceDescriptor == null)
             throw new InvalidOperationException($"The service of type {typeof(TService).Name} has not been registered.");
 
@@ -169,6 +175,7 @@ public class RegistrationContext<TService> where TService : class
         return provider =>
         {
             TService service = GetOriginalService(serviceDescriptor, provider);
+
             foreach (Func<IServiceProvider, Func<TService, TService>> decoratorFactory in decoratorFactories)
                 service = decoratorFactory(provider)(service);
 
