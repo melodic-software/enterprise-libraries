@@ -43,15 +43,19 @@ internal class EventServiceRegistrar : IRegisterServices
         services.BeginRegistration<IDispatchEvents>()
             .TryAddSingleton(provider =>
             {
+                // It is very likely that we will have a decorator chain with the event handlers.
+                // This is only used to get the innermost decorated instance of the event handler resolved internally.
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IResolveEventHandlers eventHandlerResolver = provider.GetRequiredService<IResolveEventHandlers>();
                 ILogger<EventDispatcher> logger = provider.GetRequiredService<ILogger<EventDispatcher>>();
                 return new EventDispatcher(decoratorService, eventHandlerResolver, logger);
             }).WithDecorator((provider, eventDispatcher) =>
             {
+                IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
                 ILogger<EventCallbackRaisingDecorator> logger = provider.GetRequiredService<ILogger<EventCallbackRaisingDecorator>>();
-                return new EventCallbackRaisingDecorator(eventDispatcher, eventCallbackRaiser, logger);
+
+                return new EventCallbackRaisingDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
             });
 
         services.AddSingleton<IRaiseEvents>(provider =>

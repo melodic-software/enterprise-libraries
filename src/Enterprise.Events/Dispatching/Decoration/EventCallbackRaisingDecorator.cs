@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dispatching.Decoration;
 
-public class EventCallbackRaisingDecorator : DecoratorBase<IDispatchEvents>
+public class EventCallbackRaisingDecorator : DecoratorBase<IDispatchEvents>, IDispatchEvents
 {
     private readonly IRaiseEventCallbacks _callbackService;
     private readonly ILogger<EventCallbackRaisingDecorator> _logger;
