@@ -10,6 +10,11 @@
         <member name="P:Enterprise.DesignPatterns.Decorator.Model.DecoratorBase`1.Decorated">
             <inheritdoc />
         </member>
+        <member name="P:Enterprise.DesignPatterns.Decorator.Model.DecoratorBase`1.Innermost">
+            <summary>
+            The innermost decorated instance in the decorator chain.
+            </summary>
+        </member>
         <member name="T:Enterprise.DesignPatterns.Decorator.Model.IDecorate">
             <summary>
             Implementations decorate another object instance.

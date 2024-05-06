@@ -2,6 +2,7 @@
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Dispatching;
 using Enterprise.Events.Dispatching.Abstract;
+using Enterprise.Events.Dispatching.Decoration;
 using Enterprise.Events.Handlers.Decoration;
 using Enterprise.Events.Handlers.Resolution;
 using Enterprise.Events.Handlers.Resolution.Abstract;
@@ -14,7 +15,6 @@ using Enterprise.Events.Raising.Callbacks.Facade;
 using Enterprise.Events.Raising.Callbacks.Facade.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dependencies;
@@ -23,6 +23,10 @@ internal class EventServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
+        // TODO: Add configuration options to allow for dynamic registration of services, decorators, etc.
+
+        RegisterEventCallbackServices(services);
+
         services.BeginRegistration<IResolveEventHandlers>()
             .AddSingleton(provider => new ReflectionEventHandlerResolver(provider))
             .WithDecorators((provider, eventHandlerResolver) =>
@@ -36,27 +40,30 @@ internal class EventServiceRegistrar : IRegisterServices
             });
 
         // We only want to add this if no other services have been registered.
-        services.TryAddSingleton(provider =>
-        {
-            IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-            IResolveEventHandlers eventHandlerResolver = provider.GetRequiredService<IResolveEventHandlers>();
-            ILogger<EventDispatcher> logger = provider.GetRequiredService<ILogger<EventDispatcher>>();
+        services.BeginRegistration<IDispatchEvents>()
+            .TryAddSingleton(provider =>
+            {
+                IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
+                IResolveEventHandlers eventHandlerResolver = provider.GetRequiredService<IResolveEventHandlers>();
+                ILogger<EventDispatcher> logger = provider.GetRequiredService<ILogger<EventDispatcher>>();
+                return new EventDispatcher(decoratorService, eventHandlerResolver, logger);
+            }).WithDecorator((provider, eventDispatcher) =>
+            {
+                IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
+                ILogger<EventCallbackRaisingDecorator> logger = provider.GetRequiredService<ILogger<EventCallbackRaisingDecorator>>();
+                return new EventCallbackRaisingDecorator(eventDispatcher, eventCallbackRaiser, logger);
+            });
 
-            IDispatchEvents eventDispatcher = new EventDispatcher(decoratorService, eventHandlerResolver, logger);
-
-            return eventDispatcher;
-        });
-
-        services.AddSingleton(provider =>
+        services.AddSingleton<IRaiseEvents>(provider =>
         {
             IDispatchEvents eventDispatcher = provider.GetRequiredService<IDispatchEvents>();
             ILogger<EventRaiser> logger = provider.GetRequiredService<ILogger<EventRaiser>>();
-
-            IRaiseEvents eventRaiser = new EventRaiser(eventDispatcher, logger);
-
-            return eventRaiser;
+            return new EventRaiser(eventDispatcher, logger);
         });
+    }
 
+    private static void RegisterEventCallbackServices(IServiceCollection services)
+    {
         services.BeginRegistration<IEventCallbackRegistrar>()
             .Add(provider =>
             {
@@ -86,14 +93,11 @@ internal class EventServiceRegistrar : IRegisterServices
                 return decorator;
             });
 
-        services.AddScoped(provider =>
+        services.AddScoped<IEventCallbackService>(provider =>
         {
             IEventCallbackRegistrar callbackRegistrar = provider.GetRequiredService<IEventCallbackRegistrar>();
             IRaiseEventCallbacks callbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
-
-            IEventCallbackService eventCallbackService = new EventCallbackService(callbackRegistrar, callbackRaiser);
-
-            return eventCallbackService;
+            return new EventCallbackService(callbackRegistrar, callbackRaiser);
         });
     }
 }

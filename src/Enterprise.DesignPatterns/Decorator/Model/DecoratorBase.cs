@@ -12,7 +12,10 @@ public abstract class DecoratorBase<T> : IDecorate<T> where T : class
     /// <inheritdoc />
     public T Decorated { get; }
 
-    protected T InnermostHandler => _decoratorService.GetInnermost(Decorated);
+    /// <summary>
+    /// The innermost decorated instance in the decorator chain.
+    /// </summary>
+    protected T Innermost => _decoratorService.GetInnermost(Decorated);
 
     protected DecoratorBase(T decorated, IGetDecoratedInstance decoratorService)
     {

@@ -4,7 +4,7 @@
         <name>Enterprise.Events</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
@@ -49,23 +49,21 @@
         </member>
         <member name="T:Enterprise.Events.Raising.Abstract.IRaiseEvents">
             <summary>
-            Raises events and optionally executes callbacks using an external callback service.
+            Raises events.
             </summary>
         </member>
-        <member name="M:Enterprise.Events.Raising.Abstract.IRaiseEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Events.Raising.Abstract.IRaiseEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent})">
             <summary>
-            Raises events and executes any registered callbacks associated with each event.
+            Raises events.
             </summary>
             <param name="events"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Events.Raising.Abstract.IRaiseEvents.RaiseAsync(Enterprise.Events.Model.IEvent,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Events.Raising.Abstract.IRaiseEvents.RaiseAsync(Enterprise.Events.Model.IEvent)">
             <summary>
-            Raise an event and execute any registered callbacks associated with the event.
+            Raise an event.
             </summary>
             <param name="event"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
         <member name="M:Enterprise.Events.Raising.Callbacks.Abstractions.IClearCallbacks.ClearCallbacks">
@@ -164,7 +162,7 @@
             </summary>
             <param name="event"></param>
         </member>
-        <member name="M:Enterprise.Events.Raising.EventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Events.Raising.EventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent})">
             <inheritdoc />
         </member>
     </members>

@@ -1,7 +1,6 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Abstractions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dispatching.Abstract;
@@ -18,7 +17,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
     }
 
     /// <inheritdoc />
-    public virtual async Task DispatchAsync(IEvent @event, IRaiseEventCallbacks? callbackService = null)
+    public virtual async Task DispatchAsync(IEvent @event)
     {
         Logger.LogDebug("Resolving event handlers.");
         ICollection<IHandleEvent> eventHandlers = (await ResolveEventHandlers(@event)).ToList();
@@ -40,16 +39,6 @@ public abstract class EventDispatcherBase : IDispatchEvents
             await ProcessEventHandlerAsync(eventHandler, @event);
 
         Logger.LogDebug("Event handlers processed.");
-
-        if (callbackService == null)
-        {
-            Logger.LogWarning("No event callback service provided.");
-            return;
-        }
-
-        Logger.LogDebug("Raising event callbacks.");
-        callbackService.RaiseCallbacks(@event);
-        Logger.LogDebug("Event callbacks completed.");
     }
 
     public virtual IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)

@@ -21,9 +21,9 @@ public class CachingEventHandlerResolver : IResolveEventHandlers
 
     public Task<IEnumerable<IHandleEvent>> ResolveAsync(IEvent @event)
     {
-        var eventType = @event.GetType();
+        Type eventType = @event.GetType();
 
-        if (_nonGenericHandlerCache.TryGetValue(eventType, out var handlersTask))
+        if (_nonGenericHandlerCache.TryGetValue(eventType, out Task<IEnumerable<IHandleEvent>>? handlersTask))
         {
             _logger.LogDebug("Event handler resolution task found in cache.");
             return handlersTask;
@@ -41,9 +41,9 @@ public class CachingEventHandlerResolver : IResolveEventHandlers
 
     public Task<IEnumerable<IHandleEvent<T>>> ResolveAsync<T>(T @event) where T : IEvent
     {
-        var eventType = typeof(T);
+        Type eventType = typeof(T);
 
-        if (_genericHandlerCache.TryGetValue(eventType, out var cachedHandlers))
+        if (_genericHandlerCache.TryGetValue(eventType, out object? cachedHandlers))
         {
             _logger.LogDebug("Event handler resolution task found in generic cache.");
             return (Task<IEnumerable<IHandleEvent<T>>>)cachedHandlers;
@@ -51,7 +51,7 @@ public class CachingEventHandlerResolver : IResolveEventHandlers
 
         _logger.LogDebug("Event handler resolution task not found in generic cache.");
 
-        var handlersTask = _decoratedResolver.ResolveAsync(@event);
+        Task<IEnumerable<IHandleEvent<T>>> handlersTask = _decoratedResolver.ResolveAsync(@event);
 
         _genericHandlerCache[eventType] = handlersTask;
 
