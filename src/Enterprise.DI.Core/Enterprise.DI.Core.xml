@@ -60,39 +60,17 @@
             Provides a context for fluent service registration, allowing for easy addition of services and decorators.
             </summary>
         </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddSingleton``1">
-            <summary>
-            Registers a singleton service of the specified implementation type.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddSingleton(System.Func{System.IServiceProvider,`0})">
-            <summary>
-            Registers a singleton service with a factory for creating the service.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddScoped``1">
-            <summary>
-            Registers a scoped service of the specified implementation type.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddScoped(System.Func{System.IServiceProvider,`0})">
-            <summary>
-            Registers a scoped service with a factory for creating the service.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddTransient``1">
-            <summary>
-            Registers a transient service of the specified implementation type.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.AddTransient(System.Func{System.IServiceProvider,`0})">
-            <summary>
-            Registers a transient service with a factory for creating the service.
-            </summary>
-        </member>
         <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.Add``1(Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
             <summary>
             Registers a service of the specified type with a specific implementation type and service lifetime.
+            </summary>
+            <typeparam name="TImplementation">The implementation type of the service to be registered.</typeparam>
+            <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.TryAdd``1(Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Registers a service of the specified type with a specific implementation type and service lifetime if it hasn't already been registered.
             </summary>
             <typeparam name="TImplementation">The implementation type of the service to be registered.</typeparam>
             <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
@@ -106,9 +84,24 @@
             <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
             <returns>The updated RegistrationContext instance for fluent chaining.</returns>
         </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.TryAdd(System.Func{System.IServiceProvider,`0},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Registers a service of the specified type with a factory method for creating the service instance and service lifetime if it hasn't already been registered.
+            </summary>
+            <param name="implementationFactory">The factory method used to create the service instance.</param>
+            <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
         <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.Add(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
             <summary>
             Registers a service using a pre-configured ServiceDescriptor.
+            </summary>
+            <param name="serviceDescriptor">The ServiceDescriptor that encapsulates all the information to register the service.</param>
+            <returns>The updated RegistrationContext instance for fluent chaining.</returns>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.TryAdd(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <summary>
+            Registers a service using a pre-configured ServiceDescriptor if it hasn't already been registered.
             </summary>
             <param name="serviceDescriptor">The ServiceDescriptor that encapsulates all the information to register the service.</param>
             <returns>The updated RegistrationContext instance for fluent chaining.</returns>
@@ -126,6 +119,66 @@
         <member name="M:Enterprise.DI.Core.Registration.RegistrationContext`1.WithDecorator``1(System.Func{System.IServiceProvider,`0,``0})">
             <summary>
             Registers a single decorator for the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddSingleton``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a singleton service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddSingleton``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a singleton service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddSingleton``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a singleton service of the specified implementation type if it hasn't already been registered.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddSingleton``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a singleton service with a factory for creating the service if it hasn't already been registered.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddScoped``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a scoped service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddScoped``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a scoped service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddScoped``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a scoped service of the specified implementation type if it hasn't already been registered.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddScoped``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a scoped service with a factory for creating the service if it hasn't already been registered.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddTransient``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a transient service of the specified implementation type.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.AddTransient``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a transient service with a factory for creating the service.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddTransient``2(Enterprise.DI.Core.Registration.RegistrationContext{``0})">
+            <summary>
+            Registers a transient service of the specified implementation type if it hasn't already been registered.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.RegistrationContextExtensions.TryAddTransient``1(Enterprise.DI.Core.Registration.RegistrationContext{``0},System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Registers a transient service with a factory for creating the service if it hasn't already been registered.
             </summary>
         </member>
         <member name="M:Enterprise.DI.Core.Registration.ServiceCollectionExtensions.RegisterOpenGeneric``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
