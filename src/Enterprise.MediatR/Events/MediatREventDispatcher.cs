@@ -61,15 +61,15 @@ public sealed class MediatREventDispatcher : EventDispatcher
     }
 
     /// <inheritdoc />
-    public override async Task DispatchAsync(IEvent @event, IRaiseEventCallbacks? callbackService = null)
+    public override async Task DispatchAsync(IEvent @event)
     {
         // Use the base behavior.
         // Part of which we've overridden.
-        await base.DispatchAsync(@event, callbackService);
+        await base.DispatchAsync(@event);
 
         // At this point we've safely filtered out handlers
         // that would be executed twice with the use of the MediatR publisher.
-        await PublishAsync(@event, callbackService);
+        await PublishAsync(@event);
     }
 
     private async Task PublishAsync(IEvent @event, IRaiseEventCallbacks? callbackService = null)

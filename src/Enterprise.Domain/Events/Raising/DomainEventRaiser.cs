@@ -2,7 +2,6 @@
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Model;
 using Enterprise.Events.Raising;
-using Enterprise.Events.Raising.Callbacks.Abstractions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
@@ -15,29 +14,29 @@ public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities, IRaiseEventCallbacks? eventCallbackService)
+    public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities)
     {
         foreach (IGetDomainEvents entity in entities)
-            await RaiseAsync(entity, eventCallbackService);
+            await RaiseAsync(entity);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IGetDomainEvents entity, IRaiseEventCallbacks? eventCallbackService)
+    public async Task RaiseAsync(IGetDomainEvents entity)
     {
         IReadOnlyList<IDomainEvent> events = entity.GetDomainEvents();
-        await RaiseAsync(events, eventCallbackService);
+        await RaiseAsync(events);
         (entity as IClearDomainEvents)?.ClearDomainEvents(); // TODO: Should we be doing this here? It seems like an obscured side effect.
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents, IRaiseEventCallbacks? eventCallbackService)
+    public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents)
     {
-        await RaiseAsync((IReadOnlyCollection<IEvent>)domainEvents, eventCallbackService);
+        await RaiseAsync((IReadOnlyCollection<IEvent>)domainEvents);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IDomainEvent domainEvent, IRaiseEventCallbacks? eventCallbackService)
+    public async Task RaiseAsync(IDomainEvent domainEvent)
     {
-        await RaiseAsync((IEvent)domainEvent, eventCallbackService);
+        await RaiseAsync((IEvent)domainEvent);
     }
 }

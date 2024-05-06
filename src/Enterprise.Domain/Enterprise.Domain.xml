@@ -4,6 +4,11 @@
         <name>Enterprise.Domain</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.Domain.Entities.IEntity">
+            <summary>
+            A marker interface declaring the implementation is a domain entity.
+            </summary>
+        </member>
         <member name="T:Enterprise.Domain.Events.IClearDomainEvents">
             <summary>
             Provides a mechanism for clearing domain events.
@@ -37,37 +42,35 @@
             Represents an event that happened within the system that is of importance to the business.
             </summary>
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.Domain.Events.Raising.IRaiseDomainEvents">
             <summary>
-            Raises domain events and optionally executes callbacks using an external callback service.
+            Raises domain events.
             </summary>
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent})">
             <summary>
-            Raise domain events and execute any registered callbacks associated with each event.
+            Raise domain events.
             </summary>
             <param name="domainEvents"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseDomainEvents.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
             <summary>
-            Raise domain events and execute any registered callbacks associated with the event.
+            Raise domain events.
             </summary>
             <param name="domainEvent"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
         <member name="T:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents">
@@ -75,20 +78,18 @@
             Raises domain events recorded by entities and optionally executes callbacks using an external callback service.
             </summary>
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents},Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents})">
             <summary>
             Raise domain events recorded by each entity and execute any registered callbacks associated with each event.
             </summary>
             <param name="entities"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents,Enterprise.Events.Raising.Callbacks.Abstractions.IRaiseEventCallbacks)">
+        <member name="M:Enterprise.Domain.Events.Raising.IRaiseRecordedDomainEvents.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents)">
             <summary>
             Raise domain events recorded by the entity and execute any registered callbacks associated with the event.
             </summary>
             <param name="entity"></param>
-            <param name="callbackService"></param>
             <returns></returns>
         </member>
         <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvent(Enterprise.Patterns.ResultPattern.Errors.IError)">

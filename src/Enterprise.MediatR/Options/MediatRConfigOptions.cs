@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Reflection;
+﻿using System.Reflection;
 using Enterprise.MediatR.Behaviors;
 using Enterprise.MediatR.Behaviors.Caching;
 using Enterprise.MediatR.Behaviors.Logging;

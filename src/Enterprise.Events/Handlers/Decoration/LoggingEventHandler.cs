@@ -21,7 +21,7 @@ public class LoggingEventHandler<T> : EventHandlerDecoratorBase<T> where T : IEv
     public override async Task HandleAsync(T @event)
     {
         Type eventType = typeof(T);
-        Type eventHandlerType = InnermostHandler.GetType();
+        Type eventHandlerType = Innermost.GetType();
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?

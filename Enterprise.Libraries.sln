@@ -57,10 +57,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.EntityFramework.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Events", "src\Enterprise.Events\Enterprise.Events.csproj", "{7A2E32E5-793F-4CA4-8B4A-4DC175751594}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Events.Decorators", "src\Enterprise.Events.Decorators\Enterprise.Events.Decorators.csproj", "{FA3CCB52-271E-436D-9E39-D8EA3FDDD969}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Events.DI", "src\Enterprise.Events.DI\Enterprise.Events.DI.csproj", "{F38F3891-1E71-4E03-A179-FE2A6AF0212E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Events.Facade", "src\Enterprise.Events.Facade\Enterprise.Events.Facade.csproj", "{C5587208-AF47-4D28-932B-EE076807A9CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.EventSourcing", "src\Enterprise.EventSourcing\Enterprise.EventSourcing.csproj", "{26FDB637-D5EE-4D5C-86D9-03D93BEBC63C}"
@@ -206,14 +202,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-design-patterns.yaml = .azure\enterprise-design-patterns.yaml
 		.azure\enterprise-DI-core.yaml = .azure\enterprise-DI-core.yaml
 		.azure\enterprise-DI.yaml = .azure\enterprise-DI.yaml
+		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
 		.azure\enterprise-domain-driven-design-testing.yaml = .azure\enterprise-domain-driven-design-testing.yaml
 		.azure\enterprise-domain-driven-design.yaml = .azure\enterprise-domain-driven-design.yaml
 		.azure\enterprise-domain.yaml = .azure\enterprise-domain.yaml
 		.azure\enterprise-entity-framework-aspnetcore.yaml = .azure\enterprise-entity-framework-aspnetcore.yaml
 		.azure\enterprise-entity-framework.yaml = .azure\enterprise-entity-framework.yaml
 		.azure\enterprise-event-sourcing.yaml = .azure\enterprise-event-sourcing.yaml
-		.azure\enterprise-events-decorators.yaml = .azure\enterprise-events-decorators.yaml
-		.azure\enterprise-events-DI.yaml = .azure\enterprise-events-DI.yaml
 		.azure\enterprise-events-facade.yaml = .azure\enterprise-events-facade.yaml
 		.azure\enterprise-events.yaml = .azure\enterprise-events.yaml
 		.azure\enterprise-exceptions.yaml = .azure\enterprise-exceptions.yaml
@@ -335,6 +330,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Security.Tests.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Options.Tests.Unit", "tests\Enterprise.Options.Tests.Unit\Enterprise.Options.Tests.Unit.csproj", "{CCE68B1C-5751-40DF-B004-3863967BDE4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Domain.AspNetCore", "src\Enterprise.Domain.AspNetCore\Enterprise.Domain.AspNetCore.csproj", "{21F40188-72D1-476F-A736-5B642BB637EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -445,14 +442,6 @@ Global
 		{7A2E32E5-793F-4CA4-8B4A-4DC175751594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A2E32E5-793F-4CA4-8B4A-4DC175751594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A2E32E5-793F-4CA4-8B4A-4DC175751594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA3CCB52-271E-436D-9E39-D8EA3FDDD969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA3CCB52-271E-436D-9E39-D8EA3FDDD969}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA3CCB52-271E-436D-9E39-D8EA3FDDD969}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA3CCB52-271E-436D-9E39-D8EA3FDDD969}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F38F3891-1E71-4E03-A179-FE2A6AF0212E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F38F3891-1E71-4E03-A179-FE2A6AF0212E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F38F3891-1E71-4E03-A179-FE2A6AF0212E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F38F3891-1E71-4E03-A179-FE2A6AF0212E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5587208-AF47-4D28-932B-EE076807A9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5587208-AF47-4D28-932B-EE076807A9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5587208-AF47-4D28-932B-EE076807A9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -717,6 +706,10 @@ Global
 		{CCE68B1C-5751-40DF-B004-3863967BDE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCE68B1C-5751-40DF-B004-3863967BDE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCE68B1C-5751-40DF-B004-3863967BDE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21F40188-72D1-476F-A736-5B642BB637EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21F40188-72D1-476F-A736-5B642BB637EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21F40188-72D1-476F-A736-5B642BB637EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21F40188-72D1-476F-A736-5B642BB637EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -748,8 +741,6 @@ Global
 		{CA1E6CDB-6501-44D8-AAD9-5E5DE0190A77} = {BEE0AFD0-C13F-49F2-A654-32EB83623229}
 		{128FE81F-A499-4AAE-BD92-36C638B7C9A1} = {BEE0AFD0-C13F-49F2-A654-32EB83623229}
 		{7A2E32E5-793F-4CA4-8B4A-4DC175751594} = {C0533A80-3E25-4B9E-97A2-9FFF625659A1}
-		{FA3CCB52-271E-436D-9E39-D8EA3FDDD969} = {C0533A80-3E25-4B9E-97A2-9FFF625659A1}
-		{F38F3891-1E71-4E03-A179-FE2A6AF0212E} = {C0533A80-3E25-4B9E-97A2-9FFF625659A1}
 		{C5587208-AF47-4D28-932B-EE076807A9CD} = {C0533A80-3E25-4B9E-97A2-9FFF625659A1}
 		{26FDB637-D5EE-4D5C-86D9-03D93BEBC63C} = {C0533A80-3E25-4B9E-97A2-9FFF625659A1}
 		{D6E6026C-010B-4F55-973A-3D3E756E818A} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
@@ -837,6 +828,7 @@ Global
 		{0A241250-C23A-422F-B976-C50F83B6BCF9} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 		{548D4A30-6E6B-4357-A5FA-687F7E9E6E44} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 		{CCE68B1C-5751-40DF-B004-3863967BDE4D} = {955CB110-3F3F-4C05-842A-D8B26888A129}
+		{21F40188-72D1-476F-A736-5B642BB637EF} = {6A973BA5-E538-463F-90ED-3C5A7C39A29C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}
