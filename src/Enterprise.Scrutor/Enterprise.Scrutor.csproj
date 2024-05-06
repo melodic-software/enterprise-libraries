@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.65" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.70" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
   </ItemGroup>
 

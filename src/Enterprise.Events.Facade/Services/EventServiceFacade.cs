@@ -38,7 +38,7 @@ public class EventServiceFacade : IEventServiceFacade
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IEvent @event, IRaiseEventCallbacks? callbackService = null)
+    public async Task RaiseAsync(IEvent @event)
     {
         if (_processedEventIds.Contains(@event.Id))
         {
@@ -46,39 +46,39 @@ public class EventServiceFacade : IEventServiceFacade
             return;
         }
 
-        await _eventRaiser.RaiseAsync(@event, callbackService);
+        await _eventRaiser.RaiseAsync(@event);
 
         _processedEventIds.Add(@event.Id);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IReadOnlyCollection<IEvent> events, IRaiseEventCallbacks? callbackService = null)
+    public async Task RaiseAsync(IReadOnlyCollection<IEvent> events)
     {
-        await _eventRaiser.RaiseAsync(events, callbackService);
+        await _eventRaiser.RaiseAsync(events);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities, IRaiseEventCallbacks? eventCallbackService = null)
+    public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities)
     {
-        await _domainEventRaiser.RaiseAsync(entities, eventCallbackService);
+        await _domainEventRaiser.RaiseAsync(entities);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IGetDomainEvents entity, IRaiseEventCallbacks? eventCallbackService = null)
+    public async Task RaiseAsync(IGetDomainEvents entity)
     {
-        await _domainEventRaiser.RaiseAsync(entity, eventCallbackService);
+        await _domainEventRaiser.RaiseAsync(entity);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents, IRaiseEventCallbacks? eventCallbackService = null)
+    public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents)
     {
-        await _domainEventRaiser.RaiseAsync(domainEvents, eventCallbackService);
+        await _domainEventRaiser.RaiseAsync(domainEvents);
     }
 
     /// <inheritdoc />
-    public async Task RaiseAsync(IDomainEvent domainEvent, IRaiseEventCallbacks? eventCallbackService = null)
+    public async Task RaiseAsync(IDomainEvent domainEvent)
     {
-        await _domainEventRaiser.RaiseAsync(domainEvent, eventCallbackService);
+        await _domainEventRaiser.RaiseAsync(domainEvent);
     }
 
     /// <inheritdoc />
