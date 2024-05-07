@@ -28,7 +28,7 @@
             <param name="outboxMessageFactory"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,`0,Enterprise.Domain.Events.Raising.IRaiseDomainEvents)">
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,`0,Enterprise.Domain.Events.Raising.Abstract.IRaiseQueuedDomainEvents)">
             <summary>
             Registers a delegate to raise domain events.
             The added behavior will only execute when the HTTP response has finished being sent to the client.
