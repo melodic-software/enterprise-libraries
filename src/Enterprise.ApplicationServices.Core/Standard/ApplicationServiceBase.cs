@@ -40,7 +40,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventsAsync(IEnumerable<IGetDomainEvents> entities)
     {
-        await _eventService.RaiseAsync(entities, _eventService);
+        await _eventService.RaiseAsync(entities);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventsAsync(IGetDomainEvents entity)
     {
-        await _eventService.RaiseAsync(entity, _eventService);
+        await _eventService.RaiseAsync(entity);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventsAsync(IEnumerable<IEvent> events)
     {
-        await _eventService.RaiseAsync(events.ToList(), _eventService);
+        await _eventService.RaiseAsync(events.ToList());
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventsAsync(IEnumerable<IDomainEvent> domainEvents)
     {
-        await _eventService.RaiseAsync(domainEvents.ToList(), _eventService);
+        await _eventService.RaiseAsync(domainEvents.ToList());
     }
 
     /// <summary>
@@ -91,7 +91,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventAsync(IEvent @event)
     {
-        await _eventService.RaiseAsync(@event, _eventService);
+        await _eventService.RaiseAsync(@event);
     }
 
     /// <summary>
@@ -101,7 +101,7 @@ public abstract class ApplicationServiceBase : IApplicationService
     /// <returns></returns>
     protected async Task RaiseEventAsync(IDomainEvent domainEvent)
     {
-        await _eventService.RaiseAsync(domainEvent, _eventService);
+        await _eventService.RaiseAsync(domainEvent);
     }
 
     /// <summary>

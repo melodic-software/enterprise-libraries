@@ -11,11 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.70" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Events\Raising\HttpContext\" />
+    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.72" />
   </ItemGroup>
 
 </Project>

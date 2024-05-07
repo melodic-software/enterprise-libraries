@@ -1,7 +1,9 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Dispatching.Abstract;
+using Enterprise.Events.Dispatching.Decoration;
 using Enterprise.Events.Handlers.Resolution.Abstract;
+using Enterprise.Events.Raising.Callbacks.Abstractions;
 using Enterprise.MediatR.Options;
 using Enterprise.Options.Core.Singleton;
 using MediatR;
@@ -25,16 +27,21 @@ internal class EventServiceRegistrar : IRegisterServices
         // Clear all existing registrations.
         services.RemoveAll(typeof(IDispatchEvents));
 
-        services.AddSingleton(provider =>
-        {
-            IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-            IResolveEventHandlers eventHandlerResolver = provider.GetRequiredService<IResolveEventHandlers>();
-            IPublisher publisher = provider.GetRequiredService<IPublisher>();
-            ILogger<MediatREventDispatcher> logger = provider.GetRequiredService<ILogger<MediatREventDispatcher>>();
-
-            IDispatchEvents eventDispatcher = new MediatREventDispatcher(publisher, decoratorService, eventHandlerResolver, logger);
-
-            return eventDispatcher;
-        });
+        services.BeginRegistration<IDispatchEvents>()
+            .TryAddSingleton(provider =>
+            {
+                IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
+                IResolveEventHandlers eventHandlerResolver = provider.GetRequiredService<IResolveEventHandlers>();
+                IPublisher publisher = provider.GetRequiredService<IPublisher>();
+                ILogger<MediatREventDispatcher> logger = provider.GetRequiredService<ILogger<MediatREventDispatcher>>();
+                IDispatchEvents eventDispatcher = new MediatREventDispatcher(publisher, decoratorService, eventHandlerResolver, logger);
+                return eventDispatcher;
+            }).WithDecorator((provider, eventDispatcher) =>
+            {
+                IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
+                IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
+                ILogger<EventCallbackRaisingDecorator> logger = provider.GetRequiredService<ILogger<EventCallbackRaisingDecorator>>();
+                return new EventCallbackRaisingDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
+            });
     }
 }

@@ -4,7 +4,6 @@ using Enterprise.Domain.Events.Raising;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Model;
 using Enterprise.Events.Raising.Abstract;
-using Enterprise.Events.Raising.Callbacks.Abstractions;
 using Enterprise.Events.Raising.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Raising.Callbacks.Model;
 using Microsoft.Extensions.Logging;
@@ -42,7 +41,7 @@ public class EventServiceFacade : IEventServiceFacade
     {
         if (_processedEventIds.Contains(@event.Id))
         {
-            _logger.LogWarning("Event with ID \"{EventId}\" has already been processed", @event.Id);
+            _logger.LogWarning("Event with ID \"{EventId}\" has already been processed.", @event.Id);
             return;
         }
 

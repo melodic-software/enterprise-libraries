@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Domain.AspNetCore.Events.Queuing;
 
-public static class HttpContextDomainEventQueuingConstants
+public static class HttpContextQueuingConstants
 {
     /// <summary>
     /// Key for accessing the domain events queue stored in the items collection of a scoped HTTP request context.
