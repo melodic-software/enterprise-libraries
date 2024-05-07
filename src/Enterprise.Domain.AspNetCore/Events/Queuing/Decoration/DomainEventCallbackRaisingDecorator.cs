@@ -3,7 +3,7 @@ using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Domain.Events;
 using Enterprise.Domain.Events.Model.Abstract;
 using Enterprise.Domain.Events.Raising;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
+using Enterprise.Events.Callbacks.Raising.Abstract;
 
 namespace Enterprise.Domain.AspNetCore.Events.Queuing.Decoration;
 

@@ -3,7 +3,7 @@ using Enterprise.DI.Core.Registration;
 using Enterprise.Domain.AspNetCore.Events.Queuing.Decoration;
 using Enterprise.Domain.Events.Queuing;
 using Enterprise.Domain.Events.Raising;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
+using Enterprise.Events.Callbacks.Raising.Abstract;
 using Enterprise.Options.Core.Singleton;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

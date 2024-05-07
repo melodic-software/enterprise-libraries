@@ -1,6 +1,6 @@
 ﻿using Enterprise.Domain.Events.Raising;
+using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Raising.Abstract;
-using Enterprise.Events.Raising.Callbacks.Facade.Abstractions;
 
 namespace Enterprise.Events.Facade.Abstract;
 
