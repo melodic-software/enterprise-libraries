@@ -1,11 +1,11 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
+using Enterprise.Events.Callbacks.Raising.Abstract;
 using Enterprise.Events.Dispatching;
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Dispatching.Decoration;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Raising.Abstract;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

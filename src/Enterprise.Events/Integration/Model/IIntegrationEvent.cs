@@ -1,4 +1,6 @@
-﻿namespace Enterprise.Events.Model;
+﻿using Enterprise.Events.Model;
+
+namespace Enterprise.Events.Integration.Model;
 // NOT sure if these will be needed for serialization purposes or not
 // It'd be great to externalize these or use a partial definition
 

@@ -1,8 +1,8 @@
 ﻿using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
+using Enterprise.Events.Callbacks.Raising.Abstract;
 
-namespace Enterprise.Events.Raising.Callbacks.Raising.Decoration;
+namespace Enterprise.Events.Callbacks.Raising.Decoration;
 
 public class LoggingEventCallbackRaiser : IRaiseEventCallbacks
 {
@@ -21,11 +21,11 @@ public class LoggingEventCallbackRaiser : IRaiseEventCallbacks
         // We want to use the logging scope for each event.
         // We iterate here and use the other method instead of forwarding on to the delegated instance.
 
-        List<IEvent> eventList = events.ToList();
+        var eventList = events.ToList();
 
         _logger.LogDebug("Raising callbacks for {EventCount} events.", eventList.Count);
 
-        foreach (IEvent @event in eventList)
+        foreach (var @event in eventList)
             RaiseCallbacks(@event);
 
         _logger.LogDebug("Callback raising completed.");

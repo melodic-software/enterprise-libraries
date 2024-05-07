@@ -1,6 +1,6 @@
 ﻿using Enterprise.Events.Model;
 
-namespace Enterprise.Events.Raising.Callbacks.Raising.Abstract;
+namespace Enterprise.Events.Callbacks.Raising.Abstract;
 
 public interface IRaiseEventCallbacks
 {

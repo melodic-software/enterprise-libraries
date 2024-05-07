@@ -1,6 +1,6 @@
-﻿using Enterprise.Events.Raising.Callbacks.Model;
+﻿using Enterprise.Events.Callbacks.Model;
 
-namespace Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+namespace Enterprise.Events.Callbacks.Registration.Abstract;
 
 public interface IGetRegisteredCallbacks
 {

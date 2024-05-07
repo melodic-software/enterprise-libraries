@@ -1,10 +1,10 @@
-﻿using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Model;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
-using Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+﻿using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Raising.Abstract;
+using Enterprise.Events.Callbacks.Registration.Abstract;
+using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Events.Raising.Callbacks;
+namespace Enterprise.Events.Callbacks;
 
 public class EventCallbackRaiser : IRaiseEventCallbacks
 {
@@ -22,17 +22,17 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
     /// <inheritdoc />
     public void RaiseCallbacks(IEnumerable<IEvent> events)
     {
-        foreach (IEvent @event in events)
+        foreach (var @event in events)
             RaiseCallbacks(@event);
     }
 
     /// <inheritdoc />
     public void RaiseCallbacks<TEvent>(TEvent @event) where TEvent : IEvent
     {
-        Type eventType = @event.GetType();
-        Dictionary<Type, IEnumerable<IEventCallback>> registeredCallbacks = _eventCallbackRegistrar.GetRegisteredCallbacks();
+        var eventType = @event.GetType();
+        var registeredCallbacks = _eventCallbackRegistrar.GetRegisteredCallbacks();
 
-        bool callbacksRegistered = registeredCallbacks.ContainsKey(eventType);
+        var callbacksRegistered = registeredCallbacks.ContainsKey(eventType);
 
         if (!callbacksRegistered)
         {
@@ -40,13 +40,13 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
             return;
         }
 
-        IEnumerable<IEventCallback> callbacks = registeredCallbacks[eventType];
+        var callbacks = registeredCallbacks[eventType];
 
-        List<IEventCallback> callbackList = callbacks.ToList();
+        var callbackList = callbacks.ToList();
 
         _logger.LogDebug("Attempting to raise {CallbackCount} callback(s).", callbackList.Count);
 
-        foreach (IEventCallback callback in callbackList)
+        foreach (var callback in callbackList)
             RaiseCallback(@event, callback);
     }
 

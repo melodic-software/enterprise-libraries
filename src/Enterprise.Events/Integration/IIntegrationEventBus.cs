@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Events.EventBus;
+﻿namespace Enterprise.Events.Integration;
 
 public interface IIntegrationEventBus
 {

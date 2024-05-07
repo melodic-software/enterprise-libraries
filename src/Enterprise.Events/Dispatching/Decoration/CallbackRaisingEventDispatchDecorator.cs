@@ -1,8 +1,8 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Events.Callbacks.Raising.Abstract;
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dispatching.Decoration;

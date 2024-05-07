@@ -1,9 +1,9 @@
-﻿using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Model;
-using Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+﻿using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Registration.Abstract;
+using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Events.Raising.Callbacks.Registration.Decoration;
+namespace Enterprise.Events.Callbacks.Registration.Decoration;
 
 public class LoggingEventCallbackRegistrar : IEventCallbackRegistrar
 {
@@ -30,7 +30,7 @@ public class LoggingEventCallbackRegistrar : IEventCallbackRegistrar
     public Dictionary<Type, IEnumerable<IEventCallback>> GetRegisteredCallbacks()
     {
         _logger.LogDebug("Getting registered callbacks.");
-        Dictionary<Type, IEnumerable<IEventCallback>> callbacks = _decoratedRegistrar.GetRegisteredCallbacks();
+        var callbacks = _decoratedRegistrar.GetRegisteredCallbacks();
         _logger.LogDebug("Callbacks retrieved.");
         return callbacks;
     }

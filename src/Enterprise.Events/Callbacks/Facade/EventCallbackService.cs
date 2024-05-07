@@ -1,10 +1,10 @@
-﻿using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Facade.Abstractions;
-using Enterprise.Events.Raising.Callbacks.Model;
-using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
-using Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+﻿using Enterprise.Events.Callbacks.Facade.Abstractions;
+using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Raising.Abstract;
+using Enterprise.Events.Callbacks.Registration.Abstract;
+using Enterprise.Events.Model;
 
-namespace Enterprise.Events.Raising.Callbacks.Facade;
+namespace Enterprise.Events.Callbacks.Facade;
 
 /// <summary>
 /// This is a simple facade service that aggregates the registration and raising of event callbacks.

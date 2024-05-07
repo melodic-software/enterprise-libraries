@@ -1,9 +1,9 @@
-﻿using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Model;
-using Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+﻿using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Registration.Abstract;
+using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Events.Raising.Callbacks.Registration;
+namespace Enterprise.Events.Callbacks.Registration;
 
 public class EventCallbackRegistrar : IEventCallbackRegistrar
 {
@@ -21,9 +21,9 @@ public class EventCallbackRegistrar : IEventCallbackRegistrar
     {
         IEventCallback<TEvent> eventCallback = new EventCallback<TEvent>(action);
 
-        Type eventType = typeof(TEvent);
+        var eventType = typeof(TEvent);
 
-        bool noCallbacksRegisteredForEvent = !_callbackDictionary.ContainsKey(eventType);
+        var noCallbacksRegisteredForEvent = !_callbackDictionary.ContainsKey(eventType);
 
         if (noCallbacksRegisteredForEvent)
         {
@@ -35,7 +35,7 @@ public class EventCallbackRegistrar : IEventCallbackRegistrar
             if (_callbackDictionary[eventType] is not IEnumerable<IEventCallback<TEvent>> existingCallbacks)
                 throw new Exception("Existing callback list is not valid.");
 
-            List<IEventCallback<TEvent>> existingCallbackList = existingCallbacks.ToList();
+            var existingCallbackList = existingCallbacks.ToList();
 
             // Check for duplicates before adding.
             if (!existingCallbackList.Any(x => x.Equals(eventCallback)))
@@ -46,8 +46,8 @@ public class EventCallbackRegistrar : IEventCallbackRegistrar
 
         _logger.LogDebug("Callback successfully registered.");
 
-        int totalCallbacksForEvent = _callbackDictionary[eventType].Count();
-        int totalCallbacks = _callbackDictionary.Sum(x => x.Value.Count());
+        var totalCallbacksForEvent = _callbackDictionary[eventType].Count();
+        var totalCallbacks = _callbackDictionary.Sum(x => x.Value.Count());
 
         _logger.LogDebug(
             "Total callbacks for event: {TotalCallbacksForEvent}. " +
