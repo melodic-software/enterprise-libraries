@@ -4,6 +4,7 @@ using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Options.Core.Singleton;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
@@ -18,7 +19,7 @@ internal class EventRaisingServiceRegistrar : IRegisterServices
         if (configOptions.EnableDomainEventQueuing)
             return;
 
-        services.AddSingleton(provider =>
+        services.TryAddScoped(provider =>
         {
             IDispatchEvents eventDispatcher = provider.GetRequiredService<IDispatchEvents>();
             ILogger<DomainEventRaiser> logger = provider.GetRequiredService<ILogger<DomainEventRaiser>>();

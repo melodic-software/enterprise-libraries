@@ -65,6 +65,7 @@ public static class WebApplicationBuilderExtensions
         builder.Services.ConfigureSwagger(builder.Configuration);
 
         // Determines the content type of files.
+        // This is a built-in ASP.NET Core content type provider.
         builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
         // Required to get HttpContext reference in object instances.

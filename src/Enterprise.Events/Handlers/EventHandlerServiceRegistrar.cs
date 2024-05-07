@@ -12,8 +12,20 @@ internal class EventHandlerServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.BeginRegistration<IResolveEventHandlers>()
-            .AddSingleton(provider => new ReflectionEventHandlerResolver(provider))
+        // TODO: Do we want to add configuration to dynamically choose between these registrations?
+        // The less complex and reasonably performant resolver is going to be the dynamic dispatch implementation
+        // We could also go with the implementation that uses reflection - the initial performance hit is heavier, but the caching mitigates that.
+
+        RegistrationContext<IResolveEventHandlers> registrationContext = services
+            .BeginRegistration<IResolveEventHandlers>()
+            .TryAddSingleton(provider => new DynamicDispatchingEventHandlerResolver(provider));
+
+        //registrationContext = services
+        //    .BeginRegistration<IResolveEventHandlers>()
+        //    .TryAddSingleton(provider => new ReflectionEventHandlerResolver(provider));
+        // We add decorators that will improve performance and observability.
+
+        registrationContext
             .WithDecorators((provider, eventHandlerResolver) =>
             {
                 ILogger<CachingEventHandlerResolver> logger = provider.GetRequiredService<ILogger<CachingEventHandlerResolver>>();

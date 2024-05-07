@@ -59,7 +59,7 @@ public class ReflectionEventHandlerResolver : EventHandlerResolverBase
                                           throw new InvalidOperationException("");
 
             IEnumerable<IHandleEvent> eventHandlers = (IEnumerable<IHandleEvent>)(resultProperty.GetValue(task) ??
-                                                                                  new InvalidOperationException("Task result is invalid."));
+                new InvalidOperationException("Task result is invalid."));
 
             return eventHandlers;
         };

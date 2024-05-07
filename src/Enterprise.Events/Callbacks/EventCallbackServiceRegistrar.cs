@@ -17,12 +17,12 @@ internal class EventCallbackServiceRegistrar : IRegisterServices
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
         services.BeginRegistration<IEventCallbackRegistrar>()
-            .Add(provider =>
+            .AddScoped(provider =>
             {
                 ILogger<EventCallbackRegistrar> logger = provider.GetRequiredService<ILogger<EventCallbackRegistrar>>();
                 IEventCallbackRegistrar eventCallbackRegistrar = new EventCallbackRegistrar(logger);
                 return eventCallbackRegistrar;
-            }, ServiceLifetime.Scoped)
+            })
             .WithDecorator((provider, eventCallbackRegistrar) =>
             {
                 ILogger<LoggingEventCallbackRegistrar> logger = provider.GetRequiredService<ILogger<LoggingEventCallbackRegistrar>>();
@@ -31,14 +31,14 @@ internal class EventCallbackServiceRegistrar : IRegisterServices
             });
 
         services.BeginRegistration<IRaiseEventCallbacks>()
-            .Add(provider =>
+            .AddScoped(provider =>
             {
                 IEventCallbackRegistrar callbackRegistrar = provider.GetRequiredService<IEventCallbackRegistrar>();
                 ILogger<EventCallbackRaiser> logger = provider.GetRequiredService<ILogger<EventCallbackRaiser>>();
                 bool allowMultipleExecutions = false;
                 IRaiseEventCallbacks callbackRaiser = new EventCallbackRaiser(callbackRegistrar, logger, allowMultipleExecutions);
                 return callbackRaiser;
-            }, ServiceLifetime.Scoped)
+            })
             .WithDecorator((provider, eventCallbackRaiser) =>
             {
                 ILogger<LoggingEventCallbackRaiser> logger = provider.GetRequiredService<ILogger<LoggingEventCallbackRaiser>>();

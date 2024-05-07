@@ -26,6 +26,7 @@ internal static class EndpointConfigService
         if (!minimalApiConfigOptions.EnableMinimalApiEndpoints)
             return;
 
+        // TODO: Is this the right service scope and type param for <T> here?
         services.AddSingleton(provider =>
         {
             ILogger<PreferMinimalApiEndpointSelectorPolicy> logger = provider.GetRequiredService<ILogger<PreferMinimalApiEndpointSelectorPolicy>>();
