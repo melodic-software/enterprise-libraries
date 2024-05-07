@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Domain.Events.Queuing;
 
-public static class HttpContextDomainEventQueuingConstants
+public static class DomainEventQueuingConstants
 {
     /// <summary>
     /// Key for accessing the domain events queue stored in the items collection of a scoped HTTP request context.
