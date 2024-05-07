@@ -10,5 +10,6 @@ namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 /// They also allow access to domain events that have occurred within the aggregate boundary.
 /// Aggregate root identifiers should be globally unique.
 /// Identifiers of entities inside the aggregate only need to be unique within the aggregate.
+/// Aggregates can contain other aggregate references, but they can only be identifier references, and not aggregate objects.
 /// </summary>
 public interface IAggregateRoot : IEntity, IGetDomainEvents, IClearDomainEvents;

@@ -22,7 +22,7 @@ public class LoggingCommandHandler<T> : CommandHandlerDecoratorBase<T>
     public override async Task HandleAsync(T command, CancellationToken cancellationToken)
     {
         Type commandType = typeof(T);
-        Type innermostHandlerType = InnermostHandler.GetType();
+        Type innermostHandlerType = Innermost.GetType();
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?

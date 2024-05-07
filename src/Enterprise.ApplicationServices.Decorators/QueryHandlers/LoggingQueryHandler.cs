@@ -21,7 +21,7 @@ public class LoggingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<
     public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         Type queryType = typeof(TQuery);
-        Type innermostHandlerType = InnermostHandler.GetType();
+        Type innermostHandlerType = Innermost.GetType();
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?
