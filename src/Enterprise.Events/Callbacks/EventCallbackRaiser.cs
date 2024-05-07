@@ -22,17 +22,17 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
     /// <inheritdoc />
     public void RaiseCallbacks(IEnumerable<IEvent> events)
     {
-        foreach (var @event in events)
+        foreach (IEvent @event in events)
             RaiseCallbacks(@event);
     }
 
     /// <inheritdoc />
     public void RaiseCallbacks<TEvent>(TEvent @event) where TEvent : IEvent
     {
-        var eventType = @event.GetType();
-        var registeredCallbacks = _eventCallbackRegistrar.GetRegisteredCallbacks();
+        Type eventType = @event.GetType();
+        Dictionary<Type, IEnumerable<IEventCallback>> registeredCallbacks = _eventCallbackRegistrar.GetRegisteredCallbacks();
 
-        var callbacksRegistered = registeredCallbacks.ContainsKey(eventType);
+        bool callbacksRegistered = registeredCallbacks.ContainsKey(eventType);
 
         if (!callbacksRegistered)
         {
@@ -40,13 +40,13 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
             return;
         }
 
-        var callbacks = registeredCallbacks[eventType];
+        IEnumerable<IEventCallback> callbacks = registeredCallbacks[eventType];
 
-        var callbackList = callbacks.ToList();
+        List<IEventCallback> callbackList = callbacks.ToList();
 
         _logger.LogDebug("Attempting to raise {CallbackCount} callback(s).", callbackList.Count);
 
-        foreach (var callback in callbackList)
+        foreach (IEventCallback callback in callbackList)
             RaiseCallback(@event, callback);
     }
 

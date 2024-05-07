@@ -30,7 +30,7 @@ public class LoggingEventCallbackRegistrar : IEventCallbackRegistrar
     public Dictionary<Type, IEnumerable<IEventCallback>> GetRegisteredCallbacks()
     {
         _logger.LogDebug("Getting registered callbacks.");
-        var callbacks = _decoratedRegistrar.GetRegisteredCallbacks();
+        Dictionary<Type, IEnumerable<IEventCallback>> callbacks = _decoratedRegistrar.GetRegisteredCallbacks();
         _logger.LogDebug("Callbacks retrieved.");
         return callbacks;
     }

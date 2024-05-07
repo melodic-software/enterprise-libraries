@@ -15,9 +15,9 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
     /// <inheritdoc />
     public bool IsFor(IEvent @event)
     {
-        var genericType = typeof(T);
-        var eventType = @event.GetType();
-        var typesMatch = genericType == eventType;
+        Type genericType = typeof(T);
+        Type eventType = @event.GetType();
+        bool typesMatch = genericType == eventType;
         return typesMatch;
     }
 
@@ -49,7 +49,7 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        var hash = 17;
+        int hash = 17;
         hash = hash * 31 + (Action?.Method.GetHashCode() ?? 0);
         hash = hash * 31 + (Action?.Target?.GetHashCode() ?? 0);
         return hash;
@@ -60,7 +60,7 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
 
-        var areEqual = a.Method.Equals(b.Method) && Equals(a.Target, b.Target);
+        bool areEqual = a.Method.Equals(b.Method) && Equals(a.Target, b.Target);
 
         return areEqual;
     }
