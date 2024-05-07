@@ -3,7 +3,6 @@ using Enterprise.Events.Dispatching;
 using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Callbacks.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using static Enterprise.Reflection.Types.GenericInterfaceTypeService;
@@ -72,20 +71,11 @@ public sealed class MediatREventDispatcher : EventDispatcher
         await PublishAsync(@event);
     }
 
-    private async Task PublishAsync(IEvent @event, IRaiseEventCallbacks? callbackService = null)
+    private async Task PublishAsync(IEvent @event)
     {
-        Type eventType = @event.GetType();
-
         Logger.LogDebug("Executing MediatR publisher.");
         await _publisher.Publish(@event);
-        Logger.LogDebug("Event publication completed");
-
-        if (callbackService == null)
-            return;
-
-        Logger.LogDebug("Raising callbacks for: {EventType}.", eventType.Name);
-        callbackService.RaiseCallbacks(@event);
-        Logger.LogDebug("Callbacks completed for: {EventType}.", eventType.Name);
+        Logger.LogDebug("Event publication completed.");
     }
 
     private Func<IHandleEvent, bool> IsNotMediatRHandler()

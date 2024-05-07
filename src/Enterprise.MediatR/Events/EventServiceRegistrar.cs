@@ -3,7 +3,7 @@ using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Dispatching.Decoration;
 using Enterprise.Events.Handlers.Resolution.Abstract;
-using Enterprise.Events.Raising.Callbacks.Abstractions;
+using Enterprise.Events.Raising.Callbacks.Raising.Abstract;
 using Enterprise.MediatR.Options;
 using Enterprise.Options.Core.Singleton;
 using MediatR;
@@ -40,8 +40,8 @@ internal class EventServiceRegistrar : IRegisterServices
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
-                ILogger<EventCallbackRaisingDecorator> logger = provider.GetRequiredService<ILogger<EventCallbackRaisingDecorator>>();
-                return new EventCallbackRaisingDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
+                ILogger<CallbackRaisingEventDispatchDecorator> logger = provider.GetRequiredService<ILogger<CallbackRaisingEventDispatchDecorator>>();
+                return new CallbackRaisingEventDispatchDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
             });
     }
 }
