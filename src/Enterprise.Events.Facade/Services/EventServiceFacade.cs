@@ -1,6 +1,6 @@
 ﻿using Enterprise.Domain.Events;
 using Enterprise.Domain.Events.Model.Abstract;
-using Enterprise.Domain.Events.Raising;
+using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Callbacks.Model;
 using Enterprise.Events.Facade.Abstract;

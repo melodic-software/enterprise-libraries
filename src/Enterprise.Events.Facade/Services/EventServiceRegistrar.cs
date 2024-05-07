@@ -1,5 +1,5 @@
 ﻿using Enterprise.DI.Core.Registration;
-using Enterprise.Domain.Events.Raising;
+using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Raising.Abstract;

@@ -1,4 +1,4 @@
-﻿using Enterprise.Domain.Events.Raising;
+﻿using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Raising.Abstract;
 
