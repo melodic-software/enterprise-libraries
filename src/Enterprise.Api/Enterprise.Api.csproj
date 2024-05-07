@@ -22,7 +22,7 @@
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.3" />
     <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.73" />
-    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.80" />
+    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.81" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.17" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
@@ -35,7 +35,7 @@
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.80" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.81" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.31" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.30" />

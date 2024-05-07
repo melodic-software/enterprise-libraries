@@ -1,4 +1,4 @@
-﻿using Enterprise.Events.Raising.Callbacks.Registration.Abstract;
+﻿using Enterprise.Events.Callbacks.Registration.Abstract;
 
 namespace Enterprise.ApplicationServices.Core.Standard;
 
