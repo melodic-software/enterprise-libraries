@@ -5,11 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dispatching.Abstract;
 
-public abstract class EventDispatcherBase : IDispatchEvents
+/// <summary>
+/// Base class for event dispatchers that provides common functionalities to dispatch events.
+/// This class handles the resolution, filtering, and processing of event handlers based on the incoming events.
+/// </summary>
+public abstract class EventDispatcherBase : IDispatchQueuedEvents
 {
     protected readonly IGetDecoratedInstance DecoratorService;
     protected readonly ILogger<EventDispatcherBase> Logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EventDispatcherBase"/> class.
+    /// </summary>
+    /// <param name="decoratorService">Service to access decorated instances of handlers.</param>
+    /// <param name="logger">Logger for logging operations within the dispatcher.</param>
     protected EventDispatcherBase(IGetDecoratedInstance decoratorService, ILogger<EventDispatcherBase> logger)
     {
         DecoratorService = decoratorService;
