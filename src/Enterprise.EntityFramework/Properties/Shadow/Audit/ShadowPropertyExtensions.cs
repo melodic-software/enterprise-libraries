@@ -10,7 +10,7 @@ public static class ShadowPropertyExtensions
     {
         foreach (EntityEntry entry in dbContext.ChangeTracker.Entries())
         {
-            var now = TimeProvider.System.GetUtcNow();
+            DateTimeOffset now = TimeProvider.System.GetUtcNow();
             entry.UpdateShadowProperty(dbContext, EntityState.Added, CreationDate, now.DateTime);
             entry.UpdateShadowProperty(dbContext, EntityState.Modified, DateModified, now.DateTime);
         }

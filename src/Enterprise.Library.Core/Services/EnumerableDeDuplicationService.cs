@@ -29,7 +29,7 @@ public static class EnumerableDeDuplicationService
             if (currentValue == null) continue;
 
             Type itemType = prop.PropertyType.GetGenericArguments()[0];
-            var distinctItems = new HashSet<object>(((IEnumerable)currentValue).Cast<object>());
+            HashSet<object> distinctItems = new HashSet<object>(((IEnumerable)currentValue).Cast<object>());
 
             if (prop.PropertyType.IsAssignableFrom(typeof(List<>).MakeGenericType(itemType)))
             {

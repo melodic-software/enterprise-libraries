@@ -19,7 +19,7 @@ public abstract class EventHandlerResolverBase : IResolveEventHandlers
     /// <inheritdoc />
     public Task<IEnumerable<IHandleEvent<T>>> ResolveAsync<T>(T @event) where T : IEvent
     {
-        var handlers = _serviceProvider.GetServices<IHandleEvent<T>>();
+        IEnumerable<IHandleEvent<T>> handlers = _serviceProvider.GetServices<IHandleEvent<T>>();
 
         return Task.FromResult(handlers);
     }

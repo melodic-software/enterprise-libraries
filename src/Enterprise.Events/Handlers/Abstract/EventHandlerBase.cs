@@ -11,7 +11,7 @@ public abstract class EventHandlerBase<T> : IHandleEvent<T> where T : IEvent
         ValidateType(@event, this);
 
         // It's safe to cast since we've validated the type.
-        var typedEvent = (T)@event;
+        T typedEvent = (T)@event;
 
         // Delegate to the typed HandleAsync method.
         return HandleAsync(typedEvent);

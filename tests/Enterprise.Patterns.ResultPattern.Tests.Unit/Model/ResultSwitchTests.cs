@@ -13,7 +13,7 @@ public class ResultSwitchTests
         // Arrange
         Result<string> successResult = Result.Success("success value");
         bool valueActionInvoked = false;
-        var errorActionInvoked = false;
+        bool errorActionInvoked = false;
 
         // Act
         successResult.Switch(

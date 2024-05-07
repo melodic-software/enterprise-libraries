@@ -24,7 +24,7 @@ public class EventRaiser : IRaiseEvents
     {
         Logger.LogDebug("Raising {EventCount} events.", events.Count);
 
-        foreach (var @event in events)
+        foreach (IEvent @event in events)
             await RaiseAsync(@event);
 
         Logger.LogDebug("{EventCount} event(s) raised.", events.Count);

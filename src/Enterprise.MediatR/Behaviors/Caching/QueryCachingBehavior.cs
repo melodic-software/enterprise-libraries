@@ -23,9 +23,9 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
     {
         // This is an example of the "cache aside" pattern.
 
-        var cachedResult = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
+        TResponse? cachedResult = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
 
-        var name = typeof(TRequest).Name;
+        string name = typeof(TRequest).Name;
 
         if (cachedResult is not null)
         {
@@ -35,7 +35,7 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
 
         _logger.LogInformation("Cache miss for {Query}", name);
 
-        var result = await next();
+        TResponse result = await next();
 
         if (result.IsSuccess)
         {

@@ -8,11 +8,11 @@ public static class ConfigurationExtensions
     {
         environmentNames ??= ["Development", "Staging", "Production"];
 
-        foreach (var moduleName in moduleNames)
+        foreach (string moduleName in moduleNames)
         {
             configurationBuilder.AddJsonFile($"modules.{moduleName}.json", false, true);
 
-            foreach (var environmentName in environmentNames)  
+            foreach (string environmentName in environmentNames)  
             {
                 configurationBuilder.AddJsonFile($"modules.{moduleName}.{environmentName}.json", false, true);
             }
