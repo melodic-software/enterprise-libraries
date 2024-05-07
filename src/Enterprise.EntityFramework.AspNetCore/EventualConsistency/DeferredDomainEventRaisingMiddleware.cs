@@ -1,11 +1,11 @@
 ﻿using Enterprise.Domain.Events.Exceptions;
 using Enterprise.Domain.Events.Model.Abstract;
-using Enterprise.Domain.Events.Raising;
 using Enterprise.Patterns.Outbox.Factory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Concurrent;
+using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.EntityFramework.Outbox;
 using Microsoft.Extensions.Logging;
 using static Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventQueueConstants;
@@ -27,7 +27,6 @@ namespace Enterprise.EntityFramework.AspNetCore.EventualConsistency;
 public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext : DbContext
 {
     private readonly RequestDelegate _next;
-    private readonly IRaiseDomainEvents _eventRaiser;
     private readonly EventOutboxMessageFactory _outboxMessageFactory;
     private readonly ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> _logger;
 
@@ -37,15 +36,12 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
     /// <param name="next">The next request delegate in the middleware pipeline.</param>
     /// <param name="outboxMessageFactory"></param>
     /// <param name="logger"></param>
-    /// <param name="eventRaiser"></param>
     public DeferredDomainEventRaisingMiddleware(
         RequestDelegate next,
-        IRaiseDomainEvents eventRaiser,
         EventOutboxMessageFactory outboxMessageFactory,
         ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> logger)
     {
         _next = next;
-        _eventRaiser = eventRaiser;
         _outboxMessageFactory = outboxMessageFactory;
         _logger = logger;
     }
@@ -56,7 +52,8 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
     /// </summary>
     /// <param name="httpContext"></param>
     /// <param name="dbContext"></param>
-    public async Task InvokeAsync(HttpContext httpContext, TDbContext dbContext)
+    /// <param name="eventRaiser"></param>
+    public async Task InvokeAsync(HttpContext httpContext, TDbContext dbContext, IRaiseQueuedDomainEvents eventRaiser)
     {
         _logger.LogInformation("Starting a new database transaction.");
 
@@ -74,14 +71,14 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
         // We pass the transaction into the delegate, so it won't be disposed when the request ends.
         httpContext.Response.OnCompleted(async () =>
         {
-            await ProcessDomainEventsAsync(httpContext, dbContext, transaction);
+            await ProcessDomainEventsAsync(httpContext, dbContext, transaction, eventRaiser);
         });
 
         // Continue processing the next middleware in the pipeline.
         await _next(httpContext);
     }
 
-    private async Task ProcessDomainEventsAsync(HttpContext httpContext, TDbContext dbContext, IDbContextTransaction transaction)
+    private async Task ProcessDomainEventsAsync(HttpContext httpContext, TDbContext dbContext, IDbContextTransaction transaction, IRaiseQueuedDomainEvents eventRaiser)
     {
         try
         {
@@ -98,7 +95,7 @@ public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext :
 
                 while (domainEvents.TryDequeue(out IDomainEvent? nextEvent))
                 {
-                    await _eventRaiser.RaiseAsync(nextEvent);
+                    await eventRaiser.RaiseAsync(nextEvent);
                 }
 
                 _logger.LogInformation("Domain events processed.");

@@ -20,22 +20,22 @@
             The alternative approach is in process, the primary difference being that it has to be processed before the response is returned.
             </summary>
         </member>
-        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Enterprise.Domain.Events.Raising.IRaiseDomainEvents,Enterprise.Patterns.Outbox.Factory.EventOutboxMessageFactory,Microsoft.Extensions.Logging.ILogger{Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware{`0}})">
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Enterprise.Patterns.Outbox.Factory.EventOutboxMessageFactory,Microsoft.Extensions.Logging.ILogger{Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware{`0}})">
             <summary>
             Initializes a new instance of the <see cref="T:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1"/> class.
             </summary>
             <param name="next">The next request delegate in the middleware pipeline.</param>
             <param name="outboxMessageFactory"></param>
             <param name="logger"></param>
-            <param name="eventRaiser"></param>
         </member>
-        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,`0)">
+        <member name="M:Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventRaisingMiddleware`1.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,`0,Enterprise.Domain.Events.Raising.IRaiseDomainEvents)">
             <summary>
             Registers a delegate to raise domain events.
             The added behavior will only execute when the HTTP response has finished being sent to the client.
             </summary>
             <param name="httpContext"></param>
             <param name="dbContext"></param>
+            <param name="eventRaiser"></param>
         </member>
         <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationService.EnsureNoPendingMigrationsAsync``1(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
