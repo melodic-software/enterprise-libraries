@@ -11,8 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.90" />
+    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.100" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.59" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Events\Queuing\Abstract\" />
   </ItemGroup>
 
 </Project>
