@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Domain.Events.Raising;
+﻿namespace Enterprise.Domain.Events.Raising.Abstract;
 
 /// <summary>
 /// Raises domain events recorded by entities and optionally executes callbacks using an external callback service.

@@ -100,6 +100,19 @@
         <member name="M:Enterprise.Events.Callbacks.Registration.EventCallbackRegistrar.ClearCallbacks">
             <inheritdoc />
         </member>
+        <member name="T:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase">
+            <summary>
+            Base class for event dispatchers that provides common functionalities to dispatch events.
+            This class handles the resolution, filtering, and processing of event handlers based on the incoming events.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.#ctor(Enterprise.DesignPatterns.Decorator.Services.Abstract.IGetDecoratedInstance,Microsoft.Extensions.Logging.ILogger{Enterprise.Events.Dispatching.Abstract.EventDispatcherBase})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase"/> class.
+            </summary>
+            <param name="decoratorService">Service to access decorated instances of handlers.</param>
+            <param name="logger">Logger for logging operations within the dispatcher.</param>
+        </member>
         <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>

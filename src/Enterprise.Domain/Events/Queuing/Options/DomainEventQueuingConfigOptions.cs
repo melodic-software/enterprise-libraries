@@ -1,6 +1,6 @@
-﻿namespace Enterprise.Domain.Events.Queuing;
+﻿namespace Enterprise.Domain.Events.Queuing.Options;
 
-public class DomainEventQueueConfigOptions
+public class DomainEventQueuingConfigOptions
 {
     public const string ConfigSectionKey = "Custom:DomainEventQueuing";
 

@@ -1,6 +1,6 @@
 ﻿using Enterprise.Domain.Events.Model.Abstract;
 
-namespace Enterprise.Domain.Events.Raising;
+namespace Enterprise.Domain.Events.Raising.Abstract;
 
 /// <summary>
 /// Raises domain events.

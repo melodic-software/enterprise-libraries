@@ -1,4 +1,5 @@
 ﻿using Enterprise.Domain.Events.Model.Abstract;
+using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Model;
 using Enterprise.Events.Raising;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
 
-public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
+public class DomainEventRaiser : EventRaiser, IRaiseQueuedDomainEvents
 {
     public DomainEventRaiser(IDispatchEvents eventDispatcher, ILogger<EventRaiser> logger)
         : base(eventDispatcher, logger)
