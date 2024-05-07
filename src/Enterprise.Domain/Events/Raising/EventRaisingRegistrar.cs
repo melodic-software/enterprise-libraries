@@ -1,16 +1,23 @@
 ﻿using Enterprise.DI.Core.Registration;
-using Enterprise.Domain.Events.Raising;
+using Enterprise.Domain.Events.Queuing;
 using Enterprise.Events.Dispatching.Abstract;
+using Enterprise.Options.Core.Singleton;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Domain.Events;
+namespace Enterprise.Domain.Events.Raising;
 
-internal class EventServiceRegistrar : IRegisterServices
+internal class EventRaisingRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
+        DomainEventQueueConfigOptions configOptions = OptionsInstanceService.Instance
+            .GetOptionsInstance<DomainEventQueueConfigOptions>(configuration, DomainEventQueueConfigOptions.ConfigSectionKey);
+
+        if (configOptions.EnableDomainEventQueuing)
+            return;
+
         services.AddSingleton(provider =>
         {
             IDispatchEvents eventDispatcher = provider.GetRequiredService<IDispatchEvents>();

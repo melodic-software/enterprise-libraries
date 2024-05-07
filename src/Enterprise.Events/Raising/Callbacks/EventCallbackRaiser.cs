@@ -9,11 +9,13 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
 {
     private readonly IGetRegisteredCallbacks _eventCallbackRegistrar;
     private readonly ILogger<EventCallbackRaiser> _logger;
+    private readonly bool _allowMultipleExecutions;
 
-    public EventCallbackRaiser(IGetRegisteredCallbacks eventCallbackRegistrar, ILogger<EventCallbackRaiser> logger)
+    public EventCallbackRaiser(IGetRegisteredCallbacks eventCallbackRegistrar, ILogger<EventCallbackRaiser> logger, bool? allowMultipleExecutions = null)
     {
         _eventCallbackRegistrar = eventCallbackRegistrar;
         _logger = logger;
+        _allowMultipleExecutions = allowMultipleExecutions ?? false;
     }
 
     /// <inheritdoc />
@@ -41,7 +43,7 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
 
         List<IEventCallback> callbackList = callbacks.ToList();
 
-        _logger.LogDebug("Executing {CallbackCount} callback(s).", callbackList.Count);
+        _logger.LogDebug("Attempting to raise {CallbackCount} callback(s).", callbackList.Count);
 
         foreach (IEventCallback callback in callbackList)
             RaiseCallback(@event, callback);
@@ -49,15 +51,23 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
 
     private void RaiseCallback<TEvent>(TEvent @event, IEventCallback callback) where TEvent : IEvent
     {
-        callback.Execute(@event);
+        if (!_allowMultipleExecutions && callback.HasBeenExecuted)
+        {
+            _logger.LogInformation(
+                "Callback has already been executed and callbacks have been configured to only execute once. " +
+                "Execution is being skipped to avoid duplication."
+            );
 
-        if (callback.HasBeenExecuted)
             return;
+        }
 
-        bool isTypeMismatch = !callback.IsFor(@event);
-
-        string additionalText = isTypeMismatch ? " due to a type mismatch" : string.Empty;
-
-        _logger.LogWarning("Callback has not been executed" + additionalText + ".");
+        if (callback.IsFor(@event))
+        {
+            callback.Execute(@event);
+        }
+        else
+        {
+            _logger.LogWarning("Callback has not been executed due to a type mismatch.");
+        }
     }
 }

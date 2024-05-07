@@ -54,7 +54,6 @@ internal class EventServiceRegistrar : IRegisterServices
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
                 ILogger<EventCallbackRaisingDecorator> logger = provider.GetRequiredService<ILogger<EventCallbackRaisingDecorator>>();
-
                 return new EventCallbackRaisingDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
             });
 
@@ -87,7 +86,8 @@ internal class EventServiceRegistrar : IRegisterServices
             {
                 IEventCallbackRegistrar callbackRegistrar = provider.GetRequiredService<IEventCallbackRegistrar>();
                 ILogger<EventCallbackRaiser> logger = provider.GetRequiredService<ILogger<EventCallbackRaiser>>();
-                IRaiseEventCallbacks callbackRaiser = new EventCallbackRaiser(callbackRegistrar, logger);
+                bool allowMultipleExecutions = false;
+                IRaiseEventCallbacks callbackRaiser = new EventCallbackRaiser(callbackRegistrar, logger, allowMultipleExecutions);
                 return callbackRaiser;
             }, ServiceLifetime.Scoped)
             .WithDecorator((provider, eventCallbackRaiser) =>
