@@ -32,6 +32,8 @@ public class HttpContextDomainEventQueueService : IEnqueueDomainEvents
             return;
         }
 
+        _logger.LogInformation("Attempting to queue {DomainEventCount} domain event(s).", domainEvents.Count);
+
         bool containsQueue = _httpContextAccessor.HttpContext.Items
             .TryGetValue(DomainEventQueueKey, out object? value);
 
@@ -39,9 +41,30 @@ public class HttpContextDomainEventQueueService : IEnqueueDomainEvents
             ? existingDomainEvents
             : new ConcurrentQueue<IDomainEvent>();
 
+        _logger.LogInformation("Domain event queue contains {QueuedDomainEventCount} domain event(s).", domainEventQueue.Count);
+
         foreach (IDomainEvent domainEvent in domainEvents)
-            domainEventQueue.Enqueue(domainEvent);
+        {
+            Enqueue(domainEvent, domainEventQueue);
+        }
 
         _httpContextAccessor.HttpContext.Items[DomainEventQueueKey] = domainEventQueue;
+    }
+
+    private void Enqueue(IDomainEvent domainEvent, ConcurrentQueue<IDomainEvent> domainEventQueue)
+    {
+        using (_logger.BeginScope("Domain Event Type: {DomainEventType}, Domain Event Id: {DomainEventId}", domainEvent.GetType().Name, domainEvent.Id))
+        {
+            bool alreadyQueued = domainEventQueue.Any(x => x.Id == domainEvent.Id);
+
+            if (alreadyQueued)
+            {
+                _logger.LogInformation("Domain event has already been queued.");
+                return;
+            }
+            
+            domainEventQueue.Enqueue(domainEvent);
+            _logger.LogInformation("Domain event has been successfully queued.");
+        }
     }
 }
