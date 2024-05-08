@@ -1,14 +1,15 @@
-﻿using Enterprise.Domain.Events.Exceptions;
+﻿using System.Collections.Concurrent;
+using Enterprise.Domain.Events.Exceptions;
 using Enterprise.Domain.Events.Model.Abstract;
+using Enterprise.Domain.Events.Queuing;
+using Enterprise.Domain.Events.Raising.Abstract;
+using Enterprise.EntityFramework.Outbox;
 using Enterprise.Patterns.Outbox.Factory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Collections.Concurrent;
-using Enterprise.Domain.Events.Raising.Abstract;
-using Enterprise.EntityFramework.Outbox;
 using Microsoft.Extensions.Logging;
-using static Enterprise.EntityFramework.AspNetCore.EventualConsistency.DeferredDomainEventQueueConstants;
+using static Enterprise.Domain.Events.Queuing.DomainEventQueuingConstants;
 
 namespace Enterprise.EntityFramework.AspNetCore.EventualConsistency;
 
@@ -20,26 +21,26 @@ namespace Enterprise.EntityFramework.AspNetCore.EventualConsistency;
 /// In most cases, the handlers deal with side effects and external integration event publications.
 /// Side effects would potentially involve updates to other aggregate roots within the same bounded context.
 /// This could be considered a form of eventual consistency within the context boundary.
-/// This requires registration of <see cref="DeferredDomainEventInterceptor"/> or the separate use of <see cref="DeferredDomainEventQueueService"/>.
+/// This requires registration of <see cref="DomainEventQueuingInterceptor"/> or the separate usage of <see cref="IEnqueueDomainEvents"/>.
 /// Use this OR <see cref="OutboxMessagesInterceptor"/> which internally uses <see cref="OutboxMessagePersistenceService"/>. Do not use BOTH!
 /// The alternative approach is in process, the primary difference being that it has to be processed before the response is returned.
 /// </summary>
-public class DeferredDomainEventRaisingMiddleware<TDbContext> where TDbContext : DbContext
+public class DomainEventRaisingMiddleware<TDbContext> where TDbContext : DbContext
 {
     private readonly RequestDelegate _next;
     private readonly EventOutboxMessageFactory _outboxMessageFactory;
-    private readonly ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> _logger;
+    private readonly ILogger<DomainEventRaisingMiddleware<TDbContext>> _logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DeferredDomainEventRaisingMiddleware{TDbContext}"/> class.
+    /// Initializes a new instance of the <see cref="DomainEventRaisingMiddleware{TDbContext}"/> class.
     /// </summary>
     /// <param name="next">The next request delegate in the middleware pipeline.</param>
     /// <param name="outboxMessageFactory"></param>
     /// <param name="logger"></param>
-    public DeferredDomainEventRaisingMiddleware(
+    public DomainEventRaisingMiddleware(
         RequestDelegate next,
         EventOutboxMessageFactory outboxMessageFactory,
-        ILogger<DeferredDomainEventRaisingMiddleware<TDbContext>> logger)
+        ILogger<DomainEventRaisingMiddleware<TDbContext>> logger)
     {
         _next = next;
         _outboxMessageFactory = outboxMessageFactory;

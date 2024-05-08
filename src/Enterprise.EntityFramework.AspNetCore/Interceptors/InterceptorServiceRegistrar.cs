@@ -1,4 +1,5 @@
 ﻿using Enterprise.DI.Core.Registration;
+using Enterprise.Domain.Events.Queuing;
 using Enterprise.EntityFramework.AspNetCore.Concurrency;
 using Enterprise.EntityFramework.AspNetCore.EventualConsistency;
 using Microsoft.Extensions.Configuration;
@@ -16,10 +17,9 @@ internal class InterceptorServiceRegistrar : IRegisterServices
 
         services.TryAddScoped(provider =>
         {
-            ILogger<DeferredDomainEventInterceptor> logger = provider.GetRequiredService<ILogger<DeferredDomainEventInterceptor>>();
-            DeferredDomainEventQueueService queueService = provider.GetRequiredService<DeferredDomainEventQueueService>();
-
-            return new DeferredDomainEventInterceptor(logger, queueService);
+            ILogger<DomainEventQueuingInterceptor> logger = provider.GetRequiredService<ILogger<DomainEventQueuingInterceptor>>();
+            IEnqueueDomainEvents queueService = provider.GetRequiredService<IEnqueueDomainEvents>();
+            return new DomainEventQueuingInterceptor(queueService, logger);
         });
     }
 }
