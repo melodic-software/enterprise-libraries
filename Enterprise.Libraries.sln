@@ -262,6 +262,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-text-encoding.yaml = .azure\enterprise-text-encoding.yaml
 		.azure\enterprise-time-zones.yaml = .azure\enterprise-time-zones.yaml
 		.azure\enterprise-traceability.yaml = .azure\enterprise-traceability.yaml
+		.azure\enterprise-transactions.yaml = .azure\enterprise-transactions.yaml
 		.azure\enterprise-validation.yaml = .azure\enterprise-validation.yaml
 		.azure\enterprise-value-objects.yaml = .azure\enterprise-value-objects.yaml
 	EndProjectSection
@@ -330,7 +331,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Security.Tests.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Options.Tests.Unit", "tests\Enterprise.Options.Tests.Unit\Enterprise.Options.Tests.Unit.csproj", "{CCE68B1C-5751-40DF-B004-3863967BDE4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Domain.AspNetCore", "src\Enterprise.Domain.AspNetCore\Enterprise.Domain.AspNetCore.csproj", "{21F40188-72D1-476F-A736-5B642BB637EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Domain.AspNetCore", "src\Enterprise.Domain.AspNetCore\Enterprise.Domain.AspNetCore.csproj", "{21F40188-72D1-476F-A736-5B642BB637EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{5D97BBA0-53E9-4446-8A20-6557BCFDC53F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Transactions", "src\Enterprise.Transactions\Enterprise.Transactions.csproj", "{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -710,6 +715,10 @@ Global
 		{21F40188-72D1-476F-A736-5B642BB637EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21F40188-72D1-476F-A736-5B642BB637EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21F40188-72D1-476F-A736-5B642BB637EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -829,6 +838,8 @@ Global
 		{548D4A30-6E6B-4357-A5FA-687F7E9E6E44} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 		{CCE68B1C-5751-40DF-B004-3863967BDE4D} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 		{21F40188-72D1-476F-A736-5B642BB637EF} = {6A973BA5-E538-463F-90ED-3C5A7C39A29C}
+		{5D97BBA0-53E9-4446-8A20-6557BCFDC53F} = {EF615ADD-76DF-4EFD-9E78-7B271BB42034}
+		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370} = {5D97BBA0-53E9-4446-8A20-6557BCFDC53F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}
