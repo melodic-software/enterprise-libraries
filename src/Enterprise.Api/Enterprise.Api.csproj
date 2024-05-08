@@ -25,7 +25,7 @@
     <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.106" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.17" />
-    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.112" />
+    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.114" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.31" />
