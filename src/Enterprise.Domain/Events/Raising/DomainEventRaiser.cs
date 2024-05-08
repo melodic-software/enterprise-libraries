@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
 
-public class DomainEventRaiser : EventRaiser, IRaiseQueuedDomainEvents
+public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
 {
     public DomainEventRaiser(IDispatchEvents eventDispatcher, ILogger<EventRaiser> logger)
         : base(eventDispatcher, logger)
