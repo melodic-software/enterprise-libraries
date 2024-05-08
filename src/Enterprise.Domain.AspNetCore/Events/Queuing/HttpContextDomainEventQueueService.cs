@@ -41,7 +41,7 @@ public class HttpContextDomainEventQueueService : IEnqueueDomainEvents
             ? existingDomainEvents
             : new ConcurrentQueue<IDomainEvent>();
 
-        _logger.LogInformation("Domain event queue contains {QueuedDomainEventCount} domain event(s).", domainEventQueue.Count);
+        _logger.LogInformation("Domain event queue currently contains {QueuedDomainEventCount} domain event(s).", domainEventQueue.Count);
 
         foreach (IDomainEvent domainEvent in domainEvents)
         {

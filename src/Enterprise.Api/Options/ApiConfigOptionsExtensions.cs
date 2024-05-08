@@ -6,6 +6,7 @@ using Enterprise.Api.Swagger.Options;
 using Enterprise.Api.Versioning.Options;
 using Enterprise.AutoMapper.Options;
 using Enterprise.Cors.Options;
+using Enterprise.Domain.Events.Queuing.Options;
 using Enterprise.Hosting.AspNetCore.Options;
 using Enterprise.Logging.AspNetCore.Http;
 using Enterprise.Logging.AspNetCore.Middleware;
@@ -37,6 +38,11 @@ public static class ApiConfigOptionsExtensions
     }
 
     public static void ConfigureCors(this ApiConfigOptions options, Action<CorsConfigOptions> configureOptions)
+    {
+        options.Configure(configureOptions);
+    }
+
+    public static void ConfigureDomainEventQueuing(this ApiConfigOptions options, Action<DomainEventQueuingConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }

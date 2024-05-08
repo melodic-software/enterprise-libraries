@@ -73,10 +73,10 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             options.IgnoreObsoleteActions();
             options.IgnoreObsoleteProperties();
 
-            // every class in the swagger JSON must have a unique schemaId
+            // Every class in the swagger JSON must have a unique schemaId.
             // Swashbuckle tries to just use the class name as a simple schemaId,
-            // however if you have two classes in different namespaces with the same name this will not work
-            // this outputs full assembly qualified names for models under the "schemas" area at the bottom of the Swagger UI
+            // however if you have two classes in different namespaces with the same name this will not work.
+            // This outputs full assembly qualified names for models under the "schemas" area at the bottom of the Swagger UI.
             options.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
             options.DescribeAllParametersInCamelCase();
 
@@ -108,6 +108,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
 
     private static void AddDocumentFilters(SwaggerGenOptions options)
     {
+        options.DocumentFilter<DisabledControllerFilter>();
         options.DocumentFilter<EnvironmentFilter>();
         options.DocumentFilter<PathLowercaseDocumentFilter>();
         options.DocumentFilter<AlphabeticSortingFilter>();

@@ -26,7 +26,7 @@ public class LoggingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?
 
-        using (_logger.BeginScope("Query Handler: {QueryHandlerType}: Query: {QueryType}", innermostHandlerType.Name, queryType.Name))
+        using (_logger.BeginScope("Query Handler: {QueryHandlerType}, Query: {QueryType}", innermostHandlerType.Name, queryType.Name))
         {
             _logger.LogDebug("Executing query.");
             TResponse result = await Decorated.HandleAsync(query, cancellationToken);
