@@ -9,7 +9,7 @@ namespace Enterprise.Events.Dispatching.Abstract;
 /// Base class for event dispatchers that provides common functionalities to dispatch events.
 /// This class handles the resolution, filtering, and processing of event handlers based on the incoming events.
 /// </summary>
-public abstract class EventDispatcherBase : IDispatchQueuedEvents
+public abstract class EventDispatcherBase : IDispatchEvents
 {
     protected readonly IGetDecoratedInstance DecoratorService;
     protected readonly ILogger<EventDispatcherBase> Logger;
