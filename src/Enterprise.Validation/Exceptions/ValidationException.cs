@@ -1,6 +1,6 @@
 ﻿using Enterprise.Validation.Model;
 
-namespace Enterprise.Exceptions;
+namespace Enterprise.Validation.Exceptions;
 
 /// <summary>
 /// This is to primarily be used for data type and format validation.
@@ -9,9 +9,14 @@ namespace Enterprise.Exceptions;
 /// </summary>
 public class ValidationException : Exception
 {
+    public ValidationException() : this([])
+    {
+
+    }
+
     public ValidationException(IReadOnlyCollection<ValidationError>? validationErrors)
     {
-        ValidationErrors = validationErrors ?? new List<ValidationError>();
+        ValidationErrors = validationErrors ?? [];
     }
 
     public IReadOnlyCollection<ValidationError> ValidationErrors { get; }

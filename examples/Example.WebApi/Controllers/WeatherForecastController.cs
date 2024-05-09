@@ -1,6 +1,4 @@
-﻿using Enterprise.Domain.Events.Model.Abstract;
-using Enterprise.Domain.Events.Raising.Abstract;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Example.WebApi.Controllers;
 

@@ -337,6 +337,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transaction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Transactions", "src\Enterprise.Transactions\Enterprise.Transactions.csproj", "{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.DesignPatterns.Tests.Unit", "tests\Enterprise.DesignPatterns.Tests.Unit\Enterprise.DesignPatterns.Tests.Unit.csproj", "{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -719,6 +721,10 @@ Global
 		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -840,6 +846,7 @@ Global
 		{21F40188-72D1-476F-A736-5B642BB637EF} = {6A973BA5-E538-463F-90ED-3C5A7C39A29C}
 		{5D97BBA0-53E9-4446-8A20-6557BCFDC53F} = {EF615ADD-76DF-4EFD-9E78-7B271BB42034}
 		{8DB6EA88-393A-45F9-9C2C-E79BEB6D6370} = {5D97BBA0-53E9-4446-8A20-6557BCFDC53F}
+		{EAF42C60-8D40-4EE9-ADC3-D7D68AF09C5E} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}

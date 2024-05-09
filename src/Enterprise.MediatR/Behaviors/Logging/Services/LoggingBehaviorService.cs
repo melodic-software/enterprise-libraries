@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Logging.Services;
 
-public class LoggingBehaviorService : ILoggingBehaviorService
+internal class LoggingBehaviorService : ILoggingBehaviorService
 {
     public void LogApplicationServiceError(ILogger logger, IEnumerable<IError> errors, string typeName)
     {

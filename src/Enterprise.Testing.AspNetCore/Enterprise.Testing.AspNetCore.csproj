@@ -16,4 +16,8 @@
   	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Testing" Version="1.0.0-preview.16" />
+  </ItemGroup>
+
 </Project>

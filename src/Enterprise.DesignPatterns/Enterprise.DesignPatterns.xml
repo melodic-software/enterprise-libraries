@@ -4,6 +4,105 @@
         <name>Enterprise.DesignPatterns</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Classic.ResponsibilityChain`2.PreHandle(`0)">
+            <summary>
+            Override to add some additional code before calling the next link in the chain.
+            Return true to return early and short circuit the chain of execution.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Classic.ResponsibilityChain`2.PostHandle(`0)">
+            <summary>
+            Override to add some additional code after the request has been handled by the current link in the chain.
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.NextChainLinkDelegate">
+            <summary>
+            Represents an async continuation for the next link to execute in the chain.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.NextChainLinkDelegate`1">
+            <summary>
+            Represents an async continuation for the next link to execute in the chain.
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IChainLink`1">
+            <summary>
+            Represents a single link in a chain of responsibility that processes a request.
+            </summary>
+            <typeparam name="TRequest">The type of the request processed by this link.</typeparam>
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IChainLink`1.ExecuteAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.NextChainLinkDelegate,System.Threading.CancellationToken)">
+            <summary>
+            Executes this link in the chain.
+            </summary>
+            <param name="request">The request to process.</param>
+            <param name="next">The delegate representing the next link in the chain.</param>
+            <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IChainLink`2">
+            <summary>
+            Represents a single link in a chain of responsibility that processes a request and provides a response.
+            </summary>
+            <typeparam name="TRequest">The type of the request processed by this link.</typeparam>
+            <typeparam name="TResponse">The type of the response returned by this link.</typeparam>
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IChainLink`2.ExecuteAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.NextChainLinkDelegate{`1},System.Threading.CancellationToken)">
+            <summary>
+            Executes this link in the chain.
+            </summary>
+            <param name="request">The request to process.</param>
+            <param name="next">The delegate representing the next link in the chain.</param>
+            <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+            <returns>A task that represents the asynchronous operation and contains the response from this link or from subsequent links.</returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IResponsibilityChain`1">
+            <summary>
+            Defines the responsibility for executing the entire chain of links for a request.
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IResponsibilityChain`1.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Executes the entire chain of responsibility for a given request.
+            </summary>
+            <param name="request">The request to process through the chain.</param>
+            <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IResponsibilityChain`2">
+            <summary>
+            Defines the responsibility for executing the entire chain of links for a request with a response.
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.IResponsibilityChain`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Executes the entire chain of responsibility and returns a response.
+            </summary>
+            <param name="request">The request to process through the chain.</param>
+            <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
+            <returns>A task that represents the asynchronous operation and includes the response.</returns>
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.ResponsibilityChain`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.ResponsibilityChain`1.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.ResponsibilityChain`2">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.ResponsibilityChain`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="P:Enterprise.DesignPatterns.Decorator.Model.DecoratorBase`1.Enterprise#DesignPatterns#Decorator#Model#IDecorate#Decorated">
             <inheritdoc />
         </member>

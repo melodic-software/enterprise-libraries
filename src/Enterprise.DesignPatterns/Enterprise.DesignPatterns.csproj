@@ -14,7 +14,12 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.70" />
+    <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Builder\" />
   </ItemGroup>
 
 </Project>

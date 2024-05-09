@@ -4,6 +4,13 @@
         <name>Enterprise.Validation</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.Validation.Exceptions.ValidationException">
+            <summary>
+            This is to primarily be used for data type and format validation.
+            It should not be used for domain level validation errors (business rules).
+            One example of proper use is an application service decorator that uses fluent validation for validating command/query objects.
+            </summary>
+        </member>
         <member name="M:Enterprise.Validation.Extensions.ArgumentExtensions.NotNull``1(``0,System.String)">
             <summary>
             Ensure that the provided value is not null.

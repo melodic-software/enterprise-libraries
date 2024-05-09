@@ -92,6 +92,13 @@
         <member name="M:Enterprise.Domain.Events.Raising.DomainEventRaiser.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
             <inheritdoc />
         </member>
+        <member name="T:Enterprise.Domain.Exceptions.DomainException">
+            <summary>
+            This base implementation can be used in higher layers to handle and map to responses.
+            In the case of a Web API, these can be caught globally and translated to a 422 status code (Unprocessable Entity) response.
+            Exceptions are expensive, so consider using the result pattern over throwing exceptions for business logic / domain validation errors.
+            </summary>
+        </member>
         <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvent(Enterprise.Patterns.ResultPattern.Errors.IError)">
             <summary>
             Translate the error to a <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> event.

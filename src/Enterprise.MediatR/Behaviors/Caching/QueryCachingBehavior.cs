@@ -29,11 +29,11 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
 
         if (cachedResult is not null)
         {
-            _logger.LogInformation("Cache hit for {Query}", name);
+            _logger.LogInformation("Cache hit for {Query}.", name);
             return cachedResult;
         }
 
-        _logger.LogInformation("Cache miss for {Query}", name);
+        _logger.LogInformation("Cache miss for {Query}.", name);
 
         TResponse result = await next();
 
