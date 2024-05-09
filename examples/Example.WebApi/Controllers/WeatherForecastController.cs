@@ -14,25 +14,15 @@ public class WeatherForecastController : ControllerBase
     ];
 
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly IRaiseQueuedDomainEvents _queuedEventRaiser;
-    private readonly IRaiseDomainEvents _eventRaiser;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IRaiseQueuedDomainEvents queuedEventRaiser, IRaiseDomainEvents eventRaiser)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
-        _queuedEventRaiser = queuedEventRaiser;
-        _eventRaiser = eventRaiser;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public async Task<IEnumerable<WeatherForecast>> GetAsync()
+    public IEnumerable<WeatherForecast> Get()
     {
-        var domainEvent = new TestEvent();
-
-        await _eventRaiser.RaiseAsync(domainEvent);
-
-        await _queuedEventRaiser.RaiseAsync(domainEvent);
-
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -40,10 +30,5 @@ public class WeatherForecastController : ControllerBase
                 Summary = _summaries[Random.Shared.Next(_summaries.Length)]
             })
             .ToArray();
-    }
-
-    public class TestEvent : DomainEvent
-    {
-        
     }
 }
