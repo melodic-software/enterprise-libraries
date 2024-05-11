@@ -2,8 +2,8 @@
 using System.Text.Json;
 using Enterprise.Api.ErrorHandling.Constants;
 using Enterprise.Api.ErrorHandling.Dtos;
-using Enterprise.Exceptions;
 using Enterprise.Logging.Core.Events;
+using Enterprise.Validation.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,7 +15,7 @@ public class GlobalErrorHandler
 {
     internal const string ErrorMessage = "Something went wrong.";
 
-    internal static async Task HandleError(HttpContext context, Exception exception, ILogger? logger)
+    internal static async Task HandleErrorAsync(HttpContext context, Exception exception, ILogger? logger)
     {
         if (context.Response.HasStarted)
             return;
@@ -24,10 +24,10 @@ public class GlobalErrorHandler
         // Since exception handlers or the Hellang middleware is more likely to be used I left this as is.
 
         //await HandleError(context, exception, logger);
-        await HandleProblemDetails(context, exception);
+        await HandleProblemDetailsAsync(context, exception);
     }
 
-    private static async Task UseSimpleError(HttpContext context, Exception exception, ILogger logger)
+    private static async Task UseSimpleErrorAsync(HttpContext context, Exception exception, ILogger logger)
     {
         // TODO: Provide functionality to use JSON or XML depending on the request header.
 
@@ -65,7 +65,7 @@ public class GlobalErrorHandler
         logger?.LogError(eventId, exception, exception.Message);
     }
 
-    private static async Task HandleProblemDetails(HttpContext context, Exception exception)
+    private static async Task HandleProblemDetailsAsync(HttpContext context, Exception exception)
     {
         ExceptionDetails exceptionDetails = GetExceptionDetails(exception);
 

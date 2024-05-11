@@ -1,7 +1,7 @@
 ﻿using Enterprise.Validation.Model;
 using FluentValidation;
 using FluentValidation.Results;
-using ValidationException = Enterprise.Exceptions.ValidationException;
+using ValidationException = Enterprise.Validation.Exceptions.ValidationException;
 
 namespace Enterprise.FluentValidation.Services;
 
