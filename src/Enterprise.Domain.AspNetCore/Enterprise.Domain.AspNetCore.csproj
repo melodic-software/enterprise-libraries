@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.119" />
+    <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.127" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.59" />
     <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.120" />
   </ItemGroup>
