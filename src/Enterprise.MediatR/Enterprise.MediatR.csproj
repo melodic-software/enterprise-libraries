@@ -18,7 +18,7 @@
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.77" />
     <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.121" />
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.117" />
-    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.31" />
+    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.127" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.32" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.77" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.72" />
