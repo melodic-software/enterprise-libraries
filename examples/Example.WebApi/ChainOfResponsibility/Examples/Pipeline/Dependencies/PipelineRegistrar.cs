@@ -1,4 +1,6 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.Generic;
+using Enterprise.DI.Core.Registration;
 using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Handlers;
 using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Models;
 

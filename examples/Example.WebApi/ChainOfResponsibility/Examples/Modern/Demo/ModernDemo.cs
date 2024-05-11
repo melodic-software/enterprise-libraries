@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Chains;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Shared;
+using Example.WebApi.ChainOfResponsibility.Examples.Modern.Handlers;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Example.WebApi.ChainOfResponsibility.Examples.Modern.Demo;
@@ -34,7 +37,7 @@ public static class ModernDemo
 
         // Typically you wouldn't need this, but we've registered two examples (classic and modern).
         // Normally you'd register one or the other for the specific request type.
-        IResponsibilityChain<Document> chainOfResponsibility = scope.ServiceProvider
+        IResponsibilityChain<Document>? chainOfResponsibility = scope.ServiceProvider
             .GetServices<IResponsibilityChain<Document>>()
             .FirstOrDefault(x => x.GetType() == typeof(ResponsibilityChain<Document>));
 

@@ -1,4 +1,5 @@
-﻿using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Models;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
+using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Models;
 
 namespace Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Demo;
 

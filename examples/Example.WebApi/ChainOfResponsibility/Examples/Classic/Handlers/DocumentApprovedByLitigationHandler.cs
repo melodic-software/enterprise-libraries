@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Handlers;
 
 namespace Example.WebApi.ChainOfResponsibility.Examples.Classic.Handlers;
 
