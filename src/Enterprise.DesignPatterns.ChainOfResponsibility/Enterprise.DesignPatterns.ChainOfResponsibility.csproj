@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.70" />
+    <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.16" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.16" />
+  </ItemGroup>
+
+</Project>
