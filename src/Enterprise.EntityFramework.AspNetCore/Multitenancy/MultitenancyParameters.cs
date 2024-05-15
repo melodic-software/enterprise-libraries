@@ -24,7 +24,7 @@ public class MultitenancyParameters
         ILogger logger,
         List<Type>? excludedEntityTypes = null)
     {
-        MultitenancyEnabled = configOptions.MultiTenancyEnabled;
+        MultitenancyEnabled = configOptions.MultitenancyEnabled;
         TenantIdService = tenantIdService;
         Logger = logger;
         ExcludedEntityTypes = excludedEntityTypes ?? new();

@@ -22,7 +22,7 @@
             This is typically only if the application has multi-tenancy enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.MultiTenancyEnabled">
+        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.MultitenancyEnabled">
             <summary>
             Determines if multi tenancy related services are registered.
             If this is not enabled, the application will fail when requests for any of these services are made.
