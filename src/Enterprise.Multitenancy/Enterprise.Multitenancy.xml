@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Enterprise.Multitenancy</name>
+    </assembly>
+    <members>
+        <member name="T:Enterprise.Multitenancy.Abstractions.IGetTenantId">
+            <summary>
+            Implementations know how to retrieve the tenant ID.
+            For ASP.NET Core applications, this is typically retrieved from the current request.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Multitenancy.Abstractions.IGetTenantId.GetTenantId">
+            <summary>
+            Get the current tenant identifier.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Multitenancy.Exceptions.TenantIdNotFoundException">
+            <summary>
+            This exception is thrown when a request to get a tenant ID has been made, and it can't be resolved.
+            This is typically only if the application has multi-tenancy enabled.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.MultiTenancyEnabled">
+            <summary>
+            Determines if multi tenancy related services are registered.
+            If this is not enabled, the application will fail when requests for any of these services are made.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.TenantIdRequired">
+            <summary>
+            Determines if a <see cref="T:Enterprise.Multitenancy.Exceptions.TenantIdNotFoundException"/> will be thrown if the tenant ID cannot be located (when requested).
+            </summary>
+        </member>
+    </members>
+</doc>
