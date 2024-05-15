@@ -21,7 +21,7 @@
     <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.2.0" />
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.3" />
-    <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.73" />
+    <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.165" />
     <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.145" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.17" />
@@ -32,7 +32,7 @@
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.80" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.151" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.78" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.162" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.164" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.136" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.131" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />

@@ -6,6 +6,7 @@ using Enterprise.Serilog.MediatR;
 using Enterprise.Serilog.Options;
 using Enterprise.Serilog.Templating;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -65,22 +66,36 @@ public static class SerilogConfigService
 
         return (context, loggerConfig) =>
         {
-            loggerConfig.MinimumLevel.Information();
+            // Apply minimal log level programmatically if not defined in configuration.
+            if (!context.Configuration.GetSection("Serilog:MinimumLevel:Default").Exists())
+            {
+                loggerConfig.MinimumLevel.Is(configOptions.DefaultMinimumLogLevel);
+            }
 
-            OutputTemplateBuilder outputTemplateBuilder = new OutputTemplateBuilder();
-            configOptions.ConfigureOutputTemplate(builder, outputTemplateBuilder);
-            string outputTemplate = outputTemplateBuilder.Build();
+            // Apply enrichments programmatically if not defined in configuration.
+            if (!context.Configuration.GetSection("Serilog:Enrich").Exists())
+            {
+                configOptions.Enrich(loggerConfig);
+            }
 
-            configOptions.Enrich(loggerConfig);
-            configOptions.WriteTo(builder, loggerConfig, outputTemplate);
+            // Apply sinks programmatically if not defined in configuration.
+            if (!context.Configuration.GetSection("Serilog:WriteTo").Exists())
+            {
+                OutputTemplateBuilder outputTemplateBuilder = new OutputTemplateBuilder();
+                configOptions.ConfigureOutputTemplate(builder, outputTemplateBuilder);
+                string outputTemplate = outputTemplateBuilder.Build();
+
+                configOptions.WriteTo(builder, loggerConfig, outputTemplate);
+            }
 
             // This enables the use of attributes to apply masking configuration.
             // Projects will need to reference the Destructurama.Attributes package to apply the attributes.
             loggerConfig.Destructure.UsingAttributes();
-
             configOptions.ConfigureDestructuring?.Invoke(loggerConfig.Destructure);
 
-            // Allow config overrides.
+            // This will allow for specifying values in app settings
+            // The default behavior merges these values with the programmatic configuration, which can result in undesired behavior (particularly with sinks).
+            // We've added checks above to specifically support one or the other.
             loggerConfig.ReadFrom.Configuration(context.Configuration);
 
             SelfLog.Enable(Console.Error);
