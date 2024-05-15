@@ -9,6 +9,12 @@
             Clear out all existing providers that have been registered before configuring Serilog.
             </summary>
         </member>
+        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.DefaultMinimumLogLevel">
+            <summary>
+            Set the default minimum level.
+            NOTE: This will be ignored if a value has been provided in the application settings.
+            </summary>
+        </member>
         <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.ConfigureOutputTemplate">
             <summary>
             Configure the output template using the provided builder.
@@ -17,13 +23,15 @@
         <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.Enrich">
             <summary>
             Configure the Serilog enrichers.
-            Typically, this is something that is better to do in the application settings JSON rather than in code configuration.
+            Typically, this is something that is better to do in the application settings rather than in code configuration.
+            NOTE: This will be ignored if a value has been provided in the application settings.
             </summary>
         </member>
         <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.WriteTo">
             <summary>
             Configure the Serilog sinks.
-            Typically, this is something that is better to do in the application settings JSON rather than in code configuration.
+            Typically, this is something that is better to do in the application settings rather than in code configuration.
+            NOTE: This will be ignored if a value has been provided in the application settings.
             </summary>
         </member>
         <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.ConfigureDestructuring">
@@ -36,6 +44,7 @@
         <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.CustomConfigureLogger">
             <summary>
             Use this to completely override and control all Serilog logger configuration.
+            NOTE: None of the defaults will be provided. This is a complete customization.
             </summary>
         </member>
         <member name="M:Enterprise.Serilog.Templating.OutputTemplateBuilder.SetCustomEnrichmentTemplate(System.String)">

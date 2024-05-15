@@ -27,13 +27,13 @@ public class OutputTemplateBuilder
     {
         // Add timestamp.
         _parts.Add(_useSimpleTimeFormat
-            ? "[{Timestamp:HH:mm:ss}]"
-            : "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}]");
+            ? "[{Timestamp:HH:mm:ss}"
+            : "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}");
 
         // Add log level.
-        _parts.Add("{Level:u3}");
+        _parts.Add("{Level:u3}]");
 
-        // Add custom enricher data if specified.
+        // Add custom enrichment data if specified.
         if (!string.IsNullOrWhiteSpace(_customEnrichmentTemplate))
             _parts.Add(_customEnrichmentTemplate.Trim());
 

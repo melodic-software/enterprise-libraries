@@ -16,7 +16,9 @@ public static class RegistrationMethodInvocationService
         HashSet<Assembly> processedAssemblies = [];
         HashSet<Type> processedTypes = [];
 
-        Assembly[] assemblies = config.GetAssemblies();
+        Assembly[] assemblies = config.GetAssemblies()
+            .OrderBy(x => x.GetName().FullName)
+            .ToArray();
 
         foreach (Assembly assembly in assemblies)
         {

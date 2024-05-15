@@ -1,4 +1,6 @@
-﻿namespace Enterprise.Multitenancy.Options;
+﻿using Enterprise.Multitenancy.Exceptions;
+
+namespace Enterprise.Multitenancy.Options;
 
 public class MultitenancyConfigOptions
 {
@@ -11,7 +13,7 @@ public class MultitenancyConfigOptions
     public bool MultitenancyEnabled { get; set; } = false;
 
     /// <summary>
-    /// Determines if a <see cref="Exceptions.TenantIdNotFoundException"/> will be thrown if the tenant ID cannot be located (when requested).
+    /// Determines if a <see cref="TenantIdNotFoundException"/> will be thrown if the tenant ID cannot be located (when requested).
     /// </summary>
     public bool TenantIdRequired { get; set; } = false;
 }
