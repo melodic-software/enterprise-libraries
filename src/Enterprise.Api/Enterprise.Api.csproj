@@ -32,11 +32,11 @@
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.80" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.151" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.78" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.164" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.166" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.136" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.131" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.163" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.166" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.31" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.78" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.127" />
