@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 // NOTE: This didn't work well with db context pooling.
 
-namespace Enterprise.EntityFramework.AspNetCore.MultiTenancy;
+namespace Enterprise.EntityFramework.AspNetCore.Multitenancy;
 
-internal static class MultiTenancyDbContextExtensions1
+internal static class MultitenancyDbContextExtensions
 {
-    internal static void ConfigureMultitenancy(this ModelBuilder modelBuilder, MultiTenancyParameters1 parameters)
+    internal static void ConfigureMultitenancy(this ModelBuilder modelBuilder, MultitenancyParameters parameters)
     {
         if (!parameters.MultitenancyEnabled)
         {

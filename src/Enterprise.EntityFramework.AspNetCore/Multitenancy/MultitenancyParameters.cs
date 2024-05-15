@@ -2,23 +2,23 @@
 using Enterprise.Multitenancy.Options;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.EntityFramework.AspNetCore.MultiTenancy;
+namespace Enterprise.EntityFramework.AspNetCore.Multitenancy;
 
-public class MultiTenancyParameters1
+public class MultitenancyParameters
 {
     public bool MultitenancyEnabled { get; }
     public IGetTenantId? TenantIdService { get; }
     public IReadOnlyCollection<Type> ExcludedEntityTypes { get; }
     public ILogger? Logger { get; }
 
-    public MultiTenancyParameters1()
+    public MultitenancyParameters()
     {
         MultitenancyEnabled = false;
         TenantIdService = null;
         ExcludedEntityTypes = new List<Type>();
     }
 
-    public MultiTenancyParameters1(
+    public MultitenancyParameters(
         MultiTenancyConfigOptions configOptions,
         IGetTenantId tenantIdService,
         ILogger logger,
