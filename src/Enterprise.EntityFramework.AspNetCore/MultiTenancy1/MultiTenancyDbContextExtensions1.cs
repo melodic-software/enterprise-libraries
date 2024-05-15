@@ -9,11 +9,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.AspNetCore.MultiTenancy;
 
-internal static class MultiTenancyDbContextExtensions
+internal static class MultiTenancyDbContextExtensions1
 {
-    internal static void ConfigureMultiTenancy(this ModelBuilder modelBuilder, MultiTenancyParameters parameters)
+    internal static void ConfigureMultitenancy(this ModelBuilder modelBuilder, MultiTenancyParameters1 parameters)
     {
-        if (!parameters.MultiTenancyEnabled)
+        if (!parameters.MultitenancyEnabled)
         {
             parameters.Logger?.LogInformation("Multi-tenancy is not enabled.");
             return;

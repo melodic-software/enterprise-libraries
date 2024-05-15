@@ -4,27 +4,27 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.AspNetCore.MultiTenancy;
 
-public class MultiTenancyParameters
+public class MultiTenancyParameters1
 {
-    public bool MultiTenancyEnabled { get; }
+    public bool MultitenancyEnabled { get; }
     public IGetTenantId? TenantIdService { get; }
     public IReadOnlyCollection<Type> ExcludedEntityTypes { get; }
     public ILogger? Logger { get; }
 
-    public MultiTenancyParameters()
+    public MultiTenancyParameters1()
     {
-        MultiTenancyEnabled = false;
+        MultitenancyEnabled = false;
         TenantIdService = null;
         ExcludedEntityTypes = new List<Type>();
     }
 
-    public MultiTenancyParameters(
+    public MultiTenancyParameters1(
         MultiTenancyConfigOptions configOptions,
         IGetTenantId tenantIdService,
         ILogger logger,
         List<Type>? excludedEntityTypes = null)
     {
-        MultiTenancyEnabled = configOptions.MultiTenancyEnabled;
+        MultitenancyEnabled = configOptions.MultiTenancyEnabled;
         TenantIdService = tenantIdService;
         Logger = logger;
         ExcludedEntityTypes = excludedEntityTypes ?? new();
