@@ -19,7 +19,7 @@ public class MultitenancyParameters
     }
 
     public MultitenancyParameters(
-        MultiTenancyConfigOptions configOptions,
+        MultitenancyConfigOptions configOptions,
         IGetTenantId tenantIdService,
         ILogger logger,
         List<Type>? excludedEntityTypes = null)

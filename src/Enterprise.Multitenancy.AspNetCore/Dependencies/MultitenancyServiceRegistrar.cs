@@ -18,7 +18,7 @@ internal class MultitenancyServiceRegistrar : IRegisterServices
         MultitenancyConfigOptions configOptions = services
             .RegisterOptions<MultitenancyConfigOptions>(configuration, MultitenancyConfigOptions.ConfigSectionKey);
 
-        if (!configOptions.MultiTenancyEnabled)
+        if (!configOptions.MultitenancyEnabled)
             return;
 
         services.AddScoped(provider =>

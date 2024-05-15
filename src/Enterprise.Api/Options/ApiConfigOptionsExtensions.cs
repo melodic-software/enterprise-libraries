@@ -91,7 +91,7 @@ public static class ApiConfigOptionsExtensions
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureMultitenancy(this ApiConfigOptions options, Action<MultiTenancyConfigOptions> configureOptions)
+    public static void ConfigureMultitenancy(this ApiConfigOptions options, Action<MultitenancyConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
