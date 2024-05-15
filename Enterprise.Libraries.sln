@@ -41,8 +41,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DateTimes", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DesignPatterns", "src\Enterprise.DesignPatterns\Enterprise.DesignPatterns.csproj", "{DE11B4EA-F8C2-4AB1-86FC-2B76E612E21D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI", "src\Enterprise.DI\Enterprise.DI.csproj", "{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI.Core", "src\Enterprise.DI.Core\Enterprise.DI.Core.csproj", "{A04EE684-18D6-42CE-BF99-75EC2B961ACA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Domain", "src\Enterprise.Domain\Enterprise.Domain.csproj", "{E610F166-2493-44EC-A6DA-A4F769047787}"
@@ -201,7 +199,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-design-patterns-decorator.yaml = .azure\enterprise-design-patterns-decorator.yaml
 		.azure\enterprise-design-patterns.yaml = .azure\enterprise-design-patterns.yaml
 		.azure\enterprise-DI-core.yaml = .azure\enterprise-DI-core.yaml
-		.azure\enterprise-DI.yaml = .azure\enterprise-DI.yaml
 		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
 		.azure\enterprise-domain-driven-design-testing.yaml = .azure\enterprise-domain-driven-design-testing.yaml
 		.azure\enterprise-domain-driven-design.yaml = .azure\enterprise-domain-driven-design.yaml
@@ -420,10 +417,6 @@ Global
 		{DE11B4EA-F8C2-4AB1-86FC-2B76E612E21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE11B4EA-F8C2-4AB1-86FC-2B76E612E21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE11B4EA-F8C2-4AB1-86FC-2B76E612E21D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A04EE684-18D6-42CE-BF99-75EC2B961ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A04EE684-18D6-42CE-BF99-75EC2B961ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A04EE684-18D6-42CE-BF99-75EC2B961ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -755,7 +748,6 @@ Global
 		{075D863C-F38E-4430-AC94-052E47ED9BF2} = {BEE0AFD0-C13F-49F2-A654-32EB83623229}
 		{340590BB-6EA0-4782-82CC-97292EBB9843} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 		{DE11B4EA-F8C2-4AB1-86FC-2B76E612E21D} = {C3FA00F0-238E-4C37-9A4F-F36B2D2ED344}
-		{9FD7E2D1-F154-4CD5-86CE-4F275381ECC7} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
 		{A04EE684-18D6-42CE-BF99-75EC2B961ACA} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
 		{E610F166-2493-44EC-A6DA-A4F769047787} = {6A973BA5-E538-463F-90ED-3C5A7C39A29C}
 		{709E78C0-4A9B-4EBC-9AAD-A990C1A00672} = {6A973BA5-E538-463F-90ED-3C5A7C39A29C}
