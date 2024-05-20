@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Api.Client" Version="1.0.0-preview.31" />
+    <PackageReference Include="Melodic.Enterprise.Api.Client" Version="1.0.0-preview.171" />
   </ItemGroup>
 
 </Project>
