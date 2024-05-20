@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Facade.Services;
 
-internal class EventServiceRegistrar : IRegisterServices
+internal sealed class EventServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

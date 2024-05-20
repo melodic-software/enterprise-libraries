@@ -19,7 +19,9 @@ public class ByteArraySerializer : IByteArraySerializer
     public T? Deserialize<T>(byte[]? bytes)
     {
         if (bytes == null)
+        {
             return default;
+        }
 
         // TODO: Do we want to provide JsonSerializerOptions?
         return JsonSerializer.Deserialize<T>(bytes);

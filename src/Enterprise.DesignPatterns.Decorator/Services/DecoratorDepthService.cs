@@ -17,7 +17,9 @@ public class DecoratorDepthService : IDecoratorDepthService
             current = decorator.Decorated;
 
             if (current.Equals(original))
+            {
                 return -1; // Indicates a circular reference.
+            }
         }
 
         return depth;

@@ -70,7 +70,9 @@ public class Calculation<TResult>
     public bool FailedBecause(string reason)
     {
         if (string.IsNullOrWhiteSpace(Reason) || string.IsNullOrWhiteSpace(reason))
+        {
             return false;
+        }
 
         return Reason == reason;
     }

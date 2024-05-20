@@ -19,7 +19,9 @@ internal static class LogFilterConfigService
     private static void ConfigureProduction(IHostApplicationBuilder builder)
     {
         if (!builder.Environment.IsProduction())
+        {
             return;
+        }
 
         // Ensure that trace logging can never be enabled in production.
         // These messages may contain sensitive application data.

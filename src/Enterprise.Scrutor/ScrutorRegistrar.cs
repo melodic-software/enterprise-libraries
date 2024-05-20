@@ -63,11 +63,17 @@ public static class ScrutorRegistrar
         Type attributeType = typeof(TAttribute);
 
         if (attributeType == typeof(SingletonServiceAttribute))
+        {
             lifetimeSelector.WithSingletonLifetime();
+        }
         else if (attributeType == typeof(ScopedServiceAttribute))
+        {
             lifetimeSelector.WithScopedLifetime();
+        }
         else if (attributeType == typeof(TransientServiceAttribute))
+        {
             lifetimeSelector.WithTransientLifetime();
+        }
     }
 
     private static Func<Type, IEnumerable<Type>> SelectWith<TAttribute>() where TAttribute : ServiceRegistrationAttribute
@@ -77,7 +83,9 @@ public static class ScrutorRegistrar
             TAttribute? attribute = serviceType.GetCustomAttribute<TAttribute>();
 
             if (attribute == null)
+            {
                 return Enumerable.Empty<Type>();
+            }
 
             List<Type> serviceTypes = new List<Type>();
 
@@ -90,14 +98,20 @@ public static class ScrutorRegistrar
                 Type? matchingInterface = serviceType.GetInterface("I" + serviceType.Name);
 
                 if (matchingInterface != null)
+                {
                     serviceTypes.Add(matchingInterface);
+                }
             }
 
             if (attribute.AsImplementedInterfaces)
+            {
                 serviceTypes.AddRange(serviceType.GetInterfaces());
+            }
 
             if (attribute.AsSelf)
+            {
                 serviceTypes.Add(serviceType);
+            }
 
             return serviceTypes;
         };

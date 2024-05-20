@@ -28,9 +28,9 @@ public class EventCallbackService : IEventCallbackService
         return _callbackRegistrar.GetRegisteredCallbacks();
     }
 
-    public void RegisterEventCallback<TEvent>(Action<TEvent> eventCallback) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        _callbackRegistrar.RegisterEventCallback(eventCallback);
+        _callbackRegistrar.RegisterEventCallback(action);
     }
 
     public void ClearCallbacks()

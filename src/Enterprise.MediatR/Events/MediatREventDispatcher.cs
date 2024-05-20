@@ -38,7 +38,9 @@ public sealed class MediatREventDispatcher : EventDispatcher
         int filteredCount = filteredHandlers.Count;
 
         if (initialCount == filteredCount)
+        {
             return filteredHandlers;
+        }
 
         int totalFiltered = Math.Abs(initialCount - filteredCount);
         Logger.LogDebug("Filtered out {FilteredCount} handler(s).", totalFiltered);
@@ -92,7 +94,9 @@ public sealed class MediatREventDispatcher : EventDispatcher
             bool implementsMediatRType = ImplementsGenericInterface(eventHandlerType, mediatRInterface);
 
             if (!implementsMediatRType)
+            {
                 return true;
+            }
 
             Logger.LogDebug(
                 "Handler type \"{EventHandlerType}\" implements {MediatRInterface}d and is being filtered out to avoid duplicate handling. " +
@@ -102,7 +106,9 @@ public sealed class MediatREventDispatcher : EventDispatcher
             );
 
             if (!_handlersFiltered)
+            {
                 _handlersFiltered = true;
+            }
 
             return false;
         };

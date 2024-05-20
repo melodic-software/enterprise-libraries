@@ -12,7 +12,7 @@ namespace Enterprise.Api.Startup;
 /// <summary>
 /// Configure services, request pipeline middleware, and startup the API.
 /// </summary>
-public class WebApi
+public static class WebApi
 {
     public static async Task RunAsync(string[] args) => await RunAsync(args, _ => { });
 
@@ -23,9 +23,9 @@ public class WebApi
     /// <param name="configure">A delegate to configure <see cref="ApiConfigOptions"/>.</param>
     public static async Task RunAsync(string[] args, Action<ApiConfigOptions>? configure)
     {
-        Stopwatch stopwatch = Stopwatch.StartNew();
+        var stopwatch = Stopwatch.StartNew();
 
-        ApiConfigOptions options = new ApiConfigOptions(args);
+        var options = new ApiConfigOptions(args);
 
         try
         {

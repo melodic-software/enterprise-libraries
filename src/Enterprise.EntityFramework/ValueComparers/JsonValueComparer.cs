@@ -12,7 +12,7 @@ public class JsonValueComparer<T> : ValueComparer<T>
 {
     public JsonValueComparer(JsonSerializerOptions serializerOptions) : base(
         (l, r) => JsonSerializer.Serialize(l, serializerOptions) == JsonSerializer.Serialize(r, serializerOptions),
-        v => v == null ? 0 : JsonSerializer.Serialize(v, serializerOptions).GetHashCode(),
+        v => object.Equals(v, default(T)) ? 0 : JsonSerializer.Serialize(v, serializerOptions).GetHashCode(),
         v => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(v, serializerOptions), serializerOptions)!)
     {
     }

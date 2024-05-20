@@ -18,7 +18,9 @@ public static class MediatRConfigService
             .GetOptionsInstance<MediatRConfigOptions>(configuration, MediatRConfigOptions.ConfigSectionKey);
 
         if (!options.EnableMediatR)
+        {
             return;
+        }
 
         Action<MediatRServiceConfiguration> configure = options.CustomConfigure ?? DefaultConfigure(options);
 
@@ -43,7 +45,9 @@ public static class MediatRConfigService
             List<BehaviorRegistration> behaviorRegistrations = options.BehaviorRegistrations;
 
             if (!behaviorRegistrations.Any())
+            {
                 behaviorRegistrations = options.DefaultBehaviorRegistrations;
+            }
 
             if (explicitAssembliesSpecified)
             {
@@ -51,7 +55,7 @@ public static class MediatRConfigService
 
                 foreach (Assembly assembly in assemblies)
                 {
-                    PreStartupLogger.Instance.LogInformation(assembly.FullName);
+                    PreStartupLogger.Instance.LogInformation("{AssemblyName}", assembly.FullName);
                 }
             }
 

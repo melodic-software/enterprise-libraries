@@ -14,7 +14,9 @@ public static class OpenTelemetryConfigService
             .GetOptionsInstance<OpenTelemetryConfigOptions>(builder.Configuration, OpenTelemetryConfigOptions.ConfigKeyName);
 
         if (!openTelemetryConfigOptions.EnableOpenTelemetry)
+        {
             return;
+        }
 
         // https://opentelemetry.io/docs/instrumentation/net/
 

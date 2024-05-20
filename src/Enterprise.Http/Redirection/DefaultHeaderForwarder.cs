@@ -7,13 +7,17 @@ public static class DefaultHeaderForwarder
         foreach (KeyValuePair<string, IEnumerable<string>> header in originalRequest.Headers)
         {
             if (!ShouldHeaderBeForwarded(header.Key))
+            {
                 continue;
+            }
 
             redirectRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
         }
 
         if (originalRequest.Content == null)
+        {
             return;
+        }
 
         redirectRequest.Content ??= new ByteArrayContent(Array.Empty<byte>());
 

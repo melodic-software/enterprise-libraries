@@ -1,4 +1,5 @@
-﻿using Enterprise.Api.Controllers.Options;
+﻿using System.Globalization;
+using Enterprise.Api.Controllers.Options;
 using Enterprise.Api.Swagger.DocumentFilters;
 using Enterprise.Api.Swagger.Extensions;
 using Enterprise.Api.Swagger.OperationFilters;
@@ -149,7 +150,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         options.OrderActionsBy(apiDesc =>
         {
             string? controller = apiDesc.ActionDescriptor.RouteValues["controller"];
-            string? httpMethod = apiDesc.HttpMethod?.ToLower();
+            string? httpMethod = apiDesc.HttpMethod?.ToLower(CultureInfo.InvariantCulture);
             int indexOf = Array.IndexOf(methodsOrder, httpMethod);
             string sortKey = $"{controller}_{indexOf}";
             return sortKey;

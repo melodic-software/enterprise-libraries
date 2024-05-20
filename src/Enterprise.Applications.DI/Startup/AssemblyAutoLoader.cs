@@ -35,7 +35,7 @@ public static class AssemblyAutoLoader
             return cachedAssemblies;
         }
 
-        Stopwatch stopwatch = Stopwatch.StartNew();
+        var stopwatch = Stopwatch.StartNew();
 
         Assembly[]? loadedAssemblies;
 
@@ -53,9 +53,12 @@ public static class AssemblyAutoLoader
         {
             // Attempt to load all solution assemblies as a fallback to ensure system stability when specific assemblies fail to load.
             PreStartupLogger.Instance.LogError(ex, "An exception occurred while auto loading assemblies. Falling back to loading all solution assemblies.");
-            
+
             // This is less performant, but we can safely fall back to this if needed.
-            loadedAssemblies = AssemblyLoader.LoadSolutionAssemblies(filterPredicate ??= _ => true);
+            filterPredicate ??= name => true;
+            //filterPredicate ??= AssemblyFilterPredicates.NoFilter;
+
+            loadedAssemblies = AssemblyLoader.LoadSolutionAssemblies(filterPredicate);
         }
 
         // Cache the loaded assemblies.
@@ -63,9 +66,9 @@ public static class AssemblyAutoLoader
 
         stopwatch.Stop();
 
-        PreStartupLogger.Instance.LogInformation($"Assembly loading completed in {stopwatch.ElapsedMilliseconds} ms.");
+        PreStartupLogger.Instance.LogInformation("Assembly loading completed in {Milliseconds} ms.", stopwatch.ElapsedMilliseconds);
 
-        loadedAssemblies = loadedAssemblies.OrderBy(x => x.FullName).ToArray();
+        loadedAssemblies = [.. loadedAssemblies.OrderBy(x => x.FullName)];
 
         return loadedAssemblies;
     }

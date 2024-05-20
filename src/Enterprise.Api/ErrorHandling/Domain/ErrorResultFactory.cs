@@ -13,7 +13,9 @@ public static class ErrorResultFactory
     public static IResult ToResult(IReadOnlyCollection<IError> errors, HttpContext httpContext, ProblemDetailsFactory problemDetailsFactory)
     {
         if (!errors.Any())
+        {
             throw new InvalidOperationException("No errors were provided to create an IResult.");
+        }
 
         errors = ErrorDedupeService.DedupeErrors(errors).ToList();
 
@@ -30,7 +32,9 @@ public static class ErrorResultFactory
     {
         // We can't write anything in the response body for 204.
         if (statusCode == StatusCodes.Status204NoContent)
+        {
             return TypedResults.NoContent();
+        }
 
         IEnumerable<IError> meaningfulErrors = scopedErrors.GetMeaningful().ToList();
         IDictionary<string, string[]> errorDictionary = meaningfulErrors.ToDictionary(x => x.Code ?? string.Empty, x => new[] { x.Message });
@@ -38,7 +42,9 @@ public static class ErrorResultFactory
         ValidationProblemDetails problemDetails = factory.CreateValidationProblemDetails(httpContext, errorDictionary, statusCode);
 
         if (Activity.Current?.Id != null)
+        {
             problemDetails.Extensions[ProblemDetailsConstants.TraceIdExtensionKey] = Activity.Current.Id;
+        }
 
         // TODO: Make this conditional?
         problemDetails.Instance = httpContext.Request.Path;

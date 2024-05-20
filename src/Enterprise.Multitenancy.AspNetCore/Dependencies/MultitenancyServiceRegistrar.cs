@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Enterprise.Multitenancy.AspNetCore.Dependencies;
 
-internal class MultitenancyServiceRegistrar : IRegisterServices
+internal sealed class MultitenancyServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
@@ -19,7 +19,9 @@ internal class MultitenancyServiceRegistrar : IRegisterServices
             .RegisterOptions<MultitenancyConfigOptions>(configuration, MultitenancyConfigOptions.ConfigSectionKey);
 
         if (!configOptions.MultitenancyEnabled)
+        {
             return;
+        }
 
         services.AddScoped(provider =>
         {

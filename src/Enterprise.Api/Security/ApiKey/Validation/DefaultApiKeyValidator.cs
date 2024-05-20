@@ -18,7 +18,9 @@ public class DefaultApiKeyValidator : IValidateApiKey
         string? apiKey = configuration[ConfigConstants.ApiKeyConfigKeyName];
 
         if (!string.IsNullOrWhiteSpace(apiKey))
+        {
             _apiKeys.Add(apiKey);
+        }
     }
 
     public bool RequestContainsValidApiKey(HttpContext httpContext)
@@ -42,7 +44,9 @@ public class DefaultApiKeyValidator : IValidateApiKey
         bool containsAuthHeader = httpContext.Request.Headers.ContainsKey(HeaderNames.Authorization);
 
         if (!containsAuthHeader)
+        {
             return false;
+        }
 
         string authHeader = httpContext.Request.Headers[HeaderNames.Authorization].ToString();
 

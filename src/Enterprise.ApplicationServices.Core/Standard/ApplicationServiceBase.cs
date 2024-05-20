@@ -22,9 +22,9 @@ public abstract class ApplicationServiceBase : IApplicationService
     }
 
     /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> eventCallback) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        _eventService.RegisterEventCallback(eventCallback);
+        _eventService.RegisterEventCallback(action);
     }
 
     /// <inheritdoc />

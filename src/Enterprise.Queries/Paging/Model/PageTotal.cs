@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Services;
+﻿using System.Globalization;
+using Enterprise.Queries.Paging.Services;
 
 namespace Enterprise.Queries.Paging.Model;
 
@@ -15,6 +16,6 @@ public class PageTotal
 
     public override string ToString()
     {
-        return Value.ToString();
+        return Value.ToString(CultureInfo.InvariantCulture);
     }
 }

@@ -33,7 +33,7 @@ internal static class MetadataLoadContextService
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToArray();
 
-        PathAssemblyResolver resolver = new PathAssemblyResolver(allAssemblyPaths);
+        var resolver = new PathAssemblyResolver(allAssemblyPaths);
 
         return new MetadataLoadContext(resolver);
     }
@@ -48,21 +48,23 @@ internal static class MetadataLoadContextService
         List<string> sharedFrameworkAssemblies = [];
 
         if (!sharedFrameworkDirectories.Any())
+        {
             return sharedFrameworkAssemblies.ToArray();
+        }
 
         string metadataLoadContextName = nameof(MetadataLoadContext);
 
-        PreStartupLogger.Instance.LogDebug($"Adding shared framework directories for {metadataLoadContextName}.");
+        PreStartupLogger.Instance.LogDebug("Adding shared framework directories for {MetadataLoadContextName}.", metadataLoadContextName);
 
         foreach (string? sharedFrameworkDirectory in sharedFrameworkDirectories)
         {
             if (string.IsNullOrWhiteSpace(sharedFrameworkDirectory))
             {
-                PreStartupLogger.Instance.LogWarning($"Shared framework directory is invalid for {metadataLoadContextName}: {sharedFrameworkDirectory}");
+                PreStartupLogger.Instance.LogWarning("Shared framework directory is invalid for {MetadataLoadContextName}: {SharedFrameworkDirectory}", metadataLoadContextName, sharedFrameworkDirectory);
                 continue;
             }
 
-            PreStartupLogger.Instance.LogDebug($"Adding shared framework assembly directory for {metadataLoadContextName}: {sharedFrameworkDirectory}");
+            PreStartupLogger.Instance.LogDebug("Adding shared framework assembly directory for {MetadataLoadContextName}: {SharedFrameworkDirectory}", metadataLoadContextName, sharedFrameworkDirectory);
             string[] sharedFrameworkDirectoryAssemblies = Directory.GetFiles(sharedFrameworkDirectory, DllSearchPattern);
             sharedFrameworkAssemblies.AddRange(sharedFrameworkDirectoryAssemblies);
         }

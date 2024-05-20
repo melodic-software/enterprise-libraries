@@ -12,7 +12,9 @@ internal static class MiddlewareAnalysisConfigService
     public static void InsertAnalysisStartupFilter(this WebApplicationBuilder builder)
     {
         if (!builder.Environment.IsDevelopment())
+        {
             return;
+        }
 
         // Insert the AnalysisStartupFilter as the first IStartupFilter in the container.
         // https://andrewlock.net/understanding-your-middleware-pipeline-in-dotnet-6-with-the-middleware-analysis-package
@@ -22,7 +24,9 @@ internal static class MiddlewareAnalysisConfigService
     public static IDisposable? GetDiagnosticListener(WebApplication app)
     {
         if (!app.Environment.IsDevelopment())
+        {
             return null;
+        }
 
         // Subscribe to the listener with the SubscribeWithAdapter() extension method.
         DiagnosticListener listener = app.Services.GetRequiredService<DiagnosticListener>();

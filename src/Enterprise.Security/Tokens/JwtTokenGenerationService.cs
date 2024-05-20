@@ -19,7 +19,9 @@ public class JwtTokenGenerationService
         DateTime? notBefore, DateTime? expiration, SigningCredentials signingCredentials)
     {
         if (expiration <= notBefore)
+        {
             throw new Exception("Expiration date must be after the \"not before\" date");
+        }
 
         JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
             issuer,

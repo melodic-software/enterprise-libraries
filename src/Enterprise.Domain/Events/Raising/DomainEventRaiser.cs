@@ -9,7 +9,7 @@ namespace Enterprise.Domain.Events.Raising;
 
 public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
 {
-    public DomainEventRaiser(IDispatchEvents eventDispatcher, ILogger<EventRaiser> logger)
+    public DomainEventRaiser(IDispatchEvents eventDispatcher, ILogger<DomainEventRaiser> logger)
         : base(eventDispatcher, logger)
     {
     }
@@ -18,7 +18,9 @@ public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
     public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities)
     {
         foreach (IGetDomainEvents entity in entities)
+        {
             await RaiseAsync(entity);
+        }
     }
 
     /// <inheritdoc />

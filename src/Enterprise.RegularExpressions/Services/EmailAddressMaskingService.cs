@@ -11,13 +11,17 @@ public static class EmailAddressMaskingService
     public static string MaskEmailAddress(string emailAddress)
     {
         if (string.IsNullOrWhiteSpace(emailAddress))
+        {
             return emailAddress;
+        }
 
         int indexOf = emailAddress.IndexOf(AtSymbol, Ordinal);
 
         if (indexOf == -1)
+        {
             return emailAddress;
-            
+        }
+
         string maskCandidate = emailAddress[..indexOf];
 
         if (maskCandidate.Length <= 2)

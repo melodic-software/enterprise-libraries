@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Enterprise.Api.Hypermedia;
 
-public class HypermediaLinkService
+public static class HypermediaLinkService
 {
     public static HypermediaLinkDto CreateSelfLink(string? href)
     {
@@ -29,7 +29,7 @@ public class HypermediaLinkService
     public static HypermediaLinkDto CreateLink(IUrlHelper urlHelper, string routeName, object? values, string rel, string method)
     {
         string? href = urlHelper.Link(routeName, values);
-        HypermediaLinkDto linkModel = new HypermediaLinkDto(href, rel, method);
+        var linkModel = new HypermediaLinkDto(href, rel, method);
         return linkModel;
     }
 }

@@ -20,15 +20,15 @@ public static class FormatterPrinter
                 {
                     MediaTypeCollection mediaTypes = inputFormatter.SupportedMediaTypes;
 
-                    string message = $"Registered Input Formatter: {formatter.GetType().Name}, " +
-                                     $"Supported Media Types: {string.Join(", ", mediaTypes)}";
-
-                    PreStartupLogger.Instance.LogDebug(message);
+                    PreStartupLogger.Instance.LogDebug(
+                        "Registered Input Formatter: {FormatterTypeName}, Supported Media Types: {MediaTypes}",
+                        formatter.GetType().Name, string.Join(", ", mediaTypes)
+                    );
                 }
                 else
                 {
                     // For formatters not derived from InputFormatter, just print the type name
-                    PreStartupLogger.Instance.LogDebug($"Registered Input Formatter: {formatter.GetType().Name}");
+                    PreStartupLogger.Instance.LogDebug("Registered Input Formatter: {FormatterTypeName}", formatter.GetType().Name);
                 }
             }
         });
@@ -46,15 +46,15 @@ public static class FormatterPrinter
                 {
                     MediaTypeCollection mediaTypes = outputFormatter.SupportedMediaTypes;
 
-                    string message = $"Registered Output Formatter: {formatter.GetType().Name}, " +
-                                     $"Supported Media Types: {string.Join(", ", mediaTypes)}";
-
-                    PreStartupLogger.Instance.LogDebug(message);
+                    PreStartupLogger.Instance.LogDebug(
+                        "Registered Output Formatter: {FormatterTypeName}, Supported Media Types: {MediaTypes}",
+                        formatter.GetType().Name, string.Join(", ", mediaTypes)
+                    );
                 }
                 else
                 {
                     // For formatters not derived from OutputFormatter, just print the type name.
-                    PreStartupLogger.Instance.LogDebug($"Registered Output Formatter: {formatter.GetType().Name}");
+                    PreStartupLogger.Instance.LogDebug("Registered Output Formatter: {FormatterTypeName}", formatter.GetType().Name);
                 }
             }
         });

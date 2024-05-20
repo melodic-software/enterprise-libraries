@@ -19,14 +19,18 @@ public class ErrorHandlersController : ControllerBase
     public IActionResult HandleDevelopmentError([FromServices] IWebHostEnvironment hostEnvironment)
     {
         if (hostEnvironment.IsProduction())
+        {
             return NotFound();
+        }
 
         // We can customize pre-production error responses.
 
         IExceptionHandlerFeature? exceptionHandlerFeature = HttpContext.Features.Get<IExceptionHandlerFeature>();
 
         if (exceptionHandlerFeature == null)
+        {
             return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
         return Problem(
             detail: exceptionHandlerFeature.Error.StackTrace,

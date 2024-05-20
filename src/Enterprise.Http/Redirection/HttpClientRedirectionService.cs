@@ -15,44 +15,41 @@ public static class HttpClientRedirectionService
 
         HttpResponseMessage response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
         int redirectCount = 0;
-
-        try
+        while (response.IsRedirect() && redirectCount < maxRedirects)
         {
-            while (response.IsRedirect() && redirectCount < maxRedirects)
+            Uri? redirectUri = response.Headers.Location;
+
+            if (redirectUri == null)
             {
-                Uri? redirectUri = response.Headers.Location;
-
-                if (redirectUri == null)
-                    throw new InvalidOperationException("Redirect location is null.");
-
-                if (!redirectUri.IsAbsoluteUri)
-                    redirectUri = new Uri(request.RequestUri!, redirectUri);
-
-                HttpRequestMessage originalRequest = request;
-
-                request = new HttpRequestMessage(originalRequest.Method, redirectUri);
-
-                forwardHeaders(originalRequest, request);
-
-                if (response.StatusCode == HttpStatusCode.SeeOther)
-                {
-                    request.Method = HttpMethod.Get;
-                    request.Content = null;
-                }
-
-                response.Dispose();
-                response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-                redirectCount++;
+                throw new InvalidOperationException("Redirect location is null.");
             }
 
-            if (redirectCount >= maxRedirects)
-                throw new InvalidOperationException("Maximum redirect limit reached.");
-        }
-        catch
-        {
+            if (!redirectUri.IsAbsoluteUri)
+            {
+                redirectUri = new Uri(request.RequestUri!, redirectUri);
+            }
+
+            using HttpRequestMessage originalRequest = request;
+            using var newRequest = new HttpRequestMessage(originalRequest.Method, redirectUri);
+
+            forwardHeaders(originalRequest, newRequest);
+
+            if (response.StatusCode == HttpStatusCode.SeeOther)
+            {
+                newRequest.Method = HttpMethod.Get;
+                newRequest.Content = null;
+            }
+
             response.Dispose();
-            throw;
+            response = await httpClient.SendAsync(newRequest, HttpCompletionOption.ResponseHeadersRead);
+
+            request = newRequest;
+            redirectCount++;
+        }
+
+        if (redirectCount >= maxRedirects)
+        {
+            throw new InvalidOperationException("Maximum redirect limit reached.");
         }
 
         return response;

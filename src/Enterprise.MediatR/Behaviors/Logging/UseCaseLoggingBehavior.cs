@@ -12,15 +12,15 @@ public class UseCaseLoggingBehavior<TRequest, TResponse>
     where TRequest : IUseCase
     where TResponse : Result
 {
-    private readonly ILogger<TRequest> _logger;
+    private readonly ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> _logger;
     private readonly ILoggingBehaviorService _loggingBehaviorService;
 
-    public UseCaseLoggingBehavior(ILogger<TRequest> logger) : this(logger, new LoggingBehaviorService())
+    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> logger) : this(logger, new LoggingBehaviorService())
     {
 
     }
 
-    public UseCaseLoggingBehavior(ILogger<TRequest> logger, ILoggingBehaviorService loggingBehaviorService)
+    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> logger, ILoggingBehaviorService loggingBehaviorService)
     {
         _logger = logger;
         _loggingBehaviorService = loggingBehaviorService;

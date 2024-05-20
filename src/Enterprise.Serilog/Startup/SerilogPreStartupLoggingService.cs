@@ -1,4 +1,5 @@
-﻿using Enterprise.Logging.Core.Loggers;
+﻿using System.Globalization;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Serilog.Templating;
 using Serilog;
 
@@ -8,14 +9,17 @@ public static class SerilogPreStartupLoggingService
 {
     public static void ConfigurePreStartupLogger()
     {
-        OutputTemplateBuilder outputTemplateBuilder = new OutputTemplateBuilder();
+        var outputTemplateBuilder = new OutputTemplateBuilder();
         outputTemplateBuilder.UseSimpleTimeFormat();
         string defaultOutputTemplate = outputTemplateBuilder.Build();
 
         // This is a temporary logger that can be used on application startup.
         ILogger logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
-            .WriteTo.Console(outputTemplate: defaultOutputTemplate)
+            .WriteTo.Console(
+                outputTemplate: defaultOutputTemplate,
+                formatProvider: CultureInfo.InvariantCulture
+            )
             .CreateLogger();
 
         // Set the global Serilog logger.

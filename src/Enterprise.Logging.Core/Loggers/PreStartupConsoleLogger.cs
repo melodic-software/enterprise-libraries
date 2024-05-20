@@ -6,7 +6,7 @@ namespace Enterprise.Logging.Core.Loggers;
 /// A simple console logger used by the PreStartupLogger to log messages before the main logger is available.
 /// Supports a basic form of structured logging.
 /// </summary>
-internal class PreStartupConsoleLogger : ILogger
+internal sealed class PreStartupConsoleLogger : ILogger
 {
     private readonly string _categoryName;
     private readonly LogLevel _minLogLevel;
@@ -28,7 +28,9 @@ internal class PreStartupConsoleLogger : ILogger
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
         if (!IsEnabled(logLevel))
+        {
             return;
+        }
 
         string formattedMessage = formatter(state, exception);
 

@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Enterprise.Api.Validation.Filters;
+
 // https://code-maze.com/aspnetcore-modelstate-validation-web-api/
 
-public class ModelStateValidationFilter : ActionFilterAttribute
+public sealed class ModelStateValidationFilterAttribute : ActionFilterAttribute
 {
     // TODO: Move to constants file.
     private const string DtoSuffix = "Dto";
@@ -14,22 +15,22 @@ public class ModelStateValidationFilter : ActionFilterAttribute
     private readonly List<string> _typeNameSuffixes = [];
     private readonly List<Type> _apiDataContractTypes = [];
 
-    public ModelStateValidationFilter(List<string> typeNameSuffixes)
+    public ModelStateValidationFilterAttribute(List<string> typeNameSuffixes)
     {
         _typeNameSuffixes = typeNameSuffixes;
     }
 
-    public ModelStateValidationFilter(List<Type> apiDataContractTypes)
+    public ModelStateValidationFilterAttribute(List<Type> apiDataContractTypes)
     {
         _apiDataContractTypes = apiDataContractTypes;
     }
 
-    public ModelStateValidationFilter(Type apiDataContractType)
+    public ModelStateValidationFilterAttribute(Type apiDataContractType)
     {
         _apiDataContractTypes = [apiDataContractType];
     }
 
-    public ModelStateValidationFilter()
+    public ModelStateValidationFilterAttribute()
     {
         _typeNameSuffixes = [DtoSuffix];
     }
@@ -55,7 +56,9 @@ public class ModelStateValidationFilter : ActionFilterAttribute
 
         // If a result value has been set, we cannot call the next filter / delegate.
         if (context.Result != null)
+        {
             return;
+        }
 
         ActionExecutedContext result = await next();
 
@@ -69,20 +72,22 @@ public class ModelStateValidationFilter : ActionFilterAttribute
 
         IDictionary<string, object?> actionArguments = context.ActionArguments;
 
-        List<KeyValuePair<string, object?>> apiDataContractArguments = actionArguments
+        var apiDataContractArguments = actionArguments
             .Where(x =>
             {
                 Type? paramType = x.Value?.GetType();
 
                 if (paramType == null)
+                {
                     return false;
+                }
 
                 bool isApiDataContract = IsApiDataContract(paramType);
 
                 return isApiDataContract;
             }).ToList();
 
-        List<object?> apiDataContractValues = apiDataContractArguments.Select(x => x.Value).ToList();
+        var apiDataContractValues = apiDataContractArguments.Select(x => x.Value).ToList();
 
         if (apiDataContractValues.Any(x => x is null))
         {
@@ -100,30 +105,25 @@ public class ModelStateValidationFilter : ActionFilterAttribute
         
 
         if (context.ModelState.IsValid)
+        {
             return;
+        }
 
         // See comments above on validation handling. Under specific (default) circumstances, we don't have to check model state.
         // However, we've set "SuppressModelStateInvalidFilter" to false so a 422 to can be returned instead of the default 400 (which is less accurate).
         // OR if we want more control over how problem details results are generated.
         // Normally these would be returned as ValidationProblem().
-
         // TODO: Do we want to use 422 or 400 here?
         // In most cases this will be due to DTO validation which shouldn't deal with business rules.
         // Validation here should be simple data type / format validation.
+        context.Result = context.Controller is ControllerBase @base
+            ? ValidationProblemService.CreateValidationProblem(@base)
+            : new BadRequestObjectResult(context.ModelState);
 
-        if (context.Controller is ControllerBase @base)
-        {
-            context.Result = ValidationProblemService.CreateValidationProblem(@base);
-        }
-        else
-        {
-            context.Result = new BadRequestObjectResult(context.ModelState);
-            //context.Result = new UnprocessableEntityObjectResult(context.ModelState);
-        }
-
+        //context.Result = new UnprocessableEntityObjectResult(context.ModelState);
     }
 
-    protected virtual bool IsApiDataContract(Type paramType)
+    private bool IsApiDataContract(Type paramType)
     {
         return _typeNameSuffixes.Any(s => paramType.Name.EndsWith(s, StringComparison.OrdinalIgnoreCase)) || 
                _apiDataContractTypes.Any(t => t.IsAssignableFrom(paramType));

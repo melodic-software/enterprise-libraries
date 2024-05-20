@@ -3,7 +3,7 @@ using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Handlers.Decoration.Abstract;
 using Enterprise.Events.Model;
 
-namespace Enterprise.Events.Decorators.EventHandlers;
+namespace Enterprise.Events.Handlers.Decoration;
 
 public class NullEventValidationEventHandler<T> : EventHandlerDecoratorBase<T> where T : IEvent
 {

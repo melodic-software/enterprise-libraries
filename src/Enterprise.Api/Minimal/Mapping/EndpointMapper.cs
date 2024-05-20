@@ -22,7 +22,9 @@ public static class EndpointMapper
         List<TypeInfo> types = [];
 
         foreach (Assembly assembly in assemblies)
+        {
             types.AddRange(GetAssignableConcreteTypes(assembly, typeof(IMapEndpoints)));
+        }
 
         MapEndpoints(app, types);
     }

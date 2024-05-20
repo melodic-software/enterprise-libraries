@@ -13,7 +13,9 @@ public class DecoratorChainValidator : IDecoratorChainValidator
         while (current is IDecorate<T> decorator)
         {
             if (!visited.Add(current))
+            {
                 return false; // Circular reference detected.
+            }
 
             current = decorator.Decorated;
         }

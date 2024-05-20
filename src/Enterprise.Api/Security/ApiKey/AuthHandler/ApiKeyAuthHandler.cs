@@ -25,7 +25,9 @@ public class ApiKeyAuthHandler : AuthenticationHandler<ApiKeyAuthSchemeOptions>
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         if (!_apiKeyValidator.RequestContainsValidApiKey(Context))
+        {
             return Task.FromResult(AuthenticateResult.Fail("API Key is not valid."));
+        }
 
         // TODO: Implement claims transformation.
         // There may not be context of a user here since it's just an API key.

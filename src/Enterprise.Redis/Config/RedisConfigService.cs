@@ -19,7 +19,9 @@ public static class RedisConfigService
             .GetOptionsInstance<RedisConfigOptions>(configuration, RedisConfigOptions.ConfigSectionKey);
 
         if (!configOptions.EnableRedis)
+        {
             return;
+        }
 
         string? redisConnectionString = configuration.GetConnectionString(configOptions.RedisConnectionStringName);
 

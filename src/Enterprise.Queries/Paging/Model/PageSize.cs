@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Constants;
+﻿using System.Globalization;
+using Enterprise.Queries.Paging.Constants;
 
 namespace Enterprise.Queries.Paging.Model;
 
@@ -15,10 +16,14 @@ public class PageSize
         pageSize ??= defaultPageSize;
 
         if (pageSize < minPageSize)
+        {
             pageSize = defaultPageSize.Value;
+        }
 
         if (pageSize > maxPageSize)
+        {
             pageSize = maxPageSize.Value;
+        }
 
         Value = pageSize.Value;
     }
@@ -30,6 +35,6 @@ public class PageSize
 
     public override string ToString()
     {
-        return Value.ToString();
+        return Value.ToString(CultureInfo.InvariantCulture);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Logging.Core.Diagnostics;
+
 // TODO: This mixes diagnostic / timing behavior and logging.
 // It might be best to split these out in the future,
 // and create a setup so the two are working together but have no knowledge of each other (direct coupling).
@@ -14,9 +15,10 @@ public class TimedOperation : IDisposable
 {
     private readonly ILogger _logger;
     private readonly LogLevel _logLevel;
-    private readonly string _messageTemplate;
     private readonly object?[] _args;
     private readonly long _startingTimestamp;
+
+    private const string DurationMessageTemplate = "{MessageTemplate} completed in {OperationDurationMs} ms.";
 
     /// <summary>
     /// Initializes a new instance of the TimedOperation class, starting the timing process.
@@ -29,11 +31,13 @@ public class TimedOperation : IDisposable
     {
         _logger = logger;
         _logLevel = logLevel;
-        _messageTemplate = messageTemplate;
 
         // Initialize the arguments array with an extra slot for the operation duration.
-        _args = new object[args.Length + 1];
-        Array.Copy(args, _args, args.Length); // Copy existing arguments into the new array.
+        _args = new object[args.Length + 2];
+        _args[0] = messageTemplate;
+
+        // Copy existing arguments into the new array.
+        Array.Copy(args, 0, _args, 1, args.Length); 
 
         _startingTimestamp = Stopwatch.GetTimestamp();
     }
@@ -47,6 +51,6 @@ public class TimedOperation : IDisposable
         _args[^1] = delta.TotalMilliseconds;
 
         // Log the operation's duration using the provided log level and message template.
-        _logger.Log(_logLevel, $"{_messageTemplate} completed in {{OperationDurationMs}}ms", _args);
+        _logger.Log(_logLevel, DurationMessageTemplate, _args);
     }
 }

@@ -37,39 +37,38 @@ public static class ConflictingActionResolver
         bool isOnlyControllers = !nonControllerDescriptors.Any();
         bool isMixed = nonControllerDescriptors.Any() && controllerDescriptors.Any();
 
-        if (controllersEnabled && isMixed)
+        if (controllersEnabled)
         {
-            return GetFirst(nonControllerDescriptors, logger);
-        }
-
-        if (isMixed)
-        {
-            logger.LogInformation(
-                "At least one non controller descriptor has been included." +
-                " This is likely a minimal API endpoint."
-            );
-
-            if (controllersEnabled)
+            if (isMixed)
             {
-                logger.LogInformation("Selecting first controller descriptor since controllers have been enabled.");
-                return GetFirst(controllerDescriptors, logger);
-            }
-            
-            if (nonControllerDescriptors.Count != 1)
-            {
-                logger.LogInformation(
-                    "There is more than one non controller descriptor." +
-                    " Selecting the first since controllers have been disabled."
-                );
-
+                logger.LogInformation("Selecting first non-controller descriptor since controllers are enabled and there are mixed descriptors.");
                 return GetFirst(nonControllerDescriptors, logger);
             }
 
-            logger.LogInformation("Returning non controller descriptor.");
+            if (isOnlyControllers)
+            {
+                logger.LogInformation("Returning first controller descriptor since controllers are enabled.");
+                return GetFirst(controllerDescriptors, logger);
+            }
+        }
+        else
+        {
+            if (isMixed)
+            {
+                logger.LogInformation("Selecting first controller descriptor since controllers are disabled and there are mixed descriptors.");
+                return GetFirst(controllerDescriptors, logger);
+            }
 
-            return nonControllerDescriptors.First();
+            if (isOnlyControllers)
+            {
+                return GetFirst(apiDescriptions, logger);
+            }
+
+            logger.LogInformation("Returning first non-controller descriptor since controllers are disabled.");
+            return GetFirst(nonControllerDescriptors, logger);
         }
 
+        // Default to returning the first description if none of the above conditions are met
         return GetFirst(apiDescriptions, logger);
     }
 
@@ -79,15 +78,17 @@ public static class ConflictingActionResolver
         // [RequestHeaderMatchesMediaType] attribute (action/route constraint).
 
         ApiDescription firstDescription = apiDescriptions.First();
-        List<ApiDescription> otherDescriptions = apiDescriptions.Skip(1).ToList();
+        var otherDescriptions = apiDescriptions.Skip(1).ToList();
 
-        List<ApiResponseType> otherSupportedResponseTypes = otherDescriptions
+        var otherSupportedResponseTypes = otherDescriptions
             .SelectMany(x => x.SupportedResponseTypes.Where(a => a.StatusCode == Status200OK))
             .ToList();
 
         if (!otherSupportedResponseTypes.Any())
+        {
             return firstDescription;
-        
+        }
+
         logger.LogInformation(
             "Adding additional response types from the other descriptors." +
             " These are supported response types that return a 200 OK status code."

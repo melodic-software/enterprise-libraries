@@ -24,7 +24,9 @@ internal static class EndpointConfigService
             .GetOptionsInstance<MinimalApiConfigOptions>(configuration, MinimalApiConfigOptions.ConfigSectionKey);
 
         if (!minimalApiConfigOptions.EnableMinimalApiEndpoints)
+        {
             return;
+        }
 
         // TODO: Is this the right service scope and type param for <T> here?
         services.AddSingleton(provider =>
@@ -75,7 +77,7 @@ internal static class EndpointConfigService
 
             foreach (Assembly assembly in endpointAssemblies)
             {
-                PreStartupLogger.Instance.LogInformation(assembly.FullName);
+                PreStartupLogger.Instance.LogInformation("{AssemblyName}", assembly.FullName);
             }
         }
 

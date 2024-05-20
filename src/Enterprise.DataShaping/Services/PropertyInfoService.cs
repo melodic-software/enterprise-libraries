@@ -26,7 +26,9 @@ public static class PropertyInfoService
             string[] trimmedPropertyNames = propertySplit.Select(x => x.Trim()).ToArray();
 
             foreach (string propertyName in trimmedPropertyNames)
+            {
                 AddPropertyInfo(sourceType, propertyName, bindingFlags, propertyInfos);
+            }
         }
 
         return propertyInfos;
@@ -37,7 +39,9 @@ public static class PropertyInfoService
         PropertyInfo? propertyInfo = sourceType.GetProperty(propertyName, bindingFlags);
 
         if (propertyInfo == null)
+        {
             throw new Exception($"Property {propertyName} wasn't found on {sourceType}");
+        }
 
         propertyInfos.Add(propertyInfo);
     }

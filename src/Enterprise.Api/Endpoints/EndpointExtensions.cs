@@ -18,7 +18,9 @@ public static class EndpointExtensions
     {
         // Confirm it's a RouteEndpoint (common for all routed endpoints including minimal APIs).
         if (endpoint is not RouteEndpoint routeEndpoint)
+        {
             return false;
+        }
 
         // Check for the absence of ApiControllerAttribute (common in MVC controllers).
         bool doesNotHaveControllerAttribute = routeEndpoint.Metadata.GetMetadata<ApiControllerAttribute>() == null;

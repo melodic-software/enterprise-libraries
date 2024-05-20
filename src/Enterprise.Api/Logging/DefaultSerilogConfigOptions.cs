@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
+using System.Reflection;
 using Enterprise.Serilog.Options;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -30,7 +31,9 @@ public class DefaultSerilogConfigOptions : SerilogConfigOptions
             string? assemblyName = assembly.GetName().Name;
 
             if (string.IsNullOrWhiteSpace(assemblyName))
+            {
                 throw new Exception("The assembly name is invalid!");
+            }
 
             loggerConfig
                 .Enrich.WithProperty("Application", assemblyName)
@@ -57,9 +60,10 @@ public class DefaultSerilogConfigOptions : SerilogConfigOptions
                 .WriteTo.Console(
                     restrictedToMinimumLevel: LogEventLevel.Information,
                     outputTemplate: outputTemplate,
-                    theme: AnsiConsoleTheme.Code
+                    theme: AnsiConsoleTheme.Code,
+                    formatProvider: CultureInfo.InvariantCulture
                 )
-                .WriteTo.Debug();
+                .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture);
         };
     }
 }

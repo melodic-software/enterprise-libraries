@@ -17,7 +17,9 @@ internal static class HttpLoggingConfigurer
             .GetOptionsInstance<HttpLoggingConfigOptions>(configuration, HttpLoggingConfigOptions.ConfigSectionKey);
 
         if (!configOptions.EnableHttpLogging)
+        {
             return;
+        }
 
         // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-logging
 
@@ -40,7 +42,9 @@ internal static class HttpLoggingConfigurer
         HttpLoggingConfigOptions configOptions = app.Services.GetRequiredService<IOptions<HttpLoggingConfigOptions>>().Value;
 
         if (!configOptions.EnableHttpLogging)
+        {
             return;
+        }
 
         app.UseHttpLogging();
     }

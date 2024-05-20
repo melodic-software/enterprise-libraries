@@ -19,7 +19,9 @@ public sealed class OutboxMessagesInterceptor : SaveChangesInterceptor
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
         if (eventData.Context is not null)
+        {
             InsertOutboxMessages(eventData.Context);
+        }
 
         return base.SavingChanges(eventData, result);
     }
@@ -30,7 +32,9 @@ public sealed class OutboxMessagesInterceptor : SaveChangesInterceptor
         CancellationToken cancellationToken = default)
     {
         if (eventData.Context is not null)
+        {
             InsertOutboxMessages(eventData.Context);
+        }
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }

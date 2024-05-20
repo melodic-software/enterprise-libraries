@@ -7,7 +7,9 @@ public static class ConfigurationBinder
     public static void Bind<TOptions>(TOptions currentValue, IConfigurationSection? configurationSection)
     {
         if (configurationSection == null)
+        {
             return;
+        }
 
         // This will overwrite any property values with those found in the config section.
 

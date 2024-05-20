@@ -12,7 +12,7 @@ public class ResultElseTests
     {
         // Arrange
         IError error = Error.Validation("Sample error.");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         Result<string> result = failedResult.Else(errors => errors.First());
@@ -28,7 +28,7 @@ public class ResultElseTests
     {
         // Arrange
         string expectedValue = "Success";
-        Result<string> successResult = Result.Success(expectedValue);
+        var successResult = Result.Success(expectedValue);
 
         // Act
         Result<string> result = successResult.Else(errors => errors.First());
@@ -47,7 +47,8 @@ public class ResultElseTests
             Error.Validation("Original error"),
             Error.Validation("New error")
         ];
-        Result<string> failedResult = Result.Failure<string>(errors);
+
+        var failedResult = Result.Failure<string>(errors);
 
         // Act
         Result<string> result = failedResult.Else(es => new List<IError> { Error.Validation("Processed error") });
@@ -63,7 +64,7 @@ public class ResultElseTests
     {
         // Arrange
         IError newError = Error.Validation("Override error");
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Original error"));
+        var failedResult = Result.Failure<string>(Error.Validation("Original error"));
 
         // Act
         Result<string> result = failedResult.Else(newError);
@@ -78,7 +79,7 @@ public class ResultElseTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         Result<string> result = failedResult.Else(errors => "Recovered value");
@@ -92,7 +93,7 @@ public class ResultElseTests
     public void Else_WithValue_ReturnsValueWhenFailed()
     {
         // Arrange
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Error"));
+        var failedResult = Result.Failure<string>(Error.Validation("Error"));
 
         // Act
         Result<string> result = failedResult.Else("Default value");
@@ -106,7 +107,7 @@ public class ResultElseTests
     public async Task ElseAsync_WithFuncReturningTaskT_ReturnsNewValueWhenFailed()
     {
         // Arrange
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Error"));
+        var failedResult = Result.Failure<string>(Error.Validation("Error"));
 
         // Act
         Result<string> result = await failedResult.ElseAsync(errors => Task.FromResult("Async recovered value"));
@@ -121,7 +122,7 @@ public class ResultElseTests
     {
         // Arrange
         IError newError = Error.Validation("Async error");
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Original error"));
+        var failedResult = Result.Failure<string>(Error.Validation("Original error"));
 
         // Act
         Result<string> result = await failedResult.ElseAsync(errors => Task.FromResult(newError));
@@ -136,7 +137,7 @@ public class ResultElseTests
     {
         // Arrange
         List<IError> errors = [Error.Validation("Original error")];
-        Result<string> failedResult = Result.Failure<string>(errors);
+        var failedResult = Result.Failure<string>(errors);
 
         // Act
         Result<string> result = await failedResult.ElseAsync(errors => Task.FromResult<IEnumerable<IError>>(new IError[] { Error.Validation("Processed async error") }));
@@ -150,8 +151,8 @@ public class ResultElseTests
     public async Task ElseAsync_WithTaskIError_ReturnsErrorResultWhenFailed()
     {
         // Arrange
-        Task<IError> newErrorTask = Task.FromResult<IError>(Error.Validation("Async task error"));
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Original error"));
+        var newErrorTask = Task.FromResult<IError>(Error.Validation("Async task error"));
+        var failedResult = Result.Failure<string>(Error.Validation("Original error"));
 
         // Act
         Result<string> result = await failedResult.ElseAsync(newErrorTask);
@@ -165,8 +166,8 @@ public class ResultElseTests
     public async Task ElseAsync_WithTaskT_ReturnsValueWhenFailed()
     {
         // Arrange
-        Task<string> recoveredValueTask = Task.FromResult("Async task value");
-        Result<string> failedResult = Result.Failure<string>(Error.Validation("Error"));
+        var recoveredValueTask = Task.FromResult("Async task value");
+        var failedResult = Result.Failure<string>(Error.Validation("Error"));
 
         // Act
         Result<string> result = await failedResult.ElseAsync(recoveredValueTask);

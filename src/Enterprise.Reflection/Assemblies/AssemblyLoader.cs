@@ -39,7 +39,9 @@ public static class AssemblyLoader
         Assembly? entryAssembly = Assembly.GetEntryAssembly();
 
         if (entryAssembly != null)
+        {
             assembliesToCheck.Enqueue(entryAssembly);
+        }
 
         while (assembliesToCheck.Any())
         {
@@ -50,12 +52,16 @@ public static class AssemblyLoader
             foreach (AssemblyName assemblyName in referencedAssemblyNames)
             {
                 if (loadedAssemblyNames.Contains(assemblyName.FullName))
+                {
                     continue;
+                }
 
                 bool doNotLoadAssembly = !filterPredicate?.Invoke(assemblyName) ?? false;
 
                 if (doNotLoadAssembly)
+                {
                     continue;
+                }
 
                 Assembly assembly = Assembly.Load(assemblyName);
                 assembliesToCheck.Enqueue(assembly);

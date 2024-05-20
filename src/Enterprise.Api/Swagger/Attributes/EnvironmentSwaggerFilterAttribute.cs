@@ -5,7 +5,7 @@
 /// when the application is running in specific environments.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class EnvironmentSwaggerFilterAttribute : Attribute
+public sealed class EnvironmentSwaggerFilterAttribute : Attribute
 {
     public string Environment { get; }
 

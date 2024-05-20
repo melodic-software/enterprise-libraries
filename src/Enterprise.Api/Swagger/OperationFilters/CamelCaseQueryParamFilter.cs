@@ -8,12 +8,17 @@ public class CamelCaseQueryParamFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        if (operation.Parameters == null) return;
+        if (operation.Parameters == null)
+        {
+            return;
+        }
 
         foreach (OpenApiParameter? parameter in operation.Parameters)
         {
             if (parameter.In != ParameterLocation.Query)
+            {
                 continue;
+            }
 
             string camelCaseName = JsonNamingPolicy.CamelCase.ConvertName(parameter.Name);
 

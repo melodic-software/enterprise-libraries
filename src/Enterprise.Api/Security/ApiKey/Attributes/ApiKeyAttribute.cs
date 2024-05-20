@@ -11,7 +11,7 @@ namespace Enterprise.Api.Security.ApiKey.Attributes;
 // All keys could exist in configuration, or a database.
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
-public class ApiKeyAttribute : Attribute, IAuthorizationFilter
+public sealed class ApiKeyAttribute : Attribute, IAuthorizationFilter
 {
     private readonly IValidateApiKey _apiKeyValidator;
 
@@ -28,10 +28,14 @@ public class ApiKeyAttribute : Attribute, IAuthorizationFilter
         HttpContext httpContext = context.HttpContext;
 
         if (_apiKeyValidator.RequestContainsValidApiKey(httpContext))
+        {
             return;
+        }
 
         if (SwaggerPageRequested(httpContext))
+        {
             return;
+        }
 
         context.Result = new UnauthorizedResult();
     }

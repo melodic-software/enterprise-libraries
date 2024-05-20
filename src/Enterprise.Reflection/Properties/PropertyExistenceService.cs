@@ -10,7 +10,9 @@ public class PropertyExistenceService : IPropertyExistenceService
         BindingFlags bindingFlags = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance)
     {
         if (string.IsNullOrEmpty(properties))
+        {
             return true;
+        }
 
         Type sourceType = typeof(T);
 

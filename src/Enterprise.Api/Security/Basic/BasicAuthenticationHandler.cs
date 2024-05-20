@@ -23,14 +23,17 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Headers.ContainsKey("Authorization"))
+        if (!Request.Headers.TryGetValue("Authorization", out StringValues authorizationHeader))
+        {
             return Task.FromResult(AuthenticateResult.Fail("Authorization header is missing"));
+        }
 
-        StringValues authorizationHeader = Request.Headers["Authorization"];
-        AuthenticationHeaderValue authorizationHeaderValue = AuthenticationHeaderValue.Parse(authorizationHeader!);
+        var authorizationHeaderValue = AuthenticationHeaderValue.Parse(authorizationHeader!);
 
         if (string.IsNullOrWhiteSpace(authorizationHeaderValue.Parameter))
+        {
             return Task.FromResult(AuthenticateResult.Fail("Authorization header parameter is invalid"));
+        }
 
         if (authorizationHeaderValue.Scheme == "Bearer")
         {
@@ -45,13 +48,17 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         byte[] credentialByes = Convert.FromBase64String(authorizationHeaderValue.Parameter);
         string credentials = Encoding.UTF8.GetString(credentialByes);
 
-        if (!credentials.Contains(":"))
+        if (!credentials.Contains(':'))
+        {
             return Task.FromResult(AuthenticateResult.Fail("Authorization scheme is invalid"));
+        }
 
         string[] credentialsSplit = credentials.Split(':');
 
         if (credentialsSplit.Length != 2)
+        {
             return Task.FromResult(AuthenticateResult.Fail("Authorization scheme is invalid"));
+        }
 
         string username = credentialsSplit[0];
         string password = credentialsSplit[1];
@@ -60,9 +67,9 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         if (username == "admin" && password == "password")
         {
             Claim[] claims = [new Claim(ClaimTypes.NameIdentifier, username)];
-            ClaimsIdentity identity = new ClaimsIdentity(claims, Scheme.Name);
-            ClaimsPrincipal principal = new ClaimsPrincipal(identity);
-            AuthenticationTicket ticket = new AuthenticationTicket(principal, Scheme.Name);
+            var identity = new ClaimsIdentity(claims, Scheme.Name);
+            var principal = new ClaimsPrincipal(identity);
+            var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
             return Task.FromResult(AuthenticateResult.Success(ticket));
         }

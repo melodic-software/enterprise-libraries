@@ -18,7 +18,9 @@ public static class AutoMapperConfigService
             .GetOptionsInstance<AutoMapperConfigOptions>(configuration, AutoMapperConfigOptions.ConfigSectionKey);
 
         if (!options.EnableAutoMapper)
+        {
             return;
+        }
 
         Assembly[] assemblies = options.Assemblies.ToArray();
         bool explicitAssembliesSpecified = assemblies.Any();
@@ -37,7 +39,7 @@ public static class AutoMapperConfigService
 
             foreach (Assembly assembly in assemblies)
             {
-                PreStartupLogger.Instance.LogInformation(assembly.FullName);
+                PreStartupLogger.Instance.LogInformation("{AssemblyName}", assembly.FullName);
             }
         }
 
@@ -49,8 +51,10 @@ public static class AutoMapperConfigService
         // We have profile mappings in this assembly that are not application specific.
         Assembly enterpriseMappingAssembly = typeof(AutoMapperConfigService).Assembly;
 
-        if (allAssemblies.All(a => a.FullName != enterpriseMappingAssembly.FullName))
+        if (Array.TrueForAll(allAssemblies, a => a.FullName != enterpriseMappingAssembly.FullName))
+        {
             allAssemblies = [..allAssemblies, enterpriseMappingAssembly];
+        }
 
         return allAssemblies;
     }

@@ -14,7 +14,9 @@ public static class QuartzConfigService
             .GetOptionsInstance<QuartzConfigOptions>(configuration, QuartzConfigOptions.ConfigSectionKey);
 
         if (!quartzConfigOptions.EnableQuartz)
+        {
             return;
+        }
 
         services.AddQuartz();
         services.AddQuartzHostedService(options =>

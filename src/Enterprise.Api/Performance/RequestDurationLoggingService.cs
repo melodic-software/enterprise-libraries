@@ -8,8 +8,6 @@ internal static class RequestDurationLoggingService
 {
     internal static void LogRequestDuration(Stopwatch stopWatch, ILogger logger)
     {
-        string message = $"Request completed in {stopWatch.ElapsedMilliseconds}ms";
-
-        logger.LogInformation(message);
+        logger.LogInformation("Request completed in {ElapsedMilliseconds} ms.", stopWatch.ElapsedMilliseconds);
     }
 }

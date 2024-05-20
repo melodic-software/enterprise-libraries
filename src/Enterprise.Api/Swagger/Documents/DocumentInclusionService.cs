@@ -21,10 +21,14 @@ public static class DocumentInclusionService
 
         // should be present in every version
         if (actionApiVersionModel.IsApiVersionNeutral)
+        {
             return true;
+        }
 
         if (actionApiVersionModel.NoVersionAvailable())
+        {
             return true;
+        }
 
         List<ApiVersion> matchingVersions;
 

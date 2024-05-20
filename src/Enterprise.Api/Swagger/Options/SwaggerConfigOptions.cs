@@ -61,17 +61,17 @@ public class SwaggerConfigOptions
     /// <summary>
     /// Determines if the OpenAPiOAuthFlow.Implicit flow is enabled.
     /// </summary>
-    public bool EnableImplicitFlow { get; set; } = false;
+    public bool EnableImplicitFlow { get; set; }
 
     /// <summary>
     /// Determines if the OpenAPiOAuthFlow.ClientCredentials flow is enabled.
     /// </summary>
-    public bool EnableClientCredentialsFlow { get; set; } = false;
+    public bool EnableClientCredentialsFlow { get; set; }
 
     /// <summary>
     /// Determines if the OpenAPiOAuthFlow.Password flow is enabled.
     /// </summary>
-    public bool EnablePasswordFlow { get; set; } = false;
+    public bool EnablePasswordFlow { get; set; }
 
     /// <summary>
     /// Use Proof Key for Code Exchange.

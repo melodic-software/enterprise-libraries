@@ -12,7 +12,9 @@ public static class DbContextResolutionService
         AsyncServiceScope? scope = serviceScopeFactory?.CreateAsyncScope();
 
         if (!scope.HasValue)
+        {
             return new DbContextResolutionResult<T>(null, scope);
+        }
 
         DbContextResolutionResult<T> result = await GetResultAsync<T>(scope.Value);
 
@@ -33,7 +35,9 @@ public static class DbContextResolutionService
         T? dbContext = scope.ServiceProvider.GetService<T>();
 
         if (dbContext != null)
+        {
             return new DbContextResolutionResult<T>(dbContext, scope);
+        }
 
         // If a direct instance has not been registered, we can attempt to resolve via a factory.
         IDbContextFactory<T>? factory = scope.ServiceProvider.GetService<IDbContextFactory<T>>();

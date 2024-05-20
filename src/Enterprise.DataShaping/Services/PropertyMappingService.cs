@@ -9,7 +9,9 @@ public static class PropertyMappingService
         PropertyInfo? propertyInfo = sourceType.GetProperty(propertyName, bindingFlags);
 
         if (propertyInfo == null)
+        {
             throw new Exception($"Property {propertyName} wasn't found on {typeof(TSource)}");
+        }
 
         MapProperty(sourceObject, propertyInfo, dictionary);
     }

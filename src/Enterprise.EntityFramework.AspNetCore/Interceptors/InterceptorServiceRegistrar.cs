@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.AspNetCore.Interceptors;
 
-internal class InterceptorServiceRegistrar : IRegisterServices
+internal sealed class InterceptorServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

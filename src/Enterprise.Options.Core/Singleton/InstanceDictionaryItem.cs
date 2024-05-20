@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Options.Core.Singleton;
 
-internal class OptionsInstanceDictionaryItem
+internal sealed class OptionsInstanceDictionaryItem
 {
     public object? Options { get; }
     public bool IsLocked { get; }

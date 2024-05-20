@@ -51,7 +51,9 @@ public class TenantRequestHeaderService : IGetTenantId
             _logger.LogWarning("The request does not contain a {TenantRequestHeader} header.", TenantRequestHeader);
 
             if (_tenantIdRequired)
+            {
                 throw new TenantIdNotFoundException();
+            }
         }
 
         LogReturn();

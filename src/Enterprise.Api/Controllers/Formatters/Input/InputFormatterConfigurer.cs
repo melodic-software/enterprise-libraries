@@ -28,7 +28,9 @@ public class InputFormatterConfigurer : IConfigureOptions<MvcOptions>
 
         // Add custom (application specific) input formatters.
         foreach (IInputFormatter inputFormatter in _inputFormatters)
+        {
             options.InputFormatters.Add(inputFormatter);
+        }
     }
 
     private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()

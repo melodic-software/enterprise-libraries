@@ -17,7 +17,9 @@ public static class LogProviderRemovalService
         foreach (ServiceDescriptor serviceDescriptor in logging.Services)
         {
             if (serviceDescriptor.ImplementationType != providerType)
+            {
                 continue;
+            }
 
             logging.Services.Remove(serviceDescriptor);
 

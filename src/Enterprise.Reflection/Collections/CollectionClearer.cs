@@ -31,7 +31,9 @@ public static class CollectionClearer
             object? propertyValue = property.GetValue(instance);
 
             if (propertyValue == null)
+            {
                 continue;
+            }
 
             Type propertyValueType = propertyValue.GetType();
 

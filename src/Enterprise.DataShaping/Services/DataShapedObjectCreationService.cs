@@ -14,7 +14,9 @@ public static class DataShapedObjectCreationService
         IDictionary<string, object?> dictionary = dataShapedObject;
 
         foreach (PropertyInfo propertyInfo in propertyInfos)
+        {
             PropertyMappingService.MapProperty(sourceObject, propertyInfo, dictionary);
+        }
 
         return dataShapedObject;
     }
@@ -33,7 +35,9 @@ public static class DataShapedObjectCreationService
             PropertyInfo[] propertyInfos = sourceType.GetProperties(bindingFlags);
 
             foreach (PropertyInfo propertyInfo in propertyInfos)
+            {
                 PropertyMappingService.MapProperty(sourceObject, propertyInfo, dictionary);
+            }
 
             return dataShapedObject;
         }
@@ -42,7 +46,9 @@ public static class DataShapedObjectCreationService
         string[] trimmedPropertyNames = propertySplit.Select(s => s.Trim()).ToArray();
 
         foreach (string propertyName in trimmedPropertyNames)
+        {
             PropertyMappingService.MapProperty(sourceObject, sourceType, propertyName, bindingFlags, dictionary);
+        }
 
         // return the shaped object
         return dataShapedObject;

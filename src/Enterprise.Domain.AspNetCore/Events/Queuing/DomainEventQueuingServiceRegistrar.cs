@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.AspNetCore.Events.Queuing;
 
-internal class DomainEventQueuingServiceRegistrar : IRegisterServices
+internal sealed class DomainEventQueuingServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

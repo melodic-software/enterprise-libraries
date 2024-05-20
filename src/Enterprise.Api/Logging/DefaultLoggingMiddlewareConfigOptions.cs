@@ -3,7 +3,7 @@ using Enterprise.Serilog.AspNetCore.Config;
 
 namespace Enterprise.Api.Logging;
 
-internal class DefaultLoggingMiddlewareConfigOptions : LoggingMiddlewareConfigOptions
+internal sealed class DefaultLoggingMiddlewareConfigOptions : LoggingMiddlewareConfigOptions
 {
     internal DefaultLoggingMiddlewareConfigOptions()
     {

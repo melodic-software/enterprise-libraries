@@ -20,7 +20,7 @@ public static class SecurityConstants
     public const string DemoOAuthClientId = "interactive.public.short";
     public const string DemoOAuthAppName = "Web API";
 
-    public static readonly Dictionary<string, string> DemoOAuthScopes = new()
+    public static Dictionary<string, string> DemoOAuthScopes => new()
     {
         { "api", "Access to the API" },
         { "openid", "OpenID information" },
@@ -28,7 +28,7 @@ public static class SecurityConstants
         { "email", "User email address" }
     };
 
-    public static class Swagger
+public static class Swagger
     {
         public const string ApiKeySecurityDefinitionName = "ApiKey";
         public const string ApiKeySecuritySchemeName = "ApiKeyScheme";
@@ -38,6 +38,6 @@ public static class SecurityConstants
         public const string BearerSecuritySchemeName = "Bearer";
         public const string OAuth2SecurityDefinitionName = "oauth2";
         
-        public static string OAuth2RedirectUrl(string baseUrl) => $"{baseUrl}/swagger/oauth2-redirect.html";
+        public static string OAuth2RedirectUrl(Uri baseUri) => $"{baseUri}/swagger/oauth2-redirect.html";
     }
 }

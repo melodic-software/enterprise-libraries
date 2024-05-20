@@ -45,7 +45,9 @@ internal static class HellangMiddlewareService
             options.IncludeExceptionDetails = (httpContext, exception) =>
             {
                 if (exception is NotFoundException or ValidationException)
+                {
                     return false;
+                }
 
                 return includeExceptionDetails;
             };
@@ -54,7 +56,9 @@ internal static class HellangMiddlewareService
             {
                 // We want to obfuscate exception details to clients of the API.
                 if (problemDetails.Status == StatusCodes.Status500InternalServerError && !includeExceptionDetails)
+                {
                     problemDetails.Detail = errorHandlingConfigOptions.InternalServerErrorResponseDetailMessage;
+                }
             };
 
             // These are ignored by this middleware.

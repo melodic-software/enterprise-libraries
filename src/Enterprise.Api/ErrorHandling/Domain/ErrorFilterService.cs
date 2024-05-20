@@ -27,7 +27,9 @@ public static class ErrorFilterService
         };
 
         if (!result.Any())
+        {
             result = errorList;
+        }
 
         return result;
     }

@@ -19,7 +19,9 @@ public class EnsureUtcService : IEnsureUtcService
     public DateTime EnsureUtc(DateTime dateTime)
     {
         if (dateTime.Kind == DateTimeKind.Utc)
+        {
             return dateTime;
+        }
 
         LocalDateTime localDateTime = LocalDateTime.FromDateTime(dateTime);
 

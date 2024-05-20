@@ -25,15 +25,21 @@ public static class HealthCheckConfigService
         IHealthChecksBuilder healthCheckBuilder = builder.Services.AddHealthChecks();
 
         if (!string.IsNullOrWhiteSpace(options.SqlConnectionString))
+        {
             healthCheckBuilder.AddSqlServer(options.SqlConnectionString);
+        }
 
         if (!string.IsNullOrWhiteSpace(options.PostgresConnectionString))
+        {
             healthCheckBuilder.AddNpgSql(options.PostgresConnectionString);
+        }
 
         RegisterIdentityProviderHealthCheck(options, healthCheckBuilder);
 
         if (!string.IsNullOrWhiteSpace(options.RedisConnectionString))
+        {
             healthCheckBuilder.AddRedis(options.RedisConnectionString);
+        }
 
         if (options.RabbitMqOptions != null)
         {
@@ -48,7 +54,9 @@ public static class HealthCheckConfigService
         }
 
         foreach (UriGroup group in options.UrlGroup)
-            healthCheckBuilder.AddUrlGroup(new Uri(group.Uri), group.HttpMethod, group.Name);
+        {
+            healthCheckBuilder.AddUrlGroup(group.Uri, group.HttpMethod, group.Name);
+        }
 
         // This allows for application specific health checks like entity framework DB contexts, etc.
         // These are the additional health checks services that can be registered:
@@ -77,11 +85,13 @@ public static class HealthCheckConfigService
     private static void RegisterIdentityProviderHealthCheck(HealthCheckConfigOptions options, IHealthChecksBuilder healthCheckBuilder)
     {
         if (string.IsNullOrWhiteSpace(options.OpenIdConnectAuthority))
+        {
             return;
+        }
 
         string openIdConnectAuthorityName = options.OpenIdConnectAuthorityName?.Trim().ToLowerInvariant() ?? DefaultOpenIdConnectAuthorityName;
 
-        if (openIdConnectAuthorityName is IdentityServerAuthorityName)
+        if (openIdConnectAuthorityName == IdentityServerAuthorityName)
         {
             healthCheckBuilder.AddIdentityServer(new Uri(options.OpenIdConnectAuthority));
         }

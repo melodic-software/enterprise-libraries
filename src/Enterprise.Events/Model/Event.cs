@@ -21,7 +21,9 @@ public abstract class Event : IEvent
     protected Event(Guid id, DateTimeOffset dateOccurred)
     {
         if (id == Guid.Empty)
+        {
             throw new ArgumentException("Event ID cannot be an empty GUID!", nameof(id));
+        }
 
         Id = id;
         DateOccurred = dateOccurred;

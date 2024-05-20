@@ -9,5 +9,5 @@ public class LoggingMiddlewareConfigOptions
     /// <summary>
     /// Configure the specific provider available for use in the application.
     /// </summary>
-    public Action<WebApplication> UseProviders = _ => { };
+    public Action<WebApplication> UseProviders { get; set; } = _ => { };
 }

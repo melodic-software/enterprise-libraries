@@ -28,13 +28,13 @@ public class MediatRConfigOptions
     /// Allows for providing a custom behavior pipeline.
     /// This will override any default behavior, so be sure to include all behaviors needed for the application in a specific order.
     /// </summary>
-    public List<BehaviorRegistration> BehaviorRegistrations = [];
+    public List<BehaviorRegistration> BehaviorRegistrations { get; } = [];
 
     /// <summary>
     /// This allows for complete customization and control over the MediatR config.
     /// None of the default configuration is used, so everything must be completely configured.
     /// </summary>
-    public Action<MediatRServiceConfiguration>? CustomConfigure = null;
+    public Action<MediatRServiceConfiguration>? CustomConfigure { get; set; }
 
     /// <summary>
     /// These are the default behavior registrations.

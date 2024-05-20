@@ -4,5 +4,5 @@ public class TelemetryConfigOptions
 {
     public const string ConfigSectionKey = "Custom:Logging:Telemetry";
 
-    public bool EnableApplicationInsightsTelemetry { get; set; } = false;
+    public bool EnableApplicationInsightsTelemetry { get; set; }
 }

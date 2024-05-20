@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Globalization;
+using System.Security.Claims;
 using Enterprise.Security.Tokens;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
@@ -10,9 +11,9 @@ public class JwtTokenTests
     [Fact]
     public void JwtTokenTest()
     {
-        SecurityKeyGenerationService securityKeyGenerationService = new SecurityKeyGenerationService();
-        SigningCredentialGenerationService signingCredentialGenerationService = new SigningCredentialGenerationService();
-        JwtTokenGenerationService jwtTokenGenerationService = new JwtTokenGenerationService();
+        var securityKeyGenerationService = new SecurityKeyGenerationService();
+        var signingCredentialGenerationService = new SigningCredentialGenerationService();
+        var jwtTokenGenerationService = new JwtTokenGenerationService();
 
         // has to be at least 128 bytes long
         string secret = "thisisthesecretforgeneratingakey(mustbeatleast32bitlong)";
@@ -29,7 +30,7 @@ public class JwtTokenTests
 
         List<Claim> claims =
         [
-            new("sub", userId.ToString()),
+            new("sub", userId.ToString(CultureInfo.InvariantCulture)),
             new("given_name", userFirstName),
             new("family_name", userLastName),
             new("city", city)

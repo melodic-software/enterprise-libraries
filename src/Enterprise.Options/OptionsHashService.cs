@@ -10,20 +10,22 @@ public static class OptionsHashService
 {
     public static string ComputeHash(object options, ISerializeJson jsonSerializer)
     {
-        ArgumentNullException.ThrowIfNull(jsonSerializer, nameof(jsonSerializer));
+        ArgumentNullException.ThrowIfNull(jsonSerializer);
 
         // Recursively gather all properties that can be serialized based on defined criteria.
         Dictionary<string, object> serializable = GetSerializableProperties(options);
 
         if (!serializable.Any())
+        {
             return string.Empty;
+        }
 
         // Serialize the resulting dictionary which includes only serializable properties.
         string serializedData = jsonSerializer.Serialize(serializable);
 
         // Compute SHA256 hash of the serialized data.
-        using SHA256 sha256 = SHA256.Create();
-        byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(serializedData));
+        using var sha256 = SHA256.Create();
+        byte[] hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(serializedData));
         string hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLowerInvariant();
 
         return hash;
@@ -31,10 +33,12 @@ public static class OptionsHashService
 
     private static Dictionary<string, object> GetSerializableProperties(object? obj)
     {
-        Dictionary<string, object> result = new Dictionary<string, object>();
+        var result = new Dictionary<string, object>();
 
         if (obj == null)
+        {
             return result;
+        }
 
         Type type = obj.GetType();
 
@@ -48,9 +52,9 @@ public static class OptionsHashService
         // Handle collections, enumerate each item and apply serialization recursively.
         if (typeof(IEnumerable).IsAssignableFrom(type))
         {
-            IEnumerable enumerable = (IEnumerable)obj;
+            var enumerable = (IEnumerable)obj;
 
-            Dictionary<string, object> elements = enumerable.Cast<object>()
+            var elements = enumerable.Cast<object>()
                              .Select((item, index) => new { Item = GetSerializableProperties(item), Index = index })
                              .Where(x => x.Item.Any())
                              .ToDictionary(x => $"Item{x.Index}", x => (object)x.Item);
@@ -64,22 +68,26 @@ public static class OptionsHashService
         }
 
         // Process properties of complex object types.
-        if (type.IsClass && type != typeof(object))
+        if (!type.IsClass || type == typeof(object))
         {
-            Dictionary<string, object> properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                 .Where(prop => prop.CanRead && prop.GetIndexParameters().Length == 0 && IsValidPropertyType(prop.PropertyType))
-                                 .Select(prop => new { Prop = prop, Value = prop.GetValue(obj) })
-                                 .Select(x => new { x.Prop.Name, Value = GetSerializableProperties(x.Value) })
-                                 .Where(x => x.Value.Any())
-                                 .ToDictionary(x => x.Name, x => (object)x.Value);
+            return result;
+        }
 
-            if (properties.Any())
-            {
-                foreach (KeyValuePair<string, object> entry in properties)
-                {
-                    result.Add(entry.Key, entry.Value);
-                }
-            }
+        var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            .Where(prop => prop.CanRead && prop.GetIndexParameters().Length == 0 && IsValidPropertyType(prop.PropertyType))
+            .Select(prop => new { Prop = prop, Value = prop.GetValue(obj) })
+            .Select(x => new { x.Prop.Name, Value = GetSerializableProperties(x.Value) })
+            .Where(x => x.Value.Any())
+            .ToDictionary(x => x.Name, x => (object)x.Value);
+
+        if (!properties.Any())
+        {
+            return result;
+        }
+
+        foreach (KeyValuePair<string, object> entry in properties)
+        {
+            result.Add(entry.Key, entry.Value);
         }
 
         return result;

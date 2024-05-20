@@ -45,7 +45,9 @@ public abstract class EventDispatcherBase : IDispatchEvents
         Logger.LogDebug("Processing event handler(s).");
 
         foreach (IHandleEvent eventHandler in filteredHandlers)
+        {
             await ProcessEventHandlerAsync(eventHandler, @event);
+        }
 
         Logger.LogDebug("Event handlers processed.");
     }

@@ -10,7 +10,9 @@ public static class SqliteDateTimeOffsetSortFixer
     public static void AllowDateTimeOffsetSortingForSqlite(this DbContext dbContext, ModelBuilder modelBuilder)
     {
         if (dbContext.Database.ProviderName != ProviderConstants.SqlLiteProviderName)
+        {
             return;
+        }
 
         // This is a fix to allow sorting on DateTimeOffset when using Sqlite.
         // It is based on: https://blog.dangl.me/archive/handling-datetimeoffset-in-sqlite-with-entity-framework-core/

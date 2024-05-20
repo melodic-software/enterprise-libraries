@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Callbacks;
 
-internal class EventCallbackServiceRegistrar : IRegisterServices
+internal sealed class EventCallbackServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

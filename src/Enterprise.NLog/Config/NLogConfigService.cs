@@ -45,7 +45,9 @@ public static class NLogConfigService
     public static void ConfigureNLog(this WebApplicationBuilder builder, bool clearExistingProviders = false)
     {
         if (clearExistingProviders)
+        {
             builder.Logging.ClearProviders();
+        }
 
         NLogAspNetCoreOptions options = NLogAspNetCoreOptions.Default;
 

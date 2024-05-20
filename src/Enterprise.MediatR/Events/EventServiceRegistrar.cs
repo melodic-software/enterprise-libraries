@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Events;
 
-internal class EventServiceRegistrar : IRegisterServices
+internal sealed class EventServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
@@ -22,7 +22,9 @@ internal class EventServiceRegistrar : IRegisterServices
             .GetOptionsInstance<MediatRConfigOptions>(configuration, MediatRConfigOptions.ConfigSectionKey);
 
         if (!options.EnableMediatR)
+        {
             return;
+        }
 
         // Clear all existing registrations.
         services.RemoveAll(typeof(IDispatchEvents));

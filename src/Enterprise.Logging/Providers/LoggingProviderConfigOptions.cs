@@ -16,15 +16,15 @@ public class LoggingProviderConfigOptions
     /// </summary>
     public bool EnableConsole { get; set; } = true;
     public bool EnableJsonConsole { get; set; } = true;
-    public bool EnableAddSystemdConsole { get; set; } = false;
+    public bool EnableAddSystemdConsole { get; set; }
     public bool EnableDebug { get; set; } = true;
     public bool EnableEventSource { get; set; } = true;
     public bool EnableEventLog { get; set; } = true;
     
-    public bool EnableApplicationInsights { get; set; } = false;
+    public bool EnableApplicationInsights { get; set; }
 
     /// <summary>
     /// Configure the specific provider service(s) available for use in the application.
     /// </summary>
-    public Action<IHostApplicationBuilder> ConfigureProviders = _ => { };
+    public Action<IHostApplicationBuilder> ConfigureProviders { get; set; } = _ => { };
 }

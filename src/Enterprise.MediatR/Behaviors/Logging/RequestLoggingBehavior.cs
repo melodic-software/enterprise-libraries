@@ -20,13 +20,13 @@ public class RequestLoggingBehavior<TRequest, TResponse> :
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(request, nameof(request));
+        ArgumentNullException.ThrowIfNull(request);
 
         Type requestType = request.GetType();
 
         LogProperties(request, requestType);
 
-        Stopwatch stopWatch = Stopwatch.StartNew();
+        var stopWatch = Stopwatch.StartNew();
 
         TResponse response = await next();
 
@@ -41,7 +41,9 @@ public class RequestLoggingBehavior<TRequest, TResponse> :
     private void LogProperties(TRequest request, Type requestType)
     {
         if (!_logger.IsEnabled(LogLevel.Debug))
+        {
             return;
+        }
 
         _logger.LogDebug("Handling {RequestName}.", requestType.Name);
 
@@ -54,7 +56,7 @@ public class RequestLoggingBehavior<TRequest, TResponse> :
         foreach (PropertyInfo prop in props)
         {
             object? propValue = prop.GetValue(request, null);
-            _logger.LogDebug("Property {Property} : {@Value}", prop?.Name, propValue);
+            _logger.LogDebug("Property {Property} : {@Value}", prop.Name, propValue);
         }
     }
 }

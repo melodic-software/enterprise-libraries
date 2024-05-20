@@ -1,4 +1,5 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using System.Globalization;
+using Enterprise.Patterns.ResultPattern.Errors;
 using Enterprise.Patterns.ResultPattern.Errors.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using FluentAssertions;
@@ -11,10 +12,10 @@ public class ResultThenTests
     public void Then_ExecutesFunctionOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
 
         // Act
-        Result<string> result = successResult.Then(value => Result.Success(value.ToUpper()));
+        Result<string> result = successResult.Then(value => Result.Success(value.ToUpper(CultureInfo.InvariantCulture)));
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -26,10 +27,10 @@ public class ResultThenTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
-        Result<string> result = failedResult.Then(value => Result.Success(value.ToUpper()));
+        Result<string> result = failedResult.Then(value => Result.Success(value.ToUpper(CultureInfo.InvariantCulture)));
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -40,7 +41,7 @@ public class ResultThenTests
     public void Then_ExecutesActionOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
         bool actionExecuted = false;
 
         // Act
@@ -58,7 +59,7 @@ public class ResultThenTests
     public void Then_ReturnsSameResult_WhenActionExecutes()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
 
         // Act
         Result<string> result = successResult.Then(value => { });
@@ -71,10 +72,10 @@ public class ResultThenTests
     public async Task ThenAsync_ExecutesFunctionAsyncOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
 
         // Act
-        Result<string> result = await successResult.ThenAsync(value => Task.FromResult(Result.Success(value.ToUpper())));
+        Result<string> result = await successResult.ThenAsync(value => Task.FromResult(Result.Success(value.ToUpper(CultureInfo.InvariantCulture))));
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -85,7 +86,7 @@ public class ResultThenTests
     public async Task ThenAsync_ExecutesActionAsyncOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
         bool actionExecuted = false;
 
         // Act
@@ -104,10 +105,10 @@ public class ResultThenTests
     public async Task ThenAsync_ExecutesFunctionReturningValueAsync_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("hello");
+        var successResult = Result.Success("hello");
 
         // Act
-        Result<string> result = await successResult.ThenAsync(value => Task.FromResult(value.ToUpper()));
+        Result<string> result = await successResult.ThenAsync(value => Task.FromResult(value.ToUpper(CultureInfo.InvariantCulture)));
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -119,10 +120,10 @@ public class ResultThenTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
-        Result<string> result = await failedResult.ThenAsync(value => Task.FromResult(Result.Success(value.ToUpper())));
+        Result<string> result = await failedResult.ThenAsync(value => Task.FromResult(Result.Success(value.ToUpper(CultureInfo.InvariantCulture))));
 
         // Assert
         result.IsFailure.Should().BeTrue();

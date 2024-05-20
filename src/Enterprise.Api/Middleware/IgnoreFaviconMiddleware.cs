@@ -11,7 +11,7 @@ namespace Enterprise.Api.Middleware;
 /// </summary>
 public class IgnoreFaviconMiddleware
 {
-    private readonly ILogger<RootRedirectMiddleware> _logger;
+    private readonly ILogger<IgnoreFaviconMiddleware> _logger;
     private readonly RequestDelegate _next;
 
     /// <summary>
@@ -21,7 +21,7 @@ public class IgnoreFaviconMiddleware
     /// </summary>
     /// <param name="next"></param>
     /// <param name="logger"></param>
-    public IgnoreFaviconMiddleware(RequestDelegate next, ILogger<RootRedirectMiddleware> logger)
+    public IgnoreFaviconMiddleware(RequestDelegate next, ILogger<IgnoreFaviconMiddleware> logger)
     {
         _next = next;
         _logger = logger;

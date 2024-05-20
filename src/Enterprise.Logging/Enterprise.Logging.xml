@@ -29,7 +29,7 @@
             https://learn.microsoft.com/en-us/dotnet/core/extensions/console-log-formatter
             </summary>
         </member>
-        <member name="F:Enterprise.Logging.Providers.LoggingProviderConfigOptions.ConfigureProviders">
+        <member name="P:Enterprise.Logging.Providers.LoggingProviderConfigOptions.ConfigureProviders">
             <summary>
             Configure the specific provider service(s) available for use in the application.
             </summary>

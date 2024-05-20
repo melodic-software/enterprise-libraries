@@ -13,21 +13,23 @@ public static class SwaggerEndpointService
 
         foreach (ApiVersionDescription description in descriptionProvider.ApiVersionDescriptions)
         {
-            string url = GetEndpointUrl(description);
+            Uri url = GetEndpointUrl(description);
             string name = description.GroupName.ToUpperInvariant();
-            options.SwaggerEndpoint(url, name);
+            options.SwaggerEndpoint(url.ToString(), name);
         }
     }
 
-    public static string GetEndpointUrl(ApiVersionDescription description)
+    public static Uri GetEndpointUrl(ApiVersionDescription description)
     {
-        string url = "/";
+        string endpointUrl = "/";
 
         if (!string.IsNullOrWhiteSpace(RoutePrefix))
-            url += $"{RoutePrefix}/";
+        {
+            endpointUrl += $"{RoutePrefix}/";
+        }
 
-        url += $"{description.GroupName}/swagger.json";
+        endpointUrl += $"{description.GroupName}/swagger.json";
 
-        return url;
+        return new Uri(endpointUrl);
     }
 }

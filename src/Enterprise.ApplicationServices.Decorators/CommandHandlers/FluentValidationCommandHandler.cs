@@ -23,20 +23,20 @@ public class FluentValidationCommandHandler<T> : CommandHandlerDecoratorBase<T>
         _logger = logger;
     }
 
-    public override Task HandleAsync(T command, CancellationToken cancellationToken)
+    public override async Task HandleAsync(T command, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
             _logger.LogDebug("No (fluent) validators were found for command.");
-            return Decorated.HandleAsync(command, cancellationToken);
+            await Decorated.HandleAsync(command, cancellationToken);
         }
 
         IValidationContext validationContext = new ValidationContext<T>(command);
 
         _logger.LogDebug("Executing fluent validation.");
-        FluentValidationService.ExecuteValidation(_validators, validationContext);
+        await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
         _logger.LogDebug("Fluent validation succeeded.");
 
-        return Decorated.HandleAsync(command, cancellationToken);
+        await Decorated.HandleAsync(command, cancellationToken);
     }
 }

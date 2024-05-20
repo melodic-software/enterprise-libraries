@@ -3,7 +3,7 @@
 /// <summary>
 /// Provides the ability to attach event handlers to the assembly load event.
 /// </summary>
-public class AssemblyLoadEventService
+public static class AssemblyLoadEventService
 {
     /// <summary>
     /// Attaches a handler to the event that is fired when an assembly is loaded for the first time.

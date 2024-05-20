@@ -31,7 +31,9 @@ public static class SerilogConfigService
         builder.Services.AddHostedService<LifecycleHostedService>();
 
         if (configOptions.ClearExistingProviders)
+        {
             builder.Logging.ClearProviders();
+        }
 
         Action<HostBuilderContext, LoggerConfiguration> configureLogger =
             configOptions.CustomConfigureLogger ?? ConfigureLogger(builder, configOptions);
@@ -62,7 +64,9 @@ public static class SerilogConfigService
     {
         configOptions.ConfigureOutputTemplate ??= SerilogConfigDefaults.CreateDefaultOutputTemplate;
         configOptions.Enrich ??= SerilogConfigDefaults.EnrichDefaults;
-        configOptions.WriteTo ??= SerilogConfigDefaults.WriteToDefaults;
+
+        configOptions.WriteTo ??= (_, loggerConfig, outputTemplate) =>
+            SerilogConfigDefaults.WriteToDefaults(loggerConfig, outputTemplate);
 
         return (context, loggerConfig) =>
         {
@@ -81,7 +85,7 @@ public static class SerilogConfigService
             // Apply sinks programmatically if not defined in configuration.
             if (!context.Configuration.GetSection("Serilog:WriteTo").Exists())
             {
-                OutputTemplateBuilder outputTemplateBuilder = new OutputTemplateBuilder();
+                var outputTemplateBuilder = new OutputTemplateBuilder();
                 configOptions.ConfigureOutputTemplate(builder, outputTemplateBuilder);
                 string outputTemplate = outputTemplateBuilder.Build();
 

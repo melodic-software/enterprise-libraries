@@ -22,7 +22,9 @@ public static class EventHandlerTypeValidationService
         bool eventCanBeHandled = eventType.IsAssignableFrom(expectedEventType);
 
         if (eventCanBeHandled)
+        {
             return;
+        }
 
         Type eventHandlerType = eventHandler.GetType();
 

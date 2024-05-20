@@ -26,9 +26,8 @@ public class MiddlewareAnalysisDiagnosticAdapter
     [DiagnosticName(MiddlewareException)]
     public void OnMiddlewareException(Exception exception, string name)
     {
-        _logger.LogDebug(
-            "MiddlewareException: '{MiddlewareName}'; " +
-            "'Exception: '{Exception}'",
+        _logger.LogDebug(exception: exception,
+            "MiddlewareException: '{MiddlewareName}'; 'Exception: '{Exception}'",
             name, exception
         );
     }

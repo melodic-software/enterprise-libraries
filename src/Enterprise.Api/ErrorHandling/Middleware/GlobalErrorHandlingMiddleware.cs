@@ -35,6 +35,6 @@ public class GlobalErrorHandlingMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        await GlobalErrorHandler.HandleErrorAsync(context, exception, _logger);
+        await GlobalErrorHandler.HandleErrorAsync(context, exception);
     }
 }

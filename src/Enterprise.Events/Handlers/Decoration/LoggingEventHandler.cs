@@ -4,7 +4,7 @@ using Enterprise.Events.Handlers.Decoration.Abstract;
 using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Events.Decorators.EventHandlers;
+namespace Enterprise.Events.Handlers.Decoration;
 
 public class LoggingEventHandler<T> : EventHandlerDecoratorBase<T> where T : IEvent
 {

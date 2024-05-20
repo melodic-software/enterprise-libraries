@@ -9,8 +9,10 @@ public class DecoratedInstanceService : IGetDecoratedInstance
     public T GetInnermost<T>(T current) where T : class
     {
         while (current is IDecorate<T> decorator)
+        {
             current = decorator.Decorated;
-            
+        }
+
         return current;
     }
 
@@ -21,9 +23,13 @@ public class DecoratedInstanceService : IGetDecoratedInstance
         {
             // Use "null check" pattern.
             if (decorator.Decorated is { } next)
+            {
                 current = next as IDecorate;
+            }
             else
+            {
                 break;
+            }
         }
 
         return current as T;
@@ -33,7 +39,9 @@ public class DecoratedInstanceService : IGetDecoratedInstance
     public T GetInnermost<T>(IDecorate<T> current) where T : class
     {
         while (current is { Decorated: IDecorate<T> nextDecorator })
+        {
             current = nextDecorator;
+        }
 
         return current.Decorated;
     }
@@ -42,8 +50,10 @@ public class DecoratedInstanceService : IGetDecoratedInstance
     public T? GetInnermost<T>(object current) where T : class
     {
         if (current is IDecorate<T> decorator)
+        {
             return GetInnermost(decorator);
-            
+        }
+
         return null;
     }
 }

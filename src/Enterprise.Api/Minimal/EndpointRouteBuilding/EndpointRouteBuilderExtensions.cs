@@ -44,7 +44,9 @@ public static class EndpointRouteBuilderExtensions
         IWebHostEnvironment environment = endpoints.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
 
         if (allowedEnvironments.Contains(environment.EnvironmentName))
+        {
             return endpoints.Map(pattern, handler);
+        }
 
         // Register a handler that simply returns a 404 status code when the environment doesn't match.
         // We add metadata, so it doesn't show up in the generated Swagger documentation unless the environment matches.

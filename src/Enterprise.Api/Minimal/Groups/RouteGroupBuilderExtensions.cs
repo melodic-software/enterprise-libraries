@@ -11,7 +11,9 @@ public static class RouteGroupBuilderExtensions
     {
         // Ensure non-negative version numbers
         if (majorVersion < 0 || minorVersion < 0)
+        {
             throw new ArgumentException("Major and minor version numbers must be non-negative.");
+        }
 
         ApiVersionSet apiVersionSet = ApiVersionSetService.Instance.CreateVersionSet(builder, majorVersion, minorVersion);
 

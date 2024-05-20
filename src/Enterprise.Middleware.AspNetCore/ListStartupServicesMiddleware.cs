@@ -12,12 +12,18 @@ public class ListStartupServicesMiddleware
     private readonly IServiceCollection _services;
     private readonly ILogger<ListStartupServicesMiddleware> _logger;
     private const string Path = "/debug/all-registered-services";
+    private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ListStartupServicesMiddleware(RequestDelegate next, IServiceCollection services, ILogger<ListStartupServicesMiddleware> logger)
+    public ListStartupServicesMiddleware(RequestDelegate next,
+        IServiceCollection services,
+        ILogger<ListStartupServicesMiddleware> logger)
     {
         _next = next;
         _services = services;
         _logger = logger;
+
+        JsonSerializerDefaults serializationDefaults = JsonSerializerDefaults.Web;
+        _jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
     }
 
     public async Task InvokeAsync(HttpContext httpContext)
@@ -29,16 +35,13 @@ public class ListStartupServicesMiddleware
             // TODO: Add query string parameters to filter by namespace.
             // This can be prebuilt like "show all custom" (namespaces other than System.*, Microsoft.*, etc.) or vice versa
 
-            List<ServiceDescriptionDto?> result = _services.Select(x => CreateDto(x, httpContext))
+            var result = _services.Select(x => CreateDto(x, httpContext))
                 .Where(x => x != null)
                 .OrderBy(x => x?.ServiceTypeFullName)
                 .ToList();
 
             // TODO: Do we want to group by source type namespace?
-
-            JsonSerializerDefaults serializationDefaults = JsonSerializerDefaults.Web;
-            JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
-            string json = JsonSerializer.Serialize(result, jsonSerializerOptions);
+            string json = JsonSerializer.Serialize(result, _jsonSerializerOptions);
 
             httpContext.Response.ContentType = MediaTypeNames.Application.Json;
 

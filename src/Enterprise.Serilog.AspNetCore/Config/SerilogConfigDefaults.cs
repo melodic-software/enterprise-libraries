@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
+using System.Reflection;
 using Enterprise.Serilog.Templating;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -31,21 +32,24 @@ public static class SerilogConfigDefaults
         string? assemblyName = assembly.GetName().Name;
 
         if (string.IsNullOrWhiteSpace(assemblyName))
+        {
             throw new Exception(InvalidAssemblyNameExceptionMessage);
+        }
 
         loggerConfig
             .Enrich.WithProperty(Application, assemblyName)
             .Enrich.FromLogContext();
     }
 
-    public static void WriteToDefaults(IHostApplicationBuilder builder, LoggerConfiguration loggerConfig, string outputTemplate)
+    public static void WriteToDefaults(LoggerConfiguration loggerConfig, string outputTemplate)
     {
         loggerConfig
             .WriteTo.Console(
                 restrictedToMinimumLevel: LogEventLevel.Information,
                 outputTemplate: outputTemplate,
+                formatProvider: CultureInfo.InvariantCulture,
                 theme: AnsiConsoleTheme.Code
             )
-            .WriteTo.Debug();
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture);
     }
 }

@@ -32,12 +32,16 @@ public class DateTimeParser : IDateTimeParser
         if (!string.IsNullOrEmpty(format))
         {
             if (DateTimeOffset.TryParseExact(input, format, cultureInfo, dateTimeStyles, out DateTimeOffset result))
+            {
                 return result;
+            }
         }
         else
         {
             if (DateTimeOffset.TryParse(input, cultureInfo, dateTimeStyles, out DateTimeOffset result))
+            {
                 return result;
+            }
         }
 
         throw new FormatException("Invalid date format.");
@@ -51,8 +55,10 @@ public class DateTimeParser : IDateTimeParser
 
         // Attempts to parse the input string to a DateTimeOffset object using the exact format specified.
         if (DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, dateTimeStyles, out DateTimeOffset result))
+        {
             return result;
-        
+        }
+
         throw new FormatException("Invalid date format.");
     }
 }

@@ -29,7 +29,9 @@ public static class PrimaryKeyPropertyExtensions
         string? primaryKeyPropertyName = null) where T : class
     {
         if (!string.IsNullOrWhiteSpace(primaryKeyPropertyName) || primaryKeyPropertySelector == null)
+        {
             return;
+        }
 
         // Configure the primary key property with auto-increment.
         builder.Property(primaryKeyPropertySelector)
@@ -43,7 +45,9 @@ public static class PrimaryKeyPropertyExtensions
         where T : class
     {
         if (string.IsNullOrWhiteSpace(primaryKeyPropertyName))
+        {
             return;
+        }
 
         // Configure the primary key property with auto-increment.
         builder.Property<int>(primaryKeyPropertyName)

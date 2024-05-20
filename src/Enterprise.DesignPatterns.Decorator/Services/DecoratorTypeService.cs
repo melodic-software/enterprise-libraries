@@ -32,12 +32,18 @@ public class DecoratorTypeService : IDecoratorTypeService
         while (current != null)
         {
             if (current.GetType() == targetType)
+            {
                 return current;
+            }
 
             if (current is IDecorate<T> decorator)
+            {
                 current = decorator.Decorated;
+            }
             else
+            {
                 break;
+            }
         }
 
         return null;

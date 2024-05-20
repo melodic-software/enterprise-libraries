@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.DesignPatterns.Decorator;
 
-internal class DecoratorServiceRegistrar : IRegisterServices
+internal sealed class DecoratorServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

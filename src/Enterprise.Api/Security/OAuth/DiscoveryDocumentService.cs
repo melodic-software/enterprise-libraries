@@ -2,18 +2,20 @@
 
 namespace Enterprise.Api.Security.OAuth;
 
-public class DiscoveryDocumentService
+public static class DiscoveryDocumentService
 {
     public static async Task<DiscoveryDocumentResponse> GetDiscoveryDocumentAsync(string authority)
     {
         if (string.IsNullOrWhiteSpace(authority))
+        {
             throw new ArgumentException("The trusted authority must be provided.", nameof(authority));
+        }
 
         DiscoveryDocumentResponse discoveryDocumentResponse;
 
         try
         {
-            DiscoveryCache discoveryCache = new DiscoveryCache(authority);
+            var discoveryCache = new DiscoveryCache(authority);
             discoveryDocumentResponse = await discoveryCache.GetAsync();
 
             // we probably don't need the cache here, but leaving it as an example
@@ -40,6 +42,8 @@ public class DiscoveryDocumentService
                                              string.IsNullOrWhiteSpace(tokenEndpoint);
 
         if (discoveryDocResponseIsInvalid)
+        {
             throw new Exception("Discovery document response is invalid!");
+        }
     }
 }

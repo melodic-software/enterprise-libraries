@@ -25,7 +25,9 @@ public static class SwaggerXmlCommentExtensions
     private static void AddXmlComments(Assembly? assembly, SwaggerGenOptions options)
     {
         if (assembly == null)
+        {
             return;
+        }
 
         string baseDirectory = AppContext.BaseDirectory;
 

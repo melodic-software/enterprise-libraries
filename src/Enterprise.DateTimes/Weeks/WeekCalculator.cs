@@ -19,17 +19,21 @@ public class WeekCalculator : IWeekCalculator
     
     public DateTime GetYearWeekStartDate(int year, int week)
     {
-        DateTime januaryFirst = new DateTime(year, 1, 1);
+        var januaryFirst = new DateTime(year, 1, 1, 0, 0, 0, DateTimeKind.Unspecified);
         int daysOffset = DayOfWeek.Monday - januaryFirst.DayOfWeek;
 
         if (daysOffset > 0)
+        {
             daysOffset -= 7;
+        }
 
         DateTime firstMonday = januaryFirst.AddDays(daysOffset);
         int firstWeek = ISOWeek.GetWeekOfYear(firstMonday);
 
         if (firstWeek <= 1)
+        {
             week--;
+        }
 
         DateTime result = firstMonday.AddDays(week * 7);
 
@@ -38,14 +42,16 @@ public class WeekCalculator : IWeekCalculator
 
     public int GetTotalISOWeeksInYear(int year)
     {
-        DateTime lastDayOfYear = new DateTime(year, 12, 31);
+        var lastDayOfYear = new DateTime(year, 12, 31, 0, 0, 0, DateTimeKind.Unspecified);
 
         // Find the last Thursday of the year
         int daysUntilThursday = (int)DayOfWeek.Thursday - (int)lastDayOfYear.DayOfWeek;
         
         if (daysUntilThursday > 0)
+        {
             daysUntilThursday -= 7;
-        
+        }
+
         DateTime lastThursday = lastDayOfYear.AddDays(daysUntilThursday);
         
         return ISOWeek.GetWeekOfYear(lastThursday);

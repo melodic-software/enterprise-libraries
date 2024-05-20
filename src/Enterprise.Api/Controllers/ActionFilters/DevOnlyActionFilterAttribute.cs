@@ -9,17 +9,17 @@ namespace Enterprise.Api.Controllers.ActionFilters;
 /// <summary>
 /// Action filter that restricts the action's availability to the development environment.
 /// </summary>
-public class DevOnlyActionFilter : ActionFilterAttribute
+public sealed class DevOnlyActionFilterAttribute : ActionFilterAttribute
 {
     private readonly IWebHostEnvironment _environment;
-    private readonly ILogger<DevOnlyActionFilter> _logger;
+    private readonly ILogger<DevOnlyActionFilterAttribute> _logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DevOnlyActionFilter"/> class.
+    /// Initializes a new instance of the <see cref="DevOnlyActionFilterAttribute"/> class.
     /// </summary>
     /// <param name="environment">Provides information about the web hosting environment an application is running in.</param>
     /// <param name="logger">Represents a type used to perform logging.</param>
-    public DevOnlyActionFilter(IWebHostEnvironment environment, ILogger<DevOnlyActionFilter> logger)
+    public DevOnlyActionFilterAttribute(IWebHostEnvironment environment, ILogger<DevOnlyActionFilterAttribute> logger)
     {
         _logger = logger;
         _environment = environment;

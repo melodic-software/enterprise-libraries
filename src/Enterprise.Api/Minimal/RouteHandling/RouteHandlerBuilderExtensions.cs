@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.OpenApi.Models;
 
@@ -16,7 +17,9 @@ public static class RouteHandlerBuilderExtensions
         // Ideally, we'd inspect the route builder to see if .RequiresAuthorization() has been called, but we don't seem to have access to it...
         // For now, we're going to default this since everything should be locked down by default and use .AllowAnonymous() if needed.
         if (requiresAuthorization)
+        {
             builder.Produces(StatusCodes.Status401Unauthorized);
+        }
 
         return builder
             .Produces(StatusCodes.Status406NotAcceptable)
@@ -27,32 +30,32 @@ public static class RouteHandlerBuilderExtensions
 
     private static OpenApiOperation StandardOperations(OpenApiOperation operation)
     {
-        if (operation.Responses.TryGetValue(StatusCodes.Status400BadRequest.ToString(), out OpenApiResponse? badRequestResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status400BadRequest.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? badRequestResponse))
         {
             badRequestResponse.Description = "Request is invalid.";
         }
 
-        if (operation.Responses.TryGetValue(StatusCodes.Status401Unauthorized.ToString(), out OpenApiResponse? unauthorizedResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status401Unauthorized.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? unauthorizedResponse))
         {
             unauthorizedResponse.Description = "Not authorized";
         }
 
-        if (operation.Responses.TryGetValue(StatusCodes.Status406NotAcceptable.ToString(), out OpenApiResponse? notAcceptableResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status406NotAcceptable.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? notAcceptableResponse))
         {
             notAcceptableResponse.Description = "Cannot produce a response matching the request.";
         }
 
-        if (operation.Responses.TryGetValue(StatusCodes.Status415UnsupportedMediaType.ToString(), out OpenApiResponse? unsupportedMediaTypeResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status415UnsupportedMediaType.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? unsupportedMediaTypeResponse))
         {
             unsupportedMediaTypeResponse.Description = "Media type not supported.";
         }
 
-        if (operation.Responses.TryGetValue(StatusCodes.Status422UnprocessableEntity.ToString(), out OpenApiResponse? unprocessableEntityResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status422UnprocessableEntity.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? unprocessableEntityResponse))
         {
             unprocessableEntityResponse.Description = "The request cannot be processed.";
         }
 
-        if (operation.Responses.TryGetValue(StatusCodes.Status500InternalServerError.ToString(), out OpenApiResponse? internalServerErrorResponse))
+        if (operation.Responses.TryGetValue(StatusCodes.Status500InternalServerError.ToString(CultureInfo.InvariantCulture), out OpenApiResponse? internalServerErrorResponse))
         {
             internalServerErrorResponse.Description = "An error occurred while processing the request.";
         }

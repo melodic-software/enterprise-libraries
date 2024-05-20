@@ -11,7 +11,9 @@ public abstract class DomainTestBase
         IDomainEvent? domainEvent = entity.GetSingleDomainEvent<T>();
 
         if (domainEvent == null)
+        {
             throw new Exception($"{typeof(T).Name} was not recorded.");
+        }
 
         return (T)domainEvent;
     }

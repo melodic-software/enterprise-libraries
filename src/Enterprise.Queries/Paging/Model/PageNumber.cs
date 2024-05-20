@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Constants;
+﻿using System.Globalization;
+using Enterprise.Queries.Paging.Constants;
 
 namespace Enterprise.Queries.Paging.Model;
 
@@ -14,7 +15,9 @@ public class PageNumber
         pageNumber ??= defaultPageNumber;
 
         if (pageNumber < minPageNumber)
+        {
             pageNumber = defaultPageNumber;
+        }
 
         Value = pageNumber.Value;
     }
@@ -26,6 +29,6 @@ public class PageNumber
 
     public override string ToString()
     {
-        return Value.ToString();
+        return Value.ToString(CultureInfo.InvariantCulture);
     }
 }

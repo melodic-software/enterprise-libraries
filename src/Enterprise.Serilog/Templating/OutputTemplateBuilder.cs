@@ -35,7 +35,9 @@ public class OutputTemplateBuilder
 
         // Add custom enrichment data if specified.
         if (!string.IsNullOrWhiteSpace(_customEnrichmentTemplate))
+        {
             _parts.Add(_customEnrichmentTemplate.Trim());
+        }
 
         // Add message.
         _parts.Add("{Message:lj}{NewLine}{Exception}");

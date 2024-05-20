@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.EntityFramework.Properties;
 
-public class PropertyNames
+public static class PropertyNames
 {
     public const string CreationDate = "DateCreated";
     public const string DateModified = "DateModified";

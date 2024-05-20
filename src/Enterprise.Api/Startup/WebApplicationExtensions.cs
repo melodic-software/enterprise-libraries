@@ -65,7 +65,9 @@ public static class WebApplicationExtensions
         // TODO: Add configurable option for this.
         // We may want to use HTTPs redirection locally.
         if (!app.Environment.IsDevelopment())
+        {
             app.UseHttpsRedirection();
+        }
 
         // Enables using static files for the request.
         // If a path is not set, it will use a wwwroot folder in the project by default.

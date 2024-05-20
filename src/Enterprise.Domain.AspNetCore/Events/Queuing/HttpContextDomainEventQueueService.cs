@@ -25,11 +25,13 @@ public class HttpContextDomainEventQueueService : IDomainEventQueue
     public void Enqueue(IReadOnlyCollection<IDomainEvent> domainEvents)
     {
         if (!domainEvents.Any())
+        {
             return;
+        }
 
         if (_httpContextAccessor?.HttpContext == null)
         {
-            _logger.LogDebug($"{nameof(HttpContext)} is not available. Events will not be queued.");
+            _logger.LogDebug("{HttpContext} is not available. Events cannot be dequeued.", nameof(HttpContext));
             return;
         }
 
@@ -73,7 +75,7 @@ public class HttpContextDomainEventQueueService : IDomainEventQueue
     {
         if (_httpContextAccessor?.HttpContext == null)
         {
-            _logger.LogDebug($"{nameof(HttpContext)} is not available. Events cannot be dequeued.");
+            _logger.LogDebug("{HttpContext} is not available. Events cannot be dequeued.", nameof(HttpContext));
             return null;
         }
 
@@ -109,7 +111,9 @@ public class HttpContextDomainEventQueueService : IDomainEventQueue
             _logger.LogInformation("Domain event dequeued successfully.");
 
             if (result != null)
+            {
                 return;
+            }
 
             _logger.LogWarning("Dequeued domain event is null.");
         }

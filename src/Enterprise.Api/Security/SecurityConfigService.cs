@@ -18,19 +18,23 @@ public static class SecurityConfigService
     public static void ConfigureSecurity(this IServiceCollection services, IHostApplicationBuilder builder)
     {
         if (SkipConfiguration(builder.Configuration, builder.Environment))
+        {
             return;
-        
+        }
+
         JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
         AddAuthentication(builder, services);
-        AddAuthorization(builder, services);
+        AddAuthorization(services);
     }
 
     public static void UseSecurity(this WebApplication app)
     {
         if (SkipConfiguration(app.Configuration, app.Environment))
+        {
             return;
+        }
 
         app.UseAuthentication();
         app.UseMiddleware<UserLoggingScopeMiddleware>();
@@ -68,7 +72,7 @@ public static class SecurityConfigService
         //authBuilder.AddOAuth2Introspection(authority: jwtBearerTokenOptions.Authority);
     }
 
-    private static void AddAuthorization(IHostApplicationBuilder builder, IServiceCollection services)
+    private static void AddAuthorization(IServiceCollection services)
     {
         AuthorizationBuilder authBuilder = services.AddAuthorizationBuilder();
 

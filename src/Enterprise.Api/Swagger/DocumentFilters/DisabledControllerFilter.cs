@@ -22,12 +22,16 @@ public class DisabledControllerFilter : IDocumentFilter
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
         if (_controllerConfigOptions.EnableControllers)
+        {
             return;
+        }
 
         List<IGrouping<string, ApiDescription>> groupedDescriptions = context.ApiDescriptions.GroupBy(GetPath)            .ToList();
 
         if (!groupedDescriptions.Any())
+        {
             return;
+        }
 
         _logger.LogInformation(
             "Controllers have not been enabled. " +
@@ -51,12 +55,16 @@ public class DisabledControllerFilter : IDocumentFilter
         bool allAreControllers = group.All(desc => desc.ActionDescriptor is ControllerActionDescriptor);
 
         if (hasMinimalApi || !allAreControllers)
+        {
             return;
+        }
 
         foreach (ApiDescription apiDescription in group)
         {
             if (apiDescription.ActionDescriptor is not ControllerActionDescriptor)
+            {
                 continue;
+            }
 
             string path = GetPath(apiDescription);
             _logger.LogInformation("Removing path: {Path}.", path);

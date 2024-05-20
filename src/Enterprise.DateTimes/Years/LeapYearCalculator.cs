@@ -13,7 +13,9 @@ public class LeapYearCalculator : ILeapYearCalculator
         for (int year = startYear; year <= endYear; year++)
         {
             if (IsLeapYear(year, calendar))
+            {
                 leapYears.Add(year);
+            }
         }
 
         return leapYears;

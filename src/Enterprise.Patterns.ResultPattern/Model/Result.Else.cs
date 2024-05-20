@@ -33,7 +33,9 @@ public partial class Result<T>
     public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<T>> onError)
     {
         if (IsSuccess)
+        {
             return Value;
+        }
 
         return await onError(Errors).ConfigureAwait(false);
     }

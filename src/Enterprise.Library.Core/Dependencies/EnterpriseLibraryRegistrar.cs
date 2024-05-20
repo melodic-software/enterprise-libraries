@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Library.Core.Dependencies;
 
-internal class EnterpriseLibraryRegistrar : IRegisterServices
+internal sealed class EnterpriseLibraryRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

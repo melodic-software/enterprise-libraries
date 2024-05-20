@@ -3,7 +3,7 @@ using Enterprise.Logging.Options;
 
 namespace Enterprise.Api.Logging;
 
-internal class DefaultLoggingConfigOptions : LoggingConfigOptions
+internal sealed class DefaultLoggingConfigOptions : LoggingConfigOptions
 {
     internal DefaultLoggingConfigOptions()
     {

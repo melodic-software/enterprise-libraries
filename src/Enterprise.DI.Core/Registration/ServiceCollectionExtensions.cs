@@ -23,7 +23,9 @@ public static class ServiceCollectionExtensions
         where T2 : class, T // Enforces that T2 implements or derives from T.
     {
         if (!typeof(T).IsGenericTypeDefinition || !typeof(T2).IsGenericTypeDefinition)
+        {
             throw new ArgumentException("Both T and T2 must be open generic types.");
+        }
 
         ServiceDescriptor serviceDescriptor = new ServiceDescriptor(typeof(T), typeof(T2), serviceLifetime);
 

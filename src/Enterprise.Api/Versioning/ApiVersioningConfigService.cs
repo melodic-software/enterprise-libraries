@@ -38,16 +38,24 @@ public static class ApiVersioningConfigService
         List<IApiVersionReader> apiVersionReaders = [];
 
         if (configOptions.EnableUrlVersioning)
+        {
             apiVersionReaders.Add(new UrlSegmentApiVersionReader());
+        }
 
         if (configOptions.EnableQueryStringVersioning)
+        {
             apiVersionReaders.Add(new QueryStringApiVersionReader(VersionQueryStringParameterName));
+        }
 
         if (configOptions.EnableHeaderVersioning)
+        {
             apiVersionReaders.Add(new HeaderApiVersionReader(CustomVersionRequestHeader));
+        }
 
         if (configOptions.EnableMediaTypeVersioning)
+        {
             apiVersionReaders.Add(new MediaTypeApiVersionReader(MediaTypeVersionParameterName));
+        }
 
         return ApiVersionReader.Combine(apiVersionReaders.ToArray());
     }

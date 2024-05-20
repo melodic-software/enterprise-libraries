@@ -12,7 +12,9 @@ public partial class Result<T>
     public async Task<TOut> MatchAsync<TOut>(Func<T, Task<TOut>> onSuccess, Func<IEnumerable<IError>, Task<TOut>> onError)
     {
         if (IsSuccess)
+        {
             return await onSuccess(Value).ConfigureAwait(false);
+        }
 
         return await onError(Errors).ConfigureAwait(false);
     }
@@ -25,7 +27,9 @@ public partial class Result<T>
     public async Task<TOut> MatchFirstAsync<TOut>(Func<T, Task<TOut>> onSuccess, Func<IError, Task<TOut>> onFirstError)
     {
         if (IsSuccess)
+        {
             return await onSuccess(Value).ConfigureAwait(false);
+        }
 
         return await onFirstError(FirstError).ConfigureAwait(false);
     }

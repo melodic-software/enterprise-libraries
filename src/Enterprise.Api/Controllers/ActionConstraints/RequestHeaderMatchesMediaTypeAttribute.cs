@@ -16,7 +16,7 @@ namespace Enterprise.Api.Controllers.ActionConstraints;
 /// The [Produces] attribute simply states that the media type can be produced on output (does not impact routing).
 /// </summary>
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstraint
+public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstraint
 {
     private readonly string _requestHeaderToMatch;
     private readonly MediaTypeCollection _mediaTypes = new();
@@ -32,31 +32,36 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
         AddMediaType(mediaType, _mediaTypes, nameof(mediaType));
 
         foreach (string otherMediaType in otherMediaTypes)
+        {
             AddMediaType(otherMediaType, _otherMediaTypes, nameof(otherMediaTypes));
+        }
     }
 
     public bool Accept(ActionConstraintContext context)
     {
         IHeaderDictionary requestHeaders = context.RouteContext.HttpContext.Request.Headers;
 
-        if (!requestHeaders.ContainsKey(_requestHeaderToMatch))
+        if (!requestHeaders.TryGetValue(_requestHeaderToMatch, out StringValues requestHeader))
         {
             HandleUnacceptable(context);
             return false;
         }
 
-        StringValues requestHeader = requestHeaders[_requestHeaderToMatch];
-        MediaType parsedRequestMediaType = new MediaType(requestHeader!);
+        var parsedRequestMediaType = new MediaType(requestHeader!);
 
         HandleWildcard(requestHeader, out bool? canDefault);
 
         if (canDefault.HasValue)
+        {
             return canDefault.Value;
+        }
 
         bool canAccept = MediaTypeFound(_mediaTypes, parsedRequestMediaType) || MediaTypeFound(_otherMediaTypes, parsedRequestMediaType);
 
         if (canAccept)
+        {
             return true;
+        }
 
         HandleUnacceptable(context);
 
@@ -66,13 +71,17 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
     private static void HandleUnacceptable(ActionConstraintContext context)
     {
         if (!context.RouteContext.HttpContext.Response.HasStarted)
+        {
             context.RouteContext.HttpContext.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+        }
     }
 
     private void AddMediaType(string mediaType, MediaTypeCollection mediaTypeCollection, string argumentName)
     {
         if (!MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue? parsedMediaType))
+        {
             throw new ArgumentException(argumentName);
+        }
 
         mediaTypeCollection.Add(parsedMediaType);
     }
@@ -83,10 +92,12 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
 
         // https://www.rfc-editor.org/rfc/rfc9110.html
         bool isWildcard = requestHeader.Count == 1 && requestHeader
-            .All(x => !string.IsNullOrWhiteSpace(x) && x.EndsWith(AcceptSubtypeWildcard));
+            .All(x => !string.IsNullOrWhiteSpace(x) && x.EndsWith(AcceptSubtypeWildcard, StringComparison.OrdinalIgnoreCase));
 
         if (!isWildcard)
+        {
             return;
+        }
 
         // TODO: do we want to make this more configurable?
         // do we need to account for other media type defaults?
@@ -98,10 +109,12 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
         // if one of the media types is a match, return true
         foreach (string mediaType in mediaTypes)
         {
-            MediaType parsedMediaType = new MediaType(mediaType);
+            var parsedMediaType = new MediaType(mediaType);
 
             if (parsedRequestMediaType.Equals(parsedMediaType))
+            {
                 return true;
+            }
         }
 
         return false;

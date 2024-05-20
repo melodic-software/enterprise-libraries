@@ -4,4 +4,4 @@
 /// Indicates that an assembly should be automatically loaded.
 /// </summary>
 [AttributeUsage(AttributeTargets.Assembly)]
-public class AutoLoadAttribute : Attribute;
+public sealed class AutoLoadAttribute : Attribute;

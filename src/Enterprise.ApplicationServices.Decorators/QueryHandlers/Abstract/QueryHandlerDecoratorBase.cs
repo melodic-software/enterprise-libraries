@@ -21,7 +21,7 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBa
     public async Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
-        TQuery typedQuery = (TQuery)query;
+        var typedQuery = (TQuery)query;
         TResponse result = await HandleAsync(typedQuery, cancellationToken);
         return result;
     }
@@ -30,9 +30,9 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBa
     public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
 
     /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> eventCallback) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        Decorated.RegisterEventCallback(eventCallback);
+        Decorated.RegisterEventCallback(action);
     }
 
     /// <inheritdoc />

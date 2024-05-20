@@ -7,7 +7,9 @@ public static class HttpResponseMessageExtensions
     public static bool IsRedirect(this HttpResponseMessage? response)
     {
         if (response == null)
+        {
             return false;
+        }
 
         switch (response.StatusCode)
         {

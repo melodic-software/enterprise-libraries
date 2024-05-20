@@ -26,12 +26,16 @@ public static class VendorMediaTypeService
         string vendorPrefix = GetVendorPrefix(companyName);
 
         if (subTypes.StartsWith(Period))
+        {
             subTypes = subTypes.Substring(1);
+        }
 
         string mediaType = $"{vendorPrefix}{Period}{subTypes}";
 
         if (string.IsNullOrEmpty(suffix))
+        {
             return mediaType;
+        }
 
         if (!suffix.StartsWith(PlusSign))
         {

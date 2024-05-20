@@ -12,7 +12,7 @@
             It can potentially log personally identifiable information (PII). Consider the risk and avoid logging sensitive information.
             </summary>
         </member>
-        <member name="F:Enterprise.Logging.AspNetCore.Middleware.LoggingMiddlewareConfigOptions.UseProviders">
+        <member name="P:Enterprise.Logging.AspNetCore.Middleware.LoggingMiddlewareConfigOptions.UseProviders">
             <summary>
             Configure the specific provider available for use in the application.
             </summary>

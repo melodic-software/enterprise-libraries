@@ -23,27 +23,31 @@ internal static class AssemblyPathProcessor
     /// <returns>An array of successfully loaded assemblies.</returns>
     internal static Assembly[] ProcessAssemblyPaths(Func<AssemblyName, bool>? filterPredicate, string[] assemblyPaths, MetadataLoadContext metadataLoadContext)
     {
-        ConcurrentBag<Assembly> loadedAssemblies = new ConcurrentBag<Assembly>();
+        var loadedAssemblies = new ConcurrentBag<Assembly>();
 
         Parallel.ForEach(assemblyPaths, assemblyPath =>
         {
             try
             {
                 if (!File.Exists(assemblyPath))
+                {
                     throw new FileNotFoundException($"Assembly path \"{assemblyPath}\" does not exist.");
+                }
 
                 AssemblyName assemblyName = AssemblyLoadContext.GetAssemblyName(assemblyPath);
 
                 if (SkipAssembly(filterPredicate, assemblyPath, metadataLoadContext, assemblyName))
+                {
                     return;
+                }
 
-                Assembly loadedAssembly = Assembly.Load(assemblyName);
+                var loadedAssembly = Assembly.Load(assemblyName);
                 loadedAssemblies.Add(loadedAssembly);
-                PreStartupLogger.Instance.LogDebug($"Successfully loaded assembly: {loadedAssembly.FullName}.");
+                PreStartupLogger.Instance.LogDebug("Successfully loaded assembly: {AssemblyName}.", loadedAssembly.FullName);
             }
             catch (Exception ex)
             {
-                PreStartupLogger.Instance.LogError(ex, $"Failed to load assembly from path: {assemblyPath}.");
+                PreStartupLogger.Instance.LogError(ex, "Failed to load assembly from path: {AssemblyPath}.", assemblyPath);
                 throw;
             }
         });
@@ -64,7 +68,7 @@ internal static class AssemblyPathProcessor
         // Allow for early filtering on the assembly name.
         if (filterPredicate != null && !filterPredicate(assemblyName))
         {
-            PreStartupLogger.Instance.LogDebug($"Skipping assembly because it does not meet filter criteria: {assemblyName}.");
+            PreStartupLogger.Instance.LogDebug("Skipping assembly because it does not meet filter criteria: {AssemblyName}.", assemblyName);
             return true;
         }
 
@@ -76,12 +80,13 @@ internal static class AssemblyPathProcessor
         IList<CustomAttributeData> customAttributes = metadataAssembly.GetCustomAttributesData();
         bool hasAutoLoadAttribute = customAttributes.Any(ad => ad.AttributeType.Name == AutoLoadAttributeName);
 
-        if (!hasAutoLoadAttribute)
+        if (hasAutoLoadAttribute)
         {
-            PreStartupLogger.Instance.LogDebug($"Skipping assembly without AutoLoadAttribute: {assemblyName}.");
-            return true;
+            return false;
         }
 
-        return false;
+        PreStartupLogger.Instance.LogDebug("Skipping assembly without AutoLoadAttribute: {AssemblyName}.", assemblyName);
+        
+        return true;
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.Caching.Dependencies;
 
-internal class CachingServiceRegistrar : IRegisterServices
+internal sealed class CachingServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

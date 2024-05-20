@@ -10,7 +10,7 @@ public abstract class ServiceRegistrationAttribute : Attribute
     /// When set to true, the class is registered as a service for the interface that matches its name, 
     /// ignoring other implemented interfaces.
     /// </summary>
-    public bool AsMatchingInterface { get; } = false;
+    public bool AsMatchingInterface { get; }
 
     /// <summary>
     /// Gets a value indicating whether the class should be registered as a service for all interfaces it implements.

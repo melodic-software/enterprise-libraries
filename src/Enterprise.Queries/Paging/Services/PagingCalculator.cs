@@ -14,7 +14,9 @@ public static class PagingCalculator
         int totalPages = 0;
 
         if (pageSize == 0)
+        {
             return totalPages;
+        }
 
         totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 

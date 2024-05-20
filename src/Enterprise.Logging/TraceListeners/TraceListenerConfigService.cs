@@ -17,7 +17,9 @@ internal static class TraceListenerConfigService
     internal static void ConfigureTraceListeners(this IHostApplicationBuilder builder, TraceListenerConfigOptions configOptions)
     {
         if (!configOptions.EnableTextFileTraceListener)
+        {
             return;
+        }
 
         ArgumentException.ThrowIfNullOrWhiteSpace(configOptions.LogFileApplicationName);
 

@@ -33,15 +33,21 @@ public class EventCallbackRegistrar : IEventCallbackRegistrar
         else
         {
             if (_callbackDictionary[eventType] is not IEnumerable<IEventCallback<TEvent>> existingCallbacks)
+            {
                 throw new Exception("Existing callback list is not valid.");
+            }
 
-            List<IEventCallback<TEvent>> existingCallbackList = existingCallbacks.ToList();
+            var existingCallbackList = existingCallbacks.ToList();
 
             // Check for duplicates before adding.
-            if (!existingCallbackList.Any(x => x.Equals(eventCallback)))
+            if (!existingCallbackList.Contains(eventCallback))
+            {
                 existingCallbackList.Add(eventCallback);
+            }
             else
+            {
                 _logger.LogWarning("Attempted to register a duplicate callback.");
+            }
         }
 
         _logger.LogDebug("Callback successfully registered.");

@@ -14,8 +14,8 @@ public abstract class MediatRQueryHandlerBase<TQuery, TResponse>
     {
     }
 
-    public async Task<Result<TResponse>> Handle(TQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> Handle(TQuery request, CancellationToken cancellationToken)
     {
-        return await HandleAsync(query, cancellationToken);
+        return await HandleAsync(request, cancellationToken);
     }
 }

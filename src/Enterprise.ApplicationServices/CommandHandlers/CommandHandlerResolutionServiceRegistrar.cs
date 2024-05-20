@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.CommandHandlers;
 
-internal class CommandHandlerResolutionServiceRegistrar : IRegisterServices
+internal sealed class CommandHandlerResolutionServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

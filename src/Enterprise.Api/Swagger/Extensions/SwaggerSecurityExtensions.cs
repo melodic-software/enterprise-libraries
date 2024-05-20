@@ -10,7 +10,9 @@ public static class SwaggerSecurityExtensions
     public static void AddSecurity(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
     {
         if (!swaggerConfigOptions.OAuthScopes.Any())
+        {
             swaggerConfigOptions.OAuthScopes = SecurityConstants.DemoOAuthScopes;
+        }
 
         options.AddSecurityDefinitions(swaggerConfigOptions);
         options.AddSecurityRequirements(swaggerConfigOptions);

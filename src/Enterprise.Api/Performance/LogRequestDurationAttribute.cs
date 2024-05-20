@@ -14,11 +14,12 @@ namespace Enterprise.Api.Performance;
 /// See <see cref="LogRequestDurationFilter"/> for a better way to apply this in a web API.
 /// </summary>
 [Obsolete("This is only for demonstration purposes, and eventually will be removed.")]
-internal class LogRequestDurationAttribute : Attribute, IAsyncActionFilter
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+internal sealed class LogRequestDurationAttribute : Attribute, IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        Stopwatch stopWatch = Stopwatch.StartNew();
+        var stopWatch = Stopwatch.StartNew();
 
         try
         {

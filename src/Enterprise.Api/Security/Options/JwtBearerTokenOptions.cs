@@ -37,7 +37,7 @@ public class JwtBearerTokenOptions
     /// Allows for defining multiple valid issuers, which may be needed if there are different URIs or port mappings.
     /// When empty, the <see cref="Authority"/> value will be used.
     /// </summary>
-    public HashSet<string> ValidIssuers = [];
+    public HashSet<string> ValidIssuers { get; } = [];
 
     /// <summary>
     /// HTTPs metadata will only be required in the production environment unless this is set.
@@ -49,5 +49,5 @@ public class JwtBearerTokenOptions
     /// A custom delegate that allows for complete customization of JwtBearerOptions.
     /// NOTE: if this is provided, all the default configuration is ignored.
     /// </summary>
-    public Action<JwtBearerOptions>? ConfigureJwtBearerOptions { get; set; } = null;
+    public Action<JwtBearerOptions>? ConfigureJwtBearerOptions { get; set; }
 }

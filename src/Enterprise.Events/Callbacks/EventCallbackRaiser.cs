@@ -23,7 +23,9 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
     public void RaiseCallbacks(IEnumerable<IEvent> events)
     {
         foreach (IEvent @event in events)
+        {
             RaiseCallbacks(@event);
+        }
     }
 
     /// <inheritdoc />
@@ -47,7 +49,9 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
         _logger.LogDebug("Attempting to raise {CallbackCount} callback(s).", callbackList.Count);
 
         foreach (IEventCallback callback in callbackList)
+        {
             RaiseCallback(@event, callback);
+        }
     }
 
     private void RaiseCallback<TEvent>(TEvent @event, IEventCallback callback) where TEvent : IEvent

@@ -87,9 +87,9 @@ public class EventServiceFacade : IEventServiceFacade
     }
 
     /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> eventCallback) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        _eventCallbackService.RegisterEventCallback(eventCallback);
+        _eventCallbackService.RegisterEventCallback(action);
     }
 
     /// <inheritdoc />

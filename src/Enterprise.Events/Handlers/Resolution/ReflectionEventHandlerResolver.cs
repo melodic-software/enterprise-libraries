@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
+using System.Reflection;
 using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
@@ -9,6 +10,7 @@ public class ReflectionEventHandlerResolver : EventHandlerResolverBase
 {
     public ReflectionEventHandlerResolver(IServiceProvider serviceProvider) : base(serviceProvider)
     {
+
     }
 
     /// <inheritdoc />
@@ -49,19 +51,21 @@ public class ReflectionEventHandlerResolver : EventHandlerResolverBase
                         .MakeGenericType(eventType)));
 
             // Convert/change the type to the one we defined.
-            Task? task = Convert.ChangeType(result, taskType) as Task;
+            var task = Convert.ChangeType(result, taskType, CultureInfo.InvariantCulture) as Task;
 
             // Await the task and return its result.
             await (task ?? throw new InvalidOperationException("Task conversion failed.")).ConfigureAwait(false);
 
             // Extract the result from the Task and return it.
-            PropertyInfo resultProperty = task.GetType().GetProperty(nameof(Task<object>.Result)) ??
+            PropertyInfo resultProperty = task.GetType().GetProperty(ResultPropertyName) ??
                                           throw new InvalidOperationException("");
 
-            IEnumerable<IHandleEvent> eventHandlers = (IEnumerable<IHandleEvent>)(resultProperty.GetValue(task) ??
+            var eventHandlers = (IEnumerable<IHandleEvent>)(resultProperty.GetValue(task) ??
                 new InvalidOperationException("Task result is invalid."));
 
             return eventHandlers;
         };
     }
+
+    private static string ResultPropertyName => nameof(Task<object>.Result);
 }

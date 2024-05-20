@@ -13,7 +13,9 @@ public static class SortingExtensions
         ArgumentNullException.ThrowIfNull(mappingDictionary);
 
         if (string.IsNullOrWhiteSpace(orderBy))
+        {
             return query;
+        }
 
         string orderByString = string.Empty;
 
@@ -25,7 +27,9 @@ public static class SortingExtensions
 
         // apply the orderBy clause
         foreach (string orderByClause in trimmedOrderBySplit)
+        {
             orderByString = SortService.ApplyOrderByClause(orderByClause, mappingDictionary, orderByString);
+        }
 
         IOrderedQueryable<T> result = query.OrderBy(orderByString);
 

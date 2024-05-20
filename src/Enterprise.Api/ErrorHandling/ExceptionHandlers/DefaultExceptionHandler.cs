@@ -8,7 +8,7 @@ namespace Enterprise.Api.ErrorHandling.ExceptionHandlers;
 
 // https://anthonygiretti.com/2023/06/14/asp-net-core-8-improved-exception-handling-with-iexceptionhandler/
 
-internal class DefaultExceptionHandler : IExceptionHandler
+internal sealed class DefaultExceptionHandler : IExceptionHandler
 {
     private readonly ILogger<DefaultExceptionHandler> _logger;
 
@@ -21,7 +21,7 @@ internal class DefaultExceptionHandler : IExceptionHandler
     {
         _logger.LogError(exception, "An unexpected error occurred.");
 
-        ProblemDetails problemDetails = new ProblemDetails
+        var problemDetails = new ProblemDetails
         {
             Status = (int)HttpStatusCode.InternalServerError,
             Type = exception.GetType().Name,

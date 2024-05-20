@@ -28,16 +28,20 @@ public partial class Result<T>
     public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<Result<TOut>>> onSuccess)
     {
         if (IsSuccess)
+        {
             return await onSuccess(Value).ConfigureAwait(false);
-        
+        }
+
         return Errors.ToResult<TOut>();
     }
 
     public async Task<Result<T>> ThenAsync(Func<T, Task> onSuccess)
     {
         if (IsSuccess)
+        {
             await onSuccess(Value).ConfigureAwait(false);
-        
+        }
+
         return Errors.ToResult<T>();
     }
 

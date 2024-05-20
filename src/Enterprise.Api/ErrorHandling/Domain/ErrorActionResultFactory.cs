@@ -23,7 +23,9 @@ public static class ErrorActionResultFactory
         ProblemDetailsFactory problemDetailsFactory)
     {
         if (!errors.Any())
+        {
             throw new InvalidOperationException("No errors were provided to create an ActionResult.");
+        }
 
         errors = ErrorDedupeService.DedupeErrors(errors).ToList();
 
@@ -39,7 +41,9 @@ public static class ErrorActionResultFactory
     private static ActionResult CreateActionResult(HttpContext httpContext, ProblemDetailsFactory factory, int statusCode, IEnumerable<IError> scopedErrors)
     {
         if (statusCode == StatusCodes.Status204NoContent)
+        {
             return new NoContentResult();
+        }
 
         IEnumerable<IError> meaningfulErrors = scopedErrors.GetMeaningful().ToList();
 
@@ -51,7 +55,9 @@ public static class ErrorActionResultFactory
         ValidationProblemDetails problemDetails = factory.CreateValidationProblemDetails(httpContext, errorDictionary, statusCode);
 
         if (Activity.Current?.Id != null)
+        {
             problemDetails.Extensions[ProblemDetailsConstants.TraceIdExtensionKey] = Activity.Current.Id;
+        }
 
         // TODO: Make this conditional?
         problemDetails.Instance = httpContext.Request.Path;

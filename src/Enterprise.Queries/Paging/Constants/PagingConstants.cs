@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Queries.Paging.Constants;
 
-public class PagingConstants
+public static class PagingConstants
 {
     public const int DefaultPageNumber = FirstPage;
     public const int DefaultPageSize = 25;

@@ -2,7 +2,7 @@
 
 namespace Enterprise.Serilog.Startup;
 
-internal class PreStartupSerilogWrapper : ILogger
+internal sealed class PreStartupSerilogWrapper : ILogger
 {
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => default;
     
@@ -29,10 +29,10 @@ internal class PreStartupSerilogWrapper : ILogger
                 logger.Warning(formattedMessage);
                 break;
             case LogLevel.Error:
-                logger.Error(formattedMessage, exception);
+                logger.Error(exception, formattedMessage);
                 break;
             case LogLevel.Critical:
-                logger.Error(formattedMessage, exception);
+                logger.Error(exception, formattedMessage);
                 break;
             case LogLevel.None:
                 break;

@@ -53,7 +53,7 @@ internal static class ExceptionHandlerMiddlewareService
                     // TODO: Add delegate hook for handling additional exception types OR override this completely.
                     // Maybe use a dictionary for handle?
 
-                    await GlobalErrorHandler.HandleErrorAsync(context, exception, logger);
+                    await GlobalErrorHandler.HandleErrorAsync(context, exception);
                 }
                 else
                 {

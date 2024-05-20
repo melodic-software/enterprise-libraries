@@ -36,10 +36,14 @@ public class CustomStoreKeyGenerator : IStoreKeyGenerator
         bool versionHeaderParsed = context.HttpRequest.Headers.TryGetValue(CustomVersionRequestHeader, out StringValues versionHeaderValue);
 
         if (!versionHeaderParsed)
+        {
             return storeKey;
+        }
 
         if (!storeKey.TryGetValue(RequestHeaderValuesKey, out string requestHeaderValues))
+        {
             return storeKey;
+        }
 
         requestHeaderValues += $"{Dash}{versionHeaderValue}";
         storeKey[RequestHeaderValuesKey] = requestHeaderValues;
@@ -49,19 +53,11 @@ public class CustomStoreKeyGenerator : IStoreKeyGenerator
 
     private Task<StoreKey> GenerateCustomStoreKey(StoreKeyContext context)
     {
-        List<string> values;
-
-        if (context.VaryByAll)
-        {
-            values = context.HttpRequest.Headers.SelectMany(h => h.Value).ToList();
-        }
-        else
-        {
-            values = context.HttpRequest.Headers
-                .Where(x => context.Vary.Any(h => h.Equals(x.Key, StringComparison.CurrentCultureIgnoreCase)))
+        List<string> values = context.VaryByAll
+            ? context.HttpRequest.Headers.SelectMany(h => h.Value).ToList()
+            : context.HttpRequest.Headers
+                .Where(x => context.Vary.Any(h => h.Equals(x.Key, StringComparison.OrdinalIgnoreCase)))
                 .SelectMany(h => h.Value).ToList();
-
-        }
 
         string path = context.HttpRequest.Path.ToString();
         string queryString = context.HttpRequest.QueryString.ToString();
@@ -70,9 +66,11 @@ public class CustomStoreKeyGenerator : IStoreKeyGenerator
         bool versionHeaderParsed = context.HttpRequest.Headers.TryGetValue(CustomVersionRequestHeader, out StringValues versionHeaderValue);
 
         if (versionHeaderParsed)
+        {
             values.Add(versionHeaderValue);
+        }
 
-        StoreKey storeKey = new StoreKey
+        var storeKey = new StoreKey
         {
             { QueryStringKey, path },
             { ResourcePathKey, queryString },

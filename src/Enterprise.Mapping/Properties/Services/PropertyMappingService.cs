@@ -19,13 +19,13 @@ public class PropertyMappingService : IPropertyMappingService
     public Dictionary<string, PropertyMappingValue> GetPropertyMapping<TSource, TDestination>()
     {
         // Get the matching mapping.
-        List<PropertyMapping<TSource, TDestination>> matchingMapping = _propertyMappings
+        var matchingMapping = _propertyMappings
             .OfType<PropertyMapping<TSource, TDestination>>()
             .ToList();
 
         if (matchingMapping.Count == 1)
         {
-            PropertyMapping<TSource, TDestination> first = matchingMapping.First();
+            PropertyMapping<TSource, TDestination> first = matchingMapping[0];
             Dictionary<string, PropertyMappingValue> mappingDictionary = first.MappingDictionary;
             return mappingDictionary;
         }
@@ -36,7 +36,9 @@ public class PropertyMappingService : IPropertyMappingService
     public bool MappingExistsFor<TSource, TDestination>(string propertyNames)
     {
         if (string.IsNullOrEmpty(propertyNames))
+        {
             return true;
+        }
 
         Dictionary<string, PropertyMappingValue> mappingDictionary = GetPropertyMapping<TSource, TDestination>();
 
@@ -47,7 +49,7 @@ public class PropertyMappingService : IPropertyMappingService
         string[] trimmedPropertyNames = propertyNamesSplit.Select(s => s.Trim()).ToArray();
 
         // Run through the property names.
-        bool allPropertiesExist = trimmedPropertyNames.All(trimmedPropertyName => PropertyExists(trimmedPropertyName, mappingDictionary));
+        bool allPropertiesExist = Array.TrueForAll(trimmedPropertyNames, trimmedPropertyName => PropertyExists(trimmedPropertyName, mappingDictionary));
 
         return allPropertiesExist;
     }
@@ -58,7 +60,9 @@ public class PropertyMappingService : IPropertyMappingService
 
         // Find the matching property.
         if (!mappingDictionary.ContainsKey(propertyName))
+        {
             return false;
+        }
 
         return true;
     }

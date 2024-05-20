@@ -19,7 +19,9 @@ public class TimeOutExceptionHandler : IExceptionHandler
         _logger.LogError(exception, "A timeout occurred.");
 
         if (exception is not TimeoutException)
+        {
             return false;
+        }
 
         int statusCode = StatusCodes.Status408RequestTimeout;
 

@@ -18,7 +18,9 @@ public static class IISConfigService
             .GetOptionsInstance<IISIntegrationOptions>(configuration, IISIntegrationOptions.ConfigSectionKey);
 
         if (!customOptions.EnableIISIntegration)
+        {
             return;
+        }
 
         services.Configure<IISOptions>(options =>
         {

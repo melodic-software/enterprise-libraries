@@ -19,7 +19,9 @@ internal static class W3CLoggingConfigurer
             .GetOptionsInstance<W3CLoggingConfigOptions>(configuration, W3CLoggingConfigOptions.ConfigSectionKey);
 
         if (!configOptions.EnableW3CLogging)
+        {
             return;
+        }
 
         ArgumentException.ThrowIfNullOrWhiteSpace(configOptions.W3CLogFileApplicationName);
 
@@ -45,7 +47,9 @@ internal static class W3CLoggingConfigurer
         W3CLoggingConfigOptions configOptions = app.Services.GetRequiredService<IOptions<W3CLoggingConfigOptions>>().Value;
 
         if (!configOptions.EnableW3CLogging)
+        {
             return;
+        }
 
         HttpLoggingBuilderExtensions.UseW3CLogging(app);
     }

@@ -27,10 +27,6 @@ public static class ErrorHandlingConfigService
             // TODO: Do we need to remove this if the custom global error handling middleware is being used?
             app.UseDeveloperExceptionPage();
         }
-        else
-        {
-
-        }
 
         // We're relying on the Hellang problem details middleware as our global exception handler.
         // This line can cause a runtime error if problem details service middleware (Microsoft default) is not registered.

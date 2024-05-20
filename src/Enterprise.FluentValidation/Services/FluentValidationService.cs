@@ -32,7 +32,9 @@ public static class FluentValidationService
             .ToList();
 
         if (!validationErrors.Any())
+        {
             return;
+        }
 
         // This should be handled in an upper layer - like a global error handling middleware.
         // TODO: Do we want to use an exception here or raise validation failure events and return out.

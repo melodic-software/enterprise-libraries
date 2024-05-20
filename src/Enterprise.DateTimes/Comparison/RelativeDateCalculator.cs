@@ -13,7 +13,9 @@ public class RelativeDateCalculator : IRelativeDateCalculator
         pastDate = pastDate.ToUniversalTime();
 
         if (pastDate.IsLaterThan(referenceDate))
+        {
             return Calculation<TimeSpan>.CanNotBeMadeBecause(FutureDateProvidedForPastCalculation);
+        }
 
         TimeSpan result = referenceDate - pastDate;
 
@@ -26,7 +28,9 @@ public class RelativeDateCalculator : IRelativeDateCalculator
         futureDate = futureDate.ToUniversalTime();
 
         if (futureDate.IsEarlierThan(referenceDate))
+        {
             return Calculation<TimeSpan>.CanNotBeMadeBecause(PastDateProvidedForFutureCalculation);
+        }
 
         TimeSpan result = futureDate - referenceDate;
 

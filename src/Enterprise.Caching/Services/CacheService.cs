@@ -18,7 +18,7 @@ public sealed class CacheService : ICacheService
     public async Task<T?> GetAsync<T>(string cacheKey, CancellationToken cancellationToken = default)
     {
         byte[]? bytes = await _cache.GetAsync(cacheKey, cancellationToken);
-        T? value = bytes is null ? default : _byteArraySerializer.Deserialize<T>(bytes); ;
+        T? value = bytes is null ? default : _byteArraySerializer.Deserialize<T>(bytes);
         return value;
     }
 

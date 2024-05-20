@@ -15,6 +15,9 @@ public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEven
 {
     private int _version;
 
+    // TODO: move the optimistic concurrence properties into a base implementation?
+    // See comment on the aggregate root entity.
+
     /// <summary>
     /// Gets the current version of the aggregate.
     /// This is used for concurrency control and event ordering.
@@ -30,7 +33,9 @@ public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEven
     public void LoadFromHistory(IEnumerable<IDomainEvent> history)
     {
         foreach (IDomainEvent domainEvent in history)
+        {
             ApplyChange(domainEvent, false);
+        }
     }
 
     /// <summary>
@@ -87,12 +92,16 @@ public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEven
     {
         // Prevent applying the same change more than once.
         if (DomainEvents.Any(c => c.Id == domainEvent.Id))
+        {
             return;
+        }
 
         Apply(domainEvent);
 
         if (!isNewEvent)
+        {
             return;
+        }
 
         DomainEvents.Add(domainEvent);
 

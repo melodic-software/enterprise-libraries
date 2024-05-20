@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.DateTimes.Dependencies;
 
-internal class DateTimeServiceRegistrar : IRegisterServices
+internal sealed class DateTimeServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

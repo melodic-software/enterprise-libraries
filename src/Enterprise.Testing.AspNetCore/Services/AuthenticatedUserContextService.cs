@@ -10,16 +10,18 @@ public static class AuthenticatedUserContextService
 
     public static HttpContext AssignAuthenticatedUser(List<Claim> userClaims, HttpContext? httpContext = null, Controller? controller = null)
     {
-        ClaimsIdentity claimsIdentity = new ClaimsIdentity(userClaims, UnitTestAuthenticationType);
-        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+        var claimsIdentity = new ClaimsIdentity(userClaims, UnitTestAuthenticationType);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
         httpContext ??= HttpContextCreationService.CreateDefaultContext();
 
         httpContext.User = claimsPrincipal;
 
         if (controller == null)
+        {
             return httpContext;
-            
+        }
+
         controller.ControllerContext = new ControllerContext
         {
             HttpContext = httpContext

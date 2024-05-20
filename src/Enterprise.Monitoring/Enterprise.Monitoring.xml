@@ -4,7 +4,7 @@
         <name>Enterprise.Monitoring</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Monitoring.Health.Model.UriGroup.#ctor(System.String,System.Net.Http.HttpMethod,System.String)">
+        <member name="M:Enterprise.Monitoring.Health.Model.UriGroup.#ctor(System.Uri,System.Net.Http.HttpMethod,System.String)">
             <summary>
             Create a new URI group.
             </summary>

@@ -15,16 +15,18 @@ public class BirthdayCalculator : IBirthdayCalculator
         DateTimeOffset today = DateTimeOffset.UtcNow.Date;
 
         if (birthDate.IsLaterThan(today))
+        {
             return Calculation<int>.CanNotBeMadeBecause(BirthDateIsInTheFuture);
+        }
 
-        DateTimeOffset birthday = new DateTimeOffset(today.Year, birthDate.Month, 01, 0, 0, 0, TimeSpan.Zero);
+        var birthday = new DateTimeOffset(today.Year, birthDate.Month, 01, 0, 0, 0, TimeSpan.Zero);
 
         // handle leap days
         birthday = birthday.AddDays(birthDate.Day - 1);
 
         if (birthday < today)
         {
-            birthday = new DateTime(today.Year + 1, birthDate.Month, 01);
+            birthday = new DateTime(today.Year + 1, birthDate.Month, 01, 0, 0, 0, DateTimeKind.Unspecified);
 
             // handle leap days
             birthday = birthday.AddDays(birthDate.Day - 1);

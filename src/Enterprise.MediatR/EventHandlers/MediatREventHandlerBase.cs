@@ -7,8 +7,8 @@ namespace Enterprise.MediatR.EventHandlers;
 public abstract class MediatREventHandlerBase<T> : EventHandlerBase<T>, INotificationHandler<T>
     where T : IEvent, INotification
 {
-    public async Task Handle(T @event, CancellationToken cancellationToken)
+    public async Task Handle(T notification, CancellationToken cancellationToken)
     {
-        await HandleAsync(@event);
+        await HandleAsync(notification);
     }
 }

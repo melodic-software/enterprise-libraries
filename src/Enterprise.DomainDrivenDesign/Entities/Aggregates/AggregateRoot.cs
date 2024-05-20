@@ -2,6 +2,10 @@
 
 namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 
+// TODO: Do we want to add optimistic concurrency here?
+// A version property, and a version incremented property to only increment the version once per transaction?
+// Either a state change or domain event being recorded would trigger the version increment.
+
 /// <summary>
 /// An aggregate root is an entity that is composed of one or more entities, value objects, etc.
 /// This base implementation includes basic functionalities for domain event recording and management.
@@ -30,6 +34,12 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId
     /// <param name="domainEvent"></param>
     protected virtual void Record(IDomainEvent domainEvent)
     {
+        // Prevent recording of duplicate events.
+        if (DomainEvents.Any(x => x.Id == domainEvent.Id))
+        {
+            return;
+        }
+
         DomainEvents.Add(domainEvent);
     }
 }

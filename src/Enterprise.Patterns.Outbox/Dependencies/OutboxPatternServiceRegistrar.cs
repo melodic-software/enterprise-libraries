@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Patterns.Outbox.Dependencies;
 
-internal class OutboxPatternServiceRegistrar : IRegisterServices
+internal sealed class OutboxPatternServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
@@ -16,7 +16,7 @@ internal class OutboxPatternServiceRegistrar : IRegisterServices
         {
             ISerializeJson jsonSerializer = new OutboxMessageContentSerializer();
             IDateTimeUtcNowProvider dateTimeProvider = provider.GetRequiredService<IDateTimeUtcNowProvider>();
-            EventOutboxMessageFactory outboxMessageFactory = new EventOutboxMessageFactory(jsonSerializer, dateTimeProvider);
+            var outboxMessageFactory = new EventOutboxMessageFactory(jsonSerializer, dateTimeProvider);
             return outboxMessageFactory;
         });
     }

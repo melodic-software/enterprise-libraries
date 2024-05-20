@@ -40,7 +40,9 @@ public class EnvironmentFilter : IDocumentFilter
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
         if (_webHostEnvironment.IsDevelopment())
+        {
             return;
+        }
 
         HashSet<string> pathsToExclude = new HashSet<string>();
 
@@ -63,7 +65,9 @@ public class EnvironmentFilter : IDocumentFilter
             bool isEndpointRestricted = isRestrictedByMetadata || isRestrictedByAttribute;
 
             if (!isEndpointRestricted)
+            {
                 continue;
+            }
 
             string cleanPathKey = "/" + apiDescription.RelativePath?.Split('?')[0];
 

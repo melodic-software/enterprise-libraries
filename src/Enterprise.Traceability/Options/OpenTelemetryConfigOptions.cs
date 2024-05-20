@@ -4,5 +4,5 @@ public class OpenTelemetryConfigOptions
 {
     public const string ConfigKeyName = "Custom:OpenTelemetry";
 
-    public bool EnableOpenTelemetry { get; set; } = false;
+    public bool EnableOpenTelemetry { get; set; }
 }

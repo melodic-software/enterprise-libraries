@@ -30,7 +30,9 @@ public static class ListExtensions
         else
         {
             foreach (T item in items)
+            {
                 list.Add(item);
+            }
         }
     }
 }

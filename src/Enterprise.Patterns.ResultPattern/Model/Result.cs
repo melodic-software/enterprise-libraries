@@ -2,6 +2,7 @@
 using Enterprise.Patterns.ResultPattern.Errors;
 using Enterprise.Patterns.ResultPattern.Errors.Extensions;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text;
 
 namespace Enterprise.Patterns.ResultPattern.Model;
@@ -19,7 +20,7 @@ public class Result : IResult
     public bool IsFailure => !IsSuccess;
     public List<IError> Errors => _errors.GetTrueErrors();
     public bool HasErrors => Errors.HasTrueError();
-    public IError FirstError => Errors.FirstOrDefault(x => x.IsTrueError()) ?? Errors.FirstOrDefault() ?? Error.None();
+    public IError FirstError => Errors.Find(x => x.IsTrueError()) ?? Errors.FirstOrDefault() ?? Error.None();
     
     protected internal Result(IEnumerable<IError> errors)
     {
@@ -46,7 +47,9 @@ public class Result : IResult
         string result = $"{nameof(IsSuccess)}: {IsSuccess}";
 
         if (Errors.Any())
+        {
             result += $" Error(s): {Errors.Count}";
+        }
 
         return result;
     }
@@ -73,16 +76,22 @@ public partial class Result<T> : Result, IResult<T>
         get
         {
             if (IsSuccess)
+            {
                 return _value!;
+            }
 
             // Building a detailed error message if the result is a failure.
-            StringBuilder errorMessageBuilder = new StringBuilder(FailedResultValueAccessErrorMessage);
+            var errorMessageBuilder = new StringBuilder(FailedResultValueAccessErrorMessage);
 
             if (Errors.Any())
+            {
                 errorMessageBuilder.Append(" Errors: ");
+            }
 
             foreach (IError error in Errors)
-                errorMessageBuilder.AppendLine($"{error.Code} - {error.Message}");
+            {
+                errorMessageBuilder.AppendLine(CultureInfo.InvariantCulture, $"{error.Code} - {error.Message}");
+            }
 
             throw new InvalidOperationException(errorMessageBuilder.ToString());
         }

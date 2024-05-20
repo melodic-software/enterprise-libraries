@@ -26,7 +26,9 @@ public static class CorsConfigService
         CorsConfigOptions options = OptionsInstanceService.Instance.GetOptionsInstance<CorsConfigOptions>(configuration, CorsConfigOptions.ConfigSectionKey);
 
         if (!options.EnableCors)
+        {
             return;
+        }
 
         if (options.ConfigureCustom != null)
         {
@@ -49,7 +51,9 @@ public static class CorsConfigService
         // the logger may not be available until the application is built, so a collection of log messages may need to be instantiated
         // or a logger reference may need to be instantiated elsewhere and referenced here
         if (!allowedOrigins.Any())
+        {
             throw new Exception("CORS has been enabled, but no origins are allowed.");
+        }
 
         services.AddCors(corsOptions =>
         {
@@ -62,7 +66,9 @@ public static class CorsConfigService
         CorsConfigOptions corsConfigOptions = app.Services.GetRequiredService<IOptions<CorsConfigOptions>>().Value;
 
         if (corsConfigOptions.EnableCors)
+        {
             app.UseCors(CorsPolicyNames.DefaultPolicyName);
+        }
     }
 
     /// <summary>
@@ -73,7 +79,9 @@ public static class CorsConfigService
         string policyName = CorsPolicyNames.RelaxedPolicyName;
 
         if (CorsPolicyService.PolicyExists(options, policyName))
+        {
             return;
+        }
 
         options.AddPolicy(policyName, corsPolicyBuilder =>
         {
@@ -86,7 +94,9 @@ public static class CorsConfigService
     public static Action<CorsOptions, string, string[]> StandardCorsConfiguration => (options, policyName, allowedOrigins) =>
     {
         if (CorsPolicyService.PolicyExists(options, policyName))
+        {
             return;
+        }
 
         options.AddPolicy(policyName, corsPolicyBuilder =>
         {

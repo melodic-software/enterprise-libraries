@@ -20,7 +20,9 @@ public static class DatabaseMigrationService
     public static async Task EnsureNoPendingMigrationsAsync<T>(WebApplication app) where T : DbContext
     {
         if (app.Environment.IsDevelopment())
+        {
             return;
+        }
 
         DbContextResolutionResult<T>? dbContextResult = null;
 
@@ -29,14 +31,18 @@ public static class DatabaseMigrationService
             dbContextResult = await DbContextResolutionService.ResolveDbContextAsync<T>(app.Services);
 
             if (dbContextResult.DbContext == null)
+            {
                 throw new InvalidOperationException("DbContext could not be resolved.");
+            }
 
             T dbContext = dbContextResult.DbContext;
 
             List<string> pendingMigrations = (await dbContext.Database.GetPendingMigrationsAsync()).ToList();
 
             if (!pendingMigrations.Any())
+            {
                 return;
+            }
 
             app.Logger.LogWarning(
                 "There are {PendingMigrationCount} migration(s) pending. " +
@@ -49,7 +55,9 @@ public static class DatabaseMigrationService
         finally
         {
             if (dbContextResult != null)
+            {
                 await dbContextResult.DisposeAsync();
+            }
         }
     }
 
@@ -73,7 +81,9 @@ public static class DatabaseMigrationService
             dbContextResult = await DbContextResolutionService.ResolveDbContextAsync<T>(app.Services);
 
             if (dbContextResult.DbContext == null)
+            {
                 throw new InvalidOperationException("DbContext could not be resolved.");
+            }
 
             T dbContext = dbContextResult.DbContext;
 
@@ -87,7 +97,9 @@ public static class DatabaseMigrationService
         finally
         {
             if (dbContextResult != null)
+            {
                 await dbContextResult.DisposeAsync();
+            }
         }
     }
 }

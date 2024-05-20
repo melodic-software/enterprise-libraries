@@ -12,7 +12,7 @@ public class W3CLoggingConfigOptions
     /// It can reduce the performance of an app, especially when logging the request and response bodies.
     /// It can potentially log personally identifiable information (PII). Consider the risk and avoid logging sensitive information.
     /// </summary>
-    public bool EnableW3CLogging { get; set; } = false;
+    public bool EnableW3CLogging { get; set; }
 
     /// <summary>
     /// This is the name of the application that will be included in the log file name.

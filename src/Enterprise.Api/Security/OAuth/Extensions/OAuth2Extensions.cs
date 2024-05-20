@@ -113,16 +113,24 @@ public static class OAuth2Extensions
         OpenApiOAuthFlows oAuthFlows = new OpenApiOAuthFlows();
 
         if (swaggerConfigOptions.EnableAuthorizationCodeFlow)
+        {
             oAuthFlows.AuthorizationCode = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
+        }
 
         if (swaggerConfigOptions.EnableImplicitFlow)
+        {
             oAuthFlows.Implicit = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
+        }
 
         if (swaggerConfigOptions.EnableClientCredentialsFlow)
+        {
             oAuthFlows.ClientCredentials = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
+        }
 
         if (swaggerConfigOptions.EnablePasswordFlow)
+        {
             oAuthFlows.Password = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
+        }
 
         return oAuthFlows;
     }

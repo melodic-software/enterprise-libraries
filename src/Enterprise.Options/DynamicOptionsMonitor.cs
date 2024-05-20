@@ -19,8 +19,6 @@ public class DynamicOptionsMonitor<TOptions> :
     where TOptions : class, new()
 {
     private string _currentHash;
-
-    private TOptions _currentValue;
     private readonly IConfigurationSection? _configurationSection;
     private readonly ILogger<DynamicOptionsMonitor<TOptions>> _logger;
     private readonly TimeSpan _debouncePeriod;
@@ -31,9 +29,10 @@ public class DynamicOptionsMonitor<TOptions> :
     private Timer? _debounceTimer;
     private bool _disposed;
 
-    public TOptions CurrentValue => _currentValue;
+    public TOptions CurrentValue { get; private set; }
     public TOptions Value => CurrentValue;
-    TOptions IOptionsSnapshot<TOptions>.Get(string? name) => CurrentValue;
+
+    public TOptions Get(string? name) => CurrentValue;
     TOptions IOptionsMonitor<TOptions>.Get(string? name) => CurrentValue;
 
     public DynamicOptionsMonitor(TOptions? currentValue,
@@ -42,7 +41,8 @@ public class DynamicOptionsMonitor<TOptions> :
         TimeSpan debouncePeriod,
         ISerializeJson jsonSerializer)
     {
-        _currentValue = currentValue ?? new TOptions();
+        CurrentValue = currentValue ?? new TOptions();
+        
         _configurationSection = configurationSection;
         _logger = logger;
         _debouncePeriod = debouncePeriod;
@@ -58,13 +58,13 @@ public class DynamicOptionsMonitor<TOptions> :
             {
                 if (_configurationSection == null)
                 {
-                    _currentHash = OptionsHashService.ComputeHash(_currentValue, _jsonSerializer);
+                    _currentHash = OptionsHashService.ComputeHash(CurrentValue, _jsonSerializer);
                     return;
                 }
 
-                ConfigurationBinder.Bind(_currentValue, _configurationSection);
+                ConfigurationBinder.Bind(CurrentValue, _configurationSection);
 
-                _currentHash = OptionsHashService.ComputeHash(_currentValue, _jsonSerializer);
+                _currentHash = OptionsHashService.ComputeHash(CurrentValue, _jsonSerializer);
 
                 ChangeToken.OnChange(() => _configurationSection.GetReloadToken(), ReloadConfiguration);
             }
@@ -80,13 +80,13 @@ public class DynamicOptionsMonitor<TOptions> :
         }
     }
 
-    public IDisposable OnChange(Action<TOptions, string?> onChange)
+    public IDisposable OnChange(Action<TOptions, string?> listener)
     {
         lock (_updateLock)
         {
             _logger.LogInformation("Adding configuration change listener.");
             // Return an IDisposable that removes the handler when disposed.
-            return _changeNotifier.Subscribe(onChange);
+            return _changeNotifier.Subscribe(listener);
         }
     }
 
@@ -98,8 +98,8 @@ public class DynamicOptionsMonitor<TOptions> :
             using (_logger.BeginScope("OptionsType: {OptionsType}", optionsType.Name))
             {
                 _logger.LogInformation("Applying configuration changes.");
-                applyChanges(_currentValue);
-                _changeNotifier.NotifySubscribers(_currentValue);
+                applyChanges(CurrentValue);
+                _changeNotifier.NotifySubscribers(CurrentValue);
                 _logger.LogInformation("Configuration changes applied.");
             }
         }
@@ -132,7 +132,7 @@ public class DynamicOptionsMonitor<TOptions> :
                 " Attempting to reload configuration."
             );
 
-            TOptions newInstance = new TOptions();
+            var newInstance = new TOptions();
             _configurationSection?.Bind(newInstance);
 
             // TODO: Consider performance optimizations here.
@@ -147,9 +147,11 @@ public class DynamicOptionsMonitor<TOptions> :
             if (configChanged)
             {
                 _logger.LogInformation("Configuration section '{SectionName}' has changed. Reloading.", _configurationSection?.Path);
-                _currentValue = newInstance;
+                
+                CurrentValue = newInstance;
+                
                 _currentHash = newHash;
-                _changeNotifier.NotifySubscribers(_currentValue);
+                _changeNotifier.NotifySubscribers(CurrentValue);
             }
             else
             {
@@ -163,12 +165,16 @@ public class DynamicOptionsMonitor<TOptions> :
     public void Dispose()
     {
         if (_disposed)
+        {
             return;
+        }
 
         lock (_updateLock)
         {
             if (_disposed)
+            {
                 return;
+            }
 
             _debounceTimer?.Dispose();
             _disposed = true;

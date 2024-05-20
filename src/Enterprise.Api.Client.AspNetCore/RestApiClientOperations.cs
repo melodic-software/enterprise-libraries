@@ -10,7 +10,7 @@ namespace Enterprise.Api.Client.AspNetCore;
 
 public static class RestApiClientOperations
 {
-    public static async Task HandleInvalidResponse(HttpResponseMessage response, HttpClient httpClient, string resourceUri, ILogger logger, HttpContext? httpContext = null, ClaimsPrincipal? claimsPrincipal = null)
+    public static async Task HandleInvalidResponse(HttpResponseMessage response, HttpClient httpClient, Uri resourceUri, ILogger logger, HttpContext? httpContext = null, ClaimsPrincipal? claimsPrincipal = null)
     {
         if (httpContext != null)
         {

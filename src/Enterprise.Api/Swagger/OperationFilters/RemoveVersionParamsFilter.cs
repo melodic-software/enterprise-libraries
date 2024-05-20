@@ -39,7 +39,9 @@ public class RemoveVersionParamsFilter : IOperationFilter
         bool isUrlVersioned = context.ApiDescription.ActionDescriptor.EndpointMetadata.Any(x =>
         {
             if (x is not RouteAttribute routeAttribute)
+            {
                 return false;
+            }
 
             string routeTemplate = routeAttribute.Template;
             bool routeTemplateContainsVersion = routeTemplate.Contains(RoutePartials.VersionSegment, StringComparison.Ordinal);
@@ -47,7 +49,7 @@ public class RemoveVersionParamsFilter : IOperationFilter
         });
 
         // Identify version parameters by matching with known versioning parameter names.
-        List<OpenApiParameter> versionParameters = operation.Parameters
+        var versionParameters = operation.Parameters
             .Where(p => _allVersionNames.Any(x => p.Name.Equals(x, StringComparison.OrdinalIgnoreCase)))
             .ToList();
 
@@ -56,14 +58,16 @@ public class RemoveVersionParamsFilter : IOperationFilter
         if (_mediaTypeVersioningEnabled || isUrlVersioned)
         {
             foreach (OpenApiParameter versionParameter in versionParameters)
+            {
                 operation.Parameters.Remove(versionParameter);
+            }
         }
         else if (versionParameters.Count > 1)
         {
             // When multiple versioning parameters exist but URL or media type versioning is not enabled,
             // choose to represent only one versioning mechanism in Swagger UI, preferring headers over query parameters.
-            OpenApiParameter? queryStringParam = versionParameters.FirstOrDefault(x => x.In == ParameterLocation.Query);
-            OpenApiParameter? headerParam = versionParameters.FirstOrDefault(x => x.In == ParameterLocation.Header);
+            OpenApiParameter? queryStringParam = versionParameters.Find(x => x.In == ParameterLocation.Query);
+            OpenApiParameter? headerParam = versionParameters.Find(x => x.In == ParameterLocation.Header);
 
             if (queryStringParam != null)
             {

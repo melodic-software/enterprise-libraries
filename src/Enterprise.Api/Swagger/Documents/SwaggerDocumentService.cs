@@ -15,7 +15,9 @@ public static class SwaggerDocumentService
         IApiVersionDescriptionProvider? descriptionProvider = serviceProvider.GetService<IApiVersionDescriptionProvider>();
 
         if (descriptionProvider == null)
+        {
             throw new Exception($"{nameof(descriptionProvider)} cannot be null");
+        }
 
         string? environmentName = configuration.GetValue<string>(EnvironmentVariableConstants.AspNetCoreEnvironment);
 
@@ -27,7 +29,9 @@ public static class SwaggerDocumentService
             string title = $"{swaggerConfigOptions.ApplicationName} v{description.ApiVersion}";
 
             if (!string.IsNullOrWhiteSpace(environmentName))
+            {
                 title += $" ({environmentName})";
+            }
 
             OpenApiInfo openApiInfo = new OpenApiInfo
             {

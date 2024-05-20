@@ -20,7 +20,7 @@ public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleComm
     public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
-        T typedCommand = (T)command;
+        var typedCommand = (T)command;
         return HandleAsync(typedCommand, cancellationToken);
     }
 
@@ -34,8 +34,8 @@ public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleComm
     }
 
     /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> eventCallback) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        Decorated.RegisterEventCallback(eventCallback);
+        Decorated.RegisterEventCallback(action);
     }
 }

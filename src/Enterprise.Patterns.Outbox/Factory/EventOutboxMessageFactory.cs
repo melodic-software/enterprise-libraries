@@ -19,7 +19,9 @@ public class EventOutboxMessageFactory
     public IReadOnlyCollection<EventOutboxMessage> CreateFrom(IReadOnlyCollection<IEvent> values)
     {
         if (!values.Any())
+        {
             return new List<EventOutboxMessage>();
+        }
 
         // Projecting events into outbox message instances.
         List<EventOutboxMessage> outboxMessages = values

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Api.ModularMonolith;
 
-internal class ModularMonolithOptionsRegistrar : IRegisterOptions
+internal sealed class ModularMonolithOptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {

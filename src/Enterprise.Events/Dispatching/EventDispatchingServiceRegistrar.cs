@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Dispatching;
 
-internal class EventDispatchingServiceRegistrar : IRegisterServices
+internal sealed class EventDispatchingServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

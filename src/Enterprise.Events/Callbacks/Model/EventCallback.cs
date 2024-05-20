@@ -25,7 +25,9 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
     public void Execute(IEvent @event)
     {
         if (!IsFor(@event))
+        {
             return;
+        }
 
         Execute((T)@event);
     }
@@ -41,7 +43,9 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
     public override bool Equals(object? obj)
     {
         if (obj is EventCallback<T> otherCallback)
+        {
             return Equals(Action, otherCallback.Action);
+        }
 
         return false;
     }
@@ -57,8 +61,15 @@ public class EventCallback<T> : IEventCallback<T> where T : IEvent
 
     private static bool Equals(Delegate? a, Delegate? b)
     {
-        if (a == null && b == null) return true;
-        if (a == null || b == null) return false;
+        if (a == null && b == null)
+        {
+            return true;
+        }
+
+        if (a == null || b == null)
+        {
+            return false;
+        }
 
         bool areEqual = a.Method.Equals(b.Method) && Equals(a.Target, b.Target);
 

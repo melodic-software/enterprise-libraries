@@ -8,5 +8,5 @@ public class CorsConfigOptions
 
     public bool EnableCors { get; set; } = true;
     public HashSet<string> AllowedOrigins { get; set; } = [];
-    public Action<CorsOptions>? ConfigureCustom { get; set; } = null;
+    public Action<CorsOptions>? ConfigureCustom { get; set; }
 }

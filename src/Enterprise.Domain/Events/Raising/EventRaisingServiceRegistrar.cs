@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
 
-internal class EventRaisingServiceRegistrar : IRegisterServices
+internal sealed class EventRaisingServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

@@ -20,6 +20,7 @@ public class GenericEnumerableModelBinder : IModelBinder
 
         // Check if the model metadata represents an enumerable type.
         ModelMetadata modelMetadata = bindingContext.ModelMetadata;
+
         if (!modelMetadata.IsEnumerableType)
         {
             bindingContext.Result = ModelBindingResult.Failed();
@@ -28,6 +29,7 @@ public class GenericEnumerableModelBinder : IModelBinder
 
         // Retrieve the value to be bound from the value provider using the model name.
         ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+
         if (valueProviderResult == ValueProviderResult.None)
         {
             bindingContext.Result = ModelBindingResult.Success(null);
@@ -50,17 +52,13 @@ public class GenericEnumerableModelBinder : IModelBinder
             // Determine if the target model is a collection type like List<T>.
             Type listType = typeof(List<>).MakeGenericType(elementType);
 
-            if (!bindingContext.ModelMetadata.IsCollectionType)
+            if (bindingContext.ModelMetadata.IsCollectionType)
             {
-                bindingContext.Model = BindNonCollectionType(valueProviderResult, elementType, converter);
-            }
-            else if (listType.IsAssignableFrom(bindingContext.ModelType))
-            {
-                bindingContext.Model = BindListType(valueProviderResult, listType, converter);
+                BindCollectionType(bindingContext, listType, valueProviderResult, converter);
             }
             else
             {
-                throw new InvalidOperationException("Unsupported collection type");
+                bindingContext.Model = BindNonCollectionType(valueProviderResult, elementType, converter);
             }
 
             // Successfully bind the model.
@@ -73,6 +71,22 @@ public class GenericEnumerableModelBinder : IModelBinder
         }
 
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Binds a collection enumerable type by splitting comma-separated values and converting them to the element type.
+    /// </summary>
+    /// <param name="bindingContext"></param>
+    /// <param name="listType"></param>
+    /// <param name="valueProviderResult"></param>
+    /// <param name="converter"></param>
+    /// <exception cref="InvalidOperationException"></exception>
+    private void BindCollectionType(ModelBindingContext bindingContext, Type listType, ValueProviderResult valueProviderResult,
+        TypeConverter converter)
+    {
+        bindingContext.Model = listType.IsAssignableFrom(bindingContext.ModelType)
+            ? BindListType(valueProviderResult, listType, converter)
+            : throw new InvalidOperationException("Unsupported collection type");
     }
 
     /// <summary>
@@ -89,7 +103,7 @@ public class GenericEnumerableModelBinder : IModelBinder
             .Select(v => converter.ConvertFromString(v.Trim()))
             .ToArray();
 
-        Array typedValues = Array.CreateInstance(elementType, values.Length);
+        var typedValues = Array.CreateInstance(elementType, values.Length);
         values.CopyTo(typedValues, 0);
 
         return typedValues;
@@ -116,8 +130,10 @@ public class GenericEnumerableModelBinder : IModelBinder
             foreach (string splitValue in splitValues)
             {
                 if (string.IsNullOrWhiteSpace(splitValue))
+                {
                     continue;
-                
+                }
+
                 object? convertedValue = converter.ConvertFromString(splitValue.Trim());
                 addMethod?.Invoke(list, [convertedValue]);
             }
@@ -133,8 +149,8 @@ public class GenericEnumerableModelBinder : IModelBinder
     /// <returns>An array of split strings.</returns>
     private string[] SplitString(string? input)
     {
-        return string.IsNullOrEmpty(input) ?
-            Array.Empty<string>() :
-            input.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        return string.IsNullOrEmpty(input) ? [] : input.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
     }
+
+    private static readonly char[] Separator = [','];
 }

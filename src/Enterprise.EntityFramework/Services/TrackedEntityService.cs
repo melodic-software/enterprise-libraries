@@ -1,7 +1,6 @@
 ﻿using Enterprise.Domain.Events.Model.Abstract;
 using Enterprise.DomainDrivenDesign.Entities.Aggregates;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.Services;
@@ -19,21 +18,22 @@ public static class TrackedEntityService
     public static IReadOnlyCollection<IDomainEvent> GetDomainEventsFromTrackedEntities(DbContext dbContext, ILogger logger, bool clearDomainEvents = true)
     {
         // These should be aggregate root entities that internally record events that have occurred within the aggregate boundary.
-        List<EntityEntry<IAggregateRoot>> aggregateRoots = dbContext.ChangeTracker.Entries<IAggregateRoot>().ToList();
+        var aggregateRoots = dbContext.ChangeTracker.Entries<IAggregateRoot>().ToList();
 
         if (!aggregateRoots.Any())
+        {
             return new List<IDomainEvent>();
+        }
 
         int aggregateRootCount = aggregateRoots.Count;
 
-        logger.LogInformation(
-            "Collecting " +
-            (clearDomainEvents ? "and clearing " : string.Empty) +
-            "domain events from {AggregateRootCount} aggregate root(s).",
-            aggregateRootCount
+        string activityDescription = "Collecting " + (clearDomainEvents ? "and clearing " : string.Empty);
+
+        logger.LogInformation("{ActivityDescription} domain events from {AggregateRootCount} aggregate root(s).",
+            activityDescription, aggregateRootCount
         );
 
-        List<IDomainEvent> domainEvents = aggregateRoots
+        var domainEvents = aggregateRoots
             .Select(e =>
             {
                 IReadOnlyList<IDomainEvent> domainEvents = e.Entity.GetDomainEvents();
@@ -41,18 +41,20 @@ public static class TrackedEntityService
                 // Have to clear these, so they don't get reprocessed and cause issues downstream.
                 // This can cause problems depending on the DI lifetime of the db context.
                 if (clearDomainEvents)
+                {
                     e.Entity.ClearDomainEvents();
+                }
 
                 return domainEvents;
             })
             .SelectMany(x => x)
             .ToList();
 
+        string completedActivityDescription = "Collected " + (clearDomainEvents ? "and cleared " : string.Empty);
+
         logger.LogInformation(
-            "Collected " +
-            (clearDomainEvents ? "and cleared " : string.Empty) +
-            "{DomainEventCount} domain events from {AggregateRootCount} aggregate root(s).",
-            domainEvents.Count, aggregateRootCount
+            "{ActivityDescription} {DomainEventCount} domain events from {AggregateRootCount} aggregate root(s).",
+            completedActivityDescription, domainEvents.Count, aggregateRootCount
         );
 
         return domainEvents;

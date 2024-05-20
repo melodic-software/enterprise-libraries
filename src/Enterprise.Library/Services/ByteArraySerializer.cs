@@ -22,7 +22,9 @@ public class ByteArraySerializer : IByteArraySerializer
     public T? Deserialize<T>(byte[]? bytes)
     {
         if (bytes == null)
+        {
             return default;
+        }
 
         return JsonSerializer.Deserialize<T>(bytes);
     }

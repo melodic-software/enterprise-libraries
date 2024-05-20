@@ -134,7 +134,7 @@
             Determines whether the specified object is equal to the current object.
             Implements object equality, ensuring that the type and ID match.
             </summary>
-            <param name="other">The object to compare with the current object.</param>
+            <param name="obj">The object to compare with the current object.</param>
             <returns>True if the specified object is equal to the current object; otherwise, false.</returns>
         </member>
         <member name="M:Enterprise.DomainDrivenDesign.Entities.Entity`1.GetHashCode">

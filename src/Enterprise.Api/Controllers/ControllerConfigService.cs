@@ -25,7 +25,9 @@ public static class ControllerConfigService
             .GetOptionsInstance<ControllerConfigOptions>(configuration, ControllerConfigOptions.ConfigSectionKey);
 
         if (!controllerConfigOptions.EnableControllers)
+        {
             return;
+        }
 
         IMvcBuilder builder = AddControllers(services, controllerConfigOptions);
 
@@ -34,7 +36,7 @@ public static class ControllerConfigService
 
         // These are action filters that are not globally enabled and must be manually added to an API controller or action method.
         // https://code-maze.com/action-filters-aspnetcore/
-        builder.Services.AddScoped<ModelStateValidationFilter>();
+        builder.Services.AddScoped<ModelStateValidationFilterAttribute>();
 
         builder.ConfigureApiBehavior();
     }
@@ -64,8 +66,10 @@ public static class ControllerConfigService
     public static void MapControllers(this WebApplication app, ControllerConfigOptions controllerConfigOptions)
     {
         if (!controllerConfigOptions.EnableControllers)
+        {
             return;
-        
+        }
+
         // This shortcut mixes request pipeline setup with route management.
         // No routes are specified, and it is assumed attributes will be added to controllers and actions.
         IEndpointConventionBuilder endpointConventionBuilder = ControllerEndpointRouteBuilderExtensions.MapControllers(app);
@@ -91,10 +95,10 @@ public static class ControllerConfigService
             // NewtonsoftJsonValidationMetadataProvider can be used as an alternative, but be sure to call .AddNewtonsoftJson() on the builder.
             options.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
 
-            List<IInputFormatter> inputFormatters = options.InputFormatters.ToList();
+            var inputFormatters = options.InputFormatters.ToList();
 
             // NOTE: The default output formatter is the first one in the list.
-            List<IOutputFormatter> outputFormatters = options.OutputFormatters.ToList();
+            var outputFormatters = options.OutputFormatters.ToList();
             IOutputFormatter? defaultOutputFormatter = outputFormatters.FirstOrDefault();
             Type? defaultOutputFormatterType = defaultOutputFormatter?.GetType();
 
@@ -107,11 +111,13 @@ public static class ControllerConfigService
             options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status422UnprocessableEntity));
             options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
 
-            options.Filters.Add(new ProducesAttribute(MediaTypeConstants.Json, [MediaTypeConstants.Xml, MediaTypeConstants.ProblemPlusJson, MediaTypeConstants.ProblemPlusXml]));
+            options.Filters.Add(new ProducesAttribute(MediaTypeConstants.Json, MediaTypeConstants.Xml, MediaTypeConstants.ProblemPlusJson, MediaTypeConstants.ProblemPlusXml));
 
             // Register custom filters.
             if (controllerConfigOptions.EnableGlobalAuthorizeFilter)
+            {
                 options.Filters.Add(new AuthorizeFilter());
+            }
 
             // NOTE: You can pass in authorization policy names to the authorize filter and apply a global authorization policy.
             //options.Filters.Add<ExceptionFilter>();

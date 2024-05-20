@@ -1,7 +1,7 @@
 ﻿namespace Enterprise.Library.Attributes;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Method)]
-public class AlternativeToAttribute : Attribute
+public sealed class AlternativeToAttribute : Attribute
 {
     public Type PreferredType { get; }
 

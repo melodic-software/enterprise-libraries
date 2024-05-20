@@ -36,12 +36,6 @@ public class Error : IError
     /// </summary>
     public IReadOnlyDictionary<string, object> Metadata { get; }
 
-    internal Error(string code, string message, IEnumerable<ErrorDescriptor> errorDescriptors)
-        : this(code, message, errorDescriptors, new())
-    {
-
-    }
-
     internal Error(string? code, string? message, IEnumerable<ErrorDescriptor>? errorDescriptors, Dictionary<string, object>? metadata = null)
     {
         code = code?.Trim();
@@ -81,7 +75,9 @@ public class Error : IError
         string result = Code;
         
         if (!string.IsNullOrWhiteSpace(Message))
+        {
             result += $" - {Message}";
+        }
 
         return result;
     }

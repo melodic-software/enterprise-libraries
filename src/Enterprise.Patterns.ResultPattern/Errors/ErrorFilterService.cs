@@ -3,7 +3,7 @@
 /// <summary>
 /// Provides services for filtering errors.
 /// </summary>
-public class ErrorFilterService
+public static class ErrorFilterService
 {
     /// <summary>
     /// Filters out invalid errors that do not contain a code, message, or any descriptors.
@@ -13,7 +13,7 @@ public class ErrorFilterService
     /// <returns>A collection of valid errors.</returns>
     public static IEnumerable<IError> FilterInvalid(IEnumerable<IError> errors)
     {
-        List<IError> filteredErrors = errors
+        var filteredErrors = errors
             .Where(x =>
                 x.Code is not (null or Error.DefaultCode) ||
                 !string.IsNullOrWhiteSpace(x.Message) ||

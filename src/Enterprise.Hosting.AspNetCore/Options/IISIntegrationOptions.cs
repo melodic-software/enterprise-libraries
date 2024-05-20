@@ -18,7 +18,7 @@ public class IISIntegrationOptions
     /// Sets the display name shown to users on login pages.
     /// The default is null.
     /// </summary>
-    public string? AuthenticationDisplayName { get; set; } = null;
+    public string? AuthenticationDisplayName { get; set; }
 
     /// <summary>
     /// The HttpContext.Connection.ClientCertificate (ITLSConnectionFeature) is populated when this is set to true,

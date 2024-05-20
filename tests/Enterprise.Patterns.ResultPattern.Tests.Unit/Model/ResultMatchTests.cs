@@ -1,4 +1,5 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using System.Globalization;
+using Enterprise.Patterns.ResultPattern.Errors;
 using Enterprise.Patterns.ResultPattern.Errors.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using FluentAssertions;
@@ -11,11 +12,11 @@ public class ResultMatchTests
     public void Match_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
 
         // Act
         string result = successResult.Match(
-            value => value.ToUpper(),
+            value => value.ToUpper(CultureInfo.InvariantCulture),
             errors => "error");
 
         // Assert
@@ -27,11 +28,11 @@ public class ResultMatchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         string result = failedResult.Match(
-            value => value.ToUpper(),
+            value => value.ToUpper(CultureInfo.InvariantCulture),
             errors => errors.First().Message);
 
         // Assert
@@ -42,11 +43,11 @@ public class ResultMatchTests
     public async Task MatchAsync_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
 
         // Act
         string result = await successResult.MatchAsync(
-            value => Task.FromResult(value.ToUpper()),
+            value => Task.FromResult(value.ToUpper(CultureInfo.InvariantCulture)),
             errors => Task.FromResult("error"));
 
         // Assert
@@ -58,11 +59,11 @@ public class ResultMatchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         string result = await failedResult.MatchAsync(
-            value => Task.FromResult(value.ToUpper()),
+            value => Task.FromResult(value.ToUpper(CultureInfo.InvariantCulture)),
             errors => Task.FromResult(errors.First().Message));
 
         // Assert
@@ -73,11 +74,11 @@ public class ResultMatchTests
     public void MatchFirst_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
 
         // Act
         string result = successResult.MatchFirst(
-            value => value.ToUpper(),
+            value => value.ToUpper(CultureInfo.InvariantCulture),
             error => "error");
 
         // Assert
@@ -89,11 +90,11 @@ public class ResultMatchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         string result = failedResult.MatchFirst(
-            value => value.ToUpper(),
+            value => value.ToUpper(CultureInfo.InvariantCulture),
             error => error.Message);
 
         // Assert
@@ -104,11 +105,11 @@ public class ResultMatchTests
     public async Task MatchFirstAsync_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
 
         // Act
         string result = await successResult.MatchFirstAsync(
-            value => Task.FromResult(value.ToUpper()),
+            value => Task.FromResult(value.ToUpper(CultureInfo.InvariantCulture)),
             error => Task.FromResult("error"));
 
         // Assert
@@ -120,11 +121,11 @@ public class ResultMatchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
 
         // Act
         string result = await failedResult.MatchFirstAsync(
-            value => Task.FromResult(value.ToUpper()),
+            value => Task.FromResult(value.ToUpper(CultureInfo.InvariantCulture)),
             error => Task.FromResult(error.Message));
 
         // Assert

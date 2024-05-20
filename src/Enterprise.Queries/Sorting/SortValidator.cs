@@ -15,7 +15,9 @@ public class SortValidator<TSource, TTarget> : IValidateSort
     public Error? Validate(SortOptions sortOptions)
     {
         if (string.IsNullOrWhiteSpace(sortOptions.OrderBy))
+        {
             return null;
+        }
 
         // TODO: Should this sort property be whatever the name of the input param is?
         // For example, the name of the sort parameter in a query string that is bound in an API controller method?

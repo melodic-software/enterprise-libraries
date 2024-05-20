@@ -11,6 +11,6 @@ public static class LogEventIds
     // Ex: 2000-2999 = "checking out" feature.
     // This enables another way to query and filter log entries.
 
-    public static EventId UnknownError = new(0, "UnknownError");
-    public static EventId CustomError = new(10, "CustomError");
+    public static EventId UnknownError => new(0, "UnknownError");
+    public static EventId CustomError => new(10, "CustomError");
 }

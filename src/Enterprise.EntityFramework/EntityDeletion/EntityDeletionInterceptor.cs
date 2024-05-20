@@ -36,7 +36,9 @@ public class EntityDeletionInterceptor : SaveChangesInterceptor
         DbContext? context = eventData.Context;
 
         if (context == null)
+        {
             return;
+        }
 
         ChangeTracker changeTracker = context.ChangeTracker;
 
@@ -45,7 +47,9 @@ public class EntityDeletionInterceptor : SaveChangesInterceptor
             .ToList();
 
         if (!entriesToDelete.Any())
+        {
             return;
+        }
 
         _logger.LogInformation("Entities to delete: {DeletionCount}", entriesToDelete.Count);
         entriesToDelete = entriesToDelete.Where(HasLogicalDeleteProperty).ToList();

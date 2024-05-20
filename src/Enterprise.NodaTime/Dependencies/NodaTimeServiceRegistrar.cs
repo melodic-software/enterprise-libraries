@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.NodaTime.Dependencies;
 
-internal class NodaTimeServiceRegistrar : IRegisterServices
+internal sealed class NodaTimeServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

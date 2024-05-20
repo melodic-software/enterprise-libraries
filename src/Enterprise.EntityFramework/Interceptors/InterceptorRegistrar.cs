@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.EntityFramework.Interceptors;
 
-internal class InterceptorRegistrar : IRegisterServices
+internal sealed class InterceptorRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

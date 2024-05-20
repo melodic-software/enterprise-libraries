@@ -18,9 +18,13 @@ public class DbContextResolutionResult<T> : IAsyncDisposable where T : DbContext
     public async ValueTask DisposeAsync()
     {
         if (DbContext != null)
+        {
             await DbContext.DisposeAsync();
+        }
 
         if (ServiceScope.HasValue)
+        {
             await ServiceScope.Value.DisposeAsync();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Enterprise.Api.Controllers.Extensions;
 
 public static class ApiControllerExtensions
 {
-    public static IActionResult BadDataShapingRequest(this ControllerBase controller, ProblemDetailsFactory problemDetailsFactory, string? properties)
+    public static IActionResult BadDataShapingRequest(this ControllerBase controller, ProblemDetailsFactory problemDetailsFactory)
     {
         IDictionary<string, string[]> errorDictionary = new Dictionary<string, string[]>
         {
@@ -33,10 +33,12 @@ public static class ApiControllerExtensions
         return controller.IsInvalid(model) ? ValidationProblemService.CreateValidationProblem(controller) : null;
     }
 
-    public static bool IsInvalid<T>(this ControllerBase controller, T model)
+    public static bool IsInvalid<T>(this ControllerBase controller, T? model)
     {
-        if (model == null)
+        if (Equals(model, default(T)))
+        {
             return false;
+        }
 
         string? key = nameof(T);
         ModelStateDictionary modelState = controller.ModelState;
@@ -50,7 +52,7 @@ public static class ApiControllerExtensions
             key = null;
         }
 
-        bool isInvalid = !controller.TryValidateModel(model, key);
+        bool isInvalid = !controller.TryValidateModel(model!, key);
 
         return isInvalid;
     }

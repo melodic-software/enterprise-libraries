@@ -39,13 +39,17 @@ public class MediaTypeVersionDelegatingFormatter : IOutputFormatter
         MediaTypeHeaderValue? mediaTypeHeaderValueWithoutVersion = GetMediaTypeHeaderValueWithoutVersion(context);
         
         if (mediaTypeHeaderValueWithoutVersion == null)
+        {
             return false;
+        }
 
         IOutputFormatter? formatter = GetFormatter(context, mediaTypeHeaderValueWithoutVersion);
 
         if (formatter == null)
+        {
             return false;
-        
+        }
+
         // Cache the formatter for reuse in WriteAsync.
         _formatterCache[context.ContentType] = formatter;
         
@@ -69,20 +73,26 @@ public class MediaTypeVersionDelegatingFormatter : IOutputFormatter
         IList<MediaTypeHeaderValue> acceptHeader = context.HttpContext.Request.GetTypedHeaders().Accept;
 
         if (!acceptHeader.Any())
+        {
             return null;
+        }
 
         foreach (MediaTypeHeaderValue headerValue in acceptHeader)
         {
             NameValueHeaderValue? versionParameter = headerValue.Parameters
                 .FirstOrDefault(x => x.Name == _versioningParameterName);
 
-            if (versionParameter != null)
-                headerValue.Parameters.Remove(versionParameter);
+            if (versionParameter == null)
+            {
+                continue;
+            }
 
-            return headerValue;
+            headerValue.Parameters.Remove(versionParameter);
+            return headerValue; // Return the first header with the version parameter removed.
         }
 
-        return null;
+        // If no header had the version parameter, return the first header.
+        return acceptHeader.First();
     }
 
     private IOutputFormatter? GetFormatter(OutputFormatterCanWriteContext context, MediaTypeHeaderValue mediaTypeWithoutVersion)

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Options;
 
-internal class ChangeNotifier<TOptions>
+internal sealed class ChangeNotifier<TOptions>
 {
     private readonly ConcurrentDictionary<Guid, Action<TOptions, string?>> _subscriptions = new();
     private readonly ILogger _logger;
@@ -22,7 +22,7 @@ internal class ChangeNotifier<TOptions>
     /// <returns></returns>
     internal IDisposable Subscribe(Action<TOptions, string?> onChange)
     {
-        Guid subscriptionId = Guid.NewGuid();
+        var subscriptionId = Guid.NewGuid();
         _subscriptions.TryAdd(subscriptionId, onChange);
         return new DisposableAction(() => _subscriptions.TryRemove(subscriptionId, out _));
     }

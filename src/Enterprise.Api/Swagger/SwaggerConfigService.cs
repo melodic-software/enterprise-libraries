@@ -25,7 +25,9 @@ public static class SwaggerConfigService
             .GetOptionsInstance<SwaggerConfigOptions>(configuration, SwaggerConfigOptions.ConfigSectionKey);
 
         if (!swaggerConfigOptions.EnableSwagger)
+        {
             return;
+        }
 
         // exposes information on the API, which is used internally by Swashbuckle to create an OpenApi specification
         services.AddEndpointsApiExplorer();
@@ -76,7 +78,9 @@ public static class SwaggerConfigService
         SwaggerConfigOptions swaggerConfigOptions = app.Services.GetRequiredService<IOptions<SwaggerConfigOptions>>().Value;
 
         if (!swaggerConfigOptions.EnableSwagger || app.Environment.IsProduction())
+        {
             return;
+        }
 
         // Add the middleware that generates the OpenAPI specification.
         app.UseSwagger(options =>
@@ -92,20 +96,28 @@ public static class SwaggerConfigService
                 options.OAuthClientId(swaggerConfigOptions.OAuthClientId);
 
                 if (!string.IsNullOrWhiteSpace(swaggerConfigOptions.OAuthClientSecret))
+                {
                     options.OAuthClientSecret(swaggerConfigOptions.OAuthClientSecret);
-                
+                }
+
                 options.OAuthAppName(swaggerConfigOptions.OAuthAppName);
 
                 if (swaggerConfigOptions.UsePkce)
+                {
                     options.OAuthUsePkce();
+                }
 
                 Dictionary<string, string> queryStringParams = new Dictionary<string, string>();
 
                 if (!string.IsNullOrWhiteSpace(swaggerConfigOptions.OAuthAudience))
+                {
                     queryStringParams.Add("audience", swaggerConfigOptions.OAuthAudience);
+                }
 
                 if (queryStringParams.Any())
+                {
                     options.OAuthAdditionalQueryStringParams(queryStringParams);
+                }
             }
 
             IApiVersionDescriptionProvider? descriptionProvider = app.Services.GetService<IApiVersionDescriptionProvider>();

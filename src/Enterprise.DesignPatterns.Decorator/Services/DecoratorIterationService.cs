@@ -15,6 +15,8 @@ public class DecoratorIterationService : IIDecoratorIterationService
     public void ForEachDecorator<T>(T current, Action<T> action) where T : class
     {
         foreach (T decorator in _decoratorChainService.GetAllDecorators(current))
+        {
             action(decorator);
+        }
     }
 }

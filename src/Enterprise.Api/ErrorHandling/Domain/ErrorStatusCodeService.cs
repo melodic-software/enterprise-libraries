@@ -22,7 +22,9 @@ public static class ErrorStatusCodeService
         }
 
         if (errors.ContainsConflict())
+        {
             return StatusCodes.Status409Conflict;
+        }
 
         return StatusCodes.Status422UnprocessableEntity;
     }

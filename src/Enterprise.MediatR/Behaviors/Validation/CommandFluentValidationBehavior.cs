@@ -23,11 +23,13 @@ public class CommandFluentValidationBehavior<TRequest, TResponse>
         CancellationToken cancellationToken)
     {
         if (!_validators.Any())
+        {
             return await next();
+        }
 
         IValidationContext validationContext = new ValidationContext<TRequest>(request);
 
-        FluentValidationService.ExecuteValidation(_validators, validationContext);
+        await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
 
         return await next();
     }

@@ -15,9 +15,9 @@ public abstract class MediatRCommandHandlerBase<TCommand>
 
     }
 
-    public async Task<Result> Handle(TCommand command, CancellationToken cancellationToken)
+    public async Task<Result> Handle(TCommand request, CancellationToken cancellationToken)
     {
-        return await HandleAsync(command, cancellationToken);
+        return await HandleAsync(request, cancellationToken);
     }
 }
 

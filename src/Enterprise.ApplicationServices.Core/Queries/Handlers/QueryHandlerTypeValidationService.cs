@@ -21,7 +21,9 @@ public static class QueryHandlerTypeValidationService
         bool queryCanBeHandled = queryType.IsAssignableFrom(expectedQueryType);
 
         if (queryCanBeHandled)
+        {
             return;
+        }
 
         Type queryHandlerType = queryHandler.GetType();
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Globalization;
 using System.Text;
 
 namespace Enterprise.Logging.Core.Loggers;
@@ -78,7 +79,7 @@ public class PreStartupLogger : ILogger
     /// <param name="logger">The ILogger instance to use for logging.</param>
     public void SetLogger(ILogger logger)
     {
-        ArgumentNullException.ThrowIfNull(logger, nameof(logger));
+        ArgumentNullException.ThrowIfNull(logger);
 
         lock (_syncLock)
         {
@@ -89,15 +90,19 @@ public class PreStartupLogger : ILogger
     private string FormatException(Exception? ex)
     {
         if (ex == null)
+        {
             return string.Empty;
+        }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine($"\nException: {ex.Message}");
-        stringBuilder.AppendLine($"Type: {ex.GetType().FullName}");
-        stringBuilder.AppendLine($"Stack Trace: {ex.StackTrace}");
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"\nException: {ex.Message}");
+        stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Type: {ex.GetType().FullName}");
+        stringBuilder.AppendLine(CultureInfo.InvariantCulture, $"Stack Trace: {ex.StackTrace}");
 
         if (ex.InnerException == null)
+        {
             return stringBuilder.ToString();
+        }
 
         stringBuilder.AppendLine("Inner Exception:");
 

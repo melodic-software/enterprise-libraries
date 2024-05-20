@@ -8,7 +8,7 @@ public class ControllerConfigOptions
     /// Toggles the registration of controller services.
     /// Consider disabling this if using minimal APIs.
     /// </summary>
-    public bool EnableControllers { get; set; } = false;
+    public bool EnableControllers { get; set; }
 
     /// <summary>
     /// This essentially adds the [Authorize] attribute to all controllers.

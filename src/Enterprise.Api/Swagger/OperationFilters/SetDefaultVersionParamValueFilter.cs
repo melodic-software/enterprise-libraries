@@ -49,7 +49,9 @@ public class SetDefaultVersionParamValueFilter : IOperationFilter
         // EXAMPLE: routeGroupBuilder.WithMetadata(new ApiVersionAttribute(versionString))
 
         if (apiVersion == null)
+        {
             return;
+        }
 
         // Identify version parameters by matching with known versioning parameter names.
         List<OpenApiParameter> versionParameters = operation.Parameters

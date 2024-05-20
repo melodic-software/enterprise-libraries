@@ -18,8 +18,10 @@ public static class SwaggerRequestDetectionService
         }
         else
         {
-            if (!SwaggerConstants.RoutePrefix.StartsWith("/"))
+            if (!SwaggerConstants.RoutePrefix.StartsWith('/'))
+            {
                 swaggerRoutePrefix = $"/{swaggerRoutePrefix}";
+            }
 
             isSwagger = httpContext.Request.Path.StartsWithSegments(swaggerRoutePrefix);
         }

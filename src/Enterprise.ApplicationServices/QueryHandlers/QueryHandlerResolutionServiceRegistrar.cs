@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.QueryHandlers;
 
-internal class QueryHandlerResolutionServiceRegistrar : IRegisterServices
+internal sealed class QueryHandlerResolutionServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

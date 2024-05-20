@@ -28,27 +28,33 @@ public class PreferMinimalApiEndpointSelectorPolicy : MatcherPolicy, IEndpointSe
         return endpoints.HaveBothMinimalApiAndControllerEndpoint();
     }
 
-    public Task ApplyAsync(HttpContext httpContext, CandidateSet candidateSet)
+    public Task ApplyAsync(HttpContext httpContext, CandidateSet candidates)
     {
         ApiVersion? requestedApiVersion = GetRequestedApiVersion(httpContext);
 
-        for (int i = 0; i < candidateSet.Count; i++)
+        for (int i = 0; i < candidates.Count; i++)
         {
             // We put this here because they technically can be invalidated in any order.
-            if (!candidateSet.IsValidCandidate(i))
+            if (!candidates.IsValidCandidate(i))
+            {
                 continue;
+            }
 
-            Endpoint endpoint = candidateSet[i].Endpoint;
+            Endpoint endpoint = candidates[i].Endpoint;
 
-            if (VersionIsInvalid(candidateSet, endpoint, requestedApiVersion, i))
+            if (VersionIsInvalid(candidates, endpoint, requestedApiVersion, i))
+            {
                 continue;
+            }
 
             if (!endpoint.IsMinimalApiEndpoint())
+            {
                 continue;
+            }
 
             // Prefer a minimal API endpoint (if the versions match).
             _logger.LogInformation("Preferred minimal API endpoint: {EndpointName}.", endpoint.DisplayName);
-            MarkAllOtherCandidatesAsInvalid(candidateSet, i);
+            MarkAllOtherCandidatesAsInvalid(candidates, i);
             break;
         }
 
@@ -58,7 +64,9 @@ public class PreferMinimalApiEndpointSelectorPolicy : MatcherPolicy, IEndpointSe
     private ApiVersion? GetRequestedApiVersion(HttpContext httpContext)
     {
         if (_versioningOptions == null)
+        {
             return null;
+        }
 
         ApiVersion? requestedApiVersion = httpContext.GetRequestedApiVersion();
 
@@ -83,16 +91,17 @@ public class PreferMinimalApiEndpointSelectorPolicy : MatcherPolicy, IEndpointSe
     private bool VersionIsInvalid(CandidateSet candidateSet, Endpoint endpoint, ApiVersion? requestedApiVersion, int i)
     {
         if (_versioningOptions == null)
+        {
             return false;
+        }
 
         // First, attempt to use the built-in mechanism to determine if the endpoint is valid for the requested version.
         ApiVersionMetadata? apiVersionMetadata = endpoint.Metadata.GetMetadata<ApiVersionMetadata>();
 
-        if (apiVersionMetadata != null)
+        if (apiVersionMetadata != null && apiVersionMetadata.IsMappedTo(requestedApiVersion))
         {
             // If the endpoint is explicitly mapped to the requested version, it's valid.
-            if (apiVersionMetadata.IsMappedTo(requestedApiVersion))
-                return false;
+            return false;
         }
 
         // Fallback to checking against declared versions if ApiVersionMetadata is not conclusive.
@@ -101,15 +110,21 @@ public class PreferMinimalApiEndpointSelectorPolicy : MatcherPolicy, IEndpointSe
 
         // Assume the default version if no versions are declared and the configuration specifies to do so.
         if (!declaredApiVersions.Any() && _versioningOptions.AssumeDefaultVersionWhenUnspecified)
+        {
             declaredApiVersions = [_versioningOptions.DefaultApiVersion];
+        }
 
         // No need to continue if no version is requested and no versions are declared.
         if (requestedApiVersion == null || !declaredApiVersions.Any())
+        {
             return false;
+        }
 
         // Check if any of the declared versions match the requested version.
         if (declaredApiVersions.Any(v => v == requestedApiVersion))
+        {
             return false;
+        }
 
         // If we reach here, it means there's a version mismatch.
         _logger.LogInformation("Version mismatch. Excluding endpoint: {EndpointName}.", endpoint.DisplayName);
@@ -125,7 +140,9 @@ public class PreferMinimalApiEndpointSelectorPolicy : MatcherPolicy, IEndpointSe
         for (int j = 0; j < candidateSet.Count; j++)
         {
             if (j == validCandidateIndex)
+            {
                 continue;
+            }
 
             CandidateState invalidCandidate = candidateSet[j];
             candidateSet.SetValidity(j, false);

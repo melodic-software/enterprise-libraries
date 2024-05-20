@@ -22,20 +22,6 @@ public class RegistrationMethodConfig
     public RegistrationMethodConfig(Type interfaceType,
         string methodName,
         Func<ParameterInfo[], bool> parametersAreValid,
-        object[] methodParameters)
-    {
-        InterfaceType = interfaceType;
-        MethodName = methodName;
-        ParametersAreValid = parametersAreValid;
-        BindingFlags = DefaultBindingFlags;
-        MethodParameters = methodParameters;
-        GetAssemblies = DefaultGetAssemblies;
-        GetAssemblyTypes = GetDefaultAssemblyTypes;
-    }
-
-    public RegistrationMethodConfig(Type interfaceType,
-        string methodName,
-        Func<ParameterInfo[], bool> parametersAreValid,
         object[] methodParameters,
         BindingFlags bindingFlags = DefaultBindingFlags,
         Func<Assembly[]>? getAssemblies = null,
@@ -53,7 +39,7 @@ public class RegistrationMethodConfig
 
     public List<TypeInfo> GetDefaultAssemblyTypes(Assembly assembly, Type interfaceType)
     {
-        List<TypeInfo> types = GetAssignableConcreteTypes(assembly, interfaceType)
+        var types = GetAssignableConcreteTypes(assembly, interfaceType)
             .Where(type => interfaceType.IsAssignableFrom(type) && type is { IsAbstract: false, IsGenericTypeDefinition: false })
             .ToList();
 

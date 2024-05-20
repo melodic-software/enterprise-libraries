@@ -22,14 +22,14 @@ public class HealthCheckConfigOptions
     /// If provided, a health check will be enabled for the OpenIdConnect provider.
     /// This is typically a security token service like "IdentityServer".
     /// </summary>
-    public string? OpenIdConnectAuthority { get; set; } = null;
+    public string? OpenIdConnectAuthority { get; set; }
 
     /// <summary>
     /// Sets an explicit name for the authority. If one is not provided, a generic name will be used.
     /// If a value of "identity-server" is provided, the specific health check registration for identity server will be used.
     /// If any other provider is named, a URL group will be used to register the health check.
     /// </summary>
-    public string? OpenIdConnectAuthorityName { get; set; } = null;
+    public string? OpenIdConnectAuthorityName { get; set; }
 
     /// <summary>
     /// If provided, a health check will be enabled for Redis.

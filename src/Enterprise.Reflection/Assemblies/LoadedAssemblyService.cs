@@ -5,7 +5,7 @@ namespace Enterprise.Reflection.Assemblies;
 /// <summary>
 /// Provides functionality to retrieve already loaded assemblies from the current application domain.
 /// </summary>
-public class LoadedAssemblyService
+public static class LoadedAssemblyService
 {
     /// <summary>
     /// Retrieves all assemblies that are currently loaded in the application domain.

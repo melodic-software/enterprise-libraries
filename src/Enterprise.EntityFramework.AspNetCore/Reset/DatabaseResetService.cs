@@ -40,12 +40,12 @@ public static class DatabaseResetService
 
             await dbContext.Database.EnsureDeletedAsync();
 
-            List<string> pendingMigrations = (await dbContext.Database.GetPendingMigrationsAsync()).ToList();
+            var pendingMigrations = (await dbContext.Database.GetPendingMigrationsAsync()).ToList();
 
             if (pendingMigrations.Any())
             {
                 // Apply migrations if there are any pending.
-                app.Logger.LogInformation($"Applying {pendingMigrations.Count} migrations...");
+                app.Logger.LogInformation("Applying {PendingMigrationCount} migrations...", pendingMigrations.Count);
                 await dbContext.Database.MigrateAsync();
             }
             else
@@ -74,7 +74,9 @@ public static class DatabaseResetService
         finally
         {
             if (dbContextResult != null)
+            {
                 await dbContextResult.DisposeAsync();
+            }
         }
     }
 }

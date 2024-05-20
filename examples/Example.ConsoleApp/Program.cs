@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Context;
 using Serilog.Formatting.Json;
-using ILogger = Serilog.ILogger;
 
 TestPreStartupLogger();
 TestSerilog();
@@ -24,7 +23,7 @@ void TestPreStartupLogger()
     }
     catch (Exception ex)
     {
-        PreStartupLogger.Instance.LogError(ex, ex.Message);
+        PreStartupLogger.Instance.LogError(ex, "{ExceptionMessage}", ex.Message);
     }
 
     Console.ReadKey(true);
@@ -37,7 +36,7 @@ void TestSerilog()
         // A custom buffer size can be set. The default is 10,000.
         // The JsonFormatter is required for LogContext properties (in the console sink).
 
-        ILogger logger = new LoggerConfiguration()
+        Serilog.Core.Logger logger = new LoggerConfiguration()
             //.WriteTo.Async(x => x.Console(theme: AnsiConsoleTheme.Code))
             .WriteTo.Async(x => x.Console(new JsonFormatter()))
             .Enrich.FromLogContext()

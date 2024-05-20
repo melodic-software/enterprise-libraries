@@ -20,7 +20,7 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
 
     public void Configure(MvcOptions options)
     {
-        List<IOutputFormatter> initialFormatters = options.OutputFormatters.ToList();
+        var initialFormatters = options.OutputFormatters.ToList();
 
         HandleNewtonSoftJsonFormatter(options);
         RemoveOutputFormatters(options);
@@ -29,7 +29,7 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
         //ReOrderOutputFormatters(options);
         ConfigureOutputFormatters(options);
 
-        List<IOutputFormatter> configuredFormatters = options.OutputFormatters.ToList();
+        var configuredFormatters = options.OutputFormatters.ToList();
     }
 
     private void HandleNewtonSoftJsonFormatter(MvcOptions options)
@@ -39,7 +39,9 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
             .FirstOrDefault();
 
         if (newtonSoftJsonOutputFormatter == null)
+        {
             return;
+        }
 
         // Remove text/json as it isn't the approved media type for working with JSON at an API level.
         newtonSoftJsonOutputFormatter.SupportedMediaTypes.Remove("text/json"); // TODO: Replace with constant.
@@ -67,12 +69,14 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
 
         // Add custom (application specific) output formatters.
         foreach (IOutputFormatter outputFormatter in _outputFormatters)
+        {
             options.OutputFormatters.Add(outputFormatter);
+        }
     }
 
     private void AddVersionMediaTypeDelegatingFormatter(MvcOptions options)
     {
-        List<IOutputFormatter> currentFormatters = options.OutputFormatters.ToList();
+        var currentFormatters = options.OutputFormatters.ToList();
 
         // This parses and strips out the version parameter.
         // Then delegates to any and all existing formatters.
@@ -92,7 +96,9 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
             .FirstOrDefault();
 
         if (jsonFormatter == null)
+        {
             return;
+        }
 
         // Remove the existing JSON formatter.
         options.OutputFormatters.Remove(jsonFormatter);
@@ -110,11 +116,11 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
 
     private void ConfigureSystemTextJson(MvcOptions options)
     {
-        SystemTextJsonOutputFormatter? outputFormatter = options.OutputFormatters
-            .FirstOrDefault(x => x is SystemTextJsonOutputFormatter) as SystemTextJsonOutputFormatter;
-
-        if (outputFormatter == null)
+        if (options.OutputFormatters.FirstOrDefault(x => x is SystemTextJsonOutputFormatter) 
+            is not SystemTextJsonOutputFormatter outputFormatter)
+        {
             return;
+        }
 
         // Configure JSON formatter if necessary.
         // This is primarily configured using the "AddJsonOptions" method on an IMvcBuilder instance.
@@ -124,22 +130,22 @@ public class OutputFormatterConfigurer : IConfigureOptions<MvcOptions>
 
     private void ConfigureXmlSerializer(MvcOptions options)
     {
-        XmlSerializerOutputFormatter? outputFormatter = options.OutputFormatters
-            .FirstOrDefault(x => x is XmlSerializerOutputFormatter) as XmlSerializerOutputFormatter;
-
-        if (outputFormatter == null)
+        if (options.OutputFormatters.FirstOrDefault(x => x is XmlSerializerOutputFormatter)
+            is not XmlSerializerOutputFormatter outputFormatter)
+        {
             return;
+        }
 
         // Add custom configuration here.
     }
 
     private void ConfigureXmlDataContractSerializer(MvcOptions options)
     {
-        XmlDataContractSerializerOutputFormatter? outputFormatter = options.OutputFormatters
-            .FirstOrDefault(x => x is XmlDataContractSerializerOutputFormatter) as XmlDataContractSerializerOutputFormatter;
-
-        if (outputFormatter == null)
+        if (options.OutputFormatters.FirstOrDefault(x => x is XmlDataContractSerializerOutputFormatter) 
+            is not XmlDataContractSerializerOutputFormatter outputFormatter)
+        {
             return;
+        }
 
         List<Type> knownTypes = outputFormatter.SerializerSettings.KnownTypes?.ToList() ?? [];
 

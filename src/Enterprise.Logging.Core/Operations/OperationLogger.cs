@@ -7,6 +7,8 @@ public class OperationLogger : IOperationLogger
 {
     private readonly ILogger _logger;
 
+    private const string DurationMessageTemplate = "{MessageTemplate} completed in {OperationDurationMs} ms.";
+
     public OperationLogger(ILogger logger)
     {
         _logger = logger;
@@ -14,7 +16,11 @@ public class OperationLogger : IOperationLogger
 
     public void LogOperationDuration(string messageTemplate, LogLevel logLevel, TimeSpan duration, params object[] args)
     {
-        object[] argsWithTiming = args.Append(duration.TotalMilliseconds).ToArray();
-        _logger.Log(logLevel, $"{messageTemplate} completed in {{OperationDurationMs}}ms", argsWithTiming);
+        object[] argsWithTiming = new object[args.Length + 2];
+        argsWithTiming[0] = messageTemplate;
+        Array.Copy(args, 0, argsWithTiming, 1, args.Length);
+        argsWithTiming[^1] = duration.TotalMilliseconds;
+
+        _logger.Log(logLevel, DurationMessageTemplate, argsWithTiming);
     }
 }

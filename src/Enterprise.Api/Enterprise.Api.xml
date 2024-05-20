@@ -19,19 +19,19 @@
             The [Produces] attribute simply states that the media type can be produced on output (does not impact routing).
             </summary>
         </member>
-        <member name="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter">
+        <member name="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilterAttribute">
             <summary>
             Action filter that restricts the action's availability to the development environment.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter})">
+        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilterAttribute.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilterAttribute})">
             <summary>
-            Initializes a new instance of the <see cref="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter"/> class.
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilterAttribute"/> class.
             </summary>
             <param name="environment">Provides information about the web hosting environment an application is running in.</param>
             <param name="logger">Represents a type used to perform logging.</param>
         </member>
-        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+        <member name="M:Enterprise.Api.Controllers.ActionFilters.DevOnlyActionFilterAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
             <summary>
             Called before the action method executes.
             </summary>
@@ -144,7 +144,7 @@
             
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Middleware.IgnoreFaviconMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.RootRedirectMiddleware})">
+        <member name="M:Enterprise.Api.Middleware.IgnoreFaviconMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.IgnoreFaviconMiddleware})">
             <summary>
             Most browsers default to requesting a favicon whenever the user visits a new website.
             This can trigger custom middleware an additional time, causing confusion.
@@ -244,6 +244,16 @@
             </summary>
             <param name="bindingContext">The context for the model binding.</param>
             <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.BindCollectionType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext,System.Type,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,System.ComponentModel.TypeConverter)">
+            <summary>
+            Binds a collection enumerable type by splitting comma-separated values and converting them to the element type.
+            </summary>
+            <param name="bindingContext"></param>
+            <param name="listType"></param>
+            <param name="valueProviderResult"></param>
+            <param name="converter"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:Enterprise.Api.ModelBinding.GenericEnumerableModelBinder.BindNonCollectionType(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,System.Type,System.ComponentModel.TypeConverter)">
             <summary>
@@ -443,7 +453,7 @@
             This ensures we're only accepting JWT tokens, which prevents so-called "JWT" confusion attacks.
             </summary>
         </member>
-        <member name="F:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ValidIssuers">
+        <member name="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.ValidIssuers">
             <summary>
             Allows for defining multiple valid issuers, which may be needed if there are different URIs or port mappings.
             When empty, the <see cref="P:Enterprise.Api.Security.Options.JwtBearerTokenOptions.Authority"/> value will be used.
@@ -527,12 +537,6 @@
             </summary>
             <param name="app"></param>
             <param name="builder"></param>
-        </member>
-        <member name="T:Enterprise.Api.Swagger.Attributes.DevOnlySwaggerFilterAttribute">
-            <summary>
-            Specifies that the controller or action should only be included in Swagger documentation
-            when the application is running in the development environment.
-            </summary>
         </member>
         <member name="T:Enterprise.Api.Swagger.Attributes.EnvironmentSwaggerFilterAttribute">
             <summary>

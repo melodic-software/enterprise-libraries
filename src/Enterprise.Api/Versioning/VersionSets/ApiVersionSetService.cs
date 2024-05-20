@@ -28,7 +28,9 @@ public class ApiVersionSetService
             .Value;
 
         if (apiVersionSet != null)
+        {
             return apiVersionSet;
+        }
 
         ApiVersionSetBuilder apiVersionSetBuilder = builder.NewApiVersionSet()
             .HasApiVersion(apiVersion)

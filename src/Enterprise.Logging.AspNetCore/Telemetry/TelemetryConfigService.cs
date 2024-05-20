@@ -17,7 +17,9 @@ internal static class TelemetryConfigService
     internal static void ConfigureTelemetry(this IHostApplicationBuilder builder, TelemetryConfigOptions configOptions)
     {
         if (!configOptions.EnableApplicationInsightsTelemetry)
+        {
             return;
+        }
 
         builder.Services.AddApplicationInsightsTelemetry();
     }

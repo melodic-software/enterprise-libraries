@@ -17,7 +17,9 @@ public static class PaginationResponseHeaderService
         HttpContext? httpContext = httpContextAccessor.HttpContext;
 
         if (httpContext == null)
+        {
             return;
+        }
 
         AddToResponseHeader(pagingMetadataDto, httpContext.Response);
     }
@@ -33,10 +35,18 @@ public static class PaginationResponseHeaderService
 
         // TODO: do we need to respect the "Accept" header on the request here or is this always going to be a JSON representation?
         // TODO: do we need to do anything about escaped unicode characters (for example, the "&" sign in the query string is escaped as \u0026)
-        JsonSerializerDefaults serializationDefaults = JsonSerializerDefaults.Web;
-        JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
-        string paginationJson = JsonSerializer.Serialize(pagingMetadataDto, jsonSerializerOptions);
+        
+        string paginationJson = JsonSerializer.Serialize(pagingMetadataDto, JsonSerializerOptions);
 
         response.Headers[responseHeaderName] = paginationJson;
+    }
+
+    private static JsonSerializerOptions JsonSerializerOptions => CreateJsonSerializerOptions();
+
+    private static JsonSerializerOptions CreateJsonSerializerOptions() 
+    {
+        JsonSerializerDefaults serializationDefaults = JsonSerializerDefaults.Web;
+        var jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
+        return jsonSerializerOptions;
     }
 }

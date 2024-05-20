@@ -50,7 +50,9 @@ public static class EntityTypeBuilderExtensions
     private static void ConfigureShadowProperty(EntityTypeBuilder entityTypeBuilder, AuditDatePropertyConfig configuration)
     {
         if (!configuration.IsShadowProperty)
+        {
             return;
+        }
 
         Type type = configuration.IsNullable ? typeof(DateTime?) : typeof(DateTime);
 
@@ -60,13 +62,17 @@ public static class EntityTypeBuilderExtensions
     public static void ConfigureRegularProperty(EntityTypeBuilder entityTypeBuilder, AuditDatePropertyConfig configuration)
     {
         if (configuration.IsShadowProperty)
+        {
             return;
+        }
 
         Type entityType = entityTypeBuilder.Metadata.ClrType;
         PropertyInfo? propertyInfo = entityType.GetProperty(configuration.PropertyName, BindingFlags.Public | BindingFlags.Instance);
 
         if (propertyInfo == null || propertyInfo.PropertyType != typeof(DateTime) && propertyInfo.PropertyType != typeof(DateTime?))
+        {
             throw new InvalidOperationException($"Entity does not have a property '{configuration.PropertyName}' of correct type.");
+        }
 
         Configure(configuration, entityTypeBuilder, propertyInfo.PropertyType);
     }
@@ -76,16 +82,19 @@ public static class EntityTypeBuilderExtensions
         PropertyBuilder propertyBuilder = entityTypeBuilder.Property(type, configuration.PropertyName);
 
         // Check if the type is nullable DateTime (DateTime?).
-        bool isNullableDateTime = type == typeof(DateTime?) || Nullable.GetUnderlyingType(type) == typeof(DateTime);
+        bool isNullableDateTime = type == typeof(DateTime?) || 
+                                  Nullable.GetUnderlyingType(type) == typeof(DateTime);
 
         if (!isNullableDateTime)
+        {
             propertyBuilder.IsRequired();
+        }
 
         if (configuration.DefaultSql != null)
         {
             propertyBuilder.HasDefaultValueSql(configuration.DefaultSql);
         }
-        else if (!isNullableDateTime || isNullableDateTime && configuration.ApplyDefaultToNullable)
+        else if (!isNullableDateTime || configuration.ApplyDefaultToNullable)
         {
             propertyBuilder.HasValueGenerator<UtcNowValueGenerator>();
         }

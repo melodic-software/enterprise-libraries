@@ -42,11 +42,14 @@
         <member name="M:Enterprise.ValueObjects.Model.ValueObject.Equals(Enterprise.ValueObjects.Model.ValueObject)">
             <inheritdoc />
         </member>
+        <member name="M:Enterprise.ValueObjects.Model.ValueObject.Equals(Enterprise.ValueObjects.Model.ValueObject,Enterprise.ValueObjects.Model.ValueObject)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ValueObjects.Model.ValueObject.Equals(System.Object)">
             <summary>
             Overrides the default object equality check by comparing types and value-based equality components.
             </summary>
-            <param name="other">The object to compare with this instance.</param>
+            <param name="obj">The object to compare with this instance.</param>
             <returns>True if the objects are equal, otherwise false.</returns>
         </member>
         <member name="M:Enterprise.ValueObjects.Model.ValueObject.GetHashCode">

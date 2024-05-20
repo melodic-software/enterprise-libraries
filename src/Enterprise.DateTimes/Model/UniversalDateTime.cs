@@ -56,7 +56,9 @@ public class UniversalDateTime
     public UniversalDateTime(DateTimeOffset dateTimeOffset)
     {
         if (dateTimeOffset.Offset != TimeSpan.Zero)
+        {
             throw new ArgumentException("DateTimeOffset must be in UTC.", nameof(dateTimeOffset));
+        }
 
         DateTimeOffset = dateTimeOffset;
     }
@@ -69,7 +71,9 @@ public class UniversalDateTime
         DateTime utcDateTime = ensureUtcService.EnsureUtc(dateTime);
 
         if (utcDateTime.Kind != DateTimeKind.Utc)
+        {
             throw new ArgumentException($"Expected UTC DateTime, but received DateTime with kind: {utcDateTime.Kind}", nameof(dateTime));
+        }
 
         // Set the DateTimeOffset property.
         DateTimeOffset = new DateTimeOffset(utcDateTime, TimeSpan.Zero);

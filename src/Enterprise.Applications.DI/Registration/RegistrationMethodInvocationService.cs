@@ -11,7 +11,10 @@ public static class RegistrationMethodInvocationService
     {
         Validate(config);
 
-        PreStartupLogger.Instance.LogInformation($"Invoking \"{config.MethodName}\" on \"{config.InterfaceType}\".");
+        PreStartupLogger.Instance.LogInformation(
+            "Invoking \"{MethodName}\" on \"{InterfaceTypeName}\".",
+            config.MethodName, config.InterfaceType.FullName
+        );
 
         HashSet<Assembly> processedAssemblies = [];
         HashSet<Type> processedTypes = [];
@@ -23,7 +26,9 @@ public static class RegistrationMethodInvocationService
         foreach (Assembly assembly in assemblies)
         {
             if (processedAssemblies.Contains(assembly))
+            {
                 continue;
+            }
 
             ProcessAssembly(assembly, processedTypes, config);
 
@@ -36,12 +41,16 @@ public static class RegistrationMethodInvocationService
         MethodInfo? methodInfo = config.InterfaceType.GetMethod(config.MethodName, config.BindingFlags);
 
         if (methodInfo == null)
+        {
             throw new InvalidOperationException($"{config.MethodName} method not found.");
+        }
 
         ParameterInfo[] methodParameters = methodInfo.GetParameters();
 
         if (!config.ParametersAreValid(methodParameters))
+        {
             throw new InvalidOperationException($"{config.MethodName} parameters are invalid.");
+        }
     }
 
     private static void ProcessAssembly(Assembly assembly, HashSet<Type> processedTypes, RegistrationMethodConfig config)
@@ -57,7 +66,9 @@ public static class RegistrationMethodInvocationService
     private static void ProcessType(HashSet<Type> processedTypes, RegistrationMethodConfig config, TypeInfo type)
     {
         if (processedTypes.Contains(type))
+        {
             return;
+        }
 
         if (NotExcluded(type))
         {
@@ -65,7 +76,7 @@ public static class RegistrationMethodInvocationService
         }
         else
         {
-            PreStartupLogger.Instance.LogWarning($"Registrations have been excluded for: {type.FullName}");
+            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}", type.FullName);
         }   
 
         processedTypes.Add(type);
@@ -88,12 +99,14 @@ public static class RegistrationMethodInvocationService
     {
         try
         {
-            PreStartupLogger.Instance.LogInformation($"Invoking method on: {type.FullName}.");
+            PreStartupLogger.Instance.LogInformation("Invoking method on: {TypeName}.", type.FullName);
 
             MethodInfo? methodInfo = type.GetMethod(config.MethodName, config.BindingFlags);
 
             if (methodInfo == null)
+            {
                 throw new InvalidOperationException($"Method '{config.MethodName}' not found in type '{type.Name}'.");
+            }
 
             methodInfo.Invoke(null, config.MethodParameters);
         }

@@ -6,7 +6,7 @@ public class TraceListenerConfigOptions
 {
     public const string ConfigSectionKey = "Custom:Logging:TraceListeners";
 
-    public bool EnableTextFileTraceListener { get; set; } = false;
+    public bool EnableTextFileTraceListener { get; set; }
 
     /// <summary>
     /// The name of the application that is safe to use for file system operations.

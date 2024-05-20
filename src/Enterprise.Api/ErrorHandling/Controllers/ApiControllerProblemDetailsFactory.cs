@@ -18,11 +18,11 @@ public class ApiControllerProblemDetailsFactory : ProblemDetailsFactory
         _options = options.Value;
     }
 
-    public override ProblemDetails CreateProblemDetails(HttpContext context, int? statusCode = null, string? title = null,
+    public override ProblemDetails CreateProblemDetails(HttpContext httpContext, int? statusCode = null, string? title = null,
         string? type = null, string? detail = null, string? instance = null)
     {
         // this is the standard (non customized) problem details
-        ProblemDetails problemDetails = new ProblemDetails
+        var problemDetails = new ProblemDetails
         {
             Title = title,
             Type = type,
@@ -31,20 +31,19 @@ public class ApiControllerProblemDetailsFactory : ProblemDetailsFactory
             Status = statusCode
         };
 
-        if (_options != null)
+        if (_options != null && statusCode.HasValue && _options.ClientErrorMapping.TryGetValue(statusCode.Value, out ClientErrorData? clientErrorData))
         {
-            // use/overwrite the default values with those configured (if applicable)
-            if (statusCode.HasValue && _options.ClientErrorMapping.TryGetValue(statusCode.Value, out ClientErrorData? clientErrorData))
-            {
-                problemDetails.Title ??= clientErrorData.Title;
-                problemDetails.Type ??= clientErrorData.Link;
-            }
+            // Use/overwrite the default values with those configured (if applicable).
+            problemDetails.Title ??= clientErrorData.Title;
+            problemDetails.Type ??= clientErrorData.Link;
         }
 
-        string? traceId = context?.TraceIdentifier;
+        string? traceId = httpContext?.TraceIdentifier;
 
         if (traceId != null)
+        {
             problemDetails.Extensions.Add("traceId", traceId);
+        }
 
         // customizations can be added via extensions
         //problemDetails.Extensions.Add("customValue", "value");
@@ -53,11 +52,11 @@ public class ApiControllerProblemDetailsFactory : ProblemDetailsFactory
         return problemDetails;
     }
 
-    public override ValidationProblemDetails CreateValidationProblemDetails(HttpContext context, ModelStateDictionary modelStateDictionary,
+    public override ValidationProblemDetails CreateValidationProblemDetails(HttpContext httpContext, ModelStateDictionary modelStateDictionary,
         int? statusCode = null, string? title = null, string? type = null, string? detail = null, string? instance = null)
     {
         // this is the standard (non customized) validation problem details
-        ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails(modelStateDictionary)
+        var validationProblemDetails = new ValidationProblemDetails(modelStateDictionary)
         {
             Title = title,
             Detail = detail,

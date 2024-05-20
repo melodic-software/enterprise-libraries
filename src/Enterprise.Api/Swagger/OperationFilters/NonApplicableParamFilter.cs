@@ -29,6 +29,8 @@ public class NonApplicableParamFilter : IOperationFilter
 
         // Remove the identified parameters from the operation's documentation.
         foreach (OpenApiParameter parameter in parametersToRemove)
+        {
             operation.Parameters.Remove(parameter);
+        }
     }
 }

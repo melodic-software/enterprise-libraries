@@ -2,7 +2,7 @@
 
 namespace Enterprise.ValueObjects.Example;
 
-public class TimeRange : ValueObject
+internal sealed class TimeRange : ValueObject
 {
     public TimeOnly Start { get; init; }
     public TimeOnly End { get; init; }
@@ -10,7 +10,9 @@ public class TimeRange : ValueObject
     public TimeRange(TimeOnly start, TimeOnly end)
     {
         if (start >= end)
+        {
             throw new ArgumentException("End time must be greater than the start time");
+        }
 
         Start = start;
         End = end;
@@ -30,8 +32,8 @@ public class TimeRange : ValueObject
             return null;
         }
 
-        TimeOnly startTime = TimeOnly.FromDateTime(start);
-        TimeOnly endTime = TimeOnly.FromDateTime(end);
+        var startTime = TimeOnly.FromDateTime(start);
+        var endTime = TimeOnly.FromDateTime(end);
 
         return new TimeRange(startTime, endTime);
     }
@@ -39,10 +41,14 @@ public class TimeRange : ValueObject
     public bool OverlapsWith(TimeRange other)
     {
         if (Start >= other.End)
+        {
             return false;
+        }
 
         if (other.Start >= End)
+        {
             return false;
+        }
 
         return true;
     }

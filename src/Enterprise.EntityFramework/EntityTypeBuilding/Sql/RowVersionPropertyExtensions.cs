@@ -12,7 +12,9 @@ public static class RowVersionPropertyExtensions
             .IsRowVersion();
 
         if (isRequired)
+        {
             propertyBuilder.IsRequired();
+        }
 
         return builder;
     }

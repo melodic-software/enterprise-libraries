@@ -131,7 +131,9 @@ public class RegistrationContext<TService> where TService : class
         ServiceDescriptor? originalServiceDescriptor = _services.FirstOrDefault(d => d.ServiceType == serviceType);
 
         if (originalServiceDescriptor == null)
+        {
             throw new InvalidOperationException($"The service of type {serviceType.Name} has not been registered and cannot be decorated.");
+        }
 
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
 
@@ -162,7 +164,9 @@ public class RegistrationContext<TService> where TService : class
         ServiceDescriptor? serviceDescriptor = _services.FirstOrDefault(d => d.ServiceType == typeof(TService));
 
         if (serviceDescriptor == null)
+        {
             throw new InvalidOperationException($"The service of type {typeof(TService).Name} has not been registered.");
+        }
 
         return serviceDescriptor;
     }
@@ -177,7 +181,9 @@ public class RegistrationContext<TService> where TService : class
             TService service = GetOriginalService(serviceDescriptor, provider);
 
             foreach (Func<IServiceProvider, Func<TService, TService>> decoratorFactory in decoratorFactories)
+            {
                 service = decoratorFactory(provider)(service);
+            }
 
             return service;
         };
@@ -195,13 +201,19 @@ public class RegistrationContext<TService> where TService : class
     private static TService GetOriginalService(ServiceDescriptor serviceDescriptor, IServiceProvider provider)
     {
         if (serviceDescriptor.ImplementationFactory != null)
+        {
             return (TService)serviceDescriptor.ImplementationFactory(provider);
+        }
 
         if (serviceDescriptor.ImplementationInstance != null)
+        {
             return (TService)serviceDescriptor.ImplementationInstance;
+        }
 
         if (serviceDescriptor.ImplementationType != null)
+        {
             return (TService)ActivatorUtilities.CreateInstance(provider, serviceDescriptor.ImplementationType);
+        }
 
         throw new InvalidOperationException("The registration method for the original service is not supported.");
     }

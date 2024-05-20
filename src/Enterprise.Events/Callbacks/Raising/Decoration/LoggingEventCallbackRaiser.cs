@@ -26,7 +26,9 @@ public class LoggingEventCallbackRaiser : IRaiseEventCallbacks
         _logger.LogDebug("Raising callbacks for {EventCount} events.", eventList.Count);
 
         foreach (IEvent @event in eventList)
+        {
             RaiseCallbacks(@event);
+        }
 
         _logger.LogDebug("Callback raising completed.");
     }

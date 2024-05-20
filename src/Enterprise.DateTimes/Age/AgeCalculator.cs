@@ -17,13 +17,17 @@ public class AgeCalculator : ICalculateAge
             DateTimeOffset today = DateTimeOffset.UtcNow;
 
             if (birthDate.IsLaterThan(today))
+            {
                 return Calculation<int>.CanNotBeMadeBecause(BirthDateIsInTheFuture);
+            }
 
             int age = today.Year - birthDate.Year;
 
             // if the birthday is later in the year (hasn't come to pass yet)
             if (birthDate.Date > today.Date.AddYears(-age))
+            {
                 age -= 1; // we need to subtract 1
+            }
 
             return Calculation<int>.Success(age);
         }

@@ -19,7 +19,9 @@ public static class ShadowPropertyExtensions
     public static void UpdateShadowProperty(this EntityEntry entry, DbContext dbContext, EntityState entityState, string propertyName, object value)
     {
         if (entry.State != entityState || entry.Properties.All(x => x.Metadata.Name != propertyName))
+        {
             return;
+        }
 
         object? currentDateModifiedValue = dbContext.GetShadowPropertyValue(entry, propertyName);
         PropertyEntry dateModifiedPropertyEntry = entry.Property(propertyName);

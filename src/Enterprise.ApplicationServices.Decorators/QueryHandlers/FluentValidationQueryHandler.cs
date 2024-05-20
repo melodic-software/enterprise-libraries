@@ -19,15 +19,19 @@ public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecor
         _validators = validators.ToList();
     }
 
-    public override Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
-            return Decorated.HandleAsync(query, cancellationToken);
+        {
+            await Decorated.HandleAsync(query, cancellationToken);
+        }
 
         IValidationContext validationContext = new ValidationContext<TQuery>(query);
 
-        FluentValidationService.ExecuteValidation(_validators, validationContext);
+        await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
 
-        return Decorated.HandleAsync(query, cancellationToken);
+        TResponse response = await Decorated.HandleAsync(query, cancellationToken);
+
+        return response;
     }
 }
