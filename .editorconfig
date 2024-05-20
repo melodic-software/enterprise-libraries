@@ -348,6 +348,9 @@ dotnet_diagnostic.CA5392.severity = none
 # CA5404: Do not disable token validation checks
 dotnet_diagnostic.CA5404.severity = none
 
+# CS8002: Referenced assembly does not have a strong name
+dotnet_diagnostic.CS8002.severity = none
+
 # CS8600: Converting null literal or possible null value to non-nullable type.
 dotnet_diagnostic.CS8600.severity = none
 

@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Constants" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Http" Version="1.0.0-preview.30" />
+    <PackageReference Include="Melodic.Enterprise.Http" Version="1.0.0-preview.170" />
   </ItemGroup>
 
 </Project>

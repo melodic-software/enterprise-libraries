@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Calculations" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.70" />
-    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.72" />
+    <PackageReference Include="Melodic.Enterprise.Calculations" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.170" />
   </ItemGroup>
 
 </Project>

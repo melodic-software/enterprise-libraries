@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.77" />
-    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.72" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.170" />
   </ItemGroup>
 
 </Project>

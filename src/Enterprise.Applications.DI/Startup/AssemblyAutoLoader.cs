@@ -55,9 +55,7 @@ public static class AssemblyAutoLoader
             PreStartupLogger.Instance.LogError(ex, "An exception occurred while auto loading assemblies. Falling back to loading all solution assemblies.");
 
             // This is less performant, but we can safely fall back to this if needed.
-            filterPredicate ??= name => true;
-            //filterPredicate ??= AssemblyFilterPredicates.NoFilter;
-
+            filterPredicate ??= AssemblyFilterPredicates.NoFilter;
             loadedAssemblies = AssemblyLoader.LoadSolutionAssemblies(filterPredicate);
         }
 
