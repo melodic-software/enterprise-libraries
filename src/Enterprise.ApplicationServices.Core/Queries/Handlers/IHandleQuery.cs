@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Standard;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Standard;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 

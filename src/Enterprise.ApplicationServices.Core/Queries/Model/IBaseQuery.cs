@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.UseCases;
 using Enterprise.Messages.Core.Model;
 
-namespace Enterprise.ApplicationServices.Core.Queries;
+namespace Enterprise.ApplicationServices.Core.Queries.Model;
 
 /// <summary>
 /// This is a base marker interface.

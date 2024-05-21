@@ -1,4 +1,6 @@
-﻿namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+
+namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Validation;
 
 public static class CommandHandlerTypeValidationService
 {

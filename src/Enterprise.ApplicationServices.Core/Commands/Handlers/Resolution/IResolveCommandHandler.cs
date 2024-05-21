@@ -1,4 +1,6 @@
-﻿namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+
+namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 
 /// <summary>
 /// Resolves command handler implementations that can handle specific commands.

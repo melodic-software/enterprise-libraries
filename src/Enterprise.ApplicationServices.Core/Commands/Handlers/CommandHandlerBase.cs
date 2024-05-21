@@ -1,6 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Standard;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.Events.Facade.Abstract;
-using static Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerTypeValidationService;
+using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 

@@ -1,7 +1,7 @@
 ﻿using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 
-namespace Enterprise.ApplicationServices.Core.Commands;
+namespace Enterprise.ApplicationServices.Core.Commands.Model;
 
 /// <summary>
 /// This is a marker interface that signifies that an implementing class is a command object.

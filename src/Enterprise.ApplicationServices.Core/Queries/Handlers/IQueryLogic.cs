@@ -1,4 +1,6 @@
-﻿namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+
+namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
 /// <summary>
 /// Implementations perform the query execution and mapping logic (if required).

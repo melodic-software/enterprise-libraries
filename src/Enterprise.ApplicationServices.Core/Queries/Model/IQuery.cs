@@ -1,7 +1,7 @@
 ﻿using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 
-namespace Enterprise.ApplicationServices.Core.Queries;
+namespace Enterprise.ApplicationServices.Core.Queries.Model;
 
 /// <summary>
 /// This is a marker interface that signifies that an implementing class is a query object.

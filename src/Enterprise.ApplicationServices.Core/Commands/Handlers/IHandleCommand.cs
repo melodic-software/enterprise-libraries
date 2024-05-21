@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Standard;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.Library.Core.Attributes;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers;

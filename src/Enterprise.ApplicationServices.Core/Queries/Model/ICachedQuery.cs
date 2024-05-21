@@ -1,4 +1,4 @@
-﻿namespace Enterprise.ApplicationServices.Core.Queries;
+﻿namespace Enterprise.ApplicationServices.Core.Queries.Model;
 
 public interface ICachedQuery : IQuery
 {
