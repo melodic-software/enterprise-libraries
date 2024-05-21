@@ -20,8 +20,8 @@ public interface IHandleCommand
 /// <summary>
 /// Handles commands of a specific type.
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public interface IHandleCommand<in T> : IHandleCommand, IApplicationService where T : IBaseCommand
+/// <typeparam name="TCommand"></typeparam>
+public interface IHandleCommand<in TCommand> : IHandleCommand, IApplicationService where TCommand : IBaseCommand
 {
     /// <summary>
     /// Handle the command.
@@ -29,7 +29,7 @@ public interface IHandleCommand<in T> : IHandleCommand, IApplicationService wher
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task HandleAsync(T command, CancellationToken cancellationToken);
+    Task HandleAsync(TCommand command, CancellationToken cancellationToken);
 }
 
 /// <summary>
