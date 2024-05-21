@@ -15,7 +15,7 @@ public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCom
     public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
-        T typedCommand = (T)command;
+        var typedCommand = (T)command;
         await HandleAsync(typedCommand, cancellationToken);
     }
 
@@ -42,7 +42,7 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
     public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
-        TCommand typedCommand = (TCommand)command;
+        var typedCommand = (TCommand)command;
         await HandleAsync(typedCommand, cancellationToken);
     }
 

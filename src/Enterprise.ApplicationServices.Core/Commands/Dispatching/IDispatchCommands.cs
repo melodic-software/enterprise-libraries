@@ -1,6 +1,9 @@
-﻿namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
+﻿using Enterprise.Events.Callbacks.Registration.Abstract;
 
-public interface IDispatchCommands
+namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
+
+public interface IDispatchCommands : IRegisterEventCallbacks
 {
-    Task DispatchAsync<TCommand>(TCommand command) where TCommand : IBaseCommand;
+    Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : IBaseCommand;
+    Task<TResponse?> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken) where TCommand : IBaseCommand;
 }
