@@ -1,6 +1,7 @@
 ﻿using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Callbacks.Facade;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
+using Enterprise.Events.Callbacks.Raising;
 using Enterprise.Events.Callbacks.Raising.Abstract;
 using Enterprise.Events.Callbacks.Raising.Decoration;
 using Enterprise.Events.Callbacks.Registration;

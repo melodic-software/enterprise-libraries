@@ -1,8 +1,6 @@
 ﻿using Enterprise.Serialization.Json.Microsoft;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Microsoft.Net.Http.Headers;
 using System.Text.Json;
 using Enterprise.Validation.Exceptions;
 using Enterprise.Validation.Extensions;

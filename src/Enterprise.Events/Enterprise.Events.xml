@@ -4,12 +4,6 @@
         <name>Enterprise.Events</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Events.Callbacks.EventCallbackRaiser.RaiseCallbacks(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.Events.Callbacks.EventCallbackRaiser.RaiseCallbacks``1(``0)">
-            <inheritdoc />
-        </member>
         <member name="T:Enterprise.Events.Callbacks.Facade.EventCallbackService">
             <summary>
             This is a simple facade service that aggregates the registration and raising of event callbacks.
@@ -71,6 +65,12 @@
             </summary>
             <typeparam name="TEvent"></typeparam>
             <param name="event"></param>
+        </member>
+        <member name="M:Enterprise.Events.Callbacks.Raising.EventCallbackRaiser.RaiseCallbacks(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Callbacks.Raising.EventCallbackRaiser.RaiseCallbacks``1(``0)">
+            <inheritdoc />
         </member>
         <member name="M:Enterprise.Events.Callbacks.Registration.Abstract.IClearCallbacks.ClearCallbacks">
             <summary>

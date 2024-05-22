@@ -4,7 +4,7 @@ using Enterprise.Events.Callbacks.Registration.Abstract;
 using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Events.Callbacks;
+namespace Enterprise.Events.Callbacks.Raising;
 
 public class EventCallbackRaiser : IRaiseEventCallbacks
 {
@@ -44,7 +44,7 @@ public class EventCallbackRaiser : IRaiseEventCallbacks
 
         IEnumerable<IEventCallback> callbacks = registeredCallbacks[eventType];
 
-        List<IEventCallback> callbackList = callbacks.ToList();
+        var callbackList = callbacks.ToList();
 
         _logger.LogDebug("Attempting to raise {CallbackCount} callback(s).", callbackList.Count);
 

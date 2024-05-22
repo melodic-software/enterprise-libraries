@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands;
-using Enterprise.ApplicationServices.Core.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Decorators.CommandHandlers;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
