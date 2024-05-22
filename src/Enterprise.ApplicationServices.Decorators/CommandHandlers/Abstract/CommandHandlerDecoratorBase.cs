@@ -1,9 +1,8 @@
-﻿using Enterprise.ApplicationServices.Core.Commands;
-using Enterprise.ApplicationServices.Core.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.Events.Model;
-using static Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerTypeValidationService;
+using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract;
 
@@ -26,16 +25,4 @@ public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleComm
 
     /// <inheritdoc />
     public abstract Task HandleAsync(T command, CancellationToken cancellationToken);
-
-    /// <inheritdoc />
-    public void ClearCallbacks()
-    {
-        Decorated.ClearCallbacks();
-    }
-
-    /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
-    {
-        Decorated.RegisterEventCallback(action);
-    }
 }

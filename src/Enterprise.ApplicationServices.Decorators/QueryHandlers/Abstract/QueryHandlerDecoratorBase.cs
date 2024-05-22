@@ -1,9 +1,8 @@
-﻿using Enterprise.ApplicationServices.Core.Queries;
-using Enterprise.ApplicationServices.Core.Queries.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.Events.Model;
-using static Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerTypeValidationService;
+using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract;
 
@@ -28,16 +27,4 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBa
 
     /// <inheritdoc />
     public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
-
-    /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
-    {
-        Decorated.RegisterEventCallback(action);
-    }
-
-    /// <inheritdoc />
-    public void ClearCallbacks()
-    {
-        Decorated.ClearCallbacks();
-    }
 }

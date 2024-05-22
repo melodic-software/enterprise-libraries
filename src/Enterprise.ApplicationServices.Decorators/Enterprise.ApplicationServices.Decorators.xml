@@ -4,28 +4,16 @@
         <name>Enterprise.ApplicationServices.Decorators</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.IBaseCommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract.CommandHandlerDecoratorBase`1.ClearCallbacks">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract.CommandHandlerDecoratorBase`1.RegisterEventCallback``1(System.Action{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.IBaseQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract.QueryHandlerDecoratorBase`2.RegisterEventCallback``1(System.Action{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract.QueryHandlerDecoratorBase`2.ClearCallbacks">
             <inheritdoc />
         </member>
     </members>

@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Queries;
-using Enterprise.ApplicationServices.Core.Queries.Handlers;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Microsoft.Extensions.Logging;

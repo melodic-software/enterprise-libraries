@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Queries;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.Caching.Abstractions;
 using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;

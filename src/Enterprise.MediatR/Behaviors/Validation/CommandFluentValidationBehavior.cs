@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.FluentValidation.Services;
 using FluentValidation;
 using MediatR;
