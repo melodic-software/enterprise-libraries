@@ -7,7 +7,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 /// <summary>
 /// Handles commands.
 /// </summary>
-public interface IHandleCommand
+public interface IHandleCommand : IApplicationService
 {
     /// <summary>
     /// Handle the command.
@@ -22,7 +22,7 @@ public interface IHandleCommand
 /// Handles commands of a specific type.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-public interface IHandleCommand<in TCommand> : IHandleCommand, IApplicationService where TCommand : IBaseCommand
+public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : IBaseCommand
 {
     /// <summary>
     /// Handle the command.
@@ -44,7 +44,7 @@ public interface IHandleCommand<in TCommand> : IHandleCommand, IApplicationServi
 /// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(IHandleCommand<>))]
 public interface IHandleCommand<in TCommand, TResponse>
-    : IHandleCommand, IApplicationService where TCommand : IBaseCommand
+    : IHandleCommand where TCommand : IBaseCommand
 {
     /// <summary>
     /// Handle the command.

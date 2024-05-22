@@ -3,7 +3,7 @@ using Enterprise.ApplicationServices.Core.Standard;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
-public interface IHandleQuery<TResponse>
+public interface IHandleQuery<TResponse> : IApplicationService
 {
     /// <summary>
     /// Handle the query and return the typed result.
@@ -19,7 +19,7 @@ public interface IHandleQuery<TResponse>
 /// </summary>
 /// <typeparam name="TQuery">The explicit type of query that can be handled.</typeparam>
 /// <typeparam name="TResponse">The expected result type.</typeparam>
-public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse>, IApplicationService where TQuery : IBaseQuery
+public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> where TQuery : IBaseQuery
 {
     /// <summary>
     /// Handle a specific type of query and return the typed result.
