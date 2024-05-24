@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 
@@ -13,6 +14,14 @@ public interface IResolveCommandHandler
     /// <param name="command"></param>
     /// <returns></returns>
     IHandleCommand GetHandlerFor(ICommand command);
+
+    /// <summary>
+    /// Get the handler implementation that can handle the given command.
+    /// </summary>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    IHandleCommand GetHandlerFor<TResponse>(ICommand<TResponse> command);
 
     /// <summary>
     /// Get the handler implementation that can handle the given command.

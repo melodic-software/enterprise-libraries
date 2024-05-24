@@ -23,25 +23,3 @@ public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCom
     /// <inheritdoc />
     public abstract Task HandleAsync(T command, CancellationToken cancellationToken);
 }
-
-public abstract class CommandHandlerBase<TCommand, TResponse>
-    : IHandleCommand<TCommand>, IHandleCommand<TCommand, TResponse>
-    where TCommand : IBaseCommand
-{
-    /// <inheritdoc />
-    Task IHandleCommand<TCommand>.HandleAsync(TCommand command, CancellationToken cancellationToken)
-    {
-        return HandleAsync(command, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
-    {
-        ValidateType(command, this);
-        var typedCommand = (TCommand)command;
-        await HandleAsync(typedCommand, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
-}
