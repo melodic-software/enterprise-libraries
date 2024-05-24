@@ -12,7 +12,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 /// Use of this interface is acceptable; however, <see cref="IHandleCommand"/> is preferred.
 /// </summary>
 [AlternativeTo(typeof(IHandleCommand))]
-public interface IHandleCommand<TResponse> : IApplicationService
+public interface IHandleCommand<TResponse> : IHandleCommand
 {
     public Task<TResponse> HandleAsync(ICommand<TResponse> command, CancellationToken cancellationToken);
 }
@@ -27,7 +27,7 @@ public interface IHandleCommand<TResponse> : IApplicationService
 /// <typeparam name="TCommand"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(IHandleCommand<>))]
-public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand where TCommand : IBaseCommand
+public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TResponse> where TCommand : IBaseCommand
 {
     /// <summary>
     /// Handle the command.
