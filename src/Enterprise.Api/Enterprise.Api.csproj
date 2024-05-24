@@ -22,10 +22,10 @@
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.228" />
     <PackageReference Include="Melodic.Enterprise.Applications.DI" Version="1.0.0-preview.213" />
-    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.228" />
+    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.230" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.215" />
+    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.230" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.226" />
