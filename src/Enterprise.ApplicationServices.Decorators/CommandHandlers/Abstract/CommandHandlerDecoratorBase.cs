@@ -7,7 +7,7 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 namespace Enterprise.ApplicationServices.Decorators.CommandHandlers.Abstract;
 
 public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleCommand<T>>, IHandleCommand<T>
-    where T : IBaseCommand
+    where T : ICommand
 {
     
     protected CommandHandlerDecoratorBase(IHandleCommand<T> commandHandler, IGetDecoratedInstance decoratorService)
@@ -16,7 +16,7 @@ public abstract class CommandHandlerDecoratorBase<T> : DecoratorBase<IHandleComm
     }
 
     /// <inheritdoc />
-    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
+    public Task HandleAsync(ICommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         var typedCommand = (T)command;

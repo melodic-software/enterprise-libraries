@@ -13,7 +13,7 @@ public static class CommandHandlerRegistrationExtensions
 {
     public static void RegisterCommandHandler<T>(this IServiceCollection services,
         Func<IServiceProvider, IHandleCommand<T>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where T : IBaseCommand
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where T : ICommand
     {
         services.BeginRegistration<IHandleCommand<T>>()
             .Add(factory, serviceLifetime)

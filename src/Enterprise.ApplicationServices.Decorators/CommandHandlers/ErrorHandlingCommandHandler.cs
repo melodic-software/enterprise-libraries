@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Decorators.CommandHandlers;
 
 public class ErrorHandlingCommandHandler<T> : CommandHandlerDecoratorBase<T>
-    where T : IBaseCommand
+    where T : ICommand
 {
     private readonly ILogger<ErrorHandlingCommandHandler<T>> _logger;
 

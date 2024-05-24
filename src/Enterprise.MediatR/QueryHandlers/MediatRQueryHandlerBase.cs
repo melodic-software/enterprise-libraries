@@ -8,7 +8,7 @@ namespace Enterprise.MediatR.QueryHandlers;
 
 public abstract class MediatRQueryHandlerBase<TQuery, TResponse>
     : QueryHandlerBase<TQuery, TResponse>, IRequestHandler<TQuery, Result<TResponse>>
-    where TQuery : IRequest<Result<TResponse>>, IBaseQuery
+    where TQuery : IRequest<Result<TResponse>>, IQuery
 {
     protected MediatRQueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {

@@ -8,7 +8,7 @@ namespace Enterprise.MediatR.Behaviors.Validation;
 // TODO: Can we consolidate this with the other logging decorator(s)?
 public class CommandFluentValidationBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IBaseCommand
+    where TRequest : ICommand
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators;
 

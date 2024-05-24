@@ -23,7 +23,7 @@ public static class QueryHandlerRegistrationExtensions
     /// <param name="serviceLifetime"></param>
     public static void RegisterQueryHandler<TQuery, TResponse>(this IServiceCollection services,
         Func<IServiceProvider, IHandleQuery<TQuery, TResponse>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IBaseQuery
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IQuery
     {
         services.BeginRegistration<IHandleQuery<TQuery, TResponse>>()
             .Add(factory, serviceLifetime)
@@ -37,7 +37,7 @@ public static class QueryHandlerRegistrationExtensions
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="services"></param>
-    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services) where TQuery : IBaseQuery
+    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services) where TQuery : IQuery
     {
         services.RegisterSimpleQueryHandler(provider =>
         {
@@ -57,7 +57,7 @@ public static class QueryHandlerRegistrationExtensions
     /// <param name="serviceLifetime"></param>
     public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services,
         Func<IServiceProvider, IQueryLogic<TQuery, TResponse>> queryLogicFactory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IBaseQuery
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IQuery
     {
         services.BeginRegistration<IHandleQuery<TQuery, TResponse>>()
             .Add(provider =>
@@ -77,7 +77,7 @@ public static class QueryHandlerRegistrationExtensions
     }
 
     private static void WithDefaultDecorators<TQuery, TResponse>(this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext)
-        where TQuery : IBaseQuery
+        where TQuery : IQuery
     {
         registrationContext
             .WithDecorators((provider, queryHandler) =>

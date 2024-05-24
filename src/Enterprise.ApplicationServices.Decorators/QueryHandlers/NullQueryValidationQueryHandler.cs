@@ -6,7 +6,7 @@ using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 namespace Enterprise.ApplicationServices.Decorators.QueryHandlers;
 
 public class NullQueryValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
-    where TQuery : IBaseQuery
+    where TQuery : IQuery
 {
     public NullQueryValidationQueryHandler(IHandleQuery<TQuery, TResponse> queryHandler,
         IGetDecoratedInstance decoratorService) : base(queryHandler, decoratorService)
