@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase&lt;T&gt;">
+    <Position X="4.25" Y="10.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\CommandHandlerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService">
+    <Position X="0.5" Y="10.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\Validation\CommandHandlerTypeValidationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase&lt;TCommand, TResponse&gt;">
+    <Position X="7.75" Y="10.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\Alternate\CommandHandlerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Dispatching.IDispatchCommands">
+    <Position X="1.75" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Dispatching\IDispatchCommands.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Facade.ICommandDispatchFacade" Collapsed="true">
+    <Position X="5.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Facade\ICommandDispatchFacade.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Model.Alternate.ICommand&lt;TResponse&gt;" Collapsed="true">
+    <Position X="4.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Model\Alternate\ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand" Collapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Model\IBaseCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Model.ICommand" Collapsed="true">
+    <Position X="2" Y="2" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Model\ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand">
+    <Position X="4.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\IHandleCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand&lt;TCommand&gt;">
+    <Position X="4.25" Y="8.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\IHandleCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler">
+    <Position X="4.25" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\Resolution\IResolveCommandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.IHandleCommand&lt;TCommand, TResponse&gt;">
+    <Position X="7.75" Y="8.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\Alternate\IHandleCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
