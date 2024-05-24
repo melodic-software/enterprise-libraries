@@ -28,7 +28,7 @@
     <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.215" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.214" />
-    <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.171" />
+    <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.226" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.215" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.225" />
