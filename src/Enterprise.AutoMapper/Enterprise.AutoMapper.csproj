@@ -15,8 +15,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Melodic.Enterprise.Api.Client" Version="1.0.0-preview.171" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.172" />
-    <PackageReference Include="Melodic.Enterprise.Queries" Version="1.0.0-preview.211" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.213" />
+    <PackageReference Include="Melodic.Enterprise.Queries" Version="1.0.0-preview.213" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.211" />
   </ItemGroup>
 
