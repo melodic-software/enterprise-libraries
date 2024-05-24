@@ -85,7 +85,7 @@ public static class OAuth2Extensions
         }
 
         Dictionary<string, string> oAuthScopes = swaggerConfigOptions.OAuthScopes;
-        string[] scopeNames = oAuthScopes.Keys.ToArray();
+        string[] scopeNames = [.. oAuthScopes.Keys];
 
         options.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
