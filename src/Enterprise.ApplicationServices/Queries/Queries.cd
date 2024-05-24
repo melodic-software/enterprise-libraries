@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService">
+    <Position X="4.25" Y="13" Width="3.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase&lt;TQuery, TResponse&gt;" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="13" Width="3" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver">
+    <Position X="13.25" Y="2.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Queries\Handlers\Resolution\QueryHandlerResolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.Simple.SimpleQueryHandler&lt;TQuery, TResponse&gt;">
+    <Position X="8.25" Y="15" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Queries\Handlers\Simple\SimpleQueryHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService">
+    <Position X="8.5" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAEAEAAAAAAAAAAAAAAEAAAQAAAAA=</HashCode>
+      <FileName>Queries\Facade\QueryFacadeService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatcher">
+    <Position X="8" Y="3.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Queries\Dispatching\QueryDispatcher.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Dispatching.IDispatchQueries">
+    <Position X="8.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Facade.IQueryDispatchFacade" Collapsed="true">
+    <Position X="8.75" Y="2" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.ICachedQuery" Collapsed="true">
+    <Position X="3" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.ICachedQuery&lt;TResponse&gt;" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IQuery" Collapsed="true">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IQuery&lt;TResponse&gt;" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler">
+    <Position X="13.25" Y="0.5" Width="3.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery&lt;TResponse&gt;">
+    <Position X="8.25" Y="9.25" Width="3" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery&lt;TQuery, TResponse&gt;">
+    <Position X="8.25" Y="11.25" Width="3" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic&lt;TQuery, TResponse&gt;">
+    <Position X="12" Y="13" Width="2.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
