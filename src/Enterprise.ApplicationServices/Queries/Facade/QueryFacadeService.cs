@@ -24,7 +24,7 @@ internal sealed class QueryFacadeService : IQueryDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
+    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
     {
         return await _queryDispatcher.DispatchAsync<TQuery, TResponse>(query, cancellationToken);
     }

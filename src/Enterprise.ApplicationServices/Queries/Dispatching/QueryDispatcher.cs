@@ -31,7 +31,7 @@ public class QueryDispatcher : IDispatchQueries
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
+    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
     {
         IHandleQuery<TQuery, TResponse> queryHandler = _queryHandlerResolver.GetQueryHandler<TQuery, TResponse>(query);
         TResponse result = await queryHandler.HandleAsync(query, cancellationToken);

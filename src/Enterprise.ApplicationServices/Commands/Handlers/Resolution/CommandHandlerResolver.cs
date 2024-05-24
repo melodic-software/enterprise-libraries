@@ -17,7 +17,7 @@ public class CommandHandlerResolver : IResolveCommandHandler
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command) where TCommand : IBaseCommand
+    public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command) where TCommand : ICommand
     {
         return _serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
     }

@@ -45,7 +45,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IBaseQuery
+    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
     }

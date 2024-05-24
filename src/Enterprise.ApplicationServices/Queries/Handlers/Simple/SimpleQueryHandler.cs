@@ -12,7 +12,7 @@ namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 /// </summary>
 /// <typeparam name="TQuery"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
-public class SimpleQueryHandler<TQuery, TResponse> : QueryHandlerBase<TQuery, TResponse> where TQuery : IBaseQuery
+public class SimpleQueryHandler<TQuery, TResponse> : QueryHandlerBase<TQuery, TResponse> where TQuery : IQuery
 {
     private readonly IQueryLogic<TQuery, TResponse> _queryLogic;
 
