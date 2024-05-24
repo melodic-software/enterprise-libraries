@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService">
-    <Position X="0.5" Y="13.25" Width="3.5" />
+    <Position X="1.75" Y="7.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\Validation\QueryHandlerTypeValidationService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase&lt;TQuery, TResponse&gt;" BaseTypeListCollapsed="true">
-    <Position X="4.5" Y="13.25" Width="3" />
+    <Position X="6.25" Y="7.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\QueryHandlerBase.cs</FileName>
@@ -16,77 +16,63 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Dispatching.IDispatchQueries">
-    <Position X="2.25" Y="6.25" Width="2.75" />
+    <Position X="6.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Dispatching\IDispatchQueries.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Facade.IQueryDispatchFacade" Collapsed="true">
-    <Position X="6.25" Y="6.25" Width="2.25" />
+    <Position X="10.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Facade\IQueryDispatchFacade.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Queries\Model\IBaseQuery.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.ICachedQuery" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="0.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Queries\Model\ICachedQuery.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.ICachedQuery&lt;TResponse&gt;" Collapsed="true">
-    <Position X="1.75" Y="4.75" Width="2.25" />
+    <Position X="1.75" Y="3.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Model\ICachedQuery.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IQuery" Collapsed="true">
-    <Position X="0.5" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Queries\Model\IQuery.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Queries.Model.IQuery&lt;TResponse&gt;" Collapsed="true">
-    <Position X="2.75" Y="2" Width="2.25" />
+    <Position X="2.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Model\IQuery.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler">
-    <Position X="4.25" Y="7.75" Width="3.25" />
+    <Position X="7.5" Y="2" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\Resolution\IResolveQueryHandler.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery&lt;TResponse&gt;">
-    <Position X="4.5" Y="9.5" Width="3" />
+    <Position X="6.5" Y="4.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\IHandleQuery.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery&lt;TQuery, TResponse&gt;">
-    <Position X="4.5" Y="11.5" Width="3" />
+    <Position X="6.5" Y="6" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\IHandleQuery.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic&lt;TQuery, TResponse&gt;">
-    <Position X="8.25" Y="13.25" Width="2.75" />
+    <Position X="10.75" Y="6" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Queries\Handlers\IQueryLogic.cs</FileName>

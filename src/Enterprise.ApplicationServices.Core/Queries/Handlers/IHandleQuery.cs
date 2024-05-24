@@ -11,7 +11,7 @@ public interface IHandleQuery<TResponse> : IApplicationService
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken);
+    Task<TResponse> HandleAsync(IQuery query, CancellationToken cancellationToken);
 }
 
 /// <summary>
@@ -19,7 +19,7 @@ public interface IHandleQuery<TResponse> : IApplicationService
 /// </summary>
 /// <typeparam name="TQuery">The explicit type of query that can be handled.</typeparam>
 /// <typeparam name="TResponse">The expected result type.</typeparam>
-public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> where TQuery : IBaseQuery
+public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> where TQuery : IQuery
 {
     /// <summary>
     /// Handle a specific type of query and return the typed result.

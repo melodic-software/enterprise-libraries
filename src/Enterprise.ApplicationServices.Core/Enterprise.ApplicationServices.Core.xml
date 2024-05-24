@@ -7,7 +7,7 @@
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
@@ -32,7 +32,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
@@ -43,7 +43,7 @@
             Handles commands.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
             <summary>
             Handle the command.
             </summary>
@@ -103,7 +103,7 @@
             It is used primarily for constraint purposes.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery`1.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery`1.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <summary>
             Handle the query and return the typed result.
             </summary>
@@ -144,7 +144,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
@@ -188,12 +188,6 @@
             <typeparam name="TResponse"></typeparam>
             <param name="query"></param>
             <returns></returns>
-        </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery">
-            <summary>
-            This is a base marker interface.
-            It's intended to be used as a single top level reference for generic query constraints.
-            </summary>
         </member>
         <member name="P:Enterprise.ApplicationServices.Core.Queries.Model.ICachedQuery.CacheKey">
             <summary>

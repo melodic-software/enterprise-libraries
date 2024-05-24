@@ -30,7 +30,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IBaseQuery;
+    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery;
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.

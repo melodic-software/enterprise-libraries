@@ -1,4 +1,6 @@
-﻿using Enterprise.Patterns.ResultPattern.Model;
+﻿using Enterprise.ApplicationServices.Core.UseCases;
+using Enterprise.Messages.Core.Model;
+using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Model;
@@ -7,4 +9,4 @@ namespace Enterprise.ApplicationServices.Core.Commands.Model;
 /// This is a marker interface that signifies that an implementing class is a command object.
 /// It is used primarily for constraint purposes.
 /// </summary>
-public interface ICommand : IRequest<Result>, IBaseCommand;
+public interface ICommand : IUseCase, IMessage, IRequest<Result>;

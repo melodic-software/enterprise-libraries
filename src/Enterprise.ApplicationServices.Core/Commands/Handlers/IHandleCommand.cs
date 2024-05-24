@@ -14,14 +14,14 @@ public interface IHandleCommand : IApplicationService
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken);
+    public Task HandleAsync(ICommand command, CancellationToken cancellationToken);
 }
 
 /// <summary>
 /// Handles commands of a specific type.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : IBaseCommand
+public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : ICommand
 {
     /// <summary>
     /// Handle the command.
