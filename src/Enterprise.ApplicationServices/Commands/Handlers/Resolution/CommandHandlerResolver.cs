@@ -1,6 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.Commands.Handlers.Resolution;
@@ -21,7 +23,7 @@ public class CommandHandlerResolver : IResolveCommandHandler
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : IBaseCommand
+    public IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>
     {
         return _serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResponse>>();
     }

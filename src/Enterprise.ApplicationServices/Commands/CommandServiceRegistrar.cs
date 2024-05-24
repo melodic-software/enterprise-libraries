@@ -33,8 +33,8 @@ internal sealed class CommandServiceRegistrar : IRegisterServices
         {
             IDispatchCommands commandDispatcher = provider.GetRequiredService<IDispatchCommands>();
             IEventCallbackService eventCallbackService = provider.GetRequiredService<IEventCallbackService>();
-            ICommandFacadeService commandFacadeService = new CommandFacadeService(commandDispatcher, eventCallbackService);
-            return commandFacadeService;
+            ICommandDispatchFacade commandDispatchFacade = new CommandDispatchFacade(commandDispatcher, eventCallbackService);
+            return commandDispatchFacade;
         });
     }
 }

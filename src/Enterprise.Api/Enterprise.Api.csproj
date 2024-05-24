@@ -27,12 +27,12 @@
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.193" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.173" />
+    <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.211" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.171" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.174" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.173" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.174" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.211" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.173" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.173" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />

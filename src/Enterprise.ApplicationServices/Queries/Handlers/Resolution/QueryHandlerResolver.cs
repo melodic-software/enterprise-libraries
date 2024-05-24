@@ -15,6 +15,36 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
+    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query)
+    {
+        Type queryType = query.GetType();
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
+        object handler = _serviceProvider.GetRequiredService(handlerType);
+
+        if (handler is not IHandleQuery<TResponse> result)
+        {
+            throw new InvalidOperationException();
+        }
+
+        return result;
+    }
+
+    /// <inheritdoc />
+    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query)
+    {
+        Type queryType = query.GetType();
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
+        object handler = _serviceProvider.GetRequiredService(handlerType);
+
+        if (handler is not IHandleQuery<TResponse> result)
+        {
+            throw new InvalidOperationException();
+        }
+
+        return result;
+    }
+
+    /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IBaseQuery
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
@@ -24,13 +54,5 @@ public class QueryHandlerResolver : IResolveQueryHandler
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query) where TQuery : IQuery<TResponse>
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
-    }
-
-    /// <inheritdoc />
-    public object GetQueryHandler<TResponse>(IQuery<TResponse> query)
-    {
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(query.GetType(), typeof(TResponse));
-        object handler = _serviceProvider.GetRequiredService(handlerType);
-        return handler;
     }
 }

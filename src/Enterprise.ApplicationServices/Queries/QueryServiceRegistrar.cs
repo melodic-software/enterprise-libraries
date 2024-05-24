@@ -5,6 +5,7 @@ using Enterprise.ApplicationServices.Queries.Dispatching;
 using Enterprise.ApplicationServices.Queries.Facade;
 using Enterprise.ApplicationServices.Queries.Handlers.Resolution;
 using Enterprise.DI.Core.Registration;
+using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,8 +32,9 @@ internal sealed class QueryServiceRegistrar : IRegisterServices
         services.AddScoped(provider =>
         {
             IDispatchQueries queryDispatcher = provider.GetRequiredService<IDispatchQueries>();
-            IQueryFacadeService queryFacadeService = new QueryFacadeService(queryDispatcher);
-            return queryFacadeService;
+            IEventCallbackService eventCallbackService = provider.GetRequiredService<IEventCallbackService>();
+            IQueryDispatchFacade queryDispatchFacade = new QueryFacadeService(queryDispatcher, eventCallbackService);
+            return queryDispatchFacade;
         });
     }
 }

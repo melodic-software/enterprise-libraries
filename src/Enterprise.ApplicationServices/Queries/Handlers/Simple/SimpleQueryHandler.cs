@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.Events.Facade.Abstract;
 
 namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 
@@ -21,8 +22,10 @@ public class SimpleQueryHandler<TQuery, TResponse> : QueryHandlerBase<TQuery, TR
     /// One solution that retains clean architecture is to use a prebuilt handler implementation which requires an implementation of a query logic abstraction.
     /// We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
     /// </summary>
+    /// <param name="eventRaisingFacade"></param>
     /// <param name="queryLogic"></param>
-    public SimpleQueryHandler(IQueryLogic<TQuery, TResponse> queryLogic)
+    public SimpleQueryHandler(IEventRaisingFacade eventRaisingFacade, IQueryLogic<TQuery, TResponse> queryLogic)
+        : base(eventRaisingFacade)
     {
         _queryLogic = queryLogic;
     }

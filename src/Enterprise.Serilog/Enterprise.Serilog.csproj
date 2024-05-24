@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Destructurama.Attributed" Version="4.0.0" />
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.202" />
-    <PackageReference Include="Melodic.Enterprise.Logging" Version="1.0.0-preview.173" />
+    <PackageReference Include="Melodic.Enterprise.Logging" Version="1.0.0-preview.211" />
     <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.196" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
     <PackageReference Include="Serilog" Version="3.1.1" />

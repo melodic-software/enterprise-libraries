@@ -1,7 +1,9 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Dispatching;
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Commands.Dispatching;
 
@@ -16,7 +18,7 @@ public class CommandDispatcher : IDispatchCommands
 
     /// <inheritdoc />
     public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : IBaseCommand
+        where TCommand : ICommand
     {
         IHandleCommand<TCommand> handler = _commandHandlerResolver.GetHandlerFor(command);
         await handler.HandleAsync(command, cancellationToken);
