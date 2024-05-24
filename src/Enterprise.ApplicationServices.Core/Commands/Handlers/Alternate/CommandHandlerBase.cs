@@ -6,7 +6,7 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 
 public abstract class CommandHandlerBase<TCommand, TResponse>
-    : ApplicationServiceBase, IHandleCommand<TResponse>, IHandleCommand<TCommand, TResponse>
+    : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>
     where TCommand : IBaseCommand
 {
     protected CommandHandlerBase(IEventRaisingFacade eventService) : base(eventService)

@@ -18,18 +18,18 @@ public interface IResolveCommandHandler
     /// <summary>
     /// Get the handler implementation that can handle the given command.
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    IHandleCommand GetHandlerFor<TResponse>(ICommand<TResponse> command);
-
-    /// <summary>
-    /// Get the handler implementation that can handle the given command.
-    /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
     IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command) where TCommand : IBaseCommand;
+
+    /// <summary>
+    /// Get the handler implementation that can handle the given command.
+    /// </summary>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    IHandleCommand<TResponse> GetHandlerFor<TResponse>(ICommand<TResponse> command) where TResponse : IBaseCommand;
 
     /// <summary>
     /// Get the handler implementation that can handle the given command.
