@@ -10,6 +10,13 @@ public interface IResolveCommandHandler
     /// <summary>
     /// Get the handler implementation that can handle the given command.
     /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    IHandleCommand GetHandlerFor(ICommand command);
+
+    /// <summary>
+    /// Get the handler implementation that can handle the given command.
+    /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
