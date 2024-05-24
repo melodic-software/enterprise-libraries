@@ -70,6 +70,13 @@
             Resolves command handler implementations that can handle specific commands.
             </summary>
         </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler.GetHandlerFor(Enterprise.ApplicationServices.Core.Commands.Model.ICommand)">
+            <summary>
+            Get the handler implementation that can handle the given command.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler.GetHandlerFor``1(``0)">
             <summary>
             Get the handler implementation that can handle the given command.
@@ -155,7 +162,32 @@
             Resolves query handler implementations that can handle specific queries.
             </summary>
         </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery)">
+            <summary>
+            Get the handler implementation that can handle the given query.
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery{``0})">
+            <summary>
+            Get the handler implementation that can handle the given query.
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(``0)">
+            <summary>
+            Get the handler implementation that can handle the given query.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(Enterprise.ApplicationServices.Core.Queries.Model.IQuery{``1})">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -193,6 +225,70 @@
             This interface allows for defining an explicit return type that is associated with the query.
             </summary>
             <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase">
+            <summary>
+            Application services represent the use cases of the system.
+            They are responsible for orchestrating the components in the domain layer.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventsAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents})">
+            <summary>
+            Raise domain events recorded by each entity and execute any registered callbacks associated with each event.
+            </summary>
+            <param name="entities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventsAsync(Enterprise.Domain.Events.IGetDomainEvents)">
+            <summary>
+            Raise domain events recorded by the entity and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventsAsync(System.Collections.Generic.IEnumerable{Enterprise.Events.Model.IEvent})">
+            <summary>
+            Raises events and executes any registered callbacks associated with each event.
+            </summary>
+            <param name="events"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventsAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.Model.Abstract.IDomainEvent})">
+            <summary>
+            Raise the domain events and execute any registered callbacks associated with each event.
+            </summary>
+            <param name="domainEvents"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventsAsync(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+            <summary>
+            Translates the errors to <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> instances.
+            Once translated, the events are raised and any registered callbacks are executed.
+            </summary>
+            <param name="errors"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventAsync(Enterprise.Events.Model.IEvent)">
+            <summary>
+            Raise an event and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="event"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
+            <summary>
+            Raise the domain event and execute any registered callbacks associated with the event.
+            </summary>
+            <param name="domainEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Standard.ApplicationServiceBase.RaiseEventAsync(Enterprise.Patterns.ResultPattern.Errors.IError)">
+            <summary>
+            Translates the errors to a <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> instance.
+            Once translated, the events are raised and any registered callbacks are executed.
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.UseCases.IUseCase">
             <summary>

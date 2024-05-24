@@ -1,10 +1,17 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Standard;
+using Enterprise.Events.Facade.Abstract;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 
-public abstract class CommandHandlerBase<T> : IHandleCommand<T> where T : IBaseCommand
+public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCommand<T> where T : IBaseCommand
 {
+    protected CommandHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
+    {
+
+    }
+
     /// <inheritdoc />
     public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
