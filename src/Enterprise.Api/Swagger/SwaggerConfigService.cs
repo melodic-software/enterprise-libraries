@@ -107,7 +107,7 @@ public static class SwaggerConfigService
                     options.OAuthUsePkce();
                 }
 
-                Dictionary<string, string> queryStringParams = new Dictionary<string, string>();
+                var queryStringParams = new Dictionary<string, string>();
 
                 if (!string.IsNullOrWhiteSpace(swaggerConfigOptions.OAuthAudience))
                 {

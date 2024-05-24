@@ -62,7 +62,7 @@ public static class OAuth2Extensions
         }
         catch (Exception ex)
         {
-            PreStartupLogger.Instance.LogError(ex, "An error has occurred getting the discover document.");
+            PreStartupLogger.Instance.LogError(ex, "An error has occurred getting the discovery document.");
             throw;
         }
 
@@ -110,7 +110,7 @@ public static class OAuth2Extensions
         string authorizeEndpoint = discoveryDocResponse.AuthorizeEndpoint ?? string.Empty;
         string tokenEndpoint = discoveryDocResponse.TokenEndpoint ?? string.Empty;
 
-        OpenApiOAuthFlows oAuthFlows = new OpenApiOAuthFlows();
+        var oAuthFlows = new OpenApiOAuthFlows();
 
         if (swaggerConfigOptions.EnableAuthorizationCodeFlow)
         {
@@ -144,7 +144,7 @@ public static class OAuth2Extensions
             Scopes = oAuthScopes,
             // This is typically the same endpoint.
             // TODO: use another property on the discovery document (if applicable), and/or make it configurable.
-            RefreshUrl = new Uri(tokenEndpoint), 
+            RefreshUrl = new Uri(tokenEndpoint),
             Extensions = new Dictionary<string, IOpenApiExtension>()
         };
     }

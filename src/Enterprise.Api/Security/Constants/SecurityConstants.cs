@@ -37,7 +37,15 @@ public static class Swagger
         public const string BearerSecurityDefinitionName = "Bearer";
         public const string BearerSecuritySchemeName = "Bearer";
         public const string OAuth2SecurityDefinitionName = "oauth2";
-        
-        public static string OAuth2RedirectUrl(Uri baseUri) => $"{baseUri}/swagger/oauth2-redirect.html";
+
+        public static string OAuth2RedirectUrl(Uri baseUri)
+        {
+            var builder = new UriBuilder(baseUri)
+            {
+                Path = "/swagger/oauth2-redirect.html"
+            };
+
+            return builder.Uri.ToString();
+        }
     }
 }

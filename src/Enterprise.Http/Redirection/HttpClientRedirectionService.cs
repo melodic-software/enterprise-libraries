@@ -14,7 +14,9 @@ public static class HttpClientRedirectionService
         forwardHeaders ??= DefaultHeaderForwarder.ForwardHeaders;
 
         HttpResponseMessage response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
         int redirectCount = 0;
+
         while (response.IsRedirect() && redirectCount < maxRedirects)
         {
             Uri? redirectUri = response.Headers.Location;

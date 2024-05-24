@@ -33,7 +33,7 @@ public static class SwaggerDocumentService
                 title += $" ({environmentName})";
             }
 
-            OpenApiInfo openApiInfo = new OpenApiInfo
+            var openApiInfo = new OpenApiInfo
             {
                 Title = title,
                 Description = swaggerConfigOptions.ApplicationDescription,

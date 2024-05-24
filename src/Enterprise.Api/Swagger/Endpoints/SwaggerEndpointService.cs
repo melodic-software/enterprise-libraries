@@ -30,6 +30,7 @@ public static class SwaggerEndpointService
 
         endpointUrl += $"{description.GroupName}/swagger.json";
 
-        return new Uri(endpointUrl);
+        // We do not include a scheme or host here, so this URI is relative.
+        return new Uri(endpointUrl, UriKind.Relative);
     }
 }

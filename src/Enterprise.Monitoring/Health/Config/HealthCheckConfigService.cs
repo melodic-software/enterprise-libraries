@@ -88,16 +88,17 @@ public static class HealthCheckConfigService
         {
             return;
         }
-
+        
         string openIdConnectAuthorityName = options.OpenIdConnectAuthorityName?.Trim().ToLowerInvariant() ?? DefaultOpenIdConnectAuthorityName;
+        var openIdConnectAuthorityUri = new Uri(options.OpenIdConnectAuthority);
 
         if (openIdConnectAuthorityName == IdentityServerAuthorityName)
         {
-            healthCheckBuilder.AddIdentityServer(new Uri(options.OpenIdConnectAuthority));
+            healthCheckBuilder.AddIdentityServer(openIdConnectAuthorityUri);
         }
         else
         {
-            healthCheckBuilder.AddUrlGroup(new Uri(options.OpenIdConnectAuthority), HttpMethod.Get, openIdConnectAuthorityName);
+            healthCheckBuilder.AddUrlGroup(openIdConnectAuthorityUri, HttpMethod.Get, openIdConnectAuthorityName);
         }
     }
 }
