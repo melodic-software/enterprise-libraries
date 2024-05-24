@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Hosting;
 
-internal class EnvironmentConstants
+public static class EnvironmentConstants
 {
     public const string Development = "Development";
     public const string Staging = "Staging";

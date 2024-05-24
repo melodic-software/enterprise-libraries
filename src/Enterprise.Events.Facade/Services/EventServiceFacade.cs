@@ -1,12 +1,9 @@
 ﻿using Enterprise.Domain.Events;
 using Enterprise.Domain.Events.Model.Abstract;
-using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Callbacks.Model;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Events.Raising.Abstract;
-using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Facade.Services;
 
@@ -18,66 +15,50 @@ namespace Enterprise.Events.Facade.Services;
 /// </summary>
 public class EventServiceFacade : IEventServiceFacade
 {
-    private readonly HashSet<Guid> _processedEventIds = [];
-
-    private readonly IRaiseEvents _eventRaiser;
-    private readonly IRaiseDomainEvents _domainEventRaiser;
+    private readonly IEventRaisingFacade _eventRaisingFacade;
     private readonly IEventCallbackService _eventCallbackService;
-    private readonly ILogger<EventServiceFacade> _logger;
 
-    public EventServiceFacade(IRaiseEvents eventRaiser,
-        IRaiseDomainEvents domainEventRaiser,
-        IEventCallbackService eventCallbackService,
-        ILogger<EventServiceFacade> logger)
+    public EventServiceFacade(IEventRaisingFacade eventRaisingFacade,
+        IEventCallbackService eventCallbackService)
     {
-        _eventRaiser = eventRaiser;
-        _domainEventRaiser = domainEventRaiser;
+        _eventRaisingFacade = eventRaisingFacade;
         _eventCallbackService = eventCallbackService;
-        _logger = logger;
-    }
-
-    /// <inheritdoc />
-    public async Task RaiseAsync(IEvent @event)
-    {
-        if (_processedEventIds.Contains(@event.Id))
-        {
-            _logger.LogWarning("Event with ID \"{EventId}\" has already been processed.", @event.Id);
-            return;
-        }
-
-        await _eventRaiser.RaiseAsync(@event);
-
-        _processedEventIds.Add(@event.Id);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IReadOnlyCollection<IEvent> events)
     {
-        await _eventRaiser.RaiseAsync(events);
+        await _eventRaisingFacade.RaiseAsync(events);
+    }
+
+    /// <inheritdoc />
+    public async Task RaiseAsync(IEvent @event)
+    {
+        await _eventRaisingFacade.RaiseAsync(@event);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IEnumerable<IGetDomainEvents> entities)
     {
-        await _domainEventRaiser.RaiseAsync(entities);
+        await _eventRaisingFacade.RaiseAsync(entities);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IGetDomainEvents entity)
     {
-        await _domainEventRaiser.RaiseAsync(entity);
+        await _eventRaisingFacade.RaiseAsync(entity);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents)
     {
-        await _domainEventRaiser.RaiseAsync(domainEvents);
+        await _eventRaisingFacade.RaiseAsync(domainEvents);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IDomainEvent domainEvent)
     {
-        await _domainEventRaiser.RaiseAsync(domainEvent);
+        await _eventRaisingFacade.RaiseAsync(domainEvent);
     }
 
     /// <inheritdoc />

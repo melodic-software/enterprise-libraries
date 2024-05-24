@@ -14,14 +14,20 @@ internal sealed class EventServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.TryAddScoped<IEventServiceFacade>(provider =>
+        services.TryAddScoped<IEventRaisingFacade>(provider =>
         {
             IRaiseEvents eventRaiser = provider.GetRequiredService<IRaiseEvents>();
             IRaiseDomainEvents domainEventRaiser = provider.GetRequiredService<IRaiseDomainEvents>();
-            IEventCallbackService eventCallbackService = provider.GetRequiredService<IEventCallbackService>();
-            ILogger<EventServiceFacade> logger = provider.GetRequiredService<ILogger<EventServiceFacade>>();
 
-            return new EventServiceFacade(eventRaiser, domainEventRaiser, eventCallbackService, logger);
+            return new EventRaisingFacade(eventRaiser, domainEventRaiser);
+        });
+
+        services.TryAddScoped<IEventServiceFacade>(provider =>
+        {
+            IEventRaisingFacade eventRaisingFacade = provider.GetRequiredService<IEventRaisingFacade>();
+            IEventCallbackService eventCallbackService = provider.GetRequiredService<IEventCallbackService>();
+
+            return new EventServiceFacade(eventRaisingFacade, eventCallbackService);
         });
     }
 }

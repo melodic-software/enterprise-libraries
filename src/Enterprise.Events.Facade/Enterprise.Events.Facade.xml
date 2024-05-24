@@ -4,6 +4,24 @@
         <name>Enterprise.Events.Facade</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(Enterprise.Events.Model.IEvent)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(Enterprise.Domain.Events.IGetDomainEvents)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Domain.Events.Model.Abstract.IDomainEvent})">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Facade.Services.EventRaisingFacade.RaiseAsync(Enterprise.Domain.Events.Model.Abstract.IDomainEvent)">
+            <inheritdoc />
+        </member>
         <member name="T:Enterprise.Events.Facade.Services.EventServiceFacade">
             <summary>
             <see cref="T:Enterprise.Events.Facade.Services.EventServiceFacade"/> centralizes event-related functionalities for ease of use.
@@ -12,10 +30,10 @@
             and more streamlined interface, reducing direct dependencies on multiple event services.
             </summary>
         </member>
-        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(Enterprise.Events.Model.IEvent)">
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IReadOnlyCollection{Enterprise.Events.Model.IEvent})">
+        <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.Events.Facade.Services.EventServiceFacade.RaiseAsync(System.Collections.Generic.IEnumerable{Enterprise.Domain.Events.IGetDomainEvents})">
