@@ -30,7 +30,7 @@ public class RegistrationContext<TService> where TService : class
     {
         Type serviceType = typeof(TService);
         Type implementationType = typeof(TImplementation);
-        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
         _services.Add(serviceDescriptor);
         return this;
     }
@@ -46,7 +46,7 @@ public class RegistrationContext<TService> where TService : class
     {
         Type serviceType = typeof(TService);
         Type implementationType = typeof(TImplementation);
-        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
         _services.TryAdd(serviceDescriptor);
         return this;
     }
@@ -60,7 +60,7 @@ public class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> Add(Func<IServiceProvider, TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
         Type serviceType = typeof(TService);
-        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
+        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
         _services.Add(serviceDescriptor);
         return this;
     }
@@ -74,7 +74,7 @@ public class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> TryAdd(Func<IServiceProvider, TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
         Type serviceType = typeof(TService);
-        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
+        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
         _services.TryAdd(serviceDescriptor);
         return this;
     }
@@ -143,9 +143,35 @@ public class RegistrationContext<TService> where TService : class
             return decoratorFactory(serviceProvider, originalService);
         }
 
-        ServiceDescriptor decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
+        var decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
 
         _services.Replace(decoratorDescriptor);
+
+        return this;
+    }
+
+    public RegistrationContext<TService> RegisterAlternate<TAlternate>() where TAlternate : TService
+    {
+        Type serviceType = typeof(TService);
+        ServiceDescriptor? originalServiceDescriptor = _services.FirstOrDefault(d => d.ServiceType == serviceType);
+
+        if (originalServiceDescriptor == null)
+        {
+            throw new InvalidOperationException($"The service of type {serviceType.Name} has not been registered and cannot be decorated.");
+        }
+
+        ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
+
+        object ImplementationFactory(IServiceProvider serviceProvider)
+        {
+            TService originalService = GetOriginalService(originalServiceDescriptor, serviceProvider);
+            return (TAlternate)originalService;
+        }
+
+        Type alternateType = typeof(TAlternate);
+        var alternateDescriptor = ServiceDescriptor.Describe(alternateType, ImplementationFactory, lifetime);
+
+        _services.TryAdd(alternateDescriptor);
 
         return this;
     }

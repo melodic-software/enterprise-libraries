@@ -27,7 +27,7 @@ public static class ServiceCollectionExtensions
             throw new ArgumentException("Both T and T2 must be open generic types.");
         }
 
-        ServiceDescriptor serviceDescriptor = new ServiceDescriptor(typeof(T), typeof(T2), serviceLifetime);
+        var serviceDescriptor = new ServiceDescriptor(typeof(T), typeof(T2), serviceLifetime);
 
         services.Add(serviceDescriptor);
     }
