@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 
@@ -11,13 +12,6 @@ public interface IResolveCommandHandler
     /// <summary>
     /// Get the handler implementation that can handle the given command.
     /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    IHandleCommand GetHandlerFor(ICommand command);
-
-    /// <summary>
-    /// Get the handler implementation that can handle the given command.
-    /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
@@ -26,17 +20,9 @@ public interface IResolveCommandHandler
     /// <summary>
     /// Get the handler implementation that can handle the given command.
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    IHandleCommand<TResponse> GetHandlerFor<TResponse>(ICommand<TResponse> command) where TResponse : IBaseCommand;
-
-    /// <summary>
-    /// Get the handler implementation that can handle the given command.
-    /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : IBaseCommand;
+    IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>;
 }

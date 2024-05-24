@@ -1,17 +1,16 @@
 ﻿using Enterprise.Domain.Events.Model.Abstract;
 using Enterprise.Domain.Events.Raising.Abstract;
-using Enterprise.Events.Dispatching.Abstract;
-using Enterprise.Events.Model;
-using Enterprise.Events.Raising;
-using Microsoft.Extensions.Logging;
+using Enterprise.Events.Raising.Abstract;
 
 namespace Enterprise.Domain.Events.Raising;
 
-public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
+public class DomainEventRaiser : IRaiseDomainEvents
 {
-    public DomainEventRaiser(IDispatchEvents eventDispatcher, ILogger<DomainEventRaiser> logger)
-        : base(eventDispatcher, logger)
+    private readonly IRaiseEvents _eventRaiser;
+
+    public DomainEventRaiser(IRaiseEvents eventRaiser)
     {
+        _eventRaiser = eventRaiser;
     }
 
     /// <inheritdoc />
@@ -34,12 +33,12 @@ public class DomainEventRaiser : EventRaiser, IRaiseDomainEvents
     /// <inheritdoc />
     public async Task RaiseAsync(IReadOnlyCollection<IDomainEvent> domainEvents)
     {
-        await RaiseAsync((IReadOnlyCollection<IEvent>)domainEvents);
+        await _eventRaiser.RaiseAsync(domainEvents);
     }
 
     /// <inheritdoc />
     public async Task RaiseAsync(IDomainEvent domainEvent)
     {
-        await RaiseAsync((IEvent)domainEvent);
+        await _eventRaiser.RaiseAsync(domainEvent);
     }
 }

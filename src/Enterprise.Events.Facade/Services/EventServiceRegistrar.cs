@@ -6,7 +6,6 @@ using Enterprise.Events.Raising.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Facade.Services;
 

@@ -1,10 +1,9 @@
 ﻿using Enterprise.DI.Core.Registration;
 using Enterprise.Domain.Events.Raising.Abstract;
-using Enterprise.Events.Dispatching.Abstract;
+using Enterprise.Events.Raising.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Domain.Events.Raising;
 
@@ -14,9 +13,8 @@ internal sealed class EventRaisingServiceRegistrar : IRegisterServices
     {
         services.TryAddScoped<IRaiseDomainEvents>(provider =>
         {
-            IDispatchEvents eventDispatcher = provider.GetRequiredService<IDispatchEvents>();
-            ILogger<DomainEventRaiser> logger = provider.GetRequiredService<ILogger<DomainEventRaiser>>();
-            return new DomainEventRaiser(eventDispatcher, logger);
+            IRaiseEvents eventRaiser = provider.GetRequiredService<IRaiseEvents>();
+            return new DomainEventRaiser(eventRaiser);
         });
     }
 }

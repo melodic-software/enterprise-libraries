@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
 

@@ -5,7 +5,6 @@ using Enterprise.Events.Raising.Abstract;
 using Enterprise.Events.Raising.Decorators;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Events.Raising;
@@ -31,8 +30,8 @@ internal sealed class EventRaisingServiceRegistrar : IRegisterServices
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IRecordRaisedEvents raisedEventRecorder = provider.GetRequiredService<IRecordRaisedEvents>();
-                ILogger<DuplicatePreventionDecorator> logger = provider.GetRequiredService<ILogger<DuplicatePreventionDecorator>>();
-                return new DuplicatePreventionDecorator(eventRaiser, decoratorService, raisedEventRecorder, logger);
+                ILogger<DuplicatePreventingEventRaiser> logger = provider.GetRequiredService<ILogger<DuplicatePreventingEventRaiser>>();
+                return new DuplicatePreventingEventRaiser(eventRaiser, decoratorService, raisedEventRecorder, logger);
             });
     }
 }

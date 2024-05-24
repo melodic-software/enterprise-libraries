@@ -10,7 +10,9 @@ public class LoggingEventRaiser : DecoratorBase<IRaiseEvents>, IRaiseEvents
 {
     private readonly ILogger<LoggingEventRaiser> _logger;
 
-    public LoggingEventRaiser(IRaiseEvents decorated, IGetDecoratedInstance decoratorService, ILogger<LoggingEventRaiser> logger) : base(decorated, decoratorService)
+    public LoggingEventRaiser(IRaiseEvents decorated,
+        IGetDecoratedInstance decoratorService,
+        ILogger<LoggingEventRaiser> logger) : base(decorated, decoratorService)
     {
         _logger = logger;
     }
