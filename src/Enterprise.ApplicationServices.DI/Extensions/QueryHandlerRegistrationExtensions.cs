@@ -4,6 +4,7 @@ using Enterprise.ApplicationServices.Decorators.QueryHandlers;
 using Enterprise.ApplicationServices.Queries.Handlers.Simple;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
+using Enterprise.Events.Facade.Abstract;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -46,7 +47,6 @@ public static class QueryHandlerRegistrationExtensions
         });
     }
 
-
     /// <summary>
     /// Register a simple query handler.
     /// </summary>
@@ -62,12 +62,14 @@ public static class QueryHandlerRegistrationExtensions
         services.BeginRegistration<IHandleQuery<TQuery, TResponse>>()
             .Add(provider =>
             {
+                IEventRaisingFacade eventRaisingFacade = provider.GetRequiredService<IEventRaisingFacade>();
+
                 // Resolve the query logic implementation.
                 IQueryLogic<TQuery, TResponse> queryLogic = queryLogicFactory(provider);
 
                 // Use a common handler that delegates to the query logic.
                 // We can still add cross-cutting concerns and decorate this handler as needed.
-                IHandleQuery<TQuery, TResponse> queryHandler = new SimpleQueryHandler<TQuery, TResponse>(queryLogic);
+                IHandleQuery<TQuery, TResponse> queryHandler = new SimpleQueryHandler<TQuery, TResponse>(eventRaisingFacade, queryLogic);
 
                 return queryHandler;
             }, serviceLifetime)
