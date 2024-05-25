@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Api.Swagger.Attributes;
 
-internal class SwaggerAttributeRegistrar : IRegisterServices
+internal sealed class SwaggerAttributeRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
