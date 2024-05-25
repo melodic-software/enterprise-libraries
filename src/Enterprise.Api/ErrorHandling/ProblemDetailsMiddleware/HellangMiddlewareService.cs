@@ -66,6 +66,7 @@ internal static class HellangMiddlewareService
             //options.Ignore<T>();
 
             // NOTE: Not sure if this works with the current setup.
+            
             options.Rethrow<SqliteException>();
             options.Rethrow<SqlException>();
             //options.Rethrow<ValidationException>();
@@ -79,9 +80,9 @@ internal static class HellangMiddlewareService
 
             options.Map<ValidationException>(exception =>
             {
-                Dictionary<string, string[]> errorDictionary = exception.ValidationErrors.ToDictionary();
+                var errorDictionary = exception.ValidationErrors.ToDictionary();
 
-                ValidationProblemDetails problemDetails = new ValidationProblemDetails(errorDictionary)
+                var problemDetails = new ValidationProblemDetails(errorDictionary)
                 {
                     // Validation in general can be separate from business rule violations.
                     // Simple data type and format validation are preconditions to use case execution.

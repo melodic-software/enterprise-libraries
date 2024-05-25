@@ -2,12 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.Controllers.ActionFilters;
+namespace Enterprise.Api.Swagger.Attributes;
 
-internal sealed class ActionFilterServiceRegistrar : IRegisterServices
+internal class SwaggerAttributeRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<DevOnlyActionFilterAttribute>();
+        services.AddScoped<EnvironmentSwaggerFilterAttribute>();
     }
 }
