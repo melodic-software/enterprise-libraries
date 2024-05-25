@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using Enterprise.Api.Controllers.Options;
-using Enterprise.Api.Swagger.DocumentFilters;
+using Enterprise.Api.Swagger.Documents.Filters;
 using Enterprise.Api.Swagger.Extensions;
-using Enterprise.Api.Swagger.OperationFilters;
+using Enterprise.Api.Swagger.Operations.Filters;
 using Enterprise.Api.Swagger.Options;
 using Enterprise.Api.Swagger.SchemaFilters;
 using Enterprise.Api.Swagger.Services;

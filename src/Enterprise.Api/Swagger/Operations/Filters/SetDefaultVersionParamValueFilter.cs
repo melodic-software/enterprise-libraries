@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Enterprise.Api.Swagger.OperationFilters;
+namespace Enterprise.Api.Swagger.Operations.Filters;
 
 /// <summary>
 /// A Swagger operation filter that sets default values for version parameters in the Swagger documentation.
@@ -54,7 +54,7 @@ public class SetDefaultVersionParamValueFilter : IOperationFilter
         }
 
         // Identify version parameters by matching with known versioning parameter names.
-        List<OpenApiParameter> versionParameters = operation.Parameters
+        var versionParameters = operation.Parameters
             .Where(p => _allVersionNames.Any(x => p.Name.Equals(x, StringComparison.OrdinalIgnoreCase)))
             .ToList();
 

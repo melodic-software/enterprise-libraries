@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json;
 
-namespace Enterprise.Api.Swagger.OperationFilters;
+namespace Enterprise.Api.Swagger.Operations.Filters;
 
 public class CamelCaseQueryParamFilter : IOperationFilter
 {

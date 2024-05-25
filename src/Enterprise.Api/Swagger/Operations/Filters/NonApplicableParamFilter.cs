@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Enterprise.Api.Swagger.OperationFilters;
+namespace Enterprise.Api.Swagger.Operations.Filters;
 
 /// <summary>
 /// A filter for removing non-applicable parameters, such as the Accept header, from Swagger documentation.
@@ -17,7 +17,7 @@ public class NonApplicableParamFilter : IOperationFilter
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
         // Identify and list the parameters to remove. Here, it specifically targets the Accept header.
-        List<OpenApiParameter> parametersToRemove = operation.Parameters
+        var parametersToRemove = operation.Parameters
             .Where(p =>
             {
                 bool isAcceptHeader = p.In == ParameterLocation.Header &&

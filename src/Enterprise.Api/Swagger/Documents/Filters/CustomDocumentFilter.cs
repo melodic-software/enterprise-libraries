@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Enterprise.Api.Swagger.DocumentFilters;
+namespace Enterprise.Api.Swagger.Documents.Filters;
 
 public class CustomDocumentFilter : IDocumentFilter
 {

@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
-namespace Enterprise.Api.Swagger.DocumentFilters;
+namespace Enterprise.Api.Swagger.Documents.Filters;
 
 /// <summary>
 /// Filters out Swagger endpoints that are not intended for use outside the development environment.
@@ -44,7 +44,7 @@ public class EnvironmentFilter : IDocumentFilter
             return;
         }
 
-        HashSet<string> pathsToExclude = new HashSet<string>();
+        var pathsToExclude = new HashSet<string>();
 
         foreach (ApiDescription apiDescription in context.ApiDescriptions)
         {

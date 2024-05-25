@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Enterprise.Api.Swagger.OperationFilters;
+namespace Enterprise.Api.Swagger.Operations.Filters;
 
 /// <summary>
 /// A Swagger operation filter that removes version parameters from the Swagger documentation.

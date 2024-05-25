@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Enterprise.Api.Swagger.DocumentFilters;
+namespace Enterprise.Api.Swagger.Documents.Filters;
 
 public class DisabledControllerFilter : IDocumentFilter
 {
@@ -26,7 +26,7 @@ public class DisabledControllerFilter : IDocumentFilter
             return;
         }
 
-        List<IGrouping<string, ApiDescription>> groupedDescriptions = context.ApiDescriptions.GroupBy(GetPath)            .ToList();
+        var groupedDescriptions = context.ApiDescriptions.GroupBy(GetPath).ToList();
 
         if (!groupedDescriptions.Any())
         {
