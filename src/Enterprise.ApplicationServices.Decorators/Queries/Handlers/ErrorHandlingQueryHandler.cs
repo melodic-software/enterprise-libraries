@@ -1,10 +1,11 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract;
+using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.Decorators.QueryHandlers;
+namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
 public class ErrorHandlingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
     where TQuery : IQuery
@@ -18,7 +19,7 @@ public class ErrorHandlingQueryHandler<TQuery, TResponse> : QueryHandlerDecorato
         _logger = logger;
     }
 
-    public override Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         try
         {

@@ -1,10 +1,11 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract;
+using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.Decorators.QueryHandlers;
+namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
 public class LoggingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
     where TQuery : IQuery
@@ -18,7 +19,7 @@ public class LoggingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<
         _logger = logger;
     }
 
-    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         Type queryType = typeof(TQuery);
         Type innermostHandlerType = Innermost.GetType();
@@ -29,7 +30,7 @@ public class LoggingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<
         using (_logger.BeginScope("Query Handler: {QueryHandlerType}, Query: {QueryType}", innermostHandlerType.Name, queryType.Name))
         {
             _logger.LogDebug("Executing query.");
-            TResponse result = await Decorated.HandleAsync(query, cancellationToken);
+            Result<TResponse> result = await Decorated.HandleAsync(query, cancellationToken);
             _logger.LogDebug("Query was handled successfully.");
             return result;
         }

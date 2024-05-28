@@ -2,9 +2,10 @@
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
 
-namespace Enterprise.ApplicationServices.Decorators.QueryHandlers.Abstract;
+namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 
 public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBase<IHandleQuery<TQuery, TResponse>>,
     IHandleQuery<TQuery, TResponse> where TQuery : IQuery
@@ -17,14 +18,14 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBa
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        TResponse result = await HandleAsync(typedQuery, cancellationToken);
+        Result<TResponse> result = await HandleAsync(typedQuery, cancellationToken);
         return result;
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    public abstract Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

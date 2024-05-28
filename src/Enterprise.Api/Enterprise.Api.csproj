@@ -36,7 +36,7 @@
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.235" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.246" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.171" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.127" />
