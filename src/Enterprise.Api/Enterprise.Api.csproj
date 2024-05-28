@@ -40,15 +40,15 @@
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.171" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.214" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.127" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.6.0" />
     <PackageReference Include="Serilog.Enrichers.AspNetCore.HttpContext" Version="1.0.1" />
     <PackageReference Include="Serilog.Enrichers.AssemblyName" Version="2.0.0" />
     <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
@@ -65,8 +65,8 @@
     <PackageReference Include="Serilog.Sinks.EventLog" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
