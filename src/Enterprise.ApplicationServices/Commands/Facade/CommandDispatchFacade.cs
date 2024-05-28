@@ -4,6 +4,7 @@ using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
+using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Commands.Facade;
 
@@ -32,7 +33,7 @@ public class CommandDispatchFacade : ICommandDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task<TResponse?> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
         where TCommand : ICommand<TResponse>
     {
         return await _commandDispatcher.DispatchAsync<TCommand, TResponse>(command, cancellationToken);

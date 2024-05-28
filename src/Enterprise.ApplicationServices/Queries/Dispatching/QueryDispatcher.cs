@@ -2,6 +2,7 @@
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Queries.Dispatching;
 
@@ -15,26 +16,26 @@ public class QueryDispatcher : IDispatchQueries
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TResponse>(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery query, CancellationToken cancellationToken)
     {
         IHandleQuery<TResponse> queryHandler = _queryHandlerResolver.GetQueryHandler<TResponse>(query);
-        TResponse result = await queryHandler.HandleAsync(query, cancellationToken);
+        Result<TResponse> result = await queryHandler.HandleAsync(query, cancellationToken);
         return result;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
     {
         IHandleQuery<TResponse> queryHandler = _queryHandlerResolver.GetQueryHandler(query);
-        TResponse result = await queryHandler.HandleAsync(query, cancellationToken);
+        Result<TResponse> result = await queryHandler.HandleAsync(query, cancellationToken);
         return result;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
+    public async Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
     {
         IHandleQuery<TQuery, TResponse> queryHandler = _queryHandlerResolver.GetQueryHandler<TQuery, TResponse>(query);
-        TResponse result = await queryHandler.HandleAsync(query, cancellationToken);
+        Result<TResponse> result = await queryHandler.HandleAsync(query, cancellationToken);
         return result;
     }
 }
