@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Decorators.QueryHandlers;
+using Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 using Enterprise.ApplicationServices.Queries.Handlers.Simple;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;

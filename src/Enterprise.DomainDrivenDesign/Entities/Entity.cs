@@ -1,4 +1,6 @@
 ﻿using Enterprise.Domain.Entities;
+using Enterprise.DomainDrivenDesign.Entities.Extensions;
+using Enterprise.Reflection.Types;
 
 namespace Enterprise.DomainDrivenDesign.Entities;
 
@@ -18,7 +20,7 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
     /// Aggregate root entity IDs must be unique within the system.
     /// The IDs of child entities under aggregate roots must be unique within the parent aggregate.
     /// </summary>
-    public TId Id { get; init; }
+    public TId Id { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Entity{TId}"/> class with the specified identifier.
@@ -37,6 +39,9 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
         Id = id;
     }
 
+    public static bool operator ==(Entity<TId>? first, Entity<TId>? second) => first is not null && second is not null && first.Equals(second);
+    public static bool operator !=(Entity<TId>? first, Entity<TId>? second) => !(first == second);
+
     /// <summary>
     /// Compares this entity with another entity for equality based on their identifiers.
     /// Equality is determined by the identity (ID), not by the attributes of the entity.
@@ -45,14 +50,7 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
     /// <returns>True if the entities are equal; otherwise false.</returns>
     public bool Equals(Entity<TId>? other)
     {
-        if (other == null)
-        {
-            return false;
-        }
-
-        bool identifiersAreEqual = Id.Equals(other.Id);
-
-        return identifiersAreEqual;
+        return other != null && this.HasSameIdentifierAs(other);
     }
 
     /// <summary>
@@ -68,9 +66,7 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
             return false;
         }
 
-        bool isTypeMismatch = obj.GetType() != GetType();
-
-        if (isTypeMismatch)
+        if (this.IsNotExactSameTypeAs(obj))
         {
             return false;
         }
@@ -85,7 +81,14 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
     /// Hash code is based on the entity's ID, supporting usage in collections.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
-    public override int GetHashCode() => Id.GetHashCode();
+    public override int GetHashCode()
+    {
+        // The default implementation here is perfectly fine,
+        // but typically custom hash code implementations multiply by a prime number.
+        // return Id.GetHashCode() * 41;
+
+        return Id.GetHashCode();
+    }
 
     /// <summary>
     /// Returns a string that represents the current object.
