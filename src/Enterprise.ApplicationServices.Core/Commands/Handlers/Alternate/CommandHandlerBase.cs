@@ -2,6 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.Events.Facade.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
@@ -29,5 +30,5 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    public abstract Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }
