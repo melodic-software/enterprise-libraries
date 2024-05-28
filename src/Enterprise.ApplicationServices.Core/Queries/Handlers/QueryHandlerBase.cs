@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.Events.Facade.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
@@ -15,14 +16,14 @@ public abstract class QueryHandlerBase<TQuery, TResponse> : ApplicationServiceBa
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        TResponse result = await HandleAsync(typedQuery, cancellationToken);
+        Result<TResponse> result = await HandleAsync(typedQuery, cancellationToken);
         return result;
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    public abstract Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

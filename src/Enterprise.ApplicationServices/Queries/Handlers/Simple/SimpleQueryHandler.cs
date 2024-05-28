@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.Events.Facade.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 
@@ -31,7 +32,7 @@ public class SimpleQueryHandler<TQuery, TResponse> : QueryHandlerBase<TQuery, TR
     }
 
     /// <inheritdoc />
-    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         return await _queryLogic.ExecuteAsync(query, cancellationToken);
     }

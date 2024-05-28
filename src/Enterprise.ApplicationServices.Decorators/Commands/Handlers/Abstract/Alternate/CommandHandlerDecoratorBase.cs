@@ -1,17 +1,21 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.ApplicationServices.Core.Standard;
-using Enterprise.Events.Facade.Abstract;
+using Enterprise.DesignPatterns.Decorator.Model;
+using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
-namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.Alternate;
 
-public abstract class CommandHandlerBase<TCommand, TResponse>
-    : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>
+public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> : 
+    DecoratorBase<IHandleCommand<TCommand, TResponse>>, IHandleCommand<TCommand, TResponse>
     where TCommand : ICommand<TResponse>
 {
-    protected CommandHandlerBase(IEventRaisingFacade eventService) : base(eventService)
+
+    protected CommandHandlerDecoratorBase(IHandleCommand<TCommand, TResponse> commandHandler, IGetDecoratedInstance decoratorService)
+        : base(commandHandler, decoratorService)
     {
     }
 
@@ -28,7 +32,7 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
         var typedCommand = (TCommand)command;
         await HandleAsync(typedCommand, cancellationToken);
     }
-
+    
     /// <inheritdoc />
     public abstract Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

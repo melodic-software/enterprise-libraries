@@ -4,7 +4,7 @@ using Enterprise.Events.Facade.Abstract;
 using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 
-namespace Enterprise.MediatR.CommandHandlers;
+namespace Enterprise.MediatR.Commands.Handlers;
 
 public abstract class MediatRCommandHandlerBase<TCommand>
     : CommandHandlerBase<TCommand, Result>, IRequestHandler<TCommand, Result>

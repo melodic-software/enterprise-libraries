@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.Library.Core.Attributes;
+using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 
@@ -21,5 +22,5 @@ public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TComman
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    new Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }
