@@ -18,7 +18,7 @@ public class ResultTests
         ];
 
         // Act
-        Result result = Result.Failure(errors);
+        var result = Result.Failure(errors);
 
         // Assert
         result.Errors.Should().BeEmpty();
@@ -27,7 +27,7 @@ public class ResultTests
     [Fact]
     public void IsSuccess_True_WhenNoTrueErrors()
     {
-        Result result = Result.Failure(Error.None());
+        var result = Result.Failure(Error.None());
 
         result.IsSuccess.Should().BeTrue();
     }
@@ -35,7 +35,7 @@ public class ResultTests
     [Fact]
     public void IsFailure_False_WhenNoTrueErrors()
     {
-        Result result = Result.Failure(Error.None());
+        var result = Result.Failure(Error.None());
 
         result.IsFailure.Should().BeFalse();
     }
@@ -43,7 +43,7 @@ public class ResultTests
     [Fact]
     public void Errors_Empty_WhenConstructedWithNoTrueErrors()
     {
-        Result result = Result.Failure(Error.None());
+        var result = Result.Failure(Error.None());
 
         result.Errors.Should().BeEmpty();
     }
@@ -51,7 +51,7 @@ public class ResultTests
     [Fact]
     public void HasErrors_False_WhenConstructedWithNoTrueErrors()
     {
-        Result result = Result.Failure(Error.None());
+        var result = Result.Failure(Error.None());
 
         result.HasErrors.Should().BeFalse();
     }
@@ -59,7 +59,7 @@ public class ResultTests
     [Fact]
     public void FirstError_NoError_WhenNoErrorsProvided()
     {
-        Result result = Result.Success();
+        var result = Result.Success();
 
         result.FirstError.Should().BeEquivalentTo(Error.None());
     }
@@ -68,7 +68,7 @@ public class ResultTests
     public void ToString_ContainsIsSuccess_WhenResultIsSuccess()
     {
         // Arrange
-        Result result = Result.Success();
+        var result = Result.Success();
         string expected = $"{nameof(Result.IsSuccess)}: True"; // Ensure capitalization matches actual output
 
         // Act
@@ -83,7 +83,7 @@ public class ResultTests
     {
         // Arrange
         IError error = Error.Validation("Validation Error");
-        Result result = Result.Failure(error);
+        var result = Result.Failure(error);
         string expected = $"{nameof(Result.IsSuccess)}: False Error(s): 1"; // Ensure capitalization and format matches actual output
 
         // Act
@@ -96,7 +96,7 @@ public class ResultTests
     [Fact]
     public void IsSuccess_True_WhenUsingFromFactoryWithNonNullValue()
     {
-        Result<string> result = Result<string>.From("Value");
+        var result = Result<string>.From("Value");
 
         result.IsSuccess.Should().BeTrue();
     }
@@ -105,7 +105,7 @@ public class ResultTests
     public void Value_ReturnsProvidedValue_WhenResultIsSuccess()
     {
         string expected = "Value";
-        Result<string> result = Result.Success(expected);
+        var result = Result.Success(expected);
 
         result.Value.Should().Be(expected);
     }
@@ -113,7 +113,7 @@ public class ResultTests
     [Fact]
     public void Value_Throws_WhenResultIsFailure()
     {
-        Result<string> result = Result.Failure<string>(Error.Validation("Validation Error"));
+        var result = Result.Failure<string>(Error.Validation("Validation Error"));
 
         Func<string> getValue = () => result.Value;
 

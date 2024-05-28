@@ -17,9 +17,9 @@ public class RootRedirectMiddlewareTests
         Mock<HttpContext> httpContextMock = new();
 
         IHeaderDictionary headers = new HeaderDictionary();
-        StringValues authorizationHeaderValue = new StringValues("Bearer ");
+        var authorizationHeaderValue = new StringValues("Bearer ");
         string path = "/";
-        RouteValueDictionary routeValues = new RouteValueDictionary(); //  RouteValueDictionary.FromArray()
+        var routeValues = new RouteValueDictionary(); //  RouteValueDictionary.FromArray()
 
         httpContextMock.Setup(x => x.Request.Headers).Returns(headers);
         httpContextMock.Setup(x => x.Request.Headers.Authorization).Returns(authorizationHeaderValue);
@@ -37,7 +37,7 @@ public class RootRedirectMiddlewareTests
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
         const string? swaggerRoutePrefix = null;
 
-        RootRedirectMiddleware middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
 
         // ACT
         await middleware.InvokeAsync(httpContextMock.Object);
@@ -57,7 +57,7 @@ public class RootRedirectMiddlewareTests
         IHeaderDictionary headers = new HeaderDictionary();
         StringValues authorizationHeaderValue = [];
         string path = "/";
-        RouteValueDictionary routeValues = new RouteValueDictionary(); //  RouteValueDictionary.FromArray()
+        var routeValues = new RouteValueDictionary(); //  RouteValueDictionary.FromArray()
 
         httpContextMock.Setup(x => x.Request.Headers).Returns(headers);
         httpContextMock.Setup(x => x.Request.Headers.Authorization).Returns(authorizationHeaderValue);
@@ -77,7 +77,7 @@ public class RootRedirectMiddlewareTests
 
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
            
-        RootRedirectMiddleware middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
 
         // ACT
         await middleware.InvokeAsync(httpContextMock.Object);

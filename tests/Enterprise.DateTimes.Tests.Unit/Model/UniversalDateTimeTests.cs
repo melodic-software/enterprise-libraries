@@ -1,5 +1,7 @@
-﻿using Enterprise.DateTimes.Model;
+﻿using System;
+using Enterprise.DateTimes.Model;
 using Enterprise.DateTimes.Utc;
+using FluentAssertions;
 using Moq;
 using static Enterprise.DateTimes.Formatting.DateTimeFormatStrings;
 
@@ -14,7 +16,7 @@ public class UniversalDateTimeTests
         DateTimeOffset beforeCreation = DateTimeOffset.UtcNow;
 
         // Act
-        UniversalDateTime universalDateTime = new UniversalDateTime();
+        var universalDateTime = new UniversalDateTime();
 
         // Assert
         DateTimeOffset afterCreation = DateTimeOffset.UtcNow;
@@ -28,7 +30,7 @@ public class UniversalDateTimeTests
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
 
         // Act
-        UniversalDateTime universalDateTime = new UniversalDateTime(utcNow);
+        var universalDateTime = new UniversalDateTime(utcNow);
 
         // Assert
         Assert.Equal(utcNow, universalDateTime.DateTimeOffset);
@@ -38,13 +40,17 @@ public class UniversalDateTimeTests
     public void UniversalDateTime_ConstructorWithNonUtcDateTimeOffset_ThrowsArgumentException()
     {
         // Arrange
-        DateTime localDateTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-        TimeSpan nonUtcOffset = TimeSpan.FromHours(1); // Or any non-zero offset.
-        DateTimeOffset nonUtcDateTimeOffset = new DateTimeOffset(localDateTime, nonUtcOffset);
+        var localDateTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+        var nonUtcOffset = TimeSpan.FromHours(1); // Or any non-zero offset.
+        var nonUtcDateTimeOffset = new DateTimeOffset(localDateTime, nonUtcOffset);
 
-        // Act & Assert
-        ArgumentException exception = Assert.Throws<ArgumentException>(() => new UniversalDateTime(nonUtcDateTimeOffset));
-        Assert.Contains("must be in UTC", exception.Message);
+        // Act
+        Exception? exception = Record.Exception(() => new UniversalDateTime(nonUtcDateTimeOffset));
+
+        // Assert
+        exception.Should().NotBeNull();
+        exception.Should().BeOfType<ArgumentException>();
+        exception?.Message.Should().Contain("must be in UTC");
     }
 
     [Fact]
@@ -56,7 +62,7 @@ public class UniversalDateTimeTests
         mockService.Setup(service => service.EnsureUtc(It.IsAny<DateTime>())).Returns(DateTime.UtcNow);
 
         // Act
-        UniversalDateTime universalDateTime = new UniversalDateTime(dateTime, mockService.Object);
+        var universalDateTime = new UniversalDateTime(dateTime, mockService.Object);
 
         // Assert
         mockService.Verify(service => service.EnsureUtc(dateTime), Times.Once());
@@ -68,8 +74,12 @@ public class UniversalDateTimeTests
         // Arrange
         DateTime dateTime = DateTime.Now;
 
-        // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => new UniversalDateTime(dateTime, null!));
+        // Act
+        Exception? exception = Record.Exception(() => new UniversalDateTime(dateTime, null!));
+
+        // Assert
+        exception.Should().NotBeNull();
+        exception.Should().BeOfType<ArgumentNullException>();
     }
 
     [Fact]
@@ -77,7 +87,7 @@ public class UniversalDateTimeTests
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
-        UniversalDateTime universalDateTime = new UniversalDateTime(utcNow);
+        var universalDateTime = new UniversalDateTime(utcNow);
 
         // Act
         DateTime dateTime = universalDateTime.DateTime;
@@ -92,7 +102,7 @@ public class UniversalDateTimeTests
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
-        UniversalDateTime universalDateTime = new UniversalDateTime(utcNow);
+        var universalDateTime = new UniversalDateTime(utcNow);
 
         // Act
         DateOnly dateOnly = universalDateTime.DateOnly;
@@ -106,7 +116,7 @@ public class UniversalDateTimeTests
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
-        UniversalDateTime universalDateTime = new UniversalDateTime(utcNow);
+        var universalDateTime = new UniversalDateTime(utcNow);
 
         // Act
         string dateString = universalDateTime.ToString();
@@ -119,12 +129,12 @@ public class UniversalDateTimeTests
     public void UniversalDateTime_LeapYear_HandledCorrectly()
     {
         // Arrange
-        DateTime leapYearDate = new DateTime(2020, 2, 29, 0, 0, 0, DateTimeKind.Utc);
+        var leapYearDate = new DateTime(2020, 2, 29, 0, 0, 0, DateTimeKind.Utc);
 
         Mock<IEnsureUtcService> mockEnsureUtcService = new();
         mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(leapYearDate);
 
-        UniversalDateTime universalDateTime = new UniversalDateTime(leapYearDate, mockEnsureUtcService.Object);
+        var universalDateTime = new UniversalDateTime(leapYearDate, mockEnsureUtcService.Object);
 
         // Act & Assert
         Assert.Equal(29, universalDateTime.DateTime.Day);
@@ -136,13 +146,13 @@ public class UniversalDateTimeTests
     public void UniversalDateTime_ExtremePastDate_HandledCorrectly()
     {
         // Arrange
-        DateTime ancientDate = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc); // The earliest date.
+        var ancientDate = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc); // The earliest date.
 
         Mock<IEnsureUtcService> mockEnsureUtcService = new();
         mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(ancientDate);
 
         // Act
-        UniversalDateTime ancientUniversalDateTime = new UniversalDateTime(ancientDate, mockEnsureUtcService.Object);
+        var ancientUniversalDateTime = new UniversalDateTime(ancientDate, mockEnsureUtcService.Object);
 
         // Assert
         Assert.Equal(ancientDate, ancientUniversalDateTime.DateTime);
@@ -152,13 +162,13 @@ public class UniversalDateTimeTests
     public void UniversalDateTime_ExtremeFutureDate_HandledCorrectly()
     {
         // Arrange
-        DateTime futureDate = new DateTime(9999, 12, 31, 23, 59, 59, DateTimeKind.Utc); // The latest date.
+        var futureDate = new DateTime(9999, 12, 31, 23, 59, 59, DateTimeKind.Utc); // The latest date.
 
         Mock<IEnsureUtcService> mockEnsureUtcService = new();
         mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(futureDate);
 
         // Act
-        UniversalDateTime futureUniversalDateTime = new UniversalDateTime(futureDate, mockEnsureUtcService.Object);
+        var futureUniversalDateTime = new UniversalDateTime(futureDate, mockEnsureUtcService.Object);
 
         // Assert
         Assert.Equal(futureDate, futureUniversalDateTime.DateTime);

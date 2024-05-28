@@ -2,6 +2,8 @@
 
 namespace Enterprise.ValueObjects.Example;
 
+//internal sealed record Location(double Latitude, double Longitude) : IValueObject;
+
 internal sealed class Location : ValueObject
 {
     public double Latitude { get; init; }

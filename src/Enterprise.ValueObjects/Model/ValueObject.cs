@@ -1,4 +1,6 @@
-﻿namespace Enterprise.ValueObjects.Model;
+﻿using Enterprise.ValueObjects.Model.Abstract;
+
+namespace Enterprise.ValueObjects.Model;
 
 // Alternatives
 // https://enterprisecraftsmanship.com/posts/value-object-better-implementation
@@ -12,7 +14,9 @@
 /// NOTE: For most cases in C# 10+, consider using `readonly record struct` for simpler value object implementations.
 /// See: https://nietras.com/2021/06/14/csharp-10-record-struct/
 /// </summary>
-public abstract class ValueObject : IEquatable<ValueObject>, IEqualityComparer<ValueObject>, IComparable, IComparable<ValueObject>
+public abstract class ValueObject : IValueObject, 
+    IEquatable<ValueObject>, IEqualityComparer<ValueObject>, 
+    IComparable, IComparable<ValueObject>
 {
     private readonly Lazy<int> _cachedHashCode;
 

@@ -13,7 +13,7 @@ public class SecurityHeadersMiddlewareTest
         HttpContext httpContext = HttpContextCreationService.CreateDefaultContext();
         RequestDelegate next = _ => Task.CompletedTask;
 
-        SecurityHeadersMiddleware middleware = new SecurityHeadersMiddleware(next);
+        var middleware = new SecurityHeadersMiddleware(next);
 
         // ACT
         await middleware.InvokeAsync(httpContext);

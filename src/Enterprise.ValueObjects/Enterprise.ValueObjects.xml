@@ -4,6 +4,11 @@
         <name>Enterprise.ValueObjects</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.ValueObjects.Model.Abstract.IValueObject">
+            <summary>
+            This is a marker interface for designating a class or record as a value object.
+            </summary>
+        </member>
         <member name="T:Enterprise.ValueObjects.Model.ValueObject">
             <summary>
             An immutable object with no conceptual identity that is defined solely by properties and their values.

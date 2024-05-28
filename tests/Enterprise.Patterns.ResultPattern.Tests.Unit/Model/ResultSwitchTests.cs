@@ -11,7 +11,7 @@ public class ResultSwitchTests
     public void Switch_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
 
@@ -30,7 +30,7 @@ public class ResultSwitchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
 
@@ -51,7 +51,7 @@ public class ResultSwitchTests
     public async Task SwitchAsync_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
 
@@ -77,7 +77,7 @@ public class ResultSwitchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
         IEnumerable<IError> onErrorErrors = new List<IError>();
@@ -105,7 +105,7 @@ public class ResultSwitchTests
     public void SwitchFirst_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
 
@@ -124,7 +124,7 @@ public class ResultSwitchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
         string firstErrorMessage = string.Empty;
@@ -148,7 +148,7 @@ public class ResultSwitchTests
     public async Task SwitchFirstAsync_ExecutesOnValue_ForSuccessfulResult()
     {
         // Arrange
-        Result<string> successResult = Result.Success("success value");
+        var successResult = Result.Success("success value");
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
 
@@ -174,7 +174,7 @@ public class ResultSwitchTests
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
-        Result<string> failedResult = Result.Failure<string>(error);
+        var failedResult = Result.Failure<string>(error);
         bool valueActionInvoked = false;
         bool errorActionInvoked = false;
         string firstErrorMessage = string.Empty;

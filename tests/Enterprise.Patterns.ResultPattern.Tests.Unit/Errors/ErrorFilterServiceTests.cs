@@ -18,7 +18,7 @@ public class ErrorFilterServiceTests
         ];
 
         // Act
-        List<IError> filteredErrors = ErrorFilterService.FilterInvalid(errors).ToList();
+        var filteredErrors = ErrorFilterService.FilterInvalid(errors).ToList();
 
         // Assert
         filteredErrors.Should().HaveCount(3);
@@ -39,7 +39,7 @@ public class ErrorFilterServiceTests
         ];
 
         // Act
-        List<IError> filteredErrors = ErrorFilterService.FilterInvalid(errors).ToList();
+        var filteredErrors = ErrorFilterService.FilterInvalid(errors).ToList();
 
         // Assert
         filteredErrors.Should().HaveCount(2);

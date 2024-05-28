@@ -87,8 +87,8 @@ public class OptionsHashServiceTests
     {
         // Arrange
         var options = new { Name = "ConcurrentTest", Value = 42 };
-        DefaultJsonSerializer jsonSerializer = new DefaultJsonSerializer();
-        List<Task> tasks = new List<Task>();
+        var jsonSerializer = new DefaultJsonSerializer();
+        var tasks = new List<Task>();
         int numberOfConcurrentAccesses = 100;
 
         // Act

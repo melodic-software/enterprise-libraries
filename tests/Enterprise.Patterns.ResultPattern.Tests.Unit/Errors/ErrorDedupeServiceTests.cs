@@ -19,7 +19,7 @@ public class ErrorDedupeServiceTests
         ];
 
         // Act
-        List<IError> dedupedErrors = ErrorDedupeService.DedupeErrors(errors).ToList();
+        var dedupedErrors = ErrorDedupeService.DedupeErrors(errors).ToList();
 
         // Assert
         dedupedErrors.Count.Should().Be(4);

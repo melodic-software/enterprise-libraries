@@ -12,10 +12,10 @@ public class ErrorTests
     {
         // Arrange
         List<ErrorDescriptor> descriptors = [ErrorDescriptor.Validation];
-        Dictionary<string, object> metadata = new Dictionary<string, object> { { "Detail", "Sample detail" } };
+        var metadata = new Dictionary<string, object> { { "Detail", "Sample detail" } };
 
         // Act
-        Error error = new Error("Error.Code", "Error message", descriptors, metadata);
+        var error = new Error("Error.Code", "Error message", descriptors, metadata);
 
         // Assert
         error.Code.Should().Be("Error.Code");
@@ -28,7 +28,7 @@ public class ErrorTests
     public void Error_Constructor_HandlesNullInputs()
     {
         // Act
-        Error error = new Error(null!, null!, null!);
+        var error = new Error(null!, null!, null!);
 
         // Assert
         error.Code.Should().Be("Unknown");
@@ -42,7 +42,7 @@ public class ErrorTests
         // Act
         ValidationError validationError = Error.Validation("Validation failed");
         NotFoundError notFoundError = Error.NotFound("NotFound.Code", "Resource not found");
-        Error customError = Error.Custom("Custom.Code", "Custom message", new List<ErrorDescriptor> { ErrorDescriptor.BusinessRule });
+        var customError = Error.Custom("Custom.Code", "Custom message", new List<ErrorDescriptor> { ErrorDescriptor.BusinessRule });
 
         // Assert
         validationError.Code.Should().Be(ValidationError.GenericCode);
@@ -55,7 +55,7 @@ public class ErrorTests
     public void Error_ToResult_ReturnsFailureWithThisError()
     {
         // Arrange
-        Error error = new Error("Error.Code", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.BusinessRule });
+        var error = new Error("Error.Code", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.BusinessRule });
 
         // Act
         Result result = error.ToResult;
@@ -69,7 +69,7 @@ public class ErrorTests
     public void Error_ToString_FormatsCorrectly()
     {
         // Arrange
-        Error error = new Error("Error.Code", "Error occurred", new List<ErrorDescriptor>());
+        var error = new Error("Error.Code", "Error occurred", new List<ErrorDescriptor>());
 
         // Act
         string resultString = error.ToString();
@@ -93,7 +93,7 @@ public class ErrorTests
     public void Error_CustomHandlesEmptyDescriptorsAndMetadata()
     {
         // Act
-        Error error = Error.Custom("Custom.Code", "Message", new List<ErrorDescriptor>(), new Dictionary<string, object>());
+        var error = Error.Custom("Custom.Code", "Message", new List<ErrorDescriptor>(), new Dictionary<string, object>());
 
         // Assert
         error.Descriptors.Should().BeEmpty();
@@ -104,8 +104,8 @@ public class ErrorTests
     public void Error_MetadataIsReadOnly()
     {
         // Arrange
-        Dictionary<string, object> metadata = new Dictionary<string, object> { { "key", "initial" } };
-        Error error = Error.Custom("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }, metadata);
+        var metadata = new Dictionary<string, object> { { "key", "initial" } };
+        var error = Error.Custom("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }, metadata);
 
         // Act
         string newKey = "newKey";
@@ -120,7 +120,7 @@ public class ErrorTests
     {
         // Arrange
         List<ErrorDescriptor> descriptors = [ErrorDescriptor.Validation];
-        Error error = new Error("Code", "Message", descriptors);
+        var error = new Error("Code", "Message", descriptors);
 
         // Act
         descriptors.Add(ErrorDescriptor.NotFound);
