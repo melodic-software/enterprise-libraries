@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Domain" Version="1.0.0-preview.229" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.171" />
-    <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.229" />
+    <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.254" />
   </ItemGroup>
 
 </Project>

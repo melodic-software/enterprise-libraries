@@ -15,13 +15,15 @@ public class MediatRCommandDispatcher : IDispatchCommands
         _sender = sender;
     }
 
-    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand
+    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : ICommand
     {
         IRequest<Result> request = command;
         await _sender.Send(request, cancellationToken);
     }
 
-    public async Task<Result<TResponse>> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken) where TCommand : ICommand<TResponse>
+    public async Task<Result<TResponse>> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : ICommand<TResponse>
     {
         IRequest<Result<TResponse>> request = command;
         Result<TResponse> response = await _sender.Send(request, cancellationToken);

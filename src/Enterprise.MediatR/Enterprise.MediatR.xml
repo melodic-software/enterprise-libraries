@@ -4,6 +4,11 @@
         <name>Enterprise.MediatR</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.MediatR.Behaviors.BehaviorRegistrations.Default">
+            <summary>
+            These are the default behavior registrations.
+            </summary>
+        </member>
         <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
@@ -30,11 +35,6 @@
             <summary>
             This allows for complete customization and control over the MediatR config.
             None of the default configuration is used, so everything must be completely configured.
-            </summary>
-        </member>
-        <member name="F:Enterprise.MediatR.Options.MediatRConfigOptions.DefaultBehaviorRegistrations">
-            <summary>
-            These are the default behavior registrations.
             </summary>
         </member>
     </members>

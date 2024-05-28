@@ -35,15 +35,4 @@ public class MediatRConfigOptions
     /// None of the default configuration is used, so everything must be completely configured.
     /// </summary>
     public Action<MediatRServiceConfiguration>? CustomConfigure { get; set; }
-
-    /// <summary>
-    /// These are the default behavior registrations.
-    /// </summary>
-    public readonly List<BehaviorRegistration> DefaultBehaviorRegistrations =
-    [
-        new(typeof(RequestLoggingBehavior<,>), ServiceLifetime.Scoped),
-        new (typeof(UseCaseLoggingBehavior<,>)),
-        new (typeof(CommandFluentValidationBehavior<,>)),
-        new (typeof(QueryCachingBehavior<,>))
-    ];
 }
