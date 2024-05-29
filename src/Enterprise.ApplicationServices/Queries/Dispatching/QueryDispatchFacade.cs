@@ -1,18 +1,17 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Dispatching;
-using Enterprise.ApplicationServices.Core.Queries.Facade;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 using Enterprise.Patterns.ResultPattern.Model;
 
-namespace Enterprise.ApplicationServices.Queries.Facade;
+namespace Enterprise.ApplicationServices.Queries.Dispatching;
 
-internal sealed class QueryFacadeService : IQueryDispatchFacade
+public class QueryDispatchFacade : IQueryDispatchFacade
 {
     private readonly IDispatchQueries _queryDispatcher;
     private readonly IEventCallbackService _eventCallbackService;
 
-    public QueryFacadeService(IDispatchQueries queryDispatcher, IEventCallbackService eventCallbackService)
+    public QueryDispatchFacade(IDispatchQueries queryDispatcher, IEventCallbackService eventCallbackService)
     {
         _queryDispatcher = queryDispatcher;
         _eventCallbackService = eventCallbackService;

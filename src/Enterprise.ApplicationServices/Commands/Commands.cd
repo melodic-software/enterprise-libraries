@@ -38,6 +38,26 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Enterprise.ApplicationServices.Commands.Handlers.NullCommandHandler&lt;TCommand&gt;">
+    <Position X="12.5" Y="13.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\NullCommandHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Commands.Handlers.Alternate.NullCommandHandler&lt;TCommand, TResponse&gt;">
+    <Position X="17" Y="13.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\Alternate\NullCommandHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.NullCommandHandlerBase">
+    <Position X="14.75" Y="10.75" Width="3" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="Enterprise.ApplicationServices.Core.Commands.Dispatching.IDispatchCommands">
     <Position X="1.75" Y="0.5" Width="3" />
     <TypeIdentifier />

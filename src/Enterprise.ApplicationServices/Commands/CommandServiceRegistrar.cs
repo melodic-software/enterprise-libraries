@@ -4,10 +4,7 @@ using Enterprise.ApplicationServices.Commands.Handlers;
 using Enterprise.ApplicationServices.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Dispatching;
-using Enterprise.ApplicationServices.Core.Commands.Facade;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
-using Enterprise.ApplicationServices.Queries.Handlers;
-using Enterprise.ApplicationServices.Queries.Handlers.Alternate;
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Microsoft.Extensions.Configuration;
@@ -46,7 +43,5 @@ internal sealed class CommandServiceRegistrar : IRegisterServices
         // Registering these makes it easier to resolve them from the DI container.
         services.AddTransient(typeof(NullCommandHandler<>));
         services.AddTransient(typeof(NullCommandHandler<,>));
-        services.AddTransient(typeof(NullQueryHandler<>));
-        services.AddTransient(typeof(NullQueryHandler<,>));
     }
 }

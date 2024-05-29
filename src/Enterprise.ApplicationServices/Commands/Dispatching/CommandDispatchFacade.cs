@@ -1,12 +1,11 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Dispatching;
-using Enterprise.ApplicationServices.Core.Commands.Facade;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 using Enterprise.Patterns.ResultPattern.Model;
 
-namespace Enterprise.ApplicationServices.Commands.Facade;
+namespace Enterprise.ApplicationServices.Commands.Dispatching;
 
 public class CommandDispatchFacade : ICommandDispatchFacade
 {

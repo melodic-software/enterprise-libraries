@@ -40,6 +40,26 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.NullQueryHandler&lt;TResponse&gt;">
+    <Position X="15.75" Y="18.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Queries\Handlers\NullQueryHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.Alternate.NullQueryHandler&lt;TQuery, TResponse&gt;">
+    <Position X="12.5" Y="18.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Queries\Handlers\Alternate\NullQueryHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.NullQueryHandlerBase">
+    <Position X="14.25" Y="15.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Dispatching.IDispatchQueries">
     <Position X="8.5" Y="0.5" Width="2.75" />
     <TypeIdentifier />
