@@ -1,5 +1,4 @@
-﻿using System;
-using Enterprise.DateTimes.Model;
+﻿using Enterprise.DateTimes.Model;
 using Enterprise.DateTimes.Utc;
 using FluentAssertions;
 using Moq;

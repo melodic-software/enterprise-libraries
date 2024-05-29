@@ -1,11 +1,8 @@
 ﻿using System.Reflection;
-using Enterprise.Logging.Core.Loggers;
 using Enterprise.MediatR.Options;
 using Enterprise.Options.Core.Singleton;
-using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using static Enterprise.MediatR.Assemblies.AssemblyRegistrar;
 using static Enterprise.MediatR.Behaviors.BehaviorRegistrar;
 

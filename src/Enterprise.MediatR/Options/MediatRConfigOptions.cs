@@ -1,8 +1,5 @@
 ﻿using System.Reflection;
 using Enterprise.MediatR.Behaviors;
-using Enterprise.MediatR.Behaviors.Caching;
-using Enterprise.MediatR.Behaviors.Logging;
-using Enterprise.MediatR.Behaviors.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.MediatR.Options;
