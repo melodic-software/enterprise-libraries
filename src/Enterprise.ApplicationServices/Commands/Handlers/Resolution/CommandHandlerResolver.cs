@@ -17,14 +17,14 @@ public class CommandHandlerResolver : IResolveCommandHandler
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command) where TCommand : ICommand
+    public IHandleCommand<TCommand>? GetHandlerFor<TCommand>(TCommand command) where TCommand : ICommand
     {
-        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
+        return _serviceProvider.GetService<IHandleCommand<TCommand>>();
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>
+    public IHandleCommand<TCommand, TResponse>? GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>
     {
-        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResponse>>();
+        return _serviceProvider.GetService<IHandleCommand<TCommand, TResponse>>();
     }
 }

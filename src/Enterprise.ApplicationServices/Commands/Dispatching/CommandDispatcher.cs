@@ -21,7 +21,16 @@ public class CommandDispatcher : IDispatchCommands
     public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
         where TCommand : ICommand
     {
-        IHandleCommand<TCommand> handler = _commandHandlerResolver.GetHandlerFor(command);
+        IHandleCommand<TCommand>? handler = _commandHandlerResolver.GetHandlerFor(command);
+
+        if (handler == null)
+        {
+            throw new InvalidOperationException(
+                $"An implementation of {nameof(IHandleCommand<TCommand>)} " +
+                $"could not be resolved for command \"{typeof(TCommand).FullName}\"."
+            );
+        }
+
         await handler.HandleAsync(command, cancellationToken);
     }
 
@@ -29,8 +38,19 @@ public class CommandDispatcher : IDispatchCommands
     public async Task<Result<TResponse>> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
         where TCommand : ICommand<TResponse>
     {
-        IHandleCommand<TCommand, TResponse> handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResponse>(command);
+        IHandleCommand<TCommand, TResponse>? handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResponse>(command);
+
+        if (handler == null)
+        {
+            throw new InvalidOperationException(
+                $"An implementation of {nameof(IHandleCommand<TCommand, TResponse>)} " +
+                $"could not be resolved for command \"{typeof(TCommand).FullName}\" " +
+                $"with \"{typeof(TResponse)}\" response."
+            );
+        }
+
         Result<TResponse> response = await handler.HandleAsync(command, cancellationToken);
+
         return response;
     }
 }

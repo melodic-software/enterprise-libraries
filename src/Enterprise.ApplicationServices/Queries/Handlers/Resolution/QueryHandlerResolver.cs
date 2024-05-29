@@ -15,44 +15,32 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query)
+    public IHandleQuery<TResponse>? GetQueryHandler<TResponse>(IQuery query)
     {
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-        object handler = _serviceProvider.GetRequiredService(handlerType);
-
-        if (handler is not IHandleQuery<TResponse> result)
-        {
-            throw new InvalidOperationException();
-        }
-
-        return result;
+        var handler = (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
+        return handler;
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query)
+    public IHandleQuery<TResponse>? GetQueryHandler<TResponse>(IQuery<TResponse> query)
     {
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-        object handler = _serviceProvider.GetRequiredService(handlerType);
-
-        if (handler is not IHandleQuery<TResponse> result)
-        {
-            throw new InvalidOperationException();
-        }
-
-        return result;
+        var handler = (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
+        return handler;
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery
+    public IHandleQuery<TQuery, TResponse>? GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery
     {
-        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
+        return _serviceProvider.GetService<IHandleQuery<TQuery, TResponse>>();
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query) where TQuery : IQuery<TResponse>
+    public IHandleQuery<TQuery, TResponse>? GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query) where TQuery : IQuery<TResponse>
     {
-        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
+        return _serviceProvider.GetService<IHandleQuery<TQuery, TResponse>>();
     }
 }
