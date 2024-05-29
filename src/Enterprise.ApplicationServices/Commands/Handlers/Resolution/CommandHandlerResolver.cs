@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.Commands.Handlers.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Model;
@@ -17,14 +18,34 @@ public class CommandHandlerResolver : IResolveCommandHandler
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand>? GetHandlerFor<TCommand>(TCommand command) where TCommand : ICommand
+    public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
+        where TCommand : ICommand
     {
-        return _serviceProvider.GetService<IHandleCommand<TCommand>>();
+        IHandleCommand<TCommand>? handler = _serviceProvider.GetService<IHandleCommand<TCommand>>();
+
+        if (handler != null)
+        {
+            return handler;
+        }
+
+        handler = _serviceProvider.GetRequiredService<NullCommandHandler<TCommand>>();
+
+        return handler;
     }
 
     /// <inheritdoc />
-    public IHandleCommand<TCommand, TResponse>? GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>
+    public IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command)
+        where TCommand : ICommand<TResponse>
     {
-        return _serviceProvider.GetService<IHandleCommand<TCommand, TResponse>>();
+        IHandleCommand<TCommand, TResponse>? handler = _serviceProvider.GetService<IHandleCommand<TCommand, TResponse>>();
+
+        if (handler != null)
+        {
+            return handler;
+        }
+
+        handler = _serviceProvider.GetRequiredService<NullCommandHandler<TCommand, TResponse>>();
+
+        return handler;
     }
 }

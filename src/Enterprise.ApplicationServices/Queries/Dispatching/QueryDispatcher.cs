@@ -18,7 +18,7 @@ public class QueryDispatcher : IDispatchQueries
     /// <inheritdoc />
     public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery query, CancellationToken cancellationToken)
     {
-        IHandleQuery<TResponse>? handler = _queryHandlerResolver.GetQueryHandler<TResponse>(query);
+        IHandleQuery<TResponse> handler = _queryHandlerResolver.GetQueryHandler<TResponse>(query);
 
         if (handler == null)
         {
@@ -37,7 +37,7 @@ public class QueryDispatcher : IDispatchQueries
     /// <inheritdoc />
     public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
     {
-        IHandleQuery<TResponse>? handler = _queryHandlerResolver.GetQueryHandler(query);
+        IHandleQuery<TResponse> handler = _queryHandlerResolver.GetQueryHandler(query);
 
         if (handler == null)
         {
@@ -56,7 +56,7 @@ public class QueryDispatcher : IDispatchQueries
     /// <inheritdoc />
     public async Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
     {
-        IHandleQuery<TQuery, TResponse>? handler = _queryHandlerResolver.GetQueryHandler<TQuery, TResponse>(query);
+        IHandleQuery<TQuery, TResponse> handler = _queryHandlerResolver.GetQueryHandler<TQuery, TResponse>(query);
 
         if (handler == null)
         {
