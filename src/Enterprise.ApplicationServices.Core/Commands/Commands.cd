@@ -23,6 +23,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.NullCommandHandlerBase">
+    <Position X="12.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\Handlers\NullCommandHandlerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Enterprise.ApplicationServices.Core.Commands.Dispatching.IDispatchCommands">
     <Position X="1.75" Y="2.25" Width="3" />
     <TypeIdentifier>

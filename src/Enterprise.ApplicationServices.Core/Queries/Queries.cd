@@ -15,6 +15,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="Enterprise.ApplicationServices.Core.Queries.Handlers.NullQueryHandlerBase">
+    <Position X="10.75" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Queries\Handlers\NullQueryHandlerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Enterprise.ApplicationServices.Core.Queries.Dispatching.IDispatchQueries">
     <Position X="6.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
