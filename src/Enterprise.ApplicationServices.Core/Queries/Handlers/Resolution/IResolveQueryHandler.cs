@@ -13,7 +13,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResponse>? GetQueryHandler<TResponse>(IQuery query);
+    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
@@ -21,16 +21,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResponse>? GetQueryHandler<TResponse>(IQuery<TResponse> query);
-
-    /// <summary>
-    /// Get the handler implementation that can handle the given query.
-    /// </summary>
-    /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public IHandleQuery<TQuery, TResponse>? GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery;
+    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
@@ -39,5 +30,14 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResponse>? GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query) where TQuery : IQuery<TResponse>;
+    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query) where TQuery : IQuery;
+
+    /// <summary>
+    /// Get the handler implementation that can handle the given query.
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query) where TQuery : IQuery<TResponse>;
 }
