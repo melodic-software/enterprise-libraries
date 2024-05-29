@@ -1,5 +1,4 @@
 ﻿using Enterprise.ApplicationServices.Commands.Dispatching;
-using Enterprise.ApplicationServices.Commands.Facade;
 using Enterprise.ApplicationServices.Commands.Handlers;
 using Enterprise.ApplicationServices.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Commands.Handlers.Resolution;

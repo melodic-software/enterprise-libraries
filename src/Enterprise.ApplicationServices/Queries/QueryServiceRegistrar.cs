@@ -1,7 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
 using Enterprise.ApplicationServices.Queries.Dispatching;
-using Enterprise.ApplicationServices.Queries.Facade;
 using Enterprise.ApplicationServices.Queries.Handlers;
 using Enterprise.ApplicationServices.Queries.Handlers.Resolution;
 using Enterprise.DI.Core.Registration;
