@@ -6,6 +6,9 @@ using Quartz;
 
 namespace Enterprise.Quartz.Config;
 
+// https://www.quartz-scheduler.net
+// https://www.milanjovanovic.tech/blog/scheduling-background-jobs-with-quartz-net
+
 public static class QuartzConfigService
 {
     public static void ConfigureQuartz(this IServiceCollection services, IConfiguration configuration)
@@ -18,12 +21,20 @@ public static class QuartzConfigService
             return;
         }
 
-        services.AddQuartz();
+        quartzConfigOptions.Configure ??= DefaultConfigure;
+
+        services.AddQuartz(quartzConfigOptions.Configure);
+
         services.AddQuartzHostedService(options =>
         {
             options.AwaitApplicationStarted = true;
             options.WaitForJobsToComplete = true;
             options.StartDelay = null;
         });
+    }
+
+    private static void DefaultConfigure(IServiceCollectionQuartzConfigurator configure)
+    {
+        // No configuration by default.
     }
 }

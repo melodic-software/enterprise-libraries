@@ -301,7 +301,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET Core", "ASP.NET Core", "{920E73DF-7BAD-473C-9663-0551089FD7F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Background Services", "Background Services", "{519B3EFC-14DC-41CB-9E88-633644F353B9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Background Jobs", "Background Jobs", "{519B3EFC-14DC-41CB-9E88-633644F353B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Observability", "Observability", "{92CE8247-51A2-42A1-9C1F-4C7F9605D57E}"
 EndProject
