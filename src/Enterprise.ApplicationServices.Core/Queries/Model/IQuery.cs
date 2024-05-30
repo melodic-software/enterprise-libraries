@@ -1,5 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Model;
-using MediatR;
+﻿using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Model;
 
@@ -15,4 +14,4 @@ public interface IQuery : IBaseQuery;
 /// This interface allows for defining an explicit return type that is associated with the query.
 /// </summary>
 /// <typeparam name="TResponse"></typeparam>
-public interface IQuery<TResponse> : IQuery, IRequest<Result<TResponse>>;
+public interface IQuery<out TResponse> : IQuery, IRequest<TResponse>;

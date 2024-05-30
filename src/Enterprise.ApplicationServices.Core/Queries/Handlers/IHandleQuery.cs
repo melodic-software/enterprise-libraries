@@ -1,6 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Standard;
-using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
@@ -12,7 +11,7 @@ public interface IHandleQuery<TResponse> : IApplicationService
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken);
+    Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken);
 }
 
 /// <summary>
@@ -28,5 +27,5 @@ public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> wh
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

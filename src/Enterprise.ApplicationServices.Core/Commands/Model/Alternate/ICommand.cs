@@ -1,5 +1,4 @@
 ﻿using Enterprise.Library.Core.Attributes;
-using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
@@ -13,4 +12,4 @@ namespace Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 /// </summary>
 /// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(ICommand))]
-public interface ICommand<TResponse> : IBaseCommand, IRequest<Result<TResponse>>;
+public interface ICommand<out TResponse> : IBaseCommand, IRequest<TResponse>;
