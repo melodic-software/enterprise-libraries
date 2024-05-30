@@ -2,7 +2,6 @@
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
-using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Queries.Dispatching;
 
@@ -18,25 +17,27 @@ public class QueryDispatchFacade : IQueryDispatchFacade
     }
 
     /// <inheritdoc />
-    public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
+    public void RegisterEventCallback<TEvent>(Action<TEvent> action)
+        where TEvent : IEvent
     {
         _eventCallbackService.RegisterEventCallback(action);
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
+    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken)
+        where TQuery : IBaseQuery
     {
         return await _queryDispatcher.DispatchAsync<TQuery, TResponse>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResponse> DispatchAsync<TResponse>(IBaseQuery query, CancellationToken cancellationToken)
     {
         return await _queryDispatcher.DispatchAsync<TResponse>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
+    public async Task<TResponse> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
     {
         return await _queryDispatcher.DispatchAsync(query, cancellationToken);
     }

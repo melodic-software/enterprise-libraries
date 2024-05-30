@@ -17,58 +17,30 @@ public class QueryHandlerResolver : IResolveQueryHandler
     /// <inheritdoc />
     public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IBaseQuery query)
     {
-        return Get<IHandleQuery<TResponse>, NullQueryHandler<TResponse>, TResponse>(query);
+        Type queryType = query.GetType();
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
+        return (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
     }
 
     /// <inheritdoc />
     public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query)
     {
-        return Get<IHandleQuery<TResponse>, NullQueryHandler<TResponse>, TResponse>(query);
+        Type queryType = query.GetType();
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
+        return (IHandleQuery<TResponse>)_serviceProvider.GetRequiredService(handlerType);
     }
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
         where TQuery : IBaseQuery
     {
-        return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
+        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
     }
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query)
         where TQuery : IQuery<TResponse>
     {
-        return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
-    }
-
-    private THandler Get<THandler, TNullHandler, TResponse>(IBaseQuery query)
-        where THandler : class where TNullHandler : THandler
-    {
-        Type queryType = query.GetType();
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-
-        var handler = (THandler)_serviceProvider.GetService(handlerType);
-
-        if (handler == null)
-        {
-            return handler;
-        }
-
-        handler = _serviceProvider.GetRequiredService<TNullHandler>();
-
-        return handler;
-    }
-
-    private THandler Get<THandler, TNullHandler>() where THandler : class where TNullHandler : THandler
-    {
-        THandler handler = _serviceProvider.GetService<THandler>();
-
-        if (handler == null)
-        {
-            return handler;
-        }
-
-        handler = _serviceProvider.GetRequiredService<TNullHandler>();
-
-        return handler;
+        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
     }
 }

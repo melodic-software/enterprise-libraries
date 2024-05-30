@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase&lt;TCommand&gt;">
-    <Position X="12" Y="1.75" Width="2.75" />
+    <Position X="11" Y="2.25" Width="2.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService">
-    <Position X="20" Y="2" Width="3" />
+    <Position X="19" Y="2.5" Width="3" />
     <TypeIdentifier />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase&lt;TCommand, TResponse&gt;">
-    <Position X="15.25" Y="1.75" Width="3.75" />
+    <Position X="14.25" Y="2.25" Width="3.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
@@ -29,26 +29,6 @@
       <FileName>Commands\Handlers\Resolution\CommandHandlerResolver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Enterprise.ApplicationServices.Commands.Handlers.NullCommandHandler&lt;TCommand&gt;">
-    <Position X="12.75" Y="7" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Commands\Handlers\NullCommandHandler.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Enterprise.ApplicationServices.Commands.Handlers.Alternate.NullCommandHandler&lt;TCommand, TResponse&gt;">
-    <Position X="17.25" Y="7" Width="3.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Commands\Handlers\Alternate\NullCommandHandler.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.NullCommandHandlerBase">
-    <Position X="15" Y="4.25" Width="3" />
-    <TypeIdentifier />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade">
     <Position X="1" Y="3.5" Width="3.75" />

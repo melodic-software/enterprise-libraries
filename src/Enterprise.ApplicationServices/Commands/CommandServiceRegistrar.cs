@@ -1,6 +1,4 @@
 ﻿using Enterprise.ApplicationServices.Commands.Dispatching;
-using Enterprise.ApplicationServices.Commands.Handlers;
-using Enterprise.ApplicationServices.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Dispatching;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
@@ -15,7 +13,7 @@ internal sealed class CommandServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped(provider =>
+        services.AddSingleton(provider =>
         {
             IResolveCommandHandler commandHandlerResolver = new CommandHandlerResolver(provider);
 
@@ -36,11 +34,5 @@ internal sealed class CommandServiceRegistrar : IRegisterServices
             ICommandDispatchFacade commandDispatchFacade = new CommandDispatchFacade(commandDispatcher, eventCallbackService);
             return commandDispatchFacade;
         });
-
-        // These are implementations of the null object pattern.
-        // They log warnings internally, but this ensures the dispatching services do not have to check for nulls.
-        // Registering these makes it easier to resolve them from the DI container.
-        services.AddTransient(typeof(NullCommandHandler<>));
-        services.AddTransient(typeof(NullCommandHandler<,>));
     }
 }

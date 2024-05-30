@@ -9,7 +9,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Queries.Handlers.Simple.SimpleQueryHandler&lt;TQuery, TResponse&gt;">
-    <Position X="1.5" Y="5" Width="3" />
+    <Position X="1.25" Y="6.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Queries\Handlers\Simple\SimpleQueryHandler.cs</FileName>
@@ -23,27 +23,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.NullQueryHandler&lt;TResponse&gt;">
-    <Position X="5.5" Y="5.25" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Queries\Handlers\NullQueryHandler.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade" Collapsed="true">
+  <Class Name="Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade">
     <Position X="1" Y="3.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAEAEAAAAAAAAAAAAAAEAAAQAAAAA=</HashCode>
       <FileName>Queries\Dispatching\QueryDispatchFacade.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Enterprise.ApplicationServices.Queries.Handlers.NullQueryHandler&lt;TQuery, TResponse&gt;">
-    <Position X="9" Y="5.25" Width="3.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Queries\Handlers\NullQueryHandler.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
