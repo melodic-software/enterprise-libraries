@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.Alternate;
+using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.Logging;

@@ -7,9 +7,9 @@ using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
-namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.Alternate;
+namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate.Abstract;
 
-public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> : 
+public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> :
     DecoratorBase<IHandleCommand<TCommand, TResponse>>, IHandleCommand<TCommand, TResponse>
     where TCommand : ICommand<TResponse>
 {
@@ -32,7 +32,7 @@ public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> :
         var typedCommand = (TCommand)command;
         await HandleAsync(typedCommand, cancellationToken);
     }
-    
+
     /// <inheritdoc />
     public abstract Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }
