@@ -12,7 +12,7 @@ public class NullQueryHandler<TResponse> : NullQueryHandlerBase, IHandleQuery<TR
 
     }
 
-    public Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         LogWarning(query);
         return Task.FromResult(Result<TResponse>.From(default));
@@ -20,14 +20,14 @@ public class NullQueryHandler<TResponse> : NullQueryHandlerBase, IHandleQuery<TR
 }
 
 public class NullQueryHandler<TQuery, TResponse> : NullQueryHandlerBase, IHandleQuery<TQuery, TResponse>
-    where TQuery : IQuery
+    where TQuery : IBaseQuery
 {
     public NullQueryHandler(ILogger<NullQueryHandler<TQuery, TResponse>> logger) : base(logger)
     {
 
     }
 
-    public Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         return Task.FromResult(Result<TResponse>.From(default));
     }

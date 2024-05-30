@@ -24,13 +24,13 @@ public class QueryDispatchFacade : IQueryDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery
+    public async Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
     {
         return await _queryDispatcher.DispatchAsync<TQuery, TResponse>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> DispatchAsync<TResponse>(IBaseQuery query, CancellationToken cancellationToken)
     {
         return await _queryDispatcher.DispatchAsync<TResponse>(query, cancellationToken);
     }

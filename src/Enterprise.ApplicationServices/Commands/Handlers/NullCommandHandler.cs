@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Commands.Handlers;
 
 public class NullCommandHandler<TCommand> : NullCommandHandlerBase, IHandleCommand<TCommand>
-    where TCommand : ICommand
+    where TCommand : IBaseCommand
 {
     public NullCommandHandler(ILogger<NullCommandHandler<TCommand>> logger) : base(logger)
     {
@@ -18,7 +18,7 @@ public class NullCommandHandler<TCommand> : NullCommandHandlerBase, IHandleComma
         return Task.CompletedTask;
     }
 
-    public Task HandleAsync(ICommand command, CancellationToken cancellationToken)
+    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         LogWarning(command);
         return Task.CompletedTask;

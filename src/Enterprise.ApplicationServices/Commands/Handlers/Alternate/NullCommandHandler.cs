@@ -2,7 +2,6 @@
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Commands.Handlers.Alternate;
@@ -20,13 +19,13 @@ public class NullCommandHandler<TCommand, TResponse> : NullCommandHandlerBase, I
         return HandleAsync(command, cancellationToken);
     }
 
-    public Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         LogWarning(command);
-        return Task.FromResult(Result<TResponse>.From(default));
+        return Task.FromResult(default(TResponse))!;
     }
 
-    public Task HandleAsync(ICommand command, CancellationToken cancellationToken)
+    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         LogWarning(command);
         return Task.CompletedTask;

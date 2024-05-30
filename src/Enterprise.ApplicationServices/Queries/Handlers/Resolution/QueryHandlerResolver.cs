@@ -15,7 +15,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query)
+    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IBaseQuery query)
     {
         return Get<IHandleQuery<TResponse>, NullQueryHandler<TResponse>, TResponse>(query);
     }
@@ -28,7 +28,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
-        where TQuery : IQuery
+        where TQuery : IBaseQuery
     {
         return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
     }
@@ -40,7 +40,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
         return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
     }
 
-    private THandler Get<THandler, TNullHandler, TResponse>(IQuery query)
+    private THandler Get<THandler, TNullHandler, TResponse>(IBaseQuery query)
         where THandler : class where TNullHandler : THandler
     {
         Type queryType = query.GetType();

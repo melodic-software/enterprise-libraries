@@ -1,45 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase&lt;T&gt;">
-    <Position X="6" Y="7.75" Width="2.75" />
+  <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase&lt;TCommand&gt;">
+    <Position X="12" Y="1.75" Width="2.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService">
-    <Position X="14.75" Y="7" Width="3" />
+    <Position X="20" Y="2" Width="3" />
     <TypeIdentifier />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase&lt;TCommand, TResponse&gt;">
-    <Position X="10" Y="8.25" Width="3.75" />
+    <Position X="15.25" Y="1.75" Width="3.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatcher">
-    <Position X="2" Y="2.5" Width="3.5" />
+    <Position X="1" Y="1" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Commands\Dispatching\CommandDispatcher.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Enterprise.ApplicationServices.Commands.Facade.CommandDispatchFacade">
-    <Position X="0.5" Y="6" Width="3.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAEAAAAEAAAAAAAAAAAEAAAQAAAAA=</HashCode>
-      <FileName>Commands\Facade\CommandDispatchFacade.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="Enterprise.ApplicationServices.Commands.Handlers.Resolution.CommandHandlerResolver">
-    <Position X="14" Y="2" Width="3.25" />
+    <Position X="5.5" Y="2" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAIAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Commands\Handlers\Resolution\CommandHandlerResolver.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Commands.Handlers.NullCommandHandler&lt;TCommand&gt;">
-    <Position X="12.5" Y="13.5" Width="2.75" />
+    <Position X="12.75" Y="7" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Handlers\NullCommandHandler.cs</FileName>
@@ -47,7 +39,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Commands.Handlers.Alternate.NullCommandHandler&lt;TCommand, TResponse&gt;">
-    <Position X="17" Y="13.5" Width="3.5" />
+    <Position X="17.25" Y="7" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Handlers\Alternate\NullCommandHandler.cs</FileName>
@@ -55,40 +47,16 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Enterprise.ApplicationServices.Core.Commands.Handlers.NullCommandHandlerBase">
-    <Position X="14.75" Y="10.75" Width="3" />
+    <Position X="15" Y="4.25" Width="3" />
     <TypeIdentifier />
   </Class>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Dispatching.IDispatchCommands">
-    <Position X="1.75" Y="0.5" Width="3" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Facade.ICommandDispatchFacade" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="2" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Model.Alternate.ICommand&lt;TResponse&gt;" Collapsed="true">
-    <Position X="8.5" Y="2" Width="2" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Model.ICommand">
-    <Position X="8.75" Y="0.5" Width="1.25" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand">
-    <Position X="8.5" Y="3.75" Width="2.25" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand&lt;TCommand&gt;">
-    <Position X="6" Y="5.5" Width="3.25" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler">
-    <Position X="14.25" Y="0.5" Width="2.75" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.IHandleCommand&lt;TCommand, TResponse&gt;">
-    <Position X="10.25" Y="5.5" Width="3.25" />
-    <TypeIdentifier />
-  </Interface>
+  <Class Name="Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade">
+    <Position X="1" Y="3.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAEAAAAEAAAAAAAAAAAEAAAQAAAAA=</HashCode>
+      <FileName>Commands\Dispatching\CommandDispatchFacade.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

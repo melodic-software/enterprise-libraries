@@ -19,7 +19,7 @@ public class CommandHandlerResolver : IResolveCommandHandler
 
     /// <inheritdoc />
     public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
-        where TCommand : ICommand
+        where TCommand : IBaseCommand
     {
         return Get<IHandleCommand<TCommand>, NullCommandHandler<TCommand>>();
     }
