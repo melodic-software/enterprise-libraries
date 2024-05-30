@@ -8,7 +8,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
 public abstract class QueryHandlerBase<TQuery, TResponse> : 
     ApplicationServiceBase, IHandleQuery<TQuery, TResponse>
-    where TQuery : IQuery
+    where TQuery : IBaseQuery
 {
 
     protected QueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
