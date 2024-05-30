@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.230" />
+    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.269" />
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.211" />
     <PackageReference Include="Melodic.Enterprise.Messages.Core" Version="1.0.0-preview.16" />
   </ItemGroup>

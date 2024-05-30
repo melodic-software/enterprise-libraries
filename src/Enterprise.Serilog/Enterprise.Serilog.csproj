@@ -16,7 +16,7 @@
     <PackageReference Include="Destructurama.Attributed" Version="4.0.0" />
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.202" />
     <PackageReference Include="Melodic.Enterprise.Logging" Version="1.0.0-preview.254" />
-    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.263" />
+    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.269" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
