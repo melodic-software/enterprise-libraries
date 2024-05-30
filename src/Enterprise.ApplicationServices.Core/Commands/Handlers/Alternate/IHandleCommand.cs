@@ -14,7 +14,9 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 /// <typeparam name="TCommand"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(IHandleCommand<>))]
-public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TCommand> where TCommand : ICommand<TResponse>
+public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TCommand>
+    where TCommand : ICommand<TResponse>
+    where TResponse : Result
 {
     /// <summary>
     /// Handle the command.
@@ -22,5 +24,5 @@ public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TComman
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    new Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

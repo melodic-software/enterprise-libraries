@@ -10,6 +10,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 public abstract class CommandHandlerBase<TCommand, TResponse>
     : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>
     where TCommand : ICommand<TResponse>
+    where TResponse : Result
 {
     protected CommandHandlerBase(IEventRaisingFacade eventService) : base(eventService)
     {
@@ -30,5 +31,5 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
     }
 
     /// <inheritdoc />
-    public abstract Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }
