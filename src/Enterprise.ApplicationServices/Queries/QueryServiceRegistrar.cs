@@ -13,7 +13,7 @@ internal sealed class QueryServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton(provider =>
+        services.AddScoped(provider =>
         {
             IResolveQueryHandler queryHandlerResolver = new QueryHandlerResolver(provider);
 
