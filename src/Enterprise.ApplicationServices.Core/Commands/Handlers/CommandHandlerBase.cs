@@ -5,7 +5,9 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 
-public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCommand<T> where T : ICommand
+public abstract class CommandHandlerBase<TCommand> : 
+    ApplicationServiceBase, IHandleCommand<TCommand>
+    where TCommand : IBaseCommand
 {
     protected CommandHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {
@@ -13,13 +15,13 @@ public abstract class CommandHandlerBase<T> : ApplicationServiceBase, IHandleCom
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
-        var typedCommand = (T)command;
+        var typedCommand = (TCommand)command;
         await HandleAsync(typedCommand, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task HandleAsync(T command, CancellationToken cancellationToken);
+    public abstract Task HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

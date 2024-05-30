@@ -6,7 +6,8 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
-public abstract class QueryHandlerBase<TQuery, TResponse> : ApplicationServiceBase, IHandleQuery<TQuery, TResponse>
+public abstract class QueryHandlerBase<TQuery, TResponse> : 
+    ApplicationServiceBase, IHandleQuery<TQuery, TResponse>
     where TQuery : IQuery
 {
 
@@ -16,7 +17,7 @@ public abstract class QueryHandlerBase<TQuery, TResponse> : ApplicationServiceBa
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;

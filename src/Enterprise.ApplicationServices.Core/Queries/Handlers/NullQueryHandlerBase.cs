@@ -12,7 +12,7 @@ public abstract class NullQueryHandlerBase
         Logger = logger;
     }
 
-    protected void LogWarning(IQuery query)
+    protected void LogWarning(IBaseQuery query)
     {
         string handlerTypeName = GetType().Name;
         string queryTypeName = query.GetType().Name;

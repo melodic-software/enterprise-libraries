@@ -10,7 +10,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 /// </summary>
 /// <typeparam name="TQuery"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
-public interface IQueryLogic<in TQuery, TResponse> where TQuery : IQuery
+public interface IQueryLogic<in TQuery, TResponse> where TQuery : IBaseQuery
 {
     /// <summary>
     /// Execute the query logic.

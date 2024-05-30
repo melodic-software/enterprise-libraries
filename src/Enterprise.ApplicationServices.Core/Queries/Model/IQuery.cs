@@ -9,7 +9,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Model;
 /// This is a marker interface that signifies that an implementing class is a query object.
 /// It is used primarily for constraint purposes.
 /// </summary>
-public interface IQuery : IMessage, IUseCase;
+public interface IQuery : IMessage, IUseCase, IBaseQuery;
 
 /// <summary>
 /// This is a marker interface that signifies that an implementing class is a query object.

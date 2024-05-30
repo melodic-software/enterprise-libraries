@@ -12,7 +12,7 @@ public abstract class NullCommandHandlerBase
         Logger = logger;
     }
 
-    protected void LogWarning(ICommand command)
+    protected void LogWarning(IBaseCommand command)
     {
         string handlerTypeName = GetType().Name;
         string commandTypeName = command.GetType().Name;

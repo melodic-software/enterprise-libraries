@@ -1,6 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.Library.Core.Attributes;
-using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 
@@ -16,7 +15,6 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 [AlternativeTo(typeof(IHandleCommand<>))]
 public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TCommand>
     where TCommand : ICommand<TResponse>
-    where TResponse : Result
 {
     /// <summary>
     /// Handle the command.
