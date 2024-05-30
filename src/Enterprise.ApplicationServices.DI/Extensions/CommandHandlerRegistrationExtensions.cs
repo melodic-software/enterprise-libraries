@@ -1,9 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers;
-using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.DI.Core.Registration;
 using FluentValidation;
@@ -16,10 +13,28 @@ public static class CommandHandlerRegistrationExtensions
 {
     public static void RegisterCommandHandler<TCommand>(this IServiceCollection services,
         Func<IServiceProvider, IHandleCommand<TCommand>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TCommand : ICommand
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
+        where TCommand : ICommand
     {
         services.BeginRegistration<IHandleCommand<TCommand>>()
             .Add(factory, serviceLifetime)
+            .WithDefaultDecorators();
+    }
+
+    public static void RegisterCommandHandler<TCommand, TImplementation>(this IServiceCollection services,
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
+        where TImplementation : class, IHandleCommand<TCommand>
+        where TCommand : ICommand
+    {
+        services.BeginRegistration<IHandleCommand<TCommand>>()
+            .Add<TImplementation>(serviceLifetime)
+            .WithDefaultDecorators();
+    }
+
+    private static void WithDefaultDecorators<TCommand>(this RegistrationContext<IHandleCommand<TCommand>> registration) 
+        where TCommand : ICommand
+    {
+        registration
             .WithDecorators((provider, commandHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
