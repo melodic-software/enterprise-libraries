@@ -17,67 +17,57 @@ public class QueryHandlerResolver : IResolveQueryHandler
     /// <inheritdoc />
     public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query)
     {
-        Type queryType = query.GetType();
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-
-        var handler = (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
-
-        if (handler != null)
-        {
-            return handler;
-        }
-
-        handler = _serviceProvider.GetRequiredService<NullQueryHandler<TResponse>>();
-
-        return handler;
+        return Get<IHandleQuery<TResponse>, NullQueryHandler<TResponse>, TResponse>(query);
     }
 
     /// <inheritdoc />
     public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query)
     {
-        Type queryType = query.GetType();
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-
-        var handler = (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
-
-        if (handler != null)
-        {
-            return handler;
-        }
-
-        handler = _serviceProvider.GetRequiredService<NullQueryHandler<TResponse>>();
-
-        return handler;
+        return Get<IHandleQuery<TResponse>, NullQueryHandler<TResponse>, TResponse>(query);
     }
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
         where TQuery : IQuery
     {
-        IHandleQuery<TQuery, TResponse>? handler = _serviceProvider.GetService<IHandleQuery<TQuery, TResponse>>();
-
-        if (handler != null)
-        {
-            return handler;
-        }
-
-        handler = _serviceProvider.GetRequiredService<NullQueryHandler<TQuery, TResponse>>();
-
-        return handler;
+        return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
     }
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query)
         where TQuery : IQuery<TResponse>
     {
-        IHandleQuery<TQuery, TResponse>? handler = _serviceProvider.GetService<IHandleQuery<TQuery, TResponse>>();
+        return Get<IHandleQuery<TQuery, TResponse>, NullQueryHandler<TQuery, TResponse>>();
+    }
 
-        if (handler != null)
+    private THandler Get<THandler, TNullHandler, TResponse>(IQuery query)
+        where THandler : class where TNullHandler : THandler
+    {
+        Type queryType = query.GetType();
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
+
+        var handler = (THandler)_serviceProvider.GetService(handlerType);
+
+        if (handler == null)
         {
             return handler;
         }
 
-        handler = _serviceProvider.GetRequiredService<NullQueryHandler<TQuery, TResponse>>();
+        handler = _serviceProvider.GetRequiredService<TNullHandler>();
+
+        return handler;
+    }
+
+    private THandler Get<THandler, TNullHandler>() where THandler : class where TNullHandler : THandler
+    {
+        THandler handler = _serviceProvider.GetService<THandler>();
+
+        if (handler == null)
+        {
+            return handler;
+        }
+
+        handler = _serviceProvider.GetRequiredService<TNullHandler>();
 
         return handler;
     }
