@@ -10,16 +10,16 @@
         <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Commands.Facade.CommandDispatchFacade.RegisterEventCallback``1(System.Action{``0})">
+        <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.RegisterEventCallback``1(System.Action{``0})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Commands.Facade.CommandDispatchFacade.DispatchAsync``1(``0,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.DispatchAsync``1(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Commands.Facade.CommandDispatchFacade.DispatchAsync``2(``0,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.DispatchAsync``2(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Commands.Facade.CommandDispatchFacade.ClearCallbacks">
+        <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.ClearCallbacks">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Commands.Handlers.Resolution.CommandHandlerResolver.GetHandlerFor``1(``0)">
@@ -37,19 +37,19 @@
         <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService.RegisterEventCallback``1(System.Action{``0})">
+        <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.RegisterEventCallback``1(System.Action{``0})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService.DispatchAsync``2(``0,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.DispatchAsync``2(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService.DispatchAsync``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.DispatchAsync``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService.DispatchAsync``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery{``0},System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.DispatchAsync``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery{``0},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Facade.QueryFacadeService.ClearCallbacks">
+        <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.ClearCallbacks">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery)">
