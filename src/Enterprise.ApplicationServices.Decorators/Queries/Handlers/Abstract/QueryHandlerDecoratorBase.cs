@@ -8,7 +8,7 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 
 public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBase<IHandleQuery<TQuery, TResponse>>,
-    IHandleQuery<TQuery, TResponse> where TQuery : IQuery
+    IHandleQuery<TQuery, TResponse> where TQuery : IBaseQuery
 {
     protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResponse> queryHandler,
         IGetDecoratedInstance decoratorService)
@@ -18,7 +18,7 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBa
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;

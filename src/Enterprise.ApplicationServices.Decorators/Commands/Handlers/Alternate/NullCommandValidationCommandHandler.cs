@@ -16,10 +16,10 @@ public class NullCommandValidationCommandHandler<TCommand, TResponse> : CommandH
 
     }
 
-    public override async Task<Result<TResponse>> HandleAsync(TCommand? command, CancellationToken cancellationToken)
+    public override async Task<TResponse> HandleAsync(TCommand? command, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(command);
-        Result<TResponse> result = await Decorated.HandleAsync(command, cancellationToken);
+        TResponse result = await Decorated.HandleAsync(command, cancellationToken);
         return result;
     }
 }

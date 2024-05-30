@@ -19,7 +19,7 @@ public class ErrorHandlingCommandHandler<TCommand, TResponse> : CommandHandlerDe
         _logger = logger;
     }
 
-    public override async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         try
         {

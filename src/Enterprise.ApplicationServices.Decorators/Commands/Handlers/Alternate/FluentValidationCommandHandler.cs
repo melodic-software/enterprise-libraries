@@ -24,7 +24,7 @@ public class FluentValidationCommandHandler<TCommand, TResponse> : CommandHandle
         _logger = logger;
     }
 
-    public override async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
