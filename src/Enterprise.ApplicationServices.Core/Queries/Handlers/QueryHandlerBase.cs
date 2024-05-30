@@ -9,7 +9,6 @@ public abstract class QueryHandlerBase<TQuery, TResponse> :
     ApplicationServiceBase, IHandleQuery<TQuery, TResponse>
     where TQuery : IBaseQuery
 {
-
     protected QueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {
 
