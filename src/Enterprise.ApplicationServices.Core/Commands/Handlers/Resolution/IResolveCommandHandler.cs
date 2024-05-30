@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 
@@ -24,5 +25,7 @@ public interface IResolveCommandHandler
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse>;
+    IHandleCommand<TCommand, TResponse> GetHandlerFor<TCommand, TResponse>(TCommand command)
+        where TCommand : ICommand<TResponse>
+        where TResponse : Result;
 }
