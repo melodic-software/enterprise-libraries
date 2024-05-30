@@ -2,7 +2,6 @@
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate;
@@ -25,7 +24,7 @@ public class LoggingCommandHandler<TCommand, TResponse> : CommandHandlerDecorato
         Type commandType = typeof(TCommand);
         Type innermostHandlerType = Innermost.GetType();
         
-        TResponse result;
+        TResponse response;
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?
@@ -33,10 +32,10 @@ public class LoggingCommandHandler<TCommand, TResponse> : CommandHandlerDecorato
         using (_logger.BeginScope("Command Handler: {CommandHandlerType}, Command: {CommandType}", innermostHandlerType.Name, commandType.Name))
         {
             _logger.LogDebug("Executing command.");
-            result = await Decorated.HandleAsync(command, cancellationToken);
+            response = await Decorated.HandleAsync(command, cancellationToken);
             _logger.LogDebug("Command was handled successfully.");
         }
 
-        return result;
+        return response;
     }
 }

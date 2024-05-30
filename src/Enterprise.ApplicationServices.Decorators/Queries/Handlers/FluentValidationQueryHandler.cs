@@ -3,7 +3,6 @@ using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.FluentValidation.Services;
-using Enterprise.Patterns.ResultPattern.Model;
 using FluentValidation;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
@@ -20,7 +19,7 @@ public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecor
         _validators = validators.ToList();
     }
 
-    public override async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
@@ -31,7 +30,7 @@ public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecor
 
         await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
 
-        Result<TResponse> response = await Decorated.HandleAsync(query, cancellationToken);
+        TResponse response = await Decorated.HandleAsync(query, cancellationToken);
 
         return response;
     }

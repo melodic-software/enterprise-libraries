@@ -10,7 +10,6 @@ namespace Enterprise.MediatR.Behaviors.Logging;
 public class UseCaseLoggingBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IUseCase
-    where TResponse : Result
 {
     private readonly ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> _logger;
     private readonly ILoggingBehaviorService _loggingBehaviorService;
@@ -41,24 +40,34 @@ public class UseCaseLoggingBehavior<TRequest, TResponse>
         try
         {
             _logger.LogInformation("Executing \"{UseCase}\" use case.", typeName);
+            TResponse response = await next();
+            _logger.LogInformation("\"{UseCase}\" execution completed.", typeName);
 
-            TResponse result = await next();
+            HandleResult(response, typeName);
 
-            if (result.IsSuccess)
-            {
-                _logger.LogInformation("\"{UseCase}\" was successful.", typeName);
-            }
-            else
-            {
-                _loggingBehaviorService.LogApplicationServiceError(_logger, result.Errors, typeName);
-            }
-
-            return result;
+            return response;
         }
         catch (Exception exception)
         {
             _logger.LogError(exception, "An error occurred while handling the \"{UseCase}\" use case.", typeName);
             throw;
+        }
+    }
+
+    private void HandleResult(TResponse response, string typeName)
+    {
+        if (response is not Result result)
+        {
+            return;
+        }
+
+        if (result.IsSuccess)
+        {
+            _logger.LogInformation("\"{UseCase}\" was successful.", typeName);
+        }
+        else
+        {
+            _loggingBehaviorService.LogApplicationServiceError(_logger, result.Errors, typeName);
         }
     }
 }

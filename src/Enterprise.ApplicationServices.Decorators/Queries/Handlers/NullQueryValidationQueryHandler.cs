@@ -2,7 +2,6 @@
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
@@ -15,7 +14,7 @@ public class NullQueryValidationQueryHandler<TQuery, TResponse> : QueryHandlerDe
 
     }
 
-    public override Task<Result<TResponse>> HandleAsync(TQuery? query, CancellationToken cancellationToken)
+    public override Task<TResponse> HandleAsync(TQuery? query, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(query);
         return Decorated.HandleAsync(query, cancellationToken);

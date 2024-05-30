@@ -6,7 +6,8 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract;
 
-public abstract class CommandHandlerDecoratorBase<TCommand> : DecoratorBase<IHandleCommand<TCommand>>, IHandleCommand<TCommand>
+public abstract class CommandHandlerDecoratorBase<TCommand> :
+    DecoratorBase<IHandleCommand<TCommand>>, IHandleCommand<TCommand>
     where TCommand : IBaseCommand
 {
 

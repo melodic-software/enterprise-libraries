@@ -2,30 +2,29 @@
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.Patterns.ResultPattern.Model;
 using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 
-public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : DecoratorBase<IHandleQuery<TQuery, TResponse>>,
+public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : 
+    DecoratorBase<IHandleQuery<TQuery, TResponse>>,
     IHandleQuery<TQuery, TResponse> where TQuery : IBaseQuery
 {
-    protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResponse> queryHandler,
-        IGetDecoratedInstance decoratorService)
+    protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResponse> queryHandler, IGetDecoratedInstance decoratorService)
         : base(queryHandler, decoratorService)
     {
 
     }
 
     /// <inheritdoc />
-    public async Task<Result<TResponse>> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        Result<TResponse> result = await HandleAsync(typedQuery, cancellationToken);
-        return result;
+        TResponse response = await HandleAsync(typedQuery, cancellationToken);
+        return response;
     }
 
     /// <inheritdoc />
-    public abstract Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

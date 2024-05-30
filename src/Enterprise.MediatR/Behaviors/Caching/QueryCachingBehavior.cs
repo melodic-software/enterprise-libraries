@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Caching;
 
-internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+internal sealed class QueryCachingBehavior<TRequest, TResponse> : 
+    IPipelineBehavior<TRequest, TResponse>
     where TRequest : ICachedQuery
-    where TResponse : Result
 {
     private readonly ICacheService _cacheService;
     private readonly ILogger<QueryCachingBehavior<TRequest, TResponse>> _logger;
@@ -35,13 +35,22 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> : IPipelineBehav
 
         _logger.LogInformation("Cache miss for {Query}.", name);
 
-        TResponse result = await next();
+        TResponse response = await next();
 
-        if (result.IsSuccess)
+        if (CanCache(response))
         {
-            await _cacheService.SetAsync(request.CacheKey, result, request.Expiration, cancellationToken);
+            await _cacheService.SetAsync(request.CacheKey, response, request.Expiration, cancellationToken);
+        }
+        else
+        {
+            _logger.LogWarning("Response is either null or a non successful result and cannot be cached.");
         }
 
-        return result;
+        return response;
+    }
+
+    public bool CanCache(TResponse response)
+    {
+        return response is Result { IsSuccess: true } || !Equals(response, default(TResponse));
     }
 }
