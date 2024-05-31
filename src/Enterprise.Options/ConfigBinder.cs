@@ -2,7 +2,7 @@
 
 namespace Enterprise.Options;
 
-public static class ConfigurationBinder
+public static class ConfigBinder
 {
     public static void Bind<TOptions>(TOptions currentValue, IConfigurationSection? configurationSection)
     {

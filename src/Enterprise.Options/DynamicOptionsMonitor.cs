@@ -62,7 +62,7 @@ public class DynamicOptionsMonitor<TOptions> :
                     return;
                 }
 
-                ConfigurationBinder.Bind(CurrentValue, _configurationSection);
+                ConfigBinder.Bind(CurrentValue, _configurationSection);
 
                 _currentHash = OptionsHashService.ComputeHash(CurrentValue, _jsonSerializer);
 

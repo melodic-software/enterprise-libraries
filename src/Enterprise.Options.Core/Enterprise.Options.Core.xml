@@ -19,13 +19,76 @@
             </summary>
             <param name="applyChanges"></param>
         </member>
-        <member name="T:Enterprise.Options.Core.Singleton.OptionsInstanceService">
+        <member name="P:Enterprise.Options.Core.Model.OptionsInstanceDictionaryItem.IsLocked">
+            <summary>
+            When locked, this options instance can no longer be reconfigured.
+            Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt; OR directly via DynamicOptionsMonitor&lt;T&gt;.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.ConfigBinder.BindConfig``1(System.String,Microsoft.Extensions.Configuration.IConfiguration,``0)">
+            <summary>
+            Binds a configuration section to a given options instance.
+            </summary>
+            <typeparam name="TOptions">The type of the options class.</typeparam>
+            <param name="configSectionKey">The key of the configuration section to bind.</param>
+            <param name="config">The configuration instance.</param>
+            <param name="options">The options instance to bind the configuration to.</param>
+        </member>
+        <member name="T:Enterprise.Options.Core.Services.OptionsInstanceService">
             <summary>
             This configures and provides custom options instances.
             It is only intended to be used during application startup, specifically before or during service registration.
             This is primarily due to the fact that a service provider cannot be referenced to provide options via DI.
             Once the web application has been built, the configure method should not be used.
             </summary>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.CreateTestInstance">
+            <summary>
+            This is to be used for testing purposes.
+            It is a pragmatic way to allow for test separation, mitigating the testability issues with singleton implementations.
+            This requires test project(s) to be granted visibility for internal members.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.ConfigureDefaultInstance``1(``0)">
+            <summary>
+            Configures a default instance of options.
+            </summary>
+            <typeparam name="TOptions">The type of the options class.</typeparam>
+            <param name="instance">The options instance to configure as the default.</param>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.ConfigureDefaultInstance``1(System.Func{``0})">
+            <summary>
+            Configures a default instance of options using a factory method.
+            </summary>
+            <typeparam name="TOptions">The type of the options class.</typeparam>
+            <param name="createDefault">The factory method to create the default options instance.</param>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.Configure``1(System.Action{``0})">
+            <summary>
+            Configures options with an action.
+            </summary>
+            <typeparam name="TOptions">The type of the options class.</typeparam>
+            <param name="action">The action to configure the options.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when attempting to reconfigure locked options.</exception>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.GetOptionsInstance``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Retrieves an options instance, creating and configuring it if necessary.
+            </summary>
+            <typeparam name="TOptions">The type of the options class.</typeparam>
+            <param name="configuration">The configuration instance.</param>
+            <param name="configSectionKey">The key of the configuration section.</param>
+            <returns>The configured options instance.</returns>
+            <exception cref="T:System.Exception">Thrown when a type mismatch is found in the instance dictionary.</exception>
+        </member>
+        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.UseInstance``1(``0)">
+            <summary>
+            Use the specified options instance.
+            This will lock the instance, meaning it can no longer be reconfigured with the singleton service.
+            Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt; OR directly via DynamicOptionsMonitor&lt;T&gt;.
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="options"></param>
         </member>
     </members>
 </doc>

@@ -41,7 +41,7 @@ public static class DynamicOptionsMonitorExtensions
 
             // TODO: Make this duration configurable?
             // Might just be easier to refer to a thread safe singleton object.
-            TimeSpan debouncePeriod = TimeSpan.FromSeconds(1);
+            var debouncePeriod = TimeSpan.FromSeconds(1);
 
             DynamicOptionsMonitor<TOptions> dynamicOptionsMonitor = new(currentValue, configSection, logger, debouncePeriod, jsonSerializer);
 
@@ -49,8 +49,6 @@ public static class DynamicOptionsMonitorExtensions
             {
                 // This singleton service is intended to be used for initial app startup and should not be used after the DI service provider has been built.
                 // In case anything does reference it after, we can specify new/updated instances to reduce bugs.
-                // This will lock the instance, meaning it can no longer be reconfigured with the singleton service.
-                // Updates to the config after this point must be done via an IOptionsUpdater<T> OR directly via DynamicOptionsMonitor<T>.
                 OptionsInstanceService.Instance.UseInstance(options);
             });
 
@@ -64,11 +62,13 @@ public static class DynamicOptionsMonitorExtensions
         services.RemoveAll<IOptionsUpdater<TOptions>>();
 
         // Register the DynamicOptionsMonitor<TOptions> instance to serve as
-        // IOptionsMonitor<TOptions>, IOptionsSnapshot<TOptions>, IOptions<TOptions> and IOptionsUpdater<TOptions>.
-        // Using the shorthand registration here resulted in a DI resolution error, so we're leaving this with the explicit factory methods.
-        services.TryAddSingleton<IOptionsMonitor<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
-        services.TryAddSingleton<IOptionsSnapshot<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
+        // IOptions<TOptions>, IOptionsSnapshot<TOptions>, IOptionsMonitor<TOptions>, and IOptionsUpdater<TOptions>.
+        // https://learn.microsoft.com/en-us/dotnet/core/extensions/options#options-interfaces
         services.TryAddSingleton<IOptions<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
+        services.TryAddScoped<IOptionsSnapshot<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
+        services.TryAddSingleton<IOptionsMonitor<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
+
+        // This one is our own custom options interface for updating options in memory.
         services.TryAddSingleton<IOptionsUpdater<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
     }
 }
