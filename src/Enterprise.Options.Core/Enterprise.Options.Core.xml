@@ -19,6 +19,13 @@
             </summary>
             <param name="applyChanges"></param>
         </member>
+        <member name="M:Enterprise.Options.Core.Abstract.IRegisterOptions.RegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Register one or more options with the DI container.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
         <member name="P:Enterprise.Options.Core.Model.OptionsInstanceDictionaryItem.IsLocked">
             <summary>
             When locked, this options instance can no longer be reconfigured.

@@ -26,5 +26,33 @@
             </summary>
             <typeparam name="TOptions"></typeparam>
         </member>
+        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Registers options of type <typeparamref name="TOptions"/> with the specified configuration.
+            The options instance will be resolved internally.
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <param name="configSectionKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0)">
+            <summary>
+            Registers options of type <typeparamref name="TOptions"/> with the specific instance.
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="services"></param>
+            <param name="currentValue"></param>
+        </member>
+        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0,System.String)">
+            <summary>
+            Registers options of type <typeparamref name="TOptions"/>.
+            </summary>
+            <typeparam name="TOptions"></typeparam>
+            <param name="services"></param>
+            <param name="currentValue"></param>
+            <param name="configSectionKey"></param>
+        </member>
     </members>
 </doc>

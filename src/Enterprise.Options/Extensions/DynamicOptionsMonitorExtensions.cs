@@ -12,21 +12,54 @@ namespace Enterprise.Options.Extensions;
 
 public static class DynamicOptionsMonitorExtensions
 {
-    public static TOptions RegisterOptions<TOptions>(this IServiceCollection services, IConfiguration configuration, string? configSectionKey) where TOptions : class, new()
+    /// <summary>
+    /// Registers options of type <typeparamref name="TOptions"/> with the specified configuration.
+    /// The options instance will be resolved internally.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="configSectionKey"></param>
+    /// <returns></returns>
+    public static TOptions RegisterOptions<TOptions>(this IServiceCollection services, IConfiguration configuration, string? configSectionKey)
+        where TOptions : class, new()
     {
         TOptions instance = OptionsInstanceService.Instance.GetOptionsInstance<TOptions>(configuration, configSectionKey);
         services.RegisterOptions(instance, configSectionKey);
         return instance;
     }
 
-    public static void RegisterOptions<TOptions>(this IServiceCollection services, TOptions currentValue) where TOptions : class, new()
+    /// <summary>
+    /// Registers options of type <typeparamref name="TOptions"/> with the specific instance.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="services"></param>
+    /// <param name="currentValue"></param>
+    public static void RegisterOptions<TOptions>(this IServiceCollection services, TOptions currentValue)
+        where TOptions : class, new()
     {
         services.RegisterOptions(currentValue, null);
     }
 
-    public static void RegisterOptions<TOptions>(this IServiceCollection services, TOptions? currentValue, string? configSectionKey) where TOptions : class, new()
+    /// <summary>
+    /// Registers options of type <typeparamref name="TOptions"/>.
+    /// </summary>
+    /// <typeparam name="TOptions"></typeparam>
+    /// <param name="services"></param>
+    /// <param name="currentValue"></param>
+    /// <param name="configSectionKey"></param>
+    public static void RegisterOptions<TOptions>(this IServiceCollection services, TOptions? currentValue, string? configSectionKey)
+        where TOptions : class, new()
     {
-        // We want to remove any existing registrations and ensure only one instance is ever registered.
+        RegisterDynamicOptionsMonitor(services, currentValue, configSectionKey);
+        RegisterBuiltInDotNetTypes<TOptions>(services);
+        RegisterCustomAbstractions<TOptions>(services);
+    }
+
+    private static void RegisterDynamicOptionsMonitor<TOptions>(IServiceCollection services, TOptions? currentValue,
+        string? configSectionKey) where TOptions : class, new()
+    {
+        // Remove any existing registrations, ensuring only one instance is ever registered.
         services.RemoveAll<DynamicOptionsMonitor<TOptions>>();
 
         services.TryAddSingleton(provider =>
@@ -54,12 +87,14 @@ public static class DynamicOptionsMonitorExtensions
 
             return dynamicOptionsMonitor;
         });
+    }
 
-        // We want to remove any existing registrations and ensure only one instance is ever registered.
+    private static void RegisterBuiltInDotNetTypes<TOptions>(IServiceCollection services) where TOptions : class, new()
+    {
+        // Remove any existing registrations, ensuring only one instance is ever registered.
         services.RemoveAll<IOptionsMonitor<TOptions>>();
         services.RemoveAll<IOptionsSnapshot<TOptions>>();
         services.RemoveAll<IOptions<TOptions>>();
-        services.RemoveAll<IOptionsUpdater<TOptions>>();
 
         // Register the DynamicOptionsMonitor<TOptions> instance to serve as
         // IOptions<TOptions>, IOptionsSnapshot<TOptions>, IOptionsMonitor<TOptions>, and IOptionsUpdater<TOptions>.
@@ -67,7 +102,12 @@ public static class DynamicOptionsMonitorExtensions
         services.TryAddSingleton<IOptions<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
         services.TryAddScoped<IOptionsSnapshot<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
         services.TryAddSingleton<IOptionsMonitor<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
+    }
 
+    private static void RegisterCustomAbstractions<TOptions>(IServiceCollection services) where TOptions : class, new()
+    {
+        // Remove any existing registrations, ensuring only one instance is ever registered.
+        services.RemoveAll<IOptionsUpdater<TOptions>>();
         // This one is our own custom options interface for updating options in memory.
         services.TryAddSingleton<IOptionsUpdater<TOptions>>(provider => provider.GetRequiredService<DynamicOptionsMonitor<TOptions>>());
     }

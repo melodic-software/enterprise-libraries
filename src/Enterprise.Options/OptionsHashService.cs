@@ -8,6 +8,10 @@ namespace Enterprise.Options;
 
 public static class OptionsHashService
 {
+    private const string Collection = "Collection";
+    private const string Item = "Item";
+    private const string Value = "Value";
+
     public static string ComputeHash(object options, ISerializeJson jsonSerializer)
     {
         ArgumentNullException.ThrowIfNull(jsonSerializer);
@@ -45,7 +49,7 @@ public static class OptionsHashService
         // Handle simple and direct serializable types directly by wrapping in a dictionary.
         if (type.IsPrimitive || type.IsEnum || type == typeof(string) || type == typeof(decimal) || type == typeof(DateTime))
         {
-            result.Add("Value", obj);
+            result.Add(Value, obj);
             return result;
         }
 
@@ -57,11 +61,11 @@ public static class OptionsHashService
             var elements = enumerable.Cast<object>()
                              .Select((item, index) => new { Item = GetSerializableProperties(item), Index = index })
                              .Where(x => x.Item.Any())
-                             .ToDictionary(x => $"Item{x.Index}", x => (object)x.Item);
+                             .ToDictionary(x => $"{Item}{x.Index}", x => (object)x.Item);
 
             if (elements.Any())
             {
-                result.Add("Collection", elements);
+                result.Add(Collection, elements);
             }
 
             return result;

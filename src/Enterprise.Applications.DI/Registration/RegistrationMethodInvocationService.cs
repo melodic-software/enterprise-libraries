@@ -70,29 +70,16 @@ public static class RegistrationMethodInvocationService
             return;
         }
 
-        if (NotExcluded(type))
+        if (type.ExcludeRegistrations())
         {
-            Invoke(type, config);
+            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}.", type.FullName);
         }
         else
         {
-            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}", type.FullName);
+            Invoke(type, config);
         }   
 
         processedTypes.Add(type);
-    }
-
-    private static bool NotExcluded(Type type)
-    {
-        IEnumerable<Attribute> attributes = type.GetCustomAttributes();
-
-        ExcludeRegistrationsAttribute? excludeAttribute = attributes
-            .OfType<ExcludeRegistrationsAttribute>()
-            .FirstOrDefault();
-
-        bool notExcluded = excludeAttribute == null;
-
-        return notExcluded;
     }
 
     private static void Invoke(Type type, RegistrationMethodConfig config)
