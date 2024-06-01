@@ -10,6 +10,9 @@
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -33,6 +36,9 @@
             <returns></returns>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
@@ -151,6 +157,9 @@
             <returns></returns>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
