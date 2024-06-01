@@ -1,22 +1,21 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Options;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.ApplicationServices.DI.Queries.ChainOfResponsibility;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
 
-public static class ChainOfResponsibilityRegistrationExtensions
+public static class RegistrationExtensions
 {
     public static void RegisterDefaultChainOfResponsibility<TQuery, TResponse>(
         this IServiceCollection services,
         Func<IServiceProvider, IHandler<TQuery, TResponse>> factory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TQuery : IQuery
+        where TQuery : IBaseQuery
     {
         services.RegisterChainOfResponsibility<TQuery, TResponse>()
             .WithSuccessor<LoggingQueryHandler<TQuery, TResponse>>()
@@ -26,15 +25,15 @@ public static class ChainOfResponsibilityRegistrationExtensions
             .WithSuccessor(factory, serviceLifetime);
     }
 
-    internal static void AddChainOfResponsibility<TQuery, TResponse>(
+    internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> AddChainOfResponsibility<TQuery, TResponse>(
         this RegistrationContext<IHandleQuery<TQuery, TResponse>> registration,
-        QueryHandlerRegistrationOptions<TQuery, TResponse> options,
+        RegistrationOptions<TQuery, TResponse> options,
         IServiceCollection services)
-        where TQuery : IQuery
+        where TQuery : IBaseQuery
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
-            if (options.ChainOfResponsibilityHandlerFactory == null)
+            if (options.QueryHandlerFactory == null)
             {
                 throw new InvalidOperationException(
                     "A handler factory must be configured for query handler registrations " +
@@ -43,7 +42,7 @@ public static class ChainOfResponsibilityRegistrationExtensions
             }
 
             services.RegisterDefaultChainOfResponsibility(
-                options.ChainOfResponsibilityHandlerFactory,
+                options.QueryHandlerFactory,
                 options.ServiceLifetime
             );
         }
@@ -66,5 +65,7 @@ public static class ChainOfResponsibilityRegistrationExtensions
             return new QueryHandler<TQuery, TResponse>(responsibilityChain);
 
         }, options.ServiceLifetime);
+
+        return registration;
     }
 }

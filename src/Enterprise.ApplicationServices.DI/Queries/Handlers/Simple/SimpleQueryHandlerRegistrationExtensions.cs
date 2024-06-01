@@ -1,12 +1,12 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Decoration;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Decoration;
 using Enterprise.ApplicationServices.Queries.Handlers.Simple;
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Facade.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.ApplicationServices.DI.Queries;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Simple;
 
 public static class SimpleQueryHandlerRegistrationExtensions
 {
@@ -17,7 +17,7 @@ public static class SimpleQueryHandlerRegistrationExtensions
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="services"></param>
-    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services) where TQuery : IQuery
+    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services) where TQuery : IBaseQuery
     {
         services.RegisterSimpleQueryHandler(provider =>
         {
@@ -37,7 +37,7 @@ public static class SimpleQueryHandlerRegistrationExtensions
     /// <param name="serviceLifetime"></param>
     public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services,
         Func<IServiceProvider, IQueryLogic<TQuery, TResponse>> queryLogicFactory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IQuery
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TQuery : IBaseQuery
     {
         services.BeginRegistration<IHandleQuery<TQuery, TResponse>>()
             .Add(provider =>

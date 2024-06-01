@@ -1,23 +1,21 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers;
-using Enterprise.ApplicationServices.DI.Queries.Options;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.DI.Core.Registration;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Decoration;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Decoration;
 
-public static class DecoratorRegistrationExtensions
+public static class QueryHandlerDecorators
 {
-    public static void WithDefaultDecorators<TQuery, TResponse>(
-        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext)
-        where TQuery : IQuery
+    public static IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>> 
+        GetDefault<TQuery, TResponse>() where TQuery : IBaseQuery
     {
-        registrationContext
-            .WithDecorators((provider, queryHandler) =>
+        return new List<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>>()
+        {
+            (provider, queryHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IEnumerable<IValidator<TQuery>> validators = provider.GetServices<IValidator<TQuery>>();
@@ -40,15 +38,7 @@ public static class DecoratorRegistrationExtensions
                 ILogger<LoggingQueryHandler<TQuery, TResponse>> logger = provider.GetRequiredService<ILogger<LoggingQueryHandler<TQuery, TResponse>>>();
                 IHandleQuery<TQuery, TResponse> decorator = new LoggingQueryHandler<TQuery, TResponse>(queryHandler, decoratorService, logger);
                 return decorator;
-            });
-    }
-
-    internal static void RegisterWithDecorators<TQuery, TResponse>(
-        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registration,
-        QueryHandlerRegistrationOptions<TQuery, TResponse> options)
-        where TQuery : IQuery
-    {
-        registration.AddQueryHandler(options)
-            .WithDefaultDecorators();
+            }
+        };
     }
 }
