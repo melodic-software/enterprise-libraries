@@ -1,12 +1,14 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Standard;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 using Enterprise.Events.Facade.Abstract;
 using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
 public abstract class QueryHandlerBase<TQuery, TResponse> : 
-    ApplicationServiceBase, IHandleQuery<TQuery, TResponse>
+    ApplicationServiceBase, IHandleQuery<TQuery, TResponse>, IHandler<TQuery, TResponse>
     where TQuery : IBaseQuery
 {
     protected QueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
@@ -21,6 +23,12 @@ public abstract class QueryHandlerBase<TQuery, TResponse> :
         var typedQuery = (TQuery)query;
         TResponse response = await HandleAsync(typedQuery, cancellationToken);
         return response;
+    }
+
+    /// <inheritdoc />
+    public async Task<TResponse?> HandleAsync(TQuery request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    {
+        return await HandleAsync(request, cancellationToken);
     }
 
     /// <inheritdoc />
