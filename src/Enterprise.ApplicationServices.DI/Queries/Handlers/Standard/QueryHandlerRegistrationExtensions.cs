@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.DI.Core.Registration;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Simple;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
@@ -20,10 +20,32 @@ public static class QueryHandlerRegistrationExtensions
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
+        services.Register(factory, configureOptions);
+    }
+
+    /// <summary>
+    /// Register a simple query handler.
+    /// This expects that a separate registration of <see cref="IQueryLogic{TQuery,TResponse}"/> has been made.
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <param name="services"></param>
+    /// <param name="configureOptions"></param>
+    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services,
+        Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
+        where TQuery : IBaseQuery
+    {
+        services.Register(SimpleCommandHandlerFactoryService.GetFactory<TQuery, TResponse>(), configureOptions);
+    }
+
+    private static void Register<TQuery, TResponse>(this IServiceCollection services,
+        Func<IServiceProvider, IHandleQuery<TQuery, TResponse>> factory,
+        Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
+        where TQuery : IBaseQuery
+    {
         ArgumentNullException.ThrowIfNull(factory);
         var options = new RegistrationOptions<TQuery, TResponse>(factory);
         configureOptions?.Invoke(options);
-        RegistrationContext<IHandleQuery<TQuery, TResponse>> registration = services.RegisterQueryHandler(options);
-        options.PostConfigure?.Invoke(services, registration);
+        options.PostConfigure?.Invoke(services, services.RegisterQueryHandler(options));
     }
 }
