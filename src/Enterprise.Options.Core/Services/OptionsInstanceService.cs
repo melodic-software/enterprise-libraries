@@ -18,8 +18,6 @@ public class OptionsInstanceService
     private static readonly Lazy<OptionsInstanceService> Lazy = new(() => new OptionsInstanceService());
     public static OptionsInstanceService Instance => Lazy.Value;
 
-    private readonly object _lock = new();
-
     private ConcurrentDictionary<Type, Func<IConfiguration, string?, object>> InitialDelegateDictionary { get; } = new();
     private ConcurrentDictionary<Type, List<Action<object>>> AdditionalActionDictionary { get; } = new();
     private ConcurrentDictionary<Type, OptionsInstanceDictionaryItem> InstanceDictionary { get; } = new();
@@ -52,26 +50,23 @@ public class OptionsInstanceService
     /// <param name="createDefault">The factory method to create the default options instance.</param>
     public void ConfigureDefaultInstance<TOptions>(Func<TOptions> createDefault) where TOptions : class, new()
     {
-        lock (_lock)
+        Type type = typeof(TOptions);
+
+        PreStartupLogger.Instance.LogInformation("Configuring default instance for type: {TypeName}.", type.Name);
+
+        // Ensure only one default is registered at a time.
+        if (DefaultInstanceFactoryDictionary.ContainsKey(type))
         {
-            Type type = typeof(TOptions);
+            PreStartupLogger.Instance.LogInformation(
+                "Default options instance factory already exists and will be replaced for type: {TypeName}.",
+                type.Name
+            );
 
-            PreStartupLogger.Instance.LogInformation("Configuring default instance for type: {TypeName}.", type.Name);
-
-            // Ensure only one default is registered at a time.
-            if (DefaultInstanceFactoryDictionary.ContainsKey(type))
-            {
-                PreStartupLogger.Instance.LogInformation(
-                    "Default options instance factory already exists and will be replaced for type: {TypeName}.",
-                    type.Name
-                );
-
-                DefaultInstanceFactoryDictionary.TryRemove(type, out _);
-            }
-
-            DefaultInstanceFactoryDictionary.TryAdd(type, createDefault);
-            PreStartupLogger.Instance.LogDebug("Default options instance factory added for type: {TypeName}.", type.Name);
+            DefaultInstanceFactoryDictionary.TryRemove(type, out _);
         }
+
+        DefaultInstanceFactoryDictionary.TryAdd(type, createDefault);
+        PreStartupLogger.Instance.LogDebug("Default options instance factory added for type: {TypeName}.", type.Name);
     }
 
     /// <summary>
@@ -84,54 +79,51 @@ public class OptionsInstanceService
     {
         ArgumentNullException.ThrowIfNull(action);
 
-        lock (_lock)
+        Type type = typeof(TOptions);
+
+        PreStartupLogger.Instance.LogInformation("Configuring options for type: {TypeName}.", type.Name);
+
+        bool isInitial = !InitialDelegateDictionary.ContainsKey(type);
+
+        if (isInitial)
         {
-            Type type = typeof(TOptions);
-
-            PreStartupLogger.Instance.LogInformation("Configuring options for type: {TypeName}.", type.Name);
-
-            bool isInitial = !InitialDelegateDictionary.ContainsKey(type);
-
-            if (isInitial)
-            {
-                InitialDelegateDictionary.TryAdd(typeof(TOptions), ConfigureNew(action));
-                PreStartupLogger.Instance.LogDebug("Initial configuration action added for type: {TypeName}.", type.Name);
-            }
-            else
-            {
-                bool containsActions = AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
-
-                actions ??= [];
-
-                actions.Add(o =>
-                {
-                    if (o is TOptions options)
-                    {
-                        action.Invoke(options);
-                    }
-                });
-
-                if (!containsActions)
-                {
-                    AdditionalActionDictionary.TryAdd(type, actions);
-                }
-
-                PreStartupLogger.Instance.LogDebug("Additional configuration action added for type: {TypeName}.", type.Name);
-            }
-
-            if (!InstanceDictionary.ContainsKey(type))
-            {
-                return;
-            }
-
-            InstanceDictionary.TryGetValue(type, out OptionsInstanceDictionaryItem? value);
-
-            HandleLockedInstance(value, type);
-
-            // Any config changes should clear the cached instance we have.
-            // This will ensure the latest version of the configured options is used.
-            InstanceDictionary.TryRemove(type, out OptionsInstanceDictionaryItem? removedValue);
+            InitialDelegateDictionary.TryAdd(typeof(TOptions), ConfigureNew(action));
+            PreStartupLogger.Instance.LogDebug("Initial configuration action added for type: {TypeName}.", type.Name);
         }
+        else
+        {
+            bool containsActions = AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
+
+            actions ??= [];
+
+            actions.Add(o =>
+            {
+                if (o is TOptions options)
+                {
+                    action.Invoke(options);
+                }
+            });
+
+            if (!containsActions)
+            {
+                AdditionalActionDictionary.TryAdd(type, actions);
+            }
+
+            PreStartupLogger.Instance.LogDebug("Additional configuration action added for type: {TypeName}.", type.Name);
+        }
+
+        if (!InstanceDictionary.ContainsKey(type))
+        {
+            return;
+        }
+
+        InstanceDictionary.TryGetValue(type, out OptionsInstanceDictionaryItem? value);
+
+        HandleLockedInstance(value, type);
+
+        // Any config changes should clear the cached instance we have.
+        // This will ensure the latest version of the configured options is used.
+        InstanceDictionary.TryRemove(type, out OptionsInstanceDictionaryItem? removedValue);
     }
 
     /// <summary>
@@ -146,54 +138,51 @@ public class OptionsInstanceService
     {
         ArgumentNullException.ThrowIfNull(configuration);
 
-        lock (_lock)
+        Type type = typeof(TOptions);
+        PreStartupLogger.Instance.LogDebug("Retrieving options instance for type: {TypeName}.", type.Name);
+
+        if (InstanceDictionary.ContainsKey(type))
         {
-            Type type = typeof(TOptions);
-            PreStartupLogger.Instance.LogDebug("Retrieving options instance for type: {TypeName}.", type.Name);
+            InstanceDictionary.TryGetValue(type, out OptionsInstanceDictionaryItem? value);
+            TOptions options = value?.Options as TOptions ?? throw new Exception($"Instance dictionary contains a type mismatch for the given key: {type}.");
+            PreStartupLogger.Instance.LogDebug("Options instance found in cache for type: {TypeName}.", type);
+            return options;
+        }
+        else
+        {
+            InitialDelegateDictionary.TryGetValue(type, out Func<IConfiguration, string?, object>? func);
+
+            if (func == null)
+            {
+                PreStartupLogger.Instance.LogDebug("No initial configuration found. Creating new instance of type: {TypeName}.", type.Name);
+            }
+
+            // This hasn't had any explicit configurations, so we're going to auto create and configure.
+            func ??= Create<TOptions>;
+
+            object? instance = func.Invoke(configuration, configSectionKey);
+            TOptions options = instance as TOptions ?? new TOptions();
+
+            AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
+
+            actions ??= [];
+
+            var typedActions = actions.OfType<Action<TOptions>>().ToList();
+
+            foreach (Action<TOptions> action in typedActions)
+            {
+                action.Invoke(options);
+            }
 
             if (InstanceDictionary.ContainsKey(type))
             {
-                InstanceDictionary.TryGetValue(type, out OptionsInstanceDictionaryItem? value);
-                TOptions options = value?.Options as TOptions ?? throw new Exception($"Instance dictionary contains a type mismatch for the given key: {type}.");
-                PreStartupLogger.Instance.LogDebug("Options instance found in cache for type: {TypeName}.", type);
                 return options;
             }
-            else
-            {
-                InitialDelegateDictionary.TryGetValue(type, out Func<IConfiguration, string?, object>? func);
 
-                if (func == null)
-                {
-                    PreStartupLogger.Instance.LogDebug("No initial configuration found. Creating new instance of type: {TypeName}.", type.Name);
-                }
+            var item = OptionsInstanceDictionaryItem.New(options);
+            InstanceDictionary.TryAdd(type, item);
 
-                // This hasn't had any explicit configurations, so we're going to auto create and configure.
-                func ??= Create<TOptions>;
-
-                object? instance = func.Invoke(configuration, configSectionKey);
-                TOptions options = instance as TOptions ?? new TOptions();
-
-                AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
-
-                actions ??= [];
-
-                var typedActions = actions.OfType<Action<TOptions>>().ToList();
-
-                foreach (Action<TOptions> action in typedActions)
-                {
-                    action.Invoke(options);
-                }
-
-                if (InstanceDictionary.ContainsKey(type))
-                {
-                    return options;
-                }
-
-                var item = OptionsInstanceDictionaryItem.New(options);
-                InstanceDictionary.TryAdd(type, item);
-
-                return options;
-            }
+            return options;
         }
     }
 
@@ -209,19 +198,16 @@ public class OptionsInstanceService
     {
         ArgumentNullException.ThrowIfNull(options);
 
-        lock (_lock)
+        Type type = typeof(TOptions);
+        PreStartupLogger.Instance.LogInformation("Using instance for type: {TypeName}.", type.Name);
+
+        if (InstanceDictionary.TryRemove(type, out _))
         {
-            Type type = typeof(TOptions);
-            PreStartupLogger.Instance.LogInformation("Using instance for type: {TypeName}.", type.Name);
-
-            if (InstanceDictionary.TryRemove(type, out _))
-            {
-                PreStartupLogger.Instance.LogInformation("Existing instance removed for type: {TypeName}.", type.Name);
-            }
-
-            InstanceDictionary.TryAdd(type, OptionsInstanceDictionaryItem.Locked(options));
-            PreStartupLogger.Instance.LogInformation("New instance locked for type: {TypeName}.", type.Name);
+            PreStartupLogger.Instance.LogInformation("Existing instance removed for type: {TypeName}.", type.Name);
         }
+
+        InstanceDictionary.TryAdd(type, OptionsInstanceDictionaryItem.Locked(options));
+        PreStartupLogger.Instance.LogInformation("New instance locked for type: {TypeName}.", type.Name);
     }
 
     private TOptions Create<TOptions>(IConfiguration config, string? configSectionKey)

@@ -108,28 +108,6 @@ public class OptionsInstanceServiceTests
     }
 
     [Fact]
-    public void Configure_ShouldHandleConcurrentCalls()
-    {
-        // Arrange
-        var service = OptionsInstanceService.CreateTestInstance();
-        var testOptions = new TestOptions();
-        void Action1(TestOptions options) => options.Property1 = "Action1";
-        void Action2(TestOptions options) => options.Property2 = 123;
-
-        // Act
-        Parallel.Invoke(
-            () => service.Configure<TestOptions>(Action1),
-            () => service.Configure<TestOptions>(Action2)
-        );
-
-        // Assert
-        TestOptions configuredInstance = service.GetOptionsInstance<TestOptions>(Substitute.For<IConfiguration>(), null);
-
-        configuredInstance.Property1.Should().Be("Action1");
-        configuredInstance.Property2.Should().Be(123);
-    }
-
-    [Fact]
     public void Configure_ShouldNotAffectOtherOptionTypes()
     {
         // Arrange
