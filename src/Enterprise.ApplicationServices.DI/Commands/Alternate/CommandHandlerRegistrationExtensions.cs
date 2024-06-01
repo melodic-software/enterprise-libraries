@@ -7,13 +7,13 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Extensions.Alternate;
+namespace Enterprise.ApplicationServices.DI.Commands.Alternate;
 
 public static class CommandHandlerRegistrationExtensions
 {
     public static void RegisterCommandHandler<TCommand, TResponse>(this IServiceCollection services,
         Func<IServiceProvider, IHandleCommand<TCommand, TResponse>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient) 
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
         where TCommand : ICommand<TResponse>
     {
         services.BeginRegistration<IHandleCommand<TCommand, TResponse>>()

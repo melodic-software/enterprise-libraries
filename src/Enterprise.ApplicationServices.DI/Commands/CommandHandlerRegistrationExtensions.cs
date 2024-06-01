@@ -7,7 +7,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Extensions;
+namespace Enterprise.ApplicationServices.DI.Commands;
 
 public static class CommandHandlerRegistrationExtensions
 {
@@ -31,7 +31,7 @@ public static class CommandHandlerRegistrationExtensions
             .WithDefaultDecorators();
     }
 
-    private static void WithDefaultDecorators<TCommand>(this RegistrationContext<IHandleCommand<TCommand>> registration) 
+    private static void WithDefaultDecorators<TCommand>(this RegistrationContext<IHandleCommand<TCommand>> registration)
         where TCommand : ICommand
     {
         registration
