@@ -2,10 +2,10 @@
 using Enterprise.Logging.Options;
 using Enterprise.Logging.Providers;
 using Enterprise.Logging.TraceListeners;
-using Enterprise.Options.Core.Singleton;
 using Enterprise.TextEncoding.ConsoleEncoding;
 using Microsoft.Extensions.Hosting;
 using System.Text;
+using Enterprise.Options.Core.Services;
 
 namespace Enterprise.Logging;
 

@@ -5,7 +5,7 @@ using Enterprise.Options.Core.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Options.Core.Services;
+namespace Enterprise.Options.Core.Services.Singleton;
 
 /// <summary>
 /// This configures and provides custom options instances.

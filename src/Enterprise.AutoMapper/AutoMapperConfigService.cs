@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Enterprise.AutoMapper.Options;
 using Enterprise.Logging.Core.Loggers;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

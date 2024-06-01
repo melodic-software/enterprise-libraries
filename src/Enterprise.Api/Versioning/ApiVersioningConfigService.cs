@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 using Enterprise.Api.Versioning.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using static Enterprise.Api.Versioning.Constants.VersioningConstants;

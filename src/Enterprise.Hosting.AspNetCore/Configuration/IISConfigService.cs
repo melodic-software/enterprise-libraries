@@ -1,5 +1,5 @@
 ﻿using Enterprise.Hosting.AspNetCore.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

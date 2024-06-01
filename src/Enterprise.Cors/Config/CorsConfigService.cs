@@ -1,7 +1,7 @@
 ﻿using Enterprise.Cors.Constants;
 using Enterprise.Cors.Options;
 using Enterprise.Cors.Policies;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Configuration;

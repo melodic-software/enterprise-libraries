@@ -1,6 +1,6 @@
 ﻿using Enterprise.Monitoring.Health.Model;
 using Enterprise.Monitoring.Health.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

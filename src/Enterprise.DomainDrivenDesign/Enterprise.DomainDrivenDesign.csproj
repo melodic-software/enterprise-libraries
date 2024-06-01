@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.EventSourcing" Version="1.0.0-preview.269" />
-    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.252" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.313" />
     <PackageReference Include="Melodic.Enterprise.ValueObjects" Version="1.0.0-preview.252" />
   </ItemGroup>
 

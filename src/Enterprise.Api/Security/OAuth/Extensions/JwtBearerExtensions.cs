@@ -1,5 +1,5 @@
 ﻿using Enterprise.Api.Security.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Configuration;

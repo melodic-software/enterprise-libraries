@@ -1,6 +1,6 @@
-﻿using Enterprise.Options.Core.Singleton;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using Enterprise.Options.Core.Services;
 
 namespace Enterprise.Logging.TraceListeners;
 
@@ -11,10 +11,10 @@ internal static class TraceListenerConfigService
         TraceListenerConfigOptions configOptions = OptionsInstanceService.Instance
             .GetOptionsInstance<TraceListenerConfigOptions>(builder.Configuration, TraceListenerConfigOptions.ConfigSectionKey);
 
-        builder.ConfigureTraceListeners(configOptions);
+        ConfigureTraceListeners(configOptions);
     }
 
-    internal static void ConfigureTraceListeners(this IHostApplicationBuilder builder, TraceListenerConfigOptions configOptions)
+    internal static void ConfigureTraceListeners(TraceListenerConfigOptions configOptions)
     {
         if (!configOptions.EnableTextFileTraceListener)
         {
@@ -30,7 +30,7 @@ internal static class TraceListenerConfigService
         DateTime timestamp = DateTime.Now;
         string tracePath = Path.Join(localAppDataPath, $"Log_{applicationName}_{timestamp:yyyMMdd-HHmm}.txt");
         StreamWriter fileStreamWriter = File.CreateText(tracePath);
-        TextWriterTraceListener textWriterTraceListener = new TextWriterTraceListener(fileStreamWriter);
+        var textWriterTraceListener = new TextWriterTraceListener(fileStreamWriter);
         Trace.Listeners.Add(textWriterTraceListener);
         Trace.AutoFlush = true;
     }

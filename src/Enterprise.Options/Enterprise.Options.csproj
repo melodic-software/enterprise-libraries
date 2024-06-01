@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.211" />
+    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.313" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.309" />
-    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.252" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.313" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
   </ItemGroup>
 

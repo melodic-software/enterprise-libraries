@@ -5,7 +5,7 @@ using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Dispatching.Decoration;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.MediatR.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

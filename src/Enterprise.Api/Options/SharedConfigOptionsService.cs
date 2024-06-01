@@ -2,7 +2,7 @@
 using Enterprise.Api.Swagger.Options;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Monitoring.Health.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

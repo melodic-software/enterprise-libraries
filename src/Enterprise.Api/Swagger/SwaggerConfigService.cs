@@ -2,7 +2,7 @@
 using Enterprise.Api.Controllers.Options;
 using Enterprise.Api.Swagger.Options;
 using Enterprise.Api.Versioning.Options;
-using Enterprise.Options.Core.Singleton;
+using Enterprise.Options.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

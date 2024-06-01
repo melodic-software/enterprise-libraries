@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using Enterprise.Options.Core.Model;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
