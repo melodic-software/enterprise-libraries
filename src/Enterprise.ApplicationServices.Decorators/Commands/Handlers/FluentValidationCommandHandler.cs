@@ -29,6 +29,7 @@ public class FluentValidationCommandHandler<TCommand> : CommandHandlerDecoratorB
         {
             _logger.LogDebug("No (fluent) validators were found for command.");
             await Decorated.HandleAsync(command, cancellationToken);
+            return;
         }
 
         IValidationContext validationContext = new ValidationContext<TCommand>(command);

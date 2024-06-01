@@ -181,6 +181,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-api-client-aspnetcore.yaml = .azure\enterprise-api-client-aspnetcore.yaml
 		.azure\enterprise-api-client.yaml = .azure\enterprise-api-client.yaml
 		.azure\enterprise-api.yaml = .azure\enterprise-api.yaml
+		.azure\enterprise-application-services-chain-of-responsibility.yaml = .azure\enterprise-application-services-chain-of-responsibility.yaml
 		.azure\enterprise-application-services-core.yaml = .azure\enterprise-application-services-core.yaml
 		.azure\enterprise-application-services-decorators.yaml = .azure\enterprise-application-services-decorators.yaml
 		.azure\enterprise-application-services-DI.yaml = .azure\enterprise-application-services-DI.yaml
@@ -339,7 +340,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DesignPatterns.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DesignPatterns.ChainOfResponsibility", "src\Enterprise.DesignPatterns.ChainOfResponsibility\Enterprise.DesignPatterns.ChainOfResponsibility.csproj", "{EE8EB1E7-35E3-4C4D-8611-6FD1DA113584}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Options.Core.Tests.Unit", "tests\Enterprise.Options.Core.Tests.Unit\Enterprise.Options.Core.Tests.Unit.csproj", "{F9D885FF-58F6-4062-9008-A9402195E66F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Options.Core.Tests.Unit", "tests\Enterprise.Options.Core.Tests.Unit\Enterprise.Options.Core.Tests.Unit.csproj", "{F9D885FF-58F6-4062-9008-A9402195E66F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.ApplicationServices.ChainOfResponsibility", "src\Enterprise.ApplicationServices.ChainOfResponsibility\Enterprise.ApplicationServices.ChainOfResponsibility.csproj", "{E7F68C45-0058-482D-8EF9-6210A1EC98B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -731,6 +734,10 @@ Global
 		{F9D885FF-58F6-4062-9008-A9402195E66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D885FF-58F6-4062-9008-A9402195E66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D885FF-58F6-4062-9008-A9402195E66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F68C45-0058-482D-8EF9-6210A1EC98B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F68C45-0058-482D-8EF9-6210A1EC98B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F68C45-0058-482D-8EF9-6210A1EC98B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F68C45-0058-482D-8EF9-6210A1EC98B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -854,6 +861,7 @@ Global
 		{364F91ED-AB5F-4CE6-AC27-6A0C3175DB36} = {C3FA00F0-238E-4C37-9A4F-F36B2D2ED344}
 		{EE8EB1E7-35E3-4C4D-8611-6FD1DA113584} = {C3FA00F0-238E-4C37-9A4F-F36B2D2ED344}
 		{F9D885FF-58F6-4062-9008-A9402195E66F} = {955CB110-3F3F-4C05-842A-D8B26888A129}
+		{E7F68C45-0058-482D-8EF9-6210A1EC98B0} = {15D8FAA2-098D-4C10-83DA-D81C31BF28B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}

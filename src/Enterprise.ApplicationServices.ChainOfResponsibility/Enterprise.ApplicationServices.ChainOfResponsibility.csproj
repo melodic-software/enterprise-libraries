@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title>Enterprise Application Services - Chain of Responsibiility</Title>
+    <Description></Description>
+    <PackageTags></PackageTags>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.300" />
+    <PackageReference Include="Melodic.Enterprise.DesignPatterns.ChainOfResponsibility" Version="1.0.0-preview.211" />
+    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.130" />
+    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.170" />
+  </ItemGroup>
+
+</Project>

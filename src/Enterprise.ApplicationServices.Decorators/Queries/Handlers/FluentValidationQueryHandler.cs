@@ -23,15 +23,13 @@ public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecor
     {
         if (!_validators.Any())
         {
-            await Decorated.HandleAsync(query, cancellationToken);
+            return await Decorated.HandleAsync(query, cancellationToken);
         }
 
         IValidationContext validationContext = new ValidationContext<TQuery>(query);
 
         await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
 
-        TResponse response = await Decorated.HandleAsync(query, cancellationToken);
-
-        return response;
+        return await Decorated.HandleAsync(query, cancellationToken);
     }
 }
