@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 
-public class FluentValidationCommandHandler<TCommand> : IHandler<TCommand>
+public class FluentValidationCommandHandler<TCommand, TResponse> : IHandler<TCommand>, IHandler<TCommand, TResponse>
 {
     private readonly IReadOnlyCollection<IValidator<TCommand>> _validators;
-    private readonly ILogger<FluentValidationCommandHandler<TCommand>> _logger;
+    private readonly ILogger<FluentValidationCommandHandler<TCommand, TResponse>> _logger;
 
     public FluentValidationCommandHandler(
         IEnumerable<IValidator<TCommand>> validators,
-        ILogger<FluentValidationCommandHandler<TCommand>> logger)
+        ILogger<FluentValidationCommandHandler<TCommand, TResponse>> logger)
     {
         _validators = validators.ToList();
         _logger = logger;
@@ -35,5 +35,10 @@ public class FluentValidationCommandHandler<TCommand> : IHandler<TCommand>
         _logger.LogDebug("Fluent validation succeeded.");
 
         await next();
+    }
+
+    public Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }

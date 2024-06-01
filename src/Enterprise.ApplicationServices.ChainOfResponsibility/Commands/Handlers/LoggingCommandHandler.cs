@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 
-public class LoggingCommandHandler<TCommand> : IHandler<TCommand>
+public class LoggingCommandHandler<TCommand, TResponse> : IHandler<TCommand>, IHandler<TCommand, TResponse>
 {
-    private readonly ILogger<LoggingCommandHandler<TCommand>> _logger;
+    private readonly ILogger<LoggingCommandHandler<TCommand, TResponse>> _logger;
 
-    public LoggingCommandHandler(ILogger<LoggingCommandHandler<TCommand>> logger)
+    public LoggingCommandHandler(ILogger<LoggingCommandHandler<TCommand, TResponse>> logger)
     {
         _logger = logger;
     }
@@ -23,5 +23,10 @@ public class LoggingCommandHandler<TCommand> : IHandler<TCommand>
             await next();
             _logger.LogDebug("Command was handled successfully.");
         }
+    }
+
+    public Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }
