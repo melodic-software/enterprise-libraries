@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
 public class ErrorHandlingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
-    where TQuery : IQuery
+    where TQuery : IBaseQuery
 {
     private readonly ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> _logger;
 

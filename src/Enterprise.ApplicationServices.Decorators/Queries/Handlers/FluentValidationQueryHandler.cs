@@ -8,7 +8,7 @@ using FluentValidation;
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
 public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
-    where TQuery : IQuery
+    where TQuery : IBaseQuery
 {
     private readonly IReadOnlyCollection<IValidator<TQuery>> _validators;
 
