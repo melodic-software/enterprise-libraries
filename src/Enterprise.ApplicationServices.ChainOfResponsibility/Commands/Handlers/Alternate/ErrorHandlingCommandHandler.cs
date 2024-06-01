@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 
-public class ErrorHandlingCommandHandler<TCommand> : IHandler<TCommand>
+public class ErrorHandlingCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
 {
-    private readonly ILogger<ErrorHandlingCommandHandler<TCommand>> _logger;
+    private readonly ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> _logger;
 
-    public ErrorHandlingCommandHandler(ILogger<ErrorHandlingCommandHandler<TCommand>> logger)
+    public ErrorHandlingCommandHandler(ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> logger)
     {
         _logger = logger;
     }
 
-    public async Task HandleAsync(TCommand request, SuccessorDelegate next, CancellationToken cancellationToken)
+    public async Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         try
         {
-            await next();
+            return await next();
         }
         catch (Exception exception)
         {
