@@ -52,7 +52,7 @@ public static class SerilogConfigService
 
     public static void UseSerilog(this WebApplication app)
     {
-        app.UseMiddleware<RequestCorrelationMiddleware>();
+        app.UseRequestCorrelationMiddleware();
 
         // This introduces middleware that hooks into incoming API requests
         // and starts logging useful information about the processing of API requests
