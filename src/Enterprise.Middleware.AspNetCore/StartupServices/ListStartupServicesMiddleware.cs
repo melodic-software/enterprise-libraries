@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using System.Text.Json;
+using Enterprise.Applications.DI.ServiceCollection.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,8 @@ public class ListStartupServicesMiddleware : IMiddleware
             // TODO: Add query string parameters to filter by namespace.
             // This can be prebuilt like "show all custom" (namespaces other than System.*, Microsoft.*, etc.) or vice versa
 
-            var result = _serviceDescriptorRegistry.Select(x => CreateDto(x, context))
+            var result = _serviceDescriptorRegistry.ServiceDescriptors
+                .Select(x => CreateDto(x, context))
                 .Where(x => x != null)
                 .OrderBy(x => x?.ServiceTypeFullName)
                 .ToList();
