@@ -8,28 +8,26 @@ using static Enterprise.Api.Swagger.Services.SwaggerRequestDetectionService;
 
 namespace Enterprise.Api.Security.ApiKey.Middleware;
 
-public class ApiKeyMiddleware
+public class ApiKeyMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly IValidateApiKey _apiKeyValidator;
 
-    public ApiKeyMiddleware(RequestDelegate next, IValidateApiKey apiKeyValidator)
+    public ApiKeyMiddleware(IValidateApiKey apiKeyValidator)
     {
-        _next = next;
         _apiKeyValidator = apiKeyValidator;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         if (_apiKeyValidator.RequestContainsValidApiKey(context))
         {
-            await _next(context);
+            await next(context);
             return;
         }
 
         if (SwaggerPageRequested(context))
         {
-            await _next(context);
+            await next(context);
             return;
         }
 

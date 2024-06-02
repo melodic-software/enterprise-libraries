@@ -7,25 +7,23 @@ namespace Enterprise.Api.ErrorHandling.Middleware;
 // Take a look at the ConfigureGlobalErrorHandler method in the ErrorHandlingConfigService.
 
 [Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
-public class GlobalErrorHandlingMiddleware
+public class GlobalErrorHandlingMiddleware : IMiddleware
 {
     private readonly ILogger _logger;
-    private readonly RequestDelegate _next;
 
-    public GlobalErrorHandlingMiddleware(RequestDelegate next, ILogger<GlobalErrorHandlingMiddleware> logger)
+    public GlobalErrorHandlingMiddleware(ILogger<GlobalErrorHandlingMiddleware> logger)
     {
-        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         // One of the advantages of using this middleware over "app.UseExceptionHandler"
         // is that we can perform pre- and post-handling steps (even if there isn't an error to handle).
 
         try
         {
-            await _next(context);
+            await next(context);
         }
         catch (Exception ex)
         {

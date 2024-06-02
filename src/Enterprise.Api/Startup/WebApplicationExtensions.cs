@@ -1,21 +1,18 @@
 ﻿using Enterprise.Api.Caching;
 using Enterprise.Api.Controllers;
 using Enterprise.Api.ErrorHandling;
-using Enterprise.Api.Middleware;
 using Enterprise.Api.Middleware.Custom;
+using Enterprise.Api.Middleware.Registration;
 using Enterprise.Api.Minimal;
 using Enterprise.Api.Security;
 using Enterprise.Api.Swagger;
-using Enterprise.Api.Swagger.Constants;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
-using Enterprise.Middleware.AspNetCore;
+using Enterprise.Middleware.AspNetCore.Extensions;
 using Enterprise.Monitoring.Health.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Api.Startup;
 
@@ -25,8 +22,7 @@ public static class WebApplicationExtensions
     /// Configure the request pipeline (middleware).
     /// </summary>
     /// <param name="app"></param>
-    /// <param name="builder"></param>
-    public static void ConfigureRequestPipeline(this WebApplication app, IHostApplicationBuilder builder)
+    public static void ConfigureRequestPipeline(this WebApplication app)
     {
         app.UseLogging();
 
@@ -44,12 +40,8 @@ public static class WebApplicationExtensions
         if (!app.Environment.IsProduction())
         {
             // Shows all services registered with the container.
-            ILogger<ListStartupServicesMiddleware> listStartupServiceMiddlewareLogger = app.Services
-                .GetRequiredService<ILogger<ListStartupServicesMiddleware>>();
-
-            app.UseMiddleware<ListStartupServicesMiddleware>(builder.Services, listStartupServiceMiddlewareLogger);
-            app.UseMiddleware<RootRedirectMiddleware>(SwaggerConstants.RoutePrefix);
-
+            app.UseListStartupServicesMiddleware();
+            app.UseRootRedirectMiddleware();
             app.UseSwagger();
         }
 
@@ -91,7 +83,7 @@ public static class WebApplicationExtensions
         app.UseRequestTimeouts();
 
         // These are generic pre-built middleware for specific purposes that are not environment specific
-        app.UseMiddleware<IgnoreFaviconMiddleware>();
+        app.UseIgnoreFaviconMiddleware();
 
         // This is an extensibility hook for custom application specific middleware registrations.
         // TODO: Do we need to provide middleware hooks for specific blocks here? Further up the chain?

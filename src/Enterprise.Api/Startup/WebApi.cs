@@ -47,7 +47,7 @@ public static class WebApi
             await AddServicesAsync(builder, options);
             WebApplication app = await BuildApplicationAsync(builder, options);
 
-            await ConfigureRequestPipelineAsync(builder, app, options);
+            await ConfigureRequestPipelineAsync(app, options);
 
             app.Logger.LogInformation("API configuration is complete.");
             await options.Events.RaiseConfigurationCompleted();
@@ -121,14 +121,13 @@ public static class WebApi
     /// <summary>
     /// Configure the HTTP request (middleware) pipeline.
     /// </summary>
-    /// <param name="builder"></param>
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    private static async Task ConfigureRequestPipelineAsync(IHostApplicationBuilder builder, WebApplication app, ApiConfigOptions options)
+    private static async Task ConfigureRequestPipelineAsync(WebApplication app, ApiConfigOptions options)
     {
         app.Logger.LogInformation("Configuring the request pipeline.");
-        app.ConfigureRequestPipeline(builder);
+        app.ConfigureRequestPipeline();
         app.Logger.LogInformation("Request pipeline has been configured.");
         await options.Events.RaiseRequestPipelineConfigured(app);
     }

@@ -37,10 +37,10 @@ public class RootRedirectMiddlewareTests
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
         const string? swaggerRoutePrefix = null;
 
-        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        var middleware = new RootRedirectMiddleware(loggerMock.Object, swaggerRoutePrefix);
 
         // ACT
-        await middleware.InvokeAsync(httpContextMock.Object);
+        await middleware.InvokeAsync(httpContextMock.Object, next);
 
         // ASSERT
         Assert.True(nextDelegateCalled); // this won't happen if a redirect was made
@@ -77,10 +77,10 @@ public class RootRedirectMiddlewareTests
 
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
            
-        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        var middleware = new RootRedirectMiddleware(loggerMock.Object, swaggerRoutePrefix);
 
         // ACT
-        await middleware.InvokeAsync(httpContextMock.Object);
+        await middleware.InvokeAsync(httpContextMock.Object, next);
 
         // ASSERT
         Assert.True(wasRedirectedToSwagger);

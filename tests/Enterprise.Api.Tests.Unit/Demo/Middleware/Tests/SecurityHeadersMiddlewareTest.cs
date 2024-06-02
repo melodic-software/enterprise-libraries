@@ -13,10 +13,10 @@ public class SecurityHeadersMiddlewareTest
         HttpContext httpContext = HttpContextCreationService.CreateDefaultContext();
         RequestDelegate next = _ => Task.CompletedTask;
 
-        var middleware = new SecurityHeadersMiddleware(next);
+        var middleware = new SecurityHeadersMiddleware();
 
         // ACT
-        await middleware.InvokeAsync(httpContext);
+        await middleware.InvokeAsync(httpContext, next);
 
         // ASSERT
         string cspHeader = httpContext.Request.Headers["Content-Security-Policy"].ToString();

@@ -9,30 +9,28 @@ namespace Enterprise.Api.Middleware;
 /// This redirects to swagger middleware for requests to the root resource under certain conditions.
 /// This middleware should only be registered if swagger documentation middleware has been registered.
 /// </summary>
-public class RootRedirectMiddleware
+public class RootRedirectMiddleware : IMiddleware
 {
     private const string EmptyString = "";
     private const string RootPath = "/";
     private const string IndexHtml = "/index.html";
 
-    private readonly RequestDelegate _next;
     private readonly ILogger<RootRedirectMiddleware> _logger;
     private readonly string? _swaggerRoutePrefix;
 
-    public RootRedirectMiddleware(RequestDelegate next, ILogger<RootRedirectMiddleware> logger, string? swaggerRoutePrefix)
+    public RootRedirectMiddleware(ILogger<RootRedirectMiddleware> logger, string? swaggerRoutePrefix)
     {
-        _next = next;
         _logger = logger;
         _swaggerRoutePrefix = swaggerRoutePrefix;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         if (string.IsNullOrEmpty(_swaggerRoutePrefix))
         {
             // the root API resource (if one exists) and generated swagger documentation are at the same path
             // in this case we can't signal to the swagger middleware that it should be bypassed
-            await _next(context);
+            await next(context);
         }
         else
         {
@@ -59,7 +57,7 @@ public class RootRedirectMiddleware
             }
             else
             {
-                await _next(context);
+                await next(context);
             }
         }
     }

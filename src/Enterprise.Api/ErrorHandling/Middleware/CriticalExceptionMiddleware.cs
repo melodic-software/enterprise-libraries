@@ -5,22 +5,20 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.Api.ErrorHandling.Middleware;
 
 [Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
-public class CriticalExceptionMiddleware
+public class CriticalExceptionMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<CriticalExceptionMiddleware> _logger;
 
-    public CriticalExceptionMiddleware(RequestDelegate next, ILogger<CriticalExceptionMiddleware> logger)
+    public CriticalExceptionMiddleware(ILogger<CriticalExceptionMiddleware> logger)
     {
-        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
         {
-            await _next(context);
+            await next(context);
         }
         catch (SqliteException sqliteException)
         {

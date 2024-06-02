@@ -1,5 +1,4 @@
-﻿using Enterprise.Api.Middleware;
-using Enterprise.Api.Security.Authorization.Options;
+﻿using Enterprise.Api.Security.Authorization.Options;
 using Enterprise.Api.Security.OAuth.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using System.IdentityModel.Tokens.Jwt;
+using Enterprise.Api.Middleware.Registration;
 using static Enterprise.Api.Security.Constants.SecurityConstants;
 
 namespace Enterprise.Api.Security;
@@ -37,7 +37,7 @@ public static class SecurityConfigService
         }
 
         app.UseAuthentication();
-        app.UseMiddleware<UserLoggingScopeMiddleware>();
+        app.UseUserLoggingScopeMiddleware();
         app.UseAuthorization();
 
         if (app.Environment.IsDevelopment())
