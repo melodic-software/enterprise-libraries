@@ -1,4 +1,4 @@
-﻿using Enterprise.Api.Middleware;
+﻿using Enterprise.Api.Middleware.RootRedirect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
