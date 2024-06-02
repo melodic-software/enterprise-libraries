@@ -191,46 +191,5 @@
             <param name="serviceLifetime">Specifies the lifetime of the service in the DI container.</param>
             <exception cref="T:System.ArgumentException">Thrown if either <typeparamref name="T"/> or <typeparamref name="T2"/> are not open generic types.</exception>
         </member>
-        <member name="T:Enterprise.DI.Core.ServiceCollection.Abstract.IServiceDescriptorRegistry">
-            <summary>
-            A read-only container of service descriptors for services that have been registered in the application.
-            </summary>
-        </member>
-        <member name="P:Enterprise.DI.Core.ServiceCollection.Abstract.IServiceDescriptorRegistry.ServiceDescriptors">
-            <summary>
-            Gets the read-only collection of registered service descriptors.
-            </summary>
-        </member>
-        <member name="T:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry">
-            <summary>
-            A container to hold the registered services in the application.
-            This container is intended to be registered as a singleton right before the application is built.
-            When the application is built, the service collection is locked and transformed into a <see cref="T:System.IServiceProvider"/>.
-            At this point, any new services cannot be added to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry"/> class.
-            This constructor captures the state of the provided <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
-            as a read-only collection.
-            </summary>
-            <param name="services">The service collection to be held in the container.</param>
-        </member>
-        <member name="P:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry.ServiceDescriptors">
-            <inheritdoc />
-        </member>
-        <member name="T:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistryExtensions">
-            <summary>
-            Extension methods for registering the <see cref="T:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry"/> in the service collection.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistryExtensions.AddServiceDescriptorRegistry(Microsoft.Extensions.Hosting.IHostApplicationBuilder)">
-            <summary>
-            Registers the <see cref="T:Enterprise.DI.Core.ServiceCollection.ServiceDescriptorRegistry"/> as a singleton service.
-            This method should be called right before the application is built to capture the final state of the service collection.
-            </summary>
-            <param name="builder">The host application builder.</param>
-        </member>
     </members>
 </doc>
