@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Constants" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.307" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.336" />
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
   </ItemGroup>

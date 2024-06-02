@@ -8,14 +8,15 @@ namespace Enterprise.Middleware.AspNetCore.StartupServices;
 
 public class ListStartupServicesMiddleware : IMiddleware
 {
-    private readonly IServiceCollection _services;
+    private readonly IServiceDescriptorRegistry _serviceDescriptorRegistry;
     private readonly ILogger<ListStartupServicesMiddleware> _logger;
     private const string Path = "/debug/all-registered-services";
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ListStartupServicesMiddleware(IServiceCollection services, ILogger<ListStartupServicesMiddleware> logger)
+    public ListStartupServicesMiddleware(IServiceDescriptorRegistry serviceDescriptorRegistry, 
+        ILogger<ListStartupServicesMiddleware> logger)
     {
-        _services = services;
+        _serviceDescriptorRegistry = serviceDescriptorRegistry;
         _logger = logger;
 
         JsonSerializerDefaults serializationDefaults = JsonSerializerDefaults.Web;
@@ -31,7 +32,7 @@ public class ListStartupServicesMiddleware : IMiddleware
             // TODO: Add query string parameters to filter by namespace.
             // This can be prebuilt like "show all custom" (namespaces other than System.*, Microsoft.*, etc.) or vice versa
 
-            var result = _services.Select(x => CreateDto(x, context))
+            var result = _serviceDescriptorRegistry.Select(x => CreateDto(x, context))
                 .Where(x => x != null)
                 .OrderBy(x => x?.ServiceTypeFullName)
                 .ToList();
