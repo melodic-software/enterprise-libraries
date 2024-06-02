@@ -342,7 +342,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DesignPatterns.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Options.Core.Tests.Unit", "tests\Enterprise.Options.Core.Tests.Unit\Enterprise.Options.Core.Tests.Unit.csproj", "{F9D885FF-58F6-4062-9008-A9402195E66F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.ApplicationServices.ChainOfResponsibility", "src\Enterprise.ApplicationServices.ChainOfResponsibility\Enterprise.ApplicationServices.ChainOfResponsibility.csproj", "{E7F68C45-0058-482D-8EF9-6210A1EC98B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.ApplicationServices.ChainOfResponsibility", "src\Enterprise.ApplicationServices.ChainOfResponsibility\Enterprise.ApplicationServices.ChainOfResponsibility.csproj", "{E7F68C45-0058-482D-8EF9-6210A1EC98B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
