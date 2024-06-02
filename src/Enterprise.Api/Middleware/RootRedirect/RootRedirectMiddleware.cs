@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
 namespace Enterprise.Api.Middleware.RootRedirect;
@@ -17,21 +18,21 @@ public class RootRedirectMiddleware
 
     private readonly RequestDelegate _next;
     private readonly ILogger<RootRedirectMiddleware> _logger;
-    private readonly string? _swaggerRoutePrefix;
+    private readonly RootRedirectMiddlewareOptions _options;
 
-    public RootRedirectMiddleware(RequestDelegate next, ILogger<RootRedirectMiddleware> logger, string? swaggerRoutePrefix)
+    public RootRedirectMiddleware(RequestDelegate next, ILogger<RootRedirectMiddleware> logger, IOptionsMonitor<RootRedirectMiddlewareOptions> optionsMonitor)
     {
         _next = next;
         _logger = logger;
-        _swaggerRoutePrefix = swaggerRoutePrefix;
+        _options = optionsMonitor.CurrentValue;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
-        if (string.IsNullOrEmpty(_swaggerRoutePrefix))
+        if (string.IsNullOrEmpty(_options.SwaggerRoutePrefix))
         {
-            // the root API resource (if one exists) and generated swagger documentation are at the same path
-            // in this case we can't signal to the swagger middleware that it should be bypassed
+            // The root API resource (if one exists) and generated swagger documentation are at the same path.
+            // In this case we can't signal to the swagger middleware that it should be bypassed.
             await _next(context);
         }
         else
@@ -55,7 +56,7 @@ public class RootRedirectMiddleware
 
             if (redirectToSwagger)
             {
-                context.Response.Redirect(_swaggerRoutePrefix, false);
+                context.Response.Redirect(_options.SwaggerRoutePrefix, false);
             }
             else
             {
