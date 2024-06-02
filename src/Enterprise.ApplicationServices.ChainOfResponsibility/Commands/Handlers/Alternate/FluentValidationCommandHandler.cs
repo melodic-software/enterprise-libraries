@@ -4,7 +4,7 @@ using Enterprise.FluentValidation.Services;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
+namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
 
 public class FluentValidationCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
 {

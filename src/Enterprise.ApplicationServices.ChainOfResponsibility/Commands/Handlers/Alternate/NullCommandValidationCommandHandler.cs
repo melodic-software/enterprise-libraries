@@ -1,7 +1,7 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 
-namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
+namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
 
 public class NullCommandValidationCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
 {

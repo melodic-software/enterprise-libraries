@@ -2,7 +2,7 @@
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
+namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
 
 public class ErrorHandlingCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
 {

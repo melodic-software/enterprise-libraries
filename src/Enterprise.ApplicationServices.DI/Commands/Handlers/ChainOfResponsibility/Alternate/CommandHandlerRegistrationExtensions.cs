@@ -3,12 +3,12 @@ using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard;
+namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate;
 
 public static class CommandHandlerRegistrationExtensions
 {
     /// <summary>
-    /// Register a command handler.
+    /// Register a command handler using the chain of responsibility design pattern.
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="services"></param>

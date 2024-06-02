@@ -41,7 +41,7 @@
             <param name="config">The configuration instance.</param>
             <param name="options">The options instance to bind the configuration to.</param>
         </member>
-        <member name="T:Enterprise.Options.Core.Services.OptionsInstanceService">
+        <member name="T:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService">
             <summary>
             This configures and provides custom options instances.
             It is only intended to be used during application startup, specifically before or during service registration.
@@ -49,28 +49,28 @@
             Once the web application has been built, the configure method should not be used.
             </summary>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.CreateTestInstance">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.CreateTestInstance">
             <summary>
             This is to be used for testing purposes.
             It is a pragmatic way to allow for test separation, mitigating the testability issues with singleton implementations.
             This requires test project(s) to be granted visibility for internal members.
             </summary>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.ConfigureDefaultInstance``1(``0)">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.ConfigureDefaultInstance``1(``0)">
             <summary>
             Configures a default instance of options.
             </summary>
             <typeparam name="TOptions">The type of the options class.</typeparam>
             <param name="instance">The options instance to configure as the default.</param>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.ConfigureDefaultInstance``1(System.Func{``0})">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.ConfigureDefaultInstance``1(System.Func{``0})">
             <summary>
             Configures a default instance of options using a factory method.
             </summary>
             <typeparam name="TOptions">The type of the options class.</typeparam>
             <param name="createDefault">The factory method to create the default options instance.</param>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.Configure``1(System.Action{``0})">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.Configure``1(System.Action{``0})">
             <summary>
             Configures options with an action.
             </summary>
@@ -78,7 +78,7 @@
             <param name="action">The action to configure the options.</param>
             <exception cref="T:System.InvalidOperationException">Thrown when attempting to reconfigure locked options.</exception>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.GetOptionsInstance``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.GetOptionsInstance``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             Retrieves an options instance, creating and configuring it if necessary.
             </summary>
@@ -88,7 +88,7 @@
             <returns>The configured options instance.</returns>
             <exception cref="T:System.Exception">Thrown when a type mismatch is found in the instance dictionary.</exception>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.OptionsInstanceService.UseInstance``1(``0)">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.UseInstance``1(``0)">
             <summary>
             Use the specified options instance.
             This will lock the instance, meaning it can no longer be reconfigured with the singleton service.

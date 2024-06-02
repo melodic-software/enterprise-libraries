@@ -4,6 +4,26 @@
         <name>Enterprise.ApplicationServices.DI</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions{``0}})">
+            <summary>
+            Register a command handler using the chain of responsibility design pattern.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <param name="services"></param>
+            <param name="factory"></param>
+            <param name="configureOptions"></param>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions`2.CommandHandlerFactory">
+            <summary>
+            A factory method delegate that instantiates the chain of responsibility instance.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions`2.ConfigureChainOfResponsibility">
+            <summary>
+            Provide a custom responsibility chain configuration.
+            If not provided, the default chain will be used.
+            </summary>
+        </member>
         <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions{``0}})">
             <summary>
             Register a command handler using the chain of responsibility design pattern.
@@ -24,6 +44,17 @@
             If not provided, the default chain will be used.
             </summary>
         </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Alternate.RegistrationOptionsBase`2.ServiceLifetime">
+            <summary>
+            This sets the service lifetime for the command handler registration.
+            The default is a transient service lifetime, and is recommended for most registrations.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Alternate.RegistrationOptionsBase`2.PostConfigure">
+            <summary>
+            Provider further configuration to the command handler registration.
+            </summary>
+        </member>
         <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Options.RegistrationOptionsBase`1.ServiceLifetime">
             <summary>
             This sets the service lifetime for the command handler registration.
@@ -33,6 +64,34 @@
         <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Options.RegistrationOptionsBase`1.PostConfigure">
             <summary>
             Provider further configuration to the command handler registration.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions{``0,``1}})">
+            <summary>
+            Register a command handler.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
+            <param name="factory"></param>
+            <param name="configureOptions"></param>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.UseDecorators">
+            <summary>
+            Register decorators for the command handler.
+            This is enabled by default.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.DecoratorFactories">
+            <summary>
+            Provide custom delegates used for decorator composition.
+            If none are provided, the default decorators will be used.
+            <see cref="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.CommandHandlerFactory">
+            <summary>
+            A factory method delegate that instantiates the command handler instance.
             </summary>
         </member>
         <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions{``0}})">

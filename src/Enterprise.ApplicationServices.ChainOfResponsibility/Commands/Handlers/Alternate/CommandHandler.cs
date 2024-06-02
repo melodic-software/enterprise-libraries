@@ -5,7 +5,7 @@ using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
-namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
+namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
 
 public sealed class CommandHandler<TCommand, TResponse> : IHandleCommand<TCommand, TResponse> 
     where TCommand : ICommand<TResponse>
