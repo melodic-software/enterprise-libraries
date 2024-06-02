@@ -1,4 +1,4 @@
-﻿using Enterprise.Options.Core.Services;
+﻿using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Configuration;

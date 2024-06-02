@@ -1,4 +1,4 @@
-﻿using Enterprise.Options.Core.Services;
+﻿using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
