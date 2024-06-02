@@ -15,7 +15,7 @@ public sealed class RegistrationOptions<TQuery, TResponse> :
     public bool UseDecorators { get; set; } = true;
 
     /// <summary>
-    /// Provide custom delegates used for decorator composition if .
+    /// Provide custom factory delegates used for decorator composition.
     /// If none are provided, the default decorators will be used.
     /// <see cref="UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
     /// </summary>

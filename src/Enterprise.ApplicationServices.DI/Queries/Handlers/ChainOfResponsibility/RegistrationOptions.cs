@@ -4,8 +4,7 @@ using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
-public class RegistrationOptions<TQuery, TResponse> :
-    RegistrationOptionsBase<TQuery, TResponse>
+public class RegistrationOptions<TQuery, TResponse> : RegistrationOptionsBase<TQuery, TResponse>
     where TQuery : IBaseQuery
 {
     /// <summary>

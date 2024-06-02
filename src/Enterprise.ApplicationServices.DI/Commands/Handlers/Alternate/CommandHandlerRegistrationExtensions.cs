@@ -7,7 +7,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Commands.Alternate;
+namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Alternate;
 
 public static class CommandHandlerRegistrationExtensions
 {

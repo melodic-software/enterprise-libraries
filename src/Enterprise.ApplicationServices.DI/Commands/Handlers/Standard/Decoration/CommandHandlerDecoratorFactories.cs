@@ -2,40 +2,20 @@
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.DI.Core.Registration;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Commands;
+namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration;
 
-public static class CommandHandlerRegistrationExtensions
+public static class CommandHandlerDecoratorFactories
 {
-    public static void RegisterCommandHandler<TCommand>(this IServiceCollection services,
-        Func<IServiceProvider, IHandleCommand<TCommand>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TCommand : ICommand
+    public static IEnumerable<Func<IServiceProvider, IHandleCommand<TCommand>, IHandleCommand<TCommand>>>
+        GetDefault<TCommand>() where TCommand : IBaseCommand
     {
-        services.BeginRegistration<IHandleCommand<TCommand>>()
-            .Add(factory, serviceLifetime)
-            .WithDefaultDecorators();
-    }
-
-    public static void RegisterCommandHandler<TCommand, TImplementation>(this IServiceCollection services,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TImplementation : class, IHandleCommand<TCommand>
-        where TCommand : ICommand
-    {
-        services.BeginRegistration<IHandleCommand<TCommand>>()
-            .Add<TImplementation>(serviceLifetime)
-            .WithDefaultDecorators();
-    }
-
-    private static void WithDefaultDecorators<TCommand>(this RegistrationContext<IHandleCommand<TCommand>> registration)
-        where TCommand : ICommand
-    {
-        registration
-            .WithDecorators((provider, commandHandler) =>
+        return
+        [
+            (provider, commandHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IEnumerable<IValidator<TCommand>> validators = provider.GetServices<IValidator<TCommand>>();
@@ -55,6 +35,7 @@ public static class CommandHandlerRegistrationExtensions
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 ILogger<LoggingCommandHandler<TCommand>> logger = provider.GetRequiredService<ILogger<LoggingCommandHandler<TCommand>>>();
                 return new LoggingCommandHandler<TCommand>(commandHandler, decoratorService, logger);
-            });
+            }
+        ];
     }
 }

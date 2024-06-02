@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
 
-public static class QueryHandlerRegistrationExtensions
+public static class CommandHandlerRegistrationExtensions
 {
     /// <summary>
     /// Register a query handler using the chain of responsibility design pattern.

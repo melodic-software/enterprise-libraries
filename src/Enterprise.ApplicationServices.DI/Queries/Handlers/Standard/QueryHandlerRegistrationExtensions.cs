@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
-public static class QueryHandlerRegistrationExtensions
+public static class CommandHandlerRegistrationExtensions
 {
     /// <summary>
     /// Register a query handler.
