@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Middleware.AspNetCore;
+﻿namespace Enterprise.Middleware.AspNetCore.StartupServices;
 
 // TODO: Move this to API client library.
 

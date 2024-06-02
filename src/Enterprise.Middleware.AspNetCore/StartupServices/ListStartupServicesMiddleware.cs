@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Middleware.AspNetCore;
+namespace Enterprise.Middleware.AspNetCore.StartupServices;
 
 public class ListStartupServicesMiddleware : IMiddleware
 {
