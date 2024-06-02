@@ -6,15 +6,15 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Decoration;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 
-public static class QueryHandlerDecorators
+public static class QueryHandlerDecoratorFactories
 {
-    public static IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>> 
+    public static IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>>
         GetDefault<TQuery, TResponse>() where TQuery : IBaseQuery
     {
-        return new List<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>>()
-        {
+        return
+        [
             (provider, queryHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
@@ -39,6 +39,6 @@ public static class QueryHandlerDecorators
                 IHandleQuery<TQuery, TResponse> decorator = new LoggingQueryHandler<TQuery, TResponse>(queryHandler, decoratorService, logger);
                 return decorator;
             }
-        };
+        ];
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Simple;
+using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
@@ -39,13 +39,14 @@ public static class QueryHandlerRegistrationExtensions
     }
 
     private static void Register<TQuery, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, IHandleQuery<TQuery, TResponse>> factory,
+        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> factory,
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         ArgumentNullException.ThrowIfNull(factory);
         var options = new RegistrationOptions<TQuery, TResponse>(factory);
         configureOptions?.Invoke(options);
-        options.PostConfigure?.Invoke(services, services.RegisterQueryHandler(options));
+        RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext = services.RegisterQueryHandler(options);
+        options.PostConfigure?.Invoke(services, registrationContext);
     }
 }

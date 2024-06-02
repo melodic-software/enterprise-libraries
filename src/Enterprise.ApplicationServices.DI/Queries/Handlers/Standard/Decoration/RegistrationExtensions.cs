@@ -1,9 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 using Enterprise.DI.Core.Registration;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Decoration;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 
 public static class RegistrationExtensions
 {
@@ -19,8 +18,10 @@ public static class RegistrationExtensions
         this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext)
         where TQuery : IBaseQuery
     {
-        return registrationContext
-            .WithDecorators(QueryHandlerDecorators.GetDefault<TQuery, TResponse>().ToArray());
+        IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>>
+            decoratorFactories = QueryHandlerDecoratorFactories.GetDefault<TQuery, TResponse>();
+
+        return registrationContext.WithDecorators(decoratorFactories.ToArray());
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterWithDecorators<TQuery, TResponse>(

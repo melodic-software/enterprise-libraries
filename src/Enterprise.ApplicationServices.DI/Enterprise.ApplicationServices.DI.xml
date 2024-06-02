@@ -4,7 +4,7 @@
         <name>Enterprise.ApplicationServices.DI</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.QueryHandlerRegistrationExtensions.RegisterQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers.Abstract.QueryHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions{``0,``1}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.QueryHandlerRegistrationExtensions.RegisterQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions{``0,``1}})">
             <summary>
             Register a query handler using the chain of responsibility design pattern.
             </summary>
@@ -12,6 +12,16 @@
             <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
             <param name="factory"></param>
+            <param name="configureOptions"></param>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.QueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions{``0,``1}})">
+            <summary>
+            Register a simple query handler.
+            This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions`2.QueryHandlerFactory">
@@ -36,25 +46,6 @@
             Provider further configuration to the query handler registration.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.Simple.SimpleQueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            Register a simple query handler.
-            This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
-            </summary>
-            <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
-            <param name="services"></param>
-        </member>
-        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.Simple.SimpleQueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic{``0,``1}},Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-            Register a simple query handler.
-            </summary>
-            <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
-            <param name="services"></param>
-            <param name="queryLogicFactory"></param>
-            <param name="serviceLifetime"></param>
-        </member>
         <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.QueryHandlerRegistrationExtensions.RegisterQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions{``0,``1}})">
             <summary>
             Register a query handler.
@@ -63,6 +54,16 @@
             <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
             <param name="factory"></param>
+            <param name="configureOptions"></param>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.QueryHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions{``0,``1}})">
+            <summary>
+            Register a simple query handler.
+            This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
+            </summary>
+            <typeparam name="TQuery"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="services"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions`2.UseDecorators">

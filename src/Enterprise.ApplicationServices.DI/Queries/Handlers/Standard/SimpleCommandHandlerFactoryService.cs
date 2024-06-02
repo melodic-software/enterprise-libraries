@@ -4,11 +4,11 @@ using Enterprise.ApplicationServices.Queries.Handlers.Simple;
 using Enterprise.Events.Facade.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Simple;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
 internal static class SimpleCommandHandlerFactoryService
 {
-    public static Func<IServiceProvider, IHandleQuery<TQuery, TResponse>> GetFactory<TQuery, TResponse>()
+    public static Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> GetFactory<TQuery, TResponse>()
         where TQuery : IBaseQuery
     {
         return provider =>
