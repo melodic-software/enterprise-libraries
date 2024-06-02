@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Reflection;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 
 namespace Enterprise.Api.Controllers;
 

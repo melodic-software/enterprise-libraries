@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Enterprise.MediatR.Options;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static Enterprise.MediatR.Assemblies.AssemblyRegistrar;

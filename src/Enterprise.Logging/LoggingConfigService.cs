@@ -5,7 +5,7 @@ using Enterprise.Logging.TraceListeners;
 using Enterprise.TextEncoding.ConsoleEncoding;
 using Microsoft.Extensions.Hosting;
 using System.Text;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 
 namespace Enterprise.Logging;
 

@@ -4,7 +4,7 @@ using Enterprise.Api.Minimal.EndpointSelection;
 using Enterprise.Api.Minimal.Mapping;
 using Enterprise.Api.Minimal.Options;
 using Enterprise.Logging.Core.Loggers;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Reflection.Assemblies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

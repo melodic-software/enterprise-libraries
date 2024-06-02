@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 
 namespace Enterprise.Logging.TraceListeners;
 

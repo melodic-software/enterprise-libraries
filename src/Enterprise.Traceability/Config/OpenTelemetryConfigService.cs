@@ -1,4 +1,4 @@
-﻿using Enterprise.Options.Core.Services;
+﻿using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Traceability.Options;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Resources;

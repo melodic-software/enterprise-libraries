@@ -2,7 +2,7 @@
 using Enterprise.Api.ErrorHandling.Constants;
 using Enterprise.Api.ErrorHandling.Options;
 using Enterprise.Exceptions;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Validation.Exceptions;
 using Enterprise.Validation.Extensions;
 using Hellang.Middleware.ProblemDetails;

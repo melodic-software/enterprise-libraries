@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Runtime.InteropServices;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 
 namespace Enterprise.Logging.Providers;
 

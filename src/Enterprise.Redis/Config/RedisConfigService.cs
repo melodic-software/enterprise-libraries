@@ -1,6 +1,6 @@
 ﻿using Enterprise.Exceptions;
 using Enterprise.Logging.Core.Loggers;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Redis.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

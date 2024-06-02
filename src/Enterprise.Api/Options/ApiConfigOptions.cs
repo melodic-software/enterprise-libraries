@@ -1,6 +1,6 @@
 ﻿using Enterprise.Api.Events;
 using Enterprise.Applications.DI.Startup;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serilog.Startup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

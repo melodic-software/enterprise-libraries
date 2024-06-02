@@ -2,7 +2,7 @@
 using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Logging.Providers;
 using Enterprise.Logging.Options;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serilog.Options;
 
 namespace Enterprise.Api.Options;
