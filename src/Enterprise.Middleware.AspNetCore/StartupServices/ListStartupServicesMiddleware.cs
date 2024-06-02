@@ -7,16 +7,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Middleware.AspNetCore.StartupServices;
 
-public class ListStartupServicesMiddleware : IMiddleware
+public class ListStartupServicesMiddleware
 {
+    private readonly RequestDelegate _next;
     private readonly IServiceDescriptorRegistry _serviceDescriptorRegistry;
     private readonly ILogger<ListStartupServicesMiddleware> _logger;
     private const string Path = "/debug/all-registered-services";
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ListStartupServicesMiddleware(IServiceDescriptorRegistry serviceDescriptorRegistry, 
+    public ListStartupServicesMiddleware(RequestDelegate next, IServiceDescriptorRegistry serviceDescriptorRegistry, 
         ILogger<ListStartupServicesMiddleware> logger)
     {
+        _next = next;
         _serviceDescriptorRegistry = serviceDescriptorRegistry;
         _logger = logger;
 
@@ -24,7 +26,7 @@ public class ListStartupServicesMiddleware : IMiddleware
         _jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
     }
 
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context)
     {
         if (context.Request.Path == Path)
         {
@@ -48,7 +50,7 @@ public class ListStartupServicesMiddleware : IMiddleware
         }
         else
         {
-            await next(context);
+            await _next(context);
         }
     }
 

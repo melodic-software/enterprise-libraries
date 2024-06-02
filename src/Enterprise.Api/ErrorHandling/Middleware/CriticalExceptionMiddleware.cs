@@ -6,20 +6,22 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.Api.ErrorHandling.Middleware;
 
 [Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
-public class CriticalExceptionMiddleware : IMiddleware
+public class CriticalExceptionMiddleware
 {
+    private readonly RequestDelegate _next;
     private readonly ILogger<CriticalExceptionMiddleware> _logger;
 
-    public CriticalExceptionMiddleware(ILogger<CriticalExceptionMiddleware> logger)
+    public CriticalExceptionMiddleware(RequestDelegate next, ILogger<CriticalExceptionMiddleware> logger)
     {
+        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context)
     {
         try
         {
-            await next(context);
+            await _next(context);
         }
         catch (SqliteException sqliteException)
         {

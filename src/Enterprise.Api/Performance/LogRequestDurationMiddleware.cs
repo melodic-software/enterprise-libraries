@@ -5,22 +5,24 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.Api.Performance;
 
 [Obsolete("This is only for demonstration purposes, and eventually will be removed.")]
-public class LogRequestDurationMiddleware : IMiddleware
+public class LogRequestDurationMiddleware
 {
+    private readonly RequestDelegate _next;
     private readonly ILogger<LogRequestDurationMiddleware> _logger;
 
-    public LogRequestDurationMiddleware(ILogger<LogRequestDurationMiddleware> logger)
+    public LogRequestDurationMiddleware(RequestDelegate next, ILogger<LogRequestDurationMiddleware> logger)
     {
+        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context)
     {
         var stopWatch = Stopwatch.StartNew();
 
         try
         {
-            await next(context);
+            await _next(context);
         }
         finally
         {

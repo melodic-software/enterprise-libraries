@@ -9,8 +9,9 @@ namespace Enterprise.Api.Middleware.IgnoreFavicon;
 /// This can trigger custom middleware an additional time, causing confusion.
 /// 
 /// </summary>
-public class IgnoreFaviconMiddleware : IMiddleware
+public class IgnoreFaviconMiddleware
 {
+    private readonly RequestDelegate _next;
     private readonly ILogger<IgnoreFaviconMiddleware> _logger;
 
     /// <summary>
@@ -18,13 +19,15 @@ public class IgnoreFaviconMiddleware : IMiddleware
     /// This can trigger custom middleware an additional time, causing confusion.
     /// 
     /// </summary>
+    /// <param name="next"></param>
     /// <param name="logger"></param>
-    public IgnoreFaviconMiddleware(ILogger<IgnoreFaviconMiddleware> logger)
+    public IgnoreFaviconMiddleware(RequestDelegate next, ILogger<IgnoreFaviconMiddleware> logger)
     {
+        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context)
     {
         if (context.Request.Path.Value == "/favicon.ico")
         {
@@ -34,6 +37,6 @@ public class IgnoreFaviconMiddleware : IMiddleware
             return;
         }
 
-        await next.Invoke(context);
+        await _next.Invoke(context);
     }
 }

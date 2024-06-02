@@ -8,19 +8,21 @@ namespace Enterprise.Api.Middleware.UserLoggingScope;
 /// <summary>
 /// If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
 /// </summary>
-public class UserLoggingScopeMiddleware : IMiddleware
+public class UserLoggingScopeMiddleware
 {
+    private readonly RequestDelegate _next;
     private readonly ILogger<UserLoggingScopeMiddleware> _logger;
 
     /// <summary>
     /// If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
     /// </summary>
-    public UserLoggingScopeMiddleware(ILogger<UserLoggingScopeMiddleware> logger)
+    public UserLoggingScopeMiddleware(RequestDelegate next, ILogger<UserLoggingScopeMiddleware> logger)
     {
+        _next = next;
         _logger = logger;
     }
 
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context)
     {
         bool userIsAuthenticated = context.User.Identity is { IsAuthenticated: true };
 
@@ -33,12 +35,12 @@ public class UserLoggingScopeMiddleware : IMiddleware
 
             using (_logger.BeginScope("User: {User}, SubjectId: {Subject}", identityName, subject))
             {
-                await next(context);
+                await _next(context);
             }
         }
         else
         {
-            await next(context);
+            await _next(context);
         }
     }
 }

@@ -2,9 +2,16 @@
 
 namespace Enterprise.Api.Tests.Unit.Demo.Middleware;
 
-public class SecurityHeadersMiddleware : IMiddleware
+public class SecurityHeadersMiddleware
 {
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    private readonly RequestDelegate _next;
+
+    public SecurityHeadersMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
     {
         IHeaderDictionary headers = context.Request.Headers;
 
@@ -12,6 +19,6 @@ public class SecurityHeadersMiddleware : IMiddleware
         headers["Content-Security-Policy"] = "default-src 'self';frame-ancestors 'none';";
         headers["X-Content-Type-Options"] = "nosniff";
 
-        await next(context);
+        await _next(context);
     }
 }

@@ -144,12 +144,13 @@
             
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware})">
+        <member name="M:Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware})">
             <summary>
             Most browsers default to requesting a favicon whenever the user visits a new website.
             This can trigger custom middleware an additional time, causing confusion.
             
             </summary>
+            <param name="next"></param>
             <param name="logger"></param>
         </member>
         <member name="T:Enterprise.Api.Middleware.RootRedirect.RootRedirectMiddleware">
@@ -163,7 +164,7 @@
             If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware})">
+        <member name="M:Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware})">
             <summary>
             If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
             </summary>
