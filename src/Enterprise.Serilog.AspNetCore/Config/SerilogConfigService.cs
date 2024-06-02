@@ -1,5 +1,5 @@
 ﻿using Destructurama;
-using Enterprise.Options.Core.Services;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serilog.AspNetCore.Lifecycle;
 using Enterprise.Serilog.AspNetCore.RequestCorrelation;
 using Enterprise.Serilog.MediatR;

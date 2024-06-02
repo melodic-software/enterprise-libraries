@@ -6,19 +6,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Middleware.AspNetCore;
 
-public class ListStartupServicesMiddleware
+public class ListStartupServicesMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly IServiceCollection _services;
     private readonly ILogger<ListStartupServicesMiddleware> _logger;
     private const string Path = "/debug/all-registered-services";
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ListStartupServicesMiddleware(RequestDelegate next,
-        IServiceCollection services,
-        ILogger<ListStartupServicesMiddleware> logger)
+    public ListStartupServicesMiddleware(IServiceCollection services, ILogger<ListStartupServicesMiddleware> logger)
     {
-        _next = next;
         _services = services;
         _logger = logger;
 
@@ -26,16 +22,16 @@ public class ListStartupServicesMiddleware
         _jsonSerializerOptions = new JsonSerializerOptions(serializationDefaults);
     }
 
-    public async Task InvokeAsync(HttpContext httpContext)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        if (httpContext.Request.Path == Path)
+        if (context.Request.Path == Path)
         {
             // TODO: Add filtering so DI errors, keyed services, service lifetimes, or type names can be queried specifically.
 
             // TODO: Add query string parameters to filter by namespace.
             // This can be prebuilt like "show all custom" (namespaces other than System.*, Microsoft.*, etc.) or vice versa
 
-            var result = _services.Select(x => CreateDto(x, httpContext))
+            var result = _services.Select(x => CreateDto(x, context))
                 .Where(x => x != null)
                 .OrderBy(x => x?.ServiceTypeFullName)
                 .ToList();
@@ -43,13 +39,13 @@ public class ListStartupServicesMiddleware
             // TODO: Do we want to group by source type namespace?
             string json = JsonSerializer.Serialize(result, _jsonSerializerOptions);
 
-            httpContext.Response.ContentType = MediaTypeNames.Application.Json;
+            context.Response.ContentType = MediaTypeNames.Application.Json;
 
-            await httpContext.Response.WriteAsync(json);
+            await context.Response.WriteAsync(json);
         }
         else
         {
-            await _next(httpContext);
+            await next(context);
         }
     }
 
