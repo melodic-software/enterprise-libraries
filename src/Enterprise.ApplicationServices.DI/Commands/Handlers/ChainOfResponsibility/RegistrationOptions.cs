@@ -11,7 +11,7 @@ public class RegistrationOptions<TCommand> : RegistrationOptionsBase<TCommand>
     /// <summary>
     /// A factory method delegate that instantiates the chain of responsibility instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandler<TCommand>>? CommandHandlerFactory { get; }
+    internal Func<IServiceProvider, IHandler<TCommand>>? CommandHandlerImplementationFactory { get; }
 
     /// <summary>
     /// Provide a custom responsibility chain configuration.
@@ -19,8 +19,8 @@ public class RegistrationOptions<TCommand> : RegistrationOptionsBase<TCommand>
     /// </summary>
     public Action<ResponsibilityChainRegistrationBuilder<TCommand>>? ConfigureChainOfResponsibility { get; set; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandler<TCommand>>? factory)
+    public RegistrationOptions(Func<IServiceProvider, IHandler<TCommand>>? commandHandlerImplementationFactory)
     {
-        CommandHandlerFactory = factory;
+        CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }
 }

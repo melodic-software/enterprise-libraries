@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Shared;
 using Enterprise.DI.Core.Registration;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration;
@@ -25,21 +26,21 @@ public static class RegistrationExtensions
     }
 
     internal static RegistrationContext<IHandleCommand<TCommand>> RegisterWithDecorators<TCommand>(
-        this RegistrationContext<IHandleCommand<TCommand>> registration,
+        this RegistrationContext<IHandleCommand<TCommand>> registrationContext,
         RegistrationOptions<TCommand> options)
         where TCommand : IBaseCommand
     {
-        registration.AddCommandHandler(options);
+        registrationContext.AddCommandHandler(options);
 
         if (options.DecoratorFactories.Any())
         {
-            registration.WithDecorators(options.DecoratorFactories.ToArray());
+            registrationContext.WithDecorators(options.DecoratorFactories.ToArray());
         }
         else
         {
-            registration.WithDefaultDecorators();
+            registrationContext.WithDefaultDecorators();
         }
 
-        return registration;
+        return registrationContext;
     }
 }

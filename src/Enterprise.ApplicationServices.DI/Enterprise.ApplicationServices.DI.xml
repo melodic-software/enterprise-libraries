@@ -4,16 +4,17 @@
         <name>Enterprise.ApplicationServices.DI</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions{``0}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions{``0,``1}})">
             <summary>
             Register a command handler using the chain of responsibility design pattern.
             </summary>
             <typeparam name="TCommand"></typeparam>
+            <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions`2.CommandHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions`2.CommandHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the chain of responsibility instance.
             </summary>
@@ -30,10 +31,10 @@
             </summary>
             <typeparam name="TCommand"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions`1.CommandHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions`1.CommandHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the chain of responsibility instance.
             </summary>
@@ -73,7 +74,7 @@
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.UseDecorators">
@@ -89,7 +90,7 @@
             <see cref="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
             </summary>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.CommandHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions`2.CommandHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the command handler instance.
             </summary>
@@ -100,7 +101,7 @@
             </summary>
             <typeparam name="TCommand"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions`1.UseDecorators">
@@ -116,7 +117,7 @@
             <see cref="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions`1.UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
             </summary>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions`1.CommandHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions`1.CommandHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the command handler instance.
             </summary>
@@ -128,7 +129,7 @@
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.CommandHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions{``0,``1}})">
@@ -141,7 +142,7 @@
             <param name="services"></param>
             <param name="configureOptions"></param>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions`2.QueryHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions`2.QueryHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the chain of responsibility instance.
             </summary>
@@ -170,7 +171,7 @@
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResponse"></typeparam>
             <param name="services"></param>
-            <param name="factory"></param>
+            <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
         </member>
         <member name="M:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.CommandHandlerRegistrationExtensions.RegisterSimpleQueryHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions{``0,``1}})">
@@ -196,7 +197,7 @@
             <see cref="P:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions`2.UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
             </summary>
         </member>
-        <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions`2.QueryHandlerFactory">
+        <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.RegistrationOptions`2.QueryHandlerImplementationFactory">
             <summary>
             A factory method delegate that instantiates the query handler instance.
             </summary>

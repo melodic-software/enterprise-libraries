@@ -1,5 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Simple;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,14 +15,14 @@ public static class CommandHandlerRegistrationExtensions
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     /// <param name="services"></param>
-    /// <param name="factory"></param>
+    /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> factory,
+        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory,
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        services.Register(factory, configureOptions);
+        services.Register(implementationFactory, configureOptions);
     }
 
     /// <summary>
@@ -35,18 +37,44 @@ public static class CommandHandlerRegistrationExtensions
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        services.Register(SimpleCommandHandlerFactoryService.GetFactory<TQuery, TResponse>(), configureOptions);
+        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory = 
+            SimpleQueryHandlerFactoryService.GetImplementationFactory<TQuery, TResponse>();
+
+        services.Register(implementationFactory, configureOptions);
     }
 
     private static void Register<TQuery, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> factory,
+        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory,
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        ArgumentNullException.ThrowIfNull(factory);
-        var options = new RegistrationOptions<TQuery, TResponse>(factory);
+        ArgumentNullException.ThrowIfNull(implementationFactory);
+        var options = new RegistrationOptions<TQuery, TResponse>(implementationFactory);
         configureOptions?.Invoke(options);
-        RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext = services.RegisterQueryHandler(options);
+
+        RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext =
+            services.RegisterQueryHandler(options);
+
         options.PostConfigure?.Invoke(services, registrationContext);
+    }
+
+    private static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterQueryHandler<TQuery, TResponse>(
+        this IServiceCollection services,
+        RegistrationOptions<TQuery, TResponse> options)
+        where TQuery : IBaseQuery
+    {
+        RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext = services
+            .BeginRegistration<IHandleQuery<TQuery, TResponse>>();
+
+        if (options.UseDecorators)
+        {
+            registrationContext.RegisterWithDecorators(options);
+        }
+        else
+        {
+            registrationContext.AddQueryHandler(options);
+        }
+
+        return registrationContext;
     }
 }

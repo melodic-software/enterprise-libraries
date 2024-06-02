@@ -10,7 +10,7 @@ public class RegistrationOptions<TQuery, TResponse> : RegistrationOptionsBase<TQ
     /// <summary>
     /// A factory method delegate that instantiates the chain of responsibility instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandler<TQuery, TResponse>>? QueryHandlerFactory { get; }
+    internal Func<IServiceProvider, IHandler<TQuery, TResponse>>? QueryHandlerImplementationFactory { get; }
 
     /// <summary>
     /// Provide a custom responsibility chain configuration.
@@ -18,8 +18,8 @@ public class RegistrationOptions<TQuery, TResponse> : RegistrationOptionsBase<TQ
     /// </summary>
     public Action<ResponsibilityChainRegistrationBuilder<TQuery, TResponse>>? ConfigureChainOfResponsibility { get; set; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandler<TQuery, TResponse>>? factory)
+    public RegistrationOptions(Func<IServiceProvider, IHandler<TQuery, TResponse>>? queryHandlerImplementationFactory)
     {
-        QueryHandlerFactory = factory;
+        QueryHandlerImplementationFactory = queryHandlerImplementationFactory;
     }
 }

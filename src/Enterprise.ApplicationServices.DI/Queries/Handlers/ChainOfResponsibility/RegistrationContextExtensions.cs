@@ -3,55 +3,30 @@ using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
 
-public static class RegistrationExtensions
+internal static class RegistrationContextExtensions
 {
-    public static void RegisterDefaultChainOfResponsibility<TQuery, TResponse>(
-        this IServiceCollection services,
-        Func<IServiceProvider, IHandler<TQuery, TResponse>> factory,
-        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TQuery : IBaseQuery
-    {
-        services.RegisterChainOfResponsibility<TQuery, TResponse>()
-            .WithSuccessor<LoggingQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<ErrorHandlingQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<NullQueryValidationQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<FluentValidationQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor(factory, serviceLifetime);
-    }
-
-    internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterQueryHandler<TQuery, TResponse>(
-        this IServiceCollection services,
-        RegistrationOptions<TQuery, TResponse> options)
-        where TQuery : IBaseQuery
-    {
-        return services
-            .BeginRegistration<IHandleQuery<TQuery, TResponse>>()
-            .AddChainOfResponsibility(options, services);
-    }
-
     internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> AddChainOfResponsibility<TQuery, TResponse>(
-        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registration,
+        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
         RegistrationOptions<TQuery, TResponse> options,
         IServiceCollection services)
         where TQuery : IBaseQuery
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
-            if (options.QueryHandlerFactory == null)
+            if (options.QueryHandlerImplementationFactory == null)
             {
                 throw new InvalidOperationException(
-                    "A handler factory must be configured for query handler registrations " +
+                    "A handler implementation factory must be configured for query handler registrations " +
                     "that use the chain of responsibility design pattern."
                 );
             }
 
-            services.RegisterDefaultChainOfResponsibility(options.QueryHandlerFactory, options.ServiceLifetime);
+            services.RegisterDefaultChainOfResponsibility(options.QueryHandlerImplementationFactory, options.ServiceLifetime);
         }
         else
         {
@@ -63,15 +38,25 @@ public static class RegistrationExtensions
             options.ConfigureChainOfResponsibility(chainRegistrationBuilder);
         }
 
+        return registrationContext;
+    }
+
+    internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> AddQueryHandler<TQuery, TResponse>(
+        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
+        RegistrationOptions<TQuery, TResponse> options)
+        where TQuery : IBaseQuery
+    {
         // This is a query handler implementation that takes in a responsibility chain.
-        registration.Add(provider =>
+        static IHandleQuery<TQuery, TResponse> ImplementationFactory(IServiceProvider provider)
         {
             IResponsibilityChain<TQuery, TResponse> responsibilityChain =
                 provider.GetRequiredService<IResponsibilityChain<TQuery, TResponse>>();
 
             return new QueryHandler<TQuery, TResponse>(responsibilityChain);
-        }, options.ServiceLifetime);
+        }
 
-        return registration;
+        registrationContext.Add(ImplementationFactory, options.ServiceLifetime);
+
+        return registrationContext;
     }
 }

@@ -24,10 +24,10 @@ public sealed class RegistrationOptions<TCommand, TResponse> :
     /// <summary>
     /// A factory method delegate that instantiates the command handler instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? CommandHandlerFactory { get; }
+    internal Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? CommandHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? factory)
+    public RegistrationOptions(Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? commandHandlerImplementationFactory)
     {
-        CommandHandlerFactory = factory;
+        CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }
 }

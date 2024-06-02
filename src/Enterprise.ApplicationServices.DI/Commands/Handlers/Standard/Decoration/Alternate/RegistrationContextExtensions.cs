@@ -5,7 +5,7 @@ using Enterprise.DI.Core.Registration;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Alternate;
 
-public static class RegistrationExtensions
+public static class RegistrationContextExtensions
 {
     public static void WithDecorators<TCommand, TResponse>(
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
@@ -26,21 +26,21 @@ public static class RegistrationExtensions
     }
 
     internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> RegisterWithDecorators<TCommand, TResponse>(
-        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registration,
+        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
         RegistrationOptions<TCommand, TResponse> options)
         where TCommand : ICommand<TResponse>
     {
-        registration.AddCommandHandler(options);
+        registrationContext.AddCommandHandler(options);
 
         if (options.DecoratorFactories.Any())
         {
-            registration.WithDecorators(options.DecoratorFactories.ToArray());
+            registrationContext.WithDecorators(options.DecoratorFactories.ToArray());
         }
         else
         {
-            registration.WithDefaultDecorators();
+            registrationContext.WithDefaultDecorators();
         }
 
-        return registration;
+        return registrationContext;
     }
 }

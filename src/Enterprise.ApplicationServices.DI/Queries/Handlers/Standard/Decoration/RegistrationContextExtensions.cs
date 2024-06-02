@@ -4,7 +4,7 @@ using Enterprise.DI.Core.Registration;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 
-public static class RegistrationExtensions
+public static class RegistrationContextExtensions
 {
     public static void WithDecorators<TQuery, TResponse>(
         this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
@@ -25,21 +25,21 @@ public static class RegistrationExtensions
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterWithDecorators<TQuery, TResponse>(
-        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registration,
+        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
         RegistrationOptions<TQuery, TResponse> options)
         where TQuery : IBaseQuery
     {
-        registration.AddQueryHandler(options);
+        registrationContext.AddQueryHandler(options);
 
         if (options.DecoratorFactories.Any())
         {
-            registration.WithDecorators(options.DecoratorFactories.ToArray());
+            registrationContext.WithDecorators(options.DecoratorFactories.ToArray());
         }
         else
         {
-            registration.WithDefaultDecorators();
+            registrationContext.WithDefaultDecorators();
         }
 
-        return registration;
+        return registrationContext;
     }
 }

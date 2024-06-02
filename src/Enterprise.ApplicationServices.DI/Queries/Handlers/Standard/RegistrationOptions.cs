@@ -24,10 +24,10 @@ public sealed class RegistrationOptions<TQuery, TResponse> :
     /// <summary>
     /// A factory method delegate that instantiates the query handler instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? QueryHandlerFactory { get; }
+    internal Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? QueryHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? factory)
+    public RegistrationOptions(Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? queryHandlerImplementationFactory)
     {
-        QueryHandlerFactory = factory;
+        QueryHandlerImplementationFactory = queryHandlerImplementationFactory;
     }
 }
