@@ -1,4 +1,5 @@
 ﻿using Enterprise.Options.Core.Abstract;
+using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serialization.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -10,7 +11,7 @@ namespace Enterprise.Options;
 /// <summary>
 /// This dynamically monitors configuration options of a specific type.
 /// This should be used for any options that need to be retrieved after the DI container has been created.
-/// Use <see cref="Core.Services.OptionsInstanceService"/> when the application has not yet been built.
+/// Use <see cref="OptionsInstanceService"/> when the application has not yet been built.
 /// </summary>
 /// <typeparam name="TOptions"></typeparam>
 public class DynamicOptionsMonitor<TOptions> : 

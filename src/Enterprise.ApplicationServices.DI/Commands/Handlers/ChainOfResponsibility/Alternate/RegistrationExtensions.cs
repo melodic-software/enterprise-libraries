@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
+﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;

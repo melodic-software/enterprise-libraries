@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices.ChainOfResponsibility" Version="1.0.0-preview.320" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices.ChainOfResponsibility" Version="1.0.0-preview.323" />
     <PackageReference Include="Melodic.Enterprise.ApplicationServices.Decorators" Version="1.0.0-preview.313" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
