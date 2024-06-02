@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Api.Middleware;
+namespace Enterprise.Api.Middleware.IgnoreFavicon;
 // https://stackoverflow.com/questions/67090158/how-to-ignore-favicon-call-in-asp-net-5-web-api
 
 /// <summary>

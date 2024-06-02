@@ -2,13 +2,14 @@
 using Enterprise.Api.Controllers;
 using Enterprise.Api.ErrorHandling;
 using Enterprise.Api.Middleware.Custom;
-using Enterprise.Api.Middleware.Registration;
+using Enterprise.Api.Middleware.IgnoreFavicon;
+using Enterprise.Api.Middleware.RootRedirect;
 using Enterprise.Api.Minimal;
 using Enterprise.Api.Security;
 using Enterprise.Api.Swagger;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
-using Enterprise.Middleware.AspNetCore.Extensions;
+using Enterprise.Middleware.AspNetCore.StartupServices;
 using Enterprise.Monitoring.Health.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;

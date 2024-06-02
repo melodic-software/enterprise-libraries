@@ -6,24 +6,25 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Routing;
+using Enterprise.Api.ErrorHandling.Middleware.Constants;
 
-namespace Enterprise.Api.ErrorHandling.Middleware;
+namespace Enterprise.Api.ErrorHandling.Middleware.Services;
 
 internal static class ExceptionHandlerMiddlewareService
 {
-    [Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
+    [Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
     public static void UseDevelopmentErrorHandler(this WebApplication app)
     {
         app.UseExceptionHandler(RouteTemplates.DevelopmentErrorHandler);
     }
 
-    [Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
+    [Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
     public static void UserProductionErrorHandler(this WebApplication app)
     {
         app.UseExceptionHandler(RouteTemplates.ErrorHandler);
     }
 
-    [Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
+    [Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
     public static void UseGlobalErrorHandler(this WebApplication app, ILogger? logger)
     {
         // NOTE: This is one approach to global error handling.

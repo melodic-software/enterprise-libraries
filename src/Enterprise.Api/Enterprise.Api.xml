@@ -137,14 +137,14 @@
             </summary>
             <param name="app">The web application used for registration.</param>
         </member>
-        <member name="T:Enterprise.Api.Middleware.IgnoreFaviconMiddleware">
+        <member name="T:Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware">
             <summary>
             Most browsers default to requesting a favicon whenever the user visits a new website.
             This can trigger custom middleware an additional time, causing confusion.
             
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Middleware.IgnoreFaviconMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.IgnoreFaviconMiddleware})">
+        <member name="M:Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware})">
             <summary>
             Most browsers default to requesting a favicon whenever the user visits a new website.
             This can trigger custom middleware an additional time, causing confusion.
@@ -152,18 +152,18 @@
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="T:Enterprise.Api.Middleware.RootRedirectMiddleware">
+        <member name="T:Enterprise.Api.Middleware.RootRedirect.RootRedirectMiddleware">
             <summary>
             This redirects to swagger middleware for requests to the root resource under certain conditions.
             This middleware should only be registered if swagger documentation middleware has been registered.
             </summary>
         </member>
-        <member name="T:Enterprise.Api.Middleware.UserLoggingScopeMiddleware">
+        <member name="T:Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware">
             <summary>
             If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Middleware.UserLoggingScopeMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.UserLoggingScopeMiddleware})">
+        <member name="M:Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware.#ctor(Microsoft.Extensions.Logging.ILogger{Enterprise.Api.Middleware.UserLoggingScope.UserLoggingScopeMiddleware})">
             <summary>
             If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).
             </summary>

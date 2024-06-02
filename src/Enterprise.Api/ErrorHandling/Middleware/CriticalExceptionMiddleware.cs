@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Enterprise.Api.ErrorHandling.Middleware.Constants;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Api.ErrorHandling.Middleware;
 
-[Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
+[Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
 public class CriticalExceptionMiddleware : IMiddleware
 {
     private readonly ILogger<CriticalExceptionMiddleware> _logger;

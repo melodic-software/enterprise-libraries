@@ -1,4 +1,5 @@
-﻿using Enterprise.Api.ErrorHandling.Shared;
+﻿using Enterprise.Api.ErrorHandling.Middleware.Constants;
+using Enterprise.Api.ErrorHandling.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
@@ -6,7 +7,7 @@ namespace Enterprise.Api.ErrorHandling.Middleware;
 // NOTE: This is an alternate approach to global error handling.
 // Take a look at the ConfigureGlobalErrorHandler method in the ErrorHandlingConfigService.
 
-[Obsolete("Use IExceptionHandler instead of middleware. This was introduced with .NET 8.")]
+[Obsolete(ObsoleteConstants.UseIExceptionHandlerWarning)]
 public class GlobalErrorHandlingMiddleware : IMiddleware
 {
     private readonly ILogger _logger;

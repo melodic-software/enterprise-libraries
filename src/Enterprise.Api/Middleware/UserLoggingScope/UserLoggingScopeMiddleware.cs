@@ -3,7 +3,7 @@ using IdentityModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Api.Middleware;
+namespace Enterprise.Api.Middleware.UserLoggingScope;
 
 /// <summary>
 /// If a user is authenticated, a logging scope is created to capture user information (username, subject, etc.).

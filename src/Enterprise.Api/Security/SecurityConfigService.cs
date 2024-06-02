@@ -1,4 +1,6 @@
-﻿using Enterprise.Api.Security.Authorization.Options;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Enterprise.Api.Middleware.UserLoggingScope;
+using Enterprise.Api.Security.Authorization.Options;
 using Enterprise.Api.Security.OAuth.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -7,8 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using System.IdentityModel.Tokens.Jwt;
-using Enterprise.Api.Middleware.Registration;
 using static Enterprise.Api.Security.Constants.SecurityConstants;
 
 namespace Enterprise.Api.Security;

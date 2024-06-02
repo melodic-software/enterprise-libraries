@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
-namespace Enterprise.Api.Middleware;
+namespace Enterprise.Api.Middleware.RootRedirect;
 
 /// <summary>
 /// This redirects to swagger middleware for requests to the root resource under certain conditions.
