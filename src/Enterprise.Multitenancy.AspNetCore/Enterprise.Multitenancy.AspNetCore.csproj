@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.336" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.338" />
     <PackageReference Include="Melodic.Enterprise.Multitenancy" Version="1.0.0-preview.325" />
   </ItemGroup>
 

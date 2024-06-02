@@ -15,10 +15,10 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.327" />
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.315" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.326" />
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.338" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.338" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.324" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.338" />
   </ItemGroup>
 
 </Project>

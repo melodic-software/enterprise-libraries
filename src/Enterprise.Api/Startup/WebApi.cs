@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Enterprise.DI.Core.ServiceCollection;
 
 namespace Enterprise.Api.Startup;
 
@@ -107,6 +108,12 @@ public static class WebApi
         PreStartupLogger.Instance.LogInformation("Building the application.");
 
         builder.InsertAnalysisStartupFilter();
+
+        // We have to add this right before we build the application.
+        // This captures a snapshot of all registered services up to this point.
+        // Once build is called, the service collection is transformed to a service provider,
+        // at which point no new services can be added to the DI container.
+        builder.AddServiceDescriptorRegistry();
 
         WebApplication app = builder.Build();
 

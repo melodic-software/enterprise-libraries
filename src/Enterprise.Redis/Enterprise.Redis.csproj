@@ -13,9 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.315" />
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.338" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.130" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.324" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.338" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
   </ItemGroup>
