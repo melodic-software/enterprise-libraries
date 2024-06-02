@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
     <PackageReference Include="Melodic.Enterprise.DateTimes" Version="1.0.0-preview.345" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.345" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.348" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.130" />
     <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.346" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />

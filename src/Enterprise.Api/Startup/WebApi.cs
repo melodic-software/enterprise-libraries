@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using Enterprise.DI.Core.ServiceCollection;
+using Enterprise.Applications.DI.ServiceCollection;
 
 namespace Enterprise.Api.Startup;
 
