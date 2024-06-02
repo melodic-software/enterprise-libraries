@@ -4,5 +4,5 @@ namespace Enterprise.Api.Middleware.RootRedirect;
 
 public class RootRedirectMiddlewareOptions
 {
-    public string? SwaggerRoutePrefix => SwaggerConstants.RoutePrefix;
+    public string? SwaggerRoutePrefix { get; set; } = SwaggerConstants.RoutePrefix;
 }

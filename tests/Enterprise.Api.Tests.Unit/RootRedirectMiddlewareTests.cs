@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
@@ -35,9 +36,14 @@ public class RootRedirectMiddlewareTests
         };
 
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
-        const string? swaggerRoutePrefix = null;
+        Mock<IOptionsMonitor<RootRedirectMiddlewareOptions>> optionsMonitor = new();
+        optionsMonitor.SetupGet(x => x.CurrentValue)
+            .Returns(new RootRedirectMiddlewareOptions
+            {
+                SwaggerRoutePrefix = null
+            });
 
-        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, optionsMonitor.Object);
 
         // ACT
         await middleware.InvokeAsync(httpContextMock.Object);
@@ -76,8 +82,14 @@ public class RootRedirectMiddlewareTests
         RequestDelegate next = _ => Task.CompletedTask;
 
         Mock<ILogger<RootRedirectMiddleware>> loggerMock = new();
-           
-        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, swaggerRoutePrefix);
+        Mock<IOptionsMonitor<RootRedirectMiddlewareOptions>> optionsMonitor = new();
+        optionsMonitor.SetupGet(x => x.CurrentValue)
+            .Returns(new RootRedirectMiddlewareOptions
+            {
+                SwaggerRoutePrefix = swaggerRoutePrefix
+            });
+
+        var middleware = new RootRedirectMiddleware(next, loggerMock.Object, optionsMonitor.Object);
 
         // ACT
         await middleware.InvokeAsync(httpContextMock.Object);
