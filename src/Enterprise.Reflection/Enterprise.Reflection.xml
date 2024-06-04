@@ -4,11 +4,6 @@
         <name>Enterprise.Reflection</name>
     </assembly>
     <members>
-        <member name="T:Enterprise.Reflection.Assemblies.AssemblyFilterPredicates">
-            <summary>
-            Provides common predicate functions for filtering assemblies based on their names.
-            </summary>
-        </member>
         <member name="T:Enterprise.Reflection.Assemblies.AssemblyLoadConstants">
             <summary>
             Contains constants related to assembly loading.
@@ -27,7 +22,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadAllAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadAllAssemblies(Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilter)">
             <summary>
             Loads assemblies that match a given filter predicate.
             This works at startup if you want to view ALL assemblies.
@@ -45,7 +40,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadSolutionAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+        <member name="M:Enterprise.Reflection.Assemblies.AssemblyLoader.LoadSolutionAssemblies(Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilter)">
             <summary>
             Load all assemblies in the base directory of the current app domain.
             This will return dynamically loaded assemblies as long as they are under the aforementioned directory.
@@ -67,6 +62,11 @@
             Some assemblies may have already been loaded, depending on when this is called.
             </summary>
             <param name="eventHandler">The event handler to attach.</param>
+        </member>
+        <member name="T:Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters">
+            <summary>
+            Provides common predicate functions for filtering assemblies based on their names.
+            </summary>
         </member>
         <member name="T:Enterprise.Reflection.Assemblies.LoadedAssemblyService">
             <summary>
