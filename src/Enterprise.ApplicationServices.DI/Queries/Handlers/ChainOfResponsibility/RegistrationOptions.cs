@@ -1,7 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
 public class RegistrationOptions<TQuery, TResponse> : RegistrationOptionsBase<TQuery, TResponse>

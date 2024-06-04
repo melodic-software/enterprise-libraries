@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Enterprise.Reflection.Assemblies;
 using Microsoft.AspNetCore.Builder;
-using static Enterprise.Reflection.Assemblies.AssemblyFilterPredicates;
+using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
 using static Enterprise.Reflection.Types.AssignableConcreteTypeService;
 
 namespace Enterprise.Api.Minimal.Mapping;
@@ -10,7 +10,7 @@ public static class EndpointMapper
 {
     public static void MapEndpoints(IApplicationBuilder app)
     {
-        List<Assembly> assemblies = AssemblyLoader
+        var assemblies = AssemblyLoader
             .LoadSolutionAssemblies(ThatAreNotMicrosoft)
             .ToList();
 
