@@ -4,7 +4,7 @@
         <name>Enterprise.ApplicationServices.DI</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions{``0,``1}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate.CommandHandlerImplementationFactory{``0,``1},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.RegistrationOptions{``0,``1}})">
             <summary>
             Register a command handler using the chain of responsibility design pattern.
             </summary>
@@ -25,7 +25,7 @@
             If not provided, the default chain will be used.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.RegistrationOptions{``0}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.CommandHandlerImplementationFactory{``0},Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates.ConfigureOptions{``0})">
             <summary>
             Register a command handler using the chain of responsibility design pattern.
             </summary>
@@ -67,7 +67,7 @@
             Provider further configuration to the command handler registration.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase{``0,``1}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.RegistrationOptions{``0,``1}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.CommandHandlerRegistrationExtensions.RegisterCommandHandler``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate.CommandHandlerImplementationFactory{``0,``1},Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.Delegates.ConfigureOptions{``0,``1})">
             <summary>
             Register a command handler.
             </summary>
@@ -95,7 +95,7 @@
             A factory method delegate that instantiates the command handler instance.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.IServiceProvider,Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase{``0}},System.Action{Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.RegistrationOptions{``0}})">
+        <member name="M:Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.CommandHandlerRegistrationExtensions.RegisterCommandHandler``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.CommandHandlerImplementationFactory{``0},Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Delegates.ConfigureOptions{``0})">
             <summary>
             Register a command handler.
             </summary>
@@ -144,7 +144,7 @@
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions`2.HandlerImplementationFactory">
             <summary>
-            A factory method delegate that instantiates the chain of responsibility instance.
+            A factory method delegate that instantiates the chain of responsibility handler instance.
             </summary>
         </member>
         <member name="P:Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.RegistrationOptions`2.ConfigureChainOfResponsibility">

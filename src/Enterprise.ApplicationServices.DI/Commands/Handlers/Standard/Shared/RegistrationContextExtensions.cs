@@ -18,7 +18,7 @@ internal static class RegistrationContextExtensions
             );
         }
 
-        registrationContext.Add(options.CommandHandlerImplementationFactory, options.ServiceLifetime);
+        registrationContext.Add(options.CommandHandlerImplementationFactory.Invoke, options.ServiceLifetime);
 
         return registrationContext;
     }

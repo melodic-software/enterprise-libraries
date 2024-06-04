@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,11 +21,11 @@ public static class RegistrationContextExtensions
             );
         }
 
-        registrationContext.Add(options.CommandHandlerImplementationFactory, options.ServiceLifetime);
+        registrationContext.Add(options.CommandHandlerImplementationFactory.Invoke, options.ServiceLifetime);
 
         // We also need to register this as a standard command handler.
-        var standardImplementationFactory = options.CommandHandlerImplementationFactory 
-            as Func<IServiceProvider, IHandleCommand<TCommand>>;
+        CommandHandlerImplementationFactory<TCommand> standardImplementationFactory =
+            options.CommandHandlerImplementationFactory.Invoke;
 
         var serviceDescriptor = new ServiceDescriptor(
             typeof(IHandleCommand<TCommand>),

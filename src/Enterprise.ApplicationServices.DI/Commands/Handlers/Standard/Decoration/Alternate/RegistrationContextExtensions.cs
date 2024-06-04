@@ -1,28 +1,30 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Alternate.Delegates;
 using Enterprise.DI.Core.Registration;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Alternate;
 
 public static class RegistrationContextExtensions
 {
-    public static void WithDecorators<TCommand, TResponse>(
+    public static RegistrationContext<IHandleCommand<TCommand, TResponse>> WithDecorators<TCommand, TResponse>(
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
-        params Func<IServiceProvider, IHandleCommand<TCommand, TResponse>, IHandleCommand<TCommand, TResponse>>[] decoratorFactories)
+        params CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>[] decoratorFactories)
         where TCommand : ICommand<TResponse>
     {
-        registrationContext.WithDecorators(decoratorFactories);
+        return registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
     }
 
     internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> WithDefaultDecorators<TCommand, TResponse>(
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext)
         where TCommand : ICommand<TResponse>
     {
-        IEnumerable<Func<IServiceProvider, IHandleCommand<TCommand, TResponse>, IHandleCommand<TCommand, TResponse>>>
-            decoratorFactories = CommandHandlerDecoratorFactories.GetDefault<TCommand, TResponse>();
+        IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>>
+            defaultDecoratorImplementationFactories = CommandHandlerDecoratorImplementationFactories.GetDefault<TCommand, TResponse>();
 
-        return registrationContext.WithDecorators(decoratorFactories.ToArray());
+        return registrationContext.WithDecorators(defaultDecoratorImplementationFactories);
     }
 
     internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> RegisterWithDecorators<TCommand, TResponse>(
@@ -34,11 +36,22 @@ public static class RegistrationContextExtensions
 
         if (options.DecoratorFactories.Any())
         {
-            registrationContext.WithDecorators(options.DecoratorFactories.ToArray());
+            return registrationContext.WithDecorators(options.DecoratorFactories.ToArray());
         }
-        else
+
+        registrationContext.WithDefaultDecorators();
+
+        return registrationContext;
+    }
+
+    private static RegistrationContext<IHandleCommand<TCommand, TResponse>> WithDecorators<TCommand, TResponse>(
+        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
+        IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>> implementationFactories)
+        where TCommand : ICommand<TResponse>
+    {
+        foreach (CommandHandlerDecoratorImplementationFactory<TCommand, TResponse> implementationFactory in implementationFactories)
         {
-            registrationContext.WithDefaultDecorators();
+            registrationContext.WithDecorator(implementationFactory.Invoke);
         }
 
         return registrationContext;

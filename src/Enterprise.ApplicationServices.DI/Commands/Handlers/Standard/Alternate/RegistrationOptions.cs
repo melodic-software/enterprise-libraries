@@ -1,6 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Alternate.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate;
 
@@ -19,14 +20,14 @@ public sealed class RegistrationOptions<TCommand, TResponse> :
     /// If none are provided, the default decorators will be used.
     /// <see cref="UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
     /// </summary>
-    public IEnumerable<Func<IServiceProvider, IHandleCommand<TCommand, TResponse>, IHandleCommand<TCommand, TResponse>>> DecoratorFactories { get; } = [];
+    public IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>> DecoratorFactories { get; } = [];
 
     /// <summary>
     /// A factory method delegate that instantiates the command handler instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? CommandHandlerImplementationFactory { get; }
+    internal CommandHandlerImplementationFactory<TCommand, TResponse>? CommandHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandleCommand<TCommand, TResponse>>? commandHandlerImplementationFactory)
+    public RegistrationOptions(CommandHandlerImplementationFactory<TCommand, TResponse>? commandHandlerImplementationFactory)
     {
         CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }

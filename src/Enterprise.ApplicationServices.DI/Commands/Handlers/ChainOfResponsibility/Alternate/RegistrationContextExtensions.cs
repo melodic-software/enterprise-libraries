@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate;
 
-public static class RegistrationExtensions
+public static class RegistrationContextExtensions
 {
     internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> AddChainOfResponsibility<TCommand, TResponse>(
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
@@ -46,28 +46,27 @@ public static class RegistrationExtensions
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
         RegistrationOptions<TCommand, TResponse> options) where TCommand : ICommand<TResponse>
     {
-        Func<IServiceProvider, IHandleCommand<TCommand, TResponse>> implementationFactory = provider =>
-        {
-            IResponsibilityChain<TCommand, TResponse> responsibilityChain =
-                provider.GetRequiredService<IResponsibilityChain<TCommand, TResponse>>();
-
-            return new CommandHandler<TCommand, TResponse>(responsibilityChain);
-        };
-
         // This is a command handler implementation that takes in a responsibility chain.
-        registrationContext.Add(implementationFactory, options.ServiceLifetime);
+        registrationContext.Add(ImplementationFactory<TCommand, TResponse>, options.ServiceLifetime);
 
         // We also need to register this as a standard command handler.
-        var standardImplementationFactory = implementationFactory as Func<IServiceProvider, IHandleCommand<TCommand>>;
-
         var serviceDescriptor = new ServiceDescriptor(
             typeof(IHandleCommand<TCommand>),
-            standardImplementationFactory,
+            ImplementationFactory<TCommand, TResponse>,
             options.ServiceLifetime
         );
 
         registrationContext.Add(serviceDescriptor);
 
         return registrationContext;
+    }
+
+    private static CommandHandler<TCommand, TResponse> ImplementationFactory<TCommand, TResponse>(IServiceProvider provider)
+        where TCommand : ICommand<TResponse>
+    {
+        IResponsibilityChain<TCommand, TResponse> responsibilityChain =
+            provider.GetRequiredService<IResponsibilityChain<TCommand, TResponse>>();
+
+        return new CommandHandler<TCommand, TResponse>(responsibilityChain);
     }
 }

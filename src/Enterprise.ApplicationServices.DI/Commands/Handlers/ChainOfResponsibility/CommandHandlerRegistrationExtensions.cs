@@ -1,5 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,12 +17,12 @@ public static class CommandHandlerRegistrationExtensions
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterCommandHandler<TCommand>(this IServiceCollection services,
-        Func<IServiceProvider, CommandHandlerBase<TCommand>> implementationFactory,
-        Action<RegistrationOptions<TCommand>>? configureOptions = null)
+        CommandHandlerImplementationFactory<TCommand> implementationFactory,
+        ConfigureOptions<TCommand>? configureOptions = null)
         where TCommand : IBaseCommand
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
-        var options = new RegistrationOptions<TCommand>(implementationFactory);
+        var options = new RegistrationOptions<TCommand>(implementationFactory.Invoke);
         configureOptions?.Invoke(options);
         RegistrationContext<IHandleCommand<TCommand>> registrationContext = services.RegisterCommandHandler(options);
         options.PostConfigure?.Invoke(services, registrationContext);

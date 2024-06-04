@@ -46,17 +46,27 @@ internal static class RegistrationContextExtensions
         RegistrationOptions<TQuery, TResponse> options)
         where TQuery : IBaseQuery
     {
-        // This is a query handler implementation that takes in a responsibility chain.
-        static IHandleQuery<TQuery, TResponse> ImplementationFactory(IServiceProvider provider)
-        {
-            IResponsibilityChain<TQuery, TResponse> responsibilityChain =
-                provider.GetRequiredService<IResponsibilityChain<TQuery, TResponse>>();
+        registrationContext.Add(ImplementationFactory<TQuery, TResponse>, options.ServiceLifetime);
 
-            return new QueryHandler<TQuery, TResponse>(responsibilityChain);
-        }
+        // We can also can register this alternative.
+        var serviceDescriptor = ServiceDescriptor.Describe(
+            typeof(IHandleQuery<TResponse>),
+            ImplementationFactory<TQuery, TResponse>,
+            options.ServiceLifetime
+        );
 
-        registrationContext.Add(ImplementationFactory, options.ServiceLifetime);
+        registrationContext.Add(serviceDescriptor);
 
         return registrationContext;
+    }
+
+    // This is a query handler implementation that takes in a responsibility chain.
+    public static QueryHandler<TQuery, TResponse> ImplementationFactory<TQuery, TResponse>(IServiceProvider provider)
+        where TQuery : IBaseQuery
+    {
+        IResponsibilityChain<TQuery, TResponse> responsibilityChain =
+            provider.GetRequiredService<IResponsibilityChain<TQuery, TResponse>>();
+
+        return new QueryHandler<TQuery, TResponse>(responsibilityChain);
     }
 }

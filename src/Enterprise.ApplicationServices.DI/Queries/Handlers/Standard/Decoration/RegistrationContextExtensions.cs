@@ -7,12 +7,12 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration
 
 public static class RegistrationContextExtensions
 {
-    public static void WithDecorators<TQuery, TResponse>(
+    public static RegistrationContext<IHandleQuery<TQuery, TResponse>> WithDecorators<TQuery, TResponse>(
         this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
         params QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>[] decoratorFactories)
         where TQuery : IBaseQuery
     {
-        registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
+        return registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> WithDefaultDecorators<TQuery, TResponse>(
@@ -22,9 +22,7 @@ public static class RegistrationContextExtensions
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>>
             defaultDecoratorImplementationFactories = QueryHandlerDecoratorImplementationFactories.GetDefault<TQuery, TResponse>();
 
-        registrationContext.WithDecorators(defaultDecoratorImplementationFactories);
-
-        return registrationContext;
+        return registrationContext.WithDecorators(defaultDecoratorImplementationFactories);
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterWithDecorators<TQuery, TResponse>(
@@ -36,17 +34,13 @@ public static class RegistrationContextExtensions
 
         if (options.DecoratorFactories.Any())
         {
-            registrationContext.WithDecorators(options.DecoratorFactories);
-        }
-        else
-        {
-            registrationContext.WithDefaultDecorators();
+            return registrationContext.WithDecorators(options.DecoratorFactories);
         }
 
-        return registrationContext;
+        return registrationContext.WithDefaultDecorators();
     }
 
-    private static void WithDecorators<TQuery, TResponse>(
+    private static RegistrationContext<IHandleQuery<TQuery, TResponse>> WithDecorators<TQuery, TResponse>(
         this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>> implementationFactories) 
         where TQuery : IBaseQuery
@@ -55,5 +49,7 @@ public static class RegistrationContextExtensions
         {
             registrationContext.WithDecorator(implementationFactory.Invoke);
         }
+
+        return registrationContext;
     }
 }

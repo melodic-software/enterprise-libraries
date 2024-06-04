@@ -1,16 +1,15 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration;
+namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Delegates;
 
-public static class CommandHandlerDecoratorFactories
+public static class CommandHandlerDecoratorImplementationFactories
 {
-    public static IEnumerable<Func<IServiceProvider, IHandleCommand<TCommand>, IHandleCommand<TCommand>>>
+    public static IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand>>
         GetDefault<TCommand>() where TCommand : IBaseCommand
     {
         return

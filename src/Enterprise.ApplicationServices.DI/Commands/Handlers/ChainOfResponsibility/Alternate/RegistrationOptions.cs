@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Alternate;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Alternate;
 
@@ -11,7 +11,7 @@ public class RegistrationOptions<TCommand, TResponse> : RegistrationOptionsBase<
     /// <summary>
     /// A factory method delegate that instantiates the chain of responsibility instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandler<TCommand, TResponse>>? CommandHandlerImplementationFactory { get; }
+    internal HandlerImplementationFactory<TCommand, TResponse>? CommandHandlerImplementationFactory { get; }
 
     /// <summary>
     /// Provide a custom responsibility chain configuration.
@@ -19,7 +19,7 @@ public class RegistrationOptions<TCommand, TResponse> : RegistrationOptionsBase<
     /// </summary>
     public Action<ResponsibilityChainRegistrationBuilder<TCommand, TResponse>>? ConfigureChainOfResponsibility { get; set; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandler<TCommand, TResponse>>? commandHandlerImplementationFactory)
+    public RegistrationOptions(HandlerImplementationFactory<TCommand, TResponse>? commandHandlerImplementationFactory)
     {
         CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }

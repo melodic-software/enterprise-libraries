@@ -23,7 +23,8 @@ internal static class RegistrationContextExtensions
         registrationContext.Add(options.QueryHandlerImplementationFactory.Invoke, options.ServiceLifetime);
 
         // We can also can register this alternative.
-        QueryHandlerImplementationFactory<TResponse> alternateImplementationFactory = options.QueryHandlerImplementationFactory.Invoke;
+        QueryHandlerImplementationFactory<TResponse> alternateImplementationFactory = 
+            options.QueryHandlerImplementationFactory.Invoke;
 
         var serviceDescriptor = new ServiceDescriptor(
             typeof(IHandleQuery<TResponse>),

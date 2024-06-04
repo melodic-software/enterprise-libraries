@@ -1,5 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Alternate.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Alternate;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +19,8 @@ public static class CommandHandlerRegistrationExtensions
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterCommandHandler<TCommand, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, CommandHandlerBase<TCommand, TResponse>> implementationFactory,
-        Action<RegistrationOptions<TCommand, TResponse>>? configureOptions = null)
+        CommandHandlerImplementationFactory<TCommand, TResponse> implementationFactory,
+        ConfigureOptions<TCommand, TResponse>? configureOptions = null)
         where TCommand : ICommand<TResponse>
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
@@ -41,13 +43,9 @@ public static class CommandHandlerRegistrationExtensions
 
         if (options.UseDecorators)
         {
-            registrationContext.RegisterWithDecorators(options);
-        }
-        else
-        {
-            registrationContext.AddCommandHandler(options);
+            return registrationContext.RegisterWithDecorators(options);
         }
 
-        return registrationContext;
+        return registrationContext.AddCommandHandler(options);
     }
 }

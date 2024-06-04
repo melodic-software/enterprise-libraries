@@ -68,13 +68,9 @@ public static class CommandHandlerRegistrationExtensions
 
         if (options.UseDecorators)
         {
-            registrationContext.RegisterWithDecorators(options);
-        }
-        else
-        {
-            registrationContext.AddQueryHandler(options);
+            return registrationContext.RegisterWithDecorators(options);
         }
 
-        return registrationContext;
+        return registrationContext.AddQueryHandler(options);
     }
 }
