@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Enterprise.Reflection.Assemblies.Delegates;
 using static Enterprise.Reflection.Assemblies.AssemblyLoadConstants;
 
 namespace Enterprise.Reflection.Assemblies;
@@ -16,8 +17,8 @@ public static class AssemblyLoader
     /// <returns></returns>
     public static List<Assembly> LoadAllAssemblies()
     {
-        bool FilterPredicate(AssemblyName assemblyName) => true;
-        List<Assembly> allAssemblies = LoadAllAssemblies(FilterPredicate);
+        FilterAssemblyName filterPredicate = FilterAssemblyNameDefaults.NoFilter;
+        List<Assembly> allAssemblies = LoadAllAssemblies(filterPredicate.Invoke);
         return allAssemblies;
     }
 
@@ -36,7 +37,7 @@ public static class AssemblyLoader
         HashSet<string> loadedAssemblyNames = [];
         List<Assembly> assemblies = [];
 
-        Assembly? entryAssembly = Assembly.GetEntryAssembly();
+        var entryAssembly = Assembly.GetEntryAssembly();
 
         if (entryAssembly != null)
         {
@@ -63,7 +64,7 @@ public static class AssemblyLoader
                     continue;
                 }
 
-                Assembly assembly = Assembly.Load(assemblyName);
+                var assembly = Assembly.Load(assemblyName);
                 assembliesToCheck.Enqueue(assembly);
                 loadedAssemblyNames.Add(assemblyName.FullName);
                 assemblies.Add(assembly);
@@ -80,8 +81,8 @@ public static class AssemblyLoader
     /// <returns></returns>
     public static Assembly[] LoadSolutionAssemblies()
     {
-        bool FilterPredicate(AssemblyName assemblyName) => true;
-        Assembly[] assemblies = LoadSolutionAssemblies(FilterPredicate);
+        FilterAssemblyName filterPredicate = FilterAssemblyNameDefaults.NoFilter;
+        Assembly[] assemblies = LoadSolutionAssemblies(filterPredicate);
         return assemblies;
     }
 
@@ -93,14 +94,14 @@ public static class AssemblyLoader
     /// </summary>
     /// <param name="filterPredicate"></param>
     /// <returns></returns>
-    public static Assembly[] LoadSolutionAssemblies(Func<AssemblyName, bool> filterPredicate)
+    public static Assembly[] LoadSolutionAssemblies(FilterAssemblyName filterPredicate)
     {
         AppDomain currentDomain = AppDomain.CurrentDomain;
         string baseDirectory = currentDomain.BaseDirectory;
         string[] dllFiles = Directory.GetFiles(baseDirectory, DllSearchPattern);
-        List<AssemblyName> assemblyNames = dllFiles.Select(AssemblyName.GetAssemblyName).ToList();
-        List<AssemblyName> assemblyNamesToLoad = assemblyNames.Where(filterPredicate).ToList();
-        List<Assembly> assemblies = assemblyNamesToLoad.Select(Assembly.Load).ToList();
+        var assemblyNames = dllFiles.Select(AssemblyName.GetAssemblyName).ToList();
+        var assemblyNamesToLoad = assemblyNames.Where(filterPredicate.Invoke).ToList();
+        var assemblies = assemblyNamesToLoad.Select(Assembly.Load).ToList();
         return assemblies.ToArray();
     }
 }
