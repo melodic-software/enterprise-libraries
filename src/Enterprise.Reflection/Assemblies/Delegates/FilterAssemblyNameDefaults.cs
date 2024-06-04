@@ -1,19 +1,17 @@
-﻿using System.Reflection;
-
-namespace Enterprise.Reflection.Assemblies;
+﻿namespace Enterprise.Reflection.Assemblies.Delegates;
 
 /// <summary>
 /// Provides common predicate functions for filtering assemblies based on their names.
 /// </summary>
-public static class AssemblyFilterPredicates
+public static class FilterAssemblyNameDefaults
 {
-    public static Func<AssemblyName, bool> NameStartsWithEnterprise => x =>
+    public static FilterAssemblyName NameStartsWithEnterprise => x =>
         !string.IsNullOrWhiteSpace(x.Name) &&
         x.Name.StartsWith("Enterprise", StringComparison.Ordinal);
 
-    public static Func<AssemblyName, bool> NoFilter => _ => true;
+    public static FilterAssemblyName NoFilter => _ => true;
 
-    public static Func<AssemblyName, bool> ThatAreNotMicrosoft => x =>
+    public static FilterAssemblyName ThatAreNotMicrosoft => x =>
         !string.IsNullOrWhiteSpace(x.Name) &&
         !x.Name.StartsWith("Microsoft", StringComparison.Ordinal) &&
         !x.Name.StartsWith("System", StringComparison.Ordinal);
