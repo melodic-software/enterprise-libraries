@@ -12,4 +12,4 @@ namespace Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
 /// </summary>
 /// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(ICommand))]
-public interface ICommand<out TResponse> : IBaseCommand, IRequest<TResponse>;
+public interface ICommand<out TResponse> : ICommand, IRequest<TResponse>;

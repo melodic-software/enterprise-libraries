@@ -1,8 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.DI.Core.Registration;
-using Enterprise.Patterns.ResultPattern.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Shared;
@@ -12,7 +10,7 @@ internal static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleCommand<TCommand>> AddCommandHandler<TCommand>(
         this RegistrationContext<IHandleCommand<TCommand>> registrationContext,
         RegistrationOptions<TCommand> options)
-        where TCommand : ICommand
+        where TCommand : IBaseCommand
     {
         if (options.CommandHandlerImplementationFactory == null)
         {
@@ -25,15 +23,6 @@ internal static class RegistrationContextExtensions
         registrationContext.Add(
             new ServiceDescriptor(
                 typeof(IHandleCommand<TCommand>),
-                factory: options.CommandHandlerImplementationFactory.Invoke,
-                options.ServiceLifetime
-            )
-        );
-
-        // Add alternate registration.
-        registrationContext.Add(
-            new ServiceDescriptor(
-                typeof(IHandleCommand<TCommand, Result>),
                 factory: options.CommandHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )

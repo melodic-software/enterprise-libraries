@@ -29,7 +29,7 @@ public static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleCommand<TCommand>> RegisterWithDecorators<TCommand>(
         this RegistrationContext<IHandleCommand<TCommand>> registrationContext,
         RegistrationOptions<TCommand> options)
-        where TCommand : ICommand
+        where TCommand : IBaseCommand
     {
         registrationContext.AddCommandHandler(options);
 
