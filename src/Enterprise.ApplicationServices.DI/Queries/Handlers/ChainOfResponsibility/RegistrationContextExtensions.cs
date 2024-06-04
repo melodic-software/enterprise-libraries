@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DI.Core.Registration;
@@ -46,27 +47,33 @@ internal static class RegistrationContextExtensions
         RegistrationOptions<TQuery, TResponse> options)
         where TQuery : IBaseQuery
     {
-        registrationContext.Add(ImplementationFactory<TQuery, TResponse>, options.ServiceLifetime);
-
-        // We can also can register this alternative.
-        var serviceDescriptor = ServiceDescriptor.Describe(
-            typeof(IHandleQuery<TResponse>),
-            ImplementationFactory<TQuery, TResponse>,
-            options.ServiceLifetime
+        // Register the primary.
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleQuery<TQuery, TResponse>),
+                factory: ImplementationFactory<TQuery, TResponse>,
+                options.ServiceLifetime
+            )
         );
 
-        registrationContext.Add(serviceDescriptor);
+        // Register the alternative.
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleQuery<TResponse>),
+                factory: ImplementationFactory<TQuery, TResponse>,
+                options.ServiceLifetime
+            )
+        );
 
         return registrationContext;
     }
-
-    // This is a query handler implementation that takes in a responsibility chain.
+    
     public static QueryHandler<TQuery, TResponse> ImplementationFactory<TQuery, TResponse>(IServiceProvider provider)
         where TQuery : IBaseQuery
     {
-        IResponsibilityChain<TQuery, TResponse> responsibilityChain =
-            provider.GetRequiredService<IResponsibilityChain<TQuery, TResponse>>();
+        IResponsibilityChain<TQuery, TResponse> responsibilityChain = provider.GetRequiredService<IResponsibilityChain<TQuery, TResponse>>();
 
+        // This is a query handler implementation that takes in a responsibility chain.
         return new QueryHandler<TQuery, TResponse>(responsibilityChain);
     }
 }

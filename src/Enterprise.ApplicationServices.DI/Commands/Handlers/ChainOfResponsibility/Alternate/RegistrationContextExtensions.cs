@@ -2,6 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DI.Core.Registration;
@@ -46,17 +47,23 @@ public static class RegistrationContextExtensions
         this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
         RegistrationOptions<TCommand, TResponse> options) where TCommand : ICommand<TResponse>
     {
-        // This is a command handler implementation that takes in a responsibility chain.
-        registrationContext.Add(ImplementationFactory<TCommand, TResponse>, options.ServiceLifetime);
-
-        // We also need to register this as a standard command handler.
-        var serviceDescriptor = new ServiceDescriptor(
-            typeof(IHandleCommand<TCommand>),
-            ImplementationFactory<TCommand, TResponse>,
-            options.ServiceLifetime
+        // Register the primary abstraction.
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand, TResponse>),
+                factory: ImplementationFactory<TCommand, TResponse>,
+                options.ServiceLifetime
+            )
         );
 
-        registrationContext.Add(serviceDescriptor);
+        // Register the base abstraction (alternate).
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand>),
+                factory: ImplementationFactory<TCommand, TResponse>,
+                options.ServiceLifetime
+            )
+        );
 
         return registrationContext;
     }

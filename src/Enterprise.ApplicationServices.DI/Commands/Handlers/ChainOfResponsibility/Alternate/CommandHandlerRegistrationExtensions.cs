@@ -1,6 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;

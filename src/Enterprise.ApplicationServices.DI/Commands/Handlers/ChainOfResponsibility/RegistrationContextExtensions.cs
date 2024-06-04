@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DI.Core.Registration;
@@ -48,17 +49,23 @@ public static class RegistrationContextExtensions
         this RegistrationContext<IHandleCommand<TCommand>> registrationContext,
         RegistrationOptions<TCommand> options) where TCommand : IBaseCommand
     {
-        // This is a command handler implementation that takes in a responsibility chain.
-        static IHandleCommand<TCommand> ImplementationFactory(IServiceProvider provider)
-        {
-            IResponsibilityChain<TCommand> responsibilityChain = 
-                provider.GetRequiredService<IResponsibilityChain<TCommand>>();
-
-            return new CommandHandler<TCommand>(responsibilityChain);
-        }
-
-        registrationContext.Add(ImplementationFactory, options.ServiceLifetime);
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand>),
+                factory: ImplementationFactory<TCommand>,
+                options.ServiceLifetime
+            )
+        );
 
         return registrationContext;
+    }
+
+    public static IHandleCommand<TCommand> ImplementationFactory<TCommand>(IServiceProvider provider)
+        where TCommand : IBaseCommand
+    {
+        IResponsibilityChain<TCommand> responsibilityChain = provider.GetRequiredService<IResponsibilityChain<TCommand>>();
+
+        // This is a command handler implementation that takes in a responsibility chain.
+        return new CommandHandler<TCommand>(responsibilityChain);
     }
 }

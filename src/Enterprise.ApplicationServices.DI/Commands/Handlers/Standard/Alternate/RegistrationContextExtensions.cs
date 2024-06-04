@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
 using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Alternate;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,19 +21,22 @@ public static class RegistrationContextExtensions
             );
         }
 
-        registrationContext.Add(options.CommandHandlerImplementationFactory.Invoke, options.ServiceLifetime);
-
-        // We also need to register this as a standard command handler.
-        CommandHandlerImplementationFactory<TCommand> standardImplementationFactory =
-            options.CommandHandlerImplementationFactory.Invoke;
-
-        var serviceDescriptor = new ServiceDescriptor(
-            typeof(IHandleCommand<TCommand>),
-            standardImplementationFactory,
-            options.ServiceLifetime
+        // Register the primary.
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand, TResponse>),
+                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.ServiceLifetime)
         );
 
-        registrationContext.Add(serviceDescriptor);
+        // We also need to register this as a standard command handler.
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand>),
+                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.ServiceLifetime
+            )
+        );
 
         return registrationContext;
     }

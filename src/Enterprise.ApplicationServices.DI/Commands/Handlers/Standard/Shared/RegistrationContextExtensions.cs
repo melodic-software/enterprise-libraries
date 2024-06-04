@@ -1,6 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DI.Core.Registration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Shared;
 
@@ -18,7 +20,13 @@ internal static class RegistrationContextExtensions
             );
         }
 
-        registrationContext.Add(options.CommandHandlerImplementationFactory.Invoke, options.ServiceLifetime);
+        registrationContext.Add(
+            new ServiceDescriptor(
+                typeof(IHandleCommand<TCommand>),
+                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.ServiceLifetime
+            )
+        );
 
         return registrationContext;
     }
