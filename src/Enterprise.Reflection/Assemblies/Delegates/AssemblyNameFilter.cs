@@ -2,4 +2,4 @@
 
 namespace Enterprise.Reflection.Assemblies.Delegates;
 
-public delegate bool FilterAssemblyName(AssemblyName assembly);
+public delegate bool AssemblyNameFilter(AssemblyName assembly);

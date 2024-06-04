@@ -17,7 +17,7 @@ public static class AssemblyLoader
     /// <returns></returns>
     public static List<Assembly> LoadAllAssemblies()
     {
-        FilterAssemblyName filterPredicate = FilterAssemblyNameDefaults.NoFilter;
+        AssemblyNameFilter filterPredicate = AssemblyNameFilters.NoFilter;
         List<Assembly> allAssemblies = LoadAllAssemblies(filterPredicate.Invoke);
         return allAssemblies;
     }
@@ -31,7 +31,7 @@ public static class AssemblyLoader
     /// </summary>
     /// <param name="filterPredicate">A predicate used to determine which assemblies to load.</param>
     /// <returns>A list of loaded assemblies that match the filter predicate.</returns>
-    public static List<Assembly> LoadAllAssemblies(Func<AssemblyName, bool> filterPredicate)
+    public static List<Assembly> LoadAllAssemblies(AssemblyNameFilter filterPredicate)
     {
         Queue<Assembly> assembliesToCheck = new();
         HashSet<string> loadedAssemblyNames = [];
@@ -81,7 +81,7 @@ public static class AssemblyLoader
     /// <returns></returns>
     public static Assembly[] LoadSolutionAssemblies()
     {
-        FilterAssemblyName filterPredicate = FilterAssemblyNameDefaults.NoFilter;
+        AssemblyNameFilter filterPredicate = AssemblyNameFilters.NoFilter;
         Assembly[] assemblies = LoadSolutionAssemblies(filterPredicate);
         return assemblies;
     }
@@ -94,7 +94,7 @@ public static class AssemblyLoader
     /// </summary>
     /// <param name="filterPredicate"></param>
     /// <returns></returns>
-    public static Assembly[] LoadSolutionAssemblies(FilterAssemblyName filterPredicate)
+    public static Assembly[] LoadSolutionAssemblies(AssemblyNameFilter filterPredicate)
     {
         AppDomain currentDomain = AppDomain.CurrentDomain;
         string baseDirectory = currentDomain.BaseDirectory;
