@@ -1,6 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.DI.Core.Registration;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Options.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
@@ -16,5 +15,5 @@ public abstract class RegistrationOptionsBase<TQuery, TResponse> where TQuery : 
     /// <summary>
     /// Provider further configuration to the query handler registration.
     /// </summary>
-    public Action<IServiceCollection, RegistrationContext<IHandleQuery<TQuery, TResponse>>>? PostConfigure { get; set; }
+    public PostConfigure<TQuery, TResponse>? PostConfigure { get; set; }
 }

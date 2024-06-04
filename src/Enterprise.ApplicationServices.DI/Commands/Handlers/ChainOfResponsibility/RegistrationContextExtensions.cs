@@ -1,7 +1,6 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DI.Core.Registration;

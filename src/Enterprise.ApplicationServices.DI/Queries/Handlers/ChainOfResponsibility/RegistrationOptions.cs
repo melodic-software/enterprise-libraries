@@ -16,7 +16,7 @@ public class RegistrationOptions<TQuery, TResponse> : RegistrationOptionsBase<TQ
     /// Provide a custom responsibility chain configuration.
     /// If not provided, the default chain will be used.
     /// </summary>
-    public Action<ResponsibilityChainRegistrationBuilder<TQuery, TResponse>>? ConfigureChainOfResponsibility { get; set; }
+    public ConfigureChainOfResponsibility<TQuery, TResponse>? ConfigureChainOfResponsibility { get; set; }
 
     public RegistrationOptions(HandlerImplementationFactory<TQuery, TResponse>? handlerImplementationFactory)
     {

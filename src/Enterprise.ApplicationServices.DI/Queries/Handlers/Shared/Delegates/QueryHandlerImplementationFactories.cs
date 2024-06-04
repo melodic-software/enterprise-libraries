@@ -4,7 +4,7 @@ using Enterprise.ApplicationServices.Queries.Handlers.Simple;
 using Enterprise.Events.Facade.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 
 public static class QueryHandlerImplementationFactories
 {

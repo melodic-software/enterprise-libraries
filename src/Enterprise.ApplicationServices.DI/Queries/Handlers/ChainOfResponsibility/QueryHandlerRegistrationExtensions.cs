@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +18,8 @@ public static class CommandHandlerRegistrationExtensions
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory,
-        Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
+        HandlerImplementationFactory<TQuery, TResponse> implementationFactory,
+        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         services.Register(implementationFactory, configureOptions);
@@ -33,18 +34,18 @@ public static class CommandHandlerRegistrationExtensions
     /// <param name="services"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
+        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory =
+        HandlerImplementationFactory<TQuery, TResponse> implementationFactory =
             QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResponse>;
 
         services.Register(implementationFactory, configureOptions);
     }
 
     private static void Register<TQuery, TResponse>(this IServiceCollection services,
-        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory,
-        Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
+        HandlerImplementationFactory<TQuery, TResponse> implementationFactory,
+        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);

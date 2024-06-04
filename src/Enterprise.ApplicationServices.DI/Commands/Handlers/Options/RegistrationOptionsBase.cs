@@ -1,6 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.DI.Core.Registration;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Options;
@@ -16,5 +15,5 @@ public abstract class RegistrationOptionsBase<TCommand> where TCommand : IBaseCo
     /// <summary>
     /// Provider further configuration to the command handler registration.
     /// </summary>
-    public Action<IServiceCollection, RegistrationContext<IHandleCommand<TCommand>>>? PostConfigure { get; set; }
+    public PostConfigure<TCommand>? PostConfigure { get; set; }
 }
