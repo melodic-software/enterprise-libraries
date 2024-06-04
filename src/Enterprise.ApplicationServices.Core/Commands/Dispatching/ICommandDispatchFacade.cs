@@ -2,4 +2,4 @@
 
 namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
 
-public interface ICommandDispatchFacade : IDispatchCommands, IRegisterEventCallbacks, IClearCallbacks;
+public interface ICommandDispatchFacade : IDispatchBaseCommands, IDispatchCommandsWithResponse, IRegisterEventCallbacks, IClearCallbacks;
