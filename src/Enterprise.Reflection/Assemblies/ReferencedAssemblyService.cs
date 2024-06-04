@@ -15,7 +15,7 @@ public static class ReferencedAssemblyService
     /// <returns></returns>
     public static AssemblyName[]? GetEntryAssemblyReferences()
     {
-        Assembly? entryAssembly = Assembly.GetEntryAssembly();
+        var entryAssembly = Assembly.GetEntryAssembly();
         AssemblyName[]? referencedAssemblies = entryAssembly?.GetReferencedAssemblies();
         return referencedAssemblies;
     }
