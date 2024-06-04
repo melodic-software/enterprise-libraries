@@ -3,7 +3,7 @@ using static Enterprise.Reflection.Types.AssignableConcreteTypeService;
 
 namespace Enterprise.Reflection.Assemblies.Delegates;
 
-public static class GetAssemblyTypesDefaults
+public static class GetAssemblyTypeInfosDefaults
 {
     public static List<TypeInfo> GetDefaultAssemblyTypes(Assembly assembly, Type interfaceType)
     {

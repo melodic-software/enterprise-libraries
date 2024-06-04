@@ -2,4 +2,4 @@
 
 namespace Enterprise.Reflection.Assemblies.Delegates;
 
-public delegate bool ParametersAreValid(ParameterInfo[] parameterInfos);
+public delegate bool ParameterInfosAreValid(ParameterInfo[] parameterInfos);
