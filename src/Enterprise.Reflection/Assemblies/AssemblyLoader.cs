@@ -102,6 +102,6 @@ public static class AssemblyLoader
         var assemblyNames = dllFiles.Select(AssemblyName.GetAssemblyName).ToList();
         var assemblyNamesToLoad = assemblyNames.Where(filterPredicate.Invoke).ToList();
         var assemblies = assemblyNamesToLoad.Select(Assembly.Load).ToList();
-        return assemblies.ToArray();
+        return [.. assemblies];
     }
 }
