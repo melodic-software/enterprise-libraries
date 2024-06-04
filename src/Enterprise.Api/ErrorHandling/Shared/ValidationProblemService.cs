@@ -16,7 +16,7 @@ public static class ValidationProblemService
         Func<ActionContext, IActionResult> invalidModelStateResponseFactory = options.Value.InvalidModelStateResponseFactory;
         IActionResult actionResult = invalidModelStateResponseFactory(actionContext);
 
-        ActionResult result = (ActionResult)actionResult;
+        var result = (ActionResult)actionResult;
 
         return result;
     }

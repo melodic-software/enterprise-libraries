@@ -1,6 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
@@ -19,14 +20,14 @@ public sealed class RegistrationOptions<TQuery, TResponse> :
     /// If none are provided, the default decorators will be used.
     /// <see cref="UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
     /// </summary>
-    public IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>> DecoratorFactories { get; } = [];
+    public IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>> DecoratorFactories { get; } = [];
 
     /// <summary>
     /// A factory method delegate that instantiates the query handler instance.
     /// </summary>
-    internal Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? QueryHandlerImplementationFactory { get; }
+    internal QueryHandlerImplementationFactory<TQuery, TResponse>? QueryHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(Func<IServiceProvider, IHandleQuery<TQuery, TResponse>>? queryHandlerImplementationFactory)
+    public RegistrationOptions(QueryHandlerImplementationFactory<TQuery, TResponse>? queryHandlerImplementationFactory)
     {
         QueryHandlerImplementationFactory = queryHandlerImplementationFactory;
     }

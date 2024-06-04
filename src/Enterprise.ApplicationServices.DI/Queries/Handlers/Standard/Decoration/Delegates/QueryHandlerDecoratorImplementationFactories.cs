@@ -6,12 +6,12 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
+namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
 
-public static class QueryHandlerDecoratorFactories
+public static class QueryHandlerDecoratorImplementationFactories
 {
-    public static IEnumerable<Func<IServiceProvider, IHandleQuery<TQuery, TResponse>, IHandleQuery<TQuery, TResponse>>>
-        GetDefault<TQuery, TResponse>() where TQuery : IBaseQuery
+    public static IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>> GetDefault<TQuery, TResponse>()
+        where TQuery : IBaseQuery
     {
         return
         [

@@ -1,9 +1,10 @@
-﻿using Enterprise.Logging.Core.Loggers;
+﻿using System.Reflection;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Abstract;
+using Enterprise.Reflection.Assemblies.Delegates;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace Enterprise.Applications.DI.Registration.Options;
 
@@ -16,7 +17,7 @@ public static class OptionsRegistrar
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <param name="getAssemblies"></param>
-    public static void AutoRegisterOptions(this IServiceCollection services, IConfiguration configuration, Func<Assembly[]>? getAssemblies = null)
+    public static void AutoRegisterOptions(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
     {
         PreStartupLogger.Instance.LogInformation("Auto registering options with the DI container.");
 

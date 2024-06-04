@@ -1,9 +1,10 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using System.Reflection;
+using Enterprise.DI.Core.Registration;
 using Enterprise.Logging.Core.Loggers;
+using Enterprise.Reflection.Assemblies.Delegates;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
 
 namespace Enterprise.Applications.DI.Registration.Services;
 
@@ -16,7 +17,7 @@ public static class ServiceRegistrar
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <param name="getAssemblies"></param>
-    public static void AutoRegisterServices(this IServiceCollection services, IConfiguration configuration, Func<Assembly[]>? getAssemblies = null)
+    public static void AutoRegisterServices(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
     {
         PreStartupLogger.Instance.LogInformation("Auto registering services with the DI container.");
 

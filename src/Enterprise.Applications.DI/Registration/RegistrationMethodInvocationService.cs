@@ -47,7 +47,7 @@ public static class RegistrationMethodInvocationService
 
         ParameterInfo[] methodParameters = methodInfo.GetParameters();
 
-        if (!config.ParametersAreValid(methodParameters))
+        if (!config.ParameterInfosAreValid(methodParameters))
         {
             throw new InvalidOperationException($"{config.MethodName} parameters are invalid.");
         }
@@ -55,31 +55,31 @@ public static class RegistrationMethodInvocationService
 
     private static void ProcessAssembly(Assembly assembly, HashSet<Type> processedTypes, RegistrationMethodConfig config)
     {
-        List<TypeInfo> types = config.GetAssemblyTypes(assembly, config.InterfaceType);
+        List<TypeInfo> typeInfos = config.GetAssemblyTypeInfos(assembly, config.InterfaceType);
 
-        foreach (TypeInfo type in types)
+        foreach (TypeInfo typeInfo in typeInfos)
         {
-            ProcessType(processedTypes, config, type);
+            ProcessType(processedTypes, config, typeInfo);
         }
     }
 
-    private static void ProcessType(HashSet<Type> processedTypes, RegistrationMethodConfig config, TypeInfo type)
+    private static void ProcessType(HashSet<Type> processedTypes, RegistrationMethodConfig config, TypeInfo typeInfo)
     {
-        if (processedTypes.Contains(type))
+        if (processedTypes.Contains(typeInfo))
         {
             return;
         }
 
-        if (type.ExcludeRegistrations())
+        if (typeInfo.ExcludeRegistrations())
         {
-            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}.", type.FullName);
+            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}.", typeInfo.FullName);
         }
         else
         {
-            Invoke(type, config);
+            Invoke(typeInfo, config);
         }   
 
-        processedTypes.Add(type);
+        processedTypes.Add(typeInfo);
     }
 
     private static void Invoke(Type type, RegistrationMethodConfig config)

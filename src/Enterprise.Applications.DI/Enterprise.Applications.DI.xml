@@ -4,7 +4,7 @@
         <name>Enterprise.Applications.DI</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Applications.DI.Registration.Options.OptionsRegistrar.AutoRegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Func{System.Reflection.Assembly[]})">
+        <member name="M:Enterprise.Applications.DI.Registration.Options.OptionsRegistrar.AutoRegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
             Automatically resolves instances of <see cref="T:Enterprise.Options.Core.Abstract.IRegisterOptions"/> and invokes the registration method.
             This allows for automatic wiring up of options in the DI container.
@@ -13,7 +13,7 @@
             <param name="configuration"></param>
             <param name="getAssemblies"></param>
         </member>
-        <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Func{System.Reflection.Assembly[]})">
+        <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
             Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.IRegisterServices"/> and invokes the registration method.
             This allows for automatic wiring up of services in the DI container.
@@ -68,7 +68,7 @@
             Provides functionality to automatically load assemblies based on specific conditions.
             </summary>
         </member>
-        <member name="M:Enterprise.Applications.DI.Startup.AssemblyAutoLoader.LoadAssemblies(System.Func{System.Reflection.AssemblyName,System.Boolean})">
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyAutoLoader.LoadAssemblies(Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilter)">
             <summary>
             Loads assemblies based on a specified filter predicate. If an exception occurs during loading,
             the method will attempt to load all solution assemblies as a fallback.
@@ -81,7 +81,7 @@
             Processes assembly paths and loads assemblies that meet specific criteria.
             </summary>
         </member>
-        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.ProcessAssemblyPaths(System.Func{System.Reflection.AssemblyName,System.Boolean},System.String[],System.Reflection.MetadataLoadContext)">
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.ProcessAssemblyPaths(Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilter,System.String[],System.Reflection.MetadataLoadContext)">
             <summary>
             Processes the specified assembly paths and loads them using a filter predicate and a metadata load context.
             </summary>
@@ -90,7 +90,7 @@
             <param name="metadataLoadContext">The context used for loading assembly metadata without affecting the main application domain.</param>
             <returns>An array of successfully loaded assemblies.</returns>
         </member>
-        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.SkipAssembly(System.Func{System.Reflection.AssemblyName,System.Boolean},System.String,System.Reflection.MetadataLoadContext,System.Reflection.AssemblyName)">
+        <member name="M:Enterprise.Applications.DI.Startup.AssemblyPathProcessor.SkipAssembly(Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilter,System.String,System.Reflection.MetadataLoadContext,System.Reflection.AssemblyName)">
             <summary>
             Determines whether an assembly should be skipped based on the filter predicate, its path, metadata context, and its name.
             </summary>

@@ -1,9 +1,10 @@
-﻿using Enterprise.Logging.Core.Loggers;
-using Enterprise.Reflection.Assemblies;
-using Microsoft.Extensions.Logging;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
+using Enterprise.Logging.Core.Loggers;
+using Enterprise.Reflection.Assemblies;
+using Enterprise.Reflection.Assemblies.Delegates;
+using Microsoft.Extensions.Logging;
 using static Enterprise.Reflection.Assemblies.AssemblyLoadConstants;
 
 namespace Enterprise.Applications.DI.Startup;
@@ -21,7 +22,7 @@ public static class AssemblyAutoLoader
     /// </summary>
     /// <param name="filterPredicate">A function to determine which assemblies should be loaded. If null, all assemblies are considered.</param>
     /// <returns>An array of loaded assemblies.</returns>
-    public static Assembly[] LoadAssemblies(Func<AssemblyName, bool>? filterPredicate = null)
+    public static Assembly[] LoadAssemblies(AssemblyNameFilter? filterPredicate = null)
     {
         PreStartupLogger.Instance.LogInformation("Auto loading assemblies.");
 
@@ -55,7 +56,7 @@ public static class AssemblyAutoLoader
             PreStartupLogger.Instance.LogError(ex, "An exception occurred while auto loading assemblies. Falling back to loading all solution assemblies.");
 
             // This is less performant, but we can safely fall back to this if needed.
-            filterPredicate ??= AssemblyFilterPredicates.NoFilter;
+            filterPredicate ??= AssemblyNameFilters.NoFilter;
             loadedAssemblies = AssemblyLoader.LoadSolutionAssemblies(filterPredicate);
         }
 

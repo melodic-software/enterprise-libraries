@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Simple;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +17,7 @@ public static class CommandHandlerRegistrationExtensions
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
     public static void RegisterQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory,
+        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory,
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
@@ -36,19 +36,19 @@ public static class CommandHandlerRegistrationExtensions
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory = 
-            SimpleQueryHandlerFactoryService.GetImplementationFactory<TQuery, TResponse>();
+        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory =
+            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResponse>;
 
         services.Register(implementationFactory, configureOptions);
     }
 
     private static void Register<TQuery, TResponse>(this IServiceCollection services,
-        Func<IServiceProvider, QueryHandlerBase<TQuery, TResponse>> implementationFactory,
+        QueryHandlerImplementationFactory<TQuery, TResponse> implementationFactory,
         Action<RegistrationOptions<TQuery, TResponse>>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
-        var options = new RegistrationOptions<TQuery, TResponse>(implementationFactory);
+        var options = new RegistrationOptions<TQuery, TResponse>(implementationFactory.Invoke);
         configureOptions?.Invoke(options);
 
         RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext = 

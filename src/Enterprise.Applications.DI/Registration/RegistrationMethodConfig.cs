@@ -1,7 +1,7 @@
-﻿using Enterprise.Applications.DI.Startup;
-using Enterprise.Reflection.Assemblies;
-using System.Reflection;
-using static Enterprise.Reflection.Types.AssignableConcreteTypeService;
+﻿using System.Reflection;
+using Enterprise.Applications.DI.Startup;
+using Enterprise.Reflection.Assemblies.Delegates;
+using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
 
 namespace Enterprise.Applications.DI.Registration;
 
@@ -9,40 +9,31 @@ public class RegistrationMethodConfig
 {
     private const BindingFlags DefaultBindingFlags = BindingFlags.Public | BindingFlags.Static;
 
-    private Func<Assembly[]> DefaultGetAssemblies { get; } = () => AssemblyAutoLoader.LoadAssemblies(AssemblyFilterPredicates.ThatAreNotMicrosoft);
+    private GetAssemblies DefaultGetAssemblies { get; } = () => AssemblyAutoLoader.LoadAssemblies(ThatAreNotMicrosoft);
 
     public Type InterfaceType { get; }
     public string MethodName { get; }
-    public Func<ParameterInfo[], bool> ParametersAreValid { get; }
+    public ParameterInfosAreValid ParameterInfosAreValid { get; }
     public BindingFlags BindingFlags { get; }
     public object[] MethodParameters { get; }
-    public Func<Assembly[]> GetAssemblies { get; }
-    public Func<Assembly, Type, List<TypeInfo>> GetAssemblyTypes { get; }
+    public GetAssemblies GetAssemblies { get; }
+    public GetAssemblyTypeInfos GetAssemblyTypeInfos { get; }
 
     public RegistrationMethodConfig(Type interfaceType,
         string methodName,
-        Func<ParameterInfo[], bool> parametersAreValid,
+        ParameterInfosAreValid parametersAreValid,
         object[] methodParameters,
         BindingFlags bindingFlags = DefaultBindingFlags,
-        Func<Assembly[]>? getAssemblies = null,
-        Func<Assembly, Type, List<TypeInfo>>? getAssemblyTypes = null)
+        GetAssemblies? getAssemblies = null,
+        GetAssemblyTypeInfos? getAssemblyTypes = null)
     {
         InterfaceType = interfaceType;
         MethodName = methodName;
-        ParametersAreValid = parametersAreValid;
+        ParameterInfosAreValid = parametersAreValid;
         
         BindingFlags = bindingFlags;
         MethodParameters = methodParameters;
         GetAssemblies = getAssemblies ?? DefaultGetAssemblies;
-        GetAssemblyTypes = getAssemblyTypes ?? GetDefaultAssemblyTypes;
-    }
-
-    public List<TypeInfo> GetDefaultAssemblyTypes(Assembly assembly, Type interfaceType)
-    {
-        var types = GetAssignableConcreteTypes(assembly, interfaceType)
-            .Where(type => interfaceType.IsAssignableFrom(type) && type is { IsAbstract: false, IsGenericTypeDefinition: false })
-            .ToList();
-
-        return types;
+        GetAssemblyTypeInfos = getAssemblyTypes ?? GetAssemblyTypeInfosDefaults.GetDefaultAssemblyTypes;
     }
 }

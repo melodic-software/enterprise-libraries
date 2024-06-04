@@ -18,7 +18,7 @@ internal static class RegistrationContextExtensions
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
-            if (options.QueryHandlerImplementationFactory == null)
+            if (options.HandlerImplementationFactory == null)
             {
                 throw new InvalidOperationException(
                     "A handler implementation factory must be configured for query handler registrations " +
@@ -26,7 +26,7 @@ internal static class RegistrationContextExtensions
                 );
             }
 
-            services.RegisterDefaultChainOfResponsibility(options.QueryHandlerImplementationFactory, options.ServiceLifetime);
+            services.RegisterDefaultChainOfResponsibility(options.HandlerImplementationFactory, options.ServiceLifetime);
         }
         else
         {

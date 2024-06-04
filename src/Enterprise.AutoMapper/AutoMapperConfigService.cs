@@ -6,7 +6,7 @@ using Enterprise.Reflection.Assemblies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using static Enterprise.Reflection.Assemblies.AssemblyFilterPredicates;
+using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
 
 namespace Enterprise.AutoMapper;
 

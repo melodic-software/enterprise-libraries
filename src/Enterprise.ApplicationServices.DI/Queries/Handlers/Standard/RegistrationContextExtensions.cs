@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,11 +20,10 @@ internal static class RegistrationContextExtensions
             );
         }
 
-        registrationContext.Add(options.QueryHandlerImplementationFactory, options.ServiceLifetime);
+        registrationContext.Add(options.QueryHandlerImplementationFactory.Invoke, options.ServiceLifetime);
 
         // We can also can register this alternative.
-        var alternateImplementationFactory = options.QueryHandlerImplementationFactory 
-            as Func<IServiceProvider, IHandleQuery<TResponse>>;
+        QueryHandlerImplementationFactory<TResponse> alternateImplementationFactory = options.QueryHandlerImplementationFactory.Invoke;
 
         var serviceDescriptor = new ServiceDescriptor(
             typeof(IHandleQuery<TResponse>),

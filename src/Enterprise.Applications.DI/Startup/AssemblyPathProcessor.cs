@@ -1,9 +1,10 @@
-﻿using Enterprise.Logging.Core.Loggers;
-using Enterprise.Reflection.Attributes.Assemblies;
-using Microsoft.Extensions.Logging;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Reflection;
 using System.Runtime.Loader;
+using Enterprise.Logging.Core.Loggers;
+using Enterprise.Reflection.Assemblies.Delegates;
+using Enterprise.Reflection.Attributes.Assemblies;
+using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Applications.DI.Startup;
 
@@ -21,7 +22,7 @@ internal static class AssemblyPathProcessor
     /// <param name="assemblyPaths">The paths of assemblies to consider.</param>
     /// <param name="metadataLoadContext">The context used for loading assembly metadata without affecting the main application domain.</param>
     /// <returns>An array of successfully loaded assemblies.</returns>
-    internal static Assembly[] ProcessAssemblyPaths(Func<AssemblyName, bool>? filterPredicate, string[] assemblyPaths, MetadataLoadContext metadataLoadContext)
+    internal static Assembly[] ProcessAssemblyPaths(AssemblyNameFilter? filterPredicate, string[] assemblyPaths, MetadataLoadContext metadataLoadContext)
     {
         var loadedAssemblies = new ConcurrentBag<Assembly>();
 
@@ -63,7 +64,7 @@ internal static class AssemblyPathProcessor
     /// <param name="metadataLoadContext">The metadata load context for assembly inspection.</param>
     /// <param name="assemblyName">The name of the assembly being considered.</param>
     /// <returns>True if the assembly should be skipped; otherwise, false.</returns>
-    private static bool SkipAssembly(Func<AssemblyName, bool>? filterPredicate, string assemblyPath, MetadataLoadContext metadataLoadContext, AssemblyName assemblyName)
+    private static bool SkipAssembly(AssemblyNameFilter? filterPredicate, string assemblyPath, MetadataLoadContext metadataLoadContext, AssemblyName assemblyName)
     {
         // Allow for early filtering on the assembly name.
         if (filterPredicate != null && !filterPredicate(assemblyName))
