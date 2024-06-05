@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
-public static class CommandHandlerRegistrationExtensions
+public static class QueryHandlerRegistrationExtensions
 {
     /// <summary>
     /// Register a query handler.
