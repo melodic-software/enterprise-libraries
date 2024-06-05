@@ -4,10 +4,16 @@
         <name>Enterprise.ApplicationServices.Core</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.CommandHandlerBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate.IHandleCommand`2">
