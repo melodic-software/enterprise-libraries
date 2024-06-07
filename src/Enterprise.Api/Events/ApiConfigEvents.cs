@@ -7,7 +7,7 @@ public class ApiConfigEvents
     // These are events that external clients can subscribe to, providing hooks into the application's lifecycle.
     // TODO: If possible, it would be nice to separate these and the handlers so the ApiConfigOptions only has access to raise events and not wire up handlers itself.
 
-    public event Func<string[], Task>? PreConfiguring;
+    public event Func<string[], Task>? ConfigurationStarted;
     public event Func<WebApplicationBuilder, Task>? BuilderCreated;
     public event Func<WebApplicationBuilder, Task>? ServicesConfigured;
     public event Func<WebApplication, Task>? WebApplicationBuilt;
@@ -17,7 +17,8 @@ public class ApiConfigEvents
 
     // These are internal methods to raise lifecycle events, ensuring they are invoked safely within the API.
     // Using these types of event definitions, only this class has the capability of calling them.
-    internal Task RaisePreConfigurationCompleted(string[] args) => PreConfiguring?.Invoke(args) ?? Task.CompletedTask;
+
+    internal Task RaiseConfigurationStarted(string[] args) => ConfigurationStarted?.Invoke(args) ?? Task.CompletedTask;
     internal Task RaiseBuilderCreated(WebApplicationBuilder builder) => BuilderCreated?.Invoke(builder) ?? Task.CompletedTask;
     internal Task RaiseServicesConfigured(WebApplicationBuilder builder) => ServicesConfigured?.Invoke(builder) ?? Task.CompletedTask;
     internal Task RaiseWebApplicationBuilt(WebApplication app) => WebApplicationBuilt?.Invoke(app) ?? Task.CompletedTask;
@@ -30,7 +31,7 @@ public class ApiConfigEvents
     /// </summary>
     internal void ClearStartupHandlers()
     {
-        PreConfiguring = null;
+        ConfigurationStarted = null;
         BuilderCreated = null;
         ServicesConfigured = null;
         WebApplicationBuilt = null;
@@ -43,7 +44,7 @@ public class ApiConfigEvents
     /// </summary>
     internal void ClearHandlers()
     {
-        PreConfiguring = null;
+        ConfigurationStarted = null;
         BuilderCreated = null;
         ServicesConfigured = null;
         WebApplicationBuilt = null;

@@ -36,7 +36,8 @@ public static class WebApi
             // This must be placed first in case the application decides to wire up event handlers.
             configure?.Invoke(options);
 
-            await options.Events.RaisePreConfigurationCompleted(args);
+            // This is the first extensibility hook that allows for pre-configuration.
+            await options.Events.RaiseConfigurationStarted(args);
 
             WebApplicationBuilder builder = await CreateBuilderAsync(options);
 
