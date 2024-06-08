@@ -75,13 +75,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Swagger\EmbeddedAssets\index.html" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ErrorHandling\ModelState\" />
-    <Folder Include="ErrorHandling\Mapping\" />
-    <Folder Include="Minimal\Metadata\" />
-    <Folder Include="JsonPatch\" />
-    <Folder Include="Security\Roles\" />
-  </ItemGroup>
+  
 
 </Project>

@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Enterprise.Api.Startup.Events.Delegates;
+using Microsoft.AspNetCore.Builder;
 
-namespace Enterprise.Api.Events;
+namespace Enterprise.Api.Startup.Events;
 
+/// <summary>
+/// Allows for wiring up handlers to specific lifecycle events in the API configuration.
+/// </summary>
 public class ApiConfigEvents
 {
     // These are events that external clients can subscribe to, providing hooks into the application's lifecycle.
     // TODO: If possible, it would be nice to separate these and the handlers so the ApiConfigOptions only has access to raise events and not wire up handlers itself.
 
-    public event Func<string[], Task>? ConfigurationStarted;
-    public event Func<WebApplicationBuilder, Task>? BuilderCreated;
-    public event Func<WebApplicationBuilder, Task>? ServicesConfigured;
-    public event Func<WebApplication, Task>? WebApplicationBuilt;
-    public event Func<WebApplication, Task>? RequestPipelineConfigured;
-    public event Func<Exception, Task>? ConfigurationErrorOccurred;
-    public event Func<Task>? ConfigurationCompleted;
+    public event ConfigurationStarted? ConfigurationStarted;
+    public event BuilderCreated? BuilderCreated;
+    public event ServicesConfigured? ServicesConfigured;
+    public event WebApplicationBuilt? WebApplicationBuilt;
+    public event RequestPipelineConfigured? RequestPipelineConfigured;
+    public event ConfigurationErrorOccurred? ConfigurationErrorOccurred;
+    public event ConfigurationCompleted? ConfigurationCompleted;
 
     // These are internal methods to raise lifecycle events, ensuring they are invoked safely within the API.
     // Using these types of event definitions, only this class has the capability of calling them.

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Enterprise.Options.Core.Delegates;
+using Microsoft.Extensions.Options;
 
 namespace Enterprise.Options.Core.Abstract;
 
@@ -15,5 +16,5 @@ public interface IOptionsUpdater<out TOptions> : IOptionsSnapshot<TOptions> wher
     /// Update the options instance using the provided delegate.
     /// </summary>
     /// <param name="applyChanges"></param>
-    void UpdateOptions(Action<TOptions> applyChanges);
+    void UpdateOptions(ApplyChanges<TOptions> applyChanges);
 }

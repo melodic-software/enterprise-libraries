@@ -13,7 +13,7 @@
             </summary>
             <typeparam name="TOptions"></typeparam>
         </member>
-        <member name="M:Enterprise.Options.Core.Abstract.IOptionsUpdater`1.UpdateOptions(System.Action{`0})">
+        <member name="M:Enterprise.Options.Core.Abstract.IOptionsUpdater`1.UpdateOptions(Enterprise.Options.Core.Delegates.ApplyChanges{`0})">
             <summary>
             Update the options instance using the provided delegate.
             </summary>
@@ -43,9 +43,10 @@
         </member>
         <member name="T:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService">
             <summary>
-            This configures and provides custom options instances.
+            This configures and provides options instances.
             It is only intended to be used during application startup, specifically before or during service registration.
-            This is primarily due to the fact that a service provider cannot be referenced to provide options via DI.
+            This is primarily due to the fact that a service provider cannot be referenced until it has been built, which is after services have been configured and registered.
+            Using this service allows for providing options while configuring services with the DI container.
             Once the web application has been built, the configure method should not be used.
             </summary>
         </member>
@@ -58,24 +59,24 @@
         </member>
         <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.ConfigureDefaultInstance``1(``0)">
             <summary>
-            Configures a default instance of options.
+            Configures a default options instance.
             </summary>
             <typeparam name="TOptions">The type of the options class.</typeparam>
             <param name="instance">The options instance to configure as the default.</param>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.ConfigureDefaultInstance``1(System.Func{``0})">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.ConfigureDefaultInstance``1(Enterprise.Options.Core.Delegates.CreateDefault{``0})">
             <summary>
-            Configures a default instance of options using a factory method.
+            Configure a default options instance.
             </summary>
             <typeparam name="TOptions">The type of the options class.</typeparam>
             <param name="createDefault">The factory method to create the default options instance.</param>
         </member>
-        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.Configure``1(System.Action{``0})">
+        <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.Configure``1(Enterprise.Options.Core.Delegates.Configure{``0})">
             <summary>
-            Configures options with an action.
+            Configures options.
             </summary>
             <typeparam name="TOptions">The type of the options class.</typeparam>
-            <param name="action">The action to configure the options.</param>
+            <param name="configure">The configuration delegate.</param>
             <exception cref="T:System.InvalidOperationException">Thrown when attempting to reconfigure locked options.</exception>
         </member>
         <member name="M:Enterprise.Options.Core.Services.Singleton.OptionsInstanceService.GetOptionsInstance``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
@@ -92,7 +93,8 @@
             <summary>
             Use the specified options instance.
             This will lock the instance, meaning it can no longer be reconfigured with the singleton service.
-            Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt; OR directly via DynamicOptionsMonitor&lt;T&gt;.
+            Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt;
+            OR directly via DynamicOptionsMonitor&lt;T&gt;.
             </summary>
             <typeparam name="TOptions"></typeparam>
             <param name="options"></param>

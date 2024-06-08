@@ -114,16 +114,6 @@
             <param name="httpContext"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Events.ApiConfigEvents.ClearStartupHandlers">
-            <summary>
-            Clears all handlers except for those that may be wired up to the <see cref="E:Enterprise.Api.Events.ApiConfigEvents.ConfigurationErrorOccurred"/> event.
-            </summary>
-        </member>
-        <member name="M:Enterprise.Api.Events.ApiConfigEvents.ClearHandlers">
-            <summary>
-            Clears all event handlers to prevent memory leaks or unintended behavior after app shutdown.
-            </summary>
-        </member>
         <member name="M:Enterprise.Api.Middleware.Custom.AppMiddlewareRegistrar.UseAppMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
             Automatically resolves instances of <see cref="T:Enterprise.Api.Middleware.Custom.IRegisterAppMiddleware"/> and invokes the registration method.
@@ -280,60 +270,6 @@
             <param name="input">The string to be split.</param>
             <returns>An array of split strings.</returns>
         </member>
-        <member name="T:Enterprise.Api.Options.ApiConfigOptions">
-            <summary>
-            Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Api.Options.ApiConfigOptions.DeferredConfigurations">
-            <summary>
-            Holds deferred configuration actions that are to be executed later in the application lifecycle.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Api.Options.ApiConfigOptions.WebApplicationOptions">
-            <summary>
-            Contains the options for web application that override all other configuration sources.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Api.Options.ApiConfigOptions.Events">
-            <summary>
-            Allows for wiring up handlers to specific lifecycle events in the API configuration.
-            </summary>
-        </member>
-        <member name="M:Enterprise.Api.Options.ApiConfigOptions.#ctor(System.String[])">
-            <summary>
-            Initializes a new instance of <see cref="T:Enterprise.Api.Options.ApiConfigOptions"/> with specified command line arguments.
-            </summary>
-            <param name="args">The command line arguments provided to the application.</param>
-        </member>
-        <member name="M:Enterprise.Api.Options.ApiConfigOptions.ConfigureEventHandlers(System.Action{Enterprise.Api.Events.ApiConfigEvents})">
-            <summary>
-            Configures the event handlers for specific application events.
-            Use multicast delegates for adding handlers to ensure all registered handlers are invoked.
-            </summary>
-            <param name="configureHandlers">An action that configures the event handlers.</param>
-        </member>
-        <member name="M:Enterprise.Api.Options.ApiConfigOptions.Configure``1(System.Action{``0})">
-            <summary>
-            Configures options of a specific type.
-            </summary>
-            <typeparam name="TOptions">The options type to be configured.</typeparam>
-            <param name="configureOptions">The configuration action to be applied.</param>
-        </member>
-        <member name="M:Enterprise.Api.Options.ApiConfigOptions.Configure``1(System.Action{``0,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment})">
-            <summary>
-            Configures options of a specific type with access to the configuration and web hosting environment.
-            </summary>
-            <typeparam name="TOptions">The options type to be configured.</typeparam>
-            <param name="configureOptions">The configuration action to be applied that includes access to the application's configuration and environment.</param>
-        </member>
-        <member name="M:Enterprise.Api.Options.ApiConfigOptions.ExecuteDeferredConfigurations(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
-            <summary>
-            Executes all deferred configurations using the provided configuration and web hosting environment.
-            </summary>
-            <param name="configuration">The application's configuration.</param>
-            <param name="environment">The web hosting environment.</param>
-        </member>
         <member name="M:Enterprise.Api.Options.DefaultOptionsService.RegisterDefaults">
             <summary>
             Specify default object instances.
@@ -477,51 +413,115 @@
             </summary>
             <param name="options"></param>
         </member>
+        <member name="T:Enterprise.Api.Startup.Events.ApiConfigEvents">
+            <summary>
+            Allows for wiring up handlers to specific lifecycle events in the API configuration.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Events.ApiConfigEvents.ClearStartupHandlers">
+            <summary>
+            Clears all handlers except for those that may be wired up to the <see cref="E:Enterprise.Api.Startup.Events.ApiConfigEvents.ConfigurationErrorOccurred"/> event.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Events.ApiConfigEvents.ClearHandlers">
+            <summary>
+            Clears all event handlers to prevent memory leaks or unintended behavior after app shutdown.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Api.Startup.Options.ApiConfigOptions">
+            <summary>
+            Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Startup.Options.ApiConfigOptions.DeferredConfigurations">
+            <summary>
+            Holds deferred configuration actions that are to be executed later in the application lifecycle.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Api.Startup.Options.ApiConfigOptions.WebApplicationOptions">
+            <summary>
+            Contains the options for web application that override all other configuration sources.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of <see cref="T:Enterprise.Api.Startup.Options.ApiConfigOptions"/> with specified command line arguments.
+            </summary>
+            <param name="args">The command line arguments provided to the application.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(System.Action{``0})">
+            <summary>
+            Configures options of a specific type.
+            </summary>
+            <typeparam name="TOptions">The options type to be configured.</typeparam>
+            <param name="configureOptions">The configuration action to be applied.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(Enterprise.Api.Startup.Options.Delegates.Configure{``0})">
+            <summary>
+            Configures options of a specific type with access to the configuration and web hosting environment.
+            </summary>
+            <typeparam name="TOptions">The options type to be configured.</typeparam>
+            <param name="configureOptions">The configuration to be applied that includes access to the application's configuration and environment.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.ExecuteDeferredConfigurations(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Executes all deferred configurations using the provided configuration and web hosting environment.
+            </summary>
+            <param name="configuration">The application's configuration.</param>
+            <param name="environment">The web hosting environment.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.EnsureSharedFrameworkAssemblyIsLoaded">
+            <summary>
+            Ensures the shared framework assembly directory is loaded.
+            This is required if no AutoLoad assembly attribute is defined.
+            </summary>
+        </member>
         <member name="T:Enterprise.Api.Startup.WebApi">
             <summary>
             Configure services, request pipeline middleware, and startup the API.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[],System.Action{Enterprise.Api.Options.ApiConfigOptions})">
+        <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[],Enterprise.Api.Startup.Delegates.ConfigureApi)">
             <summary>
             Configures the application's services and request pipeline.
             </summary>
             <param name="args">The command-line arguments passed to the application.</param>
-            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Options.ApiConfigOptions"/>.</param>
+            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.ApiConfigOptions"/>.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Startup.Options.ApiConfigOptions,Enterprise.Api.Startup.Events.ApiConfigEvents)">
             <summary>
             Create the WebApplicationBuilder.
             This calls into the default builder creation method which registers logging providers, and other service defaults.
             https://github.com/dotnet/aspnetcore/blob/main/src/DefaultBuilder/src/WebHost.cs#L155
             </summary>
             <param name="options"></param>
+            <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.ApiConfigEvents)">
             <summary>
             Add services to the container.
             This includes framework services, and application specific services.
             </summary>
             <param name="builder"></param>
-            <param name="options"></param>
+            <param name="events"></param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.ApiConfigEvents)">
             <summary>
             Build the application.
             All services must be registered before this is called.
             Any attempts to add additional services will result in an exception.
             </summary>
             <param name="builder"></param>
-            <param name="options"></param>
+            <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Options.ApiConfigOptions)">
+        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Startup.Events.ApiConfigEvents)">
             <summary>
             Configure the HTTP request (middleware) pipeline.
             </summary>
             <param name="app"></param>
-            <param name="options"></param>
+            <param name="events"></param>
             <returns></returns>
         </member>
         <member name="M:Enterprise.Api.Startup.WebApplicationBuilderExtensions.ConfigureServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">

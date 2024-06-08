@@ -7,6 +7,9 @@ namespace Enterprise.Serilog.Startup;
 
 public static class SerilogPreStartupLoggingService
 {
+    /// <summary>
+    /// Replaces the pre-startup logger with a Serilog implementation until the Microsoft ILogger instance is configured.
+    /// </summary>
     public static void ConfigurePreStartupLogger()
     {
         var outputTemplateBuilder = new OutputTemplateBuilder();
@@ -29,6 +32,7 @@ public static class SerilogPreStartupLoggingService
 
         // At this point we can wrap the global serilog logger and use it for the all the pre-startup logging.
         // This instance will get replaced with the official Microsoft ILogger when the service provider is built.
-        PreStartupLogger.Instance.SetLogger(new PreStartupSerilogWrapper());
+        var preStartupSerilogWrapper = new PreStartupSerilogWrapper();
+        PreStartupLogger.Instance.SetLogger(preStartupSerilogWrapper);
     }
 }

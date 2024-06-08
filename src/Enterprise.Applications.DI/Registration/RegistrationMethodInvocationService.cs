@@ -2,6 +2,7 @@
 using Enterprise.Logging.Core.Loggers;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using Enterprise.Applications.DI.Registration.Sorting;
 
 namespace Enterprise.Applications.DI.Registration;
 
@@ -20,7 +21,7 @@ public static class RegistrationMethodInvocationService
         HashSet<Type> processedTypes = [];
 
         Assembly[] assemblies = config.GetAssemblies()
-            .OrderBy(x => x.GetName().FullName)
+            .OrderBy(x => x.GetName().FullName, new SegmentComparer())
             .ToArray();
 
         foreach (Assembly assembly in assemblies)

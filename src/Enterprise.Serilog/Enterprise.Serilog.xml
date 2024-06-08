@@ -47,6 +47,11 @@
             NOTE: None of the defaults will be provided. This is a complete customization.
             </summary>
         </member>
+        <member name="M:Enterprise.Serilog.Startup.SerilogPreStartupLoggingService.ConfigurePreStartupLogger">
+            <summary>
+            Replaces the pre-startup logger with a Serilog implementation until the Microsoft ILogger instance is configured.
+            </summary>
+        </member>
         <member name="M:Enterprise.Serilog.Templating.OutputTemplateBuilder.SetCustomEnrichmentTemplate(System.String)">
             <summary>
             Add the full custom enrichment data.

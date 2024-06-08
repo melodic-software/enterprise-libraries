@@ -1,17 +1,17 @@
-﻿using Enterprise.Api.Options;
-using Enterprise.Api.Startup;
+﻿using Enterprise.Api.Startup;
+using Enterprise.Api.Startup.Options;
 using Example.WebApi.ChainOfResponsibility.Examples.Classic.Demo;
 using Example.WebApi.ChainOfResponsibility.Examples.Modern.Demo;
 using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Demo;
 
-await WebApi.RunAsync(args, apiConfigOptions =>
+await WebApi.RunAsync(args, (options, events) =>
 {
-    apiConfigOptions.Events.BuilderCreated += (builder) =>
+    events.BuilderCreated += (builder) =>
     {
         return Task.CompletedTask;
     };
 
-    apiConfigOptions.Events.RequestPipelineConfigured += async application =>
+    events.RequestPipelineConfigured += async application =>
     {
         // These follow the more standard definition of chain of responsibility.
         ClassicDemo.Execute(application.Services);
@@ -22,8 +22,8 @@ await WebApi.RunAsync(args, apiConfigOptions =>
         await PipelineDemo.ExecuteAsync(application.Services);
     };
 
-    apiConfigOptions.ConfigureControllers(options =>
+    options.ConfigureControllers(controllerOptions =>
     {
-        options.EnableControllers = true;
+        controllerOptions.EnableControllers = true;
     });
 });

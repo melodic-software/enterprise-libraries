@@ -22,7 +22,7 @@ using Enterprise.Redis.Options;
 using Enterprise.Serilog.Options;
 using Enterprise.Traceability.Options;
 
-namespace Enterprise.Api.Options;
+namespace Enterprise.Api.Startup.Options;
 
 public static class ApiConfigOptionsExtensions
 {

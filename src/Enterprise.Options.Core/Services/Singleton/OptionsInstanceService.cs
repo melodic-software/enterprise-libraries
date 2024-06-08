@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using Enterprise.Logging.Core.Loggers;
+using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -8,9 +9,10 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.Options.Core.Services.Singleton;
 
 /// <summary>
-/// This configures and provides custom options instances.
+/// This configures and provides options instances.
 /// It is only intended to be used during application startup, specifically before or during service registration.
-/// This is primarily due to the fact that a service provider cannot be referenced to provide options via DI.
+/// This is primarily due to the fact that a service provider cannot be referenced until it has been built, which is after services have been configured and registered.
+/// Using this service allows for providing options while configuring services with the DI container.
 /// Once the web application has been built, the configure method should not be used.
 /// </summary>
 public class OptionsInstanceService
@@ -18,12 +20,10 @@ public class OptionsInstanceService
     private static readonly Lazy<OptionsInstanceService> Lazy = new(() => new OptionsInstanceService());
     public static OptionsInstanceService Instance => Lazy.Value;
 
-    private ConcurrentDictionary<Type, Func<IConfiguration, string?, object>> InitialDelegateDictionary { get; } = new();
-    private ConcurrentDictionary<Type, List<Action<object>>> AdditionalActionDictionary { get; } = new();
+    private ConcurrentDictionary<Type, ConfigureInitial> InitialConfigDictionary { get; } = new();
+    private ConcurrentDictionary<Type, List<Configure>> AdditionalConfigDictionary { get; } = new();
     private ConcurrentDictionary<Type, OptionsInstanceDictionaryItem> InstanceDictionary { get; } = new();
-    private ConcurrentDictionary<Type, Func<object>> DefaultInstanceFactoryDictionary { get; } = new();
-
-    private OptionsInstanceService() { }
+    private ConcurrentDictionary<Type, CreateDefault> DefaultInstanceFactoryDictionary { get; } = new();
 
     /// <summary>
     /// This is to be used for testing purposes.
@@ -32,8 +32,10 @@ public class OptionsInstanceService
     /// </summary>
     internal static OptionsInstanceService CreateTestInstance() => new();
 
+    private OptionsInstanceService() { }
+
     /// <summary>
-    /// Configures a default instance of options.
+    /// Configures a default options instance.
     /// </summary>
     /// <typeparam name="TOptions">The type of the options class.</typeparam>
     /// <param name="instance">The options instance to configure as the default.</param>
@@ -44,11 +46,11 @@ public class OptionsInstanceService
     }
 
     /// <summary>
-    /// Configures a default instance of options using a factory method.
+    /// Configure a default options instance.
     /// </summary>
     /// <typeparam name="TOptions">The type of the options class.</typeparam>
     /// <param name="createDefault">The factory method to create the default options instance.</param>
-    public void ConfigureDefaultInstance<TOptions>(Func<TOptions> createDefault) where TOptions : class, new()
+    public void ConfigureDefaultInstance<TOptions>(CreateDefault<TOptions> createDefault) where TOptions : class, new()
     {
         Type type = typeof(TOptions);
 
@@ -65,51 +67,55 @@ public class OptionsInstanceService
             DefaultInstanceFactoryDictionary.TryRemove(type, out _);
         }
 
-        DefaultInstanceFactoryDictionary.TryAdd(type, createDefault);
+        DefaultInstanceFactoryDictionary.TryAdd(type, createDefault.Invoke);
         PreStartupLogger.Instance.LogDebug("Default options instance factory added for type: {TypeName}.", type.Name);
     }
 
     /// <summary>
-    /// Configures options with an action.
+    /// Configures options.
     /// </summary>
     /// <typeparam name="TOptions">The type of the options class.</typeparam>
-    /// <param name="action">The action to configure the options.</param>
+    /// <param name="configure">The configuration delegate.</param>
     /// <exception cref="InvalidOperationException">Thrown when attempting to reconfigure locked options.</exception>
-    public void Configure<TOptions>(Action<TOptions> action) where TOptions : class, new()
+    public void Configure<TOptions>(Configure<TOptions> configure) where TOptions : class, new()
     {
-        ArgumentNullException.ThrowIfNull(action);
+        ArgumentNullException.ThrowIfNull(configure);
 
         Type type = typeof(TOptions);
 
         PreStartupLogger.Instance.LogInformation("Configuring options for type: {TypeName}.", type.Name);
 
-        bool isInitial = !InitialDelegateDictionary.ContainsKey(type);
+        bool isInitial = !InitialConfigDictionary.ContainsKey(type);
 
         if (isInitial)
         {
-            InitialDelegateDictionary.TryAdd(typeof(TOptions), ConfigureNew(action));
-            PreStartupLogger.Instance.LogDebug("Initial configuration action added for type: {TypeName}.", type.Name);
+            InitialConfigDictionary.TryAdd(typeof(TOptions), ConfigureNew(configure));
+            PreStartupLogger.Instance.LogDebug("Initial configuration added for type: {TypeName}.", type.Name);
         }
         else
         {
-            bool containsActions = AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
+            bool containsAdditionalConfigurations = AdditionalConfigDictionary
+                .TryGetValue(type, out List<Configure>? additionalConfigurations);
 
-            actions ??= [];
+            additionalConfigurations ??= [];
 
-            actions.Add(o =>
+            additionalConfigurations.Add(o =>
             {
                 if (o is TOptions options)
                 {
-                    action.Invoke(options);
+                    configure.Invoke(options);
                 }
             });
 
-            if (!containsActions)
+            if (!containsAdditionalConfigurations)
             {
-                AdditionalActionDictionary.TryAdd(type, actions);
+                AdditionalConfigDictionary.TryAdd(type, additionalConfigurations);
             }
 
-            PreStartupLogger.Instance.LogDebug("Additional configuration action added for type: {TypeName}.", type.Name);
+            PreStartupLogger.Instance.LogDebug(
+                "Additional configuration added for type: {TypeName}.",
+                type.Name
+            );
         }
 
         if (!InstanceDictionary.ContainsKey(type))
@@ -134,7 +140,8 @@ public class OptionsInstanceService
     /// <param name="configSectionKey">The key of the configuration section.</param>
     /// <returns>The configured options instance.</returns>
     /// <exception cref="Exception">Thrown when a type mismatch is found in the instance dictionary.</exception>
-    public TOptions GetOptionsInstance<TOptions>(IConfiguration configuration, string? configSectionKey) where TOptions : class, new()
+    public TOptions GetOptionsInstance<TOptions>(IConfiguration configuration, string? configSectionKey)
+        where TOptions : class, new()
     {
         ArgumentNullException.ThrowIfNull(configuration);
 
@@ -144,34 +151,40 @@ public class OptionsInstanceService
         if (InstanceDictionary.ContainsKey(type))
         {
             InstanceDictionary.TryGetValue(type, out OptionsInstanceDictionaryItem? value);
-            TOptions options = value?.Options as TOptions ?? throw new Exception($"Instance dictionary contains a type mismatch for the given key: {type}.");
+
+            TOptions options = value?.Options as TOptions ?? 
+                throw new Exception($"Instance dictionary contains a type mismatch for the given key: {type}.");
+            
             PreStartupLogger.Instance.LogDebug("Options instance found in cache for type: {TypeName}.", type);
+
             return options;
         }
         else
         {
-            InitialDelegateDictionary.TryGetValue(type, out Func<IConfiguration, string?, object>? func);
+            InitialConfigDictionary.TryGetValue(type, out ConfigureInitial? configureInitial);
 
-            if (func == null)
+            if (configureInitial == null)
             {
-                PreStartupLogger.Instance.LogDebug("No initial configuration found. Creating new instance of type: {TypeName}.", type.Name);
+                PreStartupLogger.Instance.LogDebug(
+                    "No initial configuration found. " +
+                    "Creating new instance of type: {TypeName}.",
+                    type.Name
+                );
             }
 
             // This hasn't had any explicit configurations, so we're going to auto create and configure.
-            func ??= Create<TOptions>;
+            configureInitial ??= Create<TOptions>;
 
-            object? instance = func.Invoke(configuration, configSectionKey);
+            object? instance = configureInitial.Invoke(configuration, configSectionKey);
             TOptions options = instance as TOptions ?? new TOptions();
 
-            AdditionalActionDictionary.TryGetValue(type, out List<Action<object>>? actions);
+            AdditionalConfigDictionary.TryGetValue(type, out List<Configure>? additionalConfigurations);
 
-            actions ??= [];
+            additionalConfigurations ??= [];
 
-            var typedActions = actions.OfType<Action<TOptions>>().ToList();
-
-            foreach (Action<TOptions> action in typedActions)
+            foreach (Configure configure in additionalConfigurations)
             {
-                action.Invoke(options);
+                configure.Invoke(options);
             }
 
             if (InstanceDictionary.ContainsKey(type))
@@ -189,7 +202,8 @@ public class OptionsInstanceService
     /// <summary>
     /// Use the specified options instance.
     /// This will lock the instance, meaning it can no longer be reconfigured with the singleton service.
-    /// Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt; OR directly via DynamicOptionsMonitor&lt;T&gt;.
+    /// Updates to the config after this point must be done via an IOptionsUpdater&lt;T&gt;
+    /// OR directly via DynamicOptionsMonitor&lt;T&gt;.
     /// </summary>
     /// <typeparam name="TOptions"></typeparam>
     /// <param name="options"></param>
@@ -217,8 +231,8 @@ public class OptionsInstanceService
 
         if (DefaultInstanceFactoryDictionary.ContainsKey(typeof(TOptions)))
         {
-            DefaultInstanceFactoryDictionary.TryGetValue(typeof(TOptions), out Func<object>? defaultInstanceFactory);
-            options = defaultInstanceFactory?.Invoke() as TOptions ?? new TOptions();
+            DefaultInstanceFactoryDictionary.TryGetValue(typeof(TOptions), out CreateDefault? createDefault);
+            options = createDefault?.Invoke() as TOptions ?? new TOptions();
         }
         else
         {
@@ -230,7 +244,7 @@ public class OptionsInstanceService
         return options;
     }
 
-    private Func<IConfiguration, string?, object> ConfigureNew<TOptions>(Action<TOptions> configure)
+    private ConfigureInitial ConfigureNew<TOptions>(Configure<TOptions> configure)
         where TOptions : class, new()
     {
         return (config, configSectionKey) =>
@@ -241,16 +255,19 @@ public class OptionsInstanceService
         };
     }
 
-    private static void HandleLockedInstance(OptionsInstanceDictionaryItem? value, MemberInfo type)
+    private static void HandleLockedInstance(OptionsInstanceDictionaryItem? dictionaryItem, MemberInfo type)
     {
-        if (value is not { IsLocked: true })
+        if (dictionaryItem is not { IsLocked: true })
         {
             return;
         }
 
         // This is likely due to the options being monitored externally.
         // This class is only meant to be used on application startup when a service provider is not available.
-        PreStartupLogger.Instance.LogError("Attempted to reconfigure locked options for type: {TypeName}.", type.Name);
+
+        PreStartupLogger.Instance.LogError(
+            "Attempted to reconfigure locked options for type: {TypeName}.", type.Name
+        );
 
         throw new InvalidOperationException(
             "A locked options instance has already been registered and can no longer be reconfigured."
