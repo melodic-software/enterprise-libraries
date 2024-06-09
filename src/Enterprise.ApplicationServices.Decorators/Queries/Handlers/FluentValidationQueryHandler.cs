@@ -7,19 +7,19 @@ using FluentValidation;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
-public class FluentValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
+public class FluentValidationQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQuery, TResult>
     where TQuery : IBaseQuery
 {
     private readonly IReadOnlyCollection<IValidator<TQuery>> _validators;
 
-    public FluentValidationQueryHandler(IHandleQuery<TQuery, TResponse> queryHandler,
+    public FluentValidationQueryHandler(IHandleQuery<TQuery, TResult> queryHandler,
         IGetDecoratedInstance decoratorService,
         IEnumerable<IValidator<TQuery>> validators) : base(queryHandler, decoratorService)
     {
         _validators = validators.ToList();
     }
 
-    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {

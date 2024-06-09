@@ -6,19 +6,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 
-public class ErrorHandlingCommandHandler<TCommand, TResponse> : CommandHandlerDecoratorBase<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public class ErrorHandlingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorBase<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
-    private readonly ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<ErrorHandlingCommandHandler<TCommand, TResult>> _logger;
 
-    public ErrorHandlingCommandHandler(IHandleCommand<TCommand, TResponse> commandHandler,
+    public ErrorHandlingCommandHandler(IHandleCommand<TCommand, TResult> commandHandler,
         IGetDecoratedInstance decoratorService,
-        ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> logger) : base(commandHandler, decoratorService)
+        ILogger<ErrorHandlingCommandHandler<TCommand, TResult>> logger) : base(commandHandler, decoratorService)
     {
         _logger = logger;
     }
 
-    public override async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         try
         {

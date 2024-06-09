@@ -5,16 +5,16 @@ using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
-public class NullQueryValidationQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
+public class NullQueryValidationQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQuery, TResult>
     where TQuery : IBaseQuery
 {
-    public NullQueryValidationQueryHandler(IHandleQuery<TQuery, TResponse> queryHandler,
+    public NullQueryValidationQueryHandler(IHandleQuery<TQuery, TResult> queryHandler,
         IGetDecoratedInstance decoratorService) : base(queryHandler, decoratorService)
     {
 
     }
 
-    public override Task<TResponse> HandleAsync(TQuery? query, CancellationToken cancellationToken)
+    public override Task<TResult> HandleAsync(TQuery? query, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(query);
         return Decorated.HandleAsync(query, cancellationToken);

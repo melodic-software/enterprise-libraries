@@ -6,25 +6,25 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 
-public abstract class QueryHandlerDecoratorBase<TQuery, TResponse> : 
-    DecoratorBase<IHandleQuery<TQuery, TResponse>>,
-    IHandleQuery<TQuery, TResponse> where TQuery : IBaseQuery
+public abstract class QueryHandlerDecoratorBase<TQuery, TResult> : 
+    DecoratorBase<IHandleQuery<TQuery, TResult>>,
+    IHandleQuery<TQuery, TResult> where TQuery : IBaseQuery
 {
-    protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResponse> queryHandler, IGetDecoratedInstance decoratorService)
+    protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResult> queryHandler, IGetDecoratedInstance decoratorService)
         : base(queryHandler, decoratorService)
     {
 
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        TResponse response = await HandleAsync(typedQuery, cancellationToken);
+        TResult response = await HandleAsync(typedQuery, cancellationToken);
         return response;
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    public abstract Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

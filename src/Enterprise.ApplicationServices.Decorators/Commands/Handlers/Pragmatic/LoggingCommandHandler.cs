@@ -6,25 +6,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 
-public class LoggingCommandHandler<TCommand, TResponse> : CommandHandlerDecoratorBase<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public class LoggingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorBase<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
-    private readonly ILogger<LoggingCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<LoggingCommandHandler<TCommand, TResult>> _logger;
 
-    public LoggingCommandHandler(IHandleCommand<TCommand, TResponse> commandHandler,
+    public LoggingCommandHandler(IHandleCommand<TCommand, TResult> commandHandler,
         IGetDecoratedInstance decoratorService,
-        ILogger<LoggingCommandHandler<TCommand, TResponse>> logger)
+        ILogger<LoggingCommandHandler<TCommand, TResult>> logger)
         : base(commandHandler, decoratorService)
     {
         _logger = logger;
     }
 
-    public override async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         Type commandType = typeof(TCommand);
         Type innermostHandlerType = Innermost.GetType();
         
-        TResponse response;
+        TResult response;
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?

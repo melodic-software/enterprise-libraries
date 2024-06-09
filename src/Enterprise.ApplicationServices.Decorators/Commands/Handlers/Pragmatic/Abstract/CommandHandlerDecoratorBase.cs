@@ -8,12 +8,12 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract;
 
-public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> :
-    DecoratorBase<IHandleCommand<TCommand, TResponse>>, IHandleCommand<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public abstract class CommandHandlerDecoratorBase<TCommand, TResult> :
+    DecoratorBase<IHandleCommand<TCommand, TResult>>, IHandleCommand<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
 
-    protected CommandHandlerDecoratorBase(IHandleCommand<TCommand, TResponse> commandHandler, IGetDecoratedInstance decoratorService)
+    protected CommandHandlerDecoratorBase(IHandleCommand<TCommand, TResult> commandHandler, IGetDecoratedInstance decoratorService)
         : base(commandHandler, decoratorService)
     {
     }
@@ -33,5 +33,5 @@ public abstract class CommandHandlerDecoratorBase<TCommand, TResponse> :
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    public abstract Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

@@ -6,19 +6,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
-public class ErrorHandlingQueryHandler<TQuery, TResponse> : QueryHandlerDecoratorBase<TQuery, TResponse>
+public class ErrorHandlingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQuery, TResult>
     where TQuery : IBaseQuery
 {
-    private readonly ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> _logger;
+    private readonly ILogger<ErrorHandlingQueryHandler<TQuery, TResult>> _logger;
 
-    public ErrorHandlingQueryHandler(IHandleQuery<TQuery, TResponse> queryHandler,
+    public ErrorHandlingQueryHandler(IHandleQuery<TQuery, TResult> queryHandler,
         IGetDecoratedInstance decoratorService,
-        ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> logger) : base(queryHandler, decoratorService)
+        ILogger<ErrorHandlingQueryHandler<TQuery, TResult>> logger) : base(queryHandler, decoratorService)
     {
         _logger = logger;
     }
 
-    public override Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         try
         {

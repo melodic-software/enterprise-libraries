@@ -8,22 +8,22 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 
-public class FluentValidationCommandHandler<TCommand, TResponse> : CommandHandlerDecoratorBase<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public class FluentValidationCommandHandler<TCommand, TResult> : CommandHandlerDecoratorBase<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
     private readonly IReadOnlyCollection<IValidator<TCommand>> _validators;
-    private readonly ILogger<FluentValidationCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<FluentValidationCommandHandler<TCommand, TResult>> _logger;
 
-    public FluentValidationCommandHandler(IHandleCommand<TCommand, TResponse> commandHandler,
+    public FluentValidationCommandHandler(IHandleCommand<TCommand, TResult> commandHandler,
         IGetDecoratedInstance decoratorService,
         IEnumerable<IValidator<TCommand>> validators,
-        ILogger<FluentValidationCommandHandler<TCommand, TResponse>> logger) : base(commandHandler, decoratorService)
+        ILogger<FluentValidationCommandHandler<TCommand, TResult>> logger) : base(commandHandler, decoratorService)
     {
         _validators = validators.ToList();
         _logger = logger;
     }
 
-    public override async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
