@@ -87,7 +87,7 @@ public static class ScrutorRegistrar
                 return Enumerable.Empty<Type>();
             }
 
-            List<Type> serviceTypes = new List<Type>();
+            var serviceTypes = new List<Type>();
 
             if (attribute.AsMatchingInterface)
             {

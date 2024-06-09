@@ -11,26 +11,28 @@ using Microsoft.Extensions.Options;
 
 namespace Enterprise.Multitenancy.AspNetCore.Dependencies;
 
-internal sealed class MultitenancyServiceRegistrar : IRegisterServices
+internal sealed class ServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        MultitenancyConfigOptions configOptions = services
-            .RegisterOptions<MultitenancyConfigOptions>(configuration, MultitenancyConfigOptions.ConfigSectionKey);
+        MultitenancyOptions options = services
+            .RegisterOptions<MultitenancyOptions>(configuration, MultitenancyOptions.ConfigSectionKey);
 
-        if (!configOptions.MultitenancyEnabled)
+        if (!options.MultitenancyEnabled)
         {
             return;
         }
 
         services.AddScoped(provider =>
         {
-            MultitenancyConfigOptions options = provider.GetRequiredService<IOptionsSnapshot<MultitenancyConfigOptions>>().Value;
+            MultitenancyOptions multitenancyOptions = provider.GetRequiredService<IOptionsSnapshot<MultitenancyOptions>>().Value;
 
             IHttpContextAccessor httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
             ILogger<TenantRequestHeaderService> logger = provider.GetRequiredService<ILogger<TenantRequestHeaderService>>();
 
-            IGetTenantId tenantIdService = new TenantRequestHeaderService(httpContextAccessor, logger, options.TenantIdRequired);
+            bool tenantIdRequired = multitenancyOptions.TenantIdRequired;
+
+            IGetTenantId tenantIdService = new TenantRequestHeaderService(httpContextAccessor, logger, tenantIdRequired);
 
             return tenantIdService;
         });

@@ -19,24 +19,24 @@ public static class SerilogConfigService
 {
     public static void ConfigureSerilog(this WebApplicationBuilder builder)
     {
-        SerilogConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<SerilogConfigOptions>(builder.Configuration, SerilogConfigOptions.ConfigSectionKey);
+        SerilogOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<SerilogOptions>(builder.Configuration, SerilogOptions.ConfigSectionKey);
 
-        builder.ConfigureSerilog(configOptions);
+        builder.ConfigureSerilog(options);
     }
 
-    public static void ConfigureSerilog(this WebApplicationBuilder builder, SerilogConfigOptions configOptions)
+    public static void ConfigureSerilog(this WebApplicationBuilder builder, SerilogOptions options)
     {
         // Example service that could manage lifecycle.
         builder.Services.AddHostedService<LifecycleHostedService>();
 
-        if (configOptions.ClearExistingProviders)
+        if (options.ClearExistingProviders)
         {
             builder.Logging.ClearProviders();
         }
 
-        Action<HostBuilderContext, LoggerConfiguration> configureLogger =
-            configOptions.CustomConfigureLogger ?? ConfigureLogger(builder, configOptions);
+        Action<HostBuilderContext, LoggerConfiguration> configureLogger = 
+            options.CustomConfigureLogger ?? ConfigureLogger(builder, options);
 
         // This essentially "hijacks" the .NET logging infrastructure to use Serilog.
         // Setting "preserveStaticLogger" to false replaces Log.Logger with the logger instance configured in the provided delegate.
@@ -60,12 +60,12 @@ public static class SerilogConfigService
         app.UseSerilogRequestLogging();
     }
 
-    private static Action<HostBuilderContext, LoggerConfiguration> ConfigureLogger(IHostApplicationBuilder builder, SerilogConfigOptions configOptions)
+    private static Action<HostBuilderContext, LoggerConfiguration> ConfigureLogger(IHostApplicationBuilder builder, SerilogOptions options)
     {
-        configOptions.ConfigureOutputTemplate ??= SerilogConfigDefaults.CreateDefaultOutputTemplate;
-        configOptions.Enrich ??= SerilogConfigDefaults.EnrichDefaults;
+        options.ConfigureOutputTemplate ??= SerilogConfigDefaults.CreateDefaultOutputTemplate;
+        options.Enrich ??= SerilogConfigDefaults.EnrichDefaults;
 
-        configOptions.WriteTo ??= (_, loggerConfig, outputTemplate) =>
+        options.WriteTo ??= (_, loggerConfig, outputTemplate) =>
             SerilogConfigDefaults.WriteToDefaults(loggerConfig, outputTemplate);
 
         return (context, loggerConfig) =>
@@ -73,29 +73,29 @@ public static class SerilogConfigService
             // Apply minimal log level programmatically if not defined in configuration.
             if (!context.Configuration.GetSection("Serilog:MinimumLevel:Default").Exists())
             {
-                loggerConfig.MinimumLevel.Is(configOptions.DefaultMinimumLogLevel);
+                loggerConfig.MinimumLevel.Is(options.DefaultMinimumLogLevel);
             }
 
             // Apply enrichments programmatically if not defined in configuration.
             if (!context.Configuration.GetSection("Serilog:Enrich").Exists())
             {
-                configOptions.Enrich(loggerConfig);
+                options.Enrich(loggerConfig);
             }
 
             // Apply sinks programmatically if not defined in configuration.
             if (!context.Configuration.GetSection("Serilog:WriteTo").Exists())
             {
                 var outputTemplateBuilder = new OutputTemplateBuilder();
-                configOptions.ConfigureOutputTemplate(builder, outputTemplateBuilder);
+                options.ConfigureOutputTemplate(builder, outputTemplateBuilder);
                 string outputTemplate = outputTemplateBuilder.Build();
 
-                configOptions.WriteTo(builder, loggerConfig, outputTemplate);
+                options.WriteTo(builder, loggerConfig, outputTemplate);
             }
 
             // This enables the use of attributes to apply masking configuration.
             // Projects will need to reference the Destructurama.Attributes package to apply the attributes.
             loggerConfig.Destructure.UsingAttributes();
-            configOptions.ConfigureDestructuring?.Invoke(loggerConfig.Destructure);
+            options.ConfigureDestructuring?.Invoke(loggerConfig.Destructure);
 
             // This will allow for specifying values in app settings
             // The default behavior merges these values with the programmatic configuration, which can result in undesired behavior (particularly with sinks).
