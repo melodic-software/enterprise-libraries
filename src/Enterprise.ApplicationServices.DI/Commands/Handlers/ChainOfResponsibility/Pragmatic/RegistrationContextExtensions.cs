@@ -1,7 +1,7 @@
-﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
+﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Enterprise.DI.Core.Registration;

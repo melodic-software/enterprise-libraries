@@ -8,7 +8,7 @@ namespace Enterprise.MediatR.Behaviors.Caching;
 
 internal sealed class QueryCachingBehavior<TRequest, TResult> : 
     IPipelineBehavior<TRequest, TResult>
-    where TRequest : ICachedQuery
+    where TRequest : ICacheableQuery
 {
     private readonly ICacheService _cacheService;
     private readonly ILogger<QueryCachingBehavior<TRequest, TResult>> _logger;

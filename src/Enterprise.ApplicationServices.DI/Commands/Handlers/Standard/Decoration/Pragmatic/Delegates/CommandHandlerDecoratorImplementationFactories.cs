@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
-using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;

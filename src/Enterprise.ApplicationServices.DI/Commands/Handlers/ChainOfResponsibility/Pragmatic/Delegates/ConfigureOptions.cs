@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic.Delegates;
 

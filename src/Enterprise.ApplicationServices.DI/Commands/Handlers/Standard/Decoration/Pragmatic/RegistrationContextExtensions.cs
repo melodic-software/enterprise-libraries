@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pragmatic.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic;
 using Enterprise.DI.Core.Registration;

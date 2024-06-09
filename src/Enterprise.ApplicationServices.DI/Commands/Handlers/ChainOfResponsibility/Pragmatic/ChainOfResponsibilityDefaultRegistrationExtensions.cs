@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
 using Microsoft.Extensions.DependencyInjection;

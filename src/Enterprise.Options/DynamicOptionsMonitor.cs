@@ -1,4 +1,5 @@
 ﻿using Enterprise.Options.Core.Abstract;
+using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serialization.Json;
 using Microsoft.Extensions.Configuration;
@@ -91,7 +92,7 @@ public class DynamicOptionsMonitor<TOptions> :
         }
     }
 
-    public void UpdateOptions(Action<TOptions> applyChanges)
+    public void UpdateOptions(ApplyChanges<TOptions> applyChanges)
     {
         lock (_updateLock)
         {

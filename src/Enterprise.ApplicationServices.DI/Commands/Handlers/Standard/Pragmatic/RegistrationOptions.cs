@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pragmatic.Delegates;

@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DI.Core.Registration;
 using Microsoft.Extensions.DependencyInjection;
