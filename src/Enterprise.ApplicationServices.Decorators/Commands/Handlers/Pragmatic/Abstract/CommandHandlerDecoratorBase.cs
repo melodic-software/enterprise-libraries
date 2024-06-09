@@ -10,7 +10,7 @@ namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.
 
 public abstract class CommandHandlerDecoratorBase<TCommand, TResult> :
     DecoratorBase<IHandleCommand<TCommand, TResult>>, IHandleCommand<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
 
     protected CommandHandlerDecoratorBase(IHandleCommand<TCommand, TResult> commandHandler, IGetDecoratedInstance decoratorService)

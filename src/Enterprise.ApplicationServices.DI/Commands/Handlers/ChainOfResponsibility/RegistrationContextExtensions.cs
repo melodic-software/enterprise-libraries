@@ -14,7 +14,7 @@ public static class RegistrationContextExtensions
         this RegistrationContext<IHandleCommand<TCommand>> registrationContext,
         RegistrationOptions<TCommand> options,
         IServiceCollection services)
-        where TCommand : IBaseCommand
+        where TCommand : class, ICommand
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
@@ -60,7 +60,7 @@ public static class RegistrationContextExtensions
     }
 
     public static IHandleCommand<TCommand> ImplementationFactory<TCommand>(IServiceProvider provider)
-        where TCommand : IBaseCommand
+        where TCommand : class, ICommand
     {
         IResponsibilityChain<TCommand> responsibilityChain = provider.GetRequiredService<IResponsibilityChain<TCommand>>();
 

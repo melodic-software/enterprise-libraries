@@ -4,7 +4,7 @@ using Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;
 public class RegistrationOptions<TQuery, TResult> : RegistrationOptionsBase<TQuery, TResult>
-    where TQuery : IBaseQuery
+    where TQuery : class, IQuery
 {
     /// <summary>
     /// A factory method delegate that instantiates the chain of responsibility handler instance.

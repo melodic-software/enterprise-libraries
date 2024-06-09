@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 
@@ -25,13 +26,13 @@ public class QueryDispatchFacade : IQueryDispatchFacade
 
     /// <inheritdoc />
     public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         return await _queryDispatcher.DispatchAsync<TQuery, TResult>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TResult>(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken)
     {
         return await _queryDispatcher.DispatchAsync<TResult>(query, cancellationToken);
     }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 
 public class LoggingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorBase<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     private readonly ILogger<LoggingCommandHandler<TCommand, TResult>> _logger;
 

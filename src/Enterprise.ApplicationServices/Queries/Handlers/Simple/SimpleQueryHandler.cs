@@ -14,7 +14,7 @@ namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 /// <typeparam name="TResult"></typeparam>
 public class SimpleQueryHandler<TQuery, TResult> :
     QueryHandlerBase<TQuery, TResult> 
-    where TQuery : IBaseQuery
+    where TQuery : class, IQuery
 {
     private readonly IQueryLogic<TQuery, TResult> _queryLogic;
 

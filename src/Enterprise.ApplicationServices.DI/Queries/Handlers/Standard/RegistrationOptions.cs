@@ -7,7 +7,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
 public sealed class RegistrationOptions<TQuery, TResult> :
     RegistrationOptionsBase<TQuery, TResult>
-    where TQuery : IBaseQuery
+    where TQuery : class, IQuery
 {
     /// <summary>
     /// Register decorators for the query handler.

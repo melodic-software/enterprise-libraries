@@ -8,7 +8,8 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 
 public static class QueryHandlerImplementationFactories
 {
-    public static QueryHandlerBase<TQuery, TResult> CreateSimpleQueryHandler<TQuery, TResult>(IServiceProvider provider) where TQuery : IBaseQuery
+    public static QueryHandlerBase<TQuery, TResult> CreateSimpleQueryHandler<TQuery, TResult>(IServiceProvider provider)
+        where TQuery : class, IQuery
     {
         IEventRaisingFacade eventRaisingFacade = provider.GetRequiredService<IEventRaisingFacade>();
 

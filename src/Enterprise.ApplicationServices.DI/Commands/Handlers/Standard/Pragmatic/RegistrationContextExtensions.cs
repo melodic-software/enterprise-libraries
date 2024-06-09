@@ -11,7 +11,7 @@ public static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleCommand<TCommand, TResult>> AddCommandHandler<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
         RegistrationOptions<TCommand, TResult> options)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         if (options.CommandHandlerImplementationFactory == null)
         {

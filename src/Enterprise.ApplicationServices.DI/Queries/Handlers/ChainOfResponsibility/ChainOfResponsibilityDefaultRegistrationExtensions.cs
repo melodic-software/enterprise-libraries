@@ -12,7 +12,7 @@ public static class ChainOfResponsibilityDefaultRegistrationExtensions
         this IServiceCollection services,
         HandlerImplementationFactory<TQuery, TResult> implementationFactory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         services.RegisterChainOfResponsibility<TQuery, TResult>()
             .WithSuccessor<LoggingQueryHandler<TQuery, TResult>>()

@@ -1,7 +1,9 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Queries.Dispatching;
 
@@ -15,7 +17,7 @@ public class QueryDispatcher : IDispatchQueries
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TResult>(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken)
     {
         IHandleQuery<TResult> handler = _queryHandlerResolver.GetQueryHandler<TResult>(query);
         TResult result = await handler.HandleAsync(query, cancellationToken);
@@ -31,7 +33,8 @@ public class QueryDispatcher : IDispatchQueries
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
+    public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken)
+        where TQuery : class, IQuery
     {
         IHandleQuery<TQuery, TResult> handler = _queryHandlerResolver.GetQueryHandler<TQuery, TResult>(query);
         TResult result = await handler.HandleAsync(query, cancellationToken);

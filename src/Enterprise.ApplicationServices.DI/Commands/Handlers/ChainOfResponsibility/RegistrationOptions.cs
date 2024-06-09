@@ -5,7 +5,7 @@ using Enterprise.ApplicationServices.DI.Commands.Handlers.Options;
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility;
 
 public class RegistrationOptions<TCommand> : RegistrationOptionsBase<TCommand>
-    where TCommand : IBaseCommand
+    where TCommand : class, ICommand
 {
     /// <summary>
     /// Provide a custom responsibility chain configuration.

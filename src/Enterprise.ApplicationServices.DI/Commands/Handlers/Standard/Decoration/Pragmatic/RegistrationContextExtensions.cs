@@ -11,14 +11,14 @@ public static class RegistrationContextExtensions
     public static RegistrationContext<IHandleCommand<TCommand, TResult>> WithDecorators<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
         params CommandHandlerDecoratorImplementationFactory<TCommand, TResult>[] decoratorFactories)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         return registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
     }
 
     internal static RegistrationContext<IHandleCommand<TCommand, TResult>> WithDefaultDecorators<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResult>>
             defaultDecoratorImplementationFactories = CommandHandlerDecoratorImplementationFactories.GetDefault<TCommand, TResult>();
@@ -29,7 +29,7 @@ public static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleCommand<TCommand, TResult>> RegisterWithDecorators<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
         RegistrationOptions<TCommand, TResult> options)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         registrationContext.AddCommandHandler(options);
 
@@ -46,7 +46,7 @@ public static class RegistrationContextExtensions
     private static RegistrationContext<IHandleCommand<TCommand, TResult>> WithDecorators<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
         IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResult>> implementationFactories)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         foreach (CommandHandlerDecoratorImplementationFactory<TCommand, TResult> implementationFactory in implementationFactories)
         {

@@ -6,7 +6,7 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
 public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult>
-    where TQuery : IBaseQuery
+    where TQuery : class, IQuery
 {
     private readonly IResponsibilityChain<TQuery, TResult> _responsibilityChain;
 

@@ -1,6 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.Queries.Handlers.Resolution;
@@ -15,7 +17,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResult> GetQueryHandler<TResult>(IBaseQuery query)
+    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery query)
     {
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
@@ -32,14 +34,14 @@ public class QueryHandlerResolver : IResolveQueryHandler
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 
     /// <inheritdoc />
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
-        where TQuery : IQuery<TResult>
+        where TQuery : class, IQuery<TResult>
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }

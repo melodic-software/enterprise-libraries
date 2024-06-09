@@ -5,4 +5,4 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.P
 
 public delegate CommandHandlerBase<TCommand, TResult>
     CommandHandlerImplementationFactory<TCommand, TResult>(IServiceProvider provider)
-    where TCommand : ICommand<TResult>;
+    where TCommand : class, ICommand<TResult>;

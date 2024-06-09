@@ -11,7 +11,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration
 public static class QueryHandlerDecoratorImplementationFactories
 {
     public static IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> GetDefault<TQuery, TResult>()
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         return
         [

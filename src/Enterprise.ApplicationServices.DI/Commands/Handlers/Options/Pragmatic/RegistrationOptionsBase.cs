@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Pragmatic;
 
 public abstract class RegistrationOptionsBase<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     /// <summary>
     /// This sets the service lifetime for the command handler registration.

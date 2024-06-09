@@ -15,7 +15,7 @@ public static class RegistrationContextExtensions
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
         RegistrationOptions<TCommand, TResult> options,
         IServiceCollection services)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
@@ -44,7 +44,7 @@ public static class RegistrationContextExtensions
 
     internal static RegistrationContext<IHandleCommand<TCommand, TResult>> AddCommandHandler<TCommand, TResult>(
         this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
-        RegistrationOptions<TCommand, TResult> options) where TCommand : ICommand<TResult>
+        RegistrationOptions<TCommand, TResult> options) where TCommand : class, ICommand<TResult>
     {
         // Register the primary abstraction.
         registrationContext.Add(
@@ -68,7 +68,7 @@ public static class RegistrationContextExtensions
     }
 
     private static CommandHandler<TCommand, TResult> ImplementationFactory<TCommand, TResult>(IServiceProvider provider)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         IResponsibilityChain<TCommand, TResult> responsibilityChain =
             provider.GetRequiredService<IResponsibilityChain<TCommand, TResult>>();

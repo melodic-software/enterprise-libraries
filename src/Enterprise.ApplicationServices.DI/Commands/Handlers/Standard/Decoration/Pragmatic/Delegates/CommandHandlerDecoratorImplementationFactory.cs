@@ -5,4 +5,4 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoratio
 
 public delegate IHandleCommand<TCommand, TResult>
     CommandHandlerDecoratorImplementationFactory<TCommand, TResult>(IServiceProvider provider, IHandleCommand<TCommand, TResult> commandHandler)
-    where TCommand : ICommand<TResult>;
+    where TCommand : class, ICommand<TResult>;

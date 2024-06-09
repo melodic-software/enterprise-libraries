@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Dispatching;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 
@@ -25,14 +25,14 @@ public class CommandDispatchFacade : ICommandDispatchFacade
 
     /// <inheritdoc />
     public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : IBaseCommand
+        where TCommand : class, ICommand
     {
         await _commandDispatcher.DispatchAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         return await _commandDispatcher.DispatchAsync<TCommand, TResult>(command, cancellationToken);
     }

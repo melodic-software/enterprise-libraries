@@ -10,7 +10,7 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoratio
 public static class CommandHandlerDecoratorImplementationFactories
 {
     public static IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand>>
-        GetDefault<TCommand>() where TCommand : IBaseCommand
+        GetDefault<TCommand>() where TCommand : class, ICommand
     {
         return
         [

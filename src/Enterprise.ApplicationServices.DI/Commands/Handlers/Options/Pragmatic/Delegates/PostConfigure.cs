@@ -6,4 +6,4 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Pragmatic.Delegates;
 
 public delegate void PostConfigure<TCommand, TResult>(IServiceCollection services, RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext)
-    where TCommand : ICommand<TResult>;
+    where TCommand : class, ICommand<TResult>;

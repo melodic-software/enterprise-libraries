@@ -14,7 +14,7 @@ internal static class RegistrationContextExtensions
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options,
         IServiceCollection services)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
@@ -44,7 +44,7 @@ internal static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> AddQueryHandler<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         // Register the primary.
         registrationContext.Add(
@@ -68,7 +68,7 @@ internal static class RegistrationContextExtensions
     }
     
     public static QueryHandler<TQuery, TResult> ImplementationFactory<TQuery, TResult>(IServiceProvider provider)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         IResponsibilityChain<TQuery, TResult> responsibilityChain = provider.GetRequiredService<IResponsibilityChain<TQuery, TResult>>();
 

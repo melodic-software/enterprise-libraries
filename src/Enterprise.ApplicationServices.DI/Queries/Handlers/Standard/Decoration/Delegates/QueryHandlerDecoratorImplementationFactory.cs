@@ -5,4 +5,4 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration
 
 public delegate IHandleQuery<TQuery, TResult>
     QueryHandlerDecoratorImplementationFactory<TQuery, TResult>(IServiceProvider provider, IHandleQuery<TQuery, TResult> queryHandler)
-    where TQuery : IBaseQuery;
+    where TQuery : class, IQuery;

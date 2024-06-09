@@ -5,7 +5,7 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 
-public sealed class CommandHandler<TCommand> : IHandleCommand<TCommand> where TCommand : IBaseCommand
+public sealed class CommandHandler<TCommand> : IHandleCommand<TCommand> where TCommand : class, ICommand
 {
     private readonly IResponsibilityChain<TCommand> _responsibilityChain;
 

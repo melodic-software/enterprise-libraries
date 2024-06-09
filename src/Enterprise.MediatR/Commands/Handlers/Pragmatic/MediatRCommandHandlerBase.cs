@@ -7,7 +7,7 @@ namespace Enterprise.MediatR.Commands.Handlers.Pragmatic;
 
 public abstract class MediatRCommandHandlerBase<TCommand, TResult>
     : CommandHandlerBase<TCommand, TResult>, IRequestHandler<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     protected MediatRCommandHandlerBase(IEventRaisingFacade eventService) : base(eventService)
     {

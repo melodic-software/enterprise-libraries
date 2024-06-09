@@ -8,7 +8,7 @@ namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 
 public abstract class QueryHandlerDecoratorBase<TQuery, TResult> : 
     DecoratorBase<IHandleQuery<TQuery, TResult>>,
-    IHandleQuery<TQuery, TResult> where TQuery : IBaseQuery
+    IHandleQuery<TQuery, TResult> where TQuery : class, IQuery
 {
     protected QueryHandlerDecoratorBase(IHandleQuery<TQuery, TResult> queryHandler, IGetDecoratedInstance decoratorService)
         : base(queryHandler, decoratorService)

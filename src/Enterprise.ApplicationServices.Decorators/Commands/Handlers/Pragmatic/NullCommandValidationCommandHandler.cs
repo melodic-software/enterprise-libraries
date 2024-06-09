@@ -6,7 +6,7 @@ using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic;
 
 public class NullCommandValidationCommandHandler<TCommand, TResult> : CommandHandlerDecoratorBase<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     public NullCommandValidationCommandHandler(IHandleCommand<TCommand, TResult> commandHandler,
         IGetDecoratedInstance decoratorService)

@@ -21,7 +21,7 @@ public static class QueryHandlerRegistrationExtensions
     public static void RegisterQueryHandler<TQuery, TResult>(this IServiceCollection services,
         QueryHandlerImplementationFactory<TQuery, TResult> implementationFactory,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         services.Register(implementationFactory, configureOptions);
     }
@@ -36,7 +36,7 @@ public static class QueryHandlerRegistrationExtensions
     /// <param name="configureOptions"></param>
     public static void RegisterSimpleQueryHandler<TQuery, TResult>(this IServiceCollection services,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         QueryHandlerImplementationFactory<TQuery, TResult> implementationFactory =
             QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResult>;
@@ -47,7 +47,7 @@ public static class QueryHandlerRegistrationExtensions
     private static void Register<TQuery, TResult>(this IServiceCollection services,
         QueryHandlerImplementationFactory<TQuery, TResult> implementationFactory,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
         var options = new RegistrationOptions<TQuery, TResult>(implementationFactory);
@@ -62,7 +62,7 @@ public static class QueryHandlerRegistrationExtensions
     private static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterQueryHandler<TQuery, TResult>(
         this IServiceCollection services,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext = services
             .BeginRegistration<IHandleQuery<TQuery, TResult>>();

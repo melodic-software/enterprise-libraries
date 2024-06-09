@@ -5,7 +5,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 
 public delegate QueryHandlerBase<TQuery, TResult>
     QueryHandlerImplementationFactory<TQuery, TResult>(IServiceProvider provider)
-    where TQuery : IBaseQuery;
+    where TQuery : class, IQuery;
 
 public delegate IHandleQuery<TResult>
     QueryHandlerImplementationFactory<TResult>(IServiceProvider provider);

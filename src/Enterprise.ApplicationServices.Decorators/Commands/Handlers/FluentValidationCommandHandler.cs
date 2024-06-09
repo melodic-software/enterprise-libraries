@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Decorators.Commands.Handlers;
 
 public class FluentValidationCommandHandler<TCommand> : CommandHandlerDecoratorBase<TCommand>
-    where TCommand : IBaseCommand
+    where TCommand : class, ICommand
 {
     private readonly IReadOnlyCollection<IValidator<TCommand>> _validators;
     private readonly ILogger<FluentValidationCommandHandler<TCommand>> _logger;

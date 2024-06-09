@@ -20,7 +20,7 @@ public static class CommandHandlerRegistrationExtensions
     public static void RegisterCommandHandler<TCommand, TResult>(this IServiceCollection services,
         CommandHandlerImplementationFactory<TCommand, TResult> implementationFactory,
         ConfigureOptions<TCommand, TResult>? configureOptions = null)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
         var options = new RegistrationOptions<TCommand, TResult>(implementationFactory.Invoke);
@@ -35,7 +35,7 @@ public static class CommandHandlerRegistrationExtensions
     private static RegistrationContext<IHandleCommand<TCommand, TResult>> RegisterCommandHandler<TCommand, TResult>(
         this IServiceCollection services,
         RegistrationOptions<TCommand, TResult> options)
-        where TCommand : ICommand<TResult>
+        where TCommand : class, ICommand<TResult>
     {
         return services
             .BeginRegistration<IHandleCommand<TCommand, TResult>>()

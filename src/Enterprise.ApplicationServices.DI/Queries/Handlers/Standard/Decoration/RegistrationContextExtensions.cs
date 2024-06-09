@@ -10,14 +10,14 @@ public static class RegistrationContextExtensions
     public static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         params QueryHandlerDecoratorImplementationFactory<TQuery, TResult>[] decoratorFactories)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         return registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDefaultDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>>
             defaultDecoratorImplementationFactories = QueryHandlerDecoratorImplementationFactories.GetDefault<TQuery, TResult>();
@@ -28,7 +28,7 @@ public static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterWithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         registrationContext.AddQueryHandler(options);
 
@@ -43,7 +43,7 @@ public static class RegistrationContextExtensions
     private static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> implementationFactories) 
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         foreach (QueryHandlerDecoratorImplementationFactory<TQuery, TResult> implementationFactory in implementationFactories)
         {

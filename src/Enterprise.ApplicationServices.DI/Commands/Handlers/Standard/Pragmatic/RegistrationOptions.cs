@@ -7,7 +7,7 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic
 
 public sealed class RegistrationOptions<TCommand, TResult> :
     RegistrationOptionsBase<TCommand, TResult>
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     /// <summary>
     /// Register decorators for the command handler.

@@ -8,7 +8,7 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 
 public sealed class CommandHandler<TCommand, TResult> : IHandleCommand<TCommand, TResult> 
-    where TCommand : ICommand<TResult>
+    where TCommand : class, ICommand<TResult>
 {
     private readonly IResponsibilityChain<TCommand, TResult> _responsibilityChain;
 

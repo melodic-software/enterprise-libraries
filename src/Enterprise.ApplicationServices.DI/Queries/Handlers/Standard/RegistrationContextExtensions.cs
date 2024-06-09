@@ -10,7 +10,7 @@ internal static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> AddQueryHandler<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : IBaseQuery
+        where TQuery : class, IQuery
     {
         if (options.QueryHandlerImplementationFactory == null)
         {
