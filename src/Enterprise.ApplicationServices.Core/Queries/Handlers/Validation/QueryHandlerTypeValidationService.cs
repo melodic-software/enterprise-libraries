@@ -11,7 +11,7 @@ public static class QueryHandlerTypeValidationService
     }
 
     public static void ValidateType<TQuery, TResponse>(TQuery query, IHandleQuery<TQuery, TResponse> queryHandler)
-        where TQuery : IBaseQuery
+        where TQuery : class, IBaseQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }

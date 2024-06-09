@@ -1,6 +1,6 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Types.Alternate;
 

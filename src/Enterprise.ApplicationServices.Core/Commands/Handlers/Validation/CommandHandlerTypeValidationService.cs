@@ -11,7 +11,7 @@ public static class CommandHandlerTypeValidationService
     }
 
     public static void ValidateType<TCommand>(IBaseCommand command, IHandleCommand<TCommand> commandHandler)
-        where TCommand : IBaseCommand
+        where TCommand : class, IBaseCommand
     {
         ValidateType(command, typeof(TCommand), commandHandler);
     }

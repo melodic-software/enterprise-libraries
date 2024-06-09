@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
 
@@ -31,7 +32,7 @@ public interface IResolveQueryHandler
     /// <param name="query"></param>
     /// <returns></returns>
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
-        where TQuery : IBaseQuery;
+        where TQuery : class, IBaseQuery;
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
@@ -41,5 +42,5 @@ public interface IResolveQueryHandler
     /// <param name="query"></param>
     /// <returns></returns>
     public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query)
-        where TQuery : IQuery<TResponse>;
+        where TQuery : class, IQuery<TResponse>;
 }

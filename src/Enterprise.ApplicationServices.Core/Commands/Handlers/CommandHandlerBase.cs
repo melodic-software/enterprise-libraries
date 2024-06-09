@@ -9,7 +9,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 
 public abstract class CommandHandlerBase<TCommand> : 
     ApplicationServiceBase, IHandleCommand<TCommand>, IHandler<TCommand>
-    where TCommand : IBaseCommand
+    where TCommand : class, IBaseCommand
 {
     protected CommandHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {

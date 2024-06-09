@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Dispatching;
 

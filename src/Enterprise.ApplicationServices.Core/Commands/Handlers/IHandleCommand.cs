@@ -21,7 +21,7 @@ public interface IHandleCommand : IApplicationService
 /// Handles commands of a specific type.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : IBaseCommand
+public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : class, IBaseCommand
 {
     /// <summary>
     /// Handle the command.

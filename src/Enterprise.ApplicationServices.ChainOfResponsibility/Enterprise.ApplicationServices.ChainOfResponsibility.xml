@@ -4,19 +4,19 @@
         <name>Enterprise.ApplicationServices.ChainOfResponsibility</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate.CommandHandler`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate.CommandHandler`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Alternate.CommandHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.CommandHandler`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.CommandHandler`1.HandleAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic.CommandHandler`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic.CommandHandler`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic.CommandHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers.QueryHandler`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IBaseQuery,System.Threading.CancellationToken)">
