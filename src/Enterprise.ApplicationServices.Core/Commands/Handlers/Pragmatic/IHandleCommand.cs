@@ -11,10 +11,10 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 /// Use of this interface is acceptable; however, <see cref="IHandleCommand{T}"/> is preferred.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-/// <typeparam name="TResponse"></typeparam>
+/// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(IHandleCommand<>))]
-public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TCommand>
-    where TCommand : class, ICommand<TResponse>
+public interface IHandleCommand<in TCommand, TResult> : IHandleCommand<TCommand>
+    where TCommand : class, ICommand<TResult>
 {
     /// <summary>
     /// Handle the command.
@@ -22,5 +22,5 @@ public interface IHandleCommand<in TCommand, TResponse> : IHandleCommand<TComman
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    new Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

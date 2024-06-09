@@ -5,19 +5,19 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Validation;
 
 public static class QueryHandlerTypeValidationService
 {
-    public static void ValidateType<TQuery, TResponse>(TQuery query, IHandleQuery<TResponse> queryHandler)
+    public static void ValidateType<TQuery, TResult>(TQuery query, IHandleQuery<TResult> queryHandler)
         where TQuery : IQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }
 
-    public static void ValidateType<TQuery, TResponse>(TQuery query, IHandleQuery<TQuery, TResponse> queryHandler)
+    public static void ValidateType<TQuery, TResult>(TQuery query, IHandleQuery<TQuery, TResult> queryHandler)
         where TQuery : class, IQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }
 
-    public static void ValidateType<TResponse>(IQuery query, Type expectedQueryType, IHandleQuery<TResponse> queryHandler)
+    public static void ValidateType<TResult>(IQuery query, Type expectedQueryType, IHandleQuery<TResult> queryHandler)
     {
         Type queryType = query.GetType();
 

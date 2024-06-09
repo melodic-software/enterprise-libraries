@@ -9,8 +9,8 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 /// When partnered with prebuilt base query handlers and DI factory methods, this becomes more streamlined.
 /// </summary>
 /// <typeparam name="TQuery"></typeparam>
-/// <typeparam name="TResponse"></typeparam>
-public interface IQueryLogic<in TQuery, TResponse> where TQuery : IQuery
+/// <typeparam name="TResult"></typeparam>
+public interface IQueryLogic<in TQuery, TResult> where TQuery : IQuery
 {
     /// <summary>
     /// Execute the query logic.
@@ -18,5 +18,5 @@ public interface IQueryLogic<in TQuery, TResponse> where TQuery : IQuery
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResponse> ExecuteAsync(TQuery query, CancellationToken cancellationToken);
+    Task<TResult> ExecuteAsync(TQuery query, CancellationToken cancellationToken);
 }

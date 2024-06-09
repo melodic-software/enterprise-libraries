@@ -8,6 +8,6 @@ namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 /// It is used primarily for constraint purposes.
 /// This interface allows for defining an explicit return type that is associated with the query.
 /// </summary>
-/// <typeparam name="TResponse"></typeparam>
+/// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(IQuery))]
-public interface IQuery<out TResponse> : IQuery, IRequest<TResponse>;
+public interface IQuery<out TResult> : IQuery, IRequest<TResult>;

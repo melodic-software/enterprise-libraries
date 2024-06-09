@@ -7,8 +7,8 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 /// Handles queries.
 /// </summary>
 /// <typeparam name="TQuery">The explicit type of query that can be handled.</typeparam>
-/// <typeparam name="TResponse">The expected result type.</typeparam>
-public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> 
+/// <typeparam name="TResult">The expected result type.</typeparam>
+public interface IHandleQuery<in TQuery, TResult> : IHandleQuery<TResult> 
     where TQuery : class, IQuery
 {
     /// <summary>
@@ -17,5 +17,5 @@ public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse>
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
 }

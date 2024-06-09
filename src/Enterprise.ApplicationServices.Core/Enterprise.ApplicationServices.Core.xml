@@ -51,7 +51,7 @@
             A pragmatic base implementation of a command handler that returns a response.
             </summary>
             <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -74,7 +74,7 @@
             Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1"/> is preferred.
             </summary>
             <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.IHandleCommand`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <summary>
@@ -102,7 +102,7 @@
             Get the handler implementation that can handle the given command.
             </summary>
             <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="command"></param>
             <returns></returns>
         </member>
@@ -120,14 +120,14 @@
             This interface is a pragmatic compromise that allows for defining a result associated with the command.
             Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Model.ICommand"/> is preferred.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery`2">
             <summary>
             Handles queries.
             </summary>
             <typeparam name="TQuery">The explicit type of query that can be handled.</typeparam>
-            <typeparam name="TResponse">The expected result type.</typeparam>
+            <typeparam name="TResult">The expected result type.</typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <summary>
@@ -145,7 +145,7 @@
             When partnered with prebuilt base query handlers and DI factory methods, this becomes more streamlined.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2.ExecuteAsync(`0,System.Threading.CancellationToken)">
             <summary>
@@ -160,7 +160,7 @@
             A base implementation of a query handler that supports the raising of events.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
@@ -180,7 +180,7 @@
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="query"></param>
             <returns></returns>
         </member>
@@ -188,7 +188,7 @@
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="query"></param>
             <returns></returns>
         </member>
@@ -197,7 +197,7 @@
             Get the handler implementation that can handle the given query.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="query"></param>
             <returns></returns>
         </member>
@@ -206,7 +206,7 @@
             Get the handler implementation that can handle the given query.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="query"></param>
             <returns></returns>
         </member>
@@ -215,7 +215,7 @@
             Handles queries.
             The type of response is not directly associated with the query passed in.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound.IHandleQuery`1.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <summary>
@@ -229,7 +229,7 @@
             <summary>
             A query that can be cached.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Alternate.IQuery`1">
             <summary>
@@ -237,7 +237,7 @@
             It is used primarily for constraint purposes.
             This interface allows for defining an explicit return type that is associated with the query.
             </summary>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.ICacheableQuery">
             <summary>

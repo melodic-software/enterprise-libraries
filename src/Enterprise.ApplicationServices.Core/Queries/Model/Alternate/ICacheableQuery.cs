@@ -5,6 +5,6 @@ namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 /// <summary>
 /// A query that can be cached.
 /// </summary>
-/// <typeparam name="TResponse"></typeparam>
+/// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(ICacheableQuery))]
-public interface ICacheableQuery<out TResponse> : IQuery<TResponse>, ICacheableQuery;
+public interface ICacheableQuery<out TResult> : IQuery<TResult>, ICacheableQuery;

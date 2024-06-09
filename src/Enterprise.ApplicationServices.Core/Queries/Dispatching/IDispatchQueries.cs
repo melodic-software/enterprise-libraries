@@ -5,7 +5,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Dispatching;
 
 public interface IDispatchQueries
 {
-    Task<TResponse> DispatchAsync<TResponse>(IQuery query, CancellationToken cancellationToken);
-    Task<TResponse> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken);
-    Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery;
+    Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken);
+    Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken);
+    Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery;
 }

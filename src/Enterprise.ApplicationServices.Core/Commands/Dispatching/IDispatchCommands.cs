@@ -8,6 +8,6 @@ public interface IDispatchCommands
     Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
         where TCommand : class, ICommand;
 
-    Task<TResponse> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : class, ICommand<TResponse>;
+    Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : class, ICommand<TResult>;
 }

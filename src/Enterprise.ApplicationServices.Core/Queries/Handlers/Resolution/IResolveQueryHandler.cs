@@ -12,36 +12,36 @@ public interface IResolveQueryHandler
     /// <summary>
     /// Get the handler implementation that can handle the given query.
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery query);
+    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query);
+    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery<TResult> query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
+    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
         where TQuery : class, IQuery;
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query)
-        where TQuery : class, IQuery<TResponse>;
+    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
+        where TQuery : class, IQuery<TResult>;
 }

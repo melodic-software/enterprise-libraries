@@ -10,6 +10,6 @@ namespace Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 /// This interface is a pragmatic compromise that allows for defining a result associated with the command.
 /// Use of this interface is acceptable; however, <see cref="ICommand"/> is preferred.
 /// </summary>
-/// <typeparam name="TResponse"></typeparam>
+/// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(ICommand))]
-public interface ICommand<out TResponse> : ICommand, IRequest<TResponse>;
+public interface ICommand<out TResult> : ICommand, IRequest<TResult>;

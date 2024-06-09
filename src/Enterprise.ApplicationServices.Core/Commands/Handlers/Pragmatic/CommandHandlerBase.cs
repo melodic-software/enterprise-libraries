@@ -13,11 +13,11 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 /// A pragmatic base implementation of a command handler that returns a response.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-/// <typeparam name="TResponse"></typeparam>
+/// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(CommandHandlerBase<>))]
-public abstract class CommandHandlerBase<TCommand, TResponse>
-    : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>, IHandler<TCommand, TResponse>
-    where TCommand : class, ICommand<TResponse>
+public abstract class CommandHandlerBase<TCommand, TResult>
+    : ApplicationServiceBase, IHandleCommand<TCommand, TResult>, IHandler<TCommand, TResult>
+    where TCommand : class, ICommand<TResult>
 {
     protected CommandHandlerBase(IEventRaisingFacade eventService) : base(eventService)
     {
@@ -38,11 +38,11 @@ public abstract class CommandHandlerBase<TCommand, TResponse>
     }
 
     /// <inheritdoc />
-    public async Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         return await HandleAsync(request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    public abstract Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
 }

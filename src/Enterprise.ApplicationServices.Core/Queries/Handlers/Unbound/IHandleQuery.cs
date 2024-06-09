@@ -7,8 +7,8 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 /// Handles queries.
 /// The type of response is not directly associated with the query passed in.
 /// </summary>
-/// <typeparam name="TResponse"></typeparam>
-public interface IHandleQuery<TResponse> : IApplicationService
+/// <typeparam name="TResult"></typeparam>
+public interface IHandleQuery<TResult> : IApplicationService
 {
     /// <summary>
     /// Handle the query and return the typed result.
@@ -16,5 +16,5 @@ public interface IHandleQuery<TResponse> : IApplicationService
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResponse> HandleAsync(IQuery query, CancellationToken cancellationToken);
+    Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken);
 }
