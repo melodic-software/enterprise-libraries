@@ -13,7 +13,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 /// <typeparam name="TCommand"></typeparam>
 public abstract class CommandHandlerBase<TCommand> : 
     ApplicationServiceBase, IHandleCommand<TCommand>, IHandler<TCommand>
-    where TCommand : class, IBaseCommand
+    where TCommand : class, ICommand
 {
     protected CommandHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {
@@ -21,7 +21,7 @@ public abstract class CommandHandlerBase<TCommand> :
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         var typedCommand = (TCommand)command;

@@ -14,7 +14,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 /// <typeparam name="TResponse"></typeparam>
 public abstract class QueryHandlerBase<TQuery, TResponse> : 
     ApplicationServiceBase, IHandleQuery<TQuery, TResponse>, IHandler<TQuery, TResponse>
-    where TQuery : class, IBaseQuery
+    where TQuery : class, IQuery
 {
     protected QueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {
@@ -22,7 +22,7 @@ public abstract class QueryHandlerBase<TQuery, TResponse> :
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResponse> HandleAsync(IQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;

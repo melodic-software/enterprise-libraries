@@ -5,19 +5,19 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Validation;
 
 public static class CommandHandlerTypeValidationService
 {
-    public static void ValidateType<TCommand>(IBaseCommand command, IHandleCommand commandHandler)
-        where TCommand : IBaseCommand
+    public static void ValidateType<TCommand>(ICommand command, IHandleCommand commandHandler)
+        where TCommand : ICommand
     {
         ValidateType(command, typeof(TCommand), commandHandler);
     }
 
-    public static void ValidateType<TCommand>(IBaseCommand command, IHandleCommand<TCommand> commandHandler)
-        where TCommand : class, IBaseCommand
+    public static void ValidateType<TCommand>(ICommand command, IHandleCommand<TCommand> commandHandler)
+        where TCommand : class, ICommand
     {
         ValidateType(command, typeof(TCommand), commandHandler);
     }
 
-    public static void ValidateType(IBaseCommand command, Type expectedCommandType, IHandleCommand commandHandler)
+    public static void ValidateType(ICommand command, Type expectedCommandType, IHandleCommand commandHandler)
     {
         Type commandType = command.GetType();
 

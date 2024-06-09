@@ -9,7 +9,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 /// <typeparam name="TQuery">The explicit type of query that can be handled.</typeparam>
 /// <typeparam name="TResponse">The expected result type.</typeparam>
 public interface IHandleQuery<in TQuery, TResponse> : IHandleQuery<TResponse> 
-    where TQuery : class, IBaseQuery
+    where TQuery : class, IQuery
 {
     /// <summary>
     /// Handle a specific type of query and return the typed result.

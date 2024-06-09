@@ -7,7 +7,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 /// Handles commands of a specific type.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
-public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : class, IBaseCommand
+public interface IHandleCommand<in TCommand> : IHandleCommand where TCommand : class, ICommand
 {
     /// <summary>
     /// Handle the command.
