@@ -9,7 +9,7 @@ public static class MediatRConfigurations
 {
     public static Action<MediatRServiceConfiguration> DefaultConfigure(MediatROptions options)
     {
-        return mediatRConfiguration =>
+        return mediatRServiceConfiguration =>
         {
             Assembly[] assemblies = options.Assemblies.ToArray();
             bool explicitAssembliesSpecified = assemblies.Any();
@@ -18,9 +18,9 @@ public static class MediatRConfigurations
                 RegisterExplicitAssemblies(assemblies) :
                 RegisterAssemblies();
 
-            mediatRConfiguration.RegisterServicesFromAssemblies(assemblies);
+            mediatRServiceConfiguration.RegisterServicesFromAssemblies(assemblies);
 
-            RegisterBehaviors(options, mediatRConfiguration);
+            RegisterBehaviors(options, mediatRServiceConfiguration);
         };
     }
 }

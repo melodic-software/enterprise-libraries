@@ -5,7 +5,7 @@ namespace Enterprise.MediatR.Behaviors;
 
 internal static class BehaviorRegistrar
 {
-    public static void RegisterBehaviors(MediatROptions options, MediatRServiceConfiguration mediatRConfiguration)
+    public static void RegisterBehaviors(MediatROptions options, MediatRServiceConfiguration mediatRServiceConfiguration)
     {
         IReadOnlyCollection<BehaviorRegistration> behaviorRegistrations = options.BehaviorRegistrations;
 
@@ -16,7 +16,7 @@ internal static class BehaviorRegistrar
 
         foreach (BehaviorRegistration behaviorRegistration in behaviorRegistrations)
         {
-            mediatRConfiguration.AddOpenBehavior(behaviorRegistration.Type, behaviorRegistration.ServiceLifetime);
+            mediatRServiceConfiguration.AddOpenBehavior(behaviorRegistration.Type, behaviorRegistration.ServiceLifetime);
         }
     }
 }
