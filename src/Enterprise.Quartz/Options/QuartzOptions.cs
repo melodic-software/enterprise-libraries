@@ -2,7 +2,7 @@
 
 namespace Enterprise.Quartz.Options;
 
-public class QuartzConfigOptions
+public class QuartzOptions
 {
     public const string ConfigSectionKey = "Custom:Quartz";
 

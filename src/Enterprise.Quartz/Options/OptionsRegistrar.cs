@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Quartz.Options;
 
-public class QuartzConfigOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<QuartzConfigOptions>(configuration, QuartzConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<QuartzOptions>(configuration, QuartzOptions.ConfigSectionKey);
     }
 }

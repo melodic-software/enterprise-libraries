@@ -1,5 +1,4 @@
 ﻿using Enterprise.Options.Core.Services.Singleton;
-using Enterprise.Quartz.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
@@ -13,28 +12,23 @@ public static class QuartzConfigService
 {
     public static void ConfigureQuartz(this IServiceCollection services, IConfiguration configuration)
     {
-        QuartzConfigOptions quartzConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<QuartzConfigOptions>(configuration, QuartzConfigOptions.ConfigSectionKey);
+        Options.QuartzOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<Options.QuartzOptions>(configuration, Options.QuartzOptions.ConfigSectionKey);
 
-        if (!quartzConfigOptions.EnableQuartz)
+        if (!options.EnableQuartz)
         {
             return;
         }
 
-        quartzConfigOptions.Configure ??= DefaultConfigure;
+        options.Configure ??= _ => { };
 
-        services.AddQuartz(quartzConfigOptions.Configure);
+        services.AddQuartz(options.Configure);
 
-        services.AddQuartzHostedService(options =>
+        services.AddQuartzHostedService(quartzHostedServiceOptions =>
         {
-            options.AwaitApplicationStarted = true;
-            options.WaitForJobsToComplete = true;
-            options.StartDelay = null;
+            quartzHostedServiceOptions.AwaitApplicationStarted = true;
+            quartzHostedServiceOptions.WaitForJobsToComplete = true;
+            quartzHostedServiceOptions.StartDelay = null;
         });
-    }
-
-    private static void DefaultConfigure(IServiceCollectionQuartzConfigurator configure)
-    {
-        // No configuration by default.
     }
 }
