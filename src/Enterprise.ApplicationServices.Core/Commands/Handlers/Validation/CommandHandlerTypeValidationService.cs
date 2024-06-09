@@ -6,7 +6,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Validation;
 public static class CommandHandlerTypeValidationService
 {
     public static void ValidateType<TCommand>(ICommand command, IHandleCommand commandHandler)
-        where TCommand : ICommand
+        where TCommand : class, ICommand
     {
         ValidateType(command, typeof(TCommand), commandHandler);
     }

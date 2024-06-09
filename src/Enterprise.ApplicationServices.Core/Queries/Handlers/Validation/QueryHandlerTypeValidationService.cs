@@ -6,7 +6,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Validation;
 public static class QueryHandlerTypeValidationService
 {
     public static void ValidateType<TQuery, TResult>(TQuery query, IHandleQuery<TResult> queryHandler)
-        where TQuery : IQuery
+        where TQuery : class, IQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }

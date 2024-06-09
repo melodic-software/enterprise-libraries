@@ -5,7 +5,7 @@ namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.Servic
 
 public static class CommandHandlerTypeResolver
 {
-    public static Type? GetAlternateHandlerType<TCommand>() where TCommand : ICommand
+    public static Type? GetAlternateHandlerType<TCommand>() where TCommand : class, ICommand
     {
         // Get the type argument of ICommand<>.
         Type? resultType = GetResultType<TCommand>();
@@ -21,7 +21,7 @@ public static class CommandHandlerTypeResolver
         return handlerType;
     }
 
-    public static Type? GetResultType<TCommand>() where TCommand : ICommand
+    public static Type? GetResultType<TCommand>() where TCommand : class, ICommand
     {
         Type commandType = typeof(TCommand);
 

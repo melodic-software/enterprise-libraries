@@ -11,7 +11,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
 /// </summary>
 /// <typeparam name="TQuery"></typeparam>
 /// <typeparam name="TResult"></typeparam>
-public interface IQueryLogic<in TQuery, TResult> where TQuery : IQuery<TResult>
+public interface IQueryLogic<in TQuery, TResult> where TQuery : class, IQuery<TResult>
 {
     /// <summary>
     /// Execute the query logic.

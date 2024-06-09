@@ -7,5 +7,5 @@ public interface IDispatchQueries
 {
     Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken);
     Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken);
-    Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : IQuery;
+    Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : class, IQuery;
 }
