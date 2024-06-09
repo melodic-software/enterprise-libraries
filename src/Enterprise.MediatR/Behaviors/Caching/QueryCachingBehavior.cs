@@ -6,24 +6,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Caching;
 
-internal sealed class QueryCachingBehavior<TRequest, TResponse> : 
-    IPipelineBehavior<TRequest, TResponse>
+internal sealed class QueryCachingBehavior<TRequest, TResult> : 
+    IPipelineBehavior<TRequest, TResult>
     where TRequest : ICachedQuery
 {
     private readonly ICacheService _cacheService;
-    private readonly ILogger<QueryCachingBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogger<QueryCachingBehavior<TRequest, TResult>> _logger;
 
-    public QueryCachingBehavior(ICacheService cacheService, ILogger<QueryCachingBehavior<TRequest, TResponse>> logger)
+    public QueryCachingBehavior(ICacheService cacheService, ILogger<QueryCachingBehavior<TRequest, TResult>> logger)
     {
         _cacheService = cacheService;
         _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult> Handle(TRequest request, RequestHandlerDelegate<TResult> next, CancellationToken cancellationToken)
     {
         // This is an example of the "cache aside" pattern.
-
-        TResponse? cachedResult = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
+        TResult? cachedResult = await _cacheService.GetAsync<TResult>(request.CacheKey, cancellationToken);
 
         string name = typeof(TRequest).Name;
 
@@ -35,22 +34,22 @@ internal sealed class QueryCachingBehavior<TRequest, TResponse> :
 
         _logger.LogInformation("Cache miss for {Query}.", name);
 
-        TResponse response = await next();
+        TResult result = await next();
 
-        if (CanCache(response))
+        if (CanCache(result))
         {
-            await _cacheService.SetAsync(request.CacheKey, response, request.Expiration, cancellationToken);
+            await _cacheService.SetAsync(request.CacheKey, result, request.Expiration, cancellationToken);
         }
         else
         {
-            _logger.LogWarning("Response is either null or a non successful result and cannot be cached.");
+            _logger.LogWarning("Result is either null or a non successful result and cannot be cached.");
         }
 
-        return response;
+        return result;
     }
 
-    public bool CanCache(TResponse response)
+    public bool CanCache(TResult result)
     {
-        return response is Result { IsSuccess: true } || !Equals(response, default(TResponse));
+        return result is Result { IsSuccess: true } || !Equals(result, default(TResult));
     }
 }

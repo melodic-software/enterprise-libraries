@@ -8,20 +8,20 @@ public static class CommandHandlerTypeResolver
     public static Type? GetAlternateHandlerType<TCommand>() where TCommand : ICommand
     {
         // Get the type argument of ICommand<>.
-        Type? responseType = GeTResultType<TCommand>();
+        Type? resultType = GetResultType<TCommand>();
 
-        if (responseType == null)
+        if (resultType == null)
         {
             return null;
         }
 
         // Create the generic type for IHandleCommand<TCommand, TResult>.
-        Type handlerType = typeof(IHandleCommand<,>).MakeGenericType(typeof(TCommand), responseType);
+        Type handlerType = typeof(IHandleCommand<,>).MakeGenericType(typeof(TCommand), resultType);
 
         return handlerType;
     }
 
-    public static Type? GeTResultType<TCommand>() where TCommand : ICommand
+    public static Type? GetResultType<TCommand>() where TCommand : ICommand
     {
         Type commandType = typeof(TCommand);
 
@@ -35,8 +35,8 @@ public static class CommandHandlerTypeResolver
         }
 
         // Get the type argument of ICommand<>.
-        Type responseType = commandInterface.GetGenericArguments().First();
+        Type resultType = commandInterface.GetGenericArguments().First();
 
-        return responseType;
+        return resultType;
     }
 }

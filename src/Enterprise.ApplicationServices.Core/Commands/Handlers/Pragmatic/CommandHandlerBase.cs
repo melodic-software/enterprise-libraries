@@ -10,7 +10,7 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 
 /// <summary>
-/// A pragmatic base implementation of a command handler that returns a response.
+/// A pragmatic base implementation of a command handler that returns a result.
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
 /// <typeparam name="TResult"></typeparam>

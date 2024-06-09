@@ -17,15 +17,15 @@ public class LoggingCommandHandler<TCommand, TResult> : IHandler<TCommand, TResu
     {
         Type commandType = typeof(TCommand);
 
-        TResult response;
+        TResult result;
 
         using (_logger.BeginScope("Command: {CommandType}", commandType.Name))
         {
             _logger.LogDebug("Executing command.");
-            response = await next();
+            result = await next();
             _logger.LogDebug("Command was handled successfully.");
         }
 
-        return response;
+        return result;
     }
 }

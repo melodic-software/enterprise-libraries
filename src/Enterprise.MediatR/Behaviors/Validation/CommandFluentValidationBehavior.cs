@@ -6,8 +6,8 @@ using MediatR;
 namespace Enterprise.MediatR.Behaviors.Validation;
 
 // TODO: Can we consolidate this with the other logging decorator(s)?
-public class CommandFluentValidationBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
+public class CommandFluentValidationBehavior<TRequest, TResult>
+    : IPipelineBehavior<TRequest, TResult>
     where TRequest : ICommand
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators;
@@ -17,7 +17,7 @@ public class CommandFluentValidationBehavior<TRequest, TResponse>
         _validators = validators.ToList();
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult> Handle(TRequest request, RequestHandlerDelegate<TResult> next, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {

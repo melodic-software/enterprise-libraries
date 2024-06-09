@@ -29,7 +29,7 @@ public class CommandDispatcher : IDispatchCommands
         where TCommand : ICommand<TResult>
     {
         IHandleCommand<TCommand, TResult> handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResult>(command);
-        TResult response = await handler.HandleAsync(command, cancellationToken);
-        return response;
+        TResult result = await handler.HandleAsync(command, cancellationToken);
+        return result;
     }
 }

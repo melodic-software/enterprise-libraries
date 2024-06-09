@@ -7,27 +7,27 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Logging;
 
-public class UseCaseLoggingBehavior<TRequest, TResponse>
-    : IPipelineBehavior<TRequest, TResponse>
+public class UseCaseLoggingBehavior<TRequest, TResult>
+    : IPipelineBehavior<TRequest, TResult>
     where TRequest : IUseCase
 {
-    private readonly ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogger<UseCaseLoggingBehavior<TRequest, TResult>> _logger;
     private readonly ILoggingBehaviorService _loggingBehaviorService;
 
-    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> logger) : this(logger, new LoggingBehaviorService())
+    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResult>> logger) : this(logger, new LoggingBehaviorService())
     {
 
     }
 
-    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResponse>> logger, ILoggingBehaviorService loggingBehaviorService)
+    public UseCaseLoggingBehavior(ILogger<UseCaseLoggingBehavior<TRequest, TResult>> logger, ILoggingBehaviorService loggingBehaviorService)
     {
         _logger = logger;
         _loggingBehaviorService = loggingBehaviorService;
     }
 
-    public async Task<TResponse> Handle(
+    public async Task<TResult> Handle(
         TRequest request,
-        RequestHandlerDelegate<TResponse> next,
+        RequestHandlerDelegate<TResult> next,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -40,12 +40,12 @@ public class UseCaseLoggingBehavior<TRequest, TResponse>
         try
         {
             _logger.LogInformation("Executing \"{UseCase}\" use case.", typeName);
-            TResponse response = await next();
+            TResult result = await next();
             _logger.LogInformation("\"{UseCase}\" execution completed.", typeName);
 
-            HandleResult(response, typeName);
+            HandleResult(result, typeName);
 
-            return response;
+            return result;
         }
         catch (Exception exception)
         {
@@ -54,9 +54,9 @@ public class UseCaseLoggingBehavior<TRequest, TResponse>
         }
     }
 
-    private void HandleResult(TResponse response, string typeName)
+    private void HandleResult(TResult commandResult, string typeName)
     {
-        if (response is not Result result)
+        if (commandResult is not Result result)
         {
             return;
         }

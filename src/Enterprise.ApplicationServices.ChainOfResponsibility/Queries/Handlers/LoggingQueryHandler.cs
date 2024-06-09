@@ -20,9 +20,9 @@ public class LoggingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
         using (_logger.BeginScope("Query: {QueryType}", queryType.Name))
         {
             _logger.LogDebug("Executing query.");
-            TResult response = await next();
+            TResult result = await next();
             _logger.LogDebug("Query was handled successfully.");
-            return response;
+            return result;
         }
     }
 }

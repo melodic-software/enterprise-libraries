@@ -24,7 +24,7 @@ public class LoggingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorB
         Type commandType = typeof(TCommand);
         Type innermostHandlerType = Innermost.GetType();
         
-        TResult response;
+        TResult result;
 
         // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
         // Maybe we do that in the base?
@@ -32,10 +32,10 @@ public class LoggingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorB
         using (_logger.BeginScope("Command Handler: {CommandHandlerType}, Command: {CommandType}", innermostHandlerType.Name, commandType.Name))
         {
             _logger.LogDebug("Executing command.");
-            response = await Decorated.HandleAsync(command, cancellationToken);
+            result = await Decorated.HandleAsync(command, cancellationToken);
             _logger.LogDebug("Command was handled successfully.");
         }
 
-        return response;
+        return result;
     }
 }

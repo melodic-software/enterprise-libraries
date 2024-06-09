@@ -5,7 +5,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 
 /// <summary>
 /// Handles queries.
-/// The type of response is not directly associated with the query passed in.
+/// The type of result is not directly associated with the query passed in.
 /// </summary>
 /// <typeparam name="TResult"></typeparam>
 public interface IHandleQuery<TResult> : IApplicationService

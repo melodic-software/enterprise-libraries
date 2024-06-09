@@ -29,9 +29,9 @@ public class LoggingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQ
         using (_logger.BeginScope("Query Handler: {QueryHandlerType}, Query: {QueryType}", innermostHandlerType.Name, queryType.Name))
         {
             _logger.LogDebug("Executing query.");
-            TResult response = await Decorated.HandleAsync(query, cancellationToken);
+            TResult result = await Decorated.HandleAsync(query, cancellationToken);
             _logger.LogDebug("Query was handled successfully.");
-            return response;
+            return result;
         }
     }
 }

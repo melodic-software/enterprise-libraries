@@ -20,8 +20,8 @@ public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        TResult response = await HandleAsync(typedQuery, cancellationToken);
-        return response;
+        TResult result = await HandleAsync(typedQuery, cancellationToken);
+        return result;
     }
 
     /// <inheritdoc />

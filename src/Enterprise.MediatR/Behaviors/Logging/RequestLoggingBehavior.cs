@@ -5,19 +5,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Logging;
 
-public class RequestLoggingBehavior<TRequest, TResponse> :
-    IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+public class RequestLoggingBehavior<TRequest, TResult> :
+    IPipelineBehavior<TRequest, TResult>
+    where TRequest : IRequest<TResult>
 {
-    private readonly ILogger<RequestLoggingBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogger<RequestLoggingBehavior<TRequest, TResult>> _logger;
 
-    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResponse>> logger)
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger)
     {
         _logger = logger;
     }
 
-    public async Task<TResponse> Handle(TRequest request,
-        RequestHandlerDelegate<TResponse> next,
+    public async Task<TResult> Handle(TRequest request,
+        RequestHandlerDelegate<TResult> next,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -28,14 +28,14 @@ public class RequestLoggingBehavior<TRequest, TResponse> :
 
         var stopWatch = Stopwatch.StartNew();
 
-        TResponse response = await next();
+        TResult result = await next();
 
-        _logger.LogInformation("Handled {RequestName}, with {Response} in {Milliseconds} ms", 
-            requestType.Name, typeof(TResponse).Name, stopWatch.ElapsedMilliseconds);
+        _logger.LogInformation("Handled {RequestName}, with {Result} in {Milliseconds} ms", 
+            requestType.Name, typeof(TResult).Name, stopWatch.ElapsedMilliseconds);
 
         stopWatch.Stop();
 
-        return response;
+        return result;
     }
 
     private void LogProperties(TRequest request, Type requestType)
