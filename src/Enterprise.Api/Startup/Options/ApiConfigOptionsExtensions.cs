@@ -17,6 +17,7 @@ using Enterprise.Logging.TraceListeners;
 using Enterprise.MediatR.Options;
 using Enterprise.Monitoring.Health.Options;
 using Enterprise.Multitenancy.Options;
+using Enterprise.Options.Core.Delegates;
 using Enterprise.Quartz.Options;
 using Enterprise.Redis.Options;
 using Enterprise.Serilog.Options;
@@ -26,117 +27,117 @@ namespace Enterprise.Api.Startup.Options;
 
 public static class ApiConfigOptionsExtensions
 {
-    public static void ConfigureAutoMapper(this ApiConfigOptions options, Action<AutoMapperConfigOptions> configureOptions)
+    public static void ConfigureAutoMapper(this ApiConfigOptions options, Configure<AutoMapperConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureControllers(this ApiConfigOptions options, Action<ControllerConfigOptions> configureOptions)
+    public static void ConfigureControllers(this ApiConfigOptions options, Configure<ControllerConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureCors(this ApiConfigOptions options, Action<CorsConfigOptions> configureOptions)
+    public static void ConfigureCors(this ApiConfigOptions options, Configure<CorsConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureErrorHandling(this ApiConfigOptions options, Action<ErrorHandlingConfigOptions> configureOptions)
+    public static void ConfigureErrorHandling(this ApiConfigOptions options, Configure<ErrorHandlingConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureHealthChecks(this ApiConfigOptions options, Action<HealthCheckConfigOptions> configureOptions)
+    public static void ConfigureHealthChecks(this ApiConfigOptions options, Configure<HealthCheckConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureHttpLogging(this ApiConfigOptions options, Action<HttpLoggingConfigOptions> configureOptions)
+    public static void ConfigureHttpLogging(this ApiConfigOptions options, Configure<HttpLoggingConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureIISIntegration(this ApiConfigOptions options, Action<IISIntegrationOptions> configureOptions)
+    public static void ConfigureIISIntegration(this ApiConfigOptions options, Configure<IISIntegrationOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureJwtBearerTokenOptions(this ApiConfigOptions options, Action<JwtBearerTokenOptions> configureOptions)
+    public static void ConfigureJwtBearerTokenOptions(this ApiConfigOptions options, Configure<JwtBearerTokenOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureLogging(this ApiConfigOptions options, Action<LoggingConfigOptions> configureOptions)
+    public static void ConfigureLogging(this ApiConfigOptions options, Configure<LoggingConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureLoggingProviders(this ApiConfigOptions options, Action<LoggingProviderConfigOptions> configureOptions)
+    public static void ConfigureLoggingProviders(this ApiConfigOptions options, Configure<LoggingProviderConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureLoggingMiddleware(this ApiConfigOptions options, Action<LoggingMiddlewareConfigOptions> configureOptions)
+    public static void ConfigureLoggingMiddleware(this ApiConfigOptions options, Configure<LoggingMiddlewareConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureMediatR(this ApiConfigOptions options, Action<MediatRConfigOptions> configureOptions)
+    public static void ConfigureMediatR(this ApiConfigOptions options, Configure<MediatRConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureMinimalApi(this ApiConfigOptions options, Action<MinimalApiConfigOptions> configureOptions)
+    public static void ConfigureMinimalApi(this ApiConfigOptions options, Configure<MinimalApiConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureMultitenancy(this ApiConfigOptions options, Action<MultitenancyConfigOptions> configureOptions)
+    public static void ConfigureMultitenancy(this ApiConfigOptions options, Configure<MultitenancyConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureQuartz(this ApiConfigOptions options, Action<QuartzConfigOptions> configureOptions)
+    public static void ConfigureQuartz(this ApiConfigOptions options, Configure<QuartzConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureRedis(this ApiConfigOptions options, Action<RedisConfigOptions> configureOptions)
+    public static void ConfigureRedis(this ApiConfigOptions options, Configure<RedisConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureSerilog(this ApiConfigOptions options, Action<SerilogConfigOptions> configureOptions)
+    public static void ConfigureSerilog(this ApiConfigOptions options, Configure<SerilogConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureSwagger(this ApiConfigOptions options, Action<SwaggerConfigOptions> configureOptions)
+    public static void ConfigureSwagger(this ApiConfigOptions options, Configure<SwaggerConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureTelemetry(this ApiConfigOptions options, Action<TelemetryConfigOptions> configureOptions)
+    public static void ConfigureTelemetry(this ApiConfigOptions options, Configure<TelemetryConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureTraceability(this ApiConfigOptions options, Action<OpenTelemetryConfigOptions> configureOptions)
+    public static void ConfigureTraceability(this ApiConfigOptions options, Configure<OpenTelemetryConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureTraceListeners(this ApiConfigOptions options, Action<TraceListenerConfigOptions> configureOptions)
+    public static void ConfigureTraceListeners(this ApiConfigOptions options, Configure<TraceListenerConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureVersioning(this ApiConfigOptions options, Action<VersioningConfigOptions> configureOptions)
+    public static void ConfigureVersioning(this ApiConfigOptions options, Configure<VersioningConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }
 
-    public static void ConfigureW3CLogging(this ApiConfigOptions options, Action<W3CLoggingConfigOptions> configureOptions)
+    public static void ConfigureW3CLogging(this ApiConfigOptions options, Configure<W3CLoggingConfigOptions> configureOptions)
     {
         options.Configure(configureOptions);
     }

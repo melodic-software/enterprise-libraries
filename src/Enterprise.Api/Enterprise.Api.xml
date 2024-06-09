@@ -433,11 +433,6 @@
             Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
             </summary>
         </member>
-        <member name="F:Enterprise.Api.Startup.Options.ApiConfigOptions.DeferredConfigurations">
-            <summary>
-            Holds deferred configuration actions that are to be executed later in the application lifecycle.
-            </summary>
-        </member>
         <member name="P:Enterprise.Api.Startup.Options.ApiConfigOptions.WebApplicationOptions">
             <summary>
             Contains the options for web application that override all other configuration sources.
@@ -449,12 +444,23 @@
             </summary>
             <param name="args">The command line arguments provided to the application.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(System.Action{``0})">
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(Enterprise.Options.Core.Delegates.Configure{``0})">
             <summary>
             Configures options of a specific type.
             </summary>
             <typeparam name="TOptions">The options type to be configured.</typeparam>
             <param name="configureOptions">The configuration action to be applied.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.EnsureSharedFrameworkAssemblyIsLoaded">
+            <summary>
+            Ensures the shared framework assembly directory is loaded.
+            This is required if no AutoLoad assembly attribute is defined.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Api.Startup.Options.ApiConfigOptions.DeferredConfigurations">
+            <summary>
+            Holds deferred configuration actions that are to be executed later in the application lifecycle.
+            </summary>
         </member>
         <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(Enterprise.Api.Startup.Options.Delegates.Configure{``0})">
             <summary>
@@ -469,12 +475,6 @@
             </summary>
             <param name="configuration">The application's configuration.</param>
             <param name="environment">The web hosting environment.</param>
-        </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.EnsureSharedFrameworkAssemblyIsLoaded">
-            <summary>
-            Ensures the shared framework assembly directory is loaded.
-            This is required if no AutoLoad assembly attribute is defined.
-            </summary>
         </member>
         <member name="T:Enterprise.Api.Startup.WebApi">
             <summary>
