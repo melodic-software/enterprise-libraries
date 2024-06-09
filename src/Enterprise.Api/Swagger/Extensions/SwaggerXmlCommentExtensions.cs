@@ -7,16 +7,16 @@ namespace Enterprise.Api.Swagger.Extensions;
 
 public static class SwaggerXmlCommentExtensions
 {
-    public static void AddXmlComments(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    public static void AddXmlComments(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
     {
-        Assembly executingAssembly = Assembly.GetExecutingAssembly();
+        var executingAssembly = Assembly.GetExecutingAssembly();
 
         // this should be the main application
-        Assembly? entryAssembly = Assembly.GetEntryAssembly();
+        var entryAssembly = Assembly.GetEntryAssembly();
 
         // if an API client library is defined and the delegate reference has been provided
         // we can include the comments associated with those API contract models (if applicable)
-        Assembly? apiClientAssembly = swaggerConfigOptions.GetApiClientAssembly?.Invoke();
+        Assembly? apiClientAssembly = swaggerOptions.GetApiClientAssembly?.Invoke();
 
         AddXmlComments(entryAssembly, options);
         AddXmlComments(apiClientAssembly, options);

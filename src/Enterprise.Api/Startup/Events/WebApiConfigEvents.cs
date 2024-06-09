@@ -6,10 +6,9 @@ namespace Enterprise.Api.Startup.Events;
 /// <summary>
 /// Allows for wiring up handlers to specific lifecycle events in the API configuration.
 /// </summary>
-public class ApiConfigEvents
+public class WebApiConfigEvents
 {
     // These are events that external clients can subscribe to, providing hooks into the application's lifecycle.
-    // TODO: If possible, it would be nice to separate these and the handlers so the ApiConfigOptions only has access to raise events and not wire up handlers itself.
 
     public event ConfigurationStarted? ConfigurationStarted;
     public event BuilderCreated? BuilderCreated;

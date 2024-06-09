@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Api.Options;
 
-public class SharedConfigOptions
+public class SharedOptions
 {
     public const string ConfigSectionKey = "Custom:Shared";
 

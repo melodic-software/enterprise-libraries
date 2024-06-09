@@ -1,5 +1,4 @@
-﻿using Enterprise.Api.Swagger.Options;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -15,7 +14,7 @@ public static class BasicAuthenticationExtensions
         authBuilder.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthenticationScheme, null);
     }
 
-    public static void AddBasicAuthenticationSecurityDefinition(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    public static void AddBasicAuthenticationSecurityDefinition(this SwaggerGenOptions options)
     {
         options.AddSecurityDefinition(BasicAuthenticationSecurityDefinitionName, new OpenApiSecurityScheme
         {
@@ -25,7 +24,7 @@ public static class BasicAuthenticationExtensions
         });
     }
 
-    public static void AddBasicAuthenticationSecurityRequirement(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    public static void AddBasicAuthenticationSecurityRequirement(this SwaggerGenOptions options)
     {
         options.AddSecurityRequirement(new OpenApiSecurityRequirement
         {

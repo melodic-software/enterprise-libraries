@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Enterprise.Api.Logging;
 
-internal sealed class DefaultLoggingProviderConfigOptions : LoggingProviderConfigOptions
+internal sealed class DefaultLoggingProviderOptions : LoggingProviderOptions
 {
-    internal DefaultLoggingProviderConfigOptions()
+    internal DefaultLoggingProviderOptions()
     {
         ConfigureProviders = builder =>
         {

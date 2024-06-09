@@ -2,7 +2,7 @@
 
 namespace Enterprise.Api.ErrorHandling.Options;
 
-public class ErrorHandlingConfigOptions
+public class ErrorHandlingOptions
 {
     public const string ConfigSectionKey = "ErrorHandling";
 

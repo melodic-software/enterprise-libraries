@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.Security.Options;
+namespace Enterprise.Api.ErrorHandling.Options;
 
-public class JwtBearerTokenOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<JwtBearerTokenOptions>(configuration, JwtBearerTokenOptions.ConfigSectionKey);
+        services.RegisterOptions<ErrorHandlingOptions>(configuration, ErrorHandlingOptions.ConfigSectionKey);
     }
 }

@@ -23,13 +23,13 @@ public static class WebApi
     /// Configures the application's services and request pipeline.
     /// </summary>
     /// <param name="args">The command-line arguments passed to the application.</param>
-    /// <param name="configure">A delegate to configure <see cref="ApiConfigOptions"/>.</param>
+    /// <param name="configure">A delegate to configure <see cref="WebApiOptions"/>.</param>
     public static async Task RunAsync(string[] args, ConfigureApi? configure)
     {
         var stopwatch = Stopwatch.StartNew();
 
-        var options = new ApiConfigOptions(args);
-        var events = new ApiConfigEvents();
+        var options = new WebApiOptions(args);
+        var events = new WebApiConfigEvents();
 
         try
         {
@@ -78,7 +78,7 @@ public static class WebApi
     /// <param name="options"></param>
     /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task<WebApplicationBuilder> CreateBuilderAsync(ApiConfigOptions options, ApiConfigEvents events)
+    private static async Task<WebApplicationBuilder> CreateBuilderAsync(WebApiOptions options, WebApiConfigEvents events)
     {
         PreStartupLogger.Instance.LogInformation("Creating the WebApplicationBuilder.");
         WebApplicationBuilder builder = WebApplication.CreateBuilder(options.WebApplicationOptions);
@@ -93,7 +93,7 @@ public static class WebApi
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="events"></param>
-    private static async Task AddServicesAsync(WebApplicationBuilder builder, ApiConfigEvents events)
+    private static async Task AddServicesAsync(WebApplicationBuilder builder, WebApiConfigEvents events)
     {
         PreStartupLogger.Instance.LogInformation("Adding services to the DI container.");
         builder.ConfigureServices();
@@ -109,7 +109,7 @@ public static class WebApi
     /// <param name="builder"></param>
     /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task<WebApplication> BuildApplicationAsync(WebApplicationBuilder builder, ApiConfigEvents events)
+    private static async Task<WebApplication> BuildApplicationAsync(WebApplicationBuilder builder, WebApiConfigEvents events)
     {
         PreStartupLogger.Instance.LogInformation("Building the application.");
 
@@ -137,7 +137,7 @@ public static class WebApi
     /// <param name="app"></param>
     /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task ConfigureRequestPipelineAsync(WebApplication app, ApiConfigEvents events)
+    private static async Task ConfigureRequestPipelineAsync(WebApplication app, WebApiConfigEvents events)
     {
         app.Logger.LogInformation("Configuring the request pipeline.");
         app.ConfigureRequestPipeline();
@@ -145,7 +145,7 @@ public static class WebApi
         await events.RaiseRequestPipelineConfigured(app);
     }
 
-    private static void RegisterLifetimeEventHandlers(WebApplication app, ApiConfigEvents events, Stopwatch stopwatch)
+    private static void RegisterLifetimeEventHandlers(WebApplication app, WebApiConfigEvents events, Stopwatch stopwatch)
     {
         app.Logger.LogInformation("Registering application lifetime event handlers.");
 

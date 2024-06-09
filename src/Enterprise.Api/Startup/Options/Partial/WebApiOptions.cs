@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Enterprise.Api.Startup.Options;
 
-public partial class ApiConfigOptions
+public partial class WebApiOptions
 {
     /// <summary>
     /// Holds deferred configuration actions that are to be executed later in the application lifecycle.

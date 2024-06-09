@@ -14,12 +14,12 @@ namespace Enterprise.Api.Controllers.Formatters;
 
 public static class FormatterConfigService
 {
-    public static IMvcBuilder ConfigureFormatters(this IMvcBuilder builder, FormatterConfigOptions formatterConfigOptions)
+    public static IMvcBuilder ConfigureFormatters(this IMvcBuilder builder, FormatterOptions formatterOptions)
     {
         AddXmlInputOutputFormatters(builder);
 
-        ConfigureInputFormatters(builder, formatterConfigOptions.InputFormatters);
-        ConfigureOutputFormatters(builder, formatterConfigOptions.OutputFormatters);
+        ConfigureInputFormatters(builder, formatterOptions.InputFormatters);
+        ConfigureOutputFormatters(builder, formatterOptions.OutputFormatters);
         Configure(builder);
 
         FormatterPrinter.PrintInputFormatters(builder);

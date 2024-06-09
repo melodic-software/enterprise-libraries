@@ -22,8 +22,8 @@ internal static class HellangMiddlewareService
 {
     internal static void AddProblemDetails(IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
     {
-        ErrorHandlingConfigOptions errorHandlingConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<ErrorHandlingConfigOptions>(configuration, ErrorHandlingConfigOptions.ConfigSectionKey);
+        ErrorHandlingOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<ErrorHandlingOptions>(configuration, ErrorHandlingOptions.ConfigSectionKey);
 
         // Only show exception details in non production environments.
         bool includeExceptionDetails = !environment.IsProduction();
@@ -34,15 +34,15 @@ internal static class HellangMiddlewareService
         // https://github.com/khellang/Middleware/tree/25eac131b2595fa72e2072c87c24763e42bd8e31
         // https://github.com/khellang/Middleware/issues/149
         // https://andrewlock.net/handling-web-api-exceptions-with-problemdetails-middleware/
-        services.AddProblemDetails(options =>
+        services.AddProblemDetails(o =>
         {
-            options.IsProblem = HellangMiddlewareDelegates.IsProblem;
-            options.ValidationProblemStatusCode = StatusCodes.Status422UnprocessableEntity;
+            o.IsProblem = HellangMiddlewareDelegates.IsProblem;
+            o.ValidationProblemStatusCode = StatusCodes.Status422UnprocessableEntity;
 
-            Func<HttpContext, string?> getTraceId = options.GetTraceId;
-            string traceIdPropertyName = options.TraceIdPropertyName;
+            Func<HttpContext, string?> getTraceId = o.GetTraceId;
+            string traceIdPropertyName = o.TraceIdPropertyName;
             
-            options.IncludeExceptionDetails = (httpContext, exception) =>
+            o.IncludeExceptionDetails = (httpContext, exception) =>
             {
                 if (exception is NotFoundException or ValidationException)
                 {
@@ -52,33 +52,33 @@ internal static class HellangMiddlewareService
                 return includeExceptionDetails;
             };
 
-            options.OnBeforeWriteDetails = (httpContext, problemDetails) =>
+            o.OnBeforeWriteDetails = (httpContext, problemDetails) =>
             {
                 // We want to obfuscate exception details to clients of the API.
                 if (problemDetails.Status == StatusCodes.Status500InternalServerError && !includeExceptionDetails)
                 {
-                    problemDetails.Detail = errorHandlingConfigOptions.InternalServerErrorResponseDetailMessage;
+                    problemDetails.Detail = options.InternalServerErrorResponseDetailMessage;
                 }
             };
 
             // These are ignored by this middleware.
             // This is convenient if you want to pass through up to other exception middleware components
-            //options.Ignore<T>();
+            //o.Ignore<T>();
 
             // NOTE: Not sure if this works with the current setup.
             
-            options.Rethrow<SqliteException>();
-            options.Rethrow<SqlException>();
-            //options.Rethrow<ValidationException>();
-            //options.Rethrow<Exception>();
-            //options.RethrowAll();
+            o.Rethrow<SqliteException>();
+            o.Rethrow<SqlException>();
+            //o.Rethrow<ValidationException>();
+            //o.Rethrow<Exception>();
+            //o.RethrowAll();
 
             // These are available for use, but are entirely optional.
             // These can be handled manually in controller / framework code OR exceptions can be raised and caught here.
-            options.MapToStatusCode<NotFoundException>(StatusCodes.Status404NotFound);
-            options.MapToStatusCode<ConcurrencyException>(StatusCodes.Status409Conflict);
+            o.MapToStatusCode<NotFoundException>(StatusCodes.Status404NotFound);
+            o.MapToStatusCode<ConcurrencyException>(StatusCodes.Status409Conflict);
 
-            options.Map<ValidationException>(exception =>
+            o.Map<ValidationException>(exception =>
             {
                 var errorDictionary = exception.ValidationErrors.ToDictionary();
 
@@ -101,7 +101,7 @@ internal static class HellangMiddlewareService
             });
 
             // This is an application "fault", which is semantically different from an "error".
-            options.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
+            o.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
         });
     }
 

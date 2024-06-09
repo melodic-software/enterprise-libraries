@@ -7,30 +7,30 @@ namespace Enterprise.Api.Swagger.Extensions;
 
 public static class SwaggerSecurityExtensions
 {
-    public static void AddSecurity(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    public static void AddSecurity(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
     {
-        if (!swaggerConfigOptions.OAuthScopes.Any())
+        if (!swaggerOptions.OAuthScopes.Any())
         {
-            swaggerConfigOptions.OAuthScopes = SecurityConstants.DemoOAuthScopes;
+            swaggerOptions.OAuthScopes = SecurityConstants.DemoOAuthScopes;
         }
 
-        options.AddSecurityDefinitions(swaggerConfigOptions);
-        options.AddSecurityRequirements(swaggerConfigOptions);
+        options.AddSecurityDefinitions(swaggerOptions);
+        options.AddSecurityRequirements(swaggerOptions);
     }
 
-    private static void AddSecurityDefinitions(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    private static void AddSecurityDefinitions(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
     {
         //options.AddApiKeySecurityDefinition();
-        //options.AddBasicAuthenticationSecurityDefinition(swaggerConfigOptions);
+        //options.AddBasicAuthenticationSecurityDefinition(swaggerOptions);
         //options.AddBearerSecurityDefinition();
-        options.AddOAuth2SecurityDefinition(swaggerConfigOptions);
+        options.AddOAuth2SecurityDefinition(swaggerOptions);
     }
 
-    private static void AddSecurityRequirements(this SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions)
+    private static void AddSecurityRequirements(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
     {
         //options.AddApiKeySecurityRequirement();
-        //options.AddBasicAuthenticationSecurityRequirement(swaggerConfigOptions);
+        //options.AddBasicAuthenticationSecurityRequirement(swaggerOptions);
         //options.AddBearerSecurityRequirement();
-        options.AddOAuth2SecurityRequirement(swaggerConfigOptions);
+        options.AddOAuth2SecurityRequirement(swaggerOptions);
     }
 }

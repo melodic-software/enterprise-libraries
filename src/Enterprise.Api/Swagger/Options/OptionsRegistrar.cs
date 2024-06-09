@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.Minimal.Options;
+namespace Enterprise.Api.Swagger.Options;
 
-public class MinimalApiConfigOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<MinimalApiConfigOptions>(configuration, MinimalApiConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<SwaggerOptions>(configuration, SwaggerOptions.ConfigSectionKey);
     }
 }

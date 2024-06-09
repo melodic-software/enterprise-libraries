@@ -21,10 +21,10 @@ public static class SwaggerConfigService
 {
     public static void ConfigureSwagger(this IServiceCollection services, IConfiguration configuration)
     {
-        SwaggerConfigOptions swaggerConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<SwaggerConfigOptions>(configuration, SwaggerConfigOptions.ConfigSectionKey);
+        SwaggerOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<SwaggerOptions>(configuration, SwaggerOptions.ConfigSectionKey);
 
-        if (!swaggerConfigOptions.EnableSwagger)
+        if (!options.EnableSwagger)
         {
             return;
         }
@@ -33,7 +33,7 @@ public static class SwaggerConfigService
         services.AddEndpointsApiExplorer();
 
         // This registered service is what configures the Swagger generation options.
-        services.AddTransient(RegisterSwaggerGenConfigurer(swaggerConfigOptions));
+        services.AddTransient(RegisterSwaggerGenConfigurer(options));
 
         // NOTE: The setup action for Swagger generation is not required here.
         // It is handled by the IConfigureOptions<SwaggerGenOptions> registered above.
@@ -43,21 +43,21 @@ public static class SwaggerConfigService
         //services.AddSwaggerGenNewtonsoftSupport();
     }
 
-    private static Func<IServiceProvider, IConfigureOptions<SwaggerGenOptions>> RegisterSwaggerGenConfigurer(SwaggerConfigOptions swaggerConfigOptions)
+    private static Func<IServiceProvider, IConfigureOptions<SwaggerGenOptions>> RegisterSwaggerGenConfigurer(SwaggerOptions options)
     {
         return serviceProvider =>
         {
             IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            IOptions<ControllerConfigOptions> controllerConfigOptions = serviceProvider.GetRequiredService<IOptions<ControllerConfigOptions>>();
-            IOptions<VersioningConfigOptions> versioningConfigOptions = serviceProvider.GetRequiredService<IOptions<VersioningConfigOptions>>();
+            IOptions<ControllerOptions> controllerOptions = serviceProvider.GetRequiredService<IOptions<ControllerOptions>>();
+            IOptions<VersioningOptions> versioningOptions = serviceProvider.GetRequiredService<IOptions<VersioningOptions>>();
             ILogger<SwaggerGenOptionsConfigurer> logger = serviceProvider.GetRequiredService<ILogger<SwaggerGenOptionsConfigurer>>();
 
             // this is our primary configurer for swagger generation instead of the setupAction that can be passed into services.AddSwaggerGen()
             // we can inject other services in here as needed, which is one advantage over calling .AddSwaggerGen on the IServiceCollection instance
             IConfigureOptions<SwaggerGenOptions> result = new SwaggerGenOptionsConfigurer(
-                swaggerConfigOptions,
-                controllerConfigOptions,
-                versioningConfigOptions,
+                options,
+                controllerOptions,
+                versioningOptions,
                 configuration,
                 logger,
                 serviceProvider
@@ -75,9 +75,9 @@ public static class SwaggerConfigService
     /// <param name="app"></param>
     public static void UseSwagger(this WebApplication app)
     {
-        SwaggerConfigOptions swaggerConfigOptions = app.Services.GetRequiredService<IOptions<SwaggerConfigOptions>>().Value;
+        SwaggerOptions swaggerOptions = app.Services.GetRequiredService<IOptions<SwaggerOptions>>().Value;
 
-        if (!swaggerConfigOptions.EnableSwagger || app.Environment.IsProduction())
+        if (!swaggerOptions.EnableSwagger || app.Environment.IsProduction())
         {
             return;
         }
@@ -91,27 +91,27 @@ public static class SwaggerConfigService
         // Add the middleware that uses the spec to generate the Swagger UI.
         app.UseSwaggerUI(options =>
         {
-            if (swaggerConfigOptions.CanConfigureOAuth)
+            if (swaggerOptions.CanConfigureOAuth)
             {
-                options.OAuthClientId(swaggerConfigOptions.OAuthClientId);
+                options.OAuthClientId(swaggerOptions.OAuthClientId);
 
-                if (!string.IsNullOrWhiteSpace(swaggerConfigOptions.OAuthClientSecret))
+                if (!string.IsNullOrWhiteSpace(swaggerOptions.OAuthClientSecret))
                 {
-                    options.OAuthClientSecret(swaggerConfigOptions.OAuthClientSecret);
+                    options.OAuthClientSecret(swaggerOptions.OAuthClientSecret);
                 }
 
-                options.OAuthAppName(swaggerConfigOptions.OAuthAppName);
+                options.OAuthAppName(swaggerOptions.OAuthAppName);
 
-                if (swaggerConfigOptions.UsePkce)
+                if (swaggerOptions.UsePkce)
                 {
                     options.OAuthUsePkce();
                 }
 
                 var queryStringParams = new Dictionary<string, string>();
 
-                if (!string.IsNullOrWhiteSpace(swaggerConfigOptions.OAuthAudience))
+                if (!string.IsNullOrWhiteSpace(swaggerOptions.OAuthAudience))
                 {
-                    queryStringParams.Add("audience", swaggerConfigOptions.OAuthAudience);
+                    queryStringParams.Add("audience", swaggerOptions.OAuthAudience);
                 }
 
                 if (queryStringParams.Any())

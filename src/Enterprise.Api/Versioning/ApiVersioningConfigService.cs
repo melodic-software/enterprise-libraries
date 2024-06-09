@@ -11,48 +11,48 @@ public static class ApiVersioningConfigService
 {
     public static void ConfigureApiVersioning(this IServiceCollection services, IConfiguration configuration)
     {
-        VersioningConfigOptions versioningConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<VersioningConfigOptions>(configuration, VersioningConfigOptions.ConfigSectionKey);
+        VersioningOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<VersioningOptions>(configuration, VersioningOptions.ConfigSectionKey);
 
-        IApiVersioningBuilder apiVersioningBuilder = services.AddApiVersioning(options =>
+        IApiVersioningBuilder apiVersioningBuilder = services.AddApiVersioning(o =>
         {
             // When false, a 400 response is returned when a version is not specified in the request.
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = versioningConfigOptions.DefaultApiVersion;
-            options.ReportApiVersions = true; // Adds the "api-supported-versions" response header.
+            o.AssumeDefaultVersionWhenUnspecified = true;
+            o.DefaultApiVersion = options.DefaultApiVersion;
+            o.ReportApiVersions = true; // Adds the "api-supported-versions" response header.
 
-            options.ApiVersionReader = BuildVersionReader(versioningConfigOptions);
+            o.ApiVersionReader = BuildVersionReader(options);
         });
 
-        apiVersioningBuilder.AddApiExplorer(options =>
+        apiVersioningBuilder.AddApiExplorer(o =>
         {
-            options.GroupNameFormat = VersionGroupNameFormat;
+            o.GroupNameFormat = VersionGroupNameFormat;
 
             // Only enable this if using the URL version reader.
-            options.SubstituteApiVersionInUrl = versioningConfigOptions.EnableUrlVersioning;
+            o.SubstituteApiVersionInUrl = options.EnableUrlVersioning;
         });
     }
 
-    private static IApiVersionReader BuildVersionReader(VersioningConfigOptions configOptions)
+    private static IApiVersionReader BuildVersionReader(VersioningOptions options)
     {
         List<IApiVersionReader> apiVersionReaders = [];
 
-        if (configOptions.EnableUrlVersioning)
+        if (options.EnableUrlVersioning)
         {
             apiVersionReaders.Add(new UrlSegmentApiVersionReader());
         }
 
-        if (configOptions.EnableQueryStringVersioning)
+        if (options.EnableQueryStringVersioning)
         {
             apiVersionReaders.Add(new QueryStringApiVersionReader(VersionQueryStringParameterName));
         }
 
-        if (configOptions.EnableHeaderVersioning)
+        if (options.EnableHeaderVersioning)
         {
             apiVersionReaders.Add(new HeaderApiVersionReader(CustomVersionRequestHeader));
         }
 
-        if (configOptions.EnableMediaTypeVersioning)
+        if (options.EnableMediaTypeVersioning)
         {
             apiVersionReaders.Add(new MediaTypeApiVersionReader(MediaTypeVersionParameterName));
         }

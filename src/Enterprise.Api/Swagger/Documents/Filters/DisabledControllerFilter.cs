@@ -11,17 +11,17 @@ namespace Enterprise.Api.Swagger.Documents.Filters;
 public class DisabledControllerFilter : IDocumentFilter
 {
     private readonly ILogger<DisabledControllerFilter> _logger;
-    private readonly ControllerConfigOptions _controllerConfigOptions;
+    private readonly ControllerOptions _controllerOptions;
 
-    public DisabledControllerFilter(IOptions<ControllerConfigOptions> controllerConfigOptions, ILogger<DisabledControllerFilter> logger)
+    public DisabledControllerFilter(IOptions<ControllerOptions> controllerOptions, ILogger<DisabledControllerFilter> logger)
     {
         _logger = logger;
-        _controllerConfigOptions = controllerConfigOptions.Value;
+        _controllerOptions = controllerOptions.Value;
     }
 
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        if (_controllerConfigOptions.EnableControllers)
+        if (_controllerOptions.EnableControllers)
         {
             return;
         }

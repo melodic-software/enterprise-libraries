@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Api.Options;
 
-internal static class SharedConfigOptionsService
+internal static class SharedOptionsService
 {
     /// <summary>
     /// Use the shared config to set or override specific values.
@@ -23,30 +23,30 @@ internal static class SharedConfigOptionsService
         PreStartupLogger.Instance.LogInformation("Applying shared configuration.");
 
         // Register the shared config options.
-        services.RegisterOptions<SharedConfigOptions>(configuration, SharedConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<SharedOptions>(configuration, SharedOptions.ConfigSectionKey);
 
         // This will use the config provider to set initial values.
-        SharedConfigOptions sharedConfigOptions = GetOptionsInstance<SharedConfigOptions>(configuration, SharedConfigOptions.ConfigSectionKey);
-        SwaggerConfigOptions swaggerConfigOptions = GetOptionsInstance<SwaggerConfigOptions>(configuration, SwaggerConfigOptions.ConfigSectionKey);
-        HealthCheckConfigOptions healthCheckConfigOptions = GetOptionsInstance<HealthCheckConfigOptions>(configuration, HealthCheckConfigOptions.ConfigSectionKey);
+        SharedOptions sharedOptions = GetOptionsInstance<SharedOptions>(configuration, SharedOptions.ConfigSectionKey);
+        SwaggerOptions swaggerOptions = GetOptionsInstance<SwaggerOptions>(configuration, SwaggerOptions.ConfigSectionKey);
+        HealthCheckOptions healthCheckOptions = GetOptionsInstance<HealthCheckOptions>(configuration, HealthCheckOptions.ConfigSectionKey);
         JwtBearerTokenOptions jwtBearerTokenOptions = GetOptionsInstance<JwtBearerTokenOptions>(configuration, JwtBearerTokenOptions.ConfigSectionKey);
 
-        if (!string.IsNullOrWhiteSpace(sharedConfigOptions.ApplicationDisplayName))
+        if (!string.IsNullOrWhiteSpace(sharedOptions.ApplicationDisplayName))
         {
-            swaggerConfigOptions.ApplicationName = sharedConfigOptions.ApplicationDisplayName;
+            swaggerOptions.ApplicationName = sharedOptions.ApplicationDisplayName;
         }
 
-        if (!string.IsNullOrWhiteSpace(sharedConfigOptions.OAuthAuthority))
+        if (!string.IsNullOrWhiteSpace(sharedOptions.OAuthAuthority))
         {
-            swaggerConfigOptions.Authority = sharedConfigOptions.OAuthAuthority;
-            healthCheckConfigOptions.OpenIdConnectAuthority = sharedConfigOptions.OAuthAuthority;
-            jwtBearerTokenOptions.Authority = sharedConfigOptions.OAuthAuthority;
+            swaggerOptions.Authority = sharedOptions.OAuthAuthority;
+            healthCheckOptions.OpenIdConnectAuthority = sharedOptions.OAuthAuthority;
+            jwtBearerTokenOptions.Authority = sharedOptions.OAuthAuthority;
         }
 
         // Configure default instances.
-        OptionsInstanceService.Instance.ConfigureDefaultInstance(healthCheckConfigOptions);
+        OptionsInstanceService.Instance.ConfigureDefaultInstance(healthCheckOptions);
         OptionsInstanceService.Instance.ConfigureDefaultInstance(jwtBearerTokenOptions);
-        OptionsInstanceService.Instance.ConfigureDefaultInstance(swaggerConfigOptions);
+        OptionsInstanceService.Instance.ConfigureDefaultInstance(swaggerOptions);
     }
 
     private static T GetOptionsInstance<T>(IConfiguration configuration, string configSectionKey) where T : class, new() =>

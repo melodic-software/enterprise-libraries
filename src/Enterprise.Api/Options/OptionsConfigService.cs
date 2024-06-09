@@ -9,7 +9,7 @@ internal static class OptionsConfigService
     internal static void ConfigureOptions(this IServiceCollection services, WebApplicationBuilder builder)
     {
         DefaultOptionsService.RegisterDefaults();
-        SharedConfigOptionsService.ConfigureShared(services, builder.Configuration);
+        SharedOptionsService.ConfigureShared(services, builder.Configuration);
         services.AutoRegisterOptions(builder.Configuration);
     }
 }

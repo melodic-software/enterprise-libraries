@@ -10,7 +10,7 @@ namespace Enterprise.Api.Swagger.Documents;
 
 public static class SwaggerDocumentService
 {
-    public static void ConfigureSwaggerDocuments(SwaggerGenOptions options, SwaggerConfigOptions swaggerConfigOptions, IServiceProvider serviceProvider, IConfiguration configuration)
+    public static void ConfigureSwaggerDocuments(SwaggerGenOptions options, SwaggerOptions swaggerOptions, IServiceProvider serviceProvider, IConfiguration configuration)
     {
         IApiVersionDescriptionProvider? descriptionProvider = serviceProvider.GetService<IApiVersionDescriptionProvider>();
 
@@ -26,7 +26,7 @@ public static class SwaggerDocumentService
         {
             string swaggerDocumentName = description.GroupName;
             string version = description.ApiVersion.ToString();
-            string title = $"{swaggerConfigOptions.ApplicationName} v{description.ApiVersion}";
+            string title = $"{swaggerOptions.ApplicationName} v{description.ApiVersion}";
 
             if (!string.IsNullOrWhiteSpace(environmentName))
             {
@@ -36,7 +36,7 @@ public static class SwaggerDocumentService
             var openApiInfo = new OpenApiInfo
             {
                 Title = title,
-                Description = swaggerConfigOptions.ApplicationDescription,
+                Description = swaggerOptions.ApplicationDescription,
                 Version = version,
                 // TODO: Make this configurable.
                 //TermsOfService = new Uri("https://example.com/terms"),

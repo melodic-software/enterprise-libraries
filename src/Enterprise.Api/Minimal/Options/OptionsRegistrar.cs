@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.ModularMonolith;
+namespace Enterprise.Api.Minimal.Options;
 
-internal sealed class ModularMonolithOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<ModularMonolithOptions>(configuration, ModularMonolithOptions.ConfigSectionKey);
+        services.RegisterOptions<MinimalApiOptions>(configuration, MinimalApiOptions.ConfigSectionKey);
     }
 }

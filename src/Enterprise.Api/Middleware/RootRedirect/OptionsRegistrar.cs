@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.ErrorHandling.Options;
+namespace Enterprise.Api.Middleware.RootRedirect;
 
-public class ErrorHandlingConfigOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<ErrorHandlingConfigOptions>(configuration, ErrorHandlingConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<RootRedirectMiddlewareOptions>(configuration, null);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Enterprise.Api.Controllers.Options;
 
-public class ControllerConfigOptions
+public class ControllerOptions
 {
     public const string ConfigSectionKey = "Custom:Controllers";
 
@@ -26,5 +26,5 @@ public class ControllerConfigOptions
     /// <summary>
     /// Options for configuring input and output formatters.
     /// </summary>
-    public FormatterConfigOptions FormatterConfigOptions { get; set; } = new();
+    public FormatterOptions FormatterOptions { get; set; } = new();
 }

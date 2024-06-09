@@ -10,9 +10,9 @@ using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Enterprise.Api.Logging;
 
-public class DefaultSerilogConfigOptions : SerilogConfigOptions
+public class DefaultSerilogOptions : SerilogOptions
 {
-    public DefaultSerilogConfigOptions()
+    public DefaultSerilogOptions()
     {
         ConfigureOutputTemplate = (builder, outputTemplateBuilder) =>
         {

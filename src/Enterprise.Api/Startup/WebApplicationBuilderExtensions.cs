@@ -11,7 +11,7 @@ using Enterprise.Applications.DI.Registration.Services;
 using Enterprise.AutoMapper;
 using Enterprise.Cors.Config;
 using Enterprise.Hosting.AspNetCore.Configuration;
-using Enterprise.Logging;
+using Enterprise.Logging.Config;
 using Enterprise.MediatR.Config;
 using Enterprise.Monitoring.Health.Config;
 using Enterprise.Quartz.Config;

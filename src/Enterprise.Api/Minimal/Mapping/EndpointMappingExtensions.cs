@@ -15,7 +15,7 @@ public static class EndpointMappingExtensions
     /// <param name="services"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IServiceCollection AddEndpoints(this IServiceCollection services, MinimalApiConfigOptions options)
+    public static IServiceCollection AddEndpoints(this IServiceCollection services, MinimalApiOptions options)
     {
         return services.AddEndpoints(options.EndpointAssemblies);
     }

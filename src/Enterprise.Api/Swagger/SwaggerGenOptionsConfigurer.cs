@@ -20,23 +20,23 @@ namespace Enterprise.Api.Swagger;
 
 public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOptions>
 {
-    private readonly SwaggerConfigOptions _swaggerConfigOptions;
-    private readonly ControllerConfigOptions _controllerConfigOptions;
-    private readonly VersioningConfigOptions _versioningConfigOptions;
+    private readonly SwaggerOptions _swaggerOptions;
+    private readonly ControllerOptions _controllerOptions;
+    private readonly VersioningOptions _versioningOptions;
     private readonly IConfiguration _config;
     private readonly ILogger<SwaggerGenOptionsConfigurer> _logger;
     private readonly IServiceProvider _serviceProvider;
 
-    public SwaggerGenOptionsConfigurer(SwaggerConfigOptions swaggerConfigOptions,
-        IOptions<ControllerConfigOptions> controllerConfigOptions,
-        IOptions<VersioningConfigOptions> versioningConfigOptions,
+    public SwaggerGenOptionsConfigurer(SwaggerOptions swaggerOptions,
+        IOptions<ControllerOptions> controllerOptions,
+        IOptions<VersioningOptions> versioningOptions,
         IConfiguration config,
         ILogger<SwaggerGenOptionsConfigurer> logger,
         IServiceProvider serviceProvider)
     {
-        _swaggerConfigOptions = swaggerConfigOptions;
-        _controllerConfigOptions = controllerConfigOptions.Value;
-        _versioningConfigOptions = versioningConfigOptions.Value;
+        _swaggerOptions = swaggerOptions;
+        _controllerOptions = controllerOptions.Value;
+        _versioningOptions = versioningOptions.Value;
         _config = config;
         _logger = logger;
         _serviceProvider = serviceProvider;
@@ -46,10 +46,10 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
     {
         try
         {
-            if (_swaggerConfigOptions.CustomConfigure != null)
+            if (_swaggerOptions.CustomConfigure != null)
             {
                 // This is a full customization of the swagger spec generation.
-                _swaggerConfigOptions.CustomConfigure(options);
+                _swaggerOptions.CustomConfigure(options);
                 return;
             }
 
@@ -65,7 +65,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             // The other more popular approach is to create documents for specific versions and to let the resources all co-exist per version
             // This is what we do by default...
 
-            ConfigureSwaggerDocuments(options, _swaggerConfigOptions, _serviceProvider, _config);
+            ConfigureSwaggerDocuments(options, _swaggerOptions, _serviceProvider, _config);
 
             options.DocInclusionPredicate(CanIncludeDocument);
 
@@ -81,17 +81,17 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             options.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
             options.DescribeAllParametersInCamelCase();
 
-            options.AddSecurity(_swaggerConfigOptions);
-            options.AddXmlComments(_swaggerConfigOptions);
+            options.AddSecurity(_swaggerOptions);
+            options.AddXmlComments(_swaggerOptions);
 
             AddDocumentFilters(options);
             AddSchemaFilters(options);
-            AddOperationFilters(options, _versioningConfigOptions);
+            AddOperationFilters(options, _versioningOptions);
 
             OrderActions(options);
 
             // allow for adding application specific configuration
-            _swaggerConfigOptions.PostConfigure?.Invoke(options);
+            _swaggerOptions.PostConfigure?.Invoke(options);
         }
         catch (Exception ex)
         {
@@ -104,7 +104,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         //options.ResolveConflictingActions(apiDescriptions => ResolveSimple(apiDescriptions.ToList(), _logger));
 
         options.ResolveConflictingActions(apiDescriptions =>
-            ConflictingActionResolver.ResolveConflictingActions(apiDescriptions.ToList(), _logger, _controllerConfigOptions.EnableControllers));
+            ConflictingActionResolver.ResolveConflictingActions(apiDescriptions.ToList(), _logger, _controllerOptions.EnableControllers));
     }
 
     private static void AddDocumentFilters(SwaggerGenOptions options)
@@ -121,9 +121,9 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         options.SchemaFilter<CamelCaseSchemaFilter>();
     }
 
-    private static void AddOperationFilters(SwaggerGenOptions options, VersioningConfigOptions versionConfigOptions)
+    private static void AddOperationFilters(SwaggerGenOptions options, VersioningOptions versionOptions)
     {
-        bool mediaTypeVersioningEnabled = versionConfigOptions.EnableMediaTypeVersioning;
+        bool mediaTypeVersioningEnabled = versionOptions.EnableMediaTypeVersioning;
 
         // TODO: Inject this in as configuration, particularly if this can be customized by each API instance.
         // For now, we're just going to rely on the preconfigured constant values.

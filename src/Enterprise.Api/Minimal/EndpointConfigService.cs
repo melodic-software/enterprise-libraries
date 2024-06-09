@@ -20,10 +20,10 @@ internal static class EndpointConfigService
 {
     internal static void RegisterMinimalApiEndpointSelectorPolicy(this IServiceCollection services, IConfiguration configuration)
     {
-        MinimalApiConfigOptions minimalApiConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<MinimalApiConfigOptions>(configuration, MinimalApiConfigOptions.ConfigSectionKey);
+        MinimalApiOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<MinimalApiOptions>(configuration, MinimalApiOptions.ConfigSectionKey);
 
-        if (!minimalApiConfigOptions.EnableMinimalApiEndpoints)
+        if (!options.EnableMinimalApiEndpoints)
         {
             return;
         }
@@ -39,24 +39,24 @@ internal static class EndpointConfigService
             return matcherPolicy;
         });
 
-        services.AddEndpoints(minimalApiConfigOptions.EndpointAssemblies);
+        services.AddEndpoints(options.EndpointAssemblies);
     }
 
     internal static void MapEndpoints(this WebApplication app)
     {
-        IOptions<MinimalApiConfigOptions> options = app.Services.GetRequiredService<IOptions<MinimalApiConfigOptions>>();
+        IOptions<MinimalApiOptions> options = app.Services.GetRequiredService<IOptions<MinimalApiOptions>>();
         app.MapEndpoints(options.Value);
     }
 
-    internal static void MapEndpoints(this WebApplication app, MinimalApiConfigOptions configOptions)
+    internal static void MapEndpoints(this WebApplication app, MinimalApiOptions options)
     {
-        if (!configOptions.EnableMinimalApiEndpoints)
+        if (!options.EnableMinimalApiEndpoints)
         {
             app.Logger.LogInformation("Minimal API endpoints have been disabled.");
             return;
         }
         
-        List<Assembly> endpointAssemblies = configOptions.EndpointAssemblies;
+        List<Assembly> endpointAssemblies = options.EndpointAssemblies;
         bool explicitAssembliesDefined = endpointAssemblies.Any();
 
         if (!explicitAssembliesDefined)

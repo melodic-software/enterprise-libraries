@@ -2,7 +2,7 @@
 
 namespace Enterprise.Api.Versioning.Options;
 
-public class VersioningConfigOptions
+public class VersioningOptions
 {
     public const string ConfigSectionKey = "Custom:Versioning";
 

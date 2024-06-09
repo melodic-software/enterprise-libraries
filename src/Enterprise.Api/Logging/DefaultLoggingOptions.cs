@@ -3,9 +3,9 @@ using Enterprise.Logging.Options;
 
 namespace Enterprise.Api.Logging;
 
-internal sealed class DefaultLoggingConfigOptions : LoggingConfigOptions
+internal sealed class DefaultLoggingOptions : LoggingOptions
 {
-    internal DefaultLoggingConfigOptions()
+    internal DefaultLoggingOptions()
     {
         ConfigureExtendedServices = LoggingMiddlewareService.RegisterLoggingMiddlewareServices;
     }

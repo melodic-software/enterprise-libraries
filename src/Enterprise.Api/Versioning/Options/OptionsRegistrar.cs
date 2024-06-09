@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.Middleware.RootRedirect;
+namespace Enterprise.Api.Versioning.Options;
 
-public class RootRedirectMiddlewareOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<RootRedirectMiddlewareOptions>(configuration, null);
+        services.RegisterOptions<VersioningOptions>(configuration, VersioningOptions.ConfigSectionKey);
     }
 }

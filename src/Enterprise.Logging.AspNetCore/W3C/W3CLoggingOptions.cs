@@ -1,4 +1,4 @@
-﻿using static Enterprise.Logging.Options.LoggingOptionsDefaults;
+﻿using static Enterprise.Logging.Options.LoggingOptionDefaults;
 
 namespace Enterprise.Logging.AspNetCore.W3C;
 

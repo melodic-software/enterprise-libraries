@@ -14,10 +14,10 @@ internal static class DefaultOptionsService
     /// </summary>
     internal static void RegisterDefaults()
     {
-        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingConfigOptions>(new DefaultLoggingConfigOptions());
-        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingProviderConfigOptions>(new DefaultLoggingProviderConfigOptions());
-        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingMiddlewareConfigOptions>(new DefaultLoggingMiddlewareConfigOptions());
-        OptionsInstanceService.Instance.ConfigureDefaultInstance<SerilogConfigOptions>(new DefaultSerilogConfigOptions());
+        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingOptions>(new DefaultLoggingOptions());
+        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingProviderOptions>(new DefaultLoggingProviderOptions());
+        OptionsInstanceService.Instance.ConfigureDefaultInstance<LoggingMiddlewareOptions>(new DefaultLoggingMiddlewareOptions());
+        OptionsInstanceService.Instance.ConfigureDefaultInstance<SerilogOptions>(new DefaultSerilogOptions());
         // Register any other defaults here.
     }
 }

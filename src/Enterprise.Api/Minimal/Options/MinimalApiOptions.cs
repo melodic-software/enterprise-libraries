@@ -3,7 +3,7 @@ using Enterprise.Api.Minimal.Mapping;
 
 namespace Enterprise.Api.Minimal.Options;
 
-public class MinimalApiConfigOptions
+public class MinimalApiOptions
 {
     public const string ConfigSectionKey = "Custom:MinimalApi";
 

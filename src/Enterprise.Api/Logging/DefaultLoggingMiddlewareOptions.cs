@@ -3,9 +3,9 @@ using Enterprise.Serilog.AspNetCore.Config;
 
 namespace Enterprise.Api.Logging;
 
-internal sealed class DefaultLoggingMiddlewareConfigOptions : LoggingMiddlewareConfigOptions
+internal sealed class DefaultLoggingMiddlewareOptions : LoggingMiddlewareOptions
 {
-    internal DefaultLoggingMiddlewareConfigOptions()
+    internal DefaultLoggingMiddlewareOptions()
     {
         UseProviders = app =>
         {

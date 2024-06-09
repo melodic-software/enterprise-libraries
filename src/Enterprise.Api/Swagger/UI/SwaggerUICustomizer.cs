@@ -37,7 +37,7 @@ public static class SwaggerUICustomizer
     {
         options.IndexStream = () =>
         {
-            Type type = typeof(SwaggerConfigOptions);
+            Type type = typeof(SwaggerOptions);
             Assembly assembly = type.Assembly;
             string? assemblyName = assembly.GetName().Name;
             string relativeNamespace = "Swagger.EmbeddedAssets";

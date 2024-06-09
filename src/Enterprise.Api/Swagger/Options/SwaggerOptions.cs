@@ -8,7 +8,7 @@ namespace Enterprise.Api.Swagger.Options;
 /// <summary>
 /// The options for Swagger configuration in the application.
 /// </summary>
-public class SwaggerConfigOptions
+public class SwaggerOptions
 {
     /// <summary>
     /// Key for the configuration section related to Swagger settings.
@@ -115,9 +115,9 @@ public class SwaggerConfigOptions
                                      !string.IsNullOrWhiteSpace(OAuthAppName);
 
     /// <summary>
-    /// Create a new <see cref="SwaggerConfigOptions"/> with the default settings.
+    /// Create a new <see cref="SwaggerOptions"/> with the default settings.
     /// </summary>
-    public SwaggerConfigOptions()
+    public SwaggerOptions()
     {
         EnableSwagger = true;
         Authority = SecurityConstants.DemoAuthority;

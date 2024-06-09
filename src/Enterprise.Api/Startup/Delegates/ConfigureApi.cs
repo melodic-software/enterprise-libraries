@@ -3,4 +3,4 @@ using Enterprise.Api.Startup.Options;
 
 namespace Enterprise.Api.Startup.Delegates;
 
-public delegate void ConfigureApi(ApiConfigOptions apiConfigOptions, ApiConfigEvents apiConfigEvents);
+public delegate void ConfigureApi(WebApiOptions options, WebApiConfigEvents events);

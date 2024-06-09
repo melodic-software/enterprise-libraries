@@ -11,7 +11,7 @@ namespace Enterprise.Api.Startup.Options;
 /// <summary>
 /// Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
 /// </summary>
-public partial class ApiConfigOptions
+public partial class WebApiOptions
 {
     /// <summary>
     /// Contains the options for web application that override all other configuration sources.
@@ -19,10 +19,10 @@ public partial class ApiConfigOptions
     public WebApplicationOptions WebApplicationOptions { get; private set; }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="ApiConfigOptions"/> with specified command line arguments.
+    /// Initializes a new instance of <see cref="WebApiOptions"/> with specified command line arguments.
     /// </summary>
     /// <param name="args">The command line arguments provided to the application.</param>
-    public ApiConfigOptions(string[] args)
+    public WebApiOptions(string[] args)
     {
         EnsureSharedFrameworkAssemblyIsLoaded();
         ConfigurePreStartupLogger();

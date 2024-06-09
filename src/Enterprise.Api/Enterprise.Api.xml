@@ -69,26 +69,26 @@
             <param name="formatters"></param>
             <param name="versioningParameterName"></param>
         </member>
-        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.EnableControllers">
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerOptions.EnableControllers">
             <summary>
             Toggles the registration of controller services.
             Consider disabling this if using minimal APIs.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.EnableGlobalAuthorizeFilter">
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerOptions.EnableGlobalAuthorizeFilter">
             <summary>
             This essentially adds the [Authorize] attribute to all controllers.
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.ControllerAssemblyTypes">
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerOptions.ControllerAssemblyTypes">
             <summary>
             If you have controllers in another project, you can add one or more type references here.
             Typically, this is a custom static class called "AssemblyReference" with no implementation.
             The type reference is used to get the assembly reference, which is added as an application part.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Controllers.Options.ControllerConfigOptions.FormatterConfigOptions">
+        <member name="P:Enterprise.Api.Controllers.Options.ControllerOptions.FormatterOptions">
             <summary>
             Options for configuring input and output formatters.
             </summary>
@@ -101,7 +101,7 @@
             <param name="errors"></param>
             <returns></returns>
         </member>
-        <member name="P:Enterprise.Api.ErrorHandling.Options.ErrorHandlingConfigOptions.InternalServerErrorResponseDetailMessage">
+        <member name="P:Enterprise.Api.ErrorHandling.Options.ErrorHandlingOptions.InternalServerErrorResponseDetailMessage">
             <summary>
             This is the friendly message that will be returned when internal server errors occur (500 status code).
             </summary>
@@ -185,7 +185,7 @@
             <param name="allowedEnvironments">An array of environment names where the endpoint should be available.</param>
             <returns>An endpoint convention builder that can be used to further configure the endpoint, if the environment condition is met.</returns>
         </member>
-        <member name="M:Enterprise.Api.Minimal.Mapping.EndpointMappingExtensions.AddEndpoints(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.Api.Minimal.Options.MinimalApiConfigOptions)">
+        <member name="M:Enterprise.Api.Minimal.Mapping.EndpointMappingExtensions.AddEndpoints(Microsoft.Extensions.DependencyInjection.IServiceCollection,Enterprise.Api.Minimal.Options.MinimalApiOptions)">
             <summary>
             Adds transient registrations of all <see cref="T:Enterprise.Api.Minimal.Mapping.IMapEndpoint"/> instances found in the provided assemblies with the DI container.
             </summary>
@@ -217,7 +217,7 @@
             <param name="routeGroupBuilder"></param>
             <returns></returns>
         </member>
-        <member name="P:Enterprise.Api.Minimal.Options.MinimalApiConfigOptions.EndpointAssemblies">
+        <member name="P:Enterprise.Api.Minimal.Options.MinimalApiOptions.EndpointAssemblies">
             <summary>
             A collection of assemblies that contain implementations of <see cref="T:Enterprise.Api.Minimal.Mapping.IMapEndpoint"/> or <see cref="T:Enterprise.Api.Minimal.Mapping.IMapEndpoints"/>.
             If this collection is empty, a fallback will be provided that loads all solution assemblies.
@@ -275,27 +275,27 @@
             Specify default object instances.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Options.SharedConfigOptions.ApplicationName">
+        <member name="P:Enterprise.Api.Options.SharedOptions.ApplicationName">
             <summary>
             This is the name of the application.
             Examples: "Configuration.API", "Billing.Service", etc.
             This is what will appear in logs, and other non display uses.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Options.SharedConfigOptions.ApplicationDisplayName">
+        <member name="P:Enterprise.Api.Options.SharedOptions.ApplicationDisplayName">
             <summary>
             This is the friendly display name of the application.
             Examples: "Configuration API", "Billing Service", etc.
             This will be used for Swagger configuration, etc.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Options.SharedConfigOptions.OAuthAuthority">
+        <member name="P:Enterprise.Api.Options.SharedOptions.OAuthAuthority">
             <summary>
             The trusted OAuth authority.
             This will be used for API security, and Swagger configuration.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Options.SharedConfigOptionsService.ConfigureShared(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Enterprise.Api.Options.SharedOptionsService.ConfigureShared(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Use the shared config to set or override specific values.
             This enables setting multiple dependent config values with a singular set of config entries.
@@ -413,68 +413,68 @@
             </summary>
             <param name="options"></param>
         </member>
-        <member name="T:Enterprise.Api.Startup.Events.ApiConfigEvents">
+        <member name="T:Enterprise.Api.Startup.Events.WebApiConfigEvents">
             <summary>
             Allows for wiring up handlers to specific lifecycle events in the API configuration.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Startup.Events.ApiConfigEvents.ClearStartupHandlers">
+        <member name="M:Enterprise.Api.Startup.Events.WebApiConfigEvents.ClearStartupHandlers">
             <summary>
-            Clears all handlers except for those that may be wired up to the <see cref="E:Enterprise.Api.Startup.Events.ApiConfigEvents.ConfigurationErrorOccurred"/> event.
+            Clears all handlers except for those that may be wired up to the <see cref="E:Enterprise.Api.Startup.Events.WebApiConfigEvents.ConfigurationErrorOccurred"/> event.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Startup.Events.ApiConfigEvents.ClearHandlers">
+        <member name="M:Enterprise.Api.Startup.Events.WebApiConfigEvents.ClearHandlers">
             <summary>
             Clears all event handlers to prevent memory leaks or unintended behavior after app shutdown.
             </summary>
         </member>
-        <member name="T:Enterprise.Api.Startup.Options.ApiConfigOptions">
+        <member name="T:Enterprise.Api.Startup.Options.WebApiOptions">
             <summary>
             Represents configuration options for the API, allowing for deferred and dynamic configuration during application startup.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Startup.Options.ApiConfigOptions.WebApplicationOptions">
-            <summary>
-            Contains the options for web application that override all other configuration sources.
-            </summary>
-        </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.#ctor(System.String[])">
-            <summary>
-            Initializes a new instance of <see cref="T:Enterprise.Api.Startup.Options.ApiConfigOptions"/> with specified command line arguments.
-            </summary>
-            <param name="args">The command line arguments provided to the application.</param>
-        </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(Enterprise.Options.Core.Delegates.Configure{``0})">
-            <summary>
-            Configures options of a specific type.
-            </summary>
-            <typeparam name="TOptions">The options type to be configured.</typeparam>
-            <param name="configureOptions">The configuration action to be applied.</param>
-        </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.EnsureSharedFrameworkAssemblyIsLoaded">
-            <summary>
-            Ensures the shared framework assembly directory is loaded.
-            This is required if no AutoLoad assembly attribute is defined.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Api.Startup.Options.ApiConfigOptions.DeferredConfigurations">
+        <member name="F:Enterprise.Api.Startup.Options.WebApiOptions.DeferredConfigurations">
             <summary>
             Holds deferred configuration actions that are to be executed later in the application lifecycle.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.Configure``1(Enterprise.Api.Startup.Options.Delegates.Configure{``0})">
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptions.Configure``1(Enterprise.Api.Startup.Options.Delegates.Configure{``0})">
             <summary>
             Configures options of a specific type with access to the configuration and web hosting environment.
             </summary>
             <typeparam name="TOptions">The options type to be configured.</typeparam>
             <param name="configureOptions">The configuration to be applied that includes access to the application's configuration and environment.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.Options.ApiConfigOptions.ExecuteDeferredConfigurations(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptions.ExecuteDeferredConfigurations(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
             <summary>
             Executes all deferred configurations using the provided configuration and web hosting environment.
             </summary>
             <param name="configuration">The application's configuration.</param>
             <param name="environment">The web hosting environment.</param>
+        </member>
+        <member name="P:Enterprise.Api.Startup.Options.WebApiOptions.WebApplicationOptions">
+            <summary>
+            Contains the options for web application that override all other configuration sources.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptions.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of <see cref="T:Enterprise.Api.Startup.Options.WebApiOptions"/> with specified command line arguments.
+            </summary>
+            <param name="args">The command line arguments provided to the application.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptions.Configure``1(Enterprise.Options.Core.Delegates.Configure{``0})">
+            <summary>
+            Configures options of a specific type.
+            </summary>
+            <typeparam name="TOptions">The options type to be configured.</typeparam>
+            <param name="configureOptions">The configuration action to be applied.</param>
+        </member>
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptions.EnsureSharedFrameworkAssemblyIsLoaded">
+            <summary>
+            Ensures the shared framework assembly directory is loaded.
+            This is required if no AutoLoad assembly attribute is defined.
+            </summary>
         </member>
         <member name="T:Enterprise.Api.Startup.WebApi">
             <summary>
@@ -486,9 +486,9 @@
             Configures the application's services and request pipeline.
             </summary>
             <param name="args">The command-line arguments passed to the application.</param>
-            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.ApiConfigOptions"/>.</param>
+            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.WebApiOptions"/>.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Startup.Options.ApiConfigOptions,Enterprise.Api.Startup.Events.ApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
             <summary>
             Create the WebApplicationBuilder.
             This calls into the default builder creation method which registers logging providers, and other service defaults.
@@ -498,7 +498,7 @@
             <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.ApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
             <summary>
             Add services to the container.
             This includes framework services, and application specific services.
@@ -506,7 +506,7 @@
             <param name="builder"></param>
             <param name="events"></param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.ApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
             <summary>
             Build the application.
             All services must be registered before this is called.
@@ -516,7 +516,7 @@
             <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Startup.Events.ApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
             <summary>
             Configure the HTTP request (middleware) pipeline.
             </summary>
@@ -630,116 +630,116 @@
             <param name="operation">The operation being documented.</param>
             <param name="context">The context providing metadata for the operation.</param>
         </member>
-        <member name="T:Enterprise.Api.Swagger.Options.SwaggerConfigOptions">
+        <member name="T:Enterprise.Api.Swagger.Options.SwaggerOptions">
             <summary>
             The options for Swagger configuration in the application.
             </summary>
         </member>
-        <member name="F:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ConfigSectionKey">
+        <member name="F:Enterprise.Api.Swagger.Options.SwaggerOptions.ConfigSectionKey">
             <summary>
             Key for the configuration section related to Swagger settings.
             To preventing duplication, some of these values may be set or overridden with the "shared" config settings.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableSwagger">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.EnableSwagger">
             <summary>
             Swagger is enabled by default.
             It can never be enabled in a production environment (for security purposes).
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.Authority">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.Authority">
             <summary>
             The token security service that is the centralized token authority.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthAppName">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.OAuthAppName">
             <summary>
             The OAuth application name.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthAudience">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.OAuthAudience">
             <summary>
             The OAuth audience.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthClientId">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.OAuthClientId">
             <summary>
             The OAuth client for the swagger documentation page.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthClientSecret">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.OAuthClientSecret">
             <summary>
             The OAuth client secret.
             This may or not be required depending on the OAuth flow.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.OAuthScopes">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.OAuthScopes">
             <summary>
             The available OAuth scopes.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableAuthorizationCodeFlow">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.EnableAuthorizationCodeFlow">
             <summary>
             Determines if the OpenAPiOAuthFlow.AuthorizationCode flow is enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableImplicitFlow">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.EnableImplicitFlow">
             <summary>
             Determines if the OpenAPiOAuthFlow.Implicit flow is enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnableClientCredentialsFlow">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.EnableClientCredentialsFlow">
             <summary>
             Determines if the OpenAPiOAuthFlow.ClientCredentials flow is enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.EnablePasswordFlow">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.EnablePasswordFlow">
             <summary>
             Determines if the OpenAPiOAuthFlow.Password flow is enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.UsePkce">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.UsePkce">
             <summary>
             Use Proof Key for Code Exchange.
             This only applies to authorization code flows.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ApplicationName">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.ApplicationName">
             <summary>
             The application name.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.ApplicationDescription">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.ApplicationDescription">
             <summary>
             A brief (optional) description of the application.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.GetApiClientAssembly">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.GetApiClientAssembly">
             <summary>
             Used to retrieve XML comments for models contained in a separate API client project/assembly.
             NOTE: an XML documentation file must be generated by the target project.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.PostConfigure">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.PostConfigure">
             <summary>
             An optional extensibility hook for adding application specific customizations.
             These can include operation filters, document filters, etc.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.CustomConfigure">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.CustomConfigure">
             <summary>
             This allows for complete control over how swagger is configured.
             If provided, the prebuilt default will not be applied.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.CanConfigureOAuth">
+        <member name="P:Enterprise.Api.Swagger.Options.SwaggerOptions.CanConfigureOAuth">
             <summary>
             Have the required OAuth configuration settings been set?
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Swagger.Options.SwaggerConfigOptions.#ctor">
+        <member name="M:Enterprise.Api.Swagger.Options.SwaggerOptions.#ctor">
             <summary>
-            Create a new <see cref="T:Enterprise.Api.Swagger.Options.SwaggerConfigOptions"/> with the default settings.
+            Create a new <see cref="T:Enterprise.Api.Swagger.Options.SwaggerOptions"/> with the default settings.
             </summary>
         </member>
         <member name="M:Enterprise.Api.Swagger.Services.ConflictingActionResolver.ResolveSimple(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription},Microsoft.Extensions.Logging.ILogger)">
@@ -811,32 +811,32 @@
             <param name="suffix"></param>
             <returns></returns>
         </member>
-        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.DefaultApiVersion">
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningOptions.DefaultApiVersion">
             <summary>
             This is the default version of the API when one is not specified.
             Ensure this default is properly configured when older versions become deprecated or removed.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableUrlVersioning">
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningOptions.EnableUrlVersioning">
             <summary>
             Enables support for versioning via a url segment (like Google and Facebook) -> "api/v1/resource".
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableQueryStringVersioning">
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningOptions.EnableQueryStringVersioning">
             <summary>
             Enables specifying the version via a query string parameter.
             This is the out-of-the-box default .NET strategy.
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableHeaderVersioning">
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningOptions.EnableHeaderVersioning">
             <summary>
             This uses a custom HTTP header.
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.Api.Versioning.Options.VersioningConfigOptions.EnableMediaTypeVersioning">
+        <member name="P:Enterprise.Api.Versioning.Options.VersioningOptions.EnableMediaTypeVersioning">
             <summary>
             Defaults to "application/json;v=2.0" but can be specified in the constructor (something like "version" or "v").
             Defaults to true.

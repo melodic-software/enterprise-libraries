@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Api.Controllers.ActionFilters;
 
-internal sealed class ActionFilterRegistrar : IRegisterServices
+internal sealed class ServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

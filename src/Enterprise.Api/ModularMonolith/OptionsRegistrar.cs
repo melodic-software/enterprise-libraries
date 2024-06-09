@@ -3,12 +3,12 @@ using Enterprise.Options.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Api.Versioning.Options;
+namespace Enterprise.Api.ModularMonolith;
 
-public class VersioningConfigOptionsRegistrar : IRegisterOptions
+internal sealed class OptionsRegistrar : IRegisterOptions
 {
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterOptions<VersioningConfigOptions>(configuration, VersioningConfigOptions.ConfigSectionKey);
+        services.RegisterOptions<ModularMonolithOptions>(configuration, ModularMonolithOptions.ConfigSectionKey);
     }
 }
