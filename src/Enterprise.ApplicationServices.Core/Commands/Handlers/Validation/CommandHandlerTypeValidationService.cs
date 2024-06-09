@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric;
+using Enterprise.ApplicationServices.Core.Commands.Model;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Validation;
 

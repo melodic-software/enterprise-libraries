@@ -4,10 +4,12 @@ using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 using Enterprise.Events.Facade.Abstract;
+using Enterprise.Library.Core.Attributes;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 
+[AlternativeTo(typeof(CommandHandlerBase<>))]
 public abstract class CommandHandlerBase<TCommand, TResponse>
     : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>, IHandler<TCommand, TResponse>
     where TCommand : class, ICommand<TResponse>

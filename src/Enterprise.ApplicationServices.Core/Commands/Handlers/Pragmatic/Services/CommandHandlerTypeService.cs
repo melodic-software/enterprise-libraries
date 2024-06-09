@@ -1,8 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 
-namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Types.Alternate;
+namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.Services;
 
 internal sealed class CommandHandlerTypeService
 {

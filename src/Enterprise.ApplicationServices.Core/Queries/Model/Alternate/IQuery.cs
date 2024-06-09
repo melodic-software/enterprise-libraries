@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Enterprise.Library.Core.Attributes;
+using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 
@@ -8,4 +9,5 @@ namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 /// This interface allows for defining an explicit return type that is associated with the query.
 /// </summary>
 /// <typeparam name="TResponse"></typeparam>
+[AlternativeTo(typeof(IQuery))]
 public interface IQuery<out TResponse> : IQuery, IRequest<TResponse>;

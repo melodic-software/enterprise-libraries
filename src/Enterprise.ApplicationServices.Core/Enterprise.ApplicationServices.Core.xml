@@ -13,19 +13,6 @@
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand">
-            <summary>
-            Handles commands.
-            </summary>
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
-            <summary>
-            Handle the command.
-            </summary>
-            <param name="command"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1">
             <summary>
             Handles commands of a specific type.
@@ -33,6 +20,19 @@
             <typeparam name="TCommand"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1.HandleAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handle the command.
+            </summary>
+            <param name="command"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric.IHandleCommand">
+            <summary>
+            Handles commands.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.IBaseCommand,System.Threading.CancellationToken)">
             <summary>
             Handle the command.
             </summary>
