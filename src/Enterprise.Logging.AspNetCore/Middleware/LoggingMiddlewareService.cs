@@ -29,11 +29,11 @@ public static class LoggingMiddlewareService
     /// <param name="app"></param>
     public static void UseLogging(this WebApplication app)
     {
-        LoggingMiddlewareConfigOptions configOptions = app.Services.GetRequiredService<IOptions<LoggingMiddlewareConfigOptions>>().Value;
+        LoggingMiddlewareOptions options = app.Services.GetRequiredService<IOptions<LoggingMiddlewareOptions>>().Value;
 
         app.UseHttpLogging();
         app.UseW3CLogging();
 
-        configOptions.UseProviders.Invoke(app);
+        options.UseProviders.Invoke(app);
     }
 }

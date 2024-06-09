@@ -19,8 +19,8 @@ public static class HealthCheckConfigService
 
     public static void ConfigureHealthChecks(this IHostApplicationBuilder builder, IConfiguration configuration)
     {
-        HealthCheckConfigOptions options = OptionsInstanceService.Instance
-            .GetOptionsInstance<HealthCheckConfigOptions>(configuration, HealthCheckConfigOptions.ConfigSectionKey);
+        HealthCheckOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<HealthCheckOptions>(configuration, HealthCheckOptions.ConfigSectionKey);
 
         IHealthChecksBuilder healthCheckBuilder = builder.Services.AddHealthChecks();
 
@@ -66,7 +66,7 @@ public static class HealthCheckConfigService
 
     public static void UseHealthChecks(this WebApplication app)
     {
-        HealthCheckConfigOptions options = app.Services.GetRequiredService<IOptions<HealthCheckConfigOptions>>().Value;
+        HealthCheckOptions options = app.Services.GetRequiredService<IOptions<HealthCheckOptions>>().Value;
 
         IEndpointConventionBuilder builder = app.MapHealthChecks(options.UrlPatternName, new()
         {
@@ -82,7 +82,7 @@ public static class HealthCheckConfigService
         }
     }
 
-    private static void RegisterIdentityProviderHealthCheck(HealthCheckConfigOptions options, IHealthChecksBuilder healthCheckBuilder)
+    private static void RegisterIdentityProviderHealthCheck(HealthCheckOptions options, IHealthChecksBuilder healthCheckBuilder)
     {
         if (string.IsNullOrWhiteSpace(options.OpenIdConnectAuthority))
         {

@@ -22,13 +22,13 @@
             This is typically only if the application has multi-tenancy enabled.
             </summary>
         </member>
-        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.MultitenancyEnabled">
+        <member name="P:Enterprise.Multitenancy.Options.MultitenancyOptions.MultitenancyEnabled">
             <summary>
             Determines if multi tenancy related services are registered.
             If this is not enabled, the application will fail when requests for any of these services are made.
             </summary>
         </member>
-        <member name="P:Enterprise.Multitenancy.Options.MultitenancyConfigOptions.TenantIdRequired">
+        <member name="P:Enterprise.Multitenancy.Options.MultitenancyOptions.TenantIdRequired">
             <summary>
             Determines if a <see cref="T:Enterprise.Multitenancy.Exceptions.TenantIdNotFoundException"/> will be thrown if the tenant ID cannot be located (when requested).
             </summary>

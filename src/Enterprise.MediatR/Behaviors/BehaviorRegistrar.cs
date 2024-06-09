@@ -5,7 +5,7 @@ namespace Enterprise.MediatR.Behaviors;
 
 internal static class BehaviorRegistrar
 {
-    public static void RegisterBehaviors(MediatRConfigOptions options, MediatRServiceConfiguration mediatRConfiguration)
+    public static void RegisterBehaviors(MediatROptions options, MediatRServiceConfiguration mediatRConfiguration)
     {
         IReadOnlyCollection<BehaviorRegistration> behaviorRegistrations = options.BehaviorRegistrations;
 

@@ -15,38 +15,38 @@ internal static class W3CLoggingConfigurer
 {
     internal static void ConfigureW3CLogging(this IServiceCollection services, IConfiguration configuration)
     {
-        W3CLoggingConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<W3CLoggingConfigOptions>(configuration, W3CLoggingConfigOptions.ConfigSectionKey);
+        W3CLoggingOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<W3CLoggingOptions>(configuration, W3CLoggingOptions.ConfigSectionKey);
 
-        if (!configOptions.EnableW3CLogging)
+        if (!options.EnableW3CLogging)
         {
             return;
         }
 
-        ArgumentException.ThrowIfNullOrWhiteSpace(configOptions.W3CLogFileApplicationName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(options.W3CLogFileApplicationName);
 
         string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         string logDirectory = Path.Combine(appDataPath, LogDirectoryName);
-        string fileNamePrefix = GetFileNamePrefix(configOptions.W3CLogFileApplicationName);
+        string fileNamePrefix = GetFileNamePrefix(options.W3CLogFileApplicationName);
 
-        services.AddW3CLogging(options =>
+        services.AddW3CLogging(o =>
         {
-            options.LoggingFields = W3CLoggingFields.All;
-            options.AdditionalRequestHeaders.Add(XForwardedFor);
-            options.AdditionalRequestHeaders.Add(XClientSslProtocol);
-            options.FileSizeLimit = FileSizeLimitInBytes;
-            options.RetainedFileCountLimit = 2; // TODO: verify if this needs to change
-            options.FileName = fileNamePrefix; // This gets used as a prefix.
-            options.LogDirectory = logDirectory;
-            options.FlushInterval = TimeSpan.FromSeconds(FlushIntervalInSeconds);
+            o.LoggingFields = W3CLoggingFields.All;
+            o.AdditionalRequestHeaders.Add(XForwardedFor);
+            o.AdditionalRequestHeaders.Add(XClientSslProtocol);
+            o.FileSizeLimit = FileSizeLimitInBytes;
+            o.RetainedFileCountLimit = 2; // TODO: verify if this needs to change
+            o.FileName = fileNamePrefix; // This gets used as a prefix.
+            o.LogDirectory = logDirectory;
+            o.FlushInterval = TimeSpan.FromSeconds(FlushIntervalInSeconds);
         });
     }
 
     internal static void UseW3CLogging(this WebApplication app)
     {
-        W3CLoggingConfigOptions configOptions = app.Services.GetRequiredService<IOptions<W3CLoggingConfigOptions>>().Value;
+        W3CLoggingOptions options = app.Services.GetRequiredService<IOptions<W3CLoggingOptions>>().Value;
 
-        if (!configOptions.EnableW3CLogging)
+        if (!options.EnableW3CLogging)
         {
             return;
         }

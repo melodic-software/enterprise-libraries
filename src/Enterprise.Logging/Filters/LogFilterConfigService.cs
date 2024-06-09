@@ -7,13 +7,13 @@ namespace Enterprise.Logging.Filters;
 
 internal static class LogFilterConfigService
 {
-    internal static void ConfigureFilters(this IHostApplicationBuilder builder, LoggingConfigOptions configOptions)
+    internal static void ConfigureFilters(this IHostApplicationBuilder builder, LoggingOptions options)
     {
         ConfigureProduction(builder);
 
         // Allow for manual registration of log filters.
         // This is an alternate over the appSettings.config file configuration.
-        configOptions.AddLogFilters?.Invoke(builder.Logging);
+        options.AddLogFilters?.Invoke(builder.Logging);
     }
 
     private static void ConfigureProduction(IHostApplicationBuilder builder)

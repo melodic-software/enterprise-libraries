@@ -21,7 +21,7 @@ using Medley.Api.ChainOfResponsibility.Pipeline.Handlers.Generic;
 
 namespace Medley.Api.ChainOfResponsibility.Examples.Pipeline.Dependencies;
 
-public class PipelineRegistrar : IRegisterServices
+internal sealed ServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

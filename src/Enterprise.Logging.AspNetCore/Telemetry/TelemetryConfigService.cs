@@ -8,15 +8,15 @@ internal static class TelemetryConfigService
 {
     internal static void ConfigureTelemetry(this IHostApplicationBuilder builder)
     {
-        TelemetryConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<TelemetryConfigOptions>(builder.Configuration, TelemetryConfigOptions.ConfigSectionKey);
+        TelemetryOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<TelemetryOptions>(builder.Configuration, TelemetryOptions.ConfigSectionKey);
 
-        builder.ConfigureTelemetry(configOptions);
+        builder.ConfigureTelemetry(options);
     }
 
-    internal static void ConfigureTelemetry(this IHostApplicationBuilder builder, TelemetryConfigOptions configOptions)
+    internal static void ConfigureTelemetry(this IHostApplicationBuilder builder, TelemetryOptions options)
     {
-        if (!configOptions.EnableApplicationInsightsTelemetry)
+        if (!options.EnableApplicationInsightsTelemetry)
         {
             return;
         }

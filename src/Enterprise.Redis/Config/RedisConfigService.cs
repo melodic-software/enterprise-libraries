@@ -15,15 +15,15 @@ public static class RedisConfigService
 {
     public static void ConfigureRedis(this IServiceCollection services, IHostEnvironment environment, IConfiguration configuration)
     {
-        RedisConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<RedisConfigOptions>(configuration, RedisConfigOptions.ConfigSectionKey);
+        RedisOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<RedisOptions>(configuration, RedisOptions.ConfigSectionKey);
 
-        if (!configOptions.EnableRedis)
+        if (!options.EnableRedis)
         {
             return;
         }
 
-        string? redisConnectionString = configuration.GetConnectionString(configOptions.RedisConnectionStringName);
+        string? redisConnectionString = configuration.GetConnectionString(options.RedisConnectionStringName);
 
         if (string.IsNullOrWhiteSpace(redisConnectionString))
         {
@@ -41,11 +41,11 @@ public static class RedisConfigService
             IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
             services.TryAddSingleton(connectionMultiplexer);
 
-            services.AddStackExchangeRedisCache(options =>
+            services.AddStackExchangeRedisCache(redisCacheOptions =>
             {
                 //options.Configuration = redisConnectionString;
-                //options.InstanceName = configOptions.RedisInstanceName;
-                options.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer);
+                //options.InstanceName = options.RedisInstanceName;
+                redisCacheOptions.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer);
             });
         }
         catch (Exception ex)

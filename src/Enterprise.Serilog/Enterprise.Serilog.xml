@@ -4,44 +4,44 @@
         <name>Enterprise.Serilog</name>
     </assembly>
     <members>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.ClearExistingProviders">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.ClearExistingProviders">
             <summary>
             Clear out all existing providers that have been registered before configuring Serilog.
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.DefaultMinimumLogLevel">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.DefaultMinimumLogLevel">
             <summary>
             Set the default minimum level.
             NOTE: This will be ignored if a value has been provided in the application settings.
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.ConfigureOutputTemplate">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.ConfigureOutputTemplate">
             <summary>
             Configure the output template using the provided builder.
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.Enrich">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.Enrich">
             <summary>
             Configure the Serilog enrichers.
             Typically, this is something that is better to do in the application settings rather than in code configuration.
             NOTE: This will be ignored if a value has been provided in the application settings.
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.WriteTo">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.WriteTo">
             <summary>
             Configure the Serilog sinks.
             Typically, this is something that is better to do in the application settings rather than in code configuration.
             NOTE: This will be ignored if a value has been provided in the application settings.
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.ConfigureDestructuring">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.ConfigureDestructuring">
             <summary>
             Allows for configuring how objects are destructured and transformed.
             One common example is to restrict what is used in logging statements like:
             logger.Information("New payment with data: {@PaymentData}", payment);
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogConfigOptions.CustomConfigureLogger">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.CustomConfigureLogger">
             <summary>
             Use this to completely override and control all Serilog logger configuration.
             NOTE: None of the defaults will be provided. This is a complete customization.

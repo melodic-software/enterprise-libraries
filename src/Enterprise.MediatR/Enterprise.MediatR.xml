@@ -12,26 +12,26 @@
         <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.EnableMediatR">
+        <member name="P:Enterprise.MediatR.Options.MediatROptions.EnableMediatR">
             <summary>
             Determines if MediatR services will be registered.
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.Assemblies">
+        <member name="P:Enterprise.MediatR.Options.MediatROptions.Assemblies">
             <summary>
             This is a collection of assemblies that contain MediatR handlers.
             These implement IRequestHandler, INotificationHandler, etc.
             If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
             </summary>
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.BehaviorRegistrations">
+        <member name="P:Enterprise.MediatR.Options.MediatROptions.BehaviorRegistrations">
             <summary>
             Allows for providing a custom behavior pipeline.
             This will override any default behavior, so be sure to include all behaviors needed for the application in a specific order.
             </summary>
         </member>
-        <member name="P:Enterprise.MediatR.Options.MediatRConfigOptions.CustomConfigure">
+        <member name="P:Enterprise.MediatR.Options.MediatROptions.CustomConfigure">
             <summary>
             This allows for complete customization and control over the MediatR config.
             None of the default configuration is used, so everything must be completely configured.

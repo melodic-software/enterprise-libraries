@@ -14,8 +14,8 @@ public static class AutoMapperConfigService
 {
     public static void ConfigureAutoMapper(this IServiceCollection services, IConfiguration configuration)
     {
-        AutoMapperConfigOptions options = OptionsInstanceService.Instance
-            .GetOptionsInstance<AutoMapperConfigOptions>(configuration, AutoMapperConfigOptions.ConfigSectionKey);
+        AutoMapperOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<AutoMapperOptions>(configuration, AutoMapperOptions.ConfigSectionKey);
 
         if (!options.EnableAutoMapper)
         {

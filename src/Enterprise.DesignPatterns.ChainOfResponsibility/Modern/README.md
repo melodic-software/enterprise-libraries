@@ -16,7 +16,7 @@ using Medley.Api.ChainOfResponsibility.Modern.Dependencies;
 
 namespace Medley.Api.ChainOfResponsibility.Examples.Modern.Dependencies;
 
-public class ChainOfResponsibilityRegistrar : IRegisterServices
+internal sealed ServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {

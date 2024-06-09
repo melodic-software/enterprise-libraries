@@ -1,13 +1,14 @@
 ﻿using Enterprise.Cors.Constants;
 using Enterprise.Cors.Options;
-using Enterprise.Cors.Policies;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using static Enterprise.Cors.Config.CorsConfigurations;
 
 namespace Enterprise.Cors.Config;
 
@@ -23,7 +24,8 @@ public static class CorsConfigService
     /// <exception cref="Exception"></exception>
     public static void ConfigureCors(this IServiceCollection services, IHostEnvironment environment, IConfiguration configuration)
     {
-        CorsConfigOptions options = OptionsInstanceService.Instance.GetOptionsInstance<CorsConfigOptions>(configuration, CorsConfigOptions.ConfigSectionKey);
+        CorsOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<CorsOptions>(configuration, CorsOptions.ConfigSectionKey);
 
         if (!options.EnableCors)
         {
@@ -33,7 +35,7 @@ public static class CorsConfigService
         if (options.ConfigureCustom != null)
         {
             // allow for full customization
-            services.AddCors(options.ConfigureCustom);
+            services.AddCors(options.ConfigureCustom.Invoke);
             return;
         }
 
@@ -47,12 +49,9 @@ public static class CorsConfigService
         string policyName = CorsPolicyNames.DefaultPolicyName;
         string[] allowedOrigins = options.AllowedOrigins.Distinct().ToArray();
 
-        // TODO: add logging (warning) here instead of throwing an exception
-        // the logger may not be available until the application is built, so a collection of log messages may need to be instantiated
-        // or a logger reference may need to be instantiated elsewhere and referenced here
         if (!allowedOrigins.Any())
         {
-            throw new Exception("CORS has been enabled, but no origins are allowed.");
+            PreStartupLogger.Instance.LogError("CORS has been enabled, but no origins are allowed.");
         }
 
         services.AddCors(corsOptions =>
@@ -63,46 +62,11 @@ public static class CorsConfigService
 
     public static void UseCors(this WebApplication app)
     {
-        CorsConfigOptions corsConfigOptions = app.Services.GetRequiredService<IOptions<CorsConfigOptions>>().Value;
+        CorsOptions options = app.Services.GetRequiredService<IOptions<CorsOptions>>().Value;
 
-        if (corsConfigOptions.EnableCors)
+        if (options.EnableCors)
         {
             app.UseCors(CorsPolicyNames.DefaultPolicyName);
         }
     }
-
-    /// <summary>
-    /// This allows any origin, HTTP method or header. It should not be used in production environments.
-    /// </summary>
-    public static Action<CorsOptions> RelaxedCorsConfiguration => options =>
-    {
-        string policyName = CorsPolicyNames.RelaxedPolicyName;
-
-        if (CorsPolicyService.PolicyExists(options, policyName))
-        {
-            return;
-        }
-
-        options.AddPolicy(policyName, corsPolicyBuilder =>
-        {
-            corsPolicyBuilder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
-    };
-
-    public static Action<CorsOptions, string, string[]> StandardCorsConfiguration => (options, policyName, allowedOrigins) =>
-    {
-        if (CorsPolicyService.PolicyExists(options, policyName))
-        {
-            return;
-        }
-
-        options.AddPolicy(policyName, corsPolicyBuilder =>
-        {
-            corsPolicyBuilder.WithOrigins(allowedOrigins)
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
-    };
 }

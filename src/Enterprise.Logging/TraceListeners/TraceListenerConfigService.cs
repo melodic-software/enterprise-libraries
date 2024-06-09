@@ -8,25 +8,25 @@ internal static class TraceListenerConfigService
 {
     internal static void ConfigureTraceListeners(this IHostApplicationBuilder builder)
     {
-        TraceListenerConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<TraceListenerConfigOptions>(builder.Configuration, TraceListenerConfigOptions.ConfigSectionKey);
+        TraceListenerOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<TraceListenerOptions>(builder.Configuration, TraceListenerOptions.ConfigSectionKey);
 
-        ConfigureTraceListeners(configOptions);
+        ConfigureTraceListeners(options);
     }
 
-    internal static void ConfigureTraceListeners(TraceListenerConfigOptions configOptions)
+    internal static void ConfigureTraceListeners(TraceListenerOptions options)
     {
-        if (!configOptions.EnableTextFileTraceListener)
+        if (!options.EnableTextFileTraceListener)
         {
             return;
         }
 
-        ArgumentException.ThrowIfNullOrWhiteSpace(configOptions.LogFileApplicationName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(options.LogFileApplicationName);
 
         // Mac: /Users/<username>/.local/share
         // Windows: C:\Users\<username>\AppData\local
         string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        string applicationName = configOptions.LogFileApplicationName;
+        string applicationName = options.LogFileApplicationName;
         DateTime timestamp = DateTime.Now;
         string tracePath = Path.Join(localAppDataPath, $"Log_{applicationName}_{timestamp:yyyMMdd-HHmm}.txt");
         StreamWriter fileStreamWriter = File.CreateText(tracePath);

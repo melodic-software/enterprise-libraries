@@ -10,10 +10,10 @@ public static class OpenTelemetryConfigService
 {
     public static void ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        OpenTelemetryConfigOptions openTelemetryConfigOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<OpenTelemetryConfigOptions>(builder.Configuration, OpenTelemetryConfigOptions.ConfigKeyName);
+        OpenTelemetryOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<OpenTelemetryOptions>(builder.Configuration, OpenTelemetryOptions.ConfigKeyName);
 
-        if (!openTelemetryConfigOptions.EnableOpenTelemetry)
+        if (!options.EnableOpenTelemetry)
         {
             return;
         }

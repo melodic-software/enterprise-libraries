@@ -9,49 +9,49 @@ internal static class ProviderConfigService
 {
     internal static void ConfigureProviders(this IHostApplicationBuilder builder)
     {
-        LoggingProviderConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<LoggingProviderConfigOptions>(builder.Configuration, LoggingProviderConfigOptions.ConfigSectionKey);
+        LoggingProviderOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<LoggingProviderOptions>(builder.Configuration, LoggingProviderOptions.ConfigSectionKey);
 
-        builder.ConfigureProviders(configOptions);
+        builder.ConfigureProviders(options);
     }
 
-    internal static void ConfigureProviders(this IHostApplicationBuilder builder, LoggingProviderConfigOptions configOptions)
+    internal static void ConfigureProviders(this IHostApplicationBuilder builder, LoggingProviderOptions providerOptions)
     {
         builder.Logging.ClearProviders();
 
-        if (configOptions.EnableConsole)
+        if (providerOptions.EnableConsole)
         {
             builder.Logging.AddConsole();
         }
 
-        if (configOptions.EnableJsonConsole)
+        if (providerOptions.EnableJsonConsole)
         {
             builder.Logging.AddJsonConsole();
         }
 
-        if (configOptions.EnableDebug)
+        if (providerOptions.EnableDebug)
         {
             builder.Logging.AddDebug();
         }
 
-        if (configOptions.EnableEventSource)
+        if (providerOptions.EnableEventSource)
         {
             builder.Logging.AddEventSourceLogger();
         }
 
         // The event log is specific to Windows operating system.
         // TODO: We might want to add a filter here to ensure it only logs levels of "warning" or above.
-        if (configOptions.EnableEventLog && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (providerOptions.EnableEventLog && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             builder.Logging.AddEventLog();
         }
 
-        if (configOptions.EnableApplicationInsights)
+        if (providerOptions.EnableApplicationInsights)
         {
             builder.Logging.AddApplicationInsights();
         }
 
         // This is application specific provider customization.
-        configOptions.ConfigureProviders.Invoke(builder);
+        providerOptions.ConfigureProviders.Invoke(builder);
     }
 }

@@ -14,7 +14,7 @@
             <param name="configuration"></param>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="P:Enterprise.Cors.Config.CorsConfigService.RelaxedCorsConfiguration">
+        <member name="P:Enterprise.Cors.Config.CorsConfigurations.RelaxedCorsConfiguration">
             <summary>
             This allows any origin, HTTP method or header. It should not be used in production environments.
             </summary>

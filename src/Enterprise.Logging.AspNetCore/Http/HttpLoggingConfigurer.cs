@@ -13,35 +13,35 @@ internal static class HttpLoggingConfigurer
 {
     internal static void ConfigureHttpLogging(this IServiceCollection services, IConfiguration configuration)
     {
-        HttpLoggingConfigOptions configOptions = OptionsInstanceService.Instance
-            .GetOptionsInstance<HttpLoggingConfigOptions>(configuration, HttpLoggingConfigOptions.ConfigSectionKey);
+        HttpLoggingOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<HttpLoggingOptions>(configuration, HttpLoggingOptions.ConfigSectionKey);
 
-        if (!configOptions.EnableHttpLogging)
+        if (!options.EnableHttpLogging)
         {
             return;
         }
 
         // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-logging
 
-        services.AddHttpLogging(options =>
+        services.AddHttpLogging(o =>
         {
-            options.LoggingFields = HttpLoggingFields.All;
+            o.LoggingFields = HttpLoggingFields.All;
 
             // Request headers that are allowed to be logged.
-            options.RequestHeaders.Add(SecChUa);
+            o.RequestHeaders.Add(SecChUa);
 
-            options.MediaTypeOptions.AddText(Javascript);
+            o.MediaTypeOptions.AddText(Javascript);
 
-            options.RequestBodyLogLimit = configOptions.RequestBodyLogLimit;
-            options.ResponseBodyLogLimit = configOptions.ResponseBodyLogLimit;
+            o.RequestBodyLogLimit = options.RequestBodyLogLimit;
+            o.ResponseBodyLogLimit = options.ResponseBodyLogLimit;
         });
     }
 
     internal static void UseHttpLogging(this WebApplication app)
     {
-        HttpLoggingConfigOptions configOptions = app.Services.GetRequiredService<IOptions<HttpLoggingConfigOptions>>().Value;
+        HttpLoggingOptions options = app.Services.GetRequiredService<IOptions<HttpLoggingOptions>>().Value;
 
-        if (!configOptions.EnableHttpLogging)
+        if (!options.EnableHttpLogging)
         {
             return;
         }
