@@ -15,7 +15,7 @@ public sealed class CommandHandler<TCommand> : IHandleCommand<TCommand> where TC
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         var typedCommand = (TCommand)command;

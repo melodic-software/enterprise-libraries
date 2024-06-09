@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.DesignPatterns.Decorator.Model;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
@@ -25,7 +25,7 @@ public abstract class CommandHandlerDecoratorBase<TCommand, TResult> :
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
     {
         ValidateType(command, this);
         var typedCommand = (TCommand)command;
