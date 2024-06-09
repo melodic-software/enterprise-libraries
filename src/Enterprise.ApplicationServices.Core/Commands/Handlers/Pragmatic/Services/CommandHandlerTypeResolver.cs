@@ -3,9 +3,9 @@ using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.Services;
 
-internal sealed class CommandHandlerTypeService
+public static class CommandHandlerTypeResolver
 {
-    internal static Type? GetAlternateHandlerType<TCommand>() where TCommand : IBaseCommand
+    public static Type? GetAlternateHandlerType<TCommand>() where TCommand : IBaseCommand
     {
         // Get the type argument of ICommand<>.
         Type? responseType = GetResponseType<TCommand>();
@@ -21,7 +21,7 @@ internal sealed class CommandHandlerTypeService
         return handlerType;
     }
 
-    internal static Type? GetResponseType<TCommand>() where TCommand : IBaseCommand
+    public static Type? GetResponseType<TCommand>() where TCommand : IBaseCommand
     {
         Type commandType = typeof(TCommand);
 

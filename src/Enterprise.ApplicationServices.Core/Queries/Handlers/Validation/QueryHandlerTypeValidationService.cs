@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Validation;
 

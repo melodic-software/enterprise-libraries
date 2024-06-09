@@ -7,6 +7,11 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers;
 
+/// <summary>
+/// A base implementation of a query handler that supports the raising of events.
+/// </summary>
+/// <typeparam name="TQuery"></typeparam>
+/// <typeparam name="TResponse"></typeparam>
 public abstract class QueryHandlerBase<TQuery, TResponse> : 
     ApplicationServiceBase, IHandleQuery<TQuery, TResponse>, IHandler<TQuery, TResponse>
     where TQuery : class, IBaseQuery

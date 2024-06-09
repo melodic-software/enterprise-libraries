@@ -1,6 +1,9 @@
 ﻿namespace Enterprise.ApplicationServices.Core.Queries.Model;
 
-public interface ICachedQuery : IQuery
+/// <summary>
+/// A query that can be cached.
+/// </summary>
+public interface ICacheableQuery : IQuery
 {
     /// <summary>
     /// The unique cache identifier associated with the query.

@@ -9,6 +9,11 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 
+/// <summary>
+/// A pragmatic base implementation of a command handler that returns a response.
+/// </summary>
+/// <typeparam name="TCommand"></typeparam>
+/// <typeparam name="TResponse"></typeparam>
 [AlternativeTo(typeof(CommandHandlerBase<>))]
 public abstract class CommandHandlerBase<TCommand, TResponse>
     : ApplicationServiceBase, IHandleCommand<TCommand, TResponse>, IHandler<TCommand, TResponse>

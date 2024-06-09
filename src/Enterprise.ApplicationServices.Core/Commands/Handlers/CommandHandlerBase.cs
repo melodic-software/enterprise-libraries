@@ -7,6 +7,10 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers;
 
+/// <summary>
+/// A base implementation of a command handler that supports the raising of events.
+/// </summary>
+/// <typeparam name="TCommand"></typeparam>
 public abstract class CommandHandlerBase<TCommand> : 
     ApplicationServiceBase, IHandleCommand<TCommand>, IHandler<TCommand>
     where TCommand : class, IBaseCommand
