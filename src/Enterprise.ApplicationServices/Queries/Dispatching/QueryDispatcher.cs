@@ -15,26 +15,26 @@ public class QueryDispatcher : IDispatchQueries
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TResponse>(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IBaseQuery query, CancellationToken cancellationToken)
     {
-        IHandleQuery<TResponse> handler = _queryHandlerResolver.GetQueryHandler<TResponse>(query);
-        TResponse response = await handler.HandleAsync(query, cancellationToken);
+        IHandleQuery<TResult> handler = _queryHandlerResolver.GetQueryHandler<TResult>(query);
+        TResult response = await handler.HandleAsync(query, cancellationToken);
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken)
     {
-        IHandleQuery<TResponse> handler = _queryHandlerResolver.GetQueryHandler(query);
-        TResponse response = await handler.HandleAsync(query, cancellationToken);
+        IHandleQuery<TResult> handler = _queryHandlerResolver.GetQueryHandler(query);
+        TResult response = await handler.HandleAsync(query, cancellationToken);
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TQuery, TResponse>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
+    public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken) where TQuery : IBaseQuery
     {
-        IHandleQuery<TQuery, TResponse> handler = _queryHandlerResolver.GetQueryHandler<TQuery, TResponse>(query);
-        TResponse response = await handler.HandleAsync(query, cancellationToken);
+        IHandleQuery<TQuery, TResult> handler = _queryHandlerResolver.GetQueryHandler<TQuery, TResult>(query);
+        TResult response = await handler.HandleAsync(query, cancellationToken);
         return response;
     }
 }

@@ -72,7 +72,7 @@
             We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
         </member>
         <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Simple.SimpleQueryHandler`2.#ctor(Enterprise.Events.Facade.Abstract.IEventRaisingFacade,Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic{`0,`1})">
             <summary>

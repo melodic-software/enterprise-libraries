@@ -11,12 +11,12 @@ namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 /// We can move that out to an infrastructure layer, and simplify the creation and registration of query handlers.
 /// </summary>
 /// <typeparam name="TQuery"></typeparam>
-/// <typeparam name="TResponse"></typeparam>
-public class SimpleQueryHandler<TQuery, TResponse> :
-    QueryHandlerBase<TQuery, TResponse> 
+/// <typeparam name="TResult"></typeparam>
+public class SimpleQueryHandler<TQuery, TResult> :
+    QueryHandlerBase<TQuery, TResult> 
     where TQuery : IBaseQuery
 {
-    private readonly IQueryLogic<TQuery, TResponse> _queryLogic;
+    private readonly IQueryLogic<TQuery, TResult> _queryLogic;
 
     /// <summary>
     /// Most query handler implementations end up being pretty thin and add a lot of overhead.
@@ -26,14 +26,14 @@ public class SimpleQueryHandler<TQuery, TResponse> :
     /// </summary>
     /// <param name="eventRaisingFacade"></param>
     /// <param name="queryLogic"></param>
-    public SimpleQueryHandler(IEventRaisingFacade eventRaisingFacade, IQueryLogic<TQuery, TResponse> queryLogic)
+    public SimpleQueryHandler(IEventRaisingFacade eventRaisingFacade, IQueryLogic<TQuery, TResult> queryLogic)
         : base(eventRaisingFacade)
     {
         _queryLogic = queryLogic;
     }
 
     /// <inheritdoc />
-    public override async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         return await _queryLogic.ExecuteAsync(query, cancellationToken);
     }

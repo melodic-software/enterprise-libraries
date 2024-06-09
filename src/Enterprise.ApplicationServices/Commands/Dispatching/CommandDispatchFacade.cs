@@ -31,10 +31,10 @@ public class CommandDispatchFacade : ICommandDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : ICommand<TResponse>
+    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : ICommand<TResult>
     {
-        return await _commandDispatcher.DispatchAsync<TCommand, TResponse>(command, cancellationToken);
+        return await _commandDispatcher.DispatchAsync<TCommand, TResult>(command, cancellationToken);
     }
 
     /// <inheritdoc />

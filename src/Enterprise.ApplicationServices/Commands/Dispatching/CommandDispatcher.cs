@@ -25,11 +25,11 @@ public class CommandDispatcher : IDispatchCommands
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TCommand, TResponse>(TCommand command, CancellationToken cancellationToken)
-        where TCommand : ICommand<TResponse>
+    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
+        where TCommand : ICommand<TResult>
     {
-        IHandleCommand<TCommand, TResponse> handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResponse>(command);
-        TResponse response = await handler.HandleAsync(command, cancellationToken);
+        IHandleCommand<TCommand, TResult> handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResult>(command);
+        TResult response = await handler.HandleAsync(command, cancellationToken);
         return response;
     }
 }

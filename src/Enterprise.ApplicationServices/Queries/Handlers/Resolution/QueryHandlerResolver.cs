@@ -15,32 +15,32 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IBaseQuery query)
+    public IHandleQuery<TResult> GetQueryHandler<TResult>(IBaseQuery query)
     {
         Type queryType = query.GetType();
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-        return (IHandleQuery<TResponse>)_serviceProvider.GetService(handlerType);
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
+        return (IHandleQuery<TResult>)_serviceProvider.GetService(handlerType);
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResponse> GetQueryHandler<TResponse>(IQuery<TResponse> query)
+    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery<TResult> query)
     {
         Type queryType = query.GetType();
-        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResponse));
-        return (IHandleQuery<TResponse>)_serviceProvider.GetRequiredService(handlerType);
+        Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
+        return (IHandleQuery<TResult>)_serviceProvider.GetRequiredService(handlerType);
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(TQuery query)
+    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
         where TQuery : IBaseQuery
     {
-        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
+        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResponse> GetQueryHandler<TQuery, TResponse>(IQuery<TResponse> query)
-        where TQuery : IQuery<TResponse>
+    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
+        where TQuery : IQuery<TResult>
     {
-        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResponse>>();
+        return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 }
