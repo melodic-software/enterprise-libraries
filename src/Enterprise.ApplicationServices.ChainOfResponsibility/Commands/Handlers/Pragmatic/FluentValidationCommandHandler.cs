@@ -6,20 +6,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 
-public class FluentValidationCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
+public class FluentValidationCommandHandler<TCommand, TResult> : IHandler<TCommand, TResult>
 {
     private readonly IReadOnlyCollection<IValidator<TCommand>> _validators;
-    private readonly ILogger<FluentValidationCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<FluentValidationCommandHandler<TCommand, TResult>> _logger;
 
     public FluentValidationCommandHandler(
         IEnumerable<IValidator<TCommand>> validators,
-        ILogger<FluentValidationCommandHandler<TCommand, TResponse>> logger)
+        ILogger<FluentValidationCommandHandler<TCommand, TResult>> logger)
     {
         _validators = validators.ToList();
         _logger = logger;
     }
 
-    public async Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {

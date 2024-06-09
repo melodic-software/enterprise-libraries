@@ -4,20 +4,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 
-public class LoggingCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
+public class LoggingCommandHandler<TCommand, TResult> : IHandler<TCommand, TResult>
 {
-    private readonly ILogger<LoggingCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<LoggingCommandHandler<TCommand, TResult>> _logger;
 
-    public LoggingCommandHandler(ILogger<LoggingCommandHandler<TCommand, TResponse>> logger)
+    public LoggingCommandHandler(ILogger<LoggingCommandHandler<TCommand, TResult>> logger)
     {
         _logger = logger;
     }
 
-    public async Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         Type commandType = typeof(TCommand);
 
-        TResponse response;
+        TResult response;
 
         using (_logger.BeginScope("Command: {CommandType}", commandType.Name))
         {

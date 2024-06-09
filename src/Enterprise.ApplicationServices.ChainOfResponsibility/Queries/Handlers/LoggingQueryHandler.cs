@@ -4,23 +4,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
-public class LoggingQueryHandler<TQuery, TResponse> : IHandler<TQuery, TResponse>
+public class LoggingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
 {
-    private readonly ILogger<LoggingQueryHandler<TQuery, TResponse>> _logger;
+    private readonly ILogger<LoggingQueryHandler<TQuery, TResult>> _logger;
 
-    public LoggingQueryHandler(ILogger<LoggingQueryHandler<TQuery, TResponse>> logger)
+    public LoggingQueryHandler(ILogger<LoggingQueryHandler<TQuery, TResult>> logger)
     {
         _logger = logger;
     }
 
-    public async Task<TResponse?> HandleAsync(TQuery request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         Type queryType = typeof(TQuery);
 
         using (_logger.BeginScope("Query: {QueryType}", queryType.Name))
         {
             _logger.LogDebug("Executing query.");
-            TResponse response = await next();
+            TResult response = await next();
             _logger.LogDebug("Query was handled successfully.");
             return response;
         }

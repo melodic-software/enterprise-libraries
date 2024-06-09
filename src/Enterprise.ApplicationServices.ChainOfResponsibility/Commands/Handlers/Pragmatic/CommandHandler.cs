@@ -7,12 +7,12 @@ using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.Co
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 
-public sealed class CommandHandler<TCommand, TResponse> : IHandleCommand<TCommand, TResponse> 
-    where TCommand : ICommand<TResponse>
+public sealed class CommandHandler<TCommand, TResult> : IHandleCommand<TCommand, TResult> 
+    where TCommand : ICommand<TResult>
 {
-    private readonly IResponsibilityChain<TCommand, TResponse> _responsibilityChain;
+    private readonly IResponsibilityChain<TCommand, TResult> _responsibilityChain;
 
-    public CommandHandler(IResponsibilityChain<TCommand, TResponse> responsibilityChain)
+    public CommandHandler(IResponsibilityChain<TCommand, TResult> responsibilityChain)
     {
         _responsibilityChain = responsibilityChain;
     }
@@ -32,7 +32,7 @@ public sealed class CommandHandler<TCommand, TResponse> : IHandleCommand<TComman
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken)
     {
         return await _responsibilityChain.HandleAsync(command, cancellationToken);
     }

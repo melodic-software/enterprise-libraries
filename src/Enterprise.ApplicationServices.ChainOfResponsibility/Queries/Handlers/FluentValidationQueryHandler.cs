@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
-public class FluentValidationQueryHandler<TQuery, TResponse> : IHandler<TQuery, TResponse>
+public class FluentValidationQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
 {
     private readonly IReadOnlyCollection<IValidator<TQuery>> _validators;
 
@@ -14,7 +14,7 @@ public class FluentValidationQueryHandler<TQuery, TResponse> : IHandler<TQuery, 
         _validators = validators.ToList();
     }
 
-    public async Task<TResponse?> HandleAsync(TQuery request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {

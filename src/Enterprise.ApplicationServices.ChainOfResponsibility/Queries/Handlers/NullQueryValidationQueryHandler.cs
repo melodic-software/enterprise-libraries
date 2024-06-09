@@ -3,9 +3,9 @@ using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
-public class NullQueryValidationQueryHandler<TQuery, TResponse> : IHandler<TQuery, TResponse>
+public class NullQueryValidationQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
 {
-    public async Task<TResponse?> HandleAsync(TQuery request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
         return await next();

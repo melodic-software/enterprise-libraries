@@ -5,27 +5,27 @@ using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.Que
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
-public sealed class QueryHandler<TQuery, TResponse> : IHandleQuery<TQuery, TResponse>
+public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult>
     where TQuery : IBaseQuery
 {
-    private readonly IResponsibilityChain<TQuery, TResponse> _responsibilityChain;
+    private readonly IResponsibilityChain<TQuery, TResult> _responsibilityChain;
 
-    public QueryHandler(IResponsibilityChain<TQuery, TResponse> responsibilityChain)
+    public QueryHandler(IResponsibilityChain<TQuery, TResult> responsibilityChain)
     {
         _responsibilityChain = responsibilityChain;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
-        TResponse response = await HandleAsync(typedQuery, cancellationToken);
+        TResult response = await HandleAsync(typedQuery, cancellationToken);
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         return await _responsibilityChain.HandleAsync(query, cancellationToken);
     }

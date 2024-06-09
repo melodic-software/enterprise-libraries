@@ -4,16 +4,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 
-public class ErrorHandlingQueryHandler<TQuery, TResponse> : IHandler<TQuery, TResponse>
+public class ErrorHandlingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
 {
-    private readonly ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> _logger;
+    private readonly ILogger<ErrorHandlingQueryHandler<TQuery, TResult>> _logger;
 
-    public ErrorHandlingQueryHandler(ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> logger)
+    public ErrorHandlingQueryHandler(ILogger<ErrorHandlingQueryHandler<TQuery, TResult>> logger)
     {
         _logger = logger;
     }
 
-    public async Task<TResponse?> HandleAsync(TQuery request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         try
         {

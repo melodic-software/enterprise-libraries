@@ -4,16 +4,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 
-public class ErrorHandlingCommandHandler<TCommand, TResponse> : IHandler<TCommand, TResponse>
+public class ErrorHandlingCommandHandler<TCommand, TResult> : IHandler<TCommand, TResult>
 {
-    private readonly ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> _logger;
+    private readonly ILogger<ErrorHandlingCommandHandler<TCommand, TResult>> _logger;
 
-    public ErrorHandlingCommandHandler(ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> logger)
+    public ErrorHandlingCommandHandler(ILogger<ErrorHandlingCommandHandler<TCommand, TResult>> logger)
     {
         _logger = logger;
     }
 
-    public async Task<TResponse?> HandleAsync(TCommand request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
     {
         try
         {
