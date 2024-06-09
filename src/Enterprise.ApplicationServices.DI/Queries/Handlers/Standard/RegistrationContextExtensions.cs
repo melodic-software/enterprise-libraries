@@ -7,9 +7,9 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
 internal static class RegistrationContextExtensions
 {
-    internal static RegistrationContext<IHandleQuery<TQuery, TResponse>> AddQueryHandler<TQuery, TResponse>(
-        this RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext,
-        RegistrationOptions<TQuery, TResponse> options)
+    internal static RegistrationContext<IHandleQuery<TQuery, TResult>> AddQueryHandler<TQuery, TResult>(
+        this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
+        RegistrationOptions<TQuery, TResult> options)
         where TQuery : IBaseQuery
     {
         if (options.QueryHandlerImplementationFactory == null)
@@ -22,7 +22,7 @@ internal static class RegistrationContextExtensions
         // Register the primary.
         registrationContext.Add(
             new ServiceDescriptor(
-                typeof(IHandleQuery<TQuery, TResponse>),
+                typeof(IHandleQuery<TQuery, TResult>),
                 options.QueryHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )
@@ -31,7 +31,7 @@ internal static class RegistrationContextExtensions
         // Register the alternate.
         registrationContext.Add(
             new ServiceDescriptor(
-                typeof(IHandleQuery<TResponse>),
+                typeof(IHandleQuery<TResult>),
                 options.QueryHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )

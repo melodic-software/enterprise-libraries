@@ -3,6 +3,6 @@ using Enterprise.ApplicationServices.Core.Queries.Model;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
 
-public delegate IHandleQuery<TQuery, TResponse>
-    QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>(IServiceProvider provider, IHandleQuery<TQuery, TResponse> queryHandler)
+public delegate IHandleQuery<TQuery, TResult>
+    QueryHandlerDecoratorImplementationFactory<TQuery, TResult>(IServiceProvider provider, IHandleQuery<TQuery, TResult> queryHandler)
     where TQuery : IBaseQuery;

@@ -8,15 +8,15 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 
 public static class QueryHandlerImplementationFactories
 {
-    public static QueryHandlerBase<TQuery, TResponse> CreateSimpleQueryHandler<TQuery, TResponse>(IServiceProvider provider) where TQuery : IBaseQuery
+    public static QueryHandlerBase<TQuery, TResult> CreateSimpleQueryHandler<TQuery, TResult>(IServiceProvider provider) where TQuery : IBaseQuery
     {
         IEventRaisingFacade eventRaisingFacade = provider.GetRequiredService<IEventRaisingFacade>();
 
         // Resolve the query logic implementation.
-        IQueryLogic<TQuery, TResponse> queryLogic = provider.GetRequiredService<IQueryLogic<TQuery, TResponse>>();
+        IQueryLogic<TQuery, TResult> queryLogic = provider.GetRequiredService<IQueryLogic<TQuery, TResult>>();
 
         // Use a common handler that delegates to the query logic.
         // We can still add cross-cutting concerns and decorate this handler as needed.
-        return new SimpleQueryHandler<TQuery, TResponse>(eventRaisingFacade, queryLogic);
+        return new SimpleQueryHandler<TQuery, TResult>(eventRaisingFacade, queryLogic);
     }
 }

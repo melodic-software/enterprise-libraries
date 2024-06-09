@@ -5,5 +5,5 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Options.Delegates;
 
-public delegate void PostConfigure<TQuery, TResponse>(IServiceCollection services, RegistrationContext<IHandleQuery<TQuery, TResponse>> postConfigure)
+public delegate void PostConfigure<TQuery, TResult>(IServiceCollection services, RegistrationContext<IHandleQuery<TQuery, TResult>> postConfigure)
     where TQuery : IBaseQuery;

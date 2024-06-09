@@ -11,11 +11,11 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibil
 
 public static class RegistrationContextExtensions
 {
-    internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> AddChainOfResponsibility<TCommand, TResponse>(
-        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
-        RegistrationOptions<TCommand, TResponse> options,
+    internal static RegistrationContext<IHandleCommand<TCommand, TResult>> AddChainOfResponsibility<TCommand, TResult>(
+        this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
+        RegistrationOptions<TCommand, TResult> options,
         IServiceCollection services)
-        where TCommand : ICommand<TResponse>
+        where TCommand : ICommand<TResult>
     {
         if (options.ConfigureChainOfResponsibility == null)
         {
@@ -32,8 +32,8 @@ public static class RegistrationContextExtensions
         else
         {
             // Initialize a builder instance that can be used to customize the chain.
-            ResponsibilityChainRegistrationBuilder<TCommand, TResponse> chainRegistrationBuilder =
-                services.RegisterChainOfResponsibility<TCommand, TResponse>(options.ServiceLifetime);
+            ResponsibilityChainRegistrationBuilder<TCommand, TResult> chainRegistrationBuilder =
+                services.RegisterChainOfResponsibility<TCommand, TResult>(options.ServiceLifetime);
 
             // Allow the caller to completely configure using the builder.
             options.ConfigureChainOfResponsibility(chainRegistrationBuilder);
@@ -42,15 +42,15 @@ public static class RegistrationContextExtensions
         return registrationContext;
     }
 
-    internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> AddCommandHandler<TCommand, TResponse>(
-        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
-        RegistrationOptions<TCommand, TResponse> options) where TCommand : ICommand<TResponse>
+    internal static RegistrationContext<IHandleCommand<TCommand, TResult>> AddCommandHandler<TCommand, TResult>(
+        this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
+        RegistrationOptions<TCommand, TResult> options) where TCommand : ICommand<TResult>
     {
         // Register the primary abstraction.
         registrationContext.Add(
             new ServiceDescriptor(
-                typeof(IHandleCommand<TCommand, TResponse>),
-                factory: ImplementationFactory<TCommand, TResponse>,
+                typeof(IHandleCommand<TCommand, TResult>),
+                factory: ImplementationFactory<TCommand, TResult>,
                 options.ServiceLifetime
             )
         );
@@ -59,7 +59,7 @@ public static class RegistrationContextExtensions
         registrationContext.Add(
             new ServiceDescriptor(
                 typeof(IHandleCommand<TCommand>),
-                factory: ImplementationFactory<TCommand, TResponse>,
+                factory: ImplementationFactory<TCommand, TResult>,
                 options.ServiceLifetime
             )
         );
@@ -67,12 +67,12 @@ public static class RegistrationContextExtensions
         return registrationContext;
     }
 
-    private static CommandHandler<TCommand, TResponse> ImplementationFactory<TCommand, TResponse>(IServiceProvider provider)
-        where TCommand : ICommand<TResponse>
+    private static CommandHandler<TCommand, TResult> ImplementationFactory<TCommand, TResult>(IServiceProvider provider)
+        where TCommand : ICommand<TResult>
     {
-        IResponsibilityChain<TCommand, TResponse> responsibilityChain =
-            provider.GetRequiredService<IResponsibilityChain<TCommand, TResponse>>();
+        IResponsibilityChain<TCommand, TResult> responsibilityChain =
+            provider.GetRequiredService<IResponsibilityChain<TCommand, TResult>>();
 
-        return new CommandHandler<TCommand, TResponse>(responsibilityChain);
+        return new CommandHandler<TCommand, TResult>(responsibilityChain);
     }
 }

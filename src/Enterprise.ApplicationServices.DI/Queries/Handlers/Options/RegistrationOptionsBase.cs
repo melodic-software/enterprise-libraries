@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
 
-public abstract class RegistrationOptionsBase<TQuery, TResponse> where TQuery : IBaseQuery
+public abstract class RegistrationOptionsBase<TQuery, TResult> where TQuery : IBaseQuery
 {
     /// <summary>
     /// This sets the service lifetime for the query handler registration.
@@ -15,5 +15,5 @@ public abstract class RegistrationOptionsBase<TQuery, TResponse> where TQuery : 
     /// <summary>
     /// Provider further configuration to the query handler registration.
     /// </summary>
-    public PostConfigure<TQuery, TResponse>? PostConfigure { get; set; }
+    public PostConfigure<TQuery, TResult>? PostConfigure { get; set; }
 }

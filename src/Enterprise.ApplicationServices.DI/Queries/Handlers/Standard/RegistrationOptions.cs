@@ -5,8 +5,8 @@ using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
-public sealed class RegistrationOptions<TQuery, TResponse> :
-    RegistrationOptionsBase<TQuery, TResponse>
+public sealed class RegistrationOptions<TQuery, TResult> :
+    RegistrationOptionsBase<TQuery, TResult>
     where TQuery : IBaseQuery
 {
     /// <summary>
@@ -20,14 +20,14 @@ public sealed class RegistrationOptions<TQuery, TResponse> :
     /// If none are provided, the default decorators will be used.
     /// <see cref="UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
     /// </summary>
-    public IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>> DecoratorFactories { get; } = [];
+    public IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> DecoratorFactories { get; } = [];
 
     /// <summary>
     /// A factory method delegate that instantiates the query handler instance.
     /// </summary>
-    internal QueryHandlerImplementationFactory<TQuery, TResponse>? QueryHandlerImplementationFactory { get; }
+    internal QueryHandlerImplementationFactory<TQuery, TResult>? QueryHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(QueryHandlerImplementationFactory<TQuery, TResponse>? queryHandlerImplementationFactory)
+    public RegistrationOptions(QueryHandlerImplementationFactory<TQuery, TResult>? queryHandlerImplementationFactory)
     {
         QueryHandlerImplementationFactory = queryHandlerImplementationFactory;
     }

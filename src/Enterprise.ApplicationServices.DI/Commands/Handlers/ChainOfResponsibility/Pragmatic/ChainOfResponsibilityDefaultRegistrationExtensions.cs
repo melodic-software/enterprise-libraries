@@ -8,17 +8,17 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibil
 
 public static class ChainOfResponsibilityDefaultRegistrationExtensions
 {
-    public static void RegisterDefaultChainOfResponsibility<TCommand, TResponse>(
+    public static void RegisterDefaultChainOfResponsibility<TCommand, TResult>(
         this IServiceCollection services,
-        HandlerImplementationFactory<TCommand, TResponse> implementationFactory,
+        HandlerImplementationFactory<TCommand, TResult> implementationFactory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
-        where TCommand : ICommand<TResponse>
+        where TCommand : ICommand<TResult>
     {
-        services.RegisterChainOfResponsibility<TCommand, TResponse>()
-            .WithSuccessor<LoggingCommandHandler<TCommand, TResponse>>()
-            .WithSuccessor<ErrorHandlingCommandHandler<TCommand, TResponse>>()
-            .WithSuccessor<NullCommandValidationCommandHandler<TCommand, TResponse>>()
-            .WithSuccessor<FluentValidationCommandHandler<TCommand, TResponse>>()
+        services.RegisterChainOfResponsibility<TCommand, TResult>()
+            .WithSuccessor<LoggingCommandHandler<TCommand, TResult>>()
+            .WithSuccessor<ErrorHandlingCommandHandler<TCommand, TResult>>()
+            .WithSuccessor<NullCommandValidationCommandHandler<TCommand, TResult>>()
+            .WithSuccessor<FluentValidationCommandHandler<TCommand, TResult>>()
             .WithSuccessor(implementationFactory.Invoke, serviceLifetime);
     }
 }

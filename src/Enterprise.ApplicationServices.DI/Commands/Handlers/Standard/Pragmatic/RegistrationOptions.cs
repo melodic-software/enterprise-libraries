@@ -5,9 +5,9 @@ using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pr
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic;
 
-public sealed class RegistrationOptions<TCommand, TResponse> :
-    RegistrationOptionsBase<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public sealed class RegistrationOptions<TCommand, TResult> :
+    RegistrationOptionsBase<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
     /// <summary>
     /// Register decorators for the command handler.
@@ -20,14 +20,14 @@ public sealed class RegistrationOptions<TCommand, TResponse> :
     /// If none are provided, the default decorators will be used.
     /// <see cref="UseDecorators"/> must be true, otherwise decorator registrations will be skipped.
     /// </summary>
-    public IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>> DecoratorFactories { get; } = [];
+    public IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResult>> DecoratorFactories { get; } = [];
 
     /// <summary>
     /// A factory method delegate that instantiates the command handler instance.
     /// </summary>
-    internal CommandHandlerImplementationFactory<TCommand, TResponse>? CommandHandlerImplementationFactory { get; }
+    internal CommandHandlerImplementationFactory<TCommand, TResult>? CommandHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(CommandHandlerImplementationFactory<TCommand, TResponse>? commandHandlerImplementationFactory)
+    public RegistrationOptions(CommandHandlerImplementationFactory<TCommand, TResult>? commandHandlerImplementationFactory)
     {
         CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }

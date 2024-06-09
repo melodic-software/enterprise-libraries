@@ -8,10 +8,10 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic
 
 public static class RegistrationContextExtensions
 {
-    internal static RegistrationContext<IHandleCommand<TCommand, TResponse>> AddCommandHandler<TCommand, TResponse>(
-        this RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext,
-        RegistrationOptions<TCommand, TResponse> options)
-        where TCommand : ICommand<TResponse>
+    internal static RegistrationContext<IHandleCommand<TCommand, TResult>> AddCommandHandler<TCommand, TResult>(
+        this RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext,
+        RegistrationOptions<TCommand, TResult> options)
+        where TCommand : ICommand<TResult>
     {
         if (options.CommandHandlerImplementationFactory == null)
         {
@@ -23,7 +23,7 @@ public static class RegistrationContextExtensions
         // Register the primary.
         registrationContext.Add(
             new ServiceDescriptor(
-                typeof(IHandleCommand<TCommand, TResponse>),
+                typeof(IHandleCommand<TCommand, TResult>),
                 factory: options.CommandHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime)
         );

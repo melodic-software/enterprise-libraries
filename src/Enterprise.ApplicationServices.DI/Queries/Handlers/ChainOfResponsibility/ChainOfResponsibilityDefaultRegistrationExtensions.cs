@@ -8,17 +8,17 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibili
 
 public static class ChainOfResponsibilityDefaultRegistrationExtensions
 {
-    public static void RegisterDefaultChainOfResponsibility<TQuery, TResponse>(
+    public static void RegisterDefaultChainOfResponsibility<TQuery, TResult>(
         this IServiceCollection services,
-        HandlerImplementationFactory<TQuery, TResponse> implementationFactory,
+        HandlerImplementationFactory<TQuery, TResult> implementationFactory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
         where TQuery : IBaseQuery
     {
-        services.RegisterChainOfResponsibility<TQuery, TResponse>()
-            .WithSuccessor<LoggingQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<ErrorHandlingQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<NullQueryValidationQueryHandler<TQuery, TResponse>>()
-            .WithSuccessor<FluentValidationQueryHandler<TQuery, TResponse>>()
+        services.RegisterChainOfResponsibility<TQuery, TResult>()
+            .WithSuccessor<LoggingQueryHandler<TQuery, TResult>>()
+            .WithSuccessor<ErrorHandlingQueryHandler<TQuery, TResult>>()
+            .WithSuccessor<NullQueryValidationQueryHandler<TQuery, TResult>>()
+            .WithSuccessor<FluentValidationQueryHandler<TQuery, TResult>>()
             .WithSuccessor(implementationFactory.Invoke, serviceLifetime);
     }
 }

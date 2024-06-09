@@ -14,32 +14,32 @@ public static class CommandHandlerRegistrationExtensions
     /// Register a command handler.
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="services"></param>
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
-    public static void RegisterCommandHandler<TCommand, TResponse>(this IServiceCollection services,
-        CommandHandlerImplementationFactory<TCommand, TResponse> implementationFactory,
-        ConfigureOptions<TCommand, TResponse>? configureOptions = null)
-        where TCommand : ICommand<TResponse>
+    public static void RegisterCommandHandler<TCommand, TResult>(this IServiceCollection services,
+        CommandHandlerImplementationFactory<TCommand, TResult> implementationFactory,
+        ConfigureOptions<TCommand, TResult>? configureOptions = null)
+        where TCommand : ICommand<TResult>
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
-        var options = new RegistrationOptions<TCommand, TResponse>(implementationFactory);
+        var options = new RegistrationOptions<TCommand, TResult>(implementationFactory);
         configureOptions?.Invoke(options);
 
-        RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext =
+        RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext =
             services.RegisterCommandHandler(options);
 
         options.PostConfigure?.Invoke(services, registrationContext);
     }
 
-    private static RegistrationContext<IHandleCommand<TCommand, TResponse>> RegisterCommandHandler<TCommand, TResponse>(
+    private static RegistrationContext<IHandleCommand<TCommand, TResult>> RegisterCommandHandler<TCommand, TResult>(
         this IServiceCollection services,
-        RegistrationOptions<TCommand, TResponse> options)
-        where TCommand : ICommand<TResponse>
+        RegistrationOptions<TCommand, TResult> options)
+        where TCommand : ICommand<TResult>
     {
-        RegistrationContext<IHandleCommand<TCommand, TResponse>> registrationContext = services
-            .BeginRegistration<IHandleCommand<TCommand, TResponse>>();
+        RegistrationContext<IHandleCommand<TCommand, TResult>> registrationContext = services
+            .BeginRegistration<IHandleCommand<TCommand, TResult>>();
 
         if (options.UseDecorators)
         {

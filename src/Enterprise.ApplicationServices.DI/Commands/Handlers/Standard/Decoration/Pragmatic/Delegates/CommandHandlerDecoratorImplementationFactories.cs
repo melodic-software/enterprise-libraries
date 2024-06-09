@@ -9,8 +9,8 @@ namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoratio
 
 public static class CommandHandlerDecoratorImplementationFactories
 {
-    public static IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResponse>>
-        GetDefault<TCommand, TResponse>() where TCommand : ICommand<TResponse>
+    public static IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResult>>
+        GetDefault<TCommand, TResult>() where TCommand : ICommand<TResult>
     {
         return
         [
@@ -18,22 +18,22 @@ public static class CommandHandlerDecoratorImplementationFactories
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IEnumerable<IValidator<TCommand>> validators = provider.GetServices<IValidator<TCommand>>();
-                ILogger<FluentValidationCommandHandler<TCommand, TResponse>> logger = provider.GetRequiredService<ILogger<FluentValidationCommandHandler<TCommand, TResponse>>>();
-                return new FluentValidationCommandHandler<TCommand, TResponse>(commandHandler, decoratorService, validators, logger);
+                ILogger<FluentValidationCommandHandler<TCommand, TResult>> logger = provider.GetRequiredService<ILogger<FluentValidationCommandHandler<TCommand, TResult>>>();
+                return new FluentValidationCommandHandler<TCommand, TResult>(commandHandler, decoratorService, validators, logger);
             }, (provider, commandHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                return new NullCommandValidationCommandHandler<TCommand, TResponse>(commandHandler, decoratorService);
+                return new NullCommandValidationCommandHandler<TCommand, TResult>(commandHandler, decoratorService);
             }, (provider, commandHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>> logger = provider.GetRequiredService<ILogger<ErrorHandlingCommandHandler<TCommand, TResponse>>>();
-                return new ErrorHandlingCommandHandler<TCommand, TResponse>(commandHandler, decoratorService, logger);
+                ILogger<ErrorHandlingCommandHandler<TCommand, TResult>> logger = provider.GetRequiredService<ILogger<ErrorHandlingCommandHandler<TCommand, TResult>>>();
+                return new ErrorHandlingCommandHandler<TCommand, TResult>(commandHandler, decoratorService, logger);
             }, (provider, commandHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                ILogger<LoggingCommandHandler<TCommand, TResponse>> logger = provider.GetRequiredService<ILogger<LoggingCommandHandler<TCommand, TResponse>>>();
-                return new LoggingCommandHandler<TCommand, TResponse>(commandHandler, decoratorService, logger);
+                ILogger<LoggingCommandHandler<TCommand, TResult>> logger = provider.GetRequiredService<ILogger<LoggingCommandHandler<TCommand, TResult>>>();
+                return new LoggingCommandHandler<TCommand, TResult>(commandHandler, decoratorService, logger);
             }
         ];
     }

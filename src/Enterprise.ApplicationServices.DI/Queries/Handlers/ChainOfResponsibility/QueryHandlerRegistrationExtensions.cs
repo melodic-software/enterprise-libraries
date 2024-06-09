@@ -13,13 +13,13 @@ public static class QueryHandlerRegistrationExtensions
     /// Register a query handler using the chain of responsibility design pattern.
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="services"></param>
     /// <param name="implementationFactory"></param>
     /// <param name="configureOptions"></param>
-    public static void RegisterQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        HandlerImplementationFactory<TQuery, TResponse> implementationFactory,
-        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
+    public static void RegisterQueryHandler<TQuery, TResult>(this IServiceCollection services,
+        HandlerImplementationFactory<TQuery, TResult> implementationFactory,
+        ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         services.Register(implementationFactory, configureOptions);
@@ -27,44 +27,44 @@ public static class QueryHandlerRegistrationExtensions
 
     /// <summary>
     /// Register a simple query handler.
-    /// This expects that a separate registration of <see cref="IQueryLogic{TQuery,TResponse}"/> has been made.
+    /// This expects that a separate registration of <see cref="IQueryLogic{TQuery,TResult}"/> has been made.
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     /// <param name="services"></param>
     /// <param name="configureOptions"></param>
-    public static void RegisterSimpleQueryHandler<TQuery, TResponse>(this IServiceCollection services,
-        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
+    public static void RegisterSimpleQueryHandler<TQuery, TResult>(this IServiceCollection services,
+        ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : IBaseQuery
     {
-        HandlerImplementationFactory<TQuery, TResponse> implementationFactory =
-            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResponse>;
+        HandlerImplementationFactory<TQuery, TResult> implementationFactory =
+            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResult>;
 
         services.Register(implementationFactory, configureOptions);
     }
 
-    private static void Register<TQuery, TResponse>(this IServiceCollection services,
-        HandlerImplementationFactory<TQuery, TResponse> implementationFactory,
-        ConfigureOptions<TQuery, TResponse>? configureOptions = null)
+    private static void Register<TQuery, TResult>(this IServiceCollection services,
+        HandlerImplementationFactory<TQuery, TResult> implementationFactory,
+        ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : IBaseQuery
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
-        var options = new RegistrationOptions<TQuery, TResponse>(implementationFactory.Invoke);
+        var options = new RegistrationOptions<TQuery, TResult>(implementationFactory.Invoke);
         configureOptions?.Invoke(options);
 
-        RegistrationContext<IHandleQuery<TQuery, TResponse>> registrationContext = 
+        RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext = 
             services.RegisterQueryHandler(options);
 
         options.PostConfigure?.Invoke(services, registrationContext);
     }
 
-    private static RegistrationContext<IHandleQuery<TQuery, TResponse>> RegisterQueryHandler<TQuery, TResponse>(
+    private static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterQueryHandler<TQuery, TResult>(
         this IServiceCollection services,
-        RegistrationOptions<TQuery, TResponse> options)
+        RegistrationOptions<TQuery, TResult> options)
         where TQuery : IBaseQuery
     {
         return services
-            .BeginRegistration<IHandleQuery<TQuery, TResponse>>()
+            .BeginRegistration<IHandleQuery<TQuery, TResult>>()
             .AddChainOfResponsibility(options, services)
             .AddQueryHandler(options);
     }

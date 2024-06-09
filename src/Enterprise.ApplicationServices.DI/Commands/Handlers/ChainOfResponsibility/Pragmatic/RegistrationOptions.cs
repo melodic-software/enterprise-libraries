@@ -4,21 +4,21 @@ using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Pragmatic;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic;
 
-public class RegistrationOptions<TCommand, TResponse> : RegistrationOptionsBase<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
+public class RegistrationOptions<TCommand, TResult> : RegistrationOptionsBase<TCommand, TResult>
+    where TCommand : ICommand<TResult>
 {
     /// <summary>
     /// Provide a custom responsibility chain configuration.
     /// If not provided, the default chain will be used.
     /// </summary>
-    public ConfigureChainOfResponsibility<TCommand, TResponse>? ConfigureChainOfResponsibility { get; set; }
+    public ConfigureChainOfResponsibility<TCommand, TResult>? ConfigureChainOfResponsibility { get; set; }
 
     /// <summary>
     /// A factory method delegate that instantiates the chain of responsibility instance.
     /// </summary>
-    internal HandlerImplementationFactory<TCommand, TResponse>? CommandHandlerImplementationFactory { get; }
+    internal HandlerImplementationFactory<TCommand, TResult>? CommandHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(HandlerImplementationFactory<TCommand, TResponse>? commandHandlerImplementationFactory)
+    public RegistrationOptions(HandlerImplementationFactory<TCommand, TResult>? commandHandlerImplementationFactory)
     {
         CommandHandlerImplementationFactory = commandHandlerImplementationFactory;
     }

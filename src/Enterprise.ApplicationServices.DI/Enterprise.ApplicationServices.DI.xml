@@ -18,7 +18,7 @@
             Register a command handler using the chain of responsibility design pattern.
             </summary>
             <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
@@ -81,7 +81,7 @@
             Register a command handler.
             </summary>
             <typeparam name="TCommand"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
@@ -127,7 +127,7 @@
             Register a query handler using the chain of responsibility design pattern.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
@@ -138,7 +138,7 @@
             This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="configureOptions"></param>
         </member>
@@ -169,7 +169,7 @@
             Register a query handler.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="implementationFactory"></param>
             <param name="configureOptions"></param>
@@ -180,7 +180,7 @@
             This expects that a separate registration of <see cref="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IQueryLogic`2"/> has been made.
             </summary>
             <typeparam name="TQuery"></typeparam>
-            <typeparam name="TResponse"></typeparam>
+            <typeparam name="TResult"></typeparam>
             <param name="services"></param>
             <param name="configureOptions"></param>
         </member>

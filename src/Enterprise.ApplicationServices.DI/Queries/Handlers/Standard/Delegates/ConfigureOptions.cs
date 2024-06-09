@@ -2,5 +2,5 @@
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 
-public delegate void ConfigureOptions<TQuery, TResponse>(RegistrationOptions<TQuery, TResponse> registrationOptions) 
+public delegate void ConfigureOptions<TQuery, TResult>(RegistrationOptions<TQuery, TResult> registrationOptions) 
     where TQuery : IBaseQuery;

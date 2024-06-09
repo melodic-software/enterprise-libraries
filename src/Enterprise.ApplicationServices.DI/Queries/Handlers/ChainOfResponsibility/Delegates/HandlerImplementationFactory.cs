@@ -2,5 +2,5 @@
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
 
-public delegate IHandler<TQuery, TResponse>
-    HandlerImplementationFactory<in TQuery, TResponse>(IServiceProvider provider);
+public delegate IHandler<TQuery, TResult>
+    HandlerImplementationFactory<in TQuery, TResult>(IServiceProvider provider);

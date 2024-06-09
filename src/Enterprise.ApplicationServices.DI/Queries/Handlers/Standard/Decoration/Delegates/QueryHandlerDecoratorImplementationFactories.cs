@@ -10,7 +10,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration
 
 public static class QueryHandlerDecoratorImplementationFactories
 {
-    public static IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResponse>> GetDefault<TQuery, TResponse>()
+    public static IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> GetDefault<TQuery, TResult>()
         where TQuery : IBaseQuery
     {
         return
@@ -19,24 +19,24 @@ public static class QueryHandlerDecoratorImplementationFactories
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IEnumerable<IValidator<TQuery>> validators = provider.GetServices<IValidator<TQuery>>();
-                IHandleQuery<TQuery, TResponse> decorator = new FluentValidationQueryHandler<TQuery, TResponse>(queryHandler, decoratorService, validators);
+                IHandleQuery<TQuery, TResult> decorator = new FluentValidationQueryHandler<TQuery, TResult>(queryHandler, decoratorService, validators);
                 return decorator;
             }, (provider, queryHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                IHandleQuery<TQuery, TResponse> decorator = new NullQueryValidationQueryHandler<TQuery, TResponse>(queryHandler, decoratorService);
+                IHandleQuery<TQuery, TResult> decorator = new NullQueryValidationQueryHandler<TQuery, TResult>(queryHandler, decoratorService);
                 return decorator;
             }, (provider, queryHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>> logger = provider.GetRequiredService<ILogger<ErrorHandlingQueryHandler<TQuery, TResponse>>>();
-                IHandleQuery<TQuery, TResponse> decorator = new ErrorHandlingQueryHandler<TQuery, TResponse>(queryHandler, decoratorService, logger);
+                ILogger<ErrorHandlingQueryHandler<TQuery, TResult>> logger = provider.GetRequiredService<ILogger<ErrorHandlingQueryHandler<TQuery, TResult>>>();
+                IHandleQuery<TQuery, TResult> decorator = new ErrorHandlingQueryHandler<TQuery, TResult>(queryHandler, decoratorService, logger);
                 return decorator;
             }, (provider, queryHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                ILogger<LoggingQueryHandler<TQuery, TResponse>> logger = provider.GetRequiredService<ILogger<LoggingQueryHandler<TQuery, TResponse>>>();
-                IHandleQuery<TQuery, TResponse> decorator = new LoggingQueryHandler<TQuery, TResponse>(queryHandler, decoratorService, logger);
+                ILogger<LoggingQueryHandler<TQuery, TResult>> logger = provider.GetRequiredService<ILogger<LoggingQueryHandler<TQuery, TResult>>>();
+                IHandleQuery<TQuery, TResult> decorator = new LoggingQueryHandler<TQuery, TResult>(queryHandler, decoratorService, logger);
                 return decorator;
             }
         ];
