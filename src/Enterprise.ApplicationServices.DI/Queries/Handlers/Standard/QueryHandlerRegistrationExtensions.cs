@@ -3,8 +3,8 @@ using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
-using Enterprise.DI.Core.Registration.Extensions;
-using Enterprise.DI.Core.Registration.Model;
+using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Core.Registration.Context.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;

@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.DI.Core.Registration.Model;
+using Enterprise.DI.Core.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Shared;
