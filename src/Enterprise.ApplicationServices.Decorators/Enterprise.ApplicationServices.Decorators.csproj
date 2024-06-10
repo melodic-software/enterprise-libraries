@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.438" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.130" />
-    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.442" />
   </ItemGroup>
 
 </Project>
