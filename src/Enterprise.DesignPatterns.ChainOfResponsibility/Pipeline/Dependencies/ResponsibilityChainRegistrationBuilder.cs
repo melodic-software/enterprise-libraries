@@ -1,4 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
+using Enterprise.DI.Core.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
@@ -26,13 +27,14 @@ public class ResponsibilityChainRegistrationBuilder<TRequest>
     /// <typeparam name="TSuccessor">The type of the handler to be registered.</typeparam>
     /// <param name="serviceLifetime">The service lifetime for the registered handler.</param>
     /// <returns>The builder instance for chaining further configuration.</returns>
-    public ResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
+    public ResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
         where TSuccessor : class, IHandler<TRequest>
     {
         Type serviceType = typeof(IHandler<TRequest>);
         Type implementationType = typeof(TSuccessor);
 
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(serviceType, implementationType, serviceLifetime);
 
         _services.Add(serviceDescriptor);
 
@@ -43,16 +45,19 @@ public class ResponsibilityChainRegistrationBuilder<TRequest>
     /// Registers a handler using a factory method as a successor in the responsibility chain.
     /// </summary>
     /// <typeparam name="TSuccessor">The type of the handler to be registered.</typeparam>
-    /// <param name="factory">The factory method used to create the handler.</param>
+    /// <param name="implementationFactory">The factory method used to create the handler/successor.</param>
     /// <param name="serviceLifetime">The service lifetime for the registered handler.</param>
     /// <returns>The builder instance for chaining further configuration.</returns>
     public ResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(
-        Func<IServiceProvider, TSuccessor> factory, ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
+        ImplementationFactory<TSuccessor> implementationFactory, 
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
         where TSuccessor : class, IHandler<TRequest>
     {
-        Type serviceType = typeof(IHandler<TRequest>);
-
-        var serviceDescriptor = new ServiceDescriptor(serviceType, factory, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(
+            typeof(IHandler<TRequest>),
+            implementationFactory.Invoke,
+            serviceLifetime
+        );
 
         _services.Add(serviceDescriptor);
 
@@ -91,7 +96,7 @@ public class ResponsibilityChainRegistrationBuilder<TRequest, TResponse>
         Type serviceType = typeof(IHandler<TRequest, TResponse>);
         Type implementationType = typeof(TSuccessor);
 
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(serviceType, implementationType, serviceLifetime);
 
         _services.Add(serviceDescriptor);
         
@@ -102,16 +107,19 @@ public class ResponsibilityChainRegistrationBuilder<TRequest, TResponse>
     /// Registers a handler using a factory method as a successor in the responsibility chain.
     /// </summary>
     /// <typeparam name="TSuccessor">The type of the handler to be registered.</typeparam>
-    /// <param name="factory">The factory method used to create the handler.</param>
+    /// <param name="implementationFactory">The factory method used to create the handler/successor.</param>
     /// <param name="serviceLifetime">The service lifetime for the registered handler.</param>
     /// <returns>The builder instance for chaining further configuration.</returns>
     public ResponsibilityChainRegistrationBuilder<TRequest, TResponse> WithSuccessor<TSuccessor>(
-        Func<IServiceProvider, TSuccessor> factory, ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
+        ImplementationFactory<TSuccessor> implementationFactory,
+        ServiceLifetime serviceLifetime = ServiceLifetime.Transient)
         where TSuccessor : class, IHandler<TRequest, TResponse>
     {
-        Type serviceType = typeof(IHandler<TRequest, TResponse>);
-
-        var serviceDescriptor = new ServiceDescriptor(serviceType, factory, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(
+            typeof(IHandler<TRequest, TResponse>),
+            implementationFactory.Invoke,
+            serviceLifetime
+        );
 
         _services.Add(serviceDescriptor);
 

@@ -22,7 +22,7 @@ internal static class RegistrationContextExtensions
 
         // Register the primary.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TQuery, TResult>),
                 options.QueryHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
@@ -31,7 +31,7 @@ internal static class RegistrationContextExtensions
 
         // Register the alternate.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TResult>),
                 options.QueryHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime

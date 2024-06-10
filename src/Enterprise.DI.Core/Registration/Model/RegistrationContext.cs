@@ -31,7 +31,7 @@ public partial class RegistrationContext<TService> where TService : class
     {
         Type serviceType = typeof(TService);
         Type implementationType = typeof(TImplementation);
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(serviceType, implementationType, serviceLifetime);
         _services.Add(serviceDescriptor);
         return this;
     }
@@ -47,7 +47,7 @@ public partial class RegistrationContext<TService> where TService : class
     {
         Type serviceType = typeof(TService);
         Type implementationType = typeof(TImplementation);
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationType, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(serviceType, implementationType, serviceLifetime);
         _services.TryAdd(serviceDescriptor);
         return this;
     }
@@ -60,9 +60,14 @@ public partial class RegistrationContext<TService> where TService : class
     /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
     public RegistrationContext<TService> Add(ImplementationFactory<TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
-        Type serviceType = typeof(TService);
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(
+            typeof(TService),
+            implementationFactory.Invoke,
+            serviceLifetime
+        );
+
         _services.Add(serviceDescriptor);
+        
         return this;
     }
 
@@ -74,9 +79,14 @@ public partial class RegistrationContext<TService> where TService : class
     /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
     public RegistrationContext<TService> TryAdd(ImplementationFactory<TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
-        Type serviceType = typeof(TService);
-        var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(
+            typeof(TService),
+            implementationFactory.Invoke,
+            serviceLifetime
+        );
+
         _services.TryAdd(serviceDescriptor);
+        
         return this;
     }
 

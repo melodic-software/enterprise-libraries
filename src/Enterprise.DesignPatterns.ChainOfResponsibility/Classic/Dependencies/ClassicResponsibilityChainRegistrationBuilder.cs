@@ -1,4 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Handlers;
+using Enterprise.DI.Core.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Dependencies;
@@ -19,10 +20,11 @@ public class ClassicResponsibilityChainRegistrationBuilder<TRequest> where TRequ
         return this;
     }
 
-    public ClassicResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(Func<IServiceProvider, TSuccessor> factory)
+    public ClassicResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(
+        ImplementationFactory<TSuccessor> implementationFactory)
         where TSuccessor : class, IClassicHandler<TRequest>
     {
-        _services.AddTransient<IClassicHandler<TRequest>>(factory);
+        _services.AddTransient<IClassicHandler<TRequest>>(implementationFactory.Invoke);
         return this;
     }
 }
@@ -43,10 +45,11 @@ public class ClassicResponsibilityChainRegistrationBuilder<TRequest, TResponse> 
         return this;
     }
 
-    public ClassicResponsibilityChainRegistrationBuilder<TRequest, TResponse> WithSuccessor<TChainLink>(Func<IServiceProvider, TChainLink> factory)
+    public ClassicResponsibilityChainRegistrationBuilder<TRequest, TResponse> WithSuccessor<TChainLink>(
+        ImplementationFactory<TChainLink> implementationFactory)
         where TChainLink : class, IClassicHandler<TRequest, TResponse>
     {
-        _services.AddTransient<IClassicHandler<TRequest, TResponse>>(factory);
+        _services.AddTransient<IClassicHandler<TRequest, TResponse>>(implementationFactory.Invoke);
         return this;
     }
 }

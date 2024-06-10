@@ -22,7 +22,7 @@ public static class RegistrationExtensions
         Type interfaceType = typeof(IResponsibilityChain<TRequest>);
         Type concreteType = typeof(ResponsibilityChain<TRequest>);
 
-        var serviceDescriptor = new ServiceDescriptor(interfaceType, concreteType, lifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(interfaceType, concreteType, lifetime);
 
         services.Add(serviceDescriptor);
 
@@ -44,7 +44,7 @@ public static class RegistrationExtensions
         Type interfaceType = typeof(IResponsibilityChain<TRequest, TResponse>);
         Type concreteType = typeof(ResponsibilityChain<TRequest, TResponse>);
 
-        var serviceDescriptor = new ServiceDescriptor(interfaceType, concreteType, lifetime);
+        var serviceDescriptor = ServiceDescriptor.Describe(interfaceType, concreteType, lifetime);
 
         services.Add(serviceDescriptor);
 

@@ -21,9 +21,9 @@ internal static class RegistrationContextExtensions
 
         // Add primary registration.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand>),
-                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.CommandHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )
         );

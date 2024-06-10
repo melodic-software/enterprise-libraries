@@ -49,18 +49,18 @@ internal static class RegistrationContextExtensions
     {
         // Register the primary.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TQuery, TResult>),
-                factory: ImplementationFactory<TQuery, TResult>,
+                ImplementationFactory<TQuery, TResult>,
                 options.ServiceLifetime
             )
         );
 
         // Register the alternative.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TResult>),
-                factory: ImplementationFactory<TQuery, TResult>,
+                ImplementationFactory<TQuery, TResult>,
                 options.ServiceLifetime
             )
         );

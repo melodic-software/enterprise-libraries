@@ -48,18 +48,18 @@ public static class RegistrationContextExtensions
     {
         // Register the primary abstraction.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand, TResult>),
-                factory: ImplementationFactory<TCommand, TResult>,
+                ImplementationFactory<TCommand, TResult>,
                 options.ServiceLifetime
             )
         );
 
         // Register the base abstraction (alternate).
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand>),
-                factory: ImplementationFactory<TCommand, TResult>,
+                ImplementationFactory<TCommand, TResult>,
                 options.ServiceLifetime
             )
         );

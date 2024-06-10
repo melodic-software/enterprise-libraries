@@ -1,4 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Handlers;
+using Enterprise.DI.Core.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Dependencies;
@@ -19,10 +20,11 @@ public class ResponsibilityChainRegistrationBuilder<TRequest> where TRequest : c
         return this;
     }
 
-    public ResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(Func<IServiceProvider, TSuccessor> factory)
+    public ResponsibilityChainRegistrationBuilder<TRequest> WithSuccessor<TSuccessor>(
+        ImplementationFactory<TSuccessor> implementationFactory)
         where TSuccessor : class, IHandler<TRequest>
     {
-        _services.AddTransient<IHandler<TRequest>>(factory);
+        _services.AddTransient<IHandler<TRequest>>(implementationFactory.Invoke);
         return this;
     }
 }
@@ -43,10 +45,11 @@ public class ResponsibilityChainRegistrationBuilder<TRequest, TResponse> where T
         return this;
     }
 
-    public ResponsibilityChainRegistrationBuilder<TRequest, TResponse> WithSuccessor<TChainLink>(Func<IServiceProvider, TChainLink> factory)
+    public ResponsibilityChainRegistrationBuilder<TRequest, TResponse> WithSuccessor<TChainLink>(
+        ImplementationFactory<TChainLink> implementationFactory)
         where TChainLink : class, IHandler<TRequest, TResponse>
     {
-        _services.AddTransient<IHandler<TRequest, TResponse>>(factory);
+        _services.AddTransient<IHandler<TRequest, TResponse>>(implementationFactory.Invoke);
         return this;
     }
 }

@@ -22,17 +22,17 @@ public static class RegistrationContextExtensions
 
         // Register the primary.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand, TResult>),
-                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.CommandHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime)
         );
 
         // We also need to register this as a standard command handler.
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand>),
-                factory: options.CommandHandlerImplementationFactory.Invoke,
+                options.CommandHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )
         );

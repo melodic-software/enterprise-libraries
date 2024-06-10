@@ -49,9 +49,9 @@ public static class RegistrationContextExtensions
         RegistrationOptions<TCommand> options) where TCommand : class, ICommand
     {
         registrationContext.Add(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IHandleCommand<TCommand>),
-                factory: ImplementationFactory<TCommand>,
+                ImplementationFactory<TCommand>,
                 options.ServiceLifetime
             )
         );

@@ -33,21 +33,22 @@ internal sealed class ServiceRegistrar : IRegisterServices
         // TODO: Consider adding logging support, so it is clear what has been registered and when.
 
         services.Replace(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(ICurrentDateTimeProvider),
                 typeof(CurrentDateTimeProvider),
-                ServiceLifetime.Singleton)
+                ServiceLifetime.Singleton
+            )
         );
 
         services.Replace(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(ICurrentDateTimeOffsetProvider),
                 typeof(CurrentDateTimeOffsetProvider),
                 ServiceLifetime.Singleton)
         );
 
         services.Replace(
-            new ServiceDescriptor(
+            ServiceDescriptor.Describe(
                 typeof(IEnsureUtcService),
                 typeof(EnsureUtcService),
                 ServiceLifetime.Singleton)
