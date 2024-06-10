@@ -25,28 +25,28 @@ public partial class Result<T>
         return IsSuccess ? onSuccess(Value) : Errors.ToResult<TOut>();
     }
 
-    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<Result<TOut>>> onSuccess)
+    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<Result<TOut>>> onSuccessAsync)
     {
         if (IsSuccess)
         {
-            return await onSuccess(Value).ConfigureAwait(false);
+            return await onSuccessAsync(Value).ConfigureAwait(false);
         }
 
         return Errors.ToResult<TOut>();
     }
 
-    public async Task<Result<T>> ThenAsync(Func<T, Task> onSuccess)
+    public async Task<Result<T>> ThenAsync(Func<T, Task> onSuccessAsync)
     {
         if (IsSuccess)
         {
-            await onSuccess(Value).ConfigureAwait(false);
+            await onSuccessAsync(Value).ConfigureAwait(false);
         }
 
         return Errors.ToResult<T>();
     }
 
-    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<TOut>> onSuccess)
+    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<TOut>> onSuccessAsync)
     {
-        return IsSuccess ? await onSuccess(Value).ConfigureAwait(false) : Errors.ToResult<TOut>();
+        return IsSuccess ? await onSuccessAsync(Value).ConfigureAwait(false) : Errors.ToResult<TOut>();
     }
 }

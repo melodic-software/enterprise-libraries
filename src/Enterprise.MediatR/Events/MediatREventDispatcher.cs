@@ -31,7 +31,7 @@ public sealed class MediatREventDispatcher : EventDispatcher
         // We need to check the implemented interfaces on each handler since we could be utilizing base event handlers AND MediatR notification (event) handlers.
         // We have to make sure we don't call event handlers more than once when we use the base event raising mechanism AND the MediatR publisher.
 
-        List<IHandleEvent> filteredHandlers = eventHandlers
+        var filteredHandlers = eventHandlers
             .Where(IsNotMediatRHandler())
             .ToList();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Enterprise.DI.Core.Registration.Delegates;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.DI.Core.Registration;
 
@@ -17,7 +18,7 @@ public static class RegistrationContextExtensions
     /// Registers a singleton service with a factory for creating the service.
     /// </summary>
     public static RegistrationContext<TService> AddSingleton<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.Add(implementationFactory, ServiceLifetime.Singleton);
 
@@ -34,7 +35,7 @@ public static class RegistrationContextExtensions
     /// Registers a singleton service with a factory for creating the service if it hasn't already been registered.
     /// </summary>
     public static RegistrationContext<TService> TryAddSingleton<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.TryAdd(implementationFactory, ServiceLifetime.Singleton);
 
@@ -51,7 +52,7 @@ public static class RegistrationContextExtensions
     /// Registers a scoped service with a factory for creating the service.
     /// </summary>
     public static RegistrationContext<TService> AddScoped<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.Add(implementationFactory, ServiceLifetime.Scoped);
 
@@ -68,7 +69,7 @@ public static class RegistrationContextExtensions
     /// Registers a scoped service with a factory for creating the service if it hasn't already been registered.
     /// </summary>
     public static RegistrationContext<TService> TryAddScoped<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.TryAdd(implementationFactory, ServiceLifetime.Scoped);
 
@@ -85,7 +86,7 @@ public static class RegistrationContextExtensions
     /// Registers a transient service with a factory for creating the service.
     /// </summary>
     public static RegistrationContext<TService> AddTransient<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.Add(implementationFactory, ServiceLifetime.Transient);
 
@@ -102,7 +103,7 @@ public static class RegistrationContextExtensions
     /// Registers a transient service with a factory for creating the service if it hasn't already been registered.
     /// </summary>
     public static RegistrationContext<TService> TryAddTransient<TService>(
-        this RegistrationContext<TService> registrationContext, Func<IServiceProvider, TService> implementationFactory)
+        this RegistrationContext<TService> registrationContext, ImplementationFactory<TService> implementationFactory)
         where TService : class =>
         registrationContext.TryAdd(implementationFactory, ServiceLifetime.Transient);
 }

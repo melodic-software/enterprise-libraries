@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Model;
+﻿using Enterprise.Queries.Paging.Delegates;
+using Enterprise.Queries.Paging.Model;
 
 namespace Enterprise.Queries.Paging.Extensions;
 
@@ -17,8 +18,8 @@ public static class PagingExtensions
         return pagedQuery;
     }
 
-    public static async Task<PagedList<TResult>> ToPagedListAsync<TSource, TResult>(this IQueryable<TSource> query, PagingOptions pagingOptions, 
-        Func<IQueryable<TSource>, Task<List<TSource>>> toListAsync, Func<TSource, TResult> map)
+    public static async Task<PagedList<TResult>> ToPagedListAsync<TSource, TResult>(this IQueryable<TSource> query,
+        PagingOptions pagingOptions, ToListAsync<TSource> toListAsync, Map<TSource, TResult> map)
     {
         return await PagedList<TSource>.CreateAsync(query, pagingOptions, toListAsync, map);
     }

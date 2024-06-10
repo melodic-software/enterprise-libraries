@@ -42,7 +42,7 @@ public class EntityDeletionInterceptor : SaveChangesInterceptor
 
         ChangeTracker changeTracker = context.ChangeTracker;
 
-        List<EntityEntry> entriesToDelete = changeTracker.Entries()
+        var entriesToDelete = changeTracker.Entries()
             .Where(e => e.State == EntityState.Deleted)
             .ToList();
 

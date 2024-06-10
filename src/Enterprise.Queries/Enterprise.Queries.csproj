@@ -18,4 +18,8 @@
     <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.171" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Paging\Delegates\" />
+  </ItemGroup>
+
 </Project>

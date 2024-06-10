@@ -15,14 +15,14 @@ public static partial class ResultExtensions
         return (await result.ConfigureAwait(false)).Else(onError);
     }
 
-    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<TValue>> onError)
+    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<TValue>> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).ElseAsync(onError).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ElseAsync(onErrorAsync).ConfigureAwait(false);
     }
 
-    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Task<TValue> onError)
+    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Task<TValue> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).ElseAsync(onError).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ElseAsync(onErrorAsync).ConfigureAwait(false);
     }
 
     public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, IError> onError)
@@ -40,18 +40,18 @@ public static partial class ResultExtensions
         return (await result.ConfigureAwait(false)).Else(error);
     }
 
-    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<IError>> onError)
+    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<IError>> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).ElseAsync(onError).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ElseAsync(onErrorAsync).ConfigureAwait(false);
     }
 
-    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<IEnumerable<IError>>> onError)
+    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Func<IEnumerable<IError>, Task<IEnumerable<IError>>> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).ElseAsync(onError).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ElseAsync(onErrorAsync).ConfigureAwait(false);
     }
 
-    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Task<IError> onError)
+    public static async Task<Result<TValue>> ElseAsync<TValue>(this Task<Result<TValue>> result, Task<IError> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).ElseAsync(onError).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ElseAsync(onErrorAsync).ConfigureAwait(false);
     }
 }

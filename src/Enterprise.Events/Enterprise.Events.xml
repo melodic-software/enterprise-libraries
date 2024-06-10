@@ -137,6 +137,9 @@
         <member name="M:Enterprise.Events.Handlers.Resolution.DynamicDispatchingEventHandlerResolver.ResolveAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
+        <member name="M:Enterprise.Events.Handlers.Resolution.ReflectionEventHandlerResolver.#ctor(System.IServiceProvider)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.Events.Handlers.Resolution.ReflectionEventHandlerResolver.ResolveAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>

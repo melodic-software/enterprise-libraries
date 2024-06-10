@@ -19,18 +19,18 @@ public static partial class ResultExtensions
         return (await result.ConfigureAwait(false)).Then(onSuccess);
     }
 
-    public static async Task<Result<TOut>> ThenAsync<TValue, TOut>(this Task<Result<TValue>> result, Func<TValue, Task<Result<TOut>>> onSuccess)
+    public static async Task<Result<TOut>> ThenAsync<TValue, TOut>(this Task<Result<TValue>> result, Func<TValue, Task<Result<TOut>>> onSuccessAsync)
     {
-        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccess).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccessAsync).ConfigureAwait(false);
     }
 
-    public static async Task<Result<TOut>> ThenAsync<TValue, TOut>(this Task<Result<TValue>> result, Func<TValue, Task<TOut>> onSuccess)
+    public static async Task<Result<TOut>> ThenAsync<TValue, TOut>(this Task<Result<TValue>> result, Func<TValue, Task<TOut>> onSuccessAsync)
     {
-        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccess).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccessAsync).ConfigureAwait(false);
     }
 
-    public static async Task<Result<TValue>> ThenAsync<TValue>(this Task<Result<TValue>> result, Func<TValue, Task> onSuccess)
+    public static async Task<Result<TValue>> ThenAsync<TValue>(this Task<Result<TValue>> result, Func<TValue, Task> onSuccessAsync)
     {
-        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccess).ConfigureAwait(false);
+        return await (await result.ConfigureAwait(false)).ThenAsync(onSuccessAsync).ConfigureAwait(false);
     }
 }

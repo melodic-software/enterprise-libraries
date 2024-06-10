@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Enterprise.DI.Core.Registration.Delegates;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.DI.Core.Registration;
@@ -57,7 +58,7 @@ public class RegistrationContext<TService> where TService : class
     /// <param name="implementationFactory">The factory method used to create the service instance.</param>
     /// <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
     /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
-    public RegistrationContext<TService> Add(Func<IServiceProvider, TService> implementationFactory, ServiceLifetime serviceLifetime)
+    public RegistrationContext<TService> Add(ImplementationFactory<TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
         Type serviceType = typeof(TService);
         var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
@@ -71,7 +72,7 @@ public class RegistrationContext<TService> where TService : class
     /// <param name="implementationFactory">The factory method used to create the service instance.</param>
     /// <param name="serviceLifetime">The lifetime of the service being registered (Singleton, Scoped, or Transient).</param>
     /// <returns>The updated RegistrationContext instance for fluent chaining.</returns>
-    public RegistrationContext<TService> TryAdd(Func<IServiceProvider, TService> implementationFactory, ServiceLifetime serviceLifetime)
+    public RegistrationContext<TService> TryAdd(ImplementationFactory<TService> implementationFactory, ServiceLifetime serviceLifetime)
     {
         Type serviceType = typeof(TService);
         var serviceDescriptor = new ServiceDescriptor(serviceType, implementationFactory, serviceLifetime);
@@ -104,35 +105,40 @@ public class RegistrationContext<TService> where TService : class
     /// <summary>
     /// Registers decorators for the service, each taking the service instance and IServiceProvider as parameters.
     /// </summary>
-    public RegistrationContext<TService> WithDecorators(params Func<IServiceProvider, TService, TService>[] decoratorFactories)
+    public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
-        return ApplyDecorators(decoratorFactories.Select(df =>
-            new Func<IServiceProvider, Func<TService, TService>>(provider =>
-                service => df(provider, service)
-            )
-        ).ToArray());
+        ApplyDecoratorFactory<TService>[] applyDecoratorFactories = decoratorFactories
+            .Select(factory => new ApplyDecoratorFactory<TService>(provider => service => factory(provider, service)))
+            .ToArray();
+
+        return ApplyDecorators(applyDecoratorFactories);
     }
 
     /// <summary>
     /// Registers decorators for the service, each represented as a factory function.
     /// </summary>
-    public RegistrationContext<TService> WithDecorators(params Func<IServiceProvider, Func<TService, TService>>[] decoratorFactories)
+    public RegistrationContext<TService> WithDecorators(params ApplyDecoratorFactory<TService>[] applyDecoratorFactories)
     {
-        return ApplyDecorators(decoratorFactories);
+        return ApplyDecorators(applyDecoratorFactories);
     }
 
     /// <summary>
     /// Registers a single decorator for the service.
     /// </summary>
-    public RegistrationContext<TService> WithDecorator<TDecorator>(Func<IServiceProvider, TService, TDecorator> decoratorFactory)
+    public RegistrationContext<TService> WithDecorator<TDecorator>(
+        DecoratorFactory<TService, TDecorator> decoratorFactory)
         where TDecorator : class, TService
     {
         Type serviceType = typeof(TService);
-        ServiceDescriptor? originalServiceDescriptor = _services.FirstOrDefault(d => d.ServiceType == serviceType);
+
+        ServiceDescriptor? originalServiceDescriptor = _services
+            .FirstOrDefault(d => d.ServiceType == serviceType);
 
         if (originalServiceDescriptor == null)
         {
-            throw new InvalidOperationException($"The service of type {serviceType.Name} has not been registered and cannot be decorated.");
+            throw new InvalidOperationException(
+                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
+            );
         }
 
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
@@ -153,11 +159,15 @@ public class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> RegisterAlternate<TAlternate>() where TAlternate : TService
     {
         Type serviceType = typeof(TService);
-        ServiceDescriptor? originalServiceDescriptor = _services.FirstOrDefault(d => d.ServiceType == serviceType);
+
+        ServiceDescriptor? originalServiceDescriptor = _services
+            .FirstOrDefault(d => d.ServiceType == serviceType);
 
         if (originalServiceDescriptor == null)
         {
-            throw new InvalidOperationException($"The service of type {serviceType.Name} has not been registered and cannot be decorated.");
+            throw new InvalidOperationException(
+                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
+            );
         }
 
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
@@ -176,52 +186,62 @@ public class RegistrationContext<TService> where TService : class
         return this;
     }
 
-    private RegistrationContext<TService> ApplyDecorators(Func<IServiceProvider, Func<TService, TService>>[] decoratorFactories)
+    private RegistrationContext<TService> ApplyDecorators(ApplyDecoratorFactory<TService>[] applyDecoratorFactories)
     {
         ServiceDescriptor serviceDescriptor = GetServiceDescriptor();
-        Func<IServiceProvider, TService> decoratedFactory = CreateDecoratedFactory(serviceDescriptor, decoratorFactories);
-        ReplaceServiceDescriptor(serviceDescriptor, decoratedFactory);
+
+        ImplementationFactory<TService> implementationFactory = 
+            CreateDecoratedImplementationFactory(serviceDescriptor, applyDecoratorFactories);
+
+        ReplaceServiceDescriptor(serviceDescriptor, implementationFactory);
 
         return this;
     }
 
     private ServiceDescriptor GetServiceDescriptor()
     {
-        ServiceDescriptor? serviceDescriptor = _services.FirstOrDefault(d => d.ServiceType == typeof(TService));
+        ServiceDescriptor? serviceDescriptor = _services
+            .FirstOrDefault(d => d.ServiceType == typeof(TService));
 
         if (serviceDescriptor == null)
         {
-            throw new InvalidOperationException($"The service of type {typeof(TService).Name} has not been registered.");
+            throw new InvalidOperationException(
+                $"The service of type {typeof(TService).Name} has not been registered."
+            );
         }
 
         return serviceDescriptor;
     }
 
-    private static Func<IServiceProvider, TService> CreateDecoratedFactory(
+    private static ImplementationFactory<TService> CreateDecoratedImplementationFactory(
         ServiceDescriptor serviceDescriptor,
-        Func<IServiceProvider, Func<TService, TService>>[] decoratorFactories
+        ApplyDecoratorFactory<TService>[] applyDecoratorFactories
     )
     {
         return provider =>
         {
             TService service = GetOriginalService(serviceDescriptor, provider);
 
-            foreach (Func<IServiceProvider, Func<TService, TService>> decoratorFactory in decoratorFactories)
+            foreach (ApplyDecoratorFactory<TService> applyDecoratorFactory in applyDecoratorFactories)
             {
-                service = decoratorFactory(provider)(service);
+                ApplyDecorator<TService> applyDecorator = applyDecoratorFactory(provider);
+                service = applyDecorator(service);
             }
 
             return service;
         };
     }
 
-    private void ReplaceServiceDescriptor(ServiceDescriptor originalDescriptor, Func<IServiceProvider, TService> decoratedFactory)
+    private void ReplaceServiceDescriptor(ServiceDescriptor originalDescriptor, 
+        ImplementationFactory<TService> implementationFactory)
     {
-        _services.Replace(ServiceDescriptor.Describe(
+        var serviceDescriptor = ServiceDescriptor.Describe(
             typeof(TService),
-            decoratedFactory,
-            originalDescriptor.Lifetime)
+            implementationFactory.Invoke,
+            originalDescriptor.Lifetime
         );
+
+        _services.Replace(serviceDescriptor);
     }
 
     private static TService GetOriginalService(ServiceDescriptor serviceDescriptor, IServiceProvider provider)
@@ -241,6 +261,8 @@ public class RegistrationContext<TService> where TService : class
             return (TService)ActivatorUtilities.CreateInstance(provider, serviceDescriptor.ImplementationType);
         }
 
-        throw new InvalidOperationException("The registration method for the original service is not supported.");
+        throw new InvalidOperationException(
+            "The registration method for the original service is not supported."
+        );
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Enterprise.DI.Core.Lifetime.Attributes;
 using Enterprise.DI.Core.Lifetime.Attributes.Abstract;
+using Enterprise.Scrutor.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
@@ -58,7 +59,7 @@ public static class ScrutorRegistrar
         ILifetimeSelector lifetimeSelector = implementationTypeSelector
             .AddClasses(classes => classes.WithAttribute<TAttribute>())
             .UsingRegistrationStrategy(registrationStrategy)
-            .As(SelectWith<TAttribute>());
+            .As(SelectWith<TAttribute>().Invoke);
 
         Type attributeType = typeof(TAttribute);
 
@@ -76,7 +77,7 @@ public static class ScrutorRegistrar
         }
     }
 
-    private static Func<Type, IEnumerable<Type>> SelectWith<TAttribute>() where TAttribute : ServiceRegistrationAttribute
+    private static GetServiceTypes SelectWith<TAttribute>() where TAttribute : ServiceRegistrationAttribute
     {
         return serviceType =>
         {
@@ -84,7 +85,7 @@ public static class ScrutorRegistrar
 
             if (attribute == null)
             {
-                return Enumerable.Empty<Type>();
+                return [];
             }
 
             var serviceTypes = new List<Type>();

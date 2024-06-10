@@ -30,7 +30,8 @@ public class DuplicatePreventingEventRaiser : DecoratorBase<IRaiseEvents>, IRais
         await RaiseAsync(@event, e => Decorated.RaiseAsync(@event));
     }
 
-    private async Task RaiseAsync<T>(IReadOnlyCollection<T> events, Func<IEnumerable<T>, Task> raiseEvents) where T : IEvent
+    private async Task RaiseAsync<T>(IReadOnlyCollection<T> events, Func<IEnumerable<T>, Task> raiseEventsAsync)
+        where T : IEvent
     {
         var dedupedEvents = events
             .GroupBy(x => x.Id).Select(x => x.First())
@@ -59,12 +60,12 @@ public class DuplicatePreventingEventRaiser : DecoratorBase<IRaiseEvents>, IRais
 
         alreadyRaised.ForEach(e => LogAlreadyRaised(e));
 
-        await raiseEvents.Invoke(eventsToRaise);
+        await raiseEventsAsync(eventsToRaise);
 
         eventsToRaise.ForEach(e => _raisedEventRecorder.Record(e));
     }
 
-    private async Task RaiseAsync<T>(T @event, Func<T, Task> raiseEvent) where T : IEvent
+    private async Task RaiseAsync<T>(T @event, Func<T, Task> raiseEventAsync) where T : IEvent
     {
         if (_raisedEventRecorder.EventHasBeenRaised(@event))
         {
@@ -72,7 +73,7 @@ public class DuplicatePreventingEventRaiser : DecoratorBase<IRaiseEvents>, IRais
             return;
         }
 
-        await raiseEvent.Invoke(@event);
+        await raiseEventAsync(@event);
 
         _raisedEventRecorder.Record(@event);
     }

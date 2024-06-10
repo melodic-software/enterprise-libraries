@@ -15,7 +15,7 @@ public partial class Result<T>
         onError(Errors);
     }
 
-    public async Task SwitchAsync(Func<T, Task> onSuccess, Func<IEnumerable<IError>, Task> onError)
+    public async Task SwitchAsync(Func<T, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
     {
         if (IsSuccess)
         {
@@ -23,7 +23,7 @@ public partial class Result<T>
             return;
         }
 
-        await onError(Errors).ConfigureAwait(false);
+        await onErrorAsync(Errors).ConfigureAwait(false);
     }
 
     public void SwitchFirst(Action<T> onSuccess, Action<IError> onFirstError)
@@ -37,7 +37,7 @@ public partial class Result<T>
         onFirstError(FirstError);
     }
 
-    public async Task SwitchFirstAsync(Func<T, Task> onSuccess, Func<IError, Task> onFirstError)
+    public async Task SwitchFirstAsync(Func<T, Task> onSuccess, Func<IError, Task> onFirstErrorAsync)
     {
         if (IsSuccess)
         {
@@ -45,6 +45,6 @@ public partial class Result<T>
             return;
         }
 
-        await onFirstError(FirstError).ConfigureAwait(false);
+        await onFirstErrorAsync(FirstError).ConfigureAwait(false);
     }
 }

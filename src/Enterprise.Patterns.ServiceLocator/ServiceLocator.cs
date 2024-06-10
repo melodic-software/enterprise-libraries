@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Enterprise.Patterns.ServiceLocator.Delegates;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Patterns.ServiceLocator;
 
@@ -10,9 +11,9 @@ namespace Enterprise.Patterns.ServiceLocator;
 /// </summary>
 public class ServiceLocator
 {
-    private static readonly Lazy<ServiceLocator> _instance = new(() => new ServiceLocator());
+    private static readonly Lazy<ServiceLocator> Lazy = new(() => new ServiceLocator());
 
-    private readonly Dictionary<Type, Func<object?>> _services = new();
+    private readonly Dictionary<Type, Resolve<object?>> _services = new();
     private readonly object _lock = new();
 
     private IServiceProvider? _serviceProvider;
@@ -20,7 +21,7 @@ public class ServiceLocator
     /// <summary>
     /// Provides access to the singleton instance of the ServiceLocator.
     /// </summary>
-    public static ServiceLocator Instance => _instance.Value;
+    public static ServiceLocator Instance => Lazy.Value;
 
     /// <summary>
     /// Private constructor to prevent instantiation outside the class. Initializes internal structures.
@@ -34,12 +35,12 @@ public class ServiceLocator
     /// Registers a service factory for a given type. The service will be lazily created by the provided function.
     /// </summary>
     /// <typeparam name="T">The type of the service to register.</typeparam>
-    /// <param name="resolver">A function that returns an instance of the service when called.</param>
-    public void Register<T>(Func<T?> resolver)
+    /// <param name="resolve">A delegate that returns an instance of the service when called.</param>
+    public void Register<T>(Resolve<T> resolve)
     {
         lock (_lock)
         {
-            _services[typeof(T)] = () => resolver();
+            _services[typeof(T)] = () => resolve();
         }
     }
 
@@ -73,7 +74,7 @@ public class ServiceLocator
                 return _serviceProvider.GetService<T>();
             }
 
-            if (_services.TryGetValue(typeof(T), out Func<object?>? resolver))
+            if (_services.TryGetValue(typeof(T), out Resolve<object?>? resolver))
             {
                 object? service = resolver();
 

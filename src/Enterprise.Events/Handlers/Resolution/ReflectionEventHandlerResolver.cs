@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Delegates;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
 
@@ -8,6 +9,7 @@ namespace Enterprise.Events.Handlers.Resolution;
 
 public class ReflectionEventHandlerResolver : EventHandlerResolverBase
 {
+    /// <inheritdoc />
     public ReflectionEventHandlerResolver(IServiceProvider serviceProvider) : base(serviceProvider)
     {
 
@@ -17,12 +19,12 @@ public class ReflectionEventHandlerResolver : EventHandlerResolverBase
     public override Task<IEnumerable<IHandleEvent>> ResolveAsync(IEvent @event)
     {
         Type eventType = @event.GetType();
-        Func<IEvent, Task<IEnumerable<IHandleEvent>>> resolver = CreateResolver(eventType);
+        ResolveEventHandlersAsync resolver = CreateResolver(eventType);
         Task<IEnumerable<IHandleEvent>> task = resolver(@event);
         return task;
     }
 
-    private Func<IEvent, Task<IEnumerable<IHandleEvent>>> CreateResolver(Type eventType)
+    private ResolveEventHandlersAsync CreateResolver(Type eventType)
     {
         Type baseType = typeof(EventHandlerResolverBase);
 

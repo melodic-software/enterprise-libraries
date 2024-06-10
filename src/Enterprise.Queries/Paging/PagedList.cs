@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Extensions;
+﻿using Enterprise.Queries.Paging.Delegates;
+using Enterprise.Queries.Paging.Extensions;
 
 namespace Enterprise.Queries.Paging;
 
@@ -25,8 +26,8 @@ public class PagedList<T> : List<T>
         return emptyList;
     }
 
-    public static async Task<PagedList<TSource>> CreateAsync<TSource>(IQueryable<TSource> query, PagingOptions pagingOptions, 
-        Func<IQueryable<TSource>, Task<List<TSource>>> toListAsync)
+    public static async Task<PagedList<TSource>> CreateAsync<TSource>(IQueryable<TSource> query,
+        PagingOptions pagingOptions, ToListAsync<TSource> toListAsync)
     {
         int totalCount = query.Count();
 
@@ -40,17 +41,16 @@ public class PagedList<T> : List<T>
     }
 
     public static async Task<PagedList<TResult>> CreateAsync<TSource, TResult>(IQueryable<TSource> query,
-        PagingOptions pagingOptions, Func<IQueryable<TSource>, Task<List<TSource>>> toListAsync,
-        Func<TSource, TResult> map)
+        PagingOptions pagingOptions, ToListAsync<TSource> toListAsync, Map<TSource, TResult> map)
     {
         PagedList<TSource> pagedList = await CreateAsync(query, pagingOptions, toListAsync);
         PagedList<TResult> result = Map(pagedList, map);
         return result;
     }
 
-    public static PagedList<TResult> Map<TSource, TResult>(PagedList<TSource> pagedList, Func<TSource, TResult> map)
+    public static PagedList<TResult> Map<TSource, TResult>(PagedList<TSource> pagedList, Map<TSource, TResult> map)
     {
-        List<TResult> mappedItems = pagedList.Select(map).ToList();
+        var mappedItems = pagedList.Select(map.Invoke).ToList();
         PagedList<TResult> result = new(mappedItems, pagedList.PaginationMetadata);
         return result;
     }

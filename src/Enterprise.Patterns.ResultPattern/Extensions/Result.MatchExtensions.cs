@@ -12,9 +12,9 @@ public static partial class ResultExtensions
     }
 
     public static async Task<TOut> MatchAsync<TValue, TOut>(this Task<Result<TValue>> result,
-        Func<TValue, Task<TOut>> onSuccess, Func<IEnumerable<IError>, Task<TOut>> onError)
+        Func<TValue, Task<TOut>> onSuccess, Func<IEnumerable<IError>, Task<TOut>> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).MatchAsync(onSuccess, onError);
+        return await (await result.ConfigureAwait(false)).MatchAsync(onSuccess, onErrorAsync);
     }
 
     public static async Task<TOut> MatchFirstAsync<TValue, TOut>(this Task<Result<TValue>> result,
@@ -24,8 +24,8 @@ public static partial class ResultExtensions
     }
 
     public static async Task<TOut> MatchFirstAsync<TValue, TOut>(this Task<Result<TValue>> result,
-        Func<TValue, Task<TOut>> onSuccess, Func<IError, Task<TOut>> onError)
+        Func<TValue, Task<TOut>> onSuccess, Func<IError, Task<TOut>> onErrorAsync)
     {
-        return await (await result.ConfigureAwait(false)).MatchFirstAsync(onSuccess, onError);
+        return await (await result.ConfigureAwait(false)).MatchFirstAsync(onSuccess, onErrorAsync);
     }
 }

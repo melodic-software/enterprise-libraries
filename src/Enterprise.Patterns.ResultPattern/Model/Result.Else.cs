@@ -30,33 +30,33 @@ public partial class Result<T>
         return IsSuccess ? Value : onError;
     }
 
-    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<T>> onError)
+    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<T>> onErrorAsync)
     {
         if (IsSuccess)
         {
             return Value;
         }
 
-        return await onError(Errors).ConfigureAwait(false);
+        return await onErrorAsync(Errors).ConfigureAwait(false);
     }
 
-    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<IError>> onError)
+    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<IError>> onErrorAsync)
     {
-        return IsSuccess ? Value : (await onError(Errors).ConfigureAwait(false)).ToResult<T>();
+        return IsSuccess ? Value : (await onErrorAsync(Errors).ConfigureAwait(false)).ToResult<T>();
     }
 
-    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<IEnumerable<IError>>> onError)
+    public async Task<Result<T>> ElseAsync(Func<IEnumerable<IError>, Task<IEnumerable<IError>>> onErrorAsync)
     {
-        return IsSuccess ? Value : (await onError(Errors).ConfigureAwait(false)).ToResult<T>();
+        return IsSuccess ? Value : (await onErrorAsync(Errors).ConfigureAwait(false)).ToResult<T>();
     }
 
-    public async Task<Result<T>> ElseAsync(Task<IError> error)
+    public async Task<Result<T>> ElseAsync(Task<IError> onErrorAsync)
     {
-        return IsSuccess ? Value : (await error.ConfigureAwait(false)).ToResult<T>();
+        return IsSuccess ? Value : (await onErrorAsync.ConfigureAwait(false)).ToResult<T>();
     }
 
-    public async Task<Result<T>> ElseAsync(Task<T> onError)
+    public async Task<Result<T>> ElseAsync(Task<T> onErrorAsync)
     {
-        return IsSuccess ? Value : await onError.ConfigureAwait(false);
+        return IsSuccess ? Value : await onErrorAsync.ConfigureAwait(false);
     }
 }

@@ -2,6 +2,7 @@
 using Enterprise.DI.Core.Registration;
 using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Handlers.Decoration;
+using Enterprise.Events.Handlers.Delegates;
 using Enterprise.Events.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,11 +12,11 @@ namespace Enterprise.Events.Handlers;
 public static class EventHandlerRegistrar
 {
     public static void RegisterEventHandler<T>(this IServiceCollection services,
-        Func<IServiceProvider, IHandleEvent<T>> factory,
+        EventHandlerImplementationFactory<T> factory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where T : IEvent
     {
         services.BeginRegistration<IHandleEvent<T>>()
-            .Add(factory, serviceLifetime)
+            .Add(factory.Invoke, serviceLifetime)
             .WithDecorators((provider, eventHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
