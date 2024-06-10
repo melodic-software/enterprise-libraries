@@ -52,6 +52,6 @@ internal static class ProviderConfigService
         }
 
         // This is application specific provider customization.
-        providerOptions.ConfigureProviders.Invoke(builder);
+        providerOptions.ConfigureProviders(builder);
     }
 }

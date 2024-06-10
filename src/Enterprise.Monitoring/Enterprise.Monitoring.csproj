@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Health\Options\Delegates\" />
     <Folder Include="Liveness\" />
     <Folder Include="Readiness\" />
   </ItemGroup>

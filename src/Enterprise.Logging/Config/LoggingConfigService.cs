@@ -19,9 +19,9 @@ public static class LoggingConfigService
         // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging
 
         // Completely customize the logging config.
-        if (options.CustomConfigureLogging != null)
+        if (options.CustomConfigure != null)
         {
-            options.CustomConfigureLogging(builder.Logging);
+            options.CustomConfigure(builder.Logging);
             return;
         }
 

@@ -19,7 +19,7 @@ public static class DefaultHeaderForwarder
             return;
         }
 
-        redirectRequest.Content ??= new ByteArrayContent(Array.Empty<byte>());
+        redirectRequest.Content ??= new ByteArrayContent([]);
 
         foreach (KeyValuePair<string, IEnumerable<string>> header in originalRequest.Content.Headers)
         {

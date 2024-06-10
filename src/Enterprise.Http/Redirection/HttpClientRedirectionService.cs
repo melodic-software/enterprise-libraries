@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Enterprise.Http.Extensions;
+using Enterprise.Http.Redirection.Delegates;
 
 namespace Enterprise.Http.Redirection;
 
@@ -8,7 +9,7 @@ public static class HttpClientRedirectionService
     public static async Task<HttpResponseMessage> SendRequestWithRedirects(
         HttpClient httpClient,
         HttpRequestMessage request,
-        Action<HttpRequestMessage, HttpRequestMessage>? forwardHeaders = null,
+        ForwardHeaders? forwardHeaders = null,
         int maxRedirects = 10)
     {
         forwardHeaders ??= DefaultHeaderForwarder.ForwardHeaders;

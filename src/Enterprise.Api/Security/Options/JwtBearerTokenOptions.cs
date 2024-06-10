@@ -1,4 +1,5 @@
 ﻿using Enterprise.Api.Security.Constants;
+using Enterprise.Options.Core.Delegates;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Enterprise.Api.Security.Options;
@@ -49,5 +50,5 @@ public class JwtBearerTokenOptions
     /// A custom delegate that allows for complete customization of JwtBearerOptions.
     /// NOTE: if this is provided, all the default configuration is ignored.
     /// </summary>
-    public Action<JwtBearerOptions>? ConfigureJwtBearerOptions { get; set; }
+    public Configure<JwtBearerOptions>? ConfigureJwtBearerOptions { get; set; }
 }

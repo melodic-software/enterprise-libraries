@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Enterprise.MediatR.Behaviors;
+using Enterprise.Options.Core.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.MediatR.Options;
@@ -31,5 +32,5 @@ public class MediatROptions
     /// This allows for complete customization and control over the MediatR config.
     /// None of the default configuration is used, so everything must be completely configured.
     /// </summary>
-    public Action<MediatRServiceConfiguration>? CustomConfigure { get; set; }
+    public Configure<MediatRServiceConfiguration>? CustomConfigure { get; set; }
 }

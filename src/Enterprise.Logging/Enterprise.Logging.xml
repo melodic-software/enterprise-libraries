@@ -10,7 +10,7 @@
             It is recommended to use configuration (appSettings.json) over in code configuration.
             </summary>
         </member>
-        <member name="P:Enterprise.Logging.Options.LoggingOptions.CustomConfigureLogging">
+        <member name="P:Enterprise.Logging.Options.LoggingOptions.CustomConfigure">
             <summary>
             Completely customize logging configuration.
             If this is provided, all the logging configuration defaults will not be configured.

@@ -21,4 +21,8 @@
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.434" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Options\Delegates\" />
+  </ItemGroup>
+
 </Project>

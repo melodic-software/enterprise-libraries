@@ -22,4 +22,8 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middleware\Delegates\" />
+  </ItemGroup>
+
 </Project>

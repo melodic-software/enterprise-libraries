@@ -17,39 +17,38 @@ public static class JwtBearerExtensions
 {
     public static void AddJwtBearer(this AuthenticationBuilder authBuilder, IHostEnvironment environment, IConfiguration configuration)
     {
-        JwtBearerTokenOptions jwtBearerTokenOptions = OptionsInstanceService.Instance
+        JwtBearerTokenOptions options = OptionsInstanceService.Instance
             .GetOptionsInstance<JwtBearerTokenOptions>(configuration, JwtBearerTokenOptions.ConfigSectionKey);
 
         // This allows for the application to completely customize the configuration.
-        if (jwtBearerTokenOptions.ConfigureJwtBearerOptions != null)
+        if (options.ConfigureJwtBearerOptions != null)
         {
-            authBuilder.AddJwtBearer(authenticationScheme: JwtBearerAuthenticationScheme,
-                jwtBearerTokenOptions.ConfigureJwtBearerOptions);
+            authBuilder.AddJwtBearer(JwtBearerAuthenticationScheme, options.ConfigureJwtBearerOptions.Invoke);
         }
         else
         {
-            string authority = jwtBearerTokenOptions.Authority;
-            string audience = jwtBearerTokenOptions.Audience;
-            bool requireHttpsMetadata = jwtBearerTokenOptions.RequireHttpsMetadata ?? environment.IsProduction();
-            string validAudience = jwtBearerTokenOptions.Audience;
-            HashSet<string> validTypes = jwtBearerTokenOptions.ValidTokenTypes;
-            string nameClaimType = jwtBearerTokenOptions.NameClaimType ?? JwtClaimTypes.Name;
+            string authority = options.Authority;
+            string audience = options.Audience;
+            bool requireHttpsMetadata = options.RequireHttpsMetadata ?? environment.IsProduction();
+            string validAudience = options.Audience;
+            HashSet<string> validTypes = options.ValidTokenTypes;
+            string nameClaimType = options.NameClaimType ?? JwtClaimTypes.Name;
             string roleClaimType = JwtClaimTypes.Role;
 
-            HashSet<string> validIssuers = jwtBearerTokenOptions.ValidIssuers;
+            HashSet<string> validIssuers = options.ValidIssuers;
 
             if (!validIssuers.Any())
             {
                 validIssuers.Add(authority);
             }
 
-            authBuilder.AddJwtBearer(authenticationScheme: JwtBearerAuthenticationScheme, options =>
+            authBuilder.AddJwtBearer(authenticationScheme: JwtBearerAuthenticationScheme, o =>
             {
-                options.Authority = authority;
-                options.Audience = audience;
-                options.SaveToken = true; // Required for "builder.Services.AddOpenIdConnectAccessTokenManagement".
-                options.RequireHttpsMetadata = requireHttpsMetadata;
-                options.TokenValidationParameters = new TokenValidationParameters
+                o.Authority = authority;
+                o.Audience = audience;
+                o.SaveToken = true; // Required for "builder.Services.AddOpenIdConnectAccessTokenManagement".
+                o.RequireHttpsMetadata = requireHttpsMetadata;
+                o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
 

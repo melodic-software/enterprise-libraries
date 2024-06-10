@@ -1,4 +1,5 @@
 ﻿using Enterprise.MediatR.Options;
+using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,9 +19,9 @@ public static class MediatRConfigService
             return;
         }
 
-        Action<MediatRServiceConfiguration> configure = 
+        Configure<MediatRServiceConfiguration> configure = 
             options.CustomConfigure ?? MediatRConfigurations.DefaultConfigure(options);
 
-        services.AddMediatR(configure);
+        services.AddMediatR(configure.Invoke);
     }
 }

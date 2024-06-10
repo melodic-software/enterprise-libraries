@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Enterprise.Logging.Providers.Delegates;
 
 namespace Enterprise.Logging.Providers;
 
@@ -26,5 +26,5 @@ public class LoggingProviderOptions
     /// <summary>
     /// Configure the specific provider service(s) available for use in the application.
     /// </summary>
-    public Action<IHostApplicationBuilder> ConfigureProviders { get; set; } = _ => { };
+    public ConfigureProviders ConfigureProviders { get; set; } = _ => { };
 }

@@ -1,4 +1,5 @@
 ﻿using Enterprise.Monitoring.Health.Model;
+using Enterprise.Monitoring.Health.Options.Delegates;
 using HealthChecks.RabbitMQ;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -60,5 +61,5 @@ public class HealthCheckOptions
     /// Allows for custom registrations of health checks specific to the executing application.
     /// These can be entity framework DB contexts, SQL server databases, etc.
     /// </summary>
-    public Action<IHealthChecksBuilder> AddHealthChecks { get; set; } = _ => { };
+    public AddHealthChecks AddHealthChecks { get; set; } = _ => { };
 }

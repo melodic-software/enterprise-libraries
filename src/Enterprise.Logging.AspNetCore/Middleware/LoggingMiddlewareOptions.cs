@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Enterprise.Logging.AspNetCore.Middleware.Delegates;
 
 namespace Enterprise.Logging.AspNetCore.Middleware;
 
@@ -9,5 +9,5 @@ public class LoggingMiddlewareOptions
     /// <summary>
     /// Configure the specific provider available for use in the application.
     /// </summary>
-    public Action<WebApplication> UseProviders { get; set; } = _ => { };
+    public UseProviders UseProviders { get; set; } = _ => { };
 }

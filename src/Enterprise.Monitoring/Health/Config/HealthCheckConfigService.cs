@@ -61,7 +61,7 @@ public static class HealthCheckConfigService
         // This allows for application specific health checks like entity framework DB contexts, etc.
         // These are the additional health checks services that can be registered:
         // https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
-        options.AddHealthChecks.Invoke(healthCheckBuilder);
+        options.AddHealthChecks(healthCheckBuilder);
     }
 
     public static void UseHealthChecks(this WebApplication app)

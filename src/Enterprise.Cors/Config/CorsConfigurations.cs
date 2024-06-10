@@ -1,5 +1,7 @@
-﻿using Enterprise.Cors.Constants;
+﻿using Enterprise.Cors.Config.Delegates;
+using Enterprise.Cors.Constants;
 using Enterprise.Cors.Policies;
+using Enterprise.Options.Core.Delegates;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Enterprise.Cors.Config;
@@ -9,7 +11,7 @@ public static class CorsConfigurations
     /// <summary>
     /// This allows any origin, HTTP method or header. It should not be used in production environments.
     /// </summary>
-    public static Action<CorsOptions> RelaxedCorsConfiguration => options =>
+    public static Configure<CorsOptions> RelaxedCorsConfiguration => options =>
     {
         string policyName = CorsPolicyNames.RelaxedPolicyName;
 
@@ -26,7 +28,7 @@ public static class CorsConfigurations
         });
     };
 
-    public static Action<CorsOptions, string, string[]> StandardCorsConfiguration => (options, policyName, allowedOrigins) =>
+    public static ConfigureCors StandardCorsConfiguration => (options, policyName, allowedOrigins) =>
     {
         if (CorsPolicyService.PolicyExists(options, policyName))
         {

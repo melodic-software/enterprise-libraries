@@ -8,5 +8,5 @@ public class CorsOptions
 
     public bool EnableCors { get; set; } = true;
     public HashSet<string> AllowedOrigins { get; set; } = [];
-    public Configure<Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions>? ConfigureCustom { get; set; }
+    public Configure<Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions>? CustomConfigure { get; set; }
 }
