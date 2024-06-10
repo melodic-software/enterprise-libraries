@@ -1,7 +1,7 @@
 ﻿using Enterprise.DateTimes.Current;
 using Enterprise.DateTimes.Current.Abstract;
 using Enterprise.DateTimes.Current.Abstract.Composite;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

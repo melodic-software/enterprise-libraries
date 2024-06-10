@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Multitenancy.Abstractions;
 using Enterprise.Multitenancy.AspNetCore.Services;
 using Enterprise.Multitenancy.Options;

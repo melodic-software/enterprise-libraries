@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Library.Core.Services;
 using Enterprise.Library.Core.Services.Abstract;
 using Microsoft.Extensions.Configuration;

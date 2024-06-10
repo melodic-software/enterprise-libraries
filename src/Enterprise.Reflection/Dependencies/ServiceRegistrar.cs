@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Reflection.Properties;
 using Enterprise.Reflection.Properties.Abstract;
 using Microsoft.Extensions.Configuration;
