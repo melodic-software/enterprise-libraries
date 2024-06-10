@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.DI.Core.Registration;
+namespace Enterprise.DI.Core.Registration.Abstract;
 
 public interface IRegisterServices
 {

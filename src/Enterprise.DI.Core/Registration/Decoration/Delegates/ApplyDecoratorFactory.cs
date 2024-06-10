@@ -1,3 +1,3 @@
-﻿namespace Enterprise.DI.Core.Registration.Delegates;
+﻿namespace Enterprise.DI.Core.Registration.Decoration.Delegates;
 
 public delegate ApplyDecorator<TService> ApplyDecoratorFactory<TService>(IServiceProvider provider);

@@ -1,7 +1,8 @@
 ﻿using Enterprise.DI.Core.Registration.Delegates;
+using Enterprise.DI.Core.Registration.Model;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.DI.Core.Registration;
+namespace Enterprise.DI.Core.Registration.Extensions;
 
 public static class RegistrationContextExtensions
 {
@@ -11,7 +12,7 @@ public static class RegistrationContextExtensions
     public static RegistrationContext<TService> AddSingleton<TService, TImplementation>(
         this RegistrationContext<TService> registrationContext)
         where TService : class
-        where TImplementation : class, TService  =>
+        where TImplementation : class, TService =>
         registrationContext.Add<TImplementation>(ServiceLifetime.Singleton);
 
     /// <summary>

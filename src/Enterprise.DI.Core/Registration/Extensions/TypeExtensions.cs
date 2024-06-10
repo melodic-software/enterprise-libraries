@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
+using Enterprise.DI.Core.Registration.Attributes;
 
-namespace Enterprise.DI.Core.Registration;
+namespace Enterprise.DI.Core.Registration.Extensions;
 
 public static class TypeExtensions
 {

@@ -1,4 +1,6 @@
-﻿namespace Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
+
+namespace Enterprise.DI.Core.Registration.Attributes;
 
 /// <summary>
 /// Decorate types with this attribute to ensure that any DI registrations are not automatically registered.

@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Enterprise.DI.Core.Registration.Model;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.DI.Core.Registration;
+namespace Enterprise.DI.Core.Registration.Extensions;
 
 public static class ServiceCollectionExtensions
 {
