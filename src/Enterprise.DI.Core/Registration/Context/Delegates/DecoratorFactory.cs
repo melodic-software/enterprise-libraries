@@ -1,4 +1,4 @@
-﻿namespace Enterprise.DI.Core.Registration.Decoration.Delegates;
+﻿namespace Enterprise.DI.Core.Registration.Context.Delegates;
 
 public delegate TDecorator DecoratorFactory<in TService, out TDecorator>(IServiceProvider provider, TService service)
     where TDecorator : class, TService;

@@ -1,8 +1,7 @@
 ﻿using Enterprise.DI.Core.Registration.Delegates;
-using Enterprise.DI.Core.Registration.Model;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.DI.Core.Registration.Extensions;
+namespace Enterprise.DI.Core.Registration.Context.Extensions;
 
 public static class RegistrationContextExtensions
 {

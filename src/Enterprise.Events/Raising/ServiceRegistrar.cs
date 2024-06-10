@@ -1,5 +1,6 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
+using Enterprise.DI.Core.Registration.Extensions;
 using Enterprise.Events.Dispatching.Abstract;
 using Enterprise.Events.Raising.Abstract;
 using Enterprise.Events.Raising.Decorators;

@@ -1,5 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Dependencies;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Example.WebApi.ChainOfResponsibility.Examples.Classic.Handlers;
 
 namespace Example.WebApi.ChainOfResponsibility.Examples.Classic.Dependencies;

@@ -1,5 +1,5 @@
 ﻿using Enterprise.DateTimes.Current.Abstract;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Patterns.Outbox.Factory;
 using Enterprise.Patterns.Outbox.Serializers;
 using Enterprise.Serialization.Json;

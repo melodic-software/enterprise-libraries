@@ -15,7 +15,7 @@
         </member>
         <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
-            Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.IRegisterServices"/> and invokes the registration method.
+            Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.Abstract.IRegisterServices"/> and invokes the registration method.
             This allows for automatic wiring up of services in the DI container.
             </summary>
             <param name="services"></param>

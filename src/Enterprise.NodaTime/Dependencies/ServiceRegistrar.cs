@@ -1,7 +1,7 @@
 ﻿using Enterprise.DateTimes.Current.Abstract;
 using Enterprise.DateTimes.Current.Abstract.Composite;
 using Enterprise.DateTimes.Utc;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.NodaTime.Current;
 using Enterprise.NodaTime.Utc;
 using Microsoft.Extensions.Configuration;

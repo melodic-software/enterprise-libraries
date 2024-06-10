@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.EntityFramework.EntityDeletion;
 using Enterprise.EntityFramework.Outbox;
 using Enterprise.Patterns.Outbox.Factory;

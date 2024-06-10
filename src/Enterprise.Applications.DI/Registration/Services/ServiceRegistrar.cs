@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Reflection.Assemblies.Delegates;
 using Microsoft.Extensions.Configuration;

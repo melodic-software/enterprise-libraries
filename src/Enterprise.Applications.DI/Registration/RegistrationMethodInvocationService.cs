@@ -1,8 +1,8 @@
-﻿using Enterprise.DI.Core.Registration;
-using Enterprise.Logging.Core.Loggers;
+﻿using Enterprise.Logging.Core.Loggers;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using Enterprise.Applications.DI.Registration.Sorting;
+using Enterprise.DI.Core.Registration.Extensions;
 
 namespace Enterprise.Applications.DI.Registration;
 
@@ -73,7 +73,10 @@ public static class RegistrationMethodInvocationService
 
         if (typeInfo.ExcludeRegistrations())
         {
-            PreStartupLogger.Instance.LogWarning("Registrations have been excluded for: {TypeName}.", typeInfo.FullName);
+            PreStartupLogger.Instance.LogWarning(
+                "Registrations have been excluded for: {TypeName}.",
+                typeInfo.FullName
+            );
         }
         else
         {

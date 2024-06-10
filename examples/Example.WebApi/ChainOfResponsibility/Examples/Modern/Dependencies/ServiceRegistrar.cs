@@ -1,5 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Dependencies;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Example.WebApi.ChainOfResponsibility.Examples.Modern.Handlers;
 
 namespace Example.WebApi.ChainOfResponsibility.Examples.Modern.Dependencies;

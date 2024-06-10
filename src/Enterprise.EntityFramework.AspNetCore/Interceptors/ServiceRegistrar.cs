@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Domain.Events.Queuing;
 using Enterprise.EntityFramework.AspNetCore.Concurrency;
 using Enterprise.EntityFramework.AspNetCore.EventualConsistency;
