@@ -21,7 +21,7 @@ public class OptionsHashServiceTests
         };
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, _jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
 
         // Assert
         string expectedHash = "4416b687710487cf4e8403e56d221bc434f8e9f126136054fe9721c1e839b06e";
@@ -36,7 +36,7 @@ public class OptionsHashServiceTests
         var options = new { Name = "Test", Value = 123 };
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, _jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
 
         // Assert
         // Verify that a valid hash is produced (specific hash value can depend on the actual serialization result)
@@ -50,7 +50,7 @@ public class OptionsHashServiceTests
         var options = new { };
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, _jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -67,7 +67,7 @@ public class OptionsHashServiceTests
         };
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, _jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
 
         // Assert
         hash.Should().NotBeEmpty();
@@ -77,7 +77,7 @@ public class OptionsHashServiceTests
     public void ComputeHash_ShouldReturnEmptyString_WhenNullObjectIsProvided()
     {
         // Act
-        string hash = OptionsHashService.ComputeHash(null!, _jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(null!, _jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -97,7 +97,7 @@ public class OptionsHashServiceTests
         {
             tasks.Add(Task.Run(() =>
             {
-                string hash = OptionsHashService.ComputeHash(options, _jsonSerializer);
+                string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
                 hash.Should().NotBeEmpty();
             }));
         }
@@ -141,7 +141,7 @@ public class OptionsHashServiceTests
     private void TestNonSerializableType(object nonSerializableObject)
     {
         // Act
-        Action act = () => OptionsHashService.ComputeHash(nonSerializableObject, _jsonSerializer);
+        Action act = () => OptionsHashingService.ComputeHash(nonSerializableObject, _jsonSerializer);
 
         // Assert
         act.Should().NotThrow<NotSupportedException>("because the method should handle non-serializable types gracefully.");

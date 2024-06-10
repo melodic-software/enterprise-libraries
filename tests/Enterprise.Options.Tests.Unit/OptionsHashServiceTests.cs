@@ -19,7 +19,7 @@ public class OptionsHashServiceTests
         string expectedHash = "b01f9a4a87d97098d8fc7a4d001272d7e61cece4cec7b21e2798993598b025f4";
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().Be(expectedHash);
@@ -34,7 +34,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -55,7 +55,7 @@ public class OptionsHashServiceTests
         string expectedHash = "fa4dad13fa20995362022813092cf95f1c0b62429504763e7d1dbd8e40c38c6d";
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().Be(expectedHash);
@@ -69,7 +69,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(null!, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(null!, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -82,7 +82,7 @@ public class OptionsHashServiceTests
         var options = new { Name = "Test" };
 
         // Act
-        Func<string> act = () => OptionsHashService.ComputeHash(options, null!);
+        Func<string> act = () => OptionsHashingService.ComputeHash(options, null!);
 
         // Assert
         act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'jsonSerializer')");
@@ -97,7 +97,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -112,7 +112,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -127,7 +127,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -142,7 +142,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
@@ -157,7 +157,7 @@ public class OptionsHashServiceTests
         jsonSerializer.Serialize(Arg.Any<Dictionary<string, object>>()).Returns("{}");
 
         // Act
-        string hash = OptionsHashService.ComputeHash(options, jsonSerializer);
+        string hash = OptionsHashingService.ComputeHash(options, jsonSerializer);
 
         // Assert
         hash.Should().BeEmpty();
