@@ -1,5 +1,6 @@
 ﻿using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Core.Services.Singleton;
+using Enterprise.Options.Monitoring;
 using Enterprise.Serialization.Json;
 using Enterprise.Serialization.Json.Microsoft;
 using Microsoft.Extensions.Configuration;
@@ -8,9 +9,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Enterprise.Options.Monitoring.Extensions;
+namespace Enterprise.Options.Registration.Extensions;
 
-public static class DynamicOptionsMonitorExtensions
+public static class RegistrationExtensions
 {
     /// <summary>
     /// Registers options of type <typeparamref name="TOptions"/> with the specified configuration.
@@ -56,8 +57,7 @@ public static class DynamicOptionsMonitorExtensions
         RegisterCustomAbstractions<TOptions>(services);
     }
 
-    private static void RegisterDynamicOptionsMonitor<TOptions>(IServiceCollection services, TOptions? currentValue,
-        string? configSectionKey) where TOptions : class, new()
+    private static void RegisterDynamicOptionsMonitor<TOptions>(IServiceCollection services, TOptions? currentValue, string? configSectionKey) where TOptions : class, new()
     {
         // Remove any existing registrations, ensuring only one instance is ever registered.
         services.RemoveAll<DynamicOptionsMonitor<TOptions>>();

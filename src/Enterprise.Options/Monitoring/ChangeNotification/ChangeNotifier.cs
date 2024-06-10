@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using Enterprise.Library.Core.Disposables;
-using Enterprise.Options.ChangeNotification.Delegates;
+using Enterprise.Options.Monitoring.ChangeNotification.Delegates;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Options.ChangeNotification;
+namespace Enterprise.Options.Monitoring.ChangeNotification;
 
 internal sealed class ChangeNotifier<TOptions>
 {

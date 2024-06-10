@@ -1,9 +1,9 @@
-﻿using Enterprise.Options.ChangeNotification;
-using Enterprise.Options.ConfigBinding;
+﻿using Enterprise.Options.ConfigBinding;
 using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Options.Hashing;
+using Enterprise.Options.Monitoring.ChangeNotification;
 using Enterprise.Serialization.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -63,13 +63,13 @@ public class DynamicOptionsMonitor<TOptions> :
             {
                 if (_configurationSection == null)
                 {
-                    _currentHash = OptionsHashService.ComputeHash(CurrentValue, _jsonSerializer);
+                    _currentHash = OptionsHashingService.ComputeHash(CurrentValue, _jsonSerializer);
                     return;
                 }
 
                 ConfigBinder.Bind(CurrentValue, _configurationSection);
 
-                _currentHash = OptionsHashService.ComputeHash(CurrentValue, _jsonSerializer);
+                _currentHash = OptionsHashingService.ComputeHash(CurrentValue, _jsonSerializer);
 
                 ChangeToken.OnChange(() => _configurationSection.GetReloadToken(), ReloadConfiguration);
             }
@@ -151,7 +151,7 @@ public class DynamicOptionsMonitor<TOptions> :
             // We could also treat these as value objects and do equality checks without requiring serialization.
             // This might require some type constraints (via marker interfaces, etc.).
 
-            string newHash = OptionsHashService.ComputeHash(newInstance, _jsonSerializer);
+            string newHash = OptionsHashingService.ComputeHash(newInstance, _jsonSerializer);
             bool configChanged = !string.Equals(_currentHash, newHash, StringComparison.Ordinal);
 
             if (configChanged)

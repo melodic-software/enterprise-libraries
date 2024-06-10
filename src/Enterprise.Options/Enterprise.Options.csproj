@@ -19,8 +19,4 @@
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ChangeNotification\Delegates\" />
-  </ItemGroup>
-
 </Project>

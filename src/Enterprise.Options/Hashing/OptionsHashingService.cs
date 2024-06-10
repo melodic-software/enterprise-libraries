@@ -6,7 +6,7 @@ using Enterprise.Serialization.Json;
 
 namespace Enterprise.Options.Hashing;
 
-public static class OptionsHashService
+public static class OptionsHashingService
 {
     private const string Collection = "Collection";
     private const string Item = "Item";
