@@ -4,7 +4,7 @@
         <name>Enterprise.Options</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Options.ChangeNotifier`1.Subscribe(System.Action{`0,System.String})">
+        <member name="M:Enterprise.Options.ChangeNotification.ChangeNotifier`1.Subscribe(Enterprise.Options.ChangeNotification.Delegates.OnChange{`0})">
             <summary>
             Subscribe to change notifications.
             The provided action will be executed when a change occurs.
@@ -12,13 +12,13 @@
             <param name="onChange"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Options.ChangeNotifier`1.NotifySubscribers(`0)">
+        <member name="M:Enterprise.Options.ChangeNotification.ChangeNotifier`1.NotifySubscribers(`0)">
             <summary>
             Notify subscribers that the options have changed.
             </summary>
             <param name="options">The current options value.</param>
         </member>
-        <member name="T:Enterprise.Options.DynamicOptionsMonitor`1">
+        <member name="T:Enterprise.Options.Monitoring.DynamicOptionsMonitor`1">
             <summary>
             This dynamically monitors configuration options of a specific type.
             This should be used for any options that need to be retrieved after the DI container has been created.
@@ -26,7 +26,7 @@
             </summary>
             <typeparam name="TOptions"></typeparam>
         </member>
-        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+        <member name="M:Enterprise.Options.Monitoring.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             Registers options of type <typeparamref name="TOptions"/> with the specified configuration.
             The options instance will be resolved internally.
@@ -37,7 +37,7 @@
             <param name="configSectionKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0)">
+        <member name="M:Enterprise.Options.Monitoring.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0)">
             <summary>
             Registers options of type <typeparamref name="TOptions"/> with the specific instance.
             </summary>
@@ -45,7 +45,7 @@
             <param name="services"></param>
             <param name="currentValue"></param>
         </member>
-        <member name="M:Enterprise.Options.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0,System.String)">
+        <member name="M:Enterprise.Options.Monitoring.Extensions.DynamicOptionsMonitorExtensions.RegisterOptions``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,``0,System.String)">
             <summary>
             Registers options of type <typeparamref name="TOptions"/>.
             </summary>

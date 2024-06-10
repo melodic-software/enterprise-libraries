@@ -14,19 +14,19 @@ public static class IISConfigService
 {
     public static void ConfigureIISIntegration(this IServiceCollection services, IConfiguration configuration)
     {
-        IISIntegrationOptions customOptions = OptionsInstanceService.Instance
+        IISIntegrationOptions options = OptionsInstanceService.Instance
             .GetOptionsInstance<IISIntegrationOptions>(configuration, IISIntegrationOptions.ConfigSectionKey);
 
-        if (!customOptions.EnableIISIntegration)
+        if (!options.EnableIISIntegration)
         {
             return;
         }
 
-        services.Configure<IISOptions>(options =>
+        services.Configure<IISOptions>(o =>
         {
-            options.AutomaticAuthentication = customOptions.AutomaticAuthentication;
-            options.AuthenticationDisplayName = customOptions.AuthenticationDisplayName;
-            options.ForwardClientCertificate = customOptions.ForwardClientCertificate;
+            o.AutomaticAuthentication = options.AutomaticAuthentication;
+            o.AuthenticationDisplayName = options.AuthenticationDisplayName;
+            o.ForwardClientCertificate = options.ForwardClientCertificate;
         });
     }
 }

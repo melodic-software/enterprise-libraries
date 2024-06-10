@@ -1,12 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using Enterprise.Library.Core.Disposables;
+using Enterprise.Options.ChangeNotification.Delegates;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Options;
+namespace Enterprise.Options.ChangeNotification;
 
 internal sealed class ChangeNotifier<TOptions>
 {
-    private readonly ConcurrentDictionary<Guid, Action<TOptions, string?>> _subscriptions = new();
+    private readonly ConcurrentDictionary<Guid, OnChange<TOptions>> _subscriptions = new();
     private readonly ILogger _logger;
 
     internal ChangeNotifier(ILogger logger)
@@ -20,10 +21,10 @@ internal sealed class ChangeNotifier<TOptions>
     /// </summary>
     /// <param name="onChange"></param>
     /// <returns></returns>
-    internal IDisposable Subscribe(Action<TOptions, string?> onChange)
+    internal IDisposable Subscribe(OnChange<TOptions> onChange)
     {
         var subscriptionId = Guid.NewGuid();
-        _subscriptions.TryAdd(subscriptionId, onChange);
+        _subscriptions.TryAdd(subscriptionId, onChange.Invoke);
         return new DisposableAction(() => _subscriptions.TryRemove(subscriptionId, out _));
     }
 
@@ -35,11 +36,11 @@ internal sealed class ChangeNotifier<TOptions>
     {
         _logger.LogInformation("Notifying subscribers that a config change has occurred.");
 
-        foreach (Action<TOptions, string?> subscriber in _subscriptions.Values)
+        foreach (OnChange<TOptions> subscriber in _subscriptions.Values)
         {
             try
             {
-                subscriber(options, null);
+                subscriber(options);
             }
             catch (Exception ex)
             {

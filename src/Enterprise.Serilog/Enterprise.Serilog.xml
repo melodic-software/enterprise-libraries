@@ -41,7 +41,7 @@
             logger.Information("New payment with data: {@PaymentData}", payment);
             </summary>
         </member>
-        <member name="P:Enterprise.Serilog.Options.SerilogOptions.CustomConfigureLogger">
+        <member name="P:Enterprise.Serilog.Options.SerilogOptions.ConfigureLogger">
             <summary>
             Use this to completely override and control all Serilog logger configuration.
             NOTE: None of the defaults will be provided. This is a complete customization.

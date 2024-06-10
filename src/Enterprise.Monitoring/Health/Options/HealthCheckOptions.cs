@@ -1,7 +1,6 @@
 ﻿using Enterprise.Monitoring.Health.Model;
 using Enterprise.Monitoring.Health.Options.Delegates;
 using HealthChecks.RabbitMQ;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.Monitoring.Health.Options;
 

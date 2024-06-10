@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Enterprise.Serialization.Json;
 
-namespace Enterprise.Options;
+namespace Enterprise.Options.Hashing;
 
 public static class OptionsHashService
 {

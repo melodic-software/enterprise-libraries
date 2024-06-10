@@ -35,14 +35,14 @@ public static class CorsConfigService
         if (options.CustomConfigure != null)
         {
             // allow for full customization
-            services.AddCors(options.CustomConfigure.Invoke);
+            services.AddCors(options.CustomConfigure);
             return;
         }
 
         if (!environment.IsProduction())
         {
             // this should only be used in pre-production environments
-            services.AddCors(RelaxedCorsConfiguration.Invoke);
+            services.AddCors(RelaxedCorsConfiguration);
             return;
         }
 

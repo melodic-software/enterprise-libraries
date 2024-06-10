@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Enterprise.Api.Security.Constants;
 using Enterprise.Api.Swagger.Constants;
-using Enterprise.Options.Core.Delegates;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Enterprise.Api.Swagger.Options;
@@ -100,13 +99,13 @@ public class SwaggerOptions
     /// An optional extensibility hook for adding application specific customizations.
     /// These can include operation filters, document filters, etc.
     /// </summary>
-    public Configure<SwaggerGenOptions>? PostConfigure { get; set; }
+    public Action<SwaggerGenOptions>? PostConfigure { get; set; }
 
     /// <summary>
     /// This allows for complete control over how swagger is configured.
     /// If provided, the prebuilt default will not be applied.
     /// </summary>
-    public Configure<SwaggerGenOptions>? CustomConfigure { get; set; }
+    public Action<SwaggerGenOptions>? CustomConfigure { get; set; }
 
     /// <summary>
     /// Have the required OAuth configuration settings been set?

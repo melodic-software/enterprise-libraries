@@ -1,8 +1,10 @@
-﻿using Enterprise.Api.Controllers.Behavior;
+﻿using System.Reflection;
+using Enterprise.Api.Controllers.Behavior;
 using Enterprise.Api.Controllers.Formatters;
 using Enterprise.Api.Controllers.Options;
 using Enterprise.Api.Validation.Filters;
 using Enterprise.Constants;
+using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +14,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System.Reflection;
-using Enterprise.Options.Core.Services.Singleton;
 
 namespace Enterprise.Api.Controllers;
 

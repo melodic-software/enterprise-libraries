@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Enterprise.MediatR.Options;
-using Enterprise.Options.Core.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 using static Enterprise.MediatR.Assemblies.AssemblyRegistrar;
 using static Enterprise.MediatR.Behaviors.BehaviorRegistrar;
@@ -8,7 +7,7 @@ using static Enterprise.MediatR.Behaviors.BehaviorRegistrar;
 namespace Enterprise.MediatR.Config;
 public static class MediatRConfigurations
 {
-    public static Configure<MediatRServiceConfiguration> DefaultConfigure(MediatROptions options)
+    public static Action<MediatRServiceConfiguration> DefaultConfigure(MediatROptions options)
     {
         return mediatRServiceConfiguration =>
         {

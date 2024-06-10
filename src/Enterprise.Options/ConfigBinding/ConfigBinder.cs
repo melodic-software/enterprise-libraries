@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Enterprise.Options;
+namespace Enterprise.Options.ConfigBinding;
 
 internal static class ConfigBinder
 {

@@ -23,7 +23,7 @@ public static class JwtBearerExtensions
         // This allows for the application to completely customize the configuration.
         if (options.ConfigureJwtBearerOptions != null)
         {
-            authBuilder.AddJwtBearer(JwtBearerAuthenticationScheme, options.ConfigureJwtBearerOptions.Invoke);
+            authBuilder.AddJwtBearer(JwtBearerAuthenticationScheme, options.ConfigureJwtBearerOptions);
         }
         else
         {

@@ -1,13 +1,16 @@
-﻿using Enterprise.Options.Core.Abstract;
+﻿using Enterprise.Options.ChangeNotification;
+using Enterprise.Options.ConfigBinding;
+using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Services.Singleton;
+using Enterprise.Options.Hashing;
 using Enterprise.Serialization.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 
-namespace Enterprise.Options;
+namespace Enterprise.Options.Monitoring;
 
 /// <summary>
 /// This dynamically monitors configuration options of a specific type.
@@ -15,8 +18,8 @@ namespace Enterprise.Options;
 /// Use <see cref="OptionsInstanceService"/> when the application has not yet been built.
 /// </summary>
 /// <typeparam name="TOptions"></typeparam>
-public class DynamicOptionsMonitor<TOptions> : 
-    IOptionsMonitor<TOptions>, 
+public class DynamicOptionsMonitor<TOptions> :
+    IOptionsMonitor<TOptions>,
     IOptionsUpdater<TOptions>, IDisposable
     where TOptions : class, new()
 {
@@ -44,7 +47,7 @@ public class DynamicOptionsMonitor<TOptions> :
         ISerializeJson jsonSerializer)
     {
         CurrentValue = currentValue ?? new TOptions();
-        
+
         _configurationSection = configurationSection;
         _logger = logger;
         _debouncePeriod = debouncePeriod;
@@ -87,8 +90,13 @@ public class DynamicOptionsMonitor<TOptions> :
         lock (_updateLock)
         {
             _logger.LogInformation("Adding configuration change listener.");
+
+            // The string parameter here represents the name of the specific options instance that has changed.
+            // If the options instance is not named, this parameter will be null.
+            // We don't currently utilize named options with our enterprise level configuration, so we ignore it.
+
             // Return an IDisposable that removes the handler when disposed.
-            return _changeNotifier.Subscribe(listener);
+            return _changeNotifier.Subscribe(options => listener.Invoke(options, null));
         }
     }
 
@@ -149,9 +157,9 @@ public class DynamicOptionsMonitor<TOptions> :
             if (configChanged)
             {
                 _logger.LogInformation("Configuration section '{SectionName}' has changed. Reloading.", _configurationSection?.Path);
-                
+
                 CurrentValue = newInstance;
-                
+
                 _currentHash = newHash;
                 _changeNotifier.NotifySubscribers(CurrentValue);
             }

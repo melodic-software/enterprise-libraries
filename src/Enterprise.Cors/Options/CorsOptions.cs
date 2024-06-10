@@ -1,6 +1,4 @@
-﻿using Enterprise.Options.Core.Delegates;
-
-namespace Enterprise.Cors.Options;
+﻿namespace Enterprise.Cors.Options;
 
 public class CorsOptions
 {
@@ -8,5 +6,5 @@ public class CorsOptions
 
     public bool EnableCors { get; set; } = true;
     public HashSet<string> AllowedOrigins { get; set; } = [];
-    public Configure<Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions>? CustomConfigure { get; set; }
+    public Action<Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions>? CustomConfigure { get; set; }
 }

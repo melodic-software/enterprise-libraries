@@ -1,5 +1,4 @@
-﻿using Enterprise.Serilog.Templating;
-using Microsoft.Extensions.Hosting;
+﻿using Enterprise.Serilog.Options.Delegates;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Events;
@@ -24,7 +23,7 @@ public class SerilogOptions
     /// <summary>
     /// Configure the output template using the provided builder.
     /// </summary>
-    public Action<IHostApplicationBuilder, OutputTemplateBuilder>? ConfigureOutputTemplate { get; set; }
+    public ConfigureOutputTemplate? ConfigureOutputTemplate { get; set; }
 
     /// <summary>
     /// Configure the Serilog enrichers.
@@ -38,7 +37,7 @@ public class SerilogOptions
     /// Typically, this is something that is better to do in the application settings rather than in code configuration.
     /// NOTE: This will be ignored if a value has been provided in the application settings.
     /// </summary>
-    public Action<IHostApplicationBuilder, LoggerConfiguration, string>? WriteTo { get; set; }
+    public WriteTo? WriteTo { get; set; }
 
     /// <summary>
     /// Allows for configuring how objects are destructured and transformed.
@@ -51,6 +50,6 @@ public class SerilogOptions
     /// Use this to completely override and control all Serilog logger configuration.
     /// NOTE: None of the defaults will be provided. This is a complete customization.
     /// </summary>
-    public Action<HostBuilderContext, LoggerConfiguration>? CustomConfigureLogger { get; set; }
+    public ConfigureLogger? ConfigureLogger { get; set; }
 
 }

@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Enterprise.Options.Extensions;
+namespace Enterprise.Options.Monitoring.Extensions;
 
 public static class DynamicOptionsMonitorExtensions
 {
