@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.422" />
-    <PackageReference Include="Melodic.Enterprise.EntityFramework" Version="1.0.0-preview.423" />
+    <PackageReference Include="Melodic.Enterprise.EntityFramework" Version="1.0.0-preview.425" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.422" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
