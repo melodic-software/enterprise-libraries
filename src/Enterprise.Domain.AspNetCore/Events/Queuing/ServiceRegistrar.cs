@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Domain.Events.Queuing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

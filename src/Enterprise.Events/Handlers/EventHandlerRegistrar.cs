@@ -1,5 +1,5 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.DI.Core.Registration.Extensions;
+using Enterprise.DI.Core.Registration.Context.Extensions;
 using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Handlers.Decoration;
 using Enterprise.Events.Handlers.Delegates;

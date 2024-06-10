@@ -2,7 +2,7 @@
 using Enterprise.ApplicationServices.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Dispatching;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

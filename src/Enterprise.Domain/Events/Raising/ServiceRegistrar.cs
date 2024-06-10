@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Core.Registration;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Domain.Events.Raising.Abstract;
 using Enterprise.Events.Raising.Abstract;
 using Microsoft.Extensions.Configuration;

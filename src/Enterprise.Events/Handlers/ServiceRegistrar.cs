@@ -1,6 +1,6 @@
 ﻿using Enterprise.DI.Core.Registration.Abstract;
-using Enterprise.DI.Core.Registration.Extensions;
-using Enterprise.DI.Core.Registration.Model;
+using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Core.Registration.Context.Extensions;
 using Enterprise.Events.Handlers.Resolution;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Handlers.Resolution.Decoration;
