@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Model;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 

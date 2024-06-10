@@ -4,7 +4,7 @@ using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic;

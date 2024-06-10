@@ -3,7 +3,8 @@ using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic.Delegates;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Extensions;
+using Enterprise.DI.Core.Registration.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic;

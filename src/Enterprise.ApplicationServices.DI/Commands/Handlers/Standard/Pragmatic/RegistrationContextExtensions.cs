@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic;

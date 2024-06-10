@@ -2,7 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Shared;
-using Enterprise.DI.Core.Registration;
+using Enterprise.DI.Core.Registration.Model;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration;
 
