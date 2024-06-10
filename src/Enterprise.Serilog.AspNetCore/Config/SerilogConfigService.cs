@@ -4,6 +4,7 @@ using Enterprise.Serilog.AspNetCore.Lifecycle;
 using Enterprise.Serilog.AspNetCore.RequestCorrelation;
 using Enterprise.Serilog.MediatR;
 using Enterprise.Serilog.Options;
+using Enterprise.Serilog.Options.Delegates;
 using Enterprise.Serilog.Templating;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -35,14 +36,13 @@ public static class SerilogConfigService
             builder.Logging.ClearProviders();
         }
 
-        Action<HostBuilderContext, LoggerConfiguration> configureLogger = 
-            options.CustomConfigureLogger ?? ConfigureLogger(builder, options);
+        ConfigureLogger configureLogger = options.ConfigureLogger ?? ConfigureLogger(builder, options);
 
         // This essentially "hijacks" the .NET logging infrastructure to use Serilog.
         // Setting "preserveStaticLogger" to false replaces Log.Logger with the logger instance configured in the provided delegate.
         // Setting "writeToProviders" to false prevents Serilog from writing to other logging providers configured in the ASP.NET Core logging system.
         builder.Host.UseSerilog(
-            configureLogger,
+            configureLogger.Invoke,
             preserveStaticLogger: false,
             writeToProviders: false
         );
@@ -60,7 +60,7 @@ public static class SerilogConfigService
         app.UseSerilogRequestLogging();
     }
 
-    private static Action<HostBuilderContext, LoggerConfiguration> ConfigureLogger(IHostApplicationBuilder builder, SerilogOptions options)
+    private static ConfigureLogger ConfigureLogger(IHostApplicationBuilder builder, SerilogOptions options)
     {
         options.ConfigureOutputTemplate ??= SerilogConfigDefaults.CreateDefaultOutputTemplate;
         options.Enrich ??= SerilogConfigDefaults.EnrichDefaults;
