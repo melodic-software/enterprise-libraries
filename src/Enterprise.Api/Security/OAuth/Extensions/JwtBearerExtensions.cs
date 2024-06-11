@@ -46,6 +46,7 @@ public static class JwtBearerExtensions
             {
                 o.Authority = authority;
                 o.Audience = audience;
+                o.IncludeErrorDetails = !environment.IsProduction();
                 o.SaveToken = true; // Required for "builder.Services.AddOpenIdConnectAccessTokenManagement".
                 o.RequireHttpsMetadata = requireHttpsMetadata;
                 o.TokenValidationParameters = new TokenValidationParameters
@@ -65,11 +66,12 @@ public static class JwtBearerExtensions
                     ValidTypes = validTypes,
 
                     // By default, the expiration has a grace period of 5 minutes.
-                    // So technically expired tokens can be used unless the grace period has elapsed.
-                    // We can override this if needed...
+                    // So technically expired tokens will be accepted unless the grace period has elapsed.
+                    // This is done to allow for clock variances.
+                    // TODO: Make this configurable. Do we want to uncomment this line?
                     //ClockSkew = TimeSpan.Zero,
 
-                    //IssuerSigningKey = new SymmetricSecurityKey(),
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey)),
 
                     NameClaimType = nameClaimType,
                     RoleClaimType = roleClaimType,
