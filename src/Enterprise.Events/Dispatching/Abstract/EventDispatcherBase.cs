@@ -32,6 +32,12 @@ public abstract class EventDispatcherBase : IDispatchEvents
         ICollection<IHandleEvent> eventHandlers = (await ResolveEventHandlers(@event)).ToList();
         Logger.LogDebug("Resolved {EventHandlerCount} handler(s).", eventHandlers.Count);
 
+        if (eventHandlers.Count <= 0)
+        {
+            await OnNoHandlersRegistered(@event);
+            return;
+        }
+
         Logger.LogDebug("Filtering event handlers.");
         IReadOnlyCollection<IHandleEvent> filteredHandlers = FilterHandlers(eventHandlers, @event).ToList();
         Logger.LogDebug("Event handlers filtered.");

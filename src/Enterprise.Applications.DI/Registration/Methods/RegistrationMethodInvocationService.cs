@@ -1,10 +1,11 @@
-﻿using Enterprise.Logging.Core.Loggers;
-using Microsoft.Extensions.Logging;
-using System.Reflection;
+﻿using System.Reflection;
 using Enterprise.Applications.DI.Registration.Sorting;
 using Enterprise.DI.Core.Registration.Extensions;
+using Enterprise.Logging.Core.Loggers;
+using Microsoft.Extensions.Logging;
+using static Enterprise.Applications.DI.Registration.Methods.Validation.RegistrationMethodValidationService;
 
-namespace Enterprise.Applications.DI.Registration;
+namespace Enterprise.Applications.DI.Registration.Methods;
 
 public static class RegistrationMethodInvocationService
 {
@@ -17,60 +18,32 @@ public static class RegistrationMethodInvocationService
             config.MethodName, config.InterfaceType.FullName
         );
 
-        HashSet<Assembly> processedAssemblies = [];
-        HashSet<Type> processedTypes = [];
-
         Assembly[] assemblies = config.GetAssemblies()
             .OrderBy(x => x.GetName().FullName, new SegmentComparer())
             .ToArray();
 
-        foreach (Assembly assembly in assemblies)
+        var typeInfos = assemblies
+            .SelectMany(a => config.GetAssemblyTypeInfos(a, config.InterfaceType))
+            .OrderBy(ti => ti.AssemblyQualifiedName ?? ti.FullName ?? string.Empty, new SegmentComparer())
+            .ToHashSet();
+
+        HashSet<Type> processedTypes = [];
+
+        foreach (TypeInfo typeInfo in typeInfos)
         {
-            if (processedAssemblies.Contains(assembly))
+            if (processedTypes.Contains(typeInfo))
             {
                 continue;
             }
 
-            ProcessAssembly(assembly, processedTypes, config);
+            ProcessType(typeInfo, config);
 
-            processedAssemblies.Add(assembly);
+            processedTypes.Add(typeInfo);
         }
     }
 
-    private static void Validate(RegistrationMethodConfig config)
+    private static void ProcessType(TypeInfo typeInfo, RegistrationMethodConfig config)
     {
-        MethodInfo? methodInfo = config.InterfaceType.GetMethod(config.MethodName, config.BindingFlags);
-
-        if (methodInfo == null)
-        {
-            throw new InvalidOperationException($"{config.MethodName} method not found.");
-        }
-
-        ParameterInfo[] methodParameters = methodInfo.GetParameters();
-
-        if (!config.ParameterInfosAreValid(methodParameters))
-        {
-            throw new InvalidOperationException($"{config.MethodName} parameters are invalid.");
-        }
-    }
-
-    private static void ProcessAssembly(Assembly assembly, HashSet<Type> processedTypes, RegistrationMethodConfig config)
-    {
-        List<TypeInfo> typeInfos = config.GetAssemblyTypeInfos(assembly, config.InterfaceType);
-
-        foreach (TypeInfo typeInfo in typeInfos)
-        {
-            ProcessType(processedTypes, config, typeInfo);
-        }
-    }
-
-    private static void ProcessType(HashSet<Type> processedTypes, RegistrationMethodConfig config, TypeInfo typeInfo)
-    {
-        if (processedTypes.Contains(typeInfo))
-        {
-            return;
-        }
-
         if (typeInfo.ExcludeRegistrations())
         {
             PreStartupLogger.Instance.LogWarning(
@@ -81,9 +54,7 @@ public static class RegistrationMethodInvocationService
         else
         {
             Invoke(typeInfo, config);
-        }   
-
-        processedTypes.Add(typeInfo);
+        }
     }
 
     private static void Invoke(Type type, RegistrationMethodConfig config)

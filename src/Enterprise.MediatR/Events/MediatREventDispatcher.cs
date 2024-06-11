@@ -26,6 +26,12 @@ public sealed class MediatREventDispatcher : EventDispatcher
 
     public override IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
     {
+        if (eventHandlers.Count <= 0)
+        {
+            Logger.LogDebug("No handlers to filter.");
+            return eventHandlers;
+        }
+
         int initialCount = eventHandlers.Count;
 
         // We need to check the implemented interfaces on each handler since we could be utilizing base event handlers AND MediatR notification (event) handlers.

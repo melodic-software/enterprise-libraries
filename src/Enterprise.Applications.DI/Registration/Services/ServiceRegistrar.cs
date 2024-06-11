@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Enterprise.Applications.DI.Registration.Methods;
 using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Reflection.Assemblies.Delegates;

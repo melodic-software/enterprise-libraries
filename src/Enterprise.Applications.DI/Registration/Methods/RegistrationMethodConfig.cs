@@ -3,7 +3,7 @@ using Enterprise.Applications.DI.Startup;
 using Enterprise.Reflection.Assemblies.Delegates;
 using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
 
-namespace Enterprise.Applications.DI.Registration;
+namespace Enterprise.Applications.DI.Registration.Methods;
 
 public class RegistrationMethodConfig
 {
@@ -30,7 +30,7 @@ public class RegistrationMethodConfig
         InterfaceType = interfaceType;
         MethodName = methodName;
         ParameterInfosAreValid = parametersAreValid;
-        
+
         BindingFlags = bindingFlags;
         MethodParameters = methodParameters;
         GetAssemblies = getAssemblies ?? DefaultGetAssemblies;

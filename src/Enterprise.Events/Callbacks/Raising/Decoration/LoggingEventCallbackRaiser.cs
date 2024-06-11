@@ -21,7 +21,7 @@ public class LoggingEventCallbackRaiser : IRaiseEventCallbacks
         // We want to use the logging scope for each event.
         // We iterate here and use the other method instead of forwarding on to the delegated instance.
 
-        List<IEvent> eventList = events.ToList();
+        var eventList = events.ToList();
 
         _logger.LogDebug("Raising callbacks for {EventCount} events.", eventList.Count);
 
