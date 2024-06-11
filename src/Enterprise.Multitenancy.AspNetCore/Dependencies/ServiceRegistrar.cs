@@ -2,7 +2,7 @@
 using Enterprise.Multitenancy.Abstractions;
 using Enterprise.Multitenancy.AspNetCore.Services;
 using Enterprise.Multitenancy.Options;
-using Enterprise.Options.Extensions;
+using Enterprise.Options.Registration.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +15,7 @@ internal sealed class ServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        MultitenancyOptions options = services
-            .RegisterOptions<MultitenancyOptions>(configuration, MultitenancyOptions.ConfigSectionKey);
+        MultitenancyOptions options = services.RegisterOptions<MultitenancyOptions>(configuration, MultitenancyOptions.ConfigSectionKey);
 
         if (!options.MultitenancyEnabled)
         {
