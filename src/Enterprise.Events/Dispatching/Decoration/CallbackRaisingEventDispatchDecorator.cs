@@ -6,6 +6,9 @@ using Enterprise.Events.Model;
 
 namespace Enterprise.Events.Dispatching.Decoration;
 
+/// <summary>
+/// This decorator ensures that callbacks are raised after events have been dispatched.
+/// </summary>
 public class CallbackRaisingEventDispatchDecorator : DecoratorBase<IDispatchEvents>, IDispatchEvents
 {
     private readonly IRaiseEventCallbacks _callbackService;

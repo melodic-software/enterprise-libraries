@@ -29,8 +29,7 @@ internal sealed class ServiceRegistrar : IRegisterServices
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IRaiseEventCallbacks eventCallbackRaiser = provider.GetRequiredService<IRaiseEventCallbacks>();
-                ILogger<CallbackRaisingEventDispatchDecorator> logger = provider.GetRequiredService<ILogger<CallbackRaisingEventDispatchDecorator>>();
-                return new CallbackRaisingEventDispatchDecorator(eventDispatcher, decoratorService, eventCallbackRaiser, logger);
+                return new CallbackRaisingEventDispatchDecorator(eventDispatcher, decoratorService, eventCallbackRaiser);
             });
     }
 }
