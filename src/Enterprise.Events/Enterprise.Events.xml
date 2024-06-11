@@ -116,6 +116,11 @@
         <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
+        <member name="T:Enterprise.Events.Dispatching.Decoration.CallbackRaisingEventDispatchDecorator">
+            <summary>
+            This decorator ensures that callbacks are raised after events have been dispatched.
+            </summary>
+        </member>
         <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>

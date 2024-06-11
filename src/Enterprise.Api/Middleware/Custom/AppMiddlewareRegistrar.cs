@@ -1,6 +1,6 @@
-﻿using Enterprise.Applications.DI.Registration;
+﻿using System.Reflection;
+using Enterprise.Applications.DI.Registration.Methods;
 using Microsoft.AspNetCore.Builder;
-using System.Reflection;
 
 namespace Enterprise.Api.Middleware.Custom;
 
