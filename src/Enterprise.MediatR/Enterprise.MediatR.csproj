@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.3.0" />
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.471" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.473" />
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.472" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.472" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.473" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.442" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.472" />
   </ItemGroup>
