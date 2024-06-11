@@ -9,7 +9,7 @@
             These are the default behavior registrations.
             </summary>
         </member>
-        <member name="M:Enterprise.MediatR.Events.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent)">
+        <member name="M:Enterprise.MediatR.Events.Dispatching.MediatREventDispatcher.DispatchAsync(Enterprise.Events.Model.IEvent)">
             <inheritdoc />
         </member>
         <member name="P:Enterprise.MediatR.Options.MediatROptions.EnableMediatR">

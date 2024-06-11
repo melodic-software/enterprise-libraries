@@ -3,8 +3,8 @@ using Enterprise.NodaTime.Model;
 
 namespace Enterprise.NodaTime.Current;
 
-public class CurrentDateTimeProvider : ICurrentDateTimeOffsetProvider
+public class CurrentDateTimeProvider : ICurrentDateTimeProvider
 {
-    public DateTimeOffset Now => TimeProvider.System.GetUtcNow();
-    public DateTimeOffset UtcNow => new NodaUniversalDateTime();
+    public DateTime Now => TimeProvider.System.GetLocalNow().Date;
+    public DateTime UtcNow => new NodaUniversalDateTime();
 }

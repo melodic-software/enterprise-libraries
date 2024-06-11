@@ -23,7 +23,7 @@ public class EnsureUtcService : IEnsureUtcService
             return dateTime;
         }
 
-        LocalDateTime localDateTime = LocalDateTime.FromDateTime(dateTime);
+        var localDateTime = LocalDateTime.FromDateTime(dateTime);
 
         // Assuming the system's local time zone, but this can be more specific
         DateTimeZone zone = DateTimeZoneProviders.Tzdb.GetSystemDefault();
@@ -40,7 +40,7 @@ public class EnsureUtcService : IEnsureUtcService
     public DateTimeOffset EnsureUtc(DateTimeOffset dateTimeOffset)
     {
         // Noda Time's Instant handles DateTimeOffset seamlessly.
-        Instant instant = Instant.FromDateTimeOffset(dateTimeOffset);
+        var instant = Instant.FromDateTimeOffset(dateTimeOffset);
 
         return instant.ToDateTimeOffset();
     }
