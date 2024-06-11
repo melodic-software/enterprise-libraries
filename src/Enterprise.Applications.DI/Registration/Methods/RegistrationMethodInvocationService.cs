@@ -36,13 +36,13 @@ public static class RegistrationMethodInvocationService
                 continue;
             }
 
-            ProcessType(typeInfo, config);
+            ProcessTypeInfo(typeInfo, config);
 
             processedTypes.Add(typeInfo);
         }
     }
 
-    private static void ProcessType(TypeInfo typeInfo, RegistrationMethodConfig config)
+    private static void ProcessTypeInfo(TypeInfo typeInfo, RegistrationMethodConfig config)
     {
         if (typeInfo.ExcludeRegistrations())
         {
