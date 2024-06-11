@@ -24,7 +24,7 @@ public class OptionsHashServiceTests
         string hash = OptionsHashingService.ComputeHash(options, _jsonSerializer);
 
         // Assert
-        string expectedHash = "4416b687710487cf4e8403e56d221bc434f8e9f126136054fe9721c1e839b06e";
+        string expectedHash = "470accda0eb80ba5c459d5c83e93ac9138a1e3d4428f6228137e033e2212ac05";
 
         hash.Should().Be(expectedHash);
     }

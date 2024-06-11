@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using Enterprise.Serialization.Json;
 
 namespace Enterprise.Options.Hashing;
@@ -26,6 +27,11 @@ public static class OptionsHashingService
 
         // Serialize the resulting dictionary which includes only serializable properties.
         string serializedData = jsonSerializer.Serialize(serializable);
+
+        // We want to make sure this works on all operating systems.
+        // Line breaks and carriage returns are different on Windows and Linux
+        // This will ensure those variants are not part of the equation.
+        serializedData = MinifyJson(serializedData);
 
         // Compute SHA256 hash of the serialized data.
         using var sha256 = SHA256.Create();
@@ -61,6 +67,8 @@ public static class OptionsHashingService
             var elements = enumerable.Cast<object>()
                              .Select((item, index) => new { Item = GetSerializableProperties(item), Index = index })
                              .Where(x => x.Item.Any())
+                             // Ensure items are serialized in a consistent order.
+                             .OrderBy(x => x.Index)
                              .ToDictionary(x => $"{Item}{x.Index}", x => (object)x.Item);
 
             if (elements.Any())
@@ -82,6 +90,8 @@ public static class OptionsHashingService
             .Select(prop => new { Prop = prop, Value = prop.GetValue(obj) })
             .Select(x => new { x.Prop.Name, Value = GetSerializableProperties(x.Value) })
             .Where(x => x.Value.Any())
+            // Ensure properties are serialized in a consistent order.
+            .OrderBy(x => x.Name, StringComparer.Ordinal)
             .ToDictionary(x => x.Name, x => (object)x.Value);
 
         if (!properties.Any())
@@ -106,5 +116,27 @@ public static class OptionsHashingService
                !typeof(Stream).IsAssignableFrom(type) &&
                !typeof(Task).IsAssignableFrom(type) &&
                type is { IsInterface: false, IsAbstract: false };
+    }
+
+    private static string MinifyJson(string json)
+    {
+        using var jsonDocument = JsonDocument.Parse(json);
+        using var memoryStream = new MemoryStream();
+
+        var options = new JsonWriterOptions
+        {
+            Indented = false,
+            // Assuming input is always valid JSON.
+            SkipValidation = true
+        };
+
+        using (var jsonWriter = new Utf8JsonWriter(memoryStream, options))
+        {
+            jsonDocument.WriteTo(jsonWriter);
+        }
+
+        string minified = Encoding.UTF8.GetString(memoryStream.ToArray());
+
+        return minified;
     }
 }
