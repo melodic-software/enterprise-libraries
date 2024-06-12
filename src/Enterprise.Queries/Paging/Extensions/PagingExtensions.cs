@@ -1,4 +1,5 @@
-﻿using Enterprise.Queries.Paging.Delegates;
+﻿using Enterprise.Mapping.Delegates;
+using Enterprise.Queries.Paging.Delegates;
 using Enterprise.Queries.Paging.Model;
 
 namespace Enterprise.Queries.Paging.Extensions;
