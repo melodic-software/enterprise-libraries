@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.171" />
+    <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.480" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.0" />
   </ItemGroup>
 
