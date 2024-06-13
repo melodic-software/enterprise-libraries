@@ -4,18 +4,18 @@
         <name>Enterprise.Applications.DI</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.Applications.DI.Registration.Options.OptionsRegistrar.AutoRegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
+        <member name="M:Enterprise.Applications.DI.Registration.Options.OptionsRegistrar.RegisterOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
-            Automatically resolves instances of <see cref="T:Enterprise.Options.Core.Abstract.IRegisterOptions"/> and invokes the registration method.
+            Dynamically resolves instances of <see cref="T:Enterprise.Options.Core.Abstract.IRegisterOptions"/> and invokes the registration method.
             This allows for automatic wiring up of options in the DI container.
             </summary>
             <param name="services"></param>
             <param name="configuration"></param>
             <param name="getAssemblies"></param>
         </member>
-        <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.AutoRegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
+        <member name="M:Enterprise.Applications.DI.Registration.Services.ServiceRegistrar.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
-            Automatically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.Abstract.IRegisterServices"/> and invokes the registration method.
+            Dynamically resolves instances of <see cref="T:Enterprise.DI.Core.Registration.Abstract.IRegisterServices"/> and invokes the registration method.
             This allows for automatic wiring up of services in the DI container.
             </summary>
             <param name="services"></param>

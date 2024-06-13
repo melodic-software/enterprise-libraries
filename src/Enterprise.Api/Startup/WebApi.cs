@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics;
+using System.Text.Json;
 using Enterprise.Api.Diagnostics;
-using Enterprise.Api.Startup.Delegates;
 using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Options;
 using Enterprise.Applications.DI.ServiceCollection;
 using Enterprise.Logging.Core.Loggers;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -18,59 +20,61 @@ namespace Enterprise.Api.Startup;
 /// </summary>
 public static class WebApi
 {
-    /// <summary>
-    /// Bootstraps the web API by configuring services and the request pipeline, and starts the application.
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
-    public static async Task RunAsync(string[] args) => await RunAsync(args, (_, _) => { });
+    private static WebApiConfigEvents Events { get; }
+    private static WebApiOptions Options { get; set; }
+    private static Stopwatch Stopwatch { get; }
+
+    static WebApi()
+    {
+        Events = new WebApiConfigEvents();
+        Stopwatch = new Stopwatch();
+    }
 
     /// <summary>
     /// Bootstraps the web API by configuring services and the request pipeline, and starts the application.
     /// </summary>
     /// <param name="args">The command-line arguments passed to the application.</param>
-    /// <param name="configure">A delegate to configure <see cref="WebApiOptions"/> and handle <see cref="WebApiConfigEvents"/>.</param>
-    public static async Task RunAsync(string[] args, ConfigureApi? configure)
+    public static async Task RunAsync(string[] args)
     {
-        var stopwatch = Stopwatch.StartNew();
-
-        var options = new WebApiOptions(args);
-        var events = new WebApiConfigEvents();
-
         try
         {
+            Stopwatch.Start();
+
+            Options = new WebApiOptions(args);
+
             PreStartupLogger.Instance.LogInformation("Beginning configuration.");
 
             // This is the primary hook for applications to configure the API.
             // This must be placed first in case the application decides to wire up event handlers.
-            configure?.Invoke(options, events);
+            WebApiOptionConfigurer.Configure(Options);
+            WebApiConfigEventHandlerRegistrar.RegisterHandlers(Events);
 
             // This is the first extensibility hook that allows for pre-configuration.
-            await events.RaiseConfigurationStarted(args);
+            await Events.RaiseConfigurationStarted(args);
 
-            WebApplicationBuilder builder = await CreateBuilderAsync(options, events);
+            WebApplicationBuilder builder = await CreateBuilderAsync();
 
             // Execute deferred configurations with the actual configuration and environment.
             PreStartupLogger.Instance.LogInformation("Executing deferred option configuration.");
-            options.ExecuteDeferredConfigurations(builder.Configuration, builder.Environment);
+            Options.ExecuteDeferredConfigurations(builder.Configuration, builder.Environment);
             PreStartupLogger.Instance.LogInformation("Deferred option configuration complete.");
 
-            await AddServicesAsync(builder, events);
-            WebApplication app = await BuildApplicationAsync(builder, events);
+            await AddServicesAsync(builder);
+            WebApplication app = await BuildApplicationAsync(builder);
 
-            await ConfigureRequestPipelineAsync(app, events);
+            await ConfigureRequestPipelineAsync(app);
 
             app.Logger.LogInformation("API configuration is complete.");
-            await events.RaiseConfigurationCompleted();
+            await Events.RaiseConfigurationCompleted();
 
-            RegisterLifetimeEventHandlers(app, events, stopwatch);
+            RegisterLifetimeEventHandlers(app);
 
             await RunApplicationAsync(app);
         }
         catch (Exception ex)
         {
             PreStartupLogger.Instance.LogError(ex, "An error has occurred during API configuration.");
-            await events.RaiseConfigurationErrorOccurred(ex);
+            await Events.RaiseConfigurationErrorOccurred(ex);
             throw;
         }
     }
@@ -80,14 +84,12 @@ public static class WebApi
     /// This calls into the default builder creation method which registers logging providers, and other service defaults.
     /// https://github.com/dotnet/aspnetcore/blob/main/src/DefaultBuilder/src/WebHost.cs#L155
     /// </summary>
-    /// <param name="options"></param>
-    /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task<WebApplicationBuilder> CreateBuilderAsync(WebApiOptions options, WebApiConfigEvents events)
+    private static async Task<WebApplicationBuilder> CreateBuilderAsync()
     {
         PreStartupLogger.Instance.LogInformation("Creating the WebApplicationBuilder.");
-        WebApplicationBuilder builder = WebApplication.CreateBuilder(options.WebApplicationOptions);
-        await events.RaiseBuilderCreated(builder);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(Options.WebApplicationOptions);
+        await Events.RaiseBuilderCreated(builder);
         PreStartupLogger.Instance.LogInformation("WebApplicationBuilder created.");
         return builder;
     }
@@ -97,13 +99,12 @@ public static class WebApi
     /// This includes framework services, and application specific services.
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="events"></param>
-    private static async Task AddServicesAsync(WebApplicationBuilder builder, WebApiConfigEvents events)
+    private static async Task AddServicesAsync(WebApplicationBuilder builder)
     {
         PreStartupLogger.Instance.LogInformation("Adding services to the DI container.");
         builder.ConfigureServices();
         PreStartupLogger.Instance.LogInformation("Services have been registered with the DI container.");
-        await events.RaiseServicesConfigured(builder);
+        await Events.RaiseServicesConfigured(builder);
     }
 
     /// <summary>
@@ -112,9 +113,8 @@ public static class WebApi
     /// Any attempts to add additional services will result in an exception.
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task<WebApplication> BuildApplicationAsync(WebApplicationBuilder builder, WebApiConfigEvents events)
+    private static async Task<WebApplication> BuildApplicationAsync(WebApplicationBuilder builder)
     {
         PreStartupLogger.Instance.LogInformation("Building the application.");
 
@@ -131,7 +131,7 @@ public static class WebApi
         PreStartupLogger.Instance.SetLogger(app.Logger);
         app.Logger.LogInformation("Application has been built.");
 
-        await events.RaiseWebApplicationBuilt(app);
+        await Events.RaiseWebApplicationBuilt(app);
 
         return app;
     }
@@ -140,17 +140,27 @@ public static class WebApi
     /// Configure the HTTP request (middleware) pipeline.
     /// </summary>
     /// <param name="app"></param>
-    /// <param name="events"></param>
     /// <returns></returns>
-    private static async Task ConfigureRequestPipelineAsync(WebApplication app, WebApiConfigEvents events)
+    private static async Task ConfigureRequestPipelineAsync(WebApplication app)
     {
         app.Logger.LogInformation("Configuring the request pipeline.");
         app.ConfigureRequestPipeline();
+        MapApplicationUptimeResource(app);
         app.Logger.LogInformation("Request pipeline has been configured.");
-        await events.RaiseRequestPipelineConfigured(app);
+        await Events.RaiseRequestPipelineConfigured(app);
     }
 
-    private static void RegisterLifetimeEventHandlers(WebApplication app, WebApiConfigEvents events, Stopwatch stopwatch)
+    private static void MapApplicationUptimeResource(WebApplication app)
+    {
+        // TODO: Add configuration around what this path is.
+        app.MapGet("/application-uptime", [HttpCacheIgnore] async (context) =>
+        {
+            TimeSpan elapsed = Stopwatch.Elapsed;
+            await context.Response.WriteAsJsonAsync(elapsed, JsonSerializerOptions.Default, CancellationToken.None);
+        }).AllowAnonymous();
+    }
+
+    private static void RegisterLifetimeEventHandlers(WebApplication app)
     {
         app.Logger.LogInformation("Registering application lifetime event handlers.");
 
@@ -158,23 +168,26 @@ public static class WebApi
 
         lifetime.ApplicationStarted.Register(() =>
         {
-            stopwatch.Stop();
-
             app.Logger.LogInformation(
                 "Application started. Total startup time: {ElapsedMilliseconds}ms",
-                stopwatch.ElapsedMilliseconds
+                Stopwatch.ElapsedMilliseconds
             );
         });
 
         lifetime.ApplicationStopping.Register(() =>
         {
-            app.Logger.LogInformation("Application is stopping.");
+            // We've kept the stopwatch running, so we can report total continuous uptime for a given instance.
+            // Since the application is shutting down, we need to ensure the stopwatch is stopped.
+            Stopwatch.Stop();
+
+            // We can additionally report this final diagnostic information.
+            app.Logger.LogInformation("Application is stopping. Total uptime: {Uptime}.", Stopwatch.Elapsed);
         });
 
         lifetime.ApplicationStopped.Register(() =>
         {
             app.Logger.LogInformation("Application has stopped.");
-            events.ClearHandlers();
+            Events.ClearHandlers();
         });
 
         app.Logger.LogInformation("Application lifetime event handler registration complete.");

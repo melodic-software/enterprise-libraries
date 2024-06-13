@@ -416,6 +416,14 @@
             </summary>
             <param name="options"></param>
         </member>
+        <member name="M:Enterprise.Api.Startup.Events.WebApiConfigEventHandlerRegistrar.RegisterHandlers(Enterprise.Api.Startup.Events.WebApiConfigEvents,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
+            <summary>
+            Dynamically resolves instances of <see cref="T:Enterprise.Api.Core.Startup.Events.Abstract.IRegisterWebApiConfigEventHandlers"/> and invokes the configure method.
+            This allows for automatic wiring up of API configuration and keeps that concern separated.
+            </summary>
+            <param name="events"></param>
+            <param name="getAssemblies"></param>
+        </member>
         <member name="T:Enterprise.Api.Startup.Events.WebApiConfigEvents">
             <summary>
             Allows for wiring up handlers to specific lifecycle events in the API configuration.
@@ -479,6 +487,14 @@
             This is required if no AutoLoad assembly attribute is defined.
             </summary>
         </member>
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptionConfigurer.Configure(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
+            <summary>
+            Dynamically resolves instances of <see cref="T:Enterprise.Api.Core.Startup.Options.Abstract.IConfigureWebApiOptions"/> and invokes the configure method.
+            This allows for automatic wiring up of API configuration and keeps that concern separated.
+            </summary>
+            <param name="options"></param>
+            <param name="getAssemblies"></param>
+        </member>
         <member name="T:Enterprise.Api.Startup.WebApi">
             <summary>
             Provides methods to bootstrap and run the web API.
@@ -489,50 +505,37 @@
             <summary>
             Bootstraps the web API by configuring services and the request pipeline, and starts the application.
             </summary>
-            <param name="args"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[],Enterprise.Api.Startup.Delegates.ConfigureApi)">
-            <summary>
-            Bootstraps the web API by configuring services and the request pipeline, and starts the application.
-            </summary>
             <param name="args">The command-line arguments passed to the application.</param>
-            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.WebApiOptions"/> and handle <see cref="T:Enterprise.Api.Startup.Events.WebApiConfigEvents"/>.</param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync">
             <summary>
             Create the WebApplicationBuilder.
             This calls into the default builder creation method which registers logging providers, and other service defaults.
             https://github.com/dotnet/aspnetcore/blob/main/src/DefaultBuilder/src/WebHost.cs#L155
             </summary>
-            <param name="options"></param>
-            <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.AddServicesAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
             <summary>
             Add services to the container.
             This includes framework services, and application specific services.
             </summary>
             <param name="builder"></param>
-            <param name="events"></param>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.BuildApplicationAsync(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
             <summary>
             Build the application.
             All services must be registered before this is called.
             Any attempts to add additional services will result in an exception.
             </summary>
             <param name="builder"></param>
-            <param name="events"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
+        <member name="M:Enterprise.Api.Startup.WebApi.ConfigureRequestPipelineAsync(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
             Configure the HTTP request (middleware) pipeline.
             </summary>
             <param name="app"></param>
-            <param name="events"></param>
             <returns></returns>
         </member>
         <member name="M:Enterprise.Api.Startup.WebApplicationBuilderExtensions.ConfigureServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">

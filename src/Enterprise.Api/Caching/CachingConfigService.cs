@@ -1,6 +1,7 @@
 ﻿using Enterprise.Api.Caching.Services;
 using Enterprise.Redis.Config;
 using Marvin.Cache.Headers;
+using Marvin.Cache.Headers.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +37,8 @@ public static class CachingConfigService
 
     public static void ConfigureResponseCaching(this IServiceCollection services)
     {
+        // TODO: Add options to make this configurable.
+
         // https://learn.microsoft.com/en-us/aspnet/core/performance/caching/response
         // NOTE: There are several requirements for response caching to work at an individual request level.
         // https://learn.microsoft.com/en-us/aspnet/core/performance/caching/middleware
@@ -73,6 +76,7 @@ public static class CachingConfigService
 
                 validationModelOptions.MustRevalidate = true;
             },
+            middlewareOptions => middlewareOptions.IgnoredStatusCodes = [..HttpStatusCodes.AllErrors], 
             storeKeyGeneratorFunc: provider => provider.GetRequiredService<CustomStoreKeyGenerator>(),
             eTagGeneratorFunc: provider => provider.GetRequiredService<CustomETagGenerator>());
 
@@ -90,7 +94,7 @@ public static class CachingConfigService
 
     public static void UseCaching(this WebApplication app)
     {
-        // TODO: Add options to enable/disable caching.
+        // TODO: Add options to make this configurable.
 
         //UseResponseCompression(app);
         //UseResponseCaching(app);
