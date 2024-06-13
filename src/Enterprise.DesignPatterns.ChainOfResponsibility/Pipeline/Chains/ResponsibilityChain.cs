@@ -18,7 +18,7 @@ public sealed class ResponsibilityChain<TRequest> : IResponsibilityChain<TReques
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(TRequest request, CancellationToken cancellationToken)
+    public async Task HandleAsync(TRequest request, CancellationToken cancellationToken = default)
     {
         SuccessorDelegate requestDelegate = () => Task.CompletedTask;
 
@@ -49,7 +49,7 @@ public sealed class ResponsibilityChain<TRequest, TResponse> : IResponsibilityCh
     }
 
     /// <inheritdoc />
-    public async Task<TResponse?> HandleAsync(TRequest request, CancellationToken cancellationToken)
+    public async Task<TResponse?> HandleAsync(TRequest request, CancellationToken cancellationToken = default)
     {
         // Start with a delegate that returns a default response.
         SuccessorDelegate<TResponse?> handlerDelegate = () => Task.FromResult<TResponse?>(default);

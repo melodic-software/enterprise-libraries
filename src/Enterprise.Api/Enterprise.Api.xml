@@ -481,15 +481,23 @@
         </member>
         <member name="T:Enterprise.Api.Startup.WebApi">
             <summary>
-            Configure services, request pipeline middleware, and startup the API.
+            Provides methods to bootstrap and run the web API.
+            This includes configuring services, request pipeline middleware, and other startup tasks.
             </summary>
+        </member>
+        <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[])">
+            <summary>
+            Bootstraps the web API by configuring services and the request pipeline, and starts the application.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
         </member>
         <member name="M:Enterprise.Api.Startup.WebApi.RunAsync(System.String[],Enterprise.Api.Startup.Delegates.ConfigureApi)">
             <summary>
-            Configures the application's services and request pipeline.
+            Bootstraps the web API by configuring services and the request pipeline, and starts the application.
             </summary>
             <param name="args">The command-line arguments passed to the application.</param>
-            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.WebApiOptions"/>.</param>
+            <param name="configure">A delegate to configure <see cref="T:Enterprise.Api.Startup.Options.WebApiOptions"/> and handle <see cref="T:Enterprise.Api.Startup.Events.WebApiConfigEvents"/>.</param>
         </member>
         <member name="M:Enterprise.Api.Startup.WebApi.CreateBuilderAsync(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Api.Startup.Events.WebApiConfigEvents)">
             <summary>

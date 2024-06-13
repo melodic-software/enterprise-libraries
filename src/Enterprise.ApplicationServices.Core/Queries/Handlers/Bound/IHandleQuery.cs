@@ -17,5 +17,5 @@ public interface IHandleQuery<in TQuery, TResult> : Handlers.IHandleQuery<TQuery
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    new Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default);
 }

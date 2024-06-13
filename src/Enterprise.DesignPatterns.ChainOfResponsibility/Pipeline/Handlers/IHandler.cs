@@ -15,7 +15,7 @@ public interface IHandler<in TRequest>
     /// <param name="next">The next handler in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken);
+    Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -32,5 +32,5 @@ public interface IHandler<in TRequest, TResponse>
     /// <param name="next">The next handler in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>A task representing the asynchronous operation, containing the response.</returns>
-    Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken);
+    Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken = default);
 }

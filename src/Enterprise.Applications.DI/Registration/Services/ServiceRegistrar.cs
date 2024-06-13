@@ -12,13 +12,13 @@ namespace Enterprise.Applications.DI.Registration.Services;
 public static class ServiceRegistrar
 {
     /// <summary>
-    /// Automatically resolves instances of <see cref="IRegisterServices"/> and invokes the registration method.
+    /// Dynamically resolves instances of <see cref="IRegisterServices"/> and invokes the registration method.
     /// This allows for automatic wiring up of services in the DI container.
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <param name="getAssemblies"></param>
-    public static void AutoRegisterServices(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
+    public static void RegisterServices(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
     {
         PreStartupLogger.Instance.LogInformation("Auto registering services with the DI container.");
 

@@ -24,7 +24,7 @@ public abstract class CommandHandlerBase<TCommand, TResult>
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken = default)
     {
         ValidateType(command, this);
         var typedCommand = (TCommand)command;
@@ -44,5 +44,5 @@ public abstract class CommandHandlerBase<TCommand, TResult>
     }
 
     /// <inheritdoc />
-    public abstract Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    public abstract Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken = default);
 }

@@ -28,7 +28,7 @@ public class RequestLoggingHandler<TRequest, TResponse> : IHandler<TRequest>, IH
     /// <param name="request">The request to process.</param>
     /// <param name="next">The next delegate in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
-    public async Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken)
+    public async Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
 
@@ -57,7 +57,7 @@ public class RequestLoggingHandler<TRequest, TResponse> : IHandler<TRequest>, IH
     /// <param name="next">The next delegate in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>The processed response.</returns>
-    public async Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
 

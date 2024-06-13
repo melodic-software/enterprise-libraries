@@ -18,5 +18,5 @@ public interface IQueryLogic<in TQuery, TResult> where TQuery : class, IQuery
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResult> ExecuteAsync(TQuery query, CancellationToken cancellationToken);
+    Task<TResult> ExecuteAsync(TQuery query, CancellationToken cancellationToken = default);
 }

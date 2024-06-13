@@ -25,7 +25,7 @@ public class EntityDeletionInterceptor : SaveChangesInterceptor
     }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData,
-        InterceptionResult<int> result, CancellationToken cancellationToken = new())
+        InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         PerformLogicalDeletion(eventData);
         return base.SavingChangesAsync(eventData, result, cancellationToken);

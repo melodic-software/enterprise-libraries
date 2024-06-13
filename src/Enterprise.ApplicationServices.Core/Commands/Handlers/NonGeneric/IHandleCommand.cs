@@ -14,5 +14,5 @@ public interface IHandleCommand : IApplicationService
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task HandleAsync(ICommand command, CancellationToken cancellationToken);
+    public Task HandleAsync(ICommand command, CancellationToken cancellationToken = default);
 }

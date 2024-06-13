@@ -12,7 +12,7 @@ public interface IResponsibilityChain<in TRequest>
     /// <param name="request">The request to process.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    Task HandleAsync(TRequest request, CancellationToken cancellationToken);
+    Task HandleAsync(TRequest request, CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -28,5 +28,5 @@ public interface IResponsibilityChain<in TRequest, TResponse>
     /// <param name="request">The request to process.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>A task representing the asynchronous operation, containing the response.</returns>
-    Task<TResponse?> HandleAsync(TRequest request, CancellationToken cancellationToken);
+    Task<TResponse?> HandleAsync(TRequest request, CancellationToken cancellationToken = default);
 }

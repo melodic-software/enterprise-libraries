@@ -22,5 +22,5 @@ public interface IHandleCommand<in TCommand, TResult> : IHandleCommand<TCommand>
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    new Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken = default);
 }

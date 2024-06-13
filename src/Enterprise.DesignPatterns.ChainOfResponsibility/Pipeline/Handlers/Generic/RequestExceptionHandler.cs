@@ -27,7 +27,7 @@ public class RequestExceptionHandler<TRequest, TResponse> : IHandler<TRequest>, 
     /// <param name="request">The request to process.</param>
     /// <param name="next">The next delegate in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
-    public async Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken)
+    public async Task HandleAsync(TRequest request, SuccessorDelegate next, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -47,7 +47,7 @@ public class RequestExceptionHandler<TRequest, TResponse> : IHandler<TRequest>, 
     /// <param name="next">The next delegate in the chain to be called after this handler.</param>
     /// <param name="cancellationToken">Token for handling cancellation of the operation.</param>
     /// <returns>The processed response or null in case of an exception.</returns>
-    public async Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse?> HandleAsync(TRequest request, SuccessorDelegate<TResponse> next, CancellationToken cancellationToken = default)
     {
         try
         {

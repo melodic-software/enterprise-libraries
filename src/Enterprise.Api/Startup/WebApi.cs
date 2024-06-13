@@ -13,17 +13,23 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.Api.Startup;
 
 /// <summary>
-/// Configure services, request pipeline middleware, and startup the API.
+/// Provides methods to bootstrap and run the web API.
+/// This includes configuring services, request pipeline middleware, and other startup tasks.
 /// </summary>
 public static class WebApi
 {
+    /// <summary>
+    /// Bootstraps the web API by configuring services and the request pipeline, and starts the application.
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
     public static async Task RunAsync(string[] args) => await RunAsync(args, (_, _) => { });
 
     /// <summary>
-    /// Configures the application's services and request pipeline.
+    /// Bootstraps the web API by configuring services and the request pipeline, and starts the application.
     /// </summary>
     /// <param name="args">The command-line arguments passed to the application.</param>
-    /// <param name="configure">A delegate to configure <see cref="WebApiOptions"/>.</param>
+    /// <param name="configure">A delegate to configure <see cref="WebApiOptions"/> and handle <see cref="WebApiConfigEvents"/>.</param>
     public static async Task RunAsync(string[] args, ConfigureApi? configure)
     {
         var stopwatch = Stopwatch.StartNew();
@@ -37,7 +43,6 @@ public static class WebApi
 
             // This is the primary hook for applications to configure the API.
             // This must be placed first in case the application decides to wire up event handlers.
-            
             configure?.Invoke(options, events);
 
             // This is the first extensibility hook that allows for pre-configuration.

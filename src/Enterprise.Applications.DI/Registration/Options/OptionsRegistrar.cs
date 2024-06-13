@@ -12,13 +12,13 @@ namespace Enterprise.Applications.DI.Registration.Options;
 public static class OptionsRegistrar
 {
     /// <summary>
-    /// Automatically resolves instances of <see cref="IRegisterOptions"/> and invokes the registration method.
+    /// Dynamically resolves instances of <see cref="IRegisterOptions"/> and invokes the registration method.
     /// This allows for automatic wiring up of options in the DI container.
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <param name="getAssemblies"></param>
-    public static void AutoRegisterOptions(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
+    public static void RegisterOptions(this IServiceCollection services, IConfiguration configuration, GetAssemblies? getAssemblies = null)
     {
         PreStartupLogger.Instance.LogInformation("Auto registering options with the DI container.");
 
