@@ -5,12 +5,41 @@ using Enterprise.Patterns.ResultPattern.Model;
 using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Generic;
 
 public class ResultElseTests
 {
     [Fact]
-    public void Else_WithFuncReturningIError_ReturnsErrorResultWhenFailed()
+    public void Else_ShouldReturnValue_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        Result<string> elseResult = result.Else(errors => new Error("Code", "Message", errors.Select(e => ErrorDescriptor.Validation)));
+
+        // Assert
+        elseResult.IsSuccess.Should().BeTrue();
+        elseResult.Value.Should().Be("value");
+    }
+
+    [Fact]
+    public void Else_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        Result<string> elseResult = result.Else(errors => new Error("NewCode", "NewMessage", errors.Select(e => ErrorDescriptor.Validation)));
+
+        // Assert
+        elseResult.IsFailure.Should().BeTrue();
+        elseResult.Errors.Should().ContainSingle().Which.Code.Should().Be("NewCode");
+    }
+
+    [Fact]
+    public void Else_WithFuncReturningIError_ShouldReturnErrorResult_WhenCalledWithFailure()
     {
         // Arrange
         IError error = Error.Validation("Sample error.");
@@ -26,7 +55,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public void Else_WithFuncReturningIError_DoesNotChangeWhenSuccessful()
+    public void Else_WithFuncReturningIError_ShouldNotChangeResult_WhenCalledWithSuccess()
     {
         // Arrange
         string expectedValue = "Success";
@@ -41,14 +70,14 @@ public class ResultElseTests
     }
 
     [Fact]
-    public void Else_WithFuncReturningIEnumerableIError_ReturnsErrorResultWhenFailed()
+    public void Else_WithFuncReturningIEnumerableIError_ShouldReturnProcessedErrorResult_WhenCalledWithFailure()
     {
         // Arrange
-        List<IError> errors =
-        [
+        var errors = new List<IError>
+        {
             Error.Validation("Original error"),
             Error.Validation("New error")
-        ];
+        };
 
         var failedResult = Result.Failure<string>(errors);
 
@@ -62,7 +91,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public void Else_WithSingleIError_ReturnsErrorResultWhenFailed()
+    public void Else_WithSingleIError_ShouldReturnOverrideError_WhenCalledWithFailure()
     {
         // Arrange
         IError newError = Error.Validation("Override error");
@@ -77,7 +106,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public void Else_WithFuncReturningT_ReturnsNewValueWhenFailed()
+    public void Else_WithFuncReturningT_ShouldReturnRecoveredValue_WhenCalledWithFailure()
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
@@ -92,7 +121,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public void Else_WithValue_ReturnsValueWhenFailed()
+    public void Else_WithValue_ShouldReturnDefaultValue_WhenCalledWithFailure()
     {
         // Arrange
         var failedResult = Result.Failure<string>(Error.Validation("Error"));
@@ -106,7 +135,44 @@ public class ResultElseTests
     }
 
     [Fact]
-    public async Task ElseAsync_WithFuncReturningTaskT_ReturnsNewValueWhenFailed()
+    public async Task ElseAsync_ShouldReturnValue_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        Result<string> elseResult = await result.ElseAsync(async errors =>
+        {
+            await Task.Delay(1);
+            return "fallback value";
+        });
+
+        // Assert
+        elseResult.IsSuccess.Should().BeTrue();
+        elseResult.Value.Should().Be("value");
+    }
+
+    [Fact]
+    public async Task ElseAsync_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        Result<string> elseResult = await result.ElseAsync(async errors =>
+        {
+            await Task.Delay(1);
+            return new Error("NewCode", "NewMessage", errors.Select(e => ErrorDescriptor.Validation));
+        });
+
+        // Assert
+        elseResult.IsFailure.Should().BeTrue();
+        elseResult.Errors.Should().ContainSingle().Which.Code.Should().Be("NewCode");
+    }
+
+    [Fact]
+    public async Task ElseAsync_WithFuncReturningTaskT_ShouldReturnAsyncRecoveredValue_WhenCalledWithFailure()
     {
         // Arrange
         var failedResult = Result.Failure<string>(Error.Validation("Error"));
@@ -120,7 +186,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public async Task ElseAsync_WithFuncReturningTaskIError_ReturnsErrorResultWhenFailed()
+    public async Task ElseAsync_WithFuncReturningTaskIError_ShouldReturnAsyncErrorResult_WhenCalledWithFailure()
     {
         // Arrange
         IError newError = Error.Validation("Async error");
@@ -135,10 +201,10 @@ public class ResultElseTests
     }
 
     [Fact]
-    public async Task ElseAsync_WithFuncReturningTaskIEnumerableIError_ReturnsErrorResultWhenFailed()
+    public async Task ElseAsync_WithFuncReturningTaskIEnumerableIError_ShouldReturnProcessedAsyncErrorResult_WhenCalledWithFailure()
     {
         // Arrange
-        List<IError> errors = [Error.Validation("Original error")];
+        var errors = new List<IError> { Error.Validation("Original error") };
         var failedResult = Result.Failure<string>(errors);
 
         // Act
@@ -150,7 +216,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public async Task ElseAsync_WithTaskIError_ReturnsErrorResultWhenFailed()
+    public async Task ElseAsync_WithTaskIError_ShouldReturnAsyncTaskErrorResult_WhenCalledWithFailure()
     {
         // Arrange
         var newErrorTask = Task.FromResult<IError>(Error.Validation("Async task error"));
@@ -165,7 +231,7 @@ public class ResultElseTests
     }
 
     [Fact]
-    public async Task ElseAsync_WithTaskT_ReturnsValueWhenFailed()
+    public async Task ElseAsync_WithTaskT_ShouldReturnAsyncTaskValue_WhenCalledWithFailure()
     {
         // Arrange
         var recoveredValueTask = Task.FromResult("Async task value");

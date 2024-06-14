@@ -1,5 +1,4 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
-using Enterprise.Patterns.ResultPattern.Model;
 using Enterprise.Patterns.ResultPattern.Model.Generic;
 
 namespace Enterprise.Patterns.ResultPattern.Errors.Extensions;

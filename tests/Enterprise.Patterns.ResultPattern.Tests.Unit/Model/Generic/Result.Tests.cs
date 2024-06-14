@@ -1,27 +1,27 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
-using Enterprise.Patterns.ResultPattern.Model;
+using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Generic;
 
 public class ResultTests
 {
     [Fact]
-    public void Result_Constructor_ShouldInitializeEmptyErrors_WhenCalledWithoutArguments()
+    public void Constructor_ShouldInitializeValueAndEmptyErrors_WhenCalledWithValue()
     {
         // Act
-        var result = new Result();
+        var result = new Result<string>("value");
 
         // Assert
+        result.Value.Should().Be("value");
         result.Errors.Should().BeEmpty();
-        result.HasErrors.Should().BeFalse();
         result.IsSuccess.Should().BeTrue();
         result.IsFailure.Should().BeFalse();
     }
 
     [Fact]
-    public void Result_Constructor_ShouldFilterInvalidErrors_WhenCalledWithErrors()
+    public void Constructor_ShouldFilterInvalidErrors_WhenCalledWithErrors()
     {
         // Arrange
         var errors = new List<IError>
@@ -31,7 +31,7 @@ public class ResultTests
         };
 
         // Act
-        var result = new Result(errors);
+        var result = new Result<string>(default, errors);
 
         // Assert
         result.Errors.Should().HaveCount(1);
@@ -39,25 +39,26 @@ public class ResultTests
     }
 
     [Fact]
-    public void Result_Success_ShouldReturnSuccessfulResult_WhenCalled()
+    public void Success_ShouldReturnSuccessfulResult_WhenCalledWithValue()
     {
         // Act
-        var result = Result.Success();
+        var result = Result<string>.Success("value");
 
         // Assert
+        result.Value.Should().Be("value");
         result.IsSuccess.Should().BeTrue();
         result.IsFailure.Should().BeFalse();
         result.Errors.Should().BeEmpty();
     }
 
     [Fact]
-    public void Result_Failure_ShouldReturnFailureResult_WhenCalledWithError()
+    public void Failure_ShouldReturnFailureResult_WhenCalledWithError()
     {
         // Arrange
         var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
 
         // Act
-        var result = Result.Failure(error);
+        var result = Result<string>.Failure(error);
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -66,7 +67,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Result_Failure_ShouldReturnFailureResult_WhenCalledWithMultipleErrors()
+    public void Failure_ShouldReturnFailureResult_WhenCalledWithMultipleErrors()
     {
         // Arrange
         var errors = new List<IError>
@@ -76,7 +77,7 @@ public class ResultTests
         };
 
         // Act
-        var result = Result.Failure(errors);
+        var result = Result<string>.Failure(errors);
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -85,62 +86,62 @@ public class ResultTests
     }
 
     [Fact]
-    public void Result_FirstError_ShouldReturnFirstTrueError_WhenCalled()
-    {
-        // Arrange
-        var errors = new List<IError>
-        {
-            new Error("Code1", "", new List<ErrorDescriptor>()), // Invalid
-            new Error("Code2", "Message2", new List<ErrorDescriptor> { ErrorDescriptor.Validation })
-        };
-
-        // Act
-        var result = new Result(errors);
-        IError firstError = result.FirstError;
-
-        // Assert
-        firstError.Code.Should().Be("Code2");
-    }
-
-    [Fact]
-    public void Result_FirstError_ShouldReturnNoneError_WhenNoTrueErrorsExist()
-    {
-        // Arrange
-        var errors = new List<IError>
-        {
-            new Error("", "", new List<ErrorDescriptor>()) // Invalid
-        };
-
-        // Act
-        var result = new Result(errors);
-        IError firstError = result.FirstError;
-
-        // Assert
-        firstError.Code.Should().Be("NoError");
-    }
-
-    [Fact]
-    public void Result_ToString_ShouldFormatCorrectly_WhenCalled()
+    public void Value_ShouldThrowInvalidOperationException_WhenCalledOnFailureResult()
     {
         // Arrange
         var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
-        var result = Result.Failure(error);
+        var result = Result<string>.Failure(error);
 
         // Act
-        string resultString = result.ToString();
+        Action act = () => { string value = result.Value; };
 
         // Assert
-        resultString.Should().Be("IsSuccess: False Error(s): 1");
+        act.Should().Throw<InvalidOperationException>().WithMessage("Cannot access the value of a failed result.*");
     }
 
     [Fact]
-    public void Result_ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromError()
+    public void Create_ShouldReturnSuccessResult_WhenCalledWithNonNullValue()
+    {
+        // Act
+        var result = Result<string>.Create("value");
+
+        // Assert
+        result.Value.Should().Be("value");
+        result.IsSuccess.Should().BeTrue();
+        result.IsFailure.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Create_ShouldReturnFailureResult_WhenCalledWithNullValue()
+    {
+        // Act
+        var result = Result<string>.Create(null);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Errors.Should().ContainSingle().Which.Code.Should().Be("NullValue");
+    }
+
+    [Fact]
+    public void ImplicitConversion_ShouldReturnSuccessResult_WhenConvertedFromValue()
+    {
+        // Act
+        Result<string> result = "value";
+
+        // Assert
+        result.Value.Should().Be("value");
+        result.IsSuccess.Should().BeTrue();
+        result.Errors.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromError()
     {
         // Arrange
         var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
 
         // Act
-        Result result = error;
+        Result<string> result = error;
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -148,7 +149,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Result_ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromErrorArray()
+    public void ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromErrorArray()
     {
         // Arrange
         Error[] errors = new[]
@@ -158,7 +159,7 @@ public class ResultTests
         };
 
         // Act
-        Result result = errors;
+        Result<string> result = errors;
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -166,7 +167,7 @@ public class ResultTests
     }
 
     [Fact]
-    public void Result_ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromErrorList()
+    public void ImplicitConversion_ShouldReturnFailureResult_WhenConvertedFromErrorList()
     {
         // Arrange
         var errors = new List<Error>
@@ -176,7 +177,7 @@ public class ResultTests
         };
 
         // Act
-        Result result = errors;
+        Result<string> result = errors;
 
         // Assert
         result.IsFailure.Should().BeTrue();

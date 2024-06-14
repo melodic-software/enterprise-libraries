@@ -2,14 +2,93 @@
 using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
+using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Generic;
 
 public class ResultMatchTests
 {
     [Fact]
-    public void Match_ExecutesOnValue_ForSuccessfulResult()
+    public void Match_ShouldReturnSuccessResult_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        string matchResult = result.Match(
+            onSuccess: value => value,
+            onError: errors => "error");
+
+        // Assert
+        matchResult.Should().Be("value");
+    }
+
+    [Fact]
+    public void Match_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        string matchResult = result.Match(
+            onSuccess: value => value,
+            onError: errors => errors.First().Code);
+
+        // Assert
+        matchResult.Should().Be("Code");
+    }
+
+    [Fact]
+    public async Task MatchAsync_ShouldReturnSuccessResult_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        string matchResult = await result.MatchAsync(
+            onSuccessAsync: async value =>
+            {
+                await Task.Delay(1);
+                return value;
+            },
+            onErrorAsync: async errors =>
+            {
+                await Task.Delay(1);
+                return "error";
+            });
+
+        // Assert
+        matchResult.Should().Be("value");
+    }
+
+    [Fact]
+    public async Task MatchAsync_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        string matchResult = await result.MatchAsync(
+            onSuccessAsync: async value =>
+            {
+                await Task.Delay(1);
+                return value;
+            },
+            onErrorAsync: async errors =>
+            {
+                await Task.Delay(1);
+                return errors.First().Code;
+            });
+
+        // Assert
+        matchResult.Should().Be("Code");
+    }
+
+    [Fact]
+    public void Match_ShouldReturnUpperCaseValue_ForSuccessfulResult()
     {
         // Arrange
         var successResult = Result.Success("success value");
@@ -24,7 +103,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public void Match_ExecutesOnError_ForFailedResult()
+    public void Match_ShouldReturnErrorMessage_ForFailedResult()
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
@@ -40,7 +119,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public async Task MatchAsync_ExecutesOnValue_ForSuccessfulResult()
+    public async Task MatchAsync_ShouldReturnUpperCaseValue_ForSuccessfulResult()
     {
         // Arrange
         var successResult = Result.Success("success value");
@@ -55,7 +134,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public async Task MatchAsync_ExecutesOnError_ForFailedResult()
+    public async Task MatchAsync_ShouldReturnErrorMessage_ForFailedResult()
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
@@ -71,7 +150,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public void MatchFirst_ExecutesOnValue_ForSuccessfulResult()
+    public void MatchFirst_ShouldReturnUpperCaseValue_ForSuccessfulResult()
     {
         // Arrange
         var successResult = Result.Success("success value");
@@ -86,7 +165,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public void MatchFirst_ExecutesOnFirstError_ForFailedResult()
+    public void MatchFirst_ShouldReturnErrorMessage_ForFailedResult()
     {
         // Arrange
         ValidationError error = Error.Validation("Error");
@@ -102,7 +181,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public async Task MatchFirstAsync_ExecutesOnValue_ForSuccessfulResult()
+    public async Task MatchFirstAsync_ShouldReturnUpperCaseValue_ForSuccessfulResult()
     {
         // Arrange
         var successResult = Result.Success("success value");
@@ -117,7 +196,7 @@ public class ResultMatchTests
     }
 
     [Fact]
-    public async Task MatchFirstAsync_ExecutesOnFirstError_ForFailedResult()
+    public async Task MatchFirstAsync_ShouldReturnErrorMessage_ForFailedResult()
     {
         // Arrange
         ValidationError error = Error.Validation("Error");

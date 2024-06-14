@@ -139,6 +139,55 @@
             These errors are specific conflicts like concurrency, or uniqueness constraints.
             </summary>
         </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.Exception">
+            <summary>
+            These are exceptions that have been caught and translated to an error object.
+            Only use if an exception is expected, and if it is possible to recover from it.
+            Use with caution.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Model.Typed.ExceptionError">
+            <summary>
+            These are exceptions that have been caught and captured as an error.
+            These should rarely be used and only if an exception is expected, and if it is possible to recover from it.
+            Use with caution.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Model.Abstract.IResult">
+            <summary>
+            Represents the outcome of an operation, encapsulating success or failure information.
+            This interface is part of the Result pattern, often used to avoid exceptions for non-exceptional control flow,
+            and is a key component of Railway Oriented Programming (ROP).
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Abstract.IResult.Errors">
+            <summary>
+            A collection of errors that may have occurred during execution.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Abstract.IResult.IsSuccess">
+            <summary>
+            Was the operation was successful?
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Abstract.IResult.IsFailure">
+            <summary>
+            Did the operation fail?
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Model.Generic.Abstract.IResult`1">
+            <summary>
+            Represents the outcome of an operation, encapsulating success or failure information and a resulting value.
+            This interface is part of the Result pattern, often used to avoid exceptions for non-exceptional control flow,
+            and is a key component of Railway Oriented Programming (ROP).
+            </summary>
+            <typeparam name="TValue">The type of the value associated with the result.</typeparam>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Generic.Abstract.IResult`1.Value">
+            <summary>
+            Gets the value associated with the result.
+            </summary>
+        </member>
         <member name="T:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1">
             <summary>
             This is the generic variant of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> that specifies a typed value.
@@ -164,7 +213,7 @@
             Represents a generic operation result, encapsulating success or failure, with associated error information.
             This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
             These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
-            This is a core component (monad) in railway oriented programming (ROP) - a functional programming design pattern.
+            This is a core component (monad) in Railway Oriented Programming (ROP) - a functional programming design pattern.
             </summary>
         </member>
     </members>

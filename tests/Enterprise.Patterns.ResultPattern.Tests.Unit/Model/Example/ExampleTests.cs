@@ -1,7 +1,7 @@
 ﻿using Enterprise.Patterns.ResultPattern.Model;
 using Xunit.Abstractions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Example;
 
 public class ExampleTests : IAsyncLifetime, IDisposable
 {

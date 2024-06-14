@@ -3,12 +3,12 @@ using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors.Deduplication;
 
 public class ErrorDedupeServiceTests
 {
     [Fact]
-    public void DedupeErrors_RemovesDuplicates_BasedOnCodeMessageAndDescriptorCount()
+    public void ErrorDedupeService_ShouldRemoveDuplicates_WhenCalledWithDuplicateErrors()
     {
         // Arrange
         List<IError> errors =
@@ -17,7 +17,7 @@ public class ErrorDedupeServiceTests
             new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }), // Duplicate
             new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.BusinessRule, ErrorDescriptor.Validation }), // Different count
             new Error("Code2", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }),
-            new Error("Code1", "Different message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }) // Different message
+            new Error("Code1", "Different message", new List<ErrorDescriptor> { ErrorDescriptor.Validation })
         ];
 
         // Act
@@ -32,7 +32,7 @@ public class ErrorDedupeServiceTests
     }
 
     [Fact]
-    public void DedupeErrors_HandlesEmptyCollection_ReturnsEmptyCollection()
+    public void ErrorDedupeService_ShouldReturnEmptyCollection_WhenCalledWithEmptyCollection()
     {
         // Arrange
         List<IError> errors = [];
@@ -45,11 +45,10 @@ public class ErrorDedupeServiceTests
     }
 
     [Fact]
-    public void DedupeErrors_HandlesSingleError_ReturnsSingleError()
+    public void ErrorDedupeService_ShouldReturnSingleError_WhenCalledWithSingleError()
     {
         // Arrange
-        List<IError> errors =
-            [new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation })];
+        List<IError> errors = [new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation })];
 
         // Act
         IEnumerable<IError> dedupedErrors = ErrorDedupeService.DedupeErrors(errors).ToList();
@@ -61,7 +60,7 @@ public class ErrorDedupeServiceTests
     }
 
     [Fact]
-    public void DedupeErrors_DistinguishesErrors_WithDifferentDescriptorCounts()
+    public void ErrorDedupeService_ShouldDistinguishErrors_WhenCalledWithDifferentDescriptorCounts()
     {
         // Arrange
         List<IError> errors =
@@ -77,5 +76,46 @@ public class ErrorDedupeServiceTests
         dedupedErrors.Should().HaveCount(2);
         dedupedErrors.First().Descriptors.Should().HaveCount(1);
         dedupedErrors.ElementAt(1).Descriptors.Should().HaveCount(2);
+    }
+
+    [Fact]
+    public void ErrorDedupeService_ShouldReturnOriginalCollection_WhenCalledWithNoDuplicates()
+    {
+        // Arrange
+        List<IError> errors =
+        [
+            new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }),
+            new Error("Code2", "Another message", new List<ErrorDescriptor> { ErrorDescriptor.NotFound })
+        ];
+
+        // Act
+        IEnumerable<IError> dedupedErrors = ErrorDedupeService.DedupeErrors(errors).ToList();
+
+        // Assert
+        dedupedErrors.Should().HaveCount(2);
+        dedupedErrors.Should().Contain(e => e.Code == "Code1" && e.Message == "Error message");
+        dedupedErrors.Should().Contain(e => e.Code == "Code2" && e.Message == "Another message");
+    }
+
+    [Fact]
+    public void ErrorDedupeService_ShouldRetainUniqueErrors_WhenCalledWithMixedDuplicateAndUniqueErrors()
+    {
+        // Arrange
+        List<IError> errors =
+        [
+            new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }),
+            new Error("Code1", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }), // Duplicate
+            new Error("Code2", "Error message", new List<ErrorDescriptor> { ErrorDescriptor.Validation }),
+            new Error("Code2", "Another message", new List<ErrorDescriptor> { ErrorDescriptor.NotFound })
+        ];
+
+        // Act
+        IEnumerable<IError> dedupedErrors = ErrorDedupeService.DedupeErrors(errors).ToList();
+
+        // Assert
+        dedupedErrors.Should().HaveCount(3);
+        dedupedErrors.Should().ContainSingle(e => e.Code == "Code1" && e.Message == "Error message");
+        dedupedErrors.Should().ContainSingle(e => e.Code == "Code2" && e.Message == "Error message");
+        dedupedErrors.Should().ContainSingle(e => e.Code == "Code2" && e.Message == "Another message");
     }
 }

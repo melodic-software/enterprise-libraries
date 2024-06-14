@@ -5,10 +5,76 @@ using Enterprise.Patterns.ResultPattern.Model;
 using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Generic;
 
 public class ResultThenTests
 {
+    [Fact]
+    public void Then_ShouldInvokeOnSuccess_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        Result<int> thenResult = result.Then(value => Result<int>.Success(value.Length));
+
+        // Assert
+        thenResult.IsSuccess.Should().BeTrue();
+        thenResult.Value.Should().Be(5);
+    }
+
+    [Fact]
+    public void Then_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        Result<int> thenResult = result.Then(value => Result<int>.Success(value.Length));
+
+        // Assert
+        thenResult.IsFailure.Should().BeTrue();
+        thenResult.Errors.Should().ContainSingle().Which.Should().Be(error);
+    }
+
+    [Fact]
+    public async Task ThenAsync_ShouldInvokeOnSuccess_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+
+        // Act
+        Result<int> thenResult = await result.ThenAsync(async value =>
+        {
+            await Task.Delay(1);
+            return Result<int>.Success(value.Length);
+        });
+
+        // Assert
+        thenResult.IsSuccess.Should().BeTrue();
+        thenResult.Value.Should().Be(5);
+    }
+
+    [Fact]
+    public async Task ThenAsync_ShouldReturnFailureResult_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+
+        // Act
+        Result<int> thenResult = await result.ThenAsync(async value =>
+        {
+            await Task.Delay(1);
+            return Result<int>.Success(value.Length);
+        });
+
+        // Assert
+        thenResult.IsFailure.Should().BeTrue();
+        thenResult.Errors.Should().ContainSingle().Which.Should().Be(error);
+    }
+
     [Fact]
     public void Then_ExecutesFunctionOnValue_ForSuccessfulResult()
     {
@@ -46,10 +112,7 @@ public class ResultThenTests
         bool actionExecuted = false;
 
         // Act
-        Result<string> result = successResult.Then(value =>
-        {
-            actionExecuted = true;
-        });
+        Result<string> result = successResult.Then(value => { actionExecuted = true; });
 
         // Assert
         result.IsSuccess.Should().BeTrue();

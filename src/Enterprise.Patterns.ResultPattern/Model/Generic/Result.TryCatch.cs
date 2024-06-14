@@ -5,7 +5,7 @@ namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
 public partial class Result<T>
 {
-    public Result<TOut> TryCatch<TOut>(Func<T, TOut> func)
+    public Result<TOut> TryCatch<TOut>(Func<T, Result<TOut>> func)
     {
         try
         {
@@ -21,18 +21,15 @@ public partial class Result<T>
     {
         try
         {
-            return IsSuccess ? func(Value) : Result<TOut>.Failure(Errors);
+            return IsSuccess ? Result<TOut>.Success(func(Value)) : Result<TOut>.Failure(Errors);
         }
         catch
         {
-            // The exception is swallowed here.
-            // The other method should be considered if access to exception details is required.
-            // The delegate should probably contain logging code as a minimum.
-            return error;
+            return Result<TOut>.Failure(error);
         }
     }
 
-    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<T, Task<TOut>> func)
+    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<T, Task<Result<TOut>>> func)
     {
         try
         {
@@ -48,14 +45,11 @@ public partial class Result<T>
     {
         try
         {
-            return IsSuccess ? await func(Value).ConfigureAwait(false) : Result<TOut>.Failure(Errors);
+            return IsSuccess ? Result<TOut>.Success(await func(Value).ConfigureAwait(false)) : Result<TOut>.Failure(Errors);
         }
         catch
         {
-            // The exception is swallowed here.
-            // The other method should be considered if access to exception details is required.
-            // The delegate should probably contain logging code as a minimum.
-            return error;
+            return Result<TOut>.Failure(error);
         }
     }
 }

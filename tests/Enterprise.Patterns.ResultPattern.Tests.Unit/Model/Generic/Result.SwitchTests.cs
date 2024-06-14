@@ -2,12 +2,103 @@
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
+using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
-namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;
+namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model.Generic;
 
 public class ResultSwitchTests
 {
+    [Fact]
+    public void Switch_ShouldInvokeOnSuccess_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+        bool successCalled = false;
+        bool errorCalled = false;
+
+        // Act
+        result.Switch(
+            onSuccess: value => successCalled = true,
+            onError: errors => errorCalled = true);
+
+        // Assert
+        successCalled.Should().BeTrue();
+        errorCalled.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Switch_ShouldInvokeOnError_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+        bool successCalled = false;
+        bool errorCalled = false;
+
+        // Act
+        result.Switch(
+            onSuccess: value => successCalled = true,
+            onError: errors => errorCalled = true);
+
+        // Assert
+        successCalled.Should().BeFalse();
+        errorCalled.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task SwitchAsync_ShouldInvokeOnSuccess_WhenCalledWithSuccess()
+    {
+        // Arrange
+        var result = Result<string>.Success("value");
+        bool successCalled = false;
+        bool errorCalled = false;
+
+        // Act
+        await result.SwitchAsync(
+            onSuccess: async value =>
+            {
+                successCalled = true;
+                await Task.Delay(1);
+            },
+            onErrorAsync: async errors =>
+            {
+                errorCalled = true;
+                await Task.Delay(1);
+            });
+
+        // Assert
+        successCalled.Should().BeTrue();
+        errorCalled.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task SwitchAsync_ShouldInvokeOnError_WhenCalledWithFailure()
+    {
+        // Arrange
+        var error = new Error("Code", "Message", new List<ErrorDescriptor> { ErrorDescriptor.Validation });
+        var result = Result<string>.Failure(error);
+        bool successCalled = false;
+        bool errorCalled = false;
+
+        // Act
+        await result.SwitchAsync(
+            onSuccess: async value =>
+            {
+                successCalled = true;
+                await Task.Delay(1);
+            },
+            onErrorAsync: async errors =>
+            {
+                errorCalled = true;
+                await Task.Delay(1);
+            });
+
+        // Assert
+        successCalled.Should().BeFalse();
+        errorCalled.Should().BeTrue();
+    }
+
     [Fact]
     public void Switch_ExecutesOnValue_ForSuccessfulResult()
     {
@@ -38,10 +129,7 @@ public class ResultSwitchTests
         // Act
         failedResult.Switch(
             value => valueActionInvoked = true,
-            errors =>
-            {
-                errorActionInvoked = true;
-            });
+            errors => errorActionInvoked = true);
 
         // Assert
         valueActionInvoked.Should().BeFalse();
@@ -62,10 +150,11 @@ public class ResultSwitchTests
             {
                 valueActionInvoked = true;
                 await Task.CompletedTask;
-            }, errors =>
+            },
+            async errors =>
             {
                 errorActionInvoked = true;
-                return Task.CompletedTask;
+                await Task.CompletedTask;
             });
 
         // Assert
@@ -84,10 +173,11 @@ public class ResultSwitchTests
         IEnumerable<IError> onErrorErrors = new List<IError>();
 
         // Act
-        await failedResult.SwitchAsync(value =>
+        await failedResult.SwitchAsync(
+            async value =>
             {
                 valueActionInvoked = true;
-                return Task.CompletedTask;
+                await Task.CompletedTask;
             },
             async errors =>
             {
@@ -159,10 +249,11 @@ public class ResultSwitchTests
             {
                 valueActionInvoked = true;
                 await Task.CompletedTask;
-            }, error =>
+            },
+            async error =>
             {
                 errorActionInvoked = true;
-                return Task.CompletedTask;
+                await Task.CompletedTask;
             });
 
         // Assert
@@ -181,10 +272,11 @@ public class ResultSwitchTests
         string firstErrorMessage = string.Empty;
 
         // Act
-        await failedResult.SwitchFirstAsync(value =>
+        await failedResult.SwitchFirstAsync(
+            async value =>
             {
                 valueActionInvoked = true;
-                return Task.CompletedTask;
+                await Task.CompletedTask;
             },
             async firstError =>
             {
