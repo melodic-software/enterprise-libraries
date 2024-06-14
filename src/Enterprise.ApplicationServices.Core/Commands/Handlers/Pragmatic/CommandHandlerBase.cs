@@ -38,7 +38,7 @@ public abstract class CommandHandlerBase<TCommand, TResult>
     }
 
     /// <inheritdoc />
-    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         return await HandleAsync(request, cancellationToken);
     }

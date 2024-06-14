@@ -25,20 +25,20 @@ public class QueryDispatchFacade : IQueryDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken = default)
         where TQuery : class, IQuery
     {
         return await _queryDispatcher.DispatchAsync<TQuery, TResult>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IQuery query, CancellationToken cancellationToken = default)
     {
         return await _queryDispatcher.DispatchAsync<TResult>(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
     {
         return await _queryDispatcher.DispatchAsync(query, cancellationToken);
     }

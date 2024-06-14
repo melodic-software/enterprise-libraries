@@ -54,6 +54,14 @@ public static class ControllerConfigService
             builder.AddApplicationPart(assembly);
         }
 
+        // TODO: Explore this and dynamic "part" deprecation as shown here with modular monolith:
+        // https://github.com/devmentors/Inflow/blob/master/src/Shared/Inflow.Shared.Infrastructure/Extensions.cs#L106
+        // NOTE: We'd probably adapt the previous method to filter based off of assembly/module state (enabled/disabled).
+        //builder.ConfigureApplicationPartManager(manager =>
+        //{
+            
+        //});
+
         return builder;
     }
 

@@ -17,7 +17,7 @@ public class CommandDispatcher : IDispatchCommands
     }
 
     /// <inheritdoc />
-    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
         where TCommand : class, ICommand
     {
         IHandleCommand<TCommand> handler = _commandHandlerResolver.GetHandlerFor(command);
@@ -25,7 +25,7 @@ public class CommandDispatcher : IDispatchCommands
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default)
         where TCommand : class, ICommand<TResult>
     {
         IHandleCommand<TCommand, TResult> handler = _commandHandlerResolver.GetHandlerFor<TCommand, TResult>(command);

@@ -13,7 +13,7 @@ public class SecondPipelineHandler : IHandler<MyRequest, MyResponse>
         _logger = logger;
     }
 
-    public async Task<MyResponse?> HandleAsync(MyRequest request, SuccessorDelegate<MyResponse> next, CancellationToken cancellationToken)
+    public async Task<MyResponse?> HandleAsync(MyRequest request, SuccessorDelegate<MyResponse> next, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Starting second pipeline link.");
         MyResponse result = await next();

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 using Enterprise.Api.Diagnostics;
+using Enterprise.Api.ModularMonolith.Configuration;
 using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Options;
 using Enterprise.Applications.DI.ServiceCollection;
@@ -89,6 +90,7 @@ public static class WebApi
     {
         PreStartupLogger.Instance.LogInformation("Creating the WebApplicationBuilder.");
         WebApplicationBuilder builder = WebApplication.CreateBuilder(Options.WebApplicationOptions);
+        builder.RegisterModuleConfig();
         await Events.RaiseBuilderCreated(builder);
         PreStartupLogger.Instance.LogInformation("WebApplicationBuilder created.");
         return builder;

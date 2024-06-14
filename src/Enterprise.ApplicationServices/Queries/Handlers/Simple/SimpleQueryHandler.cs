@@ -33,7 +33,7 @@ public class SimpleQueryHandler<TQuery, TResult> :
     }
 
     /// <inheritdoc />
-    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
         return await _queryLogic.ExecuteAsync(query, cancellationToken);
     }

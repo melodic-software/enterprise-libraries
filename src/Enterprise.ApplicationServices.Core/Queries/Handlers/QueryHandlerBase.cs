@@ -31,7 +31,7 @@ public abstract class QueryHandlerBase<TQuery, TResult> :
     }
 
     /// <inheritdoc />
-    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         return await HandleAsync(request, cancellationToken);
     }

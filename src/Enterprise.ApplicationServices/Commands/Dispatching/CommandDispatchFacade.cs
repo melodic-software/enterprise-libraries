@@ -24,14 +24,14 @@ public class CommandDispatchFacade : ICommandDispatchFacade
     }
 
     /// <inheritdoc />
-    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken)
+    public async Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
         where TCommand : class, ICommand
     {
         await _commandDispatcher.DispatchAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken)
+    public async Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default)
         where TCommand : class, ICommand<TResult>
     {
         return await _commandDispatcher.DispatchAsync<TCommand, TResult>(command, cancellationToken);

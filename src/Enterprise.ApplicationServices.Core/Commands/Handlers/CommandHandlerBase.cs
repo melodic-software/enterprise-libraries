@@ -29,7 +29,7 @@ public abstract class CommandHandlerBase<TCommand> :
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(TCommand request, SuccessorDelegate next, CancellationToken cancellationToken)
+    public async Task HandleAsync(TCommand request, SuccessorDelegate next, CancellationToken cancellationToken = default)
     {
         await HandleAsync(request, cancellationToken);
     }
