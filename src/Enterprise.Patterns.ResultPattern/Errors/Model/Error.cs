@@ -1,8 +1,8 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Abstract;
-using Enterprise.Patterns.ResultPattern.Errors.Typed;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 
-namespace Enterprise.Patterns.ResultPattern.Errors;
+namespace Enterprise.Patterns.ResultPattern.Errors.Model;
 
 /// <summary>
 /// An error that has occurred in the domain layer, or one that has been captured and translated in the application service layer.
@@ -75,7 +75,7 @@ public class Error : IError
     public override string ToString()
     {
         string result = Code;
-        
+
         if (!string.IsNullOrWhiteSpace(Message))
         {
             result += $" - {Message}";

@@ -4,102 +4,34 @@
         <name>Enterprise.Patterns.ResultPattern</name>
     </assembly>
     <members>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Error">
-            <summary>
-            An error that has occurred in the domain layer, or one that has been captured and translated in the application service layer.
-            This error class can be used with factory creation methods along with the Result pattern objects.
-            Derived types can be created, but may create too much additional complexity or overhead.
-            A base for each descriptor can be applied if desired.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Code">
-            <summary>
-            A short human-readable code for the error.
-            Examples: "User.NotFound", "Payment.NotReceived", "Subscription.Inactive", etc.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Message">
-            <summary>
-            The human-readable message explaining the error.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Descriptors">
-            <summary>
-            One or more descriptors for the type, quality, and kind of error.
-            Most errors typically have only one.
-            This can help application components in the presentation layer present the best possible response.
-            </summary>
-        </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Error.Metadata">
-            <summary>
-            An optional dictionary for passing along additional information.
-            </summary>
-        </member>
-        <member name="M:Enterprise.Patterns.ResultPattern.Errors.Error.None">
-            <summary>
-            This uses the "null object" pattern to represent a non error.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorDedupeService">
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Deduplication.ErrorDedupeService">
             <summary>
             Provides services for deduplicating errors.
             </summary>
         </member>
-        <member name="M:Enterprise.Patterns.ResultPattern.Errors.ErrorDedupeService.DedupeErrors(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.Deduplication.ErrorDedupeService.DedupeErrors(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError})">
             <summary>
             Deduplicates a collection of errors based on their code, message, and descriptor count.
             </summary>
             <param name="errors">The collection of errors to deduplicate.</param>
             <returns>A collection of deduplicated errors.</returns>
         </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor">
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Extensions.ErrorCollectionExtensions">
             <summary>
-            Describes the type, quality, and kind of error.
+            These are extension methods that deal with error collections.
             </summary>
         </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.NoError">
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Extensions.ErrorExtensions">
             <summary>
-            This is used as a default value to represent the absence of an error.
-            The "null object" pattern can be applied with an error instance with this descriptor, which helps reduce null checks.
+            These are extension methods that deal with singular errors.
             </summary>
         </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Validation">
-            <summary>
-            These errors occur when client input does not meet validation rules.
-            Examples: format errors, range violations, missing required fields, etc.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Permission">
-            <summary>
-            These errors occur when a user or system component attempts to perform an operation
-            for which they do not have the necessary permissions or rights.
-            They're forbidden to take the action.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.BusinessRule">
-            <summary>
-            These errors occur when an operation violates domain-specific business rules or logic.
-            These are typically used to enforce invariants within the domain.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.NotFound">
-            <summary>
-            This error occurs when required entities or resources are not found.
-            This is commonly used in scenarios like database lookups.
-            </summary>
-        </member>
-        <member name="F:Enterprise.Patterns.ResultPattern.Errors.ErrorDescriptor.Conflict">
-            <summary>
-            These errors are specific conflicts like concurrency, or uniqueness constraints.
-            </summary>
-        </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.ErrorFilterService">
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Filtering.ErrorFilterService">
             <summary>
             Provides services for filtering errors.
             </summary>
         </member>
-        <member name="M:Enterprise.Patterns.ResultPattern.Errors.ErrorFilterService.FilterInvalid(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.Filtering.ErrorFilterService.FilterInvalid(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError})">
             <summary>
             Filters out invalid errors that do not contain a code, message, or any descriptors.
             An error is considered invalid if the code is the default, and does not contain a message or descriptors.
@@ -107,31 +39,104 @@
             <param name="errors">The collection of errors to filter.</param>
             <returns>A collection of valid errors.</returns>
         </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Extensions.ErrorCollectionExtensions">
-            <summary>
-            Provides extension methods for collections of IError.
-            </summary>
-        </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Errors.IError">
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError">
             <summary>
             An error that has occurred within the context of the domain.
             These are typically aggregated and raised in the application service layer.
             </summary>
         </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Code">
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError.Code">
             <summary>
             A constant descriptor for the error.
             Examples: "Entity.NotFound", "User.AlreadyRegistered", "Schedule.Conflict", etc.
             </summary>
         </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Message">
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError.Message">
             <summary>
             The human-readable message that describes the validation issue.
             </summary>
         </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Errors.IError.Descriptors">
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError.Descriptors">
             <summary>
             One or more error types that describe the error.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Model.Error">
+            <summary>
+            An error that has occurred in the domain layer, or one that has been captured and translated in the application service layer.
+            This error class can be used with factory creation methods along with the Result pattern objects.
+            Derived types can be created, but may create too much additional complexity or overhead.
+            A base for each descriptor can be applied if desired.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Error.Code">
+            <summary>
+            A short human-readable code for the error.
+            Examples: "User.NotFound", "Payment.NotReceived", "Subscription.Inactive", etc.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Error.Message">
+            <summary>
+            The human-readable message explaining the error.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Error.Descriptors">
+            <summary>
+            One or more descriptors for the type, quality, and kind of error.
+            Most errors typically have only one.
+            This can help application components in the presentation layer present the best possible response.
+            </summary>
+        </member>
+        <member name="P:Enterprise.Patterns.ResultPattern.Errors.Model.Error.Metadata">
+            <summary>
+            An optional dictionary for passing along additional information.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Patterns.ResultPattern.Errors.Model.Error.None">
+            <summary>
+            This uses the "null object" pattern to represent a non error.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor">
+            <summary>
+            Describes the type, quality, and kind of error.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.NoError">
+            <summary>
+            This is used as a default value to represent the absence of an error.
+            The "null object" pattern can be applied with an error instance with this descriptor, which helps reduce null checks.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.Validation">
+            <summary>
+            These errors occur when client input does not meet validation rules.
+            Examples: format errors, range violations, missing required fields, etc.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.Permission">
+            <summary>
+            These errors occur when a user or system component attempts to perform an operation
+            for which they do not have the necessary permissions or rights.
+            They're forbidden to take the action.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.BusinessRule">
+            <summary>
+            These errors occur when an operation violates domain-specific business rules or logic.
+            These are typically used to enforce invariants within the domain.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.NotFound">
+            <summary>
+            This error occurs when required entities or resources are not found.
+            This is commonly used in scenarios like database lookups.
+            </summary>
+        </member>
+        <member name="F:Enterprise.Patterns.ResultPattern.Errors.Model.ErrorDescriptor.Conflict">
+            <summary>
+            These errors are specific conflicts like concurrency, or uniqueness constraints.
             </summary>
         </member>
         <member name="T:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1">
@@ -159,6 +164,7 @@
             Represents a generic operation result, encapsulating success or failure, with associated error information.
             This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
             These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
+            This is a core component (monad) in railway oriented programming (ROP) - a functional programming design pattern.
             </summary>
         </member>
     </members>

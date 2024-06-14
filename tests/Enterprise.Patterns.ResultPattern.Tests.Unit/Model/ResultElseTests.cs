@@ -1,6 +1,6 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
-using Enterprise.Patterns.ResultPattern.Errors.Abstract;
-using Enterprise.Patterns.ResultPattern.Errors.Typed;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;

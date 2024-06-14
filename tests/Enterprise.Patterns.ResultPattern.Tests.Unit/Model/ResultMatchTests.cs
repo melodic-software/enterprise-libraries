@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using Enterprise.Patterns.ResultPattern.Errors;
-using Enterprise.Patterns.ResultPattern.Errors.Typed;
+using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using FluentAssertions;
 

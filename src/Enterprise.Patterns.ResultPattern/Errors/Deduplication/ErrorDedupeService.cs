@@ -1,6 +1,6 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Abstract;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 
-namespace Enterprise.Patterns.ResultPattern.Errors;
+namespace Enterprise.Patterns.ResultPattern.Errors.Deduplication;
 
 /// <summary>
 /// Provides services for deduplicating errors.

@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Patterns.ResultPattern.Errors;
+﻿namespace Enterprise.Patterns.ResultPattern.Errors.Model;
 
 /// <summary>
 /// Describes the type, quality, and kind of error.

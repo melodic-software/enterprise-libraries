@@ -1,5 +1,5 @@
-﻿using Enterprise.Api.Core.Startup.Events.Abstract;
-using Enterprise.Api.Startup.Events;
+﻿using Enterprise.Api.Startup.Events;
+using Enterprise.Api.Startup.Events.Abstract;
 using Example.WebApi.ChainOfResponsibility.Examples.Classic.Demo;
 using Example.WebApi.ChainOfResponsibility.Examples.Modern.Demo;
 using Example.WebApi.ChainOfResponsibility.Examples.Pipeline.Demo;

@@ -1,6 +1,7 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
-using Enterprise.Patterns.ResultPattern.Errors.Abstract;
-using Enterprise.Patterns.ResultPattern.Errors.Extensions;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
+using Enterprise.Patterns.ResultPattern.Errors.Filtering;
+using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Enterprise.Patterns.ResultPattern.Model.Abstract;
 using Enterprise.Patterns.ResultPattern.Model.Generic;
 
@@ -10,26 +11,34 @@ namespace Enterprise.Patterns.ResultPattern.Model;
 /// Represents a generic operation result, encapsulating success or failure, with associated error information.
 /// This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
 /// These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
-/// This is a core component (monad) in railway oriented programming (ROP) - a functional programming design pattern.
+/// This is a core component (monad) in Railway Oriented Programming (ROP) - a functional programming design pattern.
 /// </summary>
 public class Result : IResult
 {
-    private readonly IEnumerable<IError> _errors;
+    private readonly IEnumerable<IError> _errors = [];
 
-    public bool IsSuccess => !HasErrors;
-    public bool IsFailure => !IsSuccess;
-    public List<IError> Errors => _errors.GetTrueErrors();
-    public bool HasErrors => Errors.HasTrueError();
-    public IError FirstError => Errors.Find(x => x.IsTrueError()) ?? Errors.FirstOrDefault() ?? Error.None();
-    
-    protected internal Result(IEnumerable<IError> errors)
+    public List<IError> Errors
     {
-        IEnumerable<IError> filtered = ErrorFilterService.FilterInvalid(errors);
-
-        _errors = filtered;
+        get => _errors.GetTrueErrors();
+        private init => _errors = value;
     }
 
-    public static Result Success() => new([]);
+    public bool HasErrors => Errors.HasTrueError();
+    public IError FirstError => Errors.Find(x => x.IsTrueError()) ?? Errors.FirstOrDefault() ?? Error.None();
+    public bool IsSuccess => !HasErrors;
+    public bool IsFailure => !IsSuccess;
+    
+    protected internal Result()
+    {
+        Errors = [];
+    }
+
+    protected internal Result(IEnumerable<IError> errors)
+    {
+        Errors = ErrorFilterService.FilterInvalid(errors).ToList();
+    }
+
+    public static Result Success() => new();
     public static Result<T> Success<T>(T value) => new(value);
     public static Result Failure(IError error) => new([error]);
     public static Result Failure(IEnumerable<IError> errors) => new(errors);
@@ -53,5 +62,3 @@ public class Result : IResult
         return result;
     }
 }
-
-

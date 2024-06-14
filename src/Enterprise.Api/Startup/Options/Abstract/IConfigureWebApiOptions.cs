@@ -1,6 +1,4 @@
-﻿using Enterprise.Api.Startup.Options;
-
-namespace Enterprise.Api.Core.Startup.Options.Abstract;
+﻿namespace Enterprise.Api.Startup.Options.Abstract;
 
 public interface IConfigureWebApiOptions
 {

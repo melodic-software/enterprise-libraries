@@ -1,4 +1,6 @@
-﻿namespace Enterprise.Patterns.ResultPattern.Errors.Extensions;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
+
+namespace Enterprise.Patterns.ResultPattern.Errors.Extensions;
 
 public static class ErrorDescriptorExtensions
 {

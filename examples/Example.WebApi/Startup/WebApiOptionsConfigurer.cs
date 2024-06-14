@@ -1,5 +1,5 @@
-﻿using Enterprise.Api.Core.Startup.Options.Abstract;
-using Enterprise.Api.Startup.Options;
+﻿using Enterprise.Api.Startup.Options;
+using Enterprise.Api.Startup.Options.Abstract;
 
 namespace Example.WebApi.Startup;
 

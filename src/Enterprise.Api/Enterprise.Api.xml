@@ -426,7 +426,7 @@
         </member>
         <member name="M:Enterprise.Api.Startup.Events.WebApiConfigEventHandlerRegistrar.RegisterHandlers(Enterprise.Api.Startup.Events.WebApiConfigEvents,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
-            Dynamically resolves instances of <see cref="T:Enterprise.Api.Core.Startup.Events.Abstract.IRegisterWebApiConfigEventHandlers"/> and invokes the configure method.
+            Dynamically resolves instances of <see cref="T:Enterprise.Api.Startup.Events.Abstract.IRegisterWebApiConfigEventHandlers"/> and invokes the configure method.
             This allows for automatic wiring up of API configuration and keeps that concern separated.
             </summary>
             <param name="events"></param>
@@ -497,7 +497,7 @@
         </member>
         <member name="M:Enterprise.Api.Startup.Options.WebApiOptionConfigurer.Configure(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
-            Dynamically resolves instances of <see cref="T:Enterprise.Api.Core.Startup.Options.Abstract.IConfigureWebApiOptions"/> and invokes the configure method.
+            Dynamically resolves instances of <see cref="T:Enterprise.Api.Startup.Options.Abstract.IConfigureWebApiOptions"/> and invokes the configure method.
             This allows for automatic wiring up of API configuration and keeps that concern separated.
             </summary>
             <param name="options"></param>

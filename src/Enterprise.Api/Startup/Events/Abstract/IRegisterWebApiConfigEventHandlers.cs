@@ -1,6 +1,4 @@
-﻿using Enterprise.Api.Startup.Events;
-
-namespace Enterprise.Api.Core.Startup.Events.Abstract;
+﻿namespace Enterprise.Api.Startup.Events.Abstract;
 
 public interface IRegisterWebApiConfigEventHandlers
 {

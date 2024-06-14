@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
-using Enterprise.Patterns.ResultPattern.Errors;
-using Enterprise.Patterns.ResultPattern.Errors.Abstract;
+using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Enterprise.Patterns.ResultPattern.Model.Generic.Abstract;
 
 namespace Enterprise.Patterns.ResultPattern.Model.Generic;
@@ -49,8 +49,7 @@ public partial class Result<T> : Result, IResult<T>
         }
     }
 
-    protected internal Result(T? value, IEnumerable<IError> errors)
-        : base(errors)
+    protected internal Result(T? value, IEnumerable<IError> errors) : base(errors)
     {
         _value = value;
     }
@@ -70,8 +69,13 @@ public partial class Result<T> : Result, IResult<T>
         return new Result<T>(value);
     }
 
+    public static Result<T> Success(T value) => new(value);
+    public static new Result<T> Failure(IError error) => new(default, [error]);
+    public static new Result<T> Failure(IEnumerable<IError> errors) => new(default, errors);
+    public static Result<T> Create(T? value) => value is not null ? Success(value) : Failure(Error.NullValue());
+
     public static implicit operator Result<T>(T? value) => Create(value);
-    public static implicit operator Result<T>(Error error) => Failure<T>(error);
-    public static implicit operator Result<T>(Error[] errors) => Failure<T>(errors.ToList());
-    public static implicit operator Result<T>(List<Error> errors) => Failure<T>(errors);
+    public static implicit operator Result<T>(Error error) => Failure(error);
+    public static implicit operator Result<T>(Error[] errors) => Failure(errors.ToList());
+    public static implicit operator Result<T>(List<Error> errors) => Failure(errors);
 }

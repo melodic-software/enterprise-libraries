@@ -1,6 +1,6 @@
 ﻿using Enterprise.Patterns.ResultPattern.Model.Generic;
 
-namespace Enterprise.Patterns.ResultPattern.Extensions;
+namespace Enterprise.Patterns.ResultPattern.Extensions.Generic;
 
 public static partial class ResultExtensions
 {

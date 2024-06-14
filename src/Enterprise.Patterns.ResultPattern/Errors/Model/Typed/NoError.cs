@@ -1,4 +1,6 @@
-﻿namespace Enterprise.Patterns.ResultPattern.Errors.Typed;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
+
+namespace Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 
 public class NoError : Error
 {

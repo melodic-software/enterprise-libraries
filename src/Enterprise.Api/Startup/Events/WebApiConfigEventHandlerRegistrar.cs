@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Enterprise.Api.Core.Startup.Events.Abstract;
+using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.Applications.DI.Registration.Methods;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Reflection.Assemblies.Delegates;

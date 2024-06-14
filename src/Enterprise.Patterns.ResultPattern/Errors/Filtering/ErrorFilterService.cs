@@ -1,6 +1,7 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Abstract;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 
-namespace Enterprise.Patterns.ResultPattern.Errors;
+namespace Enterprise.Patterns.ResultPattern.Errors.Filtering;
 
 /// <summary>
 /// Provides services for filtering errors.
