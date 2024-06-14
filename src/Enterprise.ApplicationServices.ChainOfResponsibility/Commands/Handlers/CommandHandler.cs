@@ -15,7 +15,7 @@ public sealed class CommandHandler<TCommand> : IHandleCommand<TCommand> where TC
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(ICommand command, CancellationToken cancellationToken = default)
     {
         ValidateType(command, this);
         var typedCommand = (TCommand)command;
@@ -23,7 +23,7 @@ public sealed class CommandHandler<TCommand> : IHandleCommand<TCommand> where TC
     }
 
     /// <inheritdoc />
-    public async Task HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default)
     {
         await _responsibilityChain.HandleAsync(command, cancellationToken);
     }

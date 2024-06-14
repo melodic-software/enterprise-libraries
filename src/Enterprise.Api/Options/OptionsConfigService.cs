@@ -10,6 +10,6 @@ internal static class OptionsConfigService
     {
         DefaultOptionsService.RegisterDefaults();
         SharedOptionsService.ConfigureShared(services, builder.Configuration);
-        services.AutoRegisterOptions(builder.Configuration);
+        services.RegisterOptions(builder.Configuration);
     }
 }

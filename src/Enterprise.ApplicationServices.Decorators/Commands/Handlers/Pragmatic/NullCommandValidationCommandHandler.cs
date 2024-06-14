@@ -15,7 +15,7 @@ public class NullCommandValidationCommandHandler<TCommand, TResult> : CommandHan
 
     }
 
-    public override async Task<TResult> HandleAsync(TCommand? command, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TCommand? command, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(command);
         TResult result = await Decorated.HandleAsync(command, cancellationToken);

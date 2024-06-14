@@ -18,7 +18,7 @@ public class ErrorHandlingCommandHandler<TCommand, TResult> : CommandHandlerDeco
         _logger = logger;
     }
 
-    public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
     {
         try
         {

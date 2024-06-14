@@ -1,6 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Model.Generic;
-
-namespace Enterprise.Patterns.ResultPattern.Model.Generic;
+﻿namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
 public partial class Result<T>
 {

@@ -14,7 +14,7 @@ public class NullQueryValidationQueryHandler<TQuery, TResult> : QueryHandlerDeco
 
     }
 
-    public override Task<TResult> HandleAsync(TQuery? query, CancellationToken cancellationToken)
+    public override Task<TResult> HandleAsync(TQuery? query, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(query);
         return Decorated.HandleAsync(query, cancellationToken);

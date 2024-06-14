@@ -1,4 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 
 namespace Enterprise.Domain.Events.Exceptions;
 

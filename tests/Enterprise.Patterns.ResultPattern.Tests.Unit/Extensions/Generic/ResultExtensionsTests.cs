@@ -1,6 +1,5 @@
 ﻿using Enterprise.Patterns.ResultPattern.Extensions.Generic;
 using FluentAssertions;
-using NSubstitute.ExceptionExtensions;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Extensions.Generic;
 

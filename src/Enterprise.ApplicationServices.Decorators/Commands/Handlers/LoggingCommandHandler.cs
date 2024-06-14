@@ -19,7 +19,7 @@ public class LoggingCommandHandler<TCommand> : CommandHandlerDecoratorBase<TComm
         _logger = logger;
     }
 
-    public override async Task HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default)
     {
         Type commandType = typeof(TCommand);
         Type innermostHandlerType = Innermost.GetType();

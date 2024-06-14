@@ -103,6 +103,6 @@ public static class WebApplicationBuilderExtensions
         builder.Services.ConfigureQuartz(builder.Configuration);
 
         // This uses reflection to auto wire up dependencies.
-        builder.Services.AutoRegisterServices(builder.Configuration);
+        builder.Services.RegisterServices(builder.Configuration);
     }
 }

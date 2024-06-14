@@ -1,6 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
-
-namespace Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
+﻿namespace Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 
 public class NotFoundError : Error
 {

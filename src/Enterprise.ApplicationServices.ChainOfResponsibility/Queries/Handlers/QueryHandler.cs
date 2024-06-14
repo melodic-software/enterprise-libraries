@@ -16,7 +16,7 @@ public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult
     }
 
     /// <inheritdoc />
-    public async Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
@@ -25,7 +25,7 @@ public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult
     }
 
     /// <inheritdoc />
-    public async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
         return await _responsibilityChain.HandleAsync(query, cancellationToken);
     }

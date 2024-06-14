@@ -99,14 +99,14 @@
             Exceptions are expensive, so consider using the result pattern over throwing exceptions for business logic / domain validation errors.
             </summary>
         </member>
-        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvent(Enterprise.Patterns.ResultPattern.Errors.IError)">
+        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvent(Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError)">
             <summary>
             Translate the error to a <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> event.
             </summary>
             <param name="error"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvents(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+        <member name="M:Enterprise.Domain.Extensions.ErrorExtensions.ToEvents(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError})">
             <summary>
             Translate the errors to <see cref="T:Enterprise.Domain.Events.Model.ErrorOccurred"/> events.
             </summary>

@@ -1,6 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
-
-namespace Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
+﻿namespace Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 
 /// <summary>
 /// An error that has occurred within the context of the domain.

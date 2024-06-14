@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Enterprise.Patterns.ResultPattern.Errors.Model;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using FluentAssertions;
-using Xunit;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors.Model;
 

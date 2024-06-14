@@ -19,7 +19,7 @@ public class FluentValidationQueryHandler<TQuery, TResult> : QueryHandlerDecorat
         _validators = validators.ToList();
     }
 
-    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
         if (!_validators.Any())
         {

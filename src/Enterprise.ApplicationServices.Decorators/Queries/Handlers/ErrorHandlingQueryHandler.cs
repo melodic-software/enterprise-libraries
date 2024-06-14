@@ -18,7 +18,7 @@ public class ErrorHandlingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorB
         _logger = logger;
     }
 
-    public override Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
         try
         {

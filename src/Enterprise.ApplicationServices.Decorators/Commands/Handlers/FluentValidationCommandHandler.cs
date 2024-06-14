@@ -23,7 +23,7 @@ public class FluentValidationCommandHandler<TCommand> : CommandHandlerDecoratorB
         _logger = logger;
     }
 
-    public override async Task HandleAsync(TCommand command, CancellationToken cancellationToken)
+    public override async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default)
     {
         if (!_validators.Any())
         {

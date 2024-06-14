@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Enterprise.Patterns.ResultPattern.Errors.Filtering;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Filtering;
 using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using FluentAssertions;
-using Xunit;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors.Filtering;
 

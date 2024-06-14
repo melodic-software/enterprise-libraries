@@ -18,7 +18,7 @@ public class LoggingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQ
         _logger = logger;
     }
 
-    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
         Type queryType = typeof(TQuery);
         Type innermostHandlerType = Innermost.GetType();

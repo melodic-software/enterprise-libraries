@@ -17,7 +17,7 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResult> :
     }
 
     /// <inheritdoc />
-    public async Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken)
+    public async Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;
@@ -26,5 +26,5 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResult> :
     }
 
     /// <inheritdoc />
-    public abstract Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
+    public abstract Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default);
 }
