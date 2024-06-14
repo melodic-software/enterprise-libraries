@@ -1,6 +1,6 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
 
-namespace Enterprise.Patterns.ResultPattern.Model;
+namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
 public partial class Result<T>
 {

@@ -1,4 +1,5 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors;
+using Enterprise.Patterns.ResultPattern.Errors.Abstract;
 using Enterprise.Patterns.ResultPattern.Errors.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 using FluentAssertions;

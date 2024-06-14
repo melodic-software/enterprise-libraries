@@ -1,4 +1,6 @@
-﻿using Enterprise.Patterns.ResultPattern.Model;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Abstract;
+using Enterprise.Patterns.ResultPattern.Model;
+using Enterprise.Patterns.ResultPattern.Model.Generic;
 
 namespace Enterprise.Patterns.ResultPattern.Errors.Extensions;
 
@@ -24,7 +26,7 @@ public static class ErrorCollectionExtensions
 
     public static bool HasTrueError(this IEnumerable<IError> errors)
     {
-        List<IError> errorList = errors.ToList();
+        var errorList = errors.ToList();
         bool hasTrueError = errorList.Any() && errorList.Any(e => e.IsTrueError());
         return hasTrueError;
     }

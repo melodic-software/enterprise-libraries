@@ -1,12 +1,12 @@
 ﻿namespace Enterprise.Patterns.ResultPattern.Errors.Typed;
 
-public class ValidationError : Error
+public class PermissionError : Error
 {
-    public const string GenericCode = "ValidationError";
-    public const string GenericMessage = "A validation error has occurred.";
+    public const string GenericCode = "PermissionError";
+    public const string GenericMessage = "A permission error has occurred.";
     public const ErrorDescriptor Descriptor = ErrorDescriptor.Validation;
 
-    public ValidationError(
+    public PermissionError(
         string code = GenericCode,
         string message = GenericMessage,
         Dictionary<string, object>? metadata = null)

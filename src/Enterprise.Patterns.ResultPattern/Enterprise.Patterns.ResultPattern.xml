@@ -134,32 +134,32 @@
             One or more error types that describe the error.
             </summary>
         </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Model.Result">
-            <summary>
-            Represents a generic operation result, encapsulating success or failure, with associated error information.
-            This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
-            These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
-            </summary>
-        </member>
-        <member name="T:Enterprise.Patterns.ResultPattern.Model.Result`1">
+        <member name="T:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1">
             <summary>
             This is the generic variant of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> that specifies a typed value.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:Enterprise.Patterns.ResultPattern.Model.Result`1.Value">
+        <member name="P:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1.Value">
             <summary>
             Gets the value of the result. 
             Throws InvalidOperationException if the result is a failure.
             </summary>
             <exception cref="T:System.InvalidOperationException">Thrown when the result is a failure and this property is accessed.</exception>
         </member>
-        <member name="M:Enterprise.Patterns.ResultPattern.Model.Result`1.From(`0)">
+        <member name="M:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1.From(`0)">
             <summary>
-            Creates a new instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/> with a value.
+            Creates a new instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1"/> with a value.
             </summary>
             <param name="value">The value to wrap.</param>
-            <returns>An instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result`1"/> containing the provided value.</returns>
+            <returns>An instance of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1"/> containing the provided value.</returns>
+        </member>
+        <member name="T:Enterprise.Patterns.ResultPattern.Model.Result">
+            <summary>
+            Represents a generic operation result, encapsulating success or failure, with associated error information.
+            This is a specific pattern to help mitigate the use of exceptions for things that aren't really exceptional system behavior.
+            These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
+            </summary>
         </member>
     </members>
 </doc>

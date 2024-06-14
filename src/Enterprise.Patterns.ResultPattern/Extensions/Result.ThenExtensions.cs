@@ -1,4 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Model;
+﻿using Enterprise.Patterns.ResultPattern.Model.Generic;
 
 namespace Enterprise.Patterns.ResultPattern.Extensions;
 

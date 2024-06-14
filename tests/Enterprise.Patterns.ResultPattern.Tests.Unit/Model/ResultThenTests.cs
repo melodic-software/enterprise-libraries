@@ -2,6 +2,7 @@
 using Enterprise.Patterns.ResultPattern.Errors;
 using Enterprise.Patterns.ResultPattern.Errors.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
+using Enterprise.Patterns.ResultPattern.Model.Generic;
 using FluentAssertions;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Model;

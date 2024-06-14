@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Delegates\" />
+    <Folder Include="Model\Generic\Abstract\" />
   </ItemGroup>
 
 </Project>

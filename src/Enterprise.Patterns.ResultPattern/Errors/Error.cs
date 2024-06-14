@@ -1,4 +1,5 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors.Typed;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Abstract;
+using Enterprise.Patterns.ResultPattern.Errors.Typed;
 using Enterprise.Patterns.ResultPattern.Model;
 
 namespace Enterprise.Patterns.ResultPattern.Errors;
@@ -52,15 +53,16 @@ public class Error : IError
     /// </summary>
     /// <returns></returns>
     public static NoError None() => new();
-    public static ValidationError Validation(string message) => new(ValidationError.GenericCode, message);
-    public static ValidationError Validation(string code, string message) => new(code, message);
-    public static NotFoundError NotFound() => new();
-    public static NotFoundError NotFound(string code, string message) => new(code, message);
     public static NullValueError NullValue() => new();
     public static NullValueError NullValue(string code, string message) => new(code, message);
-    
+    public static NotFoundError NotFound() => new();
+    public static NotFoundError NotFound(string code, string message) => new(code, message);
+    public static ValidationError Validation(string message) => new(ValidationError.GenericCode, message);
+    public static ValidationError Validation(string code, string message) => new(code, message);
     public static BusinessRuleViolation BusinessRuleViolation(string code, string message) => new(code, message);
     public static ConflictError Conflict(string code, string message) => new(code, message);
+    public static PermissionError Permission() => new();
+    public static PermissionError Permission(string code, string message) => new(code, message);
 
     public static Error Custom(string code, string message, ErrorDescriptor errorDescriptor, Dictionary<string, object>? metadata = null)
         => Custom(code, message, [errorDescriptor], metadata);

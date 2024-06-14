@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Patterns.ResultPattern.Errors;
+﻿namespace Enterprise.Patterns.ResultPattern.Errors.Abstract;
 
 /// <summary>
 /// An error that has occurred within the context of the domain.
