@@ -9,10 +9,11 @@ public partial class Result<T>
         if (IsSuccess)
         {
             onSuccess(Value);
-            return;
         }
-
-        onError(Errors);
+        else
+        {
+            onError(Errors);
+        }
     }
 
     public async Task SwitchAsync(Func<T, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
@@ -20,10 +21,11 @@ public partial class Result<T>
         if (IsSuccess)
         {
             await onSuccess(Value).ConfigureAwait(false);
-            return;
         }
-
-        await onErrorAsync(Errors).ConfigureAwait(false);
+        else
+        {
+            await onErrorAsync(Errors).ConfigureAwait(false);
+        }
     }
 
     public void SwitchFirst(Action<T> onSuccess, Action<IError> onFirstError)
@@ -31,10 +33,11 @@ public partial class Result<T>
         if (IsSuccess)
         {
             onSuccess(Value);
-            return;
         }
-        
-        onFirstError(FirstError);
+        else
+        {
+            onFirstError(FirstError);
+        }
     }
 
     public async Task SwitchFirstAsync(Func<T, Task> onSuccess, Func<IError, Task> onFirstErrorAsync)
@@ -42,9 +45,10 @@ public partial class Result<T>
         if (IsSuccess)
         {
             await onSuccess(Value).ConfigureAwait(false);
-            return;
         }
-
-        await onFirstErrorAsync(FirstError).ConfigureAwait(false);
+        else
+        {
+            await onFirstErrorAsync(FirstError).ConfigureAwait(false);
+        }
     }
 }

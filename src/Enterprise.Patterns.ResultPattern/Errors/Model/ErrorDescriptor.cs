@@ -39,5 +39,12 @@ public enum ErrorDescriptor
     /// <summary>
     /// These errors are specific conflicts like concurrency, or uniqueness constraints.
     /// </summary>
-    Conflict
+    Conflict,
+
+    /// <summary>
+    /// These are exceptions that have been caught and translated to an error object.
+    /// Only use if an exception is expected, and if it is possible to recover from it.
+    /// Use with caution.
+    /// </summary>
+    Exception
 }

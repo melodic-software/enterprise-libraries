@@ -16,11 +16,13 @@ public static partial class ResultExtensions
 
     public static async Task<Result<TOut>> BindAsync<TIn, TOut>(this Task<Result<TIn>> resultTask, Func<TIn, Result<TOut>> bind)
     {
-        return (await resultTask.ConfigureAwait(false)).Bind(bind);
+        Result<TIn> result = await resultTask.ConfigureAwait(false);
+        return result.Bind(bind);
     }
 
     public static async Task<Result<TOut>> BindAsync<TIn, TOut>(this Task<Result<TIn>> resultTask, Func<TIn, Task<Result<TOut>>> bindAsync)
     {
-        return await (await resultTask.ConfigureAwait(false)).BindAsync(bindAsync).ConfigureAwait(false);
+        Result<TIn> result = await resultTask.ConfigureAwait(false);
+        return await result.BindAsync(bindAsync).ConfigureAwait(false);
     }
 }

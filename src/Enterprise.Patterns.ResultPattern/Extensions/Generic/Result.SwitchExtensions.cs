@@ -5,23 +5,37 @@ namespace Enterprise.Patterns.ResultPattern.Extensions.Generic;
 
 public static partial class ResultExtensions
 {
-    public static async Task SwitchAsync<TValue>(this Task<Result<TValue>> result, Action<TValue> onSuccess, Action<IEnumerable<IError>> onError)
+    public static void Switch<TValue>(this Result<TValue> result, Action<TValue> onSuccess, Action<IEnumerable<IError>> onError)
     {
-        (await result.ConfigureAwait(false)).Switch(onSuccess, onError);
+        result.Switch(onSuccess, onError);
     }
 
-    public static async Task SwitchAsync<TValue>(this Task<Result<TValue>> result, Func<TValue, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
+    public static async Task SwitchAsync<TValue>(this Task<Result<TValue>> resultTask, Action<TValue> onSuccess, Action<IEnumerable<IError>> onError)
     {
-        await (await result.ConfigureAwait(false)).SwitchAsync(onSuccess, onErrorAsync);
+        Result<TValue> result = await resultTask.ConfigureAwait(false);
+        result.Switch(onSuccess, onError);
     }
 
-    public static async Task SwitchFirstAsync<TValue>(this Task<Result<TValue>> result, Action<TValue> onSuccess, Action<IError> onError)
+    public static async Task SwitchAsync<TValue>(this Task<Result<TValue>> resultTask, Func<TValue, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
     {
-        (await result.ConfigureAwait(false)).SwitchFirst(onSuccess, onError);
+        Result<TValue> result = await resultTask.ConfigureAwait(false);
+        await result.SwitchAsync(onSuccess, onErrorAsync).ConfigureAwait(false);
     }
 
-    public static async Task SwitchFirstAsync<TValue>(this Task<Result<TValue>> result, Func<TValue, Task> onSuccess, Func<IError, Task> onErrorAsync)
+    public static void SwitchFirst<TValue>(this Result<TValue> result, Action<TValue> onSuccess, Action<IError> onFirstError)
     {
-        await (await result.ConfigureAwait(false)).SwitchFirstAsync(onSuccess, onErrorAsync);
+        result.SwitchFirst(onSuccess, onFirstError);
+    }
+
+    public static async Task SwitchFirstAsync<TValue>(this Task<Result<TValue>> resultTask, Action<TValue> onSuccess, Action<IError> onFirstError)
+    {
+        Result<TValue> result = await resultTask.ConfigureAwait(false);
+        result.SwitchFirst(onSuccess, onFirstError);
+    }
+
+    public static async Task SwitchFirstAsync<TValue>(this Task<Result<TValue>> resultTask, Func<TValue, Task> onSuccess, Func<IError, Task> onFirstErrorAsync)
+    {
+        Result<TValue> result = await resultTask.ConfigureAwait(false);
+        await result.SwitchFirstAsync(onSuccess, onFirstErrorAsync).ConfigureAwait(false);
     }
 }
