@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering.Constants;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 
-namespace Enterprise.Middleware.AspNetCore.StartupServices.Filtering;
+namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering;
 
 public static class MicrosoftNamespaceFilter
 {
     public static List<ServiceDescriptor> Execute(IQueryCollection query, List<ServiceDescriptor> serviceDescriptors)
     {
-        if (!query.TryGetValue("excludeMicrosoft", out StringValues excludeMicrosoftFilterValue) ||
+        if (!query.TryGetValue(QueryStringConstants.ExcludeMicrosoft, out StringValues excludeMicrosoftFilterValue) ||
             !bool.TryParse(excludeMicrosoftFilterValue, out bool excludeMicrosoft))
         {
             return serviceDescriptors;

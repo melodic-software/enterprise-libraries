@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Middleware.AspNetCore.StartupServices;
+﻿namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
 
 // TODO: Move this to API client library.
 

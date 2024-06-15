@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.Middleware.AspNetCore.StartupServices.Filtering;
+namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering;
 
 public static class ServiceDescriptorFilter
 {

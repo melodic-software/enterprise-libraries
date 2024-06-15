@@ -1,16 +1,18 @@
-﻿using Enterprise.Middleware.AspNetCore.StartupServices.Mapping;
+﻿using Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering.Constants;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Mapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
-namespace Enterprise.Middleware.AspNetCore.StartupServices.Grouping;
+namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Grouping;
 
 public static class ServiceDescriptorGroupingService
 {
     public static List<ServiceDescriptionDto>? Execute(IQueryCollection query, List<ServiceDescriptor> serviceDescriptors, HttpContext context, ILogger logger)
     {
-        if (!query.TryGetValue("groupByNamespace", out StringValues groupByNamespaceValue) ||
+        if (!query.TryGetValue(QueryStringConstants.GroupByNamespace, out StringValues groupByNamespaceValue) ||
             !bool.TryParse(groupByNamespaceValue, out bool groupByNamespace) || !groupByNamespace)
         {
             return null;

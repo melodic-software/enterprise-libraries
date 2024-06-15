@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Middleware.AspNetCore.StartupServices.Mapping;
+namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Mapping;
 
 public static class DtoCreationService
 {

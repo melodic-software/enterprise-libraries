@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StartupServices\Grouping\" />
-    <Folder Include="StartupServices\Mapping\" />
-    <Folder Include="StartupServices\Responses\" />
+    <Folder Include="RegisteredServices\Grouping\" />
+    <Folder Include="RegisteredServices\Mapping\" />
+    <Folder Include="RegisteredServices\Responses\" />
   </ItemGroup>
 
 </Project>

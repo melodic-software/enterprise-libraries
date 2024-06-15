@@ -1,29 +1,30 @@
 ﻿using System.Text.Json;
 using Enterprise.Applications.DI.ServiceCollection.Abstract;
-using Enterprise.Middleware.AspNetCore.StartupServices.Filtering;
-using Enterprise.Middleware.AspNetCore.StartupServices.Grouping;
-using Enterprise.Middleware.AspNetCore.StartupServices.Mapping;
-using Enterprise.Middleware.AspNetCore.StartupServices.Responses;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Grouping;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Mapping;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Middleware.AspNetCore.StartupServices;
+namespace Enterprise.Middleware.AspNetCore.RegisteredServices;
 
-public class ListStartupServicesMiddleware
+public class RegisteredServicesEndpointMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IHostEnvironment _environment;
     private readonly IServiceDescriptorRegistry _serviceDescriptorRegistry;
-    private readonly ILogger<ListStartupServicesMiddleware> _logger;
+    private readonly ILogger<RegisteredServicesEndpointMiddleware> _logger;
     private const string Path = "/debug/registered-services";
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ListStartupServicesMiddleware(RequestDelegate next,
+    public RegisteredServicesEndpointMiddleware(RequestDelegate next,
         IHostEnvironment environment,
         IServiceDescriptorRegistry serviceDescriptorRegistry,
-        ILogger<ListStartupServicesMiddleware> logger)
+        ILogger<RegisteredServicesEndpointMiddleware> logger)
     {
         _next = next;
         _environment = environment;
