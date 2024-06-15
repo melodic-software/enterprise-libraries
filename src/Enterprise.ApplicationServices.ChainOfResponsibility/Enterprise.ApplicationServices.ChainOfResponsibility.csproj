@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.494" />
-    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.130" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.496" />
+    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.496" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.495" />
   </ItemGroup>
 

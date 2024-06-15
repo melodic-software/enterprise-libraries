@@ -1,5 +1,4 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
-using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Microsoft.AspNetCore.Http;
 
