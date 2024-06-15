@@ -11,7 +11,6 @@ public static class ServiceDescriptorFilter
         serviceDescriptors = ServiceKeyFilter.Execute(query, serviceDescriptors);
         serviceDescriptors = ServiceTypeFilter.Execute(query, serviceDescriptors);
         serviceDescriptors = MicrosoftNamespaceFilter.Execute(query, serviceDescriptors);
-        serviceDescriptors = NamespaceFilter.Execute(query, serviceDescriptors);
 
         return serviceDescriptors;
     }

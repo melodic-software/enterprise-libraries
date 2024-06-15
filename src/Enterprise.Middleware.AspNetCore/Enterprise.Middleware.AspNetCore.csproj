@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RegisteredServices\Grouping\" />
     <Folder Include="RegisteredServices\Mapping\" />
     <Folder Include="RegisteredServices\Responses\" />
   </ItemGroup>

@@ -11,19 +11,25 @@ public static class DtoCreationService
     {
         try
         {
-            string? instanceTypeName = serviceDescriptor.IsKeyedService ?
-                GetKeyedInstanceTypeName(serviceDescriptor, httpContext.RequestServices) :
-                GetInstanceTypeName(serviceDescriptor, httpContext.RequestServices);
-
-            string? serviceKey = GetServiceKey(serviceDescriptor);
-
-            return new ServiceDescriptionDto
+            var dto = new ServiceDescriptionDto
             {
+                ServiceTypeNamespace = serviceDescriptor.ServiceType.Namespace,
                 ServiceTypeFullName = serviceDescriptor.ServiceType.FullName,
-                ServiceLifetime = serviceDescriptor.Lifetime.ToString(),
-                InstanceTypeName = instanceTypeName,
-                ServiceKey = serviceKey
+                ServiceTypeName = serviceDescriptor.ServiceType.Name,
+                ServiceLifetime = serviceDescriptor.Lifetime.ToString()
             };
+
+            if (serviceDescriptor.IsKeyedService)
+            {
+                dto.ServiceKey = GetServiceKey(serviceDescriptor);
+                SetKeyedImplementationTypeProperties(serviceDescriptor, httpContext.RequestServices, dto);
+            }
+            else
+            {
+                SetImplementationTypeProperties(serviceDescriptor, httpContext.RequestServices, dto);
+            }
+
+            return dto;
         }
         catch (Exception ex)
         {
@@ -33,40 +39,54 @@ public static class DtoCreationService
         return null;
     }
 
-    private static string? GetInstanceTypeName(ServiceDescriptor serviceDescriptor, IServiceProvider serviceProvider)
+    private static void SetImplementationTypeProperties(ServiceDescriptor serviceDescriptor, IServiceProvider serviceProvider, ServiceDescriptionDto dto)
     {
-        if (serviceDescriptor.ImplementationInstance != null)
+        Type? implementationType = null;
+
+        if (serviceDescriptor.ImplementationType != null)
+        {
+            implementationType = serviceDescriptor.ImplementationType;
+        }
+        else if (serviceDescriptor.ImplementationInstance != null)
         {
             // Singleton instances are provided directly.
-            return serviceDescriptor.ImplementationInstance.GetType().FullName;
+            implementationType = serviceDescriptor.ImplementationInstance.GetType();
         }
-
-        if (serviceDescriptor.ImplementationFactory != null)
+        else if (serviceDescriptor.ImplementationFactory != null)
         {
             // Attempt to resolve the service from the provider, respecting the service lifetime.
             object instance = serviceProvider.GetRequiredService(serviceDescriptor.ServiceType);
-            return instance.GetType().FullName;
+            implementationType = instance.GetType();
         }
 
-        return null;
+        dto.ImplementationTypeNamespace = implementationType?.Namespace;
+        dto.ImplementationTypeFullName = implementationType?.FullName;
+        dto.ImplementationTypeName = implementationType?.Name;
     }
 
-    private static string? GetKeyedInstanceTypeName(ServiceDescriptor serviceDescriptor, IServiceProvider serviceProvider)
+    private static void SetKeyedImplementationTypeProperties(ServiceDescriptor serviceDescriptor, IServiceProvider serviceProvider, ServiceDescriptionDto dto)
     {
-        if (serviceDescriptor.KeyedImplementationInstance != null)
-        {
-            // Singleton instances provided directly.
-            return serviceDescriptor.KeyedImplementationInstance.GetType().FullName;
-        }
+        Type? implementationType = null;
 
-        if (serviceDescriptor.KeyedImplementationFactory != null)
+        if (serviceDescriptor.KeyedImplementationType != null)
+        {
+            implementationType = serviceDescriptor.KeyedImplementationType;
+        }
+        else if (serviceDescriptor.KeyedImplementationInstance != null)
+        {
+            // Singleton instances are provided directly.
+            implementationType = serviceDescriptor.KeyedImplementationInstance.GetType();
+        }
+        else if (serviceDescriptor.KeyedImplementationFactory != null)
         {
             // Attempt to resolve the service from the provider, respecting the service lifetime.
             object instance = serviceProvider.GetRequiredKeyedService(serviceDescriptor.ServiceType, serviceDescriptor.ServiceKey);
-            return instance.GetType().FullName;
+            implementationType = instance.GetType();
         }
 
-        return null;
+        dto.ImplementationTypeNamespace = implementationType?.Namespace;
+        dto.ImplementationTypeFullName = implementationType?.FullName;
+        dto.ImplementationTypeName = implementationType?.Name;
     }
 
     private static string? GetServiceKey(ServiceDescriptor serviceDescriptor)

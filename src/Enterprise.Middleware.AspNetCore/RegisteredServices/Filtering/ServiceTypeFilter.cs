@@ -9,12 +9,12 @@ public static class ServiceTypeFilter
 {
     public static List<ServiceDescriptor> Execute(IQueryCollection query, List<ServiceDescriptor> serviceDescriptors)
     {
-        if (!query.TryGetValue(QueryStringConstants.ServiceTypes, out StringValues serviceTypeNamesFilterValue))
+        if (!query.TryGetValue(QueryStringConstants.ServiceTypeNames, out StringValues serviceTypeNamesFilterValue))
         {
             return serviceDescriptors;
         }
 
-        string[] serviceTypes = serviceTypeNamesFilterValue.ToString()
+        string[] serviceTypeNames = serviceTypeNamesFilterValue.ToString()
             .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(x => x.Trim())
             .ToArray();
@@ -22,7 +22,9 @@ public static class ServiceTypeFilter
         serviceDescriptors = serviceDescriptors
             .Where(sd =>
                 sd.ServiceType.FullName != null &&
-                serviceTypes.Any(stn => sd.ServiceType.FullName.StartsWith(stn, StringComparison.OrdinalIgnoreCase)))
+                serviceTypeNames.Any(stn => sd.ServiceType.FullName.StartsWith(stn, StringComparison.OrdinalIgnoreCase)) ||
+                serviceTypeNames.Any(stn => sd.ServiceType.Name.Contains(stn, StringComparison.OrdinalIgnoreCase))
+                )
             .ToList();
 
         return serviceDescriptors;

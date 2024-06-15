@@ -1,17 +1,17 @@
-﻿using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering.Constants;
+﻿using Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
+using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering.Constants;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 
 namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering;
 
 public static class NamespaceFilter
 {
-    public static List<ServiceDescriptor> Execute(IQueryCollection query, List<ServiceDescriptor> serviceDescriptors)
+    public static List<ServiceDescriptionDto> Execute(IQueryCollection query, List<ServiceDescriptionDto> dtos)
     {
         if (!query.TryGetValue(QueryStringConstants.Namespaces, out StringValues namespacesFilterValue))
         {
-            return serviceDescriptors;
+            return dtos;
         }
 
         string[] namespaces = namespacesFilterValue.ToString()
@@ -19,12 +19,15 @@ public static class NamespaceFilter
             .Select(x => x.Trim())
             .ToArray();
 
-        serviceDescriptors = serviceDescriptors
+        dtos = dtos
             .Where(sd =>
-                sd.ServiceType.Namespace != null &&
-                namespaces.Any(n => sd.ServiceType.Namespace.StartsWith(n, StringComparison.OrdinalIgnoreCase)))
+                sd.ServiceTypeNamespace != null &&
+                namespaces.Any(n => sd.ServiceTypeNamespace.StartsWith(n, StringComparison.OrdinalIgnoreCase)) || 
+                sd.ImplementationTypeNamespace != null &&
+                namespaces.Any(n => sd.ImplementationTypeNamespace.StartsWith(n, StringComparison.OrdinalIgnoreCase))
+                )
             .ToList();
 
-        return serviceDescriptors;
+        return dtos;
     }
 }

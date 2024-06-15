@@ -7,9 +7,9 @@ namespace Enterprise.Middleware.AspNetCore.RegisteredServices.Responses;
 
 public static class ResponseService
 {
-    public static async Task CreateResponse(HttpContext context, List<ServiceDescriptionDto> result, JsonSerializerOptions serializerOptions)
+    public static async Task CreateResponse(HttpContext context, List<ServiceDescriptionDto> dtos, JsonSerializerOptions serializerOptions)
     {
-        string json = JsonSerializer.Serialize(result, serializerOptions);
+        string json = JsonSerializer.Serialize(dtos, serializerOptions);
         context.Response.ContentType = MediaTypeNames.Application.Json;
         await context.Response.WriteAsync(json);
     }

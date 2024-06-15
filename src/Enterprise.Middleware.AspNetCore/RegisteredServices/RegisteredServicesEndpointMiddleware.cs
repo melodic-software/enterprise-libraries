@@ -2,7 +2,6 @@
 using Enterprise.Applications.DI.ServiceCollection.Abstract;
 using Enterprise.Middleware.AspNetCore.RegisteredServices.Dtos;
 using Enterprise.Middleware.AspNetCore.RegisteredServices.Filtering;
-using Enterprise.Middleware.AspNetCore.RegisteredServices.Grouping;
 using Enterprise.Middleware.AspNetCore.RegisteredServices.Mapping;
 using Enterprise.Middleware.AspNetCore.RegisteredServices.Responses;
 using Microsoft.AspNetCore.Http;
@@ -54,20 +53,21 @@ public class RegisteredServicesEndpointMiddleware
         var serviceDescriptors = _serviceDescriptorRegistry.ServiceDescriptors.ToList();
         serviceDescriptors = ServiceDescriptorFilter.Execute(query, serviceDescriptors);
 
-        List<ServiceDescriptionDto>? grouped = ServiceDescriptorGroupingService.Execute(query, serviceDescriptors, context, _logger);
+        List<ServiceDescriptionDto> dtos = CreateDtos(context, serviceDescriptors);
 
-        List<ServiceDescriptionDto> result = grouped ?? CreateResult(context, serviceDescriptors);
+        dtos = ServiceDescriptionDtoFilter.Execute(query, dtos);
 
-        await ResponseService.CreateResponse(context, result, _jsonSerializerOptions);
+        await ResponseService.CreateResponse(context, dtos, _jsonSerializerOptions);
     }
 
-    private List<ServiceDescriptionDto> CreateResult(HttpContext context, List<ServiceDescriptor> serviceDescriptors)
+    private List<ServiceDescriptionDto> CreateDtos(HttpContext context, List<ServiceDescriptor> serviceDescriptors)
     {
         return serviceDescriptors
             .Select(x => DtoCreationService.CreateDto(x, context, _logger))
             .Where(x => x != null)
             .Select(x => x!)
             .OrderBy(x => x?.ServiceTypeFullName)
+            .ThenBy(x => x.ImplementationTypeFullName)
             .ToList();
     }
 }

@@ -10,14 +10,14 @@ public static class MicrosoftNamespaceFilter
     public static List<ServiceDescriptor> Execute(IQueryCollection query, List<ServiceDescriptor> serviceDescriptors)
     {
         if (!query.TryGetValue(QueryStringConstants.ExcludeMicrosoft, out StringValues excludeMicrosoftFilterValue) ||
-            !bool.TryParse(excludeMicrosoftFilterValue, out bool excludeMicrosoft))
+            !bool.TryParse(excludeMicrosoftFilterValue, out bool excludeMicrosoft) || !excludeMicrosoft)
         {
             return serviceDescriptors;
         }
 
-        serviceDescriptors = excludeMicrosoft ?
-            serviceDescriptors.Where(sd => !IsMicrosoftNamespace(sd.ServiceType.Namespace)).ToList() :
-            serviceDescriptors.Where(sd => IsMicrosoftNamespace(sd.ServiceType.Namespace)).ToList();
+        serviceDescriptors = serviceDescriptors
+            .Where(sd => !IsMicrosoftNamespace(sd.ServiceType.Namespace))
+            .ToList();
 
         return serviceDescriptors;
     }
