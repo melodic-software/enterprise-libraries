@@ -1,10 +1,10 @@
-﻿using Enterprise.Api.ErrorHandling.Domain;
-using Enterprise.Patterns.ResultPattern.Errors;
+﻿using System.Dynamic;
+using Enterprise.Api.ErrorHandling.Domain;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Enterprise.Queries.Paging;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Dynamic;
 
 namespace Enterprise.Api.DataShaping;
 
@@ -38,16 +38,16 @@ public class DataShapedQueryResult
     public static DataShapedQueryResult Failure(IActionResult actionResult)
     {
         IEnumerable<ExpandoObject> dataShaped = new List<ExpandoObject>();
-        PaginationMetadata paginationMetadata = PaginationMetadata.Empty();
-        DataShapedQueryResult dataShapedQueryResult = new DataShapedQueryResult(actionResult, dataShaped, paginationMetadata);
+        var paginationMetadata = PaginationMetadata.Empty();
+        var dataShapedQueryResult = new DataShapedQueryResult(actionResult, dataShaped, paginationMetadata);
         return dataShapedQueryResult;
     }
 
     public static DataShapedQueryResult Failure(IResult result)
     {
         IEnumerable<ExpandoObject> dataShaped = new List<ExpandoObject>();
-        PaginationMetadata paginationMetadata = PaginationMetadata.Empty();
-        DataShapedQueryResult dataShapedQueryResult = new DataShapedQueryResult(result, dataShaped, paginationMetadata);
+        var paginationMetadata = PaginationMetadata.Empty();
+        var dataShapedQueryResult = new DataShapedQueryResult(result, dataShaped, paginationMetadata);
         return dataShapedQueryResult;
     }
 

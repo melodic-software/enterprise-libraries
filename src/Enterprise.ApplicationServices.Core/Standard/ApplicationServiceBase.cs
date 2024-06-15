@@ -4,7 +4,7 @@ using Enterprise.Domain.Events.Model.Abstract;
 using Enterprise.Domain.Extensions;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Model;
-using Enterprise.Patterns.ResultPattern.Errors;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 
 namespace Enterprise.ApplicationServices.Core.Standard;
 

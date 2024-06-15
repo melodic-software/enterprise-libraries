@@ -1,6 +1,6 @@
 ﻿using Enterprise.Api.ErrorHandling.Domain;
 using Enterprise.Api.ErrorHandling.Shared;
-using Enterprise.Patterns.ResultPattern.Errors;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

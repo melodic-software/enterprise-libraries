@@ -1,5 +1,5 @@
 ﻿using Enterprise.Mapping.Properties.Services.Abstract;
-using Enterprise.Patterns.ResultPattern.Errors;
+using Enterprise.Patterns.ResultPattern.Errors.Model;
 
 namespace Enterprise.Queries.Sorting;
 

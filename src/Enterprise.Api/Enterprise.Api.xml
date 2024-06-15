@@ -93,7 +93,7 @@
             Options for configuring input and output formatters.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.ErrorHandling.Domain.ErrorsExtensions.GetMeaningful(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.IError})">
+        <member name="M:Enterprise.Api.ErrorHandling.Domain.ErrorsExtensions.GetMeaningful(System.Collections.Generic.IEnumerable{Enterprise.Patterns.ResultPattern.Errors.Model.Abstract.IError})">
             <summary>
             Filter out errors that do not have anything meaningful to display or return.
             These are errors that have a code or message specified.

@@ -19,8 +19,22 @@ public abstract class EventHandlerResolverBase : IResolveEventHandlers
     /// <inheritdoc />
     public Task<IEnumerable<IHandleEvent<T>>> ResolveAsync<T>(T @event) where T : IEvent
     {
-        IEnumerable<IHandleEvent<T>> handlers = _serviceProvider.GetServices<IHandleEvent<T>>();
-
+        IServiceProvider serviceProvider = GetServiceProvider();
+        IEnumerable<IHandleEvent<T>> handlers = serviceProvider.GetServices<IHandleEvent<T>>();
         return Task.FromResult(handlers);
+    }
+
+    private IServiceProvider GetServiceProvider()
+    {
+        IServiceScopeFactory? scopeFactory = _serviceProvider.GetService<IServiceScopeFactory>();
+
+        if (scopeFactory == null)
+        {
+            return _serviceProvider;
+        }
+
+        IServiceScope scope = scopeFactory.CreateScope();
+        IServiceProvider serviceProvider = scope.ServiceProvider;
+        return serviceProvider;
     }
 }

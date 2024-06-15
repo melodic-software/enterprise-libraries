@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.432" />
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
   </ItemGroup>
 
 </Project>

@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.432" />
-    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
+    <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
   </ItemGroup>
 

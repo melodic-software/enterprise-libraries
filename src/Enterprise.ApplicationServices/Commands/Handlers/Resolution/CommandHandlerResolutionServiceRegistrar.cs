@@ -9,7 +9,7 @@ internal sealed class CommandHandlerResolutionServiceRegistrar : IRegisterServic
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped(provider =>
+        services.AddSingleton(provider =>
         {
             IResolveCommandHandler commandHandlerResolver = new CommandHandlerResolver(provider);
 

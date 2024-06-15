@@ -1,4 +1,5 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Microsoft.AspNetCore.Http;
 
 namespace Enterprise.Api.ErrorHandling.Domain;
@@ -7,10 +8,13 @@ public static class ErrorFilterService
 {
     public static IReadOnlyCollection<IError> FilterBy(int statusCode, IEnumerable<IError> errors)
     {
-        List<IError> errorList = errors.ToList();
+        var errorList = errors.ToList();
 
         IReadOnlyCollection<IError> result = statusCode switch
         {
+            StatusCodes.Status403Forbidden => errorList
+                .Where(x => x.Descriptors.Contains(ErrorDescriptor.Permission))
+                .ToList(),
             StatusCodes.Status404NotFound => errorList
                 .Where(x => x.Descriptors.Contains(ErrorDescriptor.NotFound))
                 .ToList(),

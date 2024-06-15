@@ -10,7 +10,7 @@ public class CachingEventHandlerResolver : IResolveEventHandlers
     private readonly IResolveEventHandlers _decoratedResolver;
     private readonly ILogger<CachingEventHandlerResolver> _logger;
 
-    private readonly Dictionary<Type, Task<IEnumerable<IHandleEvent>>> _nonGenericHandlerCache = new();
+    private readonly Dictionary<Type, Task<IEnumerable<IHandleEvent>>> _nonGenericHandlerCache = [];
     private readonly Dictionary<Type, object> _genericHandlerCache = new();
 
     public CachingEventHandlerResolver(IResolveEventHandlers decoratedResolver, ILogger<CachingEventHandlerResolver> logger)

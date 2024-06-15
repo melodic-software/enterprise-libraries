@@ -1,10 +1,11 @@
-﻿using Enterprise.Api.ErrorHandling.Constants;
+﻿using System.Diagnostics;
+using Enterprise.Api.ErrorHandling.Constants;
 using Enterprise.Api.Validation;
-using Enterprise.Patterns.ResultPattern.Errors;
+using Enterprise.Patterns.ResultPattern.Errors.Deduplication;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Enterprise.Api.ErrorHandling.Domain;
 

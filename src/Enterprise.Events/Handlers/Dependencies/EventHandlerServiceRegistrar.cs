@@ -15,7 +15,7 @@ internal sealed class EventHandlerServiceRegistrar : IRegisterServices
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
         // TODO: Do we want to add configuration to dynamically choose between these registrations?
-        // The less complex and reasonably performant resolver is going to be the dynamic dispatch implementation
+        // The less complex and reasonably performant resolver is going to be the dynamic dispatch implementation.
         // We could also go with the implementation that uses reflection - the initial performance hit is heavier, but the caching mitigates that.
 
         RegistrationContext<IResolveEventHandlers> registrationContext = services

@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Reflection;
+﻿using System.Reflection;
 using Enterprise.MediatR.Assemblies;
 using Enterprise.MediatR.Behaviors;
 using Microsoft.Extensions.DependencyInjection;

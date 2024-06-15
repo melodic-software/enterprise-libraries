@@ -20,13 +20,29 @@ public class CommandHandlerResolver : IResolveCommandHandler
     public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
         where TCommand : class, ICommand
     {
-        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
+        IServiceProvider serviceProvider = GetServiceProvider();
+        return serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
     }
 
     /// <inheritdoc />
     public IHandleCommand<TCommand, TResult> GetHandlerFor<TCommand, TResult>(TCommand command)
         where TCommand : class, ICommand<TResult>
     {
-        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResult>>();
+        IServiceProvider serviceProvider = GetServiceProvider();
+        return serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResult>>();
+    }
+
+    private IServiceProvider GetServiceProvider()
+    {
+        IServiceScopeFactory? scopeFactory = _serviceProvider.GetService<IServiceScopeFactory>();
+
+        if (scopeFactory == null)
+        {
+            return _serviceProvider;
+        }
+
+        IServiceScope scope = scopeFactory.CreateScope();
+        IServiceProvider serviceProvider = scope.ServiceProvider;
+        return serviceProvider;
     }
 }

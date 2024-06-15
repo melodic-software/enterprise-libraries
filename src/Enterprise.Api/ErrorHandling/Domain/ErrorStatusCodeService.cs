@@ -1,5 +1,6 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
-using Enterprise.Patterns.ResultPattern.Errors.Extensions;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
+using Enterprise.Patterns.ResultPattern.Errors.Model;
+using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Microsoft.AspNetCore.Http;
 
 namespace Enterprise.Api.ErrorHandling.Domain;
@@ -8,6 +9,11 @@ public static class ErrorStatusCodeService
 {
     public static int GetStatusCode(IReadOnlyCollection<IError> errors, HttpContext context)
     {
+        if (errors.ContainsPermissionErrors())
+        {
+            return StatusCodes.Status403Forbidden;
+        }
+
         if (errors.ContainsNotFound())
         {
             string requestMethod = context.Request.Method;

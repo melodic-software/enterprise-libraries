@@ -1,4 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ public static class ErrorsExtensions
     /// <returns></returns>
     public static IEnumerable<IError> GetMeaningful(this IEnumerable<IError> errors)
     {
-        List<IError> meaningfulErrors = errors
+        var meaningfulErrors = errors
             .Where(e => !string.IsNullOrWhiteSpace(e.Code) || !string.IsNullOrWhiteSpace(e.Message))
             .ToList();
 

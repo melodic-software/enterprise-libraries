@@ -1,4 +1,4 @@
-﻿using Enterprise.Patterns.ResultPattern.Errors;
+﻿using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
