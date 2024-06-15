@@ -26,15 +26,20 @@ public abstract class EventHandlerResolverBase : IResolveEventHandlers
 
     private IServiceProvider GetServiceProvider()
     {
-        IServiceScopeFactory? scopeFactory = _serviceProvider.GetService<IServiceScopeFactory>();
-
-        if (scopeFactory == null)
+        // Check if the current provider is already a scoped service provider.
+        if (_serviceProvider.GetService<IServiceScopeFactory>() == null)
+        {
+            return _serviceProvider;
+        }
+        
+        if (_serviceProvider is IServiceScope)
         {
             return _serviceProvider;
         }
 
+        // Create a new scope if we are in the root scope.
+        IServiceScopeFactory scopeFactory = _serviceProvider.GetRequiredService<IServiceScopeFactory>();
         IServiceScope scope = scopeFactory.CreateScope();
-        IServiceProvider serviceProvider = scope.ServiceProvider;
-        return serviceProvider;
+        return scope.ServiceProvider;
     }
 }
