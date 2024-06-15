@@ -15,13 +15,12 @@ public class RootRedirectMiddlewareTests
         // ARRANGE
         HttpContext? httpContext = Substitute.For<HttpContext>();
 
-        var headers = new HeaderDictionary();
-        var authorizationHeaderValue = new StringValues("Bearer ");
+        IHeaderDictionary headers = new HeaderDictionary();
+        headers.Authorization = new StringValues("Bearer ");
         string path = "/";
         var routeValues = new RouteValueDictionary();
 
         httpContext.Request.Headers.Returns(headers);
-        httpContext.Request.Headers.Authorization.Returns(authorizationHeaderValue);
         httpContext.Request.Path.Returns(new PathString(path));
         httpContext.Request.RouteValues.Returns(routeValues);
 
@@ -57,13 +56,12 @@ public class RootRedirectMiddlewareTests
 
         HttpContext? httpContext = Substitute.For<HttpContext>();
 
-        var headers = new HeaderDictionary();
-        var authorizationHeaderValue = new StringValues();
+        IHeaderDictionary headers = new HeaderDictionary();
+        headers.Authorization = new StringValues();
         string path = "/";
         var routeValues = new RouteValueDictionary();
 
         httpContext.Request.Headers.Returns(headers);
-        httpContext.Request.Headers.Authorization.Returns(authorizationHeaderValue);
         httpContext.Request.Path.Returns(new PathString(path));
         httpContext.Request.RouteValues.Returns(routeValues);
 

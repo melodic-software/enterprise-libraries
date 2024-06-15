@@ -361,6 +361,24 @@
             </summary>
             <param name="options"></param>
         </member>
+        <member name="T:Enterprise.Api.Security.Middleware.SecurityHeadersMiddleware">
+            <summary>
+            Middleware to add security headers to the HTTP response.
+            </summary>
+        </member>
+        <member name="M:Enterprise.Api.Security.Middleware.SecurityHeadersMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Enterprise.Api.Security.Middleware.SecurityHeadersMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+        </member>
+        <member name="M:Enterprise.Api.Security.Middleware.SecurityHeadersMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the middleware to add security headers to the HTTP response.
+            </summary>
+            <param name="context">The HTTP context.</param>
+            <returns>A task that represents the completion of request processing.</returns>
+        </member>
         <member name="M:Enterprise.Api.Security.OAuth.Extensions.OAuth2Extensions.AddOAuth2Introspection(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.String,System.String,System.Int32)">
             <summary>
             NOTE: use this OR "AddJwtBearer" - not both
