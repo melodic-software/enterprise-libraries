@@ -2,11 +2,9 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using Enterprise.Options.Core.Model;
 using Enterprise.Options.Core.Services.Singleton;
-using FluentAssertions;
 using Microsoft.Extensions.Configuration;
-using NSubstitute;
 
-namespace Enterprise.Options.Core.Tests.Unit;
+namespace Enterprise.Options.Core.Tests.Unit.Services.Singleton;
 
 public class OptionsInstanceServiceTests
 {

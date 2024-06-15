@@ -1,5 +1,4 @@
 ﻿using Enterprise.Patterns.ResultPattern.Extensions.Generic;
-using FluentAssertions;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Extensions.Generic;
 

@@ -2,9 +2,8 @@
 using Enterprise.Options.Hashing;
 using Enterprise.Serialization.Json;
 using Enterprise.Serialization.Json.Microsoft;
-using FluentAssertions;
 
-namespace Enterprise.Options.Tests.Integration;
+namespace Enterprise.Options.Tests.Integration.Hashing;
 
 public class OptionsHashServiceTests
 {

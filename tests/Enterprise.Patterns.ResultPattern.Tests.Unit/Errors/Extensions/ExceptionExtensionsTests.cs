@@ -1,6 +1,5 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Typed;
-using FluentAssertions;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors.Extensions;
 

@@ -2,25 +2,22 @@
 using System.Security.Claims;
 using Enterprise.Security.Tokens;
 using Microsoft.IdentityModel.Tokens;
-using Xunit;
 
 namespace Enterprise.Security.Tests.Unit.Tokens;
 
 public class JwtTokenTests
 {
     [Fact]
-    public void JwtTokenTest()
+    public void GenerateTokenString_ShouldReturnToken_WhenValidInputsProvided()
     {
+        // Arrange
         var securityKeyGenerationService = new SecurityKeyGenerationService();
         var signingCredentialGenerationService = new SigningCredentialGenerationService();
         var jwtTokenGenerationService = new JwtTokenGenerationService();
 
-        // has to be at least 128 bytes long
         string secret = "thisisthesecretforgeneratingakey(mustbeatleast32bitlong)";
-
         SymmetricSecurityKey securityKey = securityKeyGenerationService.GenerateSecurityKey(secret);
 
-        // NOTE: the encryption algorithm 'HS256' requires a key size of at least '128' bits
         SigningCredentials signingCredentials = signingCredentialGenerationService.Generate(securityKey);
 
         int userId = 1;
@@ -41,8 +38,10 @@ public class JwtTokenTests
         DateTime notBefore = DateTime.UtcNow;
         DateTime expiration = notBefore.AddHours(1);
 
+        // Act
         string token = jwtTokenGenerationService.GenerateTokenString(issuer, audience, claims, notBefore, expiration, signingCredentials);
 
-        Assert.NotNull(token);
+        // Assert
+        token.Should().NotBeNull();
     }
 }

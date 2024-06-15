@@ -1,7 +1,5 @@
 ﻿using Enterprise.DateTimes.Model;
 using Enterprise.DateTimes.Utc;
-using FluentAssertions;
-using Moq;
 using static Enterprise.DateTimes.Formatting.DateTimeFormatStrings;
 
 namespace Enterprise.DateTimes.Tests.Unit.Model;
@@ -9,7 +7,7 @@ namespace Enterprise.DateTimes.Tests.Unit.Model;
 public class UniversalDateTimeTests
 {
     [Fact]
-    public void UniversalDateTime_DefaultConstructor_SetsCurrentUtcTime()
+    public void UniversalDateTime_DefaultConstructor_ShouldSetCurrentUtcTime()
     {
         // Arrange
         DateTimeOffset beforeCreation = DateTimeOffset.UtcNow;
@@ -23,7 +21,7 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_ConstructorWithDateTimeOffset_SetsCorrectTime()
+    public void UniversalDateTime_ConstructorWithDateTimeOffset_ShouldSetCorrectTime()
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
@@ -36,7 +34,7 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_ConstructorWithNonUtcDateTimeOffset_ThrowsArgumentException()
+    public void UniversalDateTime_ConstructorWithNonUtcDateTimeOffset_ShouldThrowArgumentException()
     {
         // Arrange
         var localDateTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
@@ -53,22 +51,22 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_ConstructorWithDateTime_CallsEnsureUtcService()
+    public void UniversalDateTime_ConstructorWithDateTime_ShouldCallEnsureUtcService()
     {
         // Arrange
         DateTime dateTime = DateTime.Now;
-        Mock<IEnsureUtcService> mockService = new();
-        mockService.Setup(service => service.EnsureUtc(It.IsAny<DateTime>())).Returns(DateTime.UtcNow);
+        IEnsureUtcService? mockService = Substitute.For<IEnsureUtcService>();
+        mockService.EnsureUtc(Arg.Any<DateTime>()).Returns(DateTime.UtcNow);
 
         // Act
-        var universalDateTime = new UniversalDateTime(dateTime, mockService.Object);
+        var universalDateTime = new UniversalDateTime(dateTime, mockService);
 
         // Assert
-        mockService.Verify(service => service.EnsureUtc(dateTime), Times.Once());
+        mockService.Received(1).EnsureUtc(dateTime);
     }
 
     [Fact]
-    public void UniversalDateTime_ConstructorWithNullEnsureUtcService_ThrowsArgumentNullException()
+    public void UniversalDateTime_ConstructorWithNullEnsureUtcService_ShouldThrowArgumentNullException()
     {
         // Arrange
         DateTime dateTime = DateTime.Now;
@@ -82,7 +80,7 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_DateTimeProperty_ReturnsUtcDateTime()
+    public void UniversalDateTime_DateTimeProperty_ShouldReturnUtcDateTime()
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
@@ -97,7 +95,7 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_DateOnlyProperty_ReturnsUtcDateOnly()
+    public void UniversalDateTime_DateOnlyProperty_ShouldReturnUtcDateOnly()
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
@@ -111,7 +109,7 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_ToString_ReturnsIso8601FormattedString()
+    public void UniversalDateTime_ToString_ShouldReturnIso8601FormattedString()
     {
         // Arrange
         DateTimeOffset utcNow = DateTimeOffset.UtcNow;
@@ -125,15 +123,15 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_LeapYear_HandledCorrectly()
+    public void UniversalDateTime_LeapYear_ShouldBeHandledCorrectly()
     {
         // Arrange
         var leapYearDate = new DateTime(2020, 2, 29, 0, 0, 0, DateTimeKind.Utc);
 
-        Mock<IEnsureUtcService> mockEnsureUtcService = new();
-        mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(leapYearDate);
+        IEnsureUtcService? mockEnsureUtcService = Substitute.For<IEnsureUtcService>();
+        mockEnsureUtcService.EnsureUtc(Arg.Any<DateTime>()).Returns(leapYearDate);
 
-        var universalDateTime = new UniversalDateTime(leapYearDate, mockEnsureUtcService.Object);
+        var universalDateTime = new UniversalDateTime(leapYearDate, mockEnsureUtcService);
 
         // Act & Assert
         Assert.Equal(29, universalDateTime.DateTime.Day);
@@ -142,32 +140,32 @@ public class UniversalDateTimeTests
     }
 
     [Fact]
-    public void UniversalDateTime_ExtremePastDate_HandledCorrectly()
+    public void UniversalDateTime_ExtremePastDate_ShouldBeHandledCorrectly()
     {
         // Arrange
         var ancientDate = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc); // The earliest date.
 
-        Mock<IEnsureUtcService> mockEnsureUtcService = new();
-        mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(ancientDate);
+        IEnsureUtcService? mockEnsureUtcService = Substitute.For<IEnsureUtcService>();
+        mockEnsureUtcService.EnsureUtc(Arg.Any<DateTime>()).Returns(ancientDate);
 
         // Act
-        var ancientUniversalDateTime = new UniversalDateTime(ancientDate, mockEnsureUtcService.Object);
+        var ancientUniversalDateTime = new UniversalDateTime(ancientDate, mockEnsureUtcService);
 
         // Assert
         Assert.Equal(ancientDate, ancientUniversalDateTime.DateTime);
     }
 
     [Fact]
-    public void UniversalDateTime_ExtremeFutureDate_HandledCorrectly()
+    public void UniversalDateTime_ExtremeFutureDate_ShouldBeHandledCorrectly()
     {
         // Arrange
         var futureDate = new DateTime(9999, 12, 31, 23, 59, 59, DateTimeKind.Utc); // The latest date.
 
-        Mock<IEnsureUtcService> mockEnsureUtcService = new();
-        mockEnsureUtcService.Setup(x => x.EnsureUtc(It.IsAny<DateTime>())).Returns(futureDate);
+        IEnsureUtcService? mockEnsureUtcService = Substitute.For<IEnsureUtcService>();
+        mockEnsureUtcService.EnsureUtc(Arg.Any<DateTime>()).Returns(futureDate);
 
         // Act
-        var futureUniversalDateTime = new UniversalDateTime(futureDate, mockEnsureUtcService.Object);
+        var futureUniversalDateTime = new UniversalDateTime(futureDate, mockEnsureUtcService);
 
         // Assert
         Assert.Equal(futureDate, futureUniversalDateTime.DateTime);

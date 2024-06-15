@@ -1,8 +1,6 @@
 ﻿using Enterprise.Patterns.ResultPattern.Errors.Extensions;
 using Enterprise.Patterns.ResultPattern.Errors.Model;
 using Enterprise.Patterns.ResultPattern.Errors.Model.Abstract;
-using FluentAssertions;
-using NSubstitute;
 
 namespace Enterprise.Patterns.ResultPattern.Tests.Unit.Errors.Extensions;
 

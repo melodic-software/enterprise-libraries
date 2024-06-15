@@ -1,10 +1,8 @@
 ﻿using System.Reflection;
 using Enterprise.Options.Hashing;
 using Enterprise.Serialization.Json;
-using FluentAssertions;
-using NSubstitute;
 
-namespace Enterprise.Options.Tests.Unit;
+namespace Enterprise.Options.Tests.Unit.Hashing;
 
 public class OptionsHashServiceTests
 {
