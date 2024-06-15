@@ -10,7 +10,7 @@ public class SecurityKeyGenerationService
         ArgumentException.ThrowIfNullOrWhiteSpace(secret);
 
         byte[] secretBytes = Encoding.ASCII.GetBytes(secret);
-        SymmetricSecurityKey securityKey = new SymmetricSecurityKey(secretBytes);
+        var securityKey = new SymmetricSecurityKey(secretBytes);
 
         return securityKey;
     }

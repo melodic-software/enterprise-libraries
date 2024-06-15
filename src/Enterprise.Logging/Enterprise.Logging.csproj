@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.202" />
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.472" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.494" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.TextEncoding" Version="1.0.0-preview.16" />
     <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.22.0" />

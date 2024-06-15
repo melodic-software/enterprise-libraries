@@ -19,7 +19,7 @@ public class FluentValidationCommandHandler<TCommand, TResult> : IHandler<TComma
         _logger = logger;
     }
 
-    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         if (!_validators.Any())
         {

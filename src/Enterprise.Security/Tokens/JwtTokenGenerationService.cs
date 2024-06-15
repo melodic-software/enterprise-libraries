@@ -10,7 +10,7 @@ public class JwtTokenGenerationService
         DateTime? notBefore, DateTime? expiration, SigningCredentials signingCredentials)
     {
         JwtSecurityToken jwtSecurityToken = GenerateToken(issuer, audience, claims, notBefore, expiration, signingCredentials);
-        JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+        var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         string? jwt = jwtSecurityTokenHandler.WriteToken(jwtSecurityToken);
         return jwt;
     }
@@ -23,7 +23,7 @@ public class JwtTokenGenerationService
             throw new Exception("Expiration date must be after the \"not before\" date");
         }
 
-        JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
+        var jwtSecurityToken = new JwtSecurityToken(
             issuer,
             audience,
             claims,

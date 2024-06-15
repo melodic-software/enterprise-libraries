@@ -13,7 +13,7 @@ public class ErrorHandlingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResu
         _logger = logger;
     }
 
-    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         try
         {

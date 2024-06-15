@@ -13,7 +13,7 @@ public class LoggingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
         _logger = logger;
     }
 
-    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         Type queryType = typeof(TQuery);
 

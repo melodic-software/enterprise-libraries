@@ -6,27 +6,14 @@ using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
 
 namespace Enterprise.MediatR.Assemblies;
 
-internal static class AssemblyRegistrar
+internal static class AssemblyFallbackService
 {
-    public static Assembly[] RegisterAssemblies()
+    public static List<Assembly> GetAssemblies()
     {
         // TODO: This fallback isn't ideal, as it could load a lot of assemblies we don't need.
         // We should try to find a more performant option to fall back to.
         PreStartupLogger.Instance.LogInformation("Explicit assemblies containing MediatR handlers have not been specified. Loading solution assemblies.");
         Assembly[] assemblies = AssemblyLoader.LoadSolutionAssemblies(ThatAreNotMicrosoft);
-
-        return assemblies;
-    }
-
-    public static Assembly[] RegisterExplicitAssemblies(Assembly[] assemblies)
-    {
-        PreStartupLogger.Instance.LogInformation("Registering MediatR handlers for the explicitly defined assemblies.");
-
-        foreach (Assembly assembly in assemblies)
-        {
-            PreStartupLogger.Instance.LogInformation("{AssemblyName}", assembly.FullName);
-        }
-
-        return assemblies;
+        return assemblies.ToList();
     }
 }

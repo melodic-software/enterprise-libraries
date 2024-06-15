@@ -14,7 +14,7 @@ public class FluentValidationQueryHandler<TQuery, TResult> : IHandler<TQuery, TR
         _validators = validators.ToList();
     }
 
-    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         if (!_validators.Any())
         {

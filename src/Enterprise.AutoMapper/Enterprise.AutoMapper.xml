@@ -4,17 +4,38 @@
         <name>Enterprise.AutoMapper</name>
     </assembly>
     <members>
+        <member name="P:Enterprise.AutoMapper.Assemblies.AutoMapperAssemblyService.AssembliesToRegister">
+            <summary>
+            This is a collection of assemblies that contain mapping profiles.
+            If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
+            </summary>
+        </member>
+        <member name="M:Enterprise.AutoMapper.Assemblies.AutoMapperAssemblyService.AddAssembly(System.Reflection.Assembly)">
+            <summary>
+            Explicitly add an assembly containing one or more mapping profiles.
+            This will be included when AutoMapper services are registered.
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:Enterprise.AutoMapper.Assemblies.AutoMapperAssemblyService.RemoveAssembly(System.Reflection.Assembly)">
+            <summary>
+            Explicitly remove an assembly containing one or more mapping profiles.
+            This will NOT be included when AutoMapper services are registered.
+            </summary>
+            <param name="assembly"></param>
+        </member>
         <member name="P:Enterprise.AutoMapper.Options.AutoMapperOptions.EnableAutoMapper">
             <summary>
             Determines if AutoMapper services will be registered.
             Defaults to true.
             </summary>
         </member>
-        <member name="P:Enterprise.AutoMapper.Options.AutoMapperOptions.Assemblies">
+        <member name="M:Enterprise.AutoMapper.Options.AutoMapperOptions.AddAssembly(System.Reflection.Assembly)">
             <summary>
-            This is a collection of assemblies that contain mapping profiles.
-            If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
+            Explicitly add an assembly containing AutoMapper profiles.
+            This will be included when AutoMapper services are registered.
             </summary>
+            <param name="assembly"></param>
         </member>
     </members>
 </doc>

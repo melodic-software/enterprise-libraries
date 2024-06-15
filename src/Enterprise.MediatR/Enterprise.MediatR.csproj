@@ -14,15 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.3.0" />
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.489" />
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.472" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.475" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.494" />
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.494" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.494" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.442" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.472" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Options\Delegates\" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.494" />
   </ItemGroup>
 
 </Project>

@@ -24,7 +24,7 @@ public class EventOutboxMessageFactory
         }
 
         // Projecting events into outbox message instances.
-        List<EventOutboxMessage> outboxMessages = values
+        var outboxMessages = values
             .Select(value => new EventOutboxMessage(
                 Guid.NewGuid(),
                 value.GetType().Name,

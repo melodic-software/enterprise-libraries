@@ -15,7 +15,7 @@ public static class ValidatorRegistrationExtensions
         Type genericValidatorInterface = typeof(IValidator<>);
 
         // Find all validator types in the assembly.
-        List<Type> validatorTypes = assembly.GetTypes()
+        var validatorTypes = assembly.GetTypes()
             .Where(t => t.GetInterfaces()
                 .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == genericValidatorInterface))
             .ToList();
@@ -30,7 +30,7 @@ public static class ValidatorRegistrationExtensions
     {
         foreach (Type validatorType in validatorTypes)
         {
-            List<Type> implementedInterfaces = validatorType.GetInterfaces()
+            var implementedInterfaces = validatorType.GetInterfaces()
                 .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == genericValidatorInterface)
                 .ToList();
 

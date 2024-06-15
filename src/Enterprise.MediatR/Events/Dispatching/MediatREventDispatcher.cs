@@ -105,7 +105,7 @@ public sealed class MediatREventDispatcher : EventDispatcher
             }
 
             Logger.LogDebug(
-                "Handler type \"{EventHandlerType}\" implements {MediatRInterface}d and is being filtered out to avoid duplicate handling. " +
+                "Handler type \"{EventHandlerType}\" implements {MediatRInterface} and is being filtered out to avoid duplicate handling. " +
                 "These handlers must be wired up separately in the DI container via the MediatR service registrations. " +
                 "If registered, these handlers will be triggered when the event is sent via an {PublisherInterfaceName} instance.",
                 eventHandlerType.Name, mediatRInterface.Name, nameof(IPublisher)

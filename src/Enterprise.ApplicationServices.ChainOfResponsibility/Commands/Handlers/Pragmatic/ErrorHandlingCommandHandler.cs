@@ -13,7 +13,7 @@ public class ErrorHandlingCommandHandler<TCommand, TResult> : IHandler<TCommand,
         _logger = logger;
     }
 
-    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         try
         {

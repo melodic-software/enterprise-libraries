@@ -13,7 +13,7 @@ public class LoggingCommandHandler<TCommand, TResult> : IHandler<TCommand, TResu
         _logger = logger;
     }
 
-    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         Type commandType = typeof(TCommand);
 

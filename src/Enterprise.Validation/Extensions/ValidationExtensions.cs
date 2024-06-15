@@ -16,7 +16,7 @@ public static class ValidationExtensions
                     Values = errorMessages.Distinct().ToArray()
                 });
 
-        Dictionary<string, string[]> dictionary = group.ToDictionary(x => x.Key, x => x.Values);
+        var dictionary = group.ToDictionary(x => x.Key, x => x.Values);
 
         return dictionary;
     }

@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using AutoMapper;
+using Enterprise.AutoMapper.Assemblies;
+
 namespace Enterprise.AutoMapper.Options;
 
 public class AutoMapperOptions
@@ -11,9 +14,12 @@ public class AutoMapperOptions
     /// </summary>
     public bool EnableAutoMapper { get; set; } = true;
 
+    public Action<IMapperConfigurationExpression> Configure { get; set; } = _ => { };
+
     /// <summary>
-    /// This is a collection of assemblies that contain mapping profiles.
-    /// If there are no assemblies added to this collection, a fallback will be used that loads solution assemblies.
+    /// Explicitly add an assembly containing AutoMapper profiles.
+    /// This will be included when AutoMapper services are registered.
     /// </summary>
-    public List<Assembly> Assemblies { get; } = [];
+    /// <param name="assembly"></param>
+    public void AddAssembly(Assembly assembly) => AutoMapperAssemblyService.Instance.AddAssembly(assembly);
 }

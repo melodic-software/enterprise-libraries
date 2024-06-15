@@ -5,7 +5,7 @@ namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers
 
 public class NullCommandValidationCommandHandler<TCommand, TResult> : IHandler<TCommand, TResult>
 {
-    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken)
+    public async Task<TResult?> HandleAsync(TCommand request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);
         return await next();

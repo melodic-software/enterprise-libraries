@@ -27,7 +27,7 @@ public static class FluentValidationService
             .Where(x => x is { Errors: not null } && x.Errors.Count != 0)
             .SelectMany(x => x.Errors);
 
-        List<ValidationError> validationErrors = validationFailures
+        var validationErrors = validationFailures
             .Select(validationFailure => new ValidationError(validationFailure.PropertyName, validationFailure.ErrorMessage))
             .ToList();
 
