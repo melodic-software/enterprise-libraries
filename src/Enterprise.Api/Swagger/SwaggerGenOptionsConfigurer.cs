@@ -26,13 +26,15 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
     private readonly IConfiguration _config;
     private readonly ILogger<SwaggerGenOptionsConfigurer> _logger;
     private readonly IServiceProvider _serviceProvider;
+    private readonly IServiceCollection _serviceCollection;
 
     public SwaggerGenOptionsConfigurer(SwaggerOptions swaggerOptions,
         IOptions<ControllerOptions> controllerOptions,
         IOptions<VersioningOptions> versioningOptions,
         IConfiguration config,
         ILogger<SwaggerGenOptionsConfigurer> logger,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        IServiceCollection serviceCollection)
     {
         _swaggerOptions = swaggerOptions;
         _controllerOptions = controllerOptions.Value;
@@ -40,6 +42,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         _config = config;
         _logger = logger;
         _serviceProvider = serviceProvider;
+        _serviceCollection = serviceCollection;
     }
 
     public void Configure(SwaggerGenOptions options)
@@ -91,7 +94,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             OrderActions(options);
 
             // allow for adding application specific configuration
-            _swaggerOptions.PostConfigure?.Invoke(options);
+            _swaggerOptions.PostConfigure?.Invoke(options, _serviceCollection);
         }
         catch (Exception ex)
         {

@@ -33,7 +33,7 @@ public static class SwaggerConfigService
         services.AddEndpointsApiExplorer();
 
         // This registered service is what configures the Swagger generation options.
-        services.AddTransient(RegisterSwaggerGenConfigurer(options));
+        services.AddTransient(RegisterSwaggerGenConfigurer(options, services));
 
         // NOTE: The setup action for Swagger generation is not required here.
         // It is handled by the IConfigureOptions<SwaggerGenOptions> registered above.
@@ -43,7 +43,7 @@ public static class SwaggerConfigService
         //services.AddSwaggerGenNewtonsoftSupport();
     }
 
-    private static Func<IServiceProvider, IConfigureOptions<SwaggerGenOptions>> RegisterSwaggerGenConfigurer(SwaggerOptions options)
+    private static Func<IServiceProvider, IConfigureOptions<SwaggerGenOptions>> RegisterSwaggerGenConfigurer(SwaggerOptions options, IServiceCollection services)
     {
         return serviceProvider =>
         {
@@ -60,7 +60,8 @@ public static class SwaggerConfigService
                 versioningOptions,
                 configuration,
                 logger,
-                serviceProvider
+                serviceProvider,
+                services
             );
 
             return result;

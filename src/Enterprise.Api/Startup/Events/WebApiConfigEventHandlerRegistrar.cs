@@ -11,7 +11,7 @@ public static class WebApiConfigEventHandlerRegistrar
 {
     /// <summary>
     /// Dynamically resolves instances of <see cref="IRegisterWebApiConfigEventHandlers"/> and invokes the configure method.
-    /// This allows for automatic wiring up of API configuration and keeps that concern separated.
+    /// This allows for automatic wiring up of API config event handlers and keeps that concern separated.
     /// </summary>
     /// <param name="events"></param>
     /// <param name="getAssemblies"></param>
