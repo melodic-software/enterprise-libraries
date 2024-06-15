@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DateTimes" Version="1.0.0-preview.497" />
-    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.497" />
+    <PackageReference Include="Melodic.Enterprise.DateTimes" Version="1.0.0-preview.520" />
+    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.518" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
   </ItemGroup>
 

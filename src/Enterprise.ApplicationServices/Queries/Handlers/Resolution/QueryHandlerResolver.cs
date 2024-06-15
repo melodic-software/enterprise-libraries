@@ -38,7 +38,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
         where TQuery : class, IQuery
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 
@@ -46,26 +46,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
         where TQuery : class, IQuery<TResult>
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
-    }
-
-    private IServiceProvider GetServiceProvider()
-    {
-        // Check if the current provider is already a scoped service provider.
-        if (_serviceProvider.GetService<IServiceScopeFactory>() == null)
-        {
-            return _serviceProvider;
-        }
-
-        if (_serviceProvider is IServiceScope)
-        {
-            return _serviceProvider;
-        }
-
-        // Create a new scope if we are in the root scope.
-        IServiceScopeFactory scopeFactory = _serviceProvider.GetRequiredService<IServiceScopeFactory>();
-        IServiceScope scope = scopeFactory.CreateScope();
-        return scope.ServiceProvider;
     }
 }

@@ -20,7 +20,7 @@ public class CommandHandlerResolver : IResolveCommandHandler
     public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
         where TCommand : class, ICommand
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
     }
 
@@ -28,26 +28,7 @@ public class CommandHandlerResolver : IResolveCommandHandler
     public IHandleCommand<TCommand, TResult> GetHandlerFor<TCommand, TResult>(TCommand command)
         where TCommand : class, ICommand<TResult>
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResult>>();
-    }
-
-    private IServiceProvider GetServiceProvider()
-    {
-        // Check if the current provider is already a scoped service provider.
-        if (_serviceProvider.GetService<IServiceScopeFactory>() == null)
-        {
-            return _serviceProvider;
-        }
-
-        if (_serviceProvider is IServiceScope)
-        {
-            return _serviceProvider;
-        }
-
-        // Create a new scope if we are in the root scope.
-        IServiceScopeFactory scopeFactory = _serviceProvider.GetRequiredService<IServiceScopeFactory>();
-        IServiceScope scope = scopeFactory.CreateScope();
-        return scope.ServiceProvider;
     }
 }
