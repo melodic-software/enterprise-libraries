@@ -21,9 +21,6 @@ public static class AutoMapperConfigService
             return;
         }
 
-        // We have profile mappings in this assembly that are not application specific.
-        AutoMapperAssemblyService.Instance.AddAssembly(typeof(AutoMapperConfigService).Assembly);
-
         List<Assembly> assemblies = AutoMapperAssemblyService.Instance.AssembliesToRegister;
         bool explicitAssembliesSpecified = assemblies.Any();
 
@@ -36,6 +33,19 @@ public static class AutoMapperConfigService
             assemblies = GetAssemblies();
         }
 
-        services.AddAutoMapper(options.Configure, assemblies);
+        AddEnterpriseAssembly(assemblies);
+
+        services.AddAutoMapper(options.Configure, [..assemblies]);
+    }
+
+    private static void AddEnterpriseAssembly(List<Assembly> allAssemblies)
+    {
+        // We have profile mappings in this assembly that are not application specific, and should always be included.
+        Assembly enterpriseAssembly = typeof(AutoMapperConfigService).Assembly;
+
+        if (allAssemblies.TrueForAll(a => a.GetName().FullName != enterpriseAssembly.FullName))
+        {
+            allAssemblies.Add(enterpriseAssembly);
+        }
     }
 }

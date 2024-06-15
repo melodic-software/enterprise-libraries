@@ -26,7 +26,7 @@ public static class MediatRConfigurations
                 assemblies = GetAssemblies();
             }
 
-            mediatRServiceConfiguration.RegisterServicesFromAssemblies(assemblies.ToArray());
+            mediatRServiceConfiguration.RegisterServicesFromAssemblies([..assemblies]);
 
             RegisterBehaviors(options, mediatRServiceConfiguration);
         };
