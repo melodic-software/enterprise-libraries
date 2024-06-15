@@ -4,6 +4,7 @@ using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Microsoft.Extensions.DependencyInjection;
+using static Enterprise.DI.Core.ServiceProviders.ScopedProviderService;
 
 namespace Enterprise.ApplicationServices.Queries.Handlers.Resolution;
 
@@ -19,7 +20,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     /// <inheritdoc />
     public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery query)
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
         return (IHandleQuery<TResult>)serviceProvider.GetService(handlerType);
@@ -28,7 +29,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     /// <inheritdoc />
     public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery<TResult> query)
     {
-        IServiceProvider serviceProvider = GetServiceProvider();
+        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
         return (IHandleQuery<TResult>)serviceProvider.GetRequiredService(handlerType);
@@ -38,7 +39,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
         where TQuery : class, IQuery
     {
-        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
+        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 
@@ -46,7 +47,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
         where TQuery : class, IQuery<TResult>
     {
-        IServiceProvider serviceProvider = ScopedProviderService.GetScopedProvider(_serviceProvider);
+        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
         return serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 }
