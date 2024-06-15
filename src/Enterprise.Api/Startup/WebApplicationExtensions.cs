@@ -9,7 +9,7 @@ using Enterprise.Api.Security;
 using Enterprise.Api.Swagger;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
-using Enterprise.Middleware.AspNetCore.StartupServices;
+using Enterprise.Middleware.AspNetCore.RegisteredServices;
 using Enterprise.Monitoring.Health.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -40,8 +40,8 @@ public static class WebApplicationExtensions
         // Non production related middleware / services.
         if (!app.Environment.IsProduction())
         {
-            // Shows all services registered with the container.
-            app.UseListStartupServicesMiddleware();
+            // Adds an "endpoint" that enables querying services registered with the container (in non production environments).
+            app.UseRegisteredServicesEndpointMiddleware();
             app.UseRootRedirectMiddleware();
             app.UseSwagger();
         }
