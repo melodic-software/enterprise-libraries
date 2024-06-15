@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.494" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.497" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
   </ItemGroup>
 
