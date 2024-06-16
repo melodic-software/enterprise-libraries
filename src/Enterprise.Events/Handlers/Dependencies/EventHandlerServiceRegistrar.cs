@@ -20,11 +20,11 @@ internal sealed class EventHandlerServiceRegistrar : IRegisterServices
 
         RegistrationContext<IResolveEventHandlers> registrationContext = services
             .BeginRegistration<IResolveEventHandlers>()
-            .TryAddSingleton(provider => new DynamicDispatchingEventHandlerResolver(provider));
+            .AddScoped(provider => new DynamicDispatchingEventHandlerResolver(provider));
 
         //registrationContext = services
         //    .BeginRegistration<IResolveEventHandlers>()
-        //    .TryAddSingleton(provider => new ReflectionEventHandlerResolver(provider));
+        //    .AddScoped(provider => new ReflectionEventHandlerResolver(provider));
         // We add decorators that will improve performance and observability.
 
         registrationContext

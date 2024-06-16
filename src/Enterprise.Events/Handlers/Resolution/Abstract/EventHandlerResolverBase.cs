@@ -1,7 +1,6 @@
 ﻿using Enterprise.Events.Handlers.Abstract;
 using Enterprise.Events.Model;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.DI.Core.ServiceProviders.ScopedProviderService;
 
 namespace Enterprise.Events.Handlers.Resolution.Abstract;
 
@@ -20,8 +19,7 @@ public abstract class EventHandlerResolverBase : IResolveEventHandlers
     /// <inheritdoc />
     public Task<IEnumerable<IHandleEvent<T>>> ResolveAsync<T>(T @event) where T : IEvent
     {
-        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
-        IEnumerable<IHandleEvent<T>> handlers = serviceProvider.GetServices<IHandleEvent<T>>();
+        IEnumerable<IHandleEvent<T>> handlers = _serviceProvider.GetServices<IHandleEvent<T>>();
         return Task.FromResult(handlers);
     }
 }

@@ -4,7 +4,6 @@ using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.DI.Core.ServiceProviders.ScopedProviderService;
 
 namespace Enterprise.ApplicationServices.Commands.Handlers.Resolution;
 
@@ -21,15 +20,13 @@ public class CommandHandlerResolver : IResolveCommandHandler
     public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
         where TCommand : class, ICommand
     {
-        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
-        return serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
+        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand>>();
     }
 
     /// <inheritdoc />
     public IHandleCommand<TCommand, TResult> GetHandlerFor<TCommand, TResult>(TCommand command)
         where TCommand : class, ICommand<TResult>
     {
-        IServiceProvider serviceProvider = GetScopedProvider(_serviceProvider);
-        return serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResult>>();
+        return _serviceProvider.GetRequiredService<IHandleCommand<TCommand, TResult>>();
     }
 }
