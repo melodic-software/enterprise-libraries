@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.533" />
-    <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.494" />
+    <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.543" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
   </ItemGroup>
 
