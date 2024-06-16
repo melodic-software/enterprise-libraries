@@ -35,6 +35,34 @@ public class ErrorExtensionsTests
     }
 
     [Fact]
+    public void IsTrueError_ShouldReturnFalse_WhenErrorDescriptorsListIsEmpty()
+    {
+        // Arrange
+        IError? error = Substitute.For<IError>();
+        error.Descriptors.Returns(new List<ErrorDescriptor>());
+
+        // Act
+        bool result = error.IsTrueError();
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void IsTrueError_ShouldReturnTrue_WhenErrorHasMixedDescriptors()
+    {
+        // Arrange
+        IError? error = Substitute.For<IError>();
+        error.Descriptors.Returns(new List<ErrorDescriptor> { ErrorDescriptor.Validation, ErrorDescriptor.NoError });
+
+        // Act
+        bool result = error.IsTrueError();
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [Fact]
     public void ToResult_ShouldReturnFailureResultWithError()
     {
         // Arrange

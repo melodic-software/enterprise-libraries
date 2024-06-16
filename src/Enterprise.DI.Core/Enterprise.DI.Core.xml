@@ -191,19 +191,5 @@
             Registers a single decorator for the service.
             </summary>
         </member>
-        <member name="T:Enterprise.DI.Core.ServiceProviders.ScopedProviderService">
-            <summary>
-            Provides methods for ensuring that the appropriate service provider scope is used.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.ServiceProviders.ScopedProviderService.GetScopedProvider(System.IServiceProvider)">
-            <summary>
-            Returns an appropriate scoped <see cref="T:System.IServiceProvider"/>.
-            If the current service provider is already scoped, it is returned.
-            Otherwise, a new scope is created.
-            </summary>
-            <param name="serviceProvider">The current service provider.</param>
-            <returns>An <see cref="T:System.IServiceProvider"/> that is scoped appropriately.</returns>
-        </member>
     </members>
 </doc>

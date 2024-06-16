@@ -13,7 +13,7 @@ namespace Enterprise.Patterns.ResultPattern.Model;
 /// These are mostly used in the domain and application service layers, and are passed back to the presentation layer.
 /// This is a core component (monad) in Railway Oriented Programming (ROP) - a functional programming design pattern.
 /// </summary>
-public class Result : IResult
+public partial class Result : IResult
 {
     private readonly IEnumerable<IError> _errors = [];
 
