@@ -31,7 +31,7 @@
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.535" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.534" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.534" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.535" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.544" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.534" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.534" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
