@@ -1,12 +1,39 @@
 ﻿using System.Reflection;
+using Asp.Versioning.ApiExplorer;
+using Enterprise.Api.Swagger.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using static Enterprise.Api.Swagger.Constants.SwaggerConstants;
+using static Enterprise.Api.Swagger.Endpoints.SwaggerEndpointService;
+using static Enterprise.Api.Swagger.UI.SwaggerUISecurityConfigurer;
+using SwaggerUIOptions = Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions;
 
 namespace Enterprise.Api.Swagger.UI;
 
-public static class SwaggerUICustomizer
+public static class SwaggerUIConfigurer
 {
-    public static void CustomizeUI(SwaggerUIOptions options)
+    public static void Configure(WebApplication app, SwaggerSecurityOptions swaggerSecurityOptions, Options.SwaggerUIOptions swaggerUIOptions, SwaggerUIOptions options)
+    {
+        ConfigureSecurity(swaggerSecurityOptions, options);
+
+        IApiVersionDescriptionProvider? descriptionProvider = app.Services.GetService<IApiVersionDescriptionProvider>();
+        ConfigureSwaggerEndpoints(options, descriptionProvider);
+        options.RoutePrefix = RoutePrefix;
+
+        if (swaggerUIOptions.CustomConfigureUI != null)
+        {
+            // This is a complete customization.
+            swaggerUIOptions.CustomConfigureUI(options);
+        }
+        else
+        {
+            ConfigureUI(options);
+            swaggerUIOptions.PostConfigureUI?.Invoke(options);
+        }
+    }
+
+    private static void ConfigureUI(SwaggerUIOptions options)
     {
         options.DefaultModelExpandDepth(2);
         options.DefaultModelRendering(ModelRendering.Example);
