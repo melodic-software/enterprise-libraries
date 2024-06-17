@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Enterprise.Api.Minimal.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,17 +8,6 @@ namespace Enterprise.Api.Minimal.Mapping;
 
 public static class EndpointMappingExtensions
 {
-    /// <summary>
-    /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="options"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddEndpoints(this IServiceCollection services, MinimalApiOptions options)
-    {
-        return services.AddEndpoints(options.EndpointAssemblies);
-    }
-
     /// <summary>
     /// Adds transient registrations of all <see cref="IMapEndpoint"/> instances found in the provided assemblies with the DI container.
     /// </summary>
