@@ -1,14 +1,12 @@
-﻿using Enterprise.Api.Swagger.Options;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Reflection;
 
 namespace Enterprise.Api.Swagger.UI;
 
 public static class SwaggerUICustomizer
 {
-    public static void CustomizeUI(SwaggerUIOptions options, IConfiguration configuration)
+    public static void CustomizeUI(SwaggerUIOptions options)
     {
         options.DefaultModelExpandDepth(2);
         options.DefaultModelRendering(ModelRendering.Example);
@@ -37,7 +35,7 @@ public static class SwaggerUICustomizer
     {
         options.IndexStream = () =>
         {
-            Type type = typeof(SwaggerOptions);
+            Type type = typeof(Options.SwaggerOptions);
             Assembly assembly = type.Assembly;
             string? assemblyName = assembly.GetName().Name;
             string relativeNamespace = "Swagger.EmbeddedAssets";

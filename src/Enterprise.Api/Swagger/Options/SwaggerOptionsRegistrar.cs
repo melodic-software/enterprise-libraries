@@ -10,5 +10,7 @@ internal sealed class SwaggerOptionsRegistrar : IRegisterOptions
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
         services.RegisterOptions<SwaggerOptions>(configuration, SwaggerOptions.ConfigSectionKey);
+        services.RegisterOptions<SwaggerSecurityOptions>(configuration, SwaggerSecurityOptions.ConfigSectionKey);
+        services.RegisterOptions<SwaggerUIOptions>(configuration, SwaggerUIOptions.ConfigSectionKey);
     }
 }

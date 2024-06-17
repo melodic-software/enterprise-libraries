@@ -38,9 +38,9 @@ public static class OAuth2Extensions
         });
     }
 
-    public static void AddOAuth2SecurityDefinition(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
+    public static void AddOAuth2SecurityDefinition(this SwaggerGenOptions options, SwaggerSecurityOptions securityOptions)
     {
-        if (!swaggerOptions.CanConfigureOAuth)
+        if (!securityOptions.CanConfigureOAuth)
         {
             PreStartupLogger.Instance.LogInformation(
                 "OAuth has not been configured. " +
@@ -50,7 +50,7 @@ public static class OAuth2Extensions
             return;
         }
 
-        string authority = swaggerOptions.Authority;
+        string authority = securityOptions.Authority;
 
         DiscoveryDocumentResponse discoveryDocResponse;
 
@@ -71,20 +71,20 @@ public static class OAuth2Extensions
         options.AddSecurityDefinition(OAuth2SecurityDefinitionName, new OpenApiSecurityScheme
         {
             Type = SecuritySchemeType.OAuth2,
-            Flows = CreateFlows(swaggerOptions, discoveryDocResponse)
+            Flows = CreateFlows(securityOptions, discoveryDocResponse)
         });
     }
 
-    public static void AddOAuth2SecurityRequirement(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
+    public static void AddOAuth2SecurityRequirement(this SwaggerGenOptions options, SwaggerSecurityOptions securityOptions)
     {
-        if (!swaggerOptions.CanConfigureOAuth)
+        if (!securityOptions.CanConfigureOAuth)
         {
             PreStartupLogger.Instance.LogInformation("OAuth has not been configured. The Swagger OAuth2 security requirement will not be added.");
 
             return;
         }
 
-        Dictionary<string, string> oAuthScopes = swaggerOptions.OAuthScopes;
+        Dictionary<string, string> oAuthScopes = securityOptions.OAuthScopes;
         string[] scopeNames = [.. oAuthScopes.Keys];
 
         options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -103,31 +103,31 @@ public static class OAuth2Extensions
         });
     }
 
-    private static OpenApiOAuthFlows CreateFlows(SwaggerOptions swaggerOptions, DiscoveryDocumentResponse discoveryDocResponse)
+    private static OpenApiOAuthFlows CreateFlows(SwaggerSecurityOptions securityOptions, DiscoveryDocumentResponse discoveryDocResponse)
     {
-        Dictionary<string, string> oAuthScopes = swaggerOptions.OAuthScopes;
+        Dictionary<string, string> oAuthScopes = securityOptions.OAuthScopes;
 
         string authorizeEndpoint = discoveryDocResponse.AuthorizeEndpoint ?? string.Empty;
         string tokenEndpoint = discoveryDocResponse.TokenEndpoint ?? string.Empty;
 
         var oAuthFlows = new OpenApiOAuthFlows();
 
-        if (swaggerOptions.EnableAuthorizationCodeFlow)
+        if (securityOptions.EnableAuthorizationCodeFlow)
         {
             oAuthFlows.AuthorizationCode = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
         }
 
-        if (swaggerOptions.EnableImplicitFlow)
+        if (securityOptions.EnableImplicitFlow)
         {
             oAuthFlows.Implicit = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
         }
 
-        if (swaggerOptions.EnableClientCredentialsFlow)
+        if (securityOptions.EnableClientCredentialsFlow)
         {
             oAuthFlows.ClientCredentials = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
         }
 
-        if (swaggerOptions.EnablePasswordFlow)
+        if (securityOptions.EnablePasswordFlow)
         {
             oAuthFlows.Password = CreateDefaultFlow(authorizeEndpoint, tokenEndpoint, oAuthScopes);
         }

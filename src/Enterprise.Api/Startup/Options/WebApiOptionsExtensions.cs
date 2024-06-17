@@ -117,6 +117,16 @@ public static class WebApiOptionsExtensions
         options.Configure(configure);
     }
 
+    public static void ConfigureSwaggerSecurity(this WebApiOptions options, Configure<SwaggerSecurityOptions> configure)
+    {
+        options.Configure(configure);
+    }
+
+    public static void ConfigureSwaggerUI(this WebApiOptions options, Configure<SwaggerUIOptions> configure)
+    {
+        options.Configure(configure);
+    }
+
     public static void ConfigureTelemetry(this WebApiOptions options, Configure<TelemetryOptions> configure)
     {
         options.Configure(configure);

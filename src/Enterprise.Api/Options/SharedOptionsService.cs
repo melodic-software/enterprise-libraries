@@ -28,6 +28,7 @@ internal static class SharedOptionsService
         // This will use the config provider to set initial values.
         SharedOptions sharedOptions = GetOptionsInstance<SharedOptions>(configuration, SharedOptions.ConfigSectionKey);
         SwaggerOptions swaggerOptions = GetOptionsInstance<SwaggerOptions>(configuration, SwaggerOptions.ConfigSectionKey);
+        SwaggerSecurityOptions swaggerSecurityOptions = GetOptionsInstance<SwaggerSecurityOptions>(configuration, SwaggerSecurityOptions.ConfigSectionKey);
         HealthCheckOptions healthCheckOptions = GetOptionsInstance<HealthCheckOptions>(configuration, HealthCheckOptions.ConfigSectionKey);
         JwtBearerTokenOptions jwtBearerTokenOptions = GetOptionsInstance<JwtBearerTokenOptions>(configuration, JwtBearerTokenOptions.ConfigSectionKey);
 
@@ -36,9 +37,14 @@ internal static class SharedOptionsService
             swaggerOptions.ApplicationName = sharedOptions.ApplicationDisplayName;
         }
 
+        if (!string.IsNullOrWhiteSpace(sharedOptions.ApplicationDescription))
+        {
+            swaggerOptions.ApplicationDescription = sharedOptions.ApplicationDescription;
+        }
+
         if (!string.IsNullOrWhiteSpace(sharedOptions.OAuthAuthority))
         {
-            swaggerOptions.Authority = sharedOptions.OAuthAuthority;
+            swaggerSecurityOptions.Authority = sharedOptions.OAuthAuthority;
             healthCheckOptions.OpenIdConnectAuthority = sharedOptions.OAuthAuthority;
             jwtBearerTokenOptions.Authority = sharedOptions.OAuthAuthority;
         }
@@ -47,6 +53,7 @@ internal static class SharedOptionsService
         OptionsInstanceService.Instance.ConfigureDefaultInstance(healthCheckOptions);
         OptionsInstanceService.Instance.ConfigureDefaultInstance(jwtBearerTokenOptions);
         OptionsInstanceService.Instance.ConfigureDefaultInstance(swaggerOptions);
+        OptionsInstanceService.Instance.ConfigureDefaultInstance(swaggerSecurityOptions);
     }
 
     private static T GetOptionsInstance<T>(IConfiguration configuration, string configSectionKey) where T : class, new() =>

@@ -7,30 +7,30 @@ namespace Enterprise.Api.Swagger.Extensions;
 
 public static class SwaggerSecurityExtensions
 {
-    public static void AddSecurity(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
+    public static void AddSecurity(this SwaggerGenOptions options, SwaggerSecurityOptions securityOptions)
     {
-        if (!swaggerOptions.OAuthScopes.Any())
+        if (!securityOptions.OAuthScopes.Any())
         {
-            swaggerOptions.OAuthScopes = SecurityConstants.DemoOAuthScopes;
+            securityOptions.OAuthScopes = SecurityConstants.DemoOAuthScopes;
         }
 
-        options.AddSecurityDefinitions(swaggerOptions);
-        options.AddSecurityRequirements(swaggerOptions);
+        options.AddSecurityDefinitions(securityOptions);
+        options.AddSecurityRequirements(securityOptions);
     }
 
-    private static void AddSecurityDefinitions(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
+    private static void AddSecurityDefinitions(this SwaggerGenOptions options, SwaggerSecurityOptions securityOptions)
     {
         //options.AddApiKeySecurityDefinition();
-        //options.AddBasicAuthenticationSecurityDefinition(swaggerOptions);
-        //options.AddBearerSecurityDefinition();
-        options.AddOAuth2SecurityDefinition(swaggerOptions);
+        //options.AddBasicAuthenticationSecurityDefinition();
+        //options.AddJwtBearerSecurityDefinition();
+        options.AddOAuth2SecurityDefinition(securityOptions);
     }
 
-    private static void AddSecurityRequirements(this SwaggerGenOptions options, SwaggerOptions swaggerOptions)
+    private static void AddSecurityRequirements(this SwaggerGenOptions options, SwaggerSecurityOptions securityOptions)
     {
         //options.AddApiKeySecurityRequirement();
-        //options.AddBasicAuthenticationSecurityRequirement(swaggerOptions);
-        //options.AddBearerSecurityRequirement();
-        options.AddOAuth2SecurityRequirement(swaggerOptions);
+        //options.AddBasicAuthenticationSecurityRequirement();
+        //options.AddJwtBearerSecurityRequirement();
+        options.AddOAuth2SecurityRequirement(securityOptions);
     }
 }

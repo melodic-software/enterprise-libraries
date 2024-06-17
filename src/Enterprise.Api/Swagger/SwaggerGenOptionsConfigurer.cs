@@ -21,6 +21,7 @@ namespace Enterprise.Api.Swagger;
 public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOptions>
 {
     private readonly SwaggerOptions _swaggerOptions;
+    private readonly SwaggerSecurityOptions _swaggerSecurityOptions;
     private readonly ControllerOptions _controllerOptions;
     private readonly VersioningOptions _versioningOptions;
     private readonly IConfiguration _config;
@@ -28,7 +29,9 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
     private readonly IServiceProvider _serviceProvider;
     private readonly IServiceCollection _serviceCollection;
 
-    public SwaggerGenOptionsConfigurer(SwaggerOptions swaggerOptions,
+    public SwaggerGenOptionsConfigurer(
+        IOptions<SwaggerOptions> swaggerOptions,
+        IOptions<SwaggerSecurityOptions> swaggerSecurityOptions,
         IOptions<ControllerOptions> controllerOptions,
         IOptions<VersioningOptions> versioningOptions,
         IConfiguration config,
@@ -36,7 +39,8 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         IServiceProvider serviceProvider,
         IServiceCollection serviceCollection)
     {
-        _swaggerOptions = swaggerOptions;
+        _swaggerOptions = swaggerOptions.Value;
+        _swaggerSecurityOptions = swaggerSecurityOptions.Value;
         _controllerOptions = controllerOptions.Value;
         _versioningOptions = versioningOptions.Value;
         _config = config;
@@ -84,7 +88,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             options.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
             options.DescribeAllParametersInCamelCase();
 
-            options.AddSecurity(_swaggerOptions);
+            options.AddSecurity(_swaggerSecurityOptions);
             options.AddXmlComments(_swaggerOptions);
 
             AddDocumentFilters(options);
@@ -93,7 +97,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
 
             OrderActions(options);
 
-            // allow for adding application specific configuration
+            // Allow for adding application specific configuration.
             _swaggerOptions.PostConfigure?.Invoke(options, _serviceCollection);
         }
         catch (Exception ex)
@@ -134,7 +138,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
         [
             VersioningConstants.VersionQueryStringParameterName,
             VersioningConstants.CustomVersionRequestHeader,
-            // Add other version parameter names as needed
+            // Add other version parameter names as needed.
         ];
         
         options.OperationFilter<NonApplicableParamFilter>();
