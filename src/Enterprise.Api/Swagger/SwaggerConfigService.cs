@@ -1,6 +1,4 @@
-﻿using Asp.Versioning.ApiExplorer;
-using Enterprise.Api.Swagger.Options;
-using Enterprise.Api.Swagger.UI;
+﻿using Enterprise.Api.Swagger.Options;
 using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -8,10 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using static Enterprise.Api.Swagger.Constants.SwaggerConstants;
-using static Enterprise.Api.Swagger.Endpoints.SwaggerEndpointService;
 using static Enterprise.Api.Swagger.SwaggerGen.SwaggerGenConfigurerRegistrar;
 using static Enterprise.Api.Swagger.UI.SwaggerUIConfigurer;
-using static Enterprise.Api.Swagger.UI.SwaggerUISecurityConfigurer;
 
 namespace Enterprise.Api.Swagger;
 // https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle

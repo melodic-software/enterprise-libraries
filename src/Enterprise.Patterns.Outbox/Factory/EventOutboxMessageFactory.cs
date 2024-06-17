@@ -1,7 +1,7 @@
 ﻿using Enterprise.DateTimes.Current.Abstract;
 using Enterprise.Events.Model;
 using Enterprise.Patterns.Outbox.Model;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 
 namespace Enterprise.Patterns.Outbox.Factory;
 

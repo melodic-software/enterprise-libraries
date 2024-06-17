@@ -1,6 +1,6 @@
 ﻿using Enterprise.Caching.Abstractions;
 using Enterprise.Caching.Options;
-using Enterprise.Library.Core.Services.Abstract;
+using Enterprise.Library.Core.Serialization.Abstract;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Enterprise.Caching.Services;

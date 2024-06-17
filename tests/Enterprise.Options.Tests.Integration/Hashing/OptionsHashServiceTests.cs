@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Enterprise.Options.Hashing;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 using Enterprise.Serialization.Json.Microsoft;
 
 namespace Enterprise.Options.Tests.Integration.Hashing;

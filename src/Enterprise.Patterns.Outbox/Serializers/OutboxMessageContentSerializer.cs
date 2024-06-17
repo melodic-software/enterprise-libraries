@@ -1,4 +1,4 @@
-﻿using Enterprise.Serialization.Json;
+﻿using Enterprise.Serialization.Json.Abstract;
 using Newtonsoft.Json;
 
 namespace Enterprise.Patterns.Outbox.Serializers;

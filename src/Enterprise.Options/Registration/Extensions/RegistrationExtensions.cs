@@ -1,7 +1,8 @@
-﻿using Enterprise.Options.Core.Abstract;
+﻿using System.Text.Json;
+using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Options.Monitoring;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 using Enterprise.Serialization.Json.Microsoft;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

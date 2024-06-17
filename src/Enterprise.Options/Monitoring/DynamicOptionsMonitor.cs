@@ -4,7 +4,7 @@ using Enterprise.Options.Core.Delegates;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Options.Hashing;
 using Enterprise.Options.Monitoring.ChangeNotification;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

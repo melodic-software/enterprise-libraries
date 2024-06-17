@@ -1,6 +1,6 @@
 ﻿using Enterprise.Caching.Abstractions;
 using Enterprise.DI.Core.Registration.Abstract;
-using Enterprise.Library.Core.Services.Abstract;
+using Enterprise.Library.Core.Serialization.Abstract;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

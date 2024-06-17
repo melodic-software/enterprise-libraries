@@ -2,7 +2,7 @@
 using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Patterns.Outbox.Factory;
 using Enterprise.Patterns.Outbox.Serializers;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

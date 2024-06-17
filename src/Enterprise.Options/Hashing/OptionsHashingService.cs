@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using Enterprise.Serialization.Json;
+using Enterprise.Serialization.Json.Abstract;
 
 namespace Enterprise.Options.Hashing;
 
