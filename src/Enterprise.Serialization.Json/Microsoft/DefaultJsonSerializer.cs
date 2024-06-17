@@ -6,6 +6,11 @@ namespace Enterprise.Serialization.Json.Microsoft;
 public class DefaultJsonSerializer : ISerializeJson
 {
     private readonly JsonSerializerOptions _serializerOptions;
+    
+
+    public DefaultJsonSerializer() : this(JsonSerializerOptionsService.GetDefaultOptions())
+    {
+    }
 
     public DefaultJsonSerializer(JsonSerializerOptions jsonSerializerOptions)
     {
