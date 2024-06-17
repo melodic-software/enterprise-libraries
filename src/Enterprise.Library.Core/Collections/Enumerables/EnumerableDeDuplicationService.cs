@@ -1,9 +1,9 @@
-﻿using Enterprise.Library.Attributes;
+﻿using Enterprise.Library.Core.Attributes;
+using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.Reflection;
-using Microsoft.Extensions.Logging;
 
-namespace Enterprise.Library.Services;
+namespace Enterprise.Library.Core.Collections.Enumerables;
 
 public static class EnumerableDeDuplicationService
 {

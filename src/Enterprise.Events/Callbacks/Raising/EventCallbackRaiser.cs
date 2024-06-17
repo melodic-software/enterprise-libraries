@@ -1,4 +1,5 @@
 ﻿using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Model.NonGeneric;
 using Enterprise.Events.Callbacks.Raising.Abstract;
 using Enterprise.Events.Callbacks.Registration.Abstract;
 using Enterprise.Events.Model;

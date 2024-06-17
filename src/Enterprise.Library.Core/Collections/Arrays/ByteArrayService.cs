@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Library.Core.Services;
+﻿namespace Enterprise.Library.Core.Collections.Arrays;
 
 public static class ByteArrayService
 {

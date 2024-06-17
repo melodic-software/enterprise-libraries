@@ -13,16 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Async\Parallelization\" />
-    <Folder Include="Async\Tasks\" />
-    <Folder Include="Files\" />
-    <Folder Include="Async\BackgroundWorkers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.543" />
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
+    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.16" />
   </ItemGroup>
 
 </Project>

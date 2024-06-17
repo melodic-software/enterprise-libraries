@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Serialization.Json;
+﻿namespace Enterprise.Serialization.Json.Abstract;
 
 public interface ISerializeJson
 {

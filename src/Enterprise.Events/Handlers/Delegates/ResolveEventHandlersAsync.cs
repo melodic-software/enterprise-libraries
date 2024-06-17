@@ -1,4 +1,4 @@
-﻿using Enterprise.Events.Handlers.Abstract;
+﻿using Enterprise.Events.Handlers.Abstract.NonGeneric;
 using Enterprise.Events.Model;
 
 namespace Enterprise.Events.Handlers.Delegates;

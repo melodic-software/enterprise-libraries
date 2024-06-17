@@ -1,6 +1,6 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Events.Dispatching.Abstract;
-using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Abstract.NonGeneric;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
 using Microsoft.Extensions.Logging;
@@ -11,9 +11,13 @@ public class EventDispatcher : EventDispatcherBase
 {
     private readonly IResolveEventHandlers _eventHandlerResolver;
 
-    public EventDispatcher(IGetDecoratedInstance decoratorService, IResolveEventHandlers eventHandlerResolver, ILogger<EventDispatcher> logger) : base(decoratorService, logger)
+    public EventDispatcher(IGetDecoratedInstance decoratorService,
+        IResolveEventHandlers eventHandlerResolver,
+        ILogger<EventDispatcher> logger) 
+        : base(decoratorService, logger)
     {
-        _eventHandlerResolver = eventHandlerResolver ?? throw new ArgumentNullException(nameof(eventHandlerResolver));
+        ArgumentNullException.ThrowIfNull(eventHandlerResolver);
+        _eventHandlerResolver = eventHandlerResolver;
     }
 
     protected override Task<IEnumerable<IHandleEvent>> ResolveEventHandlers(IEvent @event)

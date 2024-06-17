@@ -1,4 +1,4 @@
-﻿using Enterprise.Events.Callbacks.Model;
+﻿using Enterprise.Events.Callbacks.Model.NonGeneric;
 
 namespace Enterprise.Events.Callbacks.Registration.Abstract;
 

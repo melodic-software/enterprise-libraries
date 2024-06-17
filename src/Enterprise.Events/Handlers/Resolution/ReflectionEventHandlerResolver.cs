@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Abstract.NonGeneric;
 using Enterprise.Events.Handlers.Delegates;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;

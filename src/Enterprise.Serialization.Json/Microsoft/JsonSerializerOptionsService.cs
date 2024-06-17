@@ -7,7 +7,7 @@ public static class JsonSerializerOptionsService
 {
     public static JsonSerializerOptions GetDefaultOptions()
     {
-        JsonSerializerOptions options = new JsonSerializerOptions
+        var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,

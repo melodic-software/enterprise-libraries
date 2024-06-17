@@ -78,6 +78,8 @@
 
   <ItemGroup>
     <Folder Include="Minimal\Assemblies\" />
+    <Folder Include="ModularMonolith\Communication\Asynchronous\" />
+    <Folder Include="ModularMonolith\Communication\Synchronous\" />
   </ItemGroup>
   
 

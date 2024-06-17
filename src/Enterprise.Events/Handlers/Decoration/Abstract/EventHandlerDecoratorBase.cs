@@ -17,7 +17,7 @@ public abstract class EventHandlerDecoratorBase<T> : DecoratorBase<IHandleEvent<
     public Task HandleAsync(IEvent @event)
     {
         ValidateType(@event, this);
-        T typedEvent = (T)@event;
+        var typedEvent = (T)@event;
         return HandleAsync(typedEvent);
     }
 
