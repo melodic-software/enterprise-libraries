@@ -1,18 +1,18 @@
 ﻿using System.Reflection;
 using Asp.Versioning;
+using Enterprise.Api.Minimal.Assemblies;
 using Enterprise.Api.Minimal.EndpointSelection;
 using Enterprise.Api.Minimal.Mapping;
 using Enterprise.Api.Minimal.Options;
-using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Services.Singleton;
-using Enterprise.Reflection.Assemblies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using static Enterprise.Reflection.Assemblies.Delegates.AssemblyNameFilters;
+using static Enterprise.Api.Minimal.Assemblies.AssemblyFallbackService;
+using static Enterprise.Api.Minimal.Assemblies.ExplicitAssemblyLogger;
 
 namespace Enterprise.Api.Minimal;
 
@@ -39,7 +39,9 @@ internal static class EndpointConfigService
             return matcherPolicy;
         });
 
-        services.AddEndpoints(options.EndpointAssemblies);
+        List<Assembly> endpointAssemblies = MinimalApiEndpointAssemblyService.Instance.AssembliesToRegister;
+
+        services.AddEndpoints(endpointAssemblies);
     }
 
     internal static void MapEndpoints(this WebApplication app)
@@ -56,35 +58,22 @@ internal static class EndpointConfigService
             return;
         }
         
-        List<Assembly> endpointAssemblies = options.EndpointAssemblies;
+        List<Assembly> endpointAssemblies = MinimalApiEndpointAssemblyService.Instance.AssembliesToRegister;
         bool explicitAssembliesDefined = endpointAssemblies.Any();
-
-        if (!explicitAssembliesDefined)
-        {
-            PreStartupLogger.Instance.LogInformation(
-                "Explicit assemblies containing minimal API endpoints have not been specified. " +
-                "Loading solution assemblies."
-            );
-            
-            endpointAssemblies = AssemblyLoader
-                .LoadSolutionAssemblies(ThatAreNotMicrosoft)
-                .ToList();
-        }
 
         if (explicitAssembliesDefined)
         {
-            PreStartupLogger.Instance.LogInformation("Registering minimal API endpoints for the explicitly defined assemblies.");
-
-            foreach (Assembly assembly in endpointAssemblies)
-            {
-                PreStartupLogger.Instance.LogInformation("{AssemblyName}", assembly.FullName);
-            }
+            LogExplicitAssemblies(endpointAssemblies);
+        }
+        else
+        {
+            endpointAssemblies = GetAssemblies();
         }
 
         // This uses the IMapEndpoints static interface method.
         EndpointMapper.MapEndpoints(app, endpointAssemblies);
         
-        // This uses pre-registered services of IMapEndpoint
-        EndpointMappingExtensions.MapEndpoints(app, null);
+        // This uses pre-registered services of IMapEndpoint.
+        EndpointMappingExtensions.MapEndpoints(app);
     }
 }

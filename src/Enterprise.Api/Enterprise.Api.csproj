@@ -75,6 +75,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Swagger\EmbeddedAssets\index.html" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Minimal\Assemblies\" />
+  </ItemGroup>
   
 
 </Project>
