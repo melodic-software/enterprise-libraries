@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Enterprise.Library.Core.Services;
+using Enterprise.Library.Core.Collections.Arrays;
 using Marvin.Cache.Headers;
 using Marvin.Cache.Headers.Extensions;
 using Marvin.Cache.Headers.Interfaces;
@@ -39,7 +39,7 @@ public class CustomETagGenerator : IETagGenerator
         byte[] combinedBytes = ByteArrayService.Combine(storeKeyBytes, responseBodyBytes);
         string? md5Hash = combinedBytes.GenerateMD5Hash();
 
-        ETag eTag = new ETag(eTagType, md5Hash);
+        var eTag = new ETag(eTagType, md5Hash);
 
         return Task.FromResult(eTag);
     }
