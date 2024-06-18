@@ -1,6 +1,7 @@
 ﻿using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.Events.Dispatching;
 using Enterprise.Events.Handlers.Abstract;
+using Enterprise.Events.Handlers.Abstract.NonGeneric;
 using Enterprise.Events.Handlers.Resolution.Abstract;
 using Enterprise.Events.Model;
 using MediatR;
