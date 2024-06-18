@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Enterprise.Options.Core.Abstract;
+﻿using Enterprise.Options.Core.Abstract;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Options.Monitoring;
 using Enterprise.Serialization.Json.Abstract;

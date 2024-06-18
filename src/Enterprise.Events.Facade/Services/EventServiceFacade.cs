@@ -1,7 +1,7 @@
 ﻿using Enterprise.Domain.Events;
 using Enterprise.Domain.Events.Model.Abstract;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
-using Enterprise.Events.Callbacks.Model;
+using Enterprise.Events.Callbacks.Model.NonGeneric;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Events.Model;
 
