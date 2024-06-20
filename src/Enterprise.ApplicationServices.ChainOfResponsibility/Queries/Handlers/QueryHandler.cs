@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using static Enterprise.ApplicationServices.Core.Queries.Handlers.Validation.QueryHandlerTypeValidationService;
@@ -13,6 +14,12 @@ public sealed class QueryHandler<TQuery, TResult> : IHandleQuery<TQuery, TResult
     public QueryHandler(IResponsibilityChain<TQuery, TResult> responsibilityChain)
     {
         _responsibilityChain = responsibilityChain;
+    }
+
+    /// <inheritdoc />
+    async Task<object?> IHandleQuery.HandleAsync(IQuery query, CancellationToken cancellationToken)
+    {
+        return await HandleAsync(query, cancellationToken);
     }
 
     /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Enterprise.DesignPatterns.Decorator.Model;
@@ -16,6 +17,12 @@ public abstract class QueryHandlerDecoratorBase<TQuery, TResult> :
         : base(queryHandler, decoratorService)
     {
 
+    }
+
+    /// <inheritdoc />
+    async Task<object?> IHandleQuery.HandleAsync(IQuery query, CancellationToken cancellationToken)
+    {
+        return await HandleAsync(query, cancellationToken);
     }
 
     /// <inheritdoc />
