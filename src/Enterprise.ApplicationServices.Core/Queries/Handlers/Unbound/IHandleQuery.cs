@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Core.Standard;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 
@@ -8,7 +8,7 @@ namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 /// The type of result is not directly associated with the query passed in.
 /// </summary>
 /// <typeparam name="TResult"></typeparam>
-public interface IHandleQuery<TResult> : IApplicationService
+public interface IHandleQuery<TResult> : IHandleQuery
 {
     /// <summary>
     /// Handle the query and return the typed result.
@@ -16,5 +16,5 @@ public interface IHandleQuery<TResult> : IApplicationService
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default);
+    new Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default);
 }

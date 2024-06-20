@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
@@ -19,6 +20,12 @@ public abstract class QueryHandlerBase<TQuery, TResult> :
     protected QueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {
 
+    }
+
+    /// <inheritdoc />
+    async Task<object?> IHandleQuery.HandleAsync(IQuery query, CancellationToken cancellationToken)
+    {
+        return await HandleAsync(query, cancellationToken);
     }
 
     /// <inheritdoc />

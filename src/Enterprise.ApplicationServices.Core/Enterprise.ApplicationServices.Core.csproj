@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\Handlers\NonGeneric\" />
+    <Folder Include="Queries\Handlers\NonGeneric\" />
   </ItemGroup>
 
 </Project>

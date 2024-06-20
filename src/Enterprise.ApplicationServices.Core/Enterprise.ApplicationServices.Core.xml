@@ -165,6 +165,9 @@
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResult"></typeparam>
         </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -204,12 +207,28 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric.IHandleQuery">
+            <summary>
+            Handles queries.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric.IHandleQuery.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+            <summary>
+            Handle the query and return a result object.
+            </summary>
+            <param name="query"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2">
             <summary>
             A base implementation of a query handler that supports the raising of events.
             </summary>
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResult"></typeparam>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+            <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
