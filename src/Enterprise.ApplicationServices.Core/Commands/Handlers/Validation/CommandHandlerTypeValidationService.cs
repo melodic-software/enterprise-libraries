@@ -21,7 +21,7 @@ public static class CommandHandlerTypeValidationService
     {
         Type commandType = command.GetType();
 
-        bool commandCanBeHandled = commandType.IsAssignableFrom(expectedCommandType);
+        bool commandCanBeHandled = commandType.IsAssignableTo(expectedCommandType);
 
         if (commandCanBeHandled)
         {
