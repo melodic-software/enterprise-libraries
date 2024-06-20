@@ -24,7 +24,7 @@ public static class QueryHandlerRegistrationExtensions
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : class, IQuery
     {
-        services.Register(implementationFactory, configureOptions);
+        services.Register(provider => implementationFactory(provider), configureOptions);
     }
 
     /// <summary>
@@ -39,14 +39,14 @@ public static class QueryHandlerRegistrationExtensions
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : class, IQuery
     {
-        QueryHandlerImplementationFactory<TQuery, TResult> implementationFactory =
-            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResult>;
-
-        services.Register(implementationFactory, configureOptions);
+        services.Register(
+            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResult>,
+            configureOptions
+        );
     }
 
-    private static void Register<TQuery, TResult>(this IServiceCollection services,
-        QueryHandlerImplementationFactory<TQuery, TResult> implementationFactory,
+    internal static void Register<TQuery, TResult>(this IServiceCollection services,
+        Func<IServiceProvider, IHandleQuery<TQuery, TResult>> implementationFactory,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : class, IQuery
     {

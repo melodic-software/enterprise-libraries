@@ -1,7 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
@@ -25,9 +25,9 @@ public sealed class RegistrationOptions<TQuery, TResult> :
     /// <summary>
     /// A factory method delegate that instantiates the query handler instance.
     /// </summary>
-    internal QueryHandlerImplementationFactory<TQuery, TResult>? QueryHandlerImplementationFactory { get; }
+    internal Func<IServiceProvider, IHandleQuery<TQuery, TResult>>? QueryHandlerImplementationFactory { get; }
 
-    public RegistrationOptions(QueryHandlerImplementationFactory<TQuery, TResult>? queryHandlerImplementationFactory)
+    public RegistrationOptions(Func<IServiceProvider, IHandleQuery<TQuery, TResult>>? queryHandlerImplementationFactory)
     {
         QueryHandlerImplementationFactory = queryHandlerImplementationFactory;
     }
