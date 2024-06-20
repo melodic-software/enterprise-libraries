@@ -1,8 +1,8 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
+using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Enterprise.Events.Facade.Abstract;
 
-namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
+namespace Enterprise.ApplicationServices.Queries.Handlers.Simple.Bound;
 
 /// <summary>
 /// Most query handler implementations end up being pretty thin...
@@ -14,7 +14,7 @@ namespace Enterprise.ApplicationServices.Queries.Handlers.Simple;
 /// <typeparam name="TResult"></typeparam>
 public class SimpleQueryHandler<TQuery, TResult> :
     QueryHandlerBase<TQuery, TResult> 
-    where TQuery : class, IQuery
+    where TQuery : class, IQuery<TResult>
 {
     private readonly IQueryLogic<TQuery, TResult> _queryLogic;
 
