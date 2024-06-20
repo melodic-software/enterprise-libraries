@@ -19,6 +19,9 @@
         <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic.CommandHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers.QueryHandler`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers.QueryHandler`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
