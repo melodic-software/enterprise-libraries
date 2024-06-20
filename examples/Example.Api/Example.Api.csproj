@@ -13,7 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Enterprise.Api\Enterprise.Api.csproj" />
+    <ProjectReference Include="..\..\src\Enterprise.ApplicationServices.DI\Enterprise.ApplicationServices.DI.csproj" />
     <ProjectReference Include="..\Example.AdditionalProject\Example.AdditionalProject.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApplicationServices\Commands\Pragmatic\" />
   </ItemGroup>
 
 </Project>
