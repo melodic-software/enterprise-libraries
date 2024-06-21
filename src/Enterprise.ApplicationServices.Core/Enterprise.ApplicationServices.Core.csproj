@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DesignPatterns.ChainOfResponsibility" Version="1.0.0-preview.622" />
-    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.624" />
+    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.625" />
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.623" />
-    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.625" />
   </ItemGroup>
 
   <ItemGroup>
