@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Enterprise.DI.Core.Registration.Context.Services;
+namespace Enterprise.DI.Registration.Context.Services;
 
 internal static class ImplementationService
 {

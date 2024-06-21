@@ -1,8 +1,8 @@
-﻿using Enterprise.DI.Core.Registration.Delegates;
+﻿using Enterprise.DI.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Enterprise.DI.Core.Registration.Context;
+namespace Enterprise.DI.Registration.Context;
 
 /// <summary>
 /// Provides a context for fluent service registration, allowing for easy addition of services and decorators.

@@ -1,9 +1,9 @@
-﻿using Enterprise.DI.Core.Registration.Context.Delegates;
-using Enterprise.DI.Core.Registration.Context.Services;
+﻿using Enterprise.DI.Registration.Context.Delegates;
+using Enterprise.DI.Registration.Context.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Enterprise.DI.Core.Registration.Context;
+namespace Enterprise.DI.Registration.Context;
 
 public partial class RegistrationContext<TService> where TService : class
 {

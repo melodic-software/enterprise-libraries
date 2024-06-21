@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.613" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.615" />
   </ItemGroup>
 
 </Project>

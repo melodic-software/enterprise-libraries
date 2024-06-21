@@ -1,3 +1,3 @@
-﻿namespace Enterprise.DI.Core.Registration.Delegates;
+﻿namespace Enterprise.DI.Registration.Delegates;
 
 public delegate TService ImplementationFactory<out TService>(IServiceProvider provider);

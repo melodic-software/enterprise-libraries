@@ -197,9 +197,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-design-patterns-chain-of-responsibility.yaml = .azure\enterprise-design-patterns-chain-of-responsibility.yaml
 		.azure\enterprise-design-patterns-decorator.yaml = .azure\enterprise-design-patterns-decorator.yaml
 		.azure\enterprise-design-patterns.yaml = .azure\enterprise-design-patterns.yaml
-		.azure\enterprise-DI-core-registration.yaml = .azure\enterprise-DI-core-registration.yaml
 		.azure\enterprise-DI-core.yaml = .azure\enterprise-DI-core.yaml
 		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
+		.azure\enterprise-DI-registration.yaml = .azure\enterprise-DI-registration.yaml
 		.azure\enterprise-domain-driven-design-testing.yaml = .azure\enterprise-domain-driven-design-testing.yaml
 		.azure\enterprise-domain-driven-design.yaml = .azure\enterprise-domain-driven-design.yaml
 		.azure\enterprise-domain.yaml = .azure\enterprise-domain.yaml
@@ -345,7 +345,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.ApplicationServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Api", "examples\Example.Api\Example.Api.csproj", "{9EF6CFC6-7EB1-455C-85A0-F78715475EB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.DI.Core.Registration", "src\Enterprise.DI.Core.Registration\Enterprise.DI.Core.Registration.csproj", "{6BCC1E9A-C978-417C-9C99-06414D96EFCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI.Registration", "src\Enterprise.DI.Registration\Enterprise.DI.Registration.csproj", "{43127309-8EF8-43EC-B191-C836198C104B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -741,10 +741,10 @@ Global
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BCC1E9A-C978-417C-9C99-06414D96EFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BCC1E9A-C978-417C-9C99-06414D96EFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BCC1E9A-C978-417C-9C99-06414D96EFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BCC1E9A-C978-417C-9C99-06414D96EFCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43127309-8EF8-43EC-B191-C836198C104B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43127309-8EF8-43EC-B191-C836198C104B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43127309-8EF8-43EC-B191-C836198C104B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43127309-8EF8-43EC-B191-C836198C104B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -869,7 +869,7 @@ Global
 		{F9D885FF-58F6-4062-9008-A9402195E66F} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 		{E7F68C45-0058-482D-8EF9-6210A1EC98B0} = {15D8FAA2-098D-4C10-83DA-D81C31BF28B7}
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
-		{6BCC1E9A-C978-417C-9C99-06414D96EFCC} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
+		{43127309-8EF8-43EC-B191-C836198C104B} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}
