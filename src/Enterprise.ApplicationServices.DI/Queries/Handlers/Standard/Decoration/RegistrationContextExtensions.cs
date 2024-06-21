@@ -1,8 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
-using Enterprise.DI.Core.Registration.Context;
-using Enterprise.DI.Core.Registration.Context.Delegates;
+using Enterprise.DI.Registration.Context;
+using Enterprise.DI.Registration.Context.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 

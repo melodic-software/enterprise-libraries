@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Messages.Core.Model;
+﻿namespace Enterprise.Messaging.Core.Model;
 
 /// <summary>
 /// This is a generic marker interface for messaging within the system.

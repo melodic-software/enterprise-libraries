@@ -87,8 +87,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Mapping", "src\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MediatR", "src\Enterprise.MediatR\Enterprise.MediatR.csproj", "{B600177F-B8C2-4580-80D6-796EB1385A84}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Messages.Core", "src\Enterprise.Messages.Core\Enterprise.Messages.Core.csproj", "{703DA3BF-D44B-48DE-B664-914834DE7DB5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Middleware", "src\Enterprise.Middleware\Enterprise.Middleware.csproj", "{0EB5A505-B0D5-412E-8068-A752E1C13617}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Middleware.AspNetCore", "src\Enterprise.Middleware.AspNetCore\Enterprise.Middleware.AspNetCore.csproj", "{DA602764-AB34-43D0-8C69-368AC772AA92}"
@@ -198,8 +196,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-design-patterns-decorator.yaml = .azure\enterprise-design-patterns-decorator.yaml
 		.azure\enterprise-design-patterns.yaml = .azure\enterprise-design-patterns.yaml
 		.azure\enterprise-DI-core.yaml = .azure\enterprise-DI-core.yaml
-		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
 		.azure\enterprise-DI-registration.yaml = .azure\enterprise-DI-registration.yaml
+		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
 		.azure\enterprise-domain-driven-design-testing.yaml = .azure\enterprise-domain-driven-design-testing.yaml
 		.azure\enterprise-domain-driven-design.yaml = .azure\enterprise-domain-driven-design.yaml
 		.azure\enterprise-domain.yaml = .azure\enterprise-domain.yaml
@@ -222,7 +220,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-logging.yaml = .azure\enterprise-logging.yaml
 		.azure\enterprise-mapping.yaml = .azure\enterprise-mapping.yaml
 		.azure\enterprise-mediatr.yaml = .azure\enterprise-mediatr.yaml
-		.azure\enterprise-messages-core.yaml = .azure\enterprise-messages-core.yaml
+		.azure\enterprise-messaging-core.yaml = .azure\enterprise-messaging-core.yaml
 		.azure\enterprise-middleware-aspnetcore.yaml = .azure\enterprise-middleware-aspnetcore.yaml
 		.azure\enterprise-middleware.yaml = .azure\enterprise-middleware.yaml
 		.azure\enterprise-modular-monoliths.yaml = .azure\enterprise-modular-monoliths.yaml
@@ -346,6 +344,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Api", "examples\Example.Api\Example.Api.csproj", "{9EF6CFC6-7EB1-455C-85A0-F78715475EB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI.Registration", "src\Enterprise.DI.Registration\Enterprise.DI.Registration.csproj", "{43127309-8EF8-43EC-B191-C836198C104B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Messaging.Core", "src\Enterprise.Messaging.Core\Enterprise.Messaging.Core.csproj", "{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -517,10 +517,6 @@ Global
 		{B600177F-B8C2-4580-80D6-796EB1385A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B600177F-B8C2-4580-80D6-796EB1385A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B600177F-B8C2-4580-80D6-796EB1385A84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{703DA3BF-D44B-48DE-B664-914834DE7DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{703DA3BF-D44B-48DE-B664-914834DE7DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{703DA3BF-D44B-48DE-B664-914834DE7DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{703DA3BF-D44B-48DE-B664-914834DE7DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EB5A505-B0D5-412E-8068-A752E1C13617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EB5A505-B0D5-412E-8068-A752E1C13617}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EB5A505-B0D5-412E-8068-A752E1C13617}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -745,6 +741,10 @@ Global
 		{43127309-8EF8-43EC-B191-C836198C104B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43127309-8EF8-43EC-B191-C836198C104B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43127309-8EF8-43EC-B191-C836198C104B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -791,7 +791,6 @@ Global
 		{166F1CCB-0473-459C-AF2B-13EB7727AEAF} = {6330E9A6-D5DA-4C3E-A196-5B3CB66123F4}
 		{1F1693D1-81D7-43ED-AE66-5E504A0F8913} = {3E2E169B-60D6-485B-BD0F-899F07D576AD}
 		{B600177F-B8C2-4580-80D6-796EB1385A84} = {C3FA00F0-238E-4C37-9A4F-F36B2D2ED344}
-		{703DA3BF-D44B-48DE-B664-914834DE7DB5} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 		{0EB5A505-B0D5-412E-8068-A752E1C13617} = {49010F44-DA86-46A2-97B6-172B93864D38}
 		{DA602764-AB34-43D0-8C69-368AC772AA92} = {920E73DF-7BAD-473C-9663-0551089FD7F3}
 		{EB1DBA16-5229-465E-9B5A-75EA550B83E7} = {49010F44-DA86-46A2-97B6-172B93864D38}
@@ -870,6 +869,7 @@ Global
 		{E7F68C45-0058-482D-8EF9-6210A1EC98B0} = {15D8FAA2-098D-4C10-83DA-D81C31BF28B7}
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
 		{43127309-8EF8-43EC-B191-C836198C104B} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
+		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}

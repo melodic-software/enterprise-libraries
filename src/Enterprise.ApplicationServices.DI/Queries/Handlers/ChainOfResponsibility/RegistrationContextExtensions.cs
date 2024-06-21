@@ -4,7 +4,7 @@ using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
-using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility;

@@ -2,8 +2,8 @@
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
-using Enterprise.DI.Core.Registration.Context;
-using Enterprise.DI.Core.Registration.Context.Extensions;
+using Enterprise.DI.Registration.Context;
+using Enterprise.DI.Registration.Context.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility;

@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Options.Delegates;

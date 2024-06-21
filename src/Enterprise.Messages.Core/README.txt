@@ -1,1 +1,0 @@
-﻿TODO: Eventually rename this and package to Enterprise.Messaging.Core

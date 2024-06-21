@@ -1,6 +1,6 @@
-﻿using Enterprise.Messages.Core.Model;
+﻿using Enterprise.Messaging.Core.Model;
 
-namespace Enterprise.Messages.Core.Brokers;
+namespace Enterprise.Messaging.Core.Brokers;
 
 public interface IMessageBroker
 {
