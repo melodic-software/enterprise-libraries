@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.UseCases;
-using Enterprise.Messages.Core.Model;
+using Enterprise.Messaging.Core.Model;
 using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Model;

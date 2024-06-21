@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.UseCases;
-using Enterprise.Messages.Core.Model;
+using Enterprise.Messaging.Core.Model;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Model;
 

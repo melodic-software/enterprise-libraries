@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.622" />
+    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.623" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.622" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
