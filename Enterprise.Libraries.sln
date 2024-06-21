@@ -73,8 +73,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Http", "src\Ente
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Http.AspNetCore", "src\Enterprise.Http.AspNetCore\Enterprise.Http.AspNetCore.csproj", "{77C04A5D-7974-4149-B407-559BB63CC3A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Library", "src\Enterprise.Library\Enterprise.Library.csproj", "{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Library.Core", "src\Enterprise.Library.Core\Enterprise.Library.Core.csproj", "{AD22DBBB-9C32-4FBA-B964-0606C787AB38}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Logging", "src\Enterprise.Logging\Enterprise.Logging.csproj", "{22BD08B8-8E72-4837-82D8-03D60D24EAEF}"
@@ -214,7 +212,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-http-aspnetcore.yaml = .azure\enterprise-http-aspnetcore.yaml
 		.azure\enterprise-http.yaml = .azure\enterprise-http.yaml
 		.azure\enterprise-library-core.yaml = .azure\enterprise-library-core.yaml
-		.azure\enterprise-library.yaml = .azure\enterprise-library.yaml
 		.azure\enterprise-logging-aspnetcore.yaml = .azure\enterprise-logging-aspnetcore.yaml
 		.azure\enterprise-logging-core.yaml = .azure\enterprise-logging-core.yaml
 		.azure\enterprise-logging.yaml = .azure\enterprise-logging.yaml
@@ -489,10 +486,6 @@ Global
 		{77C04A5D-7974-4149-B407-559BB63CC3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77C04A5D-7974-4149-B407-559BB63CC3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77C04A5D-7974-4149-B407-559BB63CC3A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD22DBBB-9C32-4FBA-B964-0606C787AB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD22DBBB-9C32-4FBA-B964-0606C787AB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD22DBBB-9C32-4FBA-B964-0606C787AB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -784,7 +777,6 @@ Global
 		{0D45BA79-2DA1-4EE7-AE07-CDBDB5AC296C} = {920E73DF-7BAD-473C-9663-0551089FD7F3}
 		{788E5D57-8C25-44DF-B65B-EE399B522852} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 		{77C04A5D-7974-4149-B407-559BB63CC3A4} = {920E73DF-7BAD-473C-9663-0551089FD7F3}
-		{4C1DDC6B-EDB6-475F-9005-6E7B804BBC06} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 		{AD22DBBB-9C32-4FBA-B964-0606C787AB38} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
 		{22BD08B8-8E72-4837-82D8-03D60D24EAEF} = {6330E9A6-D5DA-4C3E-A196-5B3CB66123F4}
 		{9837EEB3-2AEA-4EA5-91C7-AD953DA26B3E} = {6330E9A6-D5DA-4C3E-A196-5B3CB66123F4}

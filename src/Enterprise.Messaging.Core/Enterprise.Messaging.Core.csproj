@@ -12,8 +12,4 @@
     <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Brokers\" />
-  </ItemGroup>
-
 </Project>
