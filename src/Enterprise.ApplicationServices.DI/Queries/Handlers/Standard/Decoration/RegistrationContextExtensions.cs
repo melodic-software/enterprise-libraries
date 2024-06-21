@@ -2,6 +2,7 @@
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
 using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Core.Registration.Context.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 
@@ -45,10 +46,14 @@ public static class RegistrationContextExtensions
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> implementationFactories) 
         where TQuery : class, IQuery
     {
-        foreach (QueryHandlerDecoratorImplementationFactory<TQuery, TResult> implementationFactory in implementationFactories)
-        {
-            registrationContext.WithDecorator(implementationFactory.Invoke);
-        }
+        DecoratorFactory<IHandleQuery<TQuery, TResult>>[] decoratorFactories = implementationFactories
+            .Select(implementationFactory =>
+                new DecoratorFactory<IHandleQuery<TQuery, TResult>>((provider, service) =>
+                    implementationFactory(provider, service))
+            )
+            .ToArray();
+
+        registrationContext.WithDecorators(decoratorFactories);
 
         return registrationContext;
     }

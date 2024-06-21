@@ -3,6 +3,7 @@ using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pragmatic.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Pragmatic;
 using Enterprise.DI.Core.Registration.Context;
+using Enterprise.DI.Core.Registration.Context.Delegates;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Pragmatic;
 
@@ -48,11 +49,15 @@ public static class RegistrationContextExtensions
         IEnumerable<CommandHandlerDecoratorImplementationFactory<TCommand, TResult>> implementationFactories)
         where TCommand : class, ICommand<TResult>
     {
-        foreach (CommandHandlerDecoratorImplementationFactory<TCommand, TResult> implementationFactory in implementationFactories)
-        {
-            registrationContext.WithDecorator(implementationFactory.Invoke);
-        }
+        DecoratorFactory<IHandleCommand<TCommand, TResult>>[] decoratorFactories = implementationFactories
+            .Select(implementationFactory =>
+                new DecoratorFactory<IHandleCommand<TCommand, TResult>>((provider, service) =>
+                    implementationFactory(provider, service))
+            )
+            .ToArray();
 
+        registrationContext.WithDecorators(decoratorFactories);
+        
         return registrationContext;
     }
 }

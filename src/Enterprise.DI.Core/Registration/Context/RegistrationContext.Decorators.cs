@@ -12,14 +12,32 @@ public partial class RegistrationContext<TService> where TService : class
     /// </summary>
     public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
-        foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories)
+        Type serviceType = typeof(TService);
+        ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
+        ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
+
+        object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            WithDecorator(decoratorFactory);
+            TService originalService = ImplementationService.Get<TService>(originalServiceDescriptor, serviceProvider);
+
+            TService decoratedService = originalService;
+
+            // Ensure these are applied in reverse order.
+            foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories.Reverse())
+            {
+                decoratedService = decoratorFactory(serviceProvider, originalService);
+            }
+
+            return decoratedService;
         }
+
+        var decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
+
+        _services.Replace(decoratorDescriptor);
 
         return this;
     }
-
+    
     /// <summary>
     /// Registers a single decorator for the service.
     /// </summary>
@@ -27,15 +45,7 @@ public partial class RegistrationContext<TService> where TService : class
     {
         Type serviceType = typeof(TService);
 
-        ServiceDescriptor? originalServiceDescriptor = _services
-            .FirstOrDefault(d => d.ServiceType == serviceType);
-
-        if (originalServiceDescriptor == null)
-        {
-            throw new InvalidOperationException(
-                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
-            );
-        }
+        ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
 
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
 
@@ -50,5 +60,20 @@ public partial class RegistrationContext<TService> where TService : class
         _services.Replace(decoratorDescriptor);
 
         return this;
+    }
+
+    private ServiceDescriptor GetOriginalServiceDescriptor(Type serviceType)
+    {
+        ServiceDescriptor? originalServiceDescriptor = _services
+            .FirstOrDefault(d => d.ServiceType == serviceType);
+
+        if (originalServiceDescriptor == null)
+        {
+            throw new InvalidOperationException(
+                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
+            );
+        }
+
+        return originalServiceDescriptor;
     }
 }
