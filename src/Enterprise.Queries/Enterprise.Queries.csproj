@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.593" />
-    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.589" />
+    <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.600" />
     <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.480" />
   </ItemGroup>
 
