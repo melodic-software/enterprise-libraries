@@ -3,12 +3,13 @@ using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Example.Api.ApplicationServices.Queries.Shared;
+using MediatR;
 using Bound = Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
 using Unbound = Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 
-namespace Example.Api.ApplicationServices.Queries.Alternate;
+namespace Example.Api.ApplicationServices.Queries.Alternate.MediatR;
 
-public class EventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
+public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
     public static void RegisterHandlers(WebApiConfigEvents events)
     {
@@ -16,8 +17,12 @@ public class EventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
         {
             await using AsyncServiceScope scope = app.Services.CreateAsyncScope();
             IQueryDispatchFacade queryDispatcher = scope.ServiceProvider.GetRequiredService<IQueryDispatchFacade>();
+            ISender sender = scope.ServiceProvider.GetRequiredService<ISender>();
 
             var query = new AlternateQuery();
+
+            // MediatR can be used directly.
+            QueryResult mediatRResult = await sender.Send(query);
 
             // No generic type parameters are required.
             // The result type is constrained to the generic type defined on the query.
@@ -32,8 +37,9 @@ public class EventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 
             Unbound.IHandleQuery<QueryResult> unboundQueryHandler = scope.ServiceProvider.GetRequiredService<Unbound.IHandleQuery<QueryResult>>();
             QueryResult result3 = await unboundQueryHandler.HandleAsync(query, CancellationToken.None);
-            
+
             IEnumerable<Unbound.IHandleQuery<QueryResult>> allUnboundHandlers = scope.ServiceProvider.GetServices<Unbound.IHandleQuery<QueryResult>>();
+
         };
     }
 }

@@ -6,9 +6,9 @@ using Example.Api.ApplicationServices.Queries.Shared;
 using Bound = Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
 using Unbound = Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 
-namespace Example.Api.ApplicationServices.Queries.Alternate.MediatR;
+namespace Example.Api.ApplicationServices.Queries.Alternate;
 
-public class EventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
+public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
     public static void RegisterHandlers(WebApiConfigEvents events)
     {
@@ -32,7 +32,7 @@ public class EventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 
             Unbound.IHandleQuery<QueryResult> unboundQueryHandler = scope.ServiceProvider.GetRequiredService<Unbound.IHandleQuery<QueryResult>>();
             QueryResult result3 = await unboundQueryHandler.HandleAsync(query, CancellationToken.None);
-
+            
             IEnumerable<Unbound.IHandleQuery<QueryResult>> allUnboundHandlers = scope.ServiceProvider.GetServices<Unbound.IHandleQuery<QueryResult>>();
         };
     }

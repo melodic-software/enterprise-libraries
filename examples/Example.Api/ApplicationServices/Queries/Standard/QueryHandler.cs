@@ -1,6 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.Events.Facade.Abstract;
 using Example.Api.ApplicationServices.Queries.Shared;
+using Example.Api.Events;
 
 namespace Example.Api.ApplicationServices.Queries.Standard;
 
@@ -15,6 +16,8 @@ public class QueryHandler : QueryHandlerBase<Query, QueryResult>
 
     public override Task<QueryResult> HandleAsync(Query query, CancellationToken cancellationToken = default)
     {
+        var @event = new MyEvent();
+        RaiseEventAsync(@event);
         return Task.FromResult(new QueryResult());
     }
 }
