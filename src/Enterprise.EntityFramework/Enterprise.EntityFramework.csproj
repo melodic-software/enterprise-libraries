@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.625" />
-    <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.626" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.627" />
+    <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.627" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
   </ItemGroup>
