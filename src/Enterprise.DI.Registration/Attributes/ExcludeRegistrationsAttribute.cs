@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Registration.Abstract;
+﻿using Enterprise.DI.Core.Registration.Abstract;
 
 namespace Enterprise.DI.Registration.Attributes;
 
