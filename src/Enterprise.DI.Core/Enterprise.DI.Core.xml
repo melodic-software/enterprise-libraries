@@ -43,5 +43,17 @@
             Attribute to indicate that a class should be registered with a transient lifetime in the DI container.
             </summary>
         </member>
+        <member name="T:Enterprise.DI.Core.Registration.Abstract.IRegisterServices">
+            <summary>
+            Registers services with the DI container.
+            </summary>
+        </member>
+        <member name="M:Enterprise.DI.Core.Registration.Abstract.IRegisterServices.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Register services with the DI container.
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+        </member>
     </members>
 </doc>
