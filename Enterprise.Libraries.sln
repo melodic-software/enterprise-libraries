@@ -197,6 +197,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure", ".azure", "{986B08
 		.azure\enterprise-design-patterns-chain-of-responsibility.yaml = .azure\enterprise-design-patterns-chain-of-responsibility.yaml
 		.azure\enterprise-design-patterns-decorator.yaml = .azure\enterprise-design-patterns-decorator.yaml
 		.azure\enterprise-design-patterns.yaml = .azure\enterprise-design-patterns.yaml
+		.azure\enterprise-DI-core-registration.yaml = .azure\enterprise-DI-core-registration.yaml
 		.azure\enterprise-DI-core.yaml = .azure\enterprise-DI-core.yaml
 		.azure\enterprise-domain-aspnetcore.yaml = .azure\enterprise-domain-aspnetcore.yaml
 		.azure\enterprise-domain-driven-design-testing.yaml = .azure\enterprise-domain-driven-design-testing.yaml
