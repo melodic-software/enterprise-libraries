@@ -1,4 +1,4 @@
-﻿using Enterprise.Messages.Core.Model;
+﻿using Enterprise.Messaging.Core.Model;
 using MediatR;
 
 namespace Enterprise.Events.Model;

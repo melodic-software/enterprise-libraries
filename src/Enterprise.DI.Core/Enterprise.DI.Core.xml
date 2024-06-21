@@ -55,5 +55,11 @@
             <param name="services"></param>
             <param name="configuration"></param>
         </member>
+        <member name="T:Enterprise.DI.Core.Registration.Attributes.ExcludeRegistrationsAttribute">
+            <summary>
+            Decorate types with this attribute to ensure that any DI registrations are not automatically registered.
+            This is primarily concerned with classes that implement <see cref="T:Enterprise.DI.Core.Registration.Abstract.IRegisterServices"/>.
+            </summary>
+        </member>
     </members>
 </doc>

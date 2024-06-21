@@ -1,4 +1,4 @@
-﻿using Enterprise.DI.Registration.Delegates;
+﻿using Enterprise.DI.Core.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

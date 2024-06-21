@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Calculations" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.609" />
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.619" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.610" />
   </ItemGroup>
 
