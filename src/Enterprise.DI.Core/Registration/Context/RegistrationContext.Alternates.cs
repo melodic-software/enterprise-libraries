@@ -24,7 +24,7 @@ public partial class RegistrationContext<TService> where TService : class
 
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = ImplementationService.Get<TService>(originalServiceDescriptor, serviceProvider);
+            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
             return (TAlternate)originalService;
         }
 

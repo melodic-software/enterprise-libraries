@@ -4,7 +4,7 @@ namespace Enterprise.DI.Core.Registration.Context.Services;
 
 internal static class ImplementationService
 {
-    internal static TService Get<TService>(ServiceDescriptor serviceDescriptor, IServiceProvider provider) where TService : class
+    internal static TService GetService<TService>(ServiceDescriptor serviceDescriptor, IServiceProvider provider) where TService : class
     {
         if (serviceDescriptor.ImplementationFactory != null)
         {

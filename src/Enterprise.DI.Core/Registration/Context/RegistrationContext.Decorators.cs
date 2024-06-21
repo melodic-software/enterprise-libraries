@@ -18,14 +18,14 @@ public partial class RegistrationContext<TService> where TService : class
 
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = ImplementationService.Get<TService>(originalServiceDescriptor, serviceProvider);
+            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
 
             TService decoratedService = originalService;
 
             // Ensure these are applied in reverse order.
             foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories.Reverse())
             {
-                decoratedService = decoratorFactory(serviceProvider, originalService);
+                decoratedService = decoratorFactory(serviceProvider, decoratedService);
             }
 
             return decoratedService;
@@ -51,7 +51,7 @@ public partial class RegistrationContext<TService> where TService : class
 
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = ImplementationService.Get<TService>(originalServiceDescriptor, serviceProvider);
+            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
             return decoratorFactory(serviceProvider, originalService);
         }
 
