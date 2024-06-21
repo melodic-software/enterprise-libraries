@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Enterprise.Applications.DI.Registration.Sorting;
-using Enterprise.DI.Registration.Extensions;
+using Enterprise.DI.Core.Registration.Extensions;
 using Enterprise.Logging.Core.Loggers;
 using Microsoft.Extensions.Logging;
 using static Enterprise.Applications.DI.Registration.Methods.Validation.RegistrationMethodValidationService;
