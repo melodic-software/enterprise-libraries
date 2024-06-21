@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
-    <PackageReference Include="Melodic.Enterprise.DesignPatterns.Decorator" Version="1.0.0-preview.610" />
-    <PackageReference Include="Melodic.Enterprise.DI.Registration" Version="1.0.0-preview.618" />
-    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.620" />
+    <PackageReference Include="Melodic.Enterprise.DesignPatterns.Decorator" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.DI.Registration" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.621" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />

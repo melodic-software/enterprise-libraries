@@ -13,10 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DesignPatterns.ChainOfResponsibility" Version="1.0.0-preview.610" />
-    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.603" />
-    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.611" />
-    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.620" />
+    <PackageReference Include="Melodic.Enterprise.DesignPatterns.ChainOfResponsibility" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.Events.Facade" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.621" />
+    <PackageReference Include="Melodic.Enterprise.Messaging.Core" Version="1.0.0-preview.621" />
   </ItemGroup>
 
   <ItemGroup>
