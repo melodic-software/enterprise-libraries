@@ -181,12 +181,7 @@
             Registers decorators for the service, each taking the service instance and IServiceProvider as parameters.
             </summary>
         </member>
-        <member name="M:Enterprise.DI.Core.Registration.Context.RegistrationContext`1.WithDecorators(Enterprise.DI.Core.Registration.Context.Delegates.ApplyDecoratorFactory{`0}[])">
-            <summary>
-            Registers decorators for the service, each represented as a factory function.
-            </summary>
-        </member>
-        <member name="M:Enterprise.DI.Core.Registration.Context.RegistrationContext`1.WithDecorator``1(Enterprise.DI.Core.Registration.Context.Delegates.DecoratorFactory{`0,``0})">
+        <member name="M:Enterprise.DI.Core.Registration.Context.RegistrationContext`1.WithDecorator(Enterprise.DI.Core.Registration.Context.Delegates.DecoratorFactory{`0})">
             <summary>
             Registers a single decorator for the service.
             </summary>

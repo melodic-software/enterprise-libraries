@@ -1,6 +1,5 @@
 ﻿using Enterprise.DI.Core.Registration.Context.Delegates;
 using Enterprise.DI.Core.Registration.Context.Services;
-using Enterprise.DI.Core.Registration.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -13,27 +12,18 @@ public partial class RegistrationContext<TService> where TService : class
     /// </summary>
     public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
-        ApplyDecoratorFactory<TService>[] applyDecoratorFactories = decoratorFactories
-            .Select(factory => new ApplyDecoratorFactory<TService>(provider => service => factory(provider, service)))
-            .ToArray();
+        foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories)
+        {
+            WithDecorator(decoratorFactory);
+        }
 
-        return ApplyDecorators(applyDecoratorFactories);
-    }
-
-    /// <summary>
-    /// Registers decorators for the service, each represented as a factory function.
-    /// </summary>
-    public RegistrationContext<TService> WithDecorators(params ApplyDecoratorFactory<TService>[] applyDecoratorFactories)
-    {
-        return ApplyDecorators(applyDecoratorFactories);
+        return this;
     }
 
     /// <summary>
     /// Registers a single decorator for the service.
     /// </summary>
-    public RegistrationContext<TService> WithDecorator<TDecorator>(
-        DecoratorFactory<TService, TDecorator> decoratorFactory)
-        where TDecorator : class, TService
+    public RegistrationContext<TService> WithDecorator(DecoratorFactory<TService> decoratorFactory)
     {
         Type serviceType = typeof(TService);
 
@@ -60,63 +50,5 @@ public partial class RegistrationContext<TService> where TService : class
         _services.Replace(decoratorDescriptor);
 
         return this;
-    }
-
-    private RegistrationContext<TService> ApplyDecorators(ApplyDecoratorFactory<TService>[] applyDecoratorFactories)
-    {
-        ServiceDescriptor serviceDescriptor = GetServiceDescriptor();
-
-        ImplementationFactory<TService> implementationFactory =
-            CreateDecoratedImplementationFactory(serviceDescriptor, applyDecoratorFactories);
-
-        ReplaceServiceDescriptor(serviceDescriptor, implementationFactory);
-
-        return this;
-    }
-
-    private ServiceDescriptor GetServiceDescriptor()
-    {
-        ServiceDescriptor? serviceDescriptor = _services
-            .FirstOrDefault(d => d.ServiceType == typeof(TService));
-
-        if (serviceDescriptor == null)
-        {
-            throw new InvalidOperationException(
-                $"The service of type {typeof(TService).Name} has not been registered."
-            );
-        }
-
-        return serviceDescriptor;
-    }
-
-    private static ImplementationFactory<TService> CreateDecoratedImplementationFactory(
-        ServiceDescriptor serviceDescriptor,
-        ApplyDecoratorFactory<TService>[] applyDecoratorFactories
-    )
-    {
-        return provider =>
-        {
-            TService service = ImplementationService.Get<TService>(serviceDescriptor, provider);
-
-            foreach (ApplyDecoratorFactory<TService> applyDecoratorFactory in applyDecoratorFactories)
-            {
-                ApplyDecorator<TService> applyDecorator = applyDecoratorFactory(provider);
-                service = applyDecorator(service);
-            }
-
-            return service;
-        };
-    }
-
-    private void ReplaceServiceDescriptor(ServiceDescriptor originalDescriptor,
-        ImplementationFactory<TService> implementationFactory)
-    {
-        var serviceDescriptor = ServiceDescriptor.Describe(
-            typeof(TService),
-            implementationFactory.Invoke,
-            originalDescriptor.Lifetime
-        );
-
-        _services.Replace(serviceDescriptor);
     }
 }

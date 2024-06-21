@@ -20,20 +20,17 @@ public static class EventHandlerRegistrar
             .WithDecorators((provider, eventHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
-                IHandleEvent<T> decorator = new NullEventValidationEventHandler<T>(eventHandler, decoratorService);
-                return decorator;
+                return new NullEventValidationEventHandler<T>(eventHandler, decoratorService);
             }, (provider, eventHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 ILogger<ErrorHandlingEventHandler<T>> logger = provider.GetRequiredService<ILogger<ErrorHandlingEventHandler<T>>>();
-                IHandleEvent<T> decorator = new ErrorHandlingEventHandler<T>(eventHandler, decoratorService, logger);
-                return decorator;
+                return new ErrorHandlingEventHandler<T>(eventHandler, decoratorService, logger);
             }, (provider, eventHandler) =>
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 ILogger<LoggingEventHandler<T>> logger = provider.GetRequiredService<ILogger<LoggingEventHandler<T>>>();
-                IHandleEvent<T> decorator = new LoggingEventHandler<T>(eventHandler, decoratorService, logger);
-                return decorator;
+                return new LoggingEventHandler<T>(eventHandler, decoratorService, logger);
             });
     }
 }
