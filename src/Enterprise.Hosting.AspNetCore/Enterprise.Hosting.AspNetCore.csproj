@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.601" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.611" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
   </ItemGroup>
