@@ -344,6 +344,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI.Registration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Messaging.Core", "src\Enterprise.Messaging.Core\Enterprise.Messaging.Core.csproj", "{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.DI.Registration.Tests.Unit", "tests\Enterprise.DI.Registration.Tests.Unit\Enterprise.DI.Registration.Tests.Unit.csproj", "{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -738,6 +740,10 @@ Global
 		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -862,6 +868,7 @@ Global
 		{9EF6CFC6-7EB1-455C-85A0-F78715475EB1} = {4548CC9E-6285-4A77-80DE-B4FC0BF69CBE}
 		{43127309-8EF8-43EC-B191-C836198C104B} = {B8054E43-0FE9-4C63-BB2D-E0A208E706A0}
 		{3E7C4549-49F8-49C1-9A3B-FD5354163FD8} = {69B07B62-7664-47B5-9E09-BBDD8E6E4DB7}
+		{CC5B5711-D2D0-4085-B56D-5FA04D819F3C} = {955CB110-3F3F-4C05-842A-D8B26888A129}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72F73BE3-5826-40D1-8646-9640D1A6B346}
