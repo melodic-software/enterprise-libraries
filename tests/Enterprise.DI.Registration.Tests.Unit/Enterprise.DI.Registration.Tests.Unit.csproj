@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -22,6 +22,10 @@
 
 	<ItemGroup>
     <ProjectReference Include="..\..\src\Enterprise.DI.Registration\Enterprise.DI.Registration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\Services\" />
   </ItemGroup>
 
 </Project>
