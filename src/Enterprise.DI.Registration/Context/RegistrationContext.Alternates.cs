@@ -1,6 +1,5 @@
 ﻿using Enterprise.DI.Registration.Context.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.DI.Registration.Context;
 
@@ -9,28 +8,35 @@ public partial class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> RegisterAlternate<TAlternate>() where TAlternate : TService
     {
         Type serviceType = typeof(TService);
-
-        ServiceDescriptor? originalServiceDescriptor = _services
-            .FirstOrDefault(d => d.ServiceType == serviceType);
-
-        if (originalServiceDescriptor == null)
-        {
-            throw new InvalidOperationException(
-                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
-            );
-        }
-
-        ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
+        ServiceDescriptor originalDescriptor = ServiceDescriptorService.GetDescriptor(_services, serviceType);
 
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
+            TService originalService = ImplementationService.GetService<TService>(originalDescriptor, serviceProvider);
             return (TAlternate)originalService;
         }
 
-        var alternateDescriptor = ServiceDescriptor.Describe(typeof(TAlternate), ImplementationFactory, lifetime);
+        var alternateDescriptor = ServiceDescriptor.Describe(typeof(TAlternate), ImplementationFactory, originalDescriptor.Lifetime);
 
-        _services.TryAdd(alternateDescriptor);
+        _services.Add(alternateDescriptor);
+
+        return this;
+    }
+
+    public RegistrationContext<TService> RegisterKeyedAlternate<TAlternate>(object? serviceKey) where TAlternate : TService
+    {
+        Type serviceType = typeof(TService);
+        ServiceDescriptor originalDescriptor = ServiceDescriptorService.GetDescriptor(_services, serviceType, serviceKey);
+
+        object ImplementationFactory(IServiceProvider serviceProvider, object? _)
+        {
+            TService originalService = ImplementationService.GetService<TService>(originalDescriptor, serviceProvider);
+            return (TAlternate)originalService;
+        }
+
+        var alternateDescriptor = ServiceDescriptor.DescribeKeyed(typeof(TAlternate), serviceKey, ImplementationFactory, originalDescriptor.Lifetime);
+
+        _services.Add(alternateDescriptor);
 
         return this;
     }

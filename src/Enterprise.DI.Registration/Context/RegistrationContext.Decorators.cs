@@ -29,51 +29,26 @@ public partial class RegistrationContext<TService> where TService : class
     private void RegisterDecorators(DecoratorFactory<TService>[] decoratorFactories)
     {
         Type serviceType = typeof(TService);
-        ServiceDescriptor originalDescriptor = GetOriginalServiceDescriptor(serviceType);
-
-        Func<IServiceProvider, TService> originalFactory = ImplementationService.GetImplementationFactory<TService>(originalDescriptor);
+        ServiceDescriptor originalDescriptor = ServiceDescriptorService.GetDescriptor(_services, serviceType);
 
         // Reverse the decorators array, so they are applied in the appropriate order.
-        DecoratorFactory<TService>[] reversedDecorators = decoratorFactories.Reverse().ToArray();
+        // TODO: Should this be configurable?
+        decoratorFactories = decoratorFactories.Reverse().ToArray();
 
         TService ImplementationFactory(IServiceProvider provider)
         {
-            TService originalService = originalFactory(provider);
-            return reversedDecorators.Aggregate(originalService, (service, factory) => factory(provider, service));
+            TService originalService = ImplementationService.GetService<TService>(originalDescriptor, provider);
+            return decoratorFactories.Aggregate(originalService, (service, decoratorFactory) => decoratorFactory(provider, service));
         }
 
-        // Register as a new descriptor to avoid overwriting the original
         var decoratedDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, originalDescriptor.Lifetime);
 
         ReplaceOriginalDescriptor(originalDescriptor, decoratedDescriptor);
     }
 
-    private ServiceDescriptor GetOriginalServiceDescriptor(Type serviceType)
-    {
-        ServiceDescriptor? originalServiceDescriptor = _services
-            .LastOrDefault(d => d.ServiceType == serviceType);
-
-        if (originalServiceDescriptor == null)
-        {
-            throw new InvalidOperationException(
-                $"The service of type {serviceType.Name} has not been registered and cannot be decorated."
-            );
-        }
-
-        return originalServiceDescriptor;
-    }
-
     private void ReplaceOriginalDescriptor(ServiceDescriptor originalDescriptor, ServiceDescriptor decoratedDescriptor)
     {
-        int index = _services.IndexOf(originalDescriptor);
-
-        if (index != -1)
-        {
-            _services[index] = decoratedDescriptor;
-        }
-        else
-        {
-            _services.Add(decoratedDescriptor);
-        }
+        bool originalRemoved = _services.Remove(originalDescriptor);
+        _services.Add(decoratedDescriptor);
     }
 }
