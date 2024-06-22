@@ -29,12 +29,12 @@
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.631" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.632" />
-    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.650" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.663" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.631" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.632" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.660" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.630" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.630" />
-    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.627" />
+    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.660" />
     <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.656" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.254" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.630" />
