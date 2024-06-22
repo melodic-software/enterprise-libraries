@@ -7,9 +7,6 @@ public class EventHandlerRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterEventHandler(provider =>
-        {
-            return new MyEventHandler();
-        });
+        services.RegisterEventHandler(provider => new MyEventHandler());
     }
 }

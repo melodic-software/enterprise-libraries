@@ -16,8 +16,6 @@ public class QueryHandler : QueryHandlerBase<Query, QueryResult>
 
     public override Task<QueryResult> HandleAsync(Query query, CancellationToken cancellationToken = default)
     {
-        var @event = new MyEvent();
-        RaiseEventAsync(@event);
         return Task.FromResult(new QueryResult());
     }
 }
