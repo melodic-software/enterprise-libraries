@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.DI.Registration" Version="1.0.0-preview.648" />
+    <PackageReference Include="Melodic.Enterprise.DI.Registration" Version="1.0.0-preview.659" />
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.202" />
     <PackageReference Include="Melodic.Enterprise.Logging.Core" Version="1.0.0-preview.170" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.397" />
