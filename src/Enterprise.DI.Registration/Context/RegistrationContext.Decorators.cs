@@ -7,22 +7,22 @@ namespace Enterprise.DI.Registration.Context;
 public partial class RegistrationContext<TService> where TService : class
 {
     /// <summary>
+    /// Registers a single decorator for the service.
+    /// </summary>
+    public RegistrationContext<TService> WithDecorator(DecoratorFactory<TService> decoratorFactory)
+    {
+        ArgumentNullException.ThrowIfNull(decoratorFactory);
+        WithDecorators(decoratorFactory);
+        return this;
+    }
+
+    /// <summary>
     /// Registers decorators for the service, each taking the service instance and IServiceProvider as parameters.
     /// </summary>
     public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
         ArgumentNullException.ThrowIfNull(decoratorFactories);
         RegisterDecorators(decoratorFactories);
-        return this;
-    }
-
-    /// <summary>
-    /// Registers a single decorator for the service.
-    /// </summary>
-    public RegistrationContext<TService> WithDecorator(DecoratorFactory<TService> decoratorFactory)
-    {
-        ArgumentNullException.ThrowIfNull(decoratorFactory);
-        RegisterDecorators([decoratorFactory]);
         return this;
     }
 
