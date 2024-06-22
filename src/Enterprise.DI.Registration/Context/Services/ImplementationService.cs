@@ -4,6 +4,26 @@ namespace Enterprise.DI.Registration.Context.Services;
 
 internal static class ImplementationService
 {
+    internal static Func<IServiceProvider, TService> GetServiceFactory<TService>(ServiceDescriptor serviceDescriptor) where TService : class
+    {
+        if (serviceDescriptor.ImplementationFactory != null)
+        {
+            return provider => (TService)serviceDescriptor.ImplementationFactory(provider);
+        }
+
+        if (serviceDescriptor.ImplementationInstance != null)
+        {
+            return provider => (TService)serviceDescriptor.ImplementationInstance;
+        }
+
+        if (serviceDescriptor.ImplementationType != null)
+        {
+            return provider => (TService)ActivatorUtilities.CreateInstance(provider, serviceDescriptor.ImplementationType);
+        }
+
+        throw new InvalidOperationException("The registration method for the service is not supported.");
+    }
+
     internal static TService GetService<TService>(ServiceDescriptor serviceDescriptor, IServiceProvider provider) where TService : class
     {
         if (serviceDescriptor.ImplementationFactory != null)

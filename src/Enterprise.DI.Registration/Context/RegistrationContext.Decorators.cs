@@ -16,9 +16,11 @@ public partial class RegistrationContext<TService> where TService : class
         ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
 
+        Func<IServiceProvider, TService> originalServiceFactory = ImplementationService.GetServiceFactory<TService>(originalServiceDescriptor);
+
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
+            TService originalService = originalServiceFactory(serviceProvider);
 
             TService decoratedService = originalService;
 
