@@ -21,23 +21,23 @@
     <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.2.0" />
     <PackageReference Include="Marvin.Cache.Headers" Version="7.1.0" />
     <PackageReference Include="Melodic.Enterprise.Api.Client.AspNetCore" Version="1.0.0-preview.450" />
-    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.654" />
-    <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.631" />
+    <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.669" />
+    <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.667" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.651" />
+    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.667" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
-    <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.631" />
+    <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.667" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
-    <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.632" />
-    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.663" />
-    <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.631" />
-    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.660" />
-    <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.630" />
-    <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.630" />
+    <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.667" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.667" />
+    <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.666" />
+    <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.667" />
+    <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.666" />
+    <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.668" />
     <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.660" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.656" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.671" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.254" />
-    <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.630" />
+    <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.666" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.495" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.6" />
@@ -47,12 +47,12 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <PackageReference Include="Microsoft.Extensions.DiagnosticAdapter" Version="3.1.32" />
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.6.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.6.2" />
     <PackageReference Include="Serilog.Enrichers.AspNetCore.HttpContext" Version="1.0.1" />
     <PackageReference Include="Serilog.Enrichers.AssemblyName" Version="2.0.0" />
     <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
     <PackageReference Include="Serilog.Enrichers.Demystifier" Version="1.0.2" />
-    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Memory" Version="1.0.4" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
     <PackageReference Include="Serilog.Enrichers.Sensitive" Version="1.7.3" />
