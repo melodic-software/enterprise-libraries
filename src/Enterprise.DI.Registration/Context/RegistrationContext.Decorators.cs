@@ -1,7 +1,6 @@
 ﻿using Enterprise.DI.Registration.Context.Delegates;
 using Enterprise.DI.Registration.Context.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Enterprise.DI.Registration.Context;
 
@@ -12,62 +11,41 @@ public partial class RegistrationContext<TService> where TService : class
     /// </summary>
     public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
-        Type serviceType = typeof(TService);
-
-        // Retrieve the original service descriptor based on the service type.
-        ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
-        ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
-
-        // Implementation factory that creates the decorated service.
-        object ImplementationFactory(IServiceProvider serviceProvider)
-        {
-            // Resolve the original service instance.
-            var originalService = (TService)serviceProvider.GetRequiredService(serviceType);
-
-            // Start with the original service.
-            TService decoratedService = originalService;
-
-            // Apply decorators in reverse order for correct decorator chaining.
-            foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories.Reverse())
-            {
-                decoratedService = decoratorFactory(serviceProvider, decoratedService);
-            }
-
-            return decoratedService;
-        }
-
-        // Create a new descriptor for the decorated service with the same lifetime as the original.
-        var decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
-
-        // Replace the original service descriptor with the new decorated one.
-        _services.Replace(decoratorDescriptor);
-
-        // Return the registration context for chaining.
+        ArgumentNullException.ThrowIfNull(decoratorFactories);
+        RegisterDecorators(decoratorFactories);
         return this;
     }
-    
+
     /// <summary>
     /// Registers a single decorator for the service.
     /// </summary>
     public RegistrationContext<TService> WithDecorator(DecoratorFactory<TService> decoratorFactory)
     {
+        ArgumentNullException.ThrowIfNull(decoratorFactory);
+        RegisterDecorators([decoratorFactory]);
+        return this;
+    }
+
+    private void RegisterDecorators(DecoratorFactory<TService>[] decoratorFactories)
+    {
         Type serviceType = typeof(TService);
+        ServiceDescriptor originalDescriptor = GetOriginalServiceDescriptor(serviceType);
 
-        ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
+        Func<IServiceProvider, TService> originalFactory = ImplementationService.GetImplementationFactory<TService>(originalDescriptor);
 
-        ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
+        // Reverse the decorators array, so they are applied in the appropriate order.
+        DecoratorFactory<TService>[] reversedDecorators = decoratorFactories.Reverse().ToArray();
 
-        object ImplementationFactory(IServiceProvider serviceProvider)
+        TService ImplementationFactory(IServiceProvider provider)
         {
-            TService originalService = ImplementationService.GetService<TService>(originalServiceDescriptor, serviceProvider);
-            return decoratorFactory(serviceProvider, originalService);
+            TService originalService = originalFactory(provider);
+            return reversedDecorators.Aggregate(originalService, (service, factory) => factory(provider, service));
         }
 
-        var decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
+        // Register as a new descriptor to avoid overwriting the original
+        var decoratedDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, originalDescriptor.Lifetime);
 
-        _services.Replace(decoratorDescriptor);
-
-        return this;
+        ReplaceOriginalDescriptor(originalDescriptor, decoratedDescriptor);
     }
 
     private ServiceDescriptor GetOriginalServiceDescriptor(Type serviceType)
@@ -83,5 +61,19 @@ public partial class RegistrationContext<TService> where TService : class
         }
 
         return originalServiceDescriptor;
+    }
+
+    private void ReplaceOriginalDescriptor(ServiceDescriptor originalDescriptor, ServiceDescriptor decoratedDescriptor)
+    {
+        int index = _services.IndexOf(originalDescriptor);
+
+        if (index != -1)
+        {
+            _services[index] = decoratedDescriptor;
+        }
+        else
+        {
+            _services.Add(decoratedDescriptor);
+        }
     }
 }
