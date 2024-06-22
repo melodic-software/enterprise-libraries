@@ -13,18 +13,21 @@ public partial class RegistrationContext<TService> where TService : class
     public RegistrationContext<TService> WithDecorators(params DecoratorFactory<TService>[] decoratorFactories)
     {
         Type serviceType = typeof(TService);
+
+        // Retrieve the original service descriptor based on the service type.
         ServiceDescriptor originalServiceDescriptor = GetOriginalServiceDescriptor(serviceType);
         ServiceLifetime lifetime = originalServiceDescriptor.Lifetime;
 
-        Func<IServiceProvider, TService> originalServiceFactory = ImplementationService.GetServiceFactory<TService>(originalServiceDescriptor);
-
+        // Implementation factory that creates the decorated service.
         object ImplementationFactory(IServiceProvider serviceProvider)
         {
-            TService originalService = originalServiceFactory(serviceProvider);
+            // Resolve the original service instance.
+            var originalService = (TService)serviceProvider.GetRequiredService(serviceType);
 
+            // Start with the original service.
             TService decoratedService = originalService;
 
-            // Ensure these are applied in reverse order.
+            // Apply decorators in reverse order for correct decorator chaining.
             foreach (DecoratorFactory<TService> decoratorFactory in decoratorFactories.Reverse())
             {
                 decoratedService = decoratorFactory(serviceProvider, decoratedService);
@@ -33,10 +36,13 @@ public partial class RegistrationContext<TService> where TService : class
             return decoratedService;
         }
 
+        // Create a new descriptor for the decorated service with the same lifetime as the original.
         var decoratorDescriptor = ServiceDescriptor.Describe(serviceType, ImplementationFactory, lifetime);
 
+        // Replace the original service descriptor with the new decorated one.
         _services.Replace(decoratorDescriptor);
 
+        // Return the registration context for chaining.
         return this;
     }
     
@@ -67,7 +73,7 @@ public partial class RegistrationContext<TService> where TService : class
     private ServiceDescriptor GetOriginalServiceDescriptor(Type serviceType)
     {
         ServiceDescriptor? originalServiceDescriptor = _services
-            .FirstOrDefault(d => d.ServiceType == serviceType);
+            .LastOrDefault(d => d.ServiceType == serviceType);
 
         if (originalServiceDescriptor == null)
         {
