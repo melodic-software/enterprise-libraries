@@ -24,12 +24,12 @@
     <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.634" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.631" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.631" />
+    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.643" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.631" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.632" />
-    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.624" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.644" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.631" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.632" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.630" />
