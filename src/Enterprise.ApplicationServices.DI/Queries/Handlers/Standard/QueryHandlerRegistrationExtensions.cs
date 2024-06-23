@@ -6,7 +6,6 @@ using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 using Enterprise.DI.Registration.Context;
 using Enterprise.DI.Registration.Context.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Services.BaseAbstractionRegistrationService;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
@@ -59,8 +58,6 @@ public static class QueryHandlerRegistrationExtensions
             services.RegisterQueryHandler(options);
 
         options.PostConfigure?.Invoke(services, registrationContext);
-
-        RegisterBaseAbstractions<TQuery, TResult>(services, options.ServiceLifetime);
     }
 
     private static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterQueryHandler<TQuery, TResult>(

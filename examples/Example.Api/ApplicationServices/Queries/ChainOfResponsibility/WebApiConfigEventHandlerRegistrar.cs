@@ -1,10 +1,10 @@
 ﻿using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.ApplicationServices.Core.Queries.Dispatching;
-using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
 using Example.Api.ApplicationServices.Queries.Results;
 
-namespace Example.Api.ApplicationServices.Queries.Standard;
+namespace Example.Api.ApplicationServices.Queries.ChainOfResponsibility;
 
 public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
@@ -18,9 +18,10 @@ public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandl
             var query = new Query();
 
             QueryResult result = await queryDispatcher.DispatchAsync<Query, QueryResult>(query, CancellationToken.None);
-            
-            IHandleQuery<Query, QueryResult> queryHandler = scope.ServiceProvider.GetRequiredService<IHandleQuery<Query, QueryResult>>();
-            QueryResult result2 = await queryHandler.HandleAsync(query, CancellationToken.None);
+
+            // This should not be used directly, but the underlying type is registered and used internally.
+            IResponsibilityChain<Query, QueryResult> responsibilityChain = scope.ServiceProvider.GetRequiredService<IResponsibilityChain<Query, QueryResult>>();
+            QueryResult? result2 = await responsibilityChain.HandleAsync(query, CancellationToken.None);
         };
     }
 }

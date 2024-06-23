@@ -2,7 +2,7 @@
 using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.Events.Facade.Abstract;
 
-namespace Example.Api.ApplicationServices.Queries.Alternate;
+namespace Example.Api.ApplicationServices.Queries.Standard.Bound.MediatR;
 
 public class QueryHandlerRegistrar : IRegisterServices
 {
@@ -11,7 +11,7 @@ public class QueryHandlerRegistrar : IRegisterServices
         services.RegisterQueryHandler(provider =>
         {
             IEventRaisingFacade eventService = provider.GetRequiredService<IEventRaisingFacade>();
-            return new BoundQueryHandler(eventService);
+            return new MediatRQueryHandler(eventService);
         });
     }
 }

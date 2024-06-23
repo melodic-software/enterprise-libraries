@@ -2,10 +2,7 @@
 using Enterprise.Events.Facade.Abstract;
 using Example.Api.ApplicationServices.Queries.Results;
 
-namespace Example.Api.ApplicationServices.Queries.Standard;
-
-// Our regular unbound query representation (result is specified by the handler).
-// This is an alternative generic - where the result type is bound to the type specified.
+namespace Example.Api.ApplicationServices.Queries.ChainOfResponsibility;
 
 public class QueryHandler : QueryHandlerBase<Query, QueryResult>
 {
@@ -15,7 +12,7 @@ public class QueryHandler : QueryHandlerBase<Query, QueryResult>
 
     public override Task<QueryResult> HandleAsync(Query query, CancellationToken cancellationToken = default)
     {
-        var result = new QueryResult("STANDARD QUERY HANDLER");
+        var result = new QueryResult("CHAIN OF RESPONSIBILITY");
         return Task.FromResult(result);
     }
 }

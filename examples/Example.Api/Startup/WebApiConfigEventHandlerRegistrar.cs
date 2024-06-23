@@ -10,7 +10,7 @@ internal sealed class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigE
 {
     public static void RegisterHandlers(WebApiConfigEvents events)
     {
-        events.BuilderCreated += (builder) =>
+        events.BuilderCreated += builder =>
         {
             return Task.CompletedTask;
         };

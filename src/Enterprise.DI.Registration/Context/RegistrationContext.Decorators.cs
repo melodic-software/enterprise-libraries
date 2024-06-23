@@ -1,4 +1,5 @@
-﻿using Enterprise.DI.Registration.Context.Delegates;
+﻿using Enterprise.DI.Core.Registration.Services;
+using Enterprise.DI.Registration.Context.Delegates;
 using Enterprise.DI.Registration.Context.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,7 +38,7 @@ public partial class RegistrationContext<TService> where TService : class
 
         TService ImplementationFactory(IServiceProvider provider)
         {
-            TService originalService = ImplementationService.GetService<TService>(originalDescriptor, provider);
+            TService originalService = ImplementationService.GetImplementation<TService>(originalDescriptor, provider);
             return decoratorFactories.Aggregate(originalService, (service, decoratorFactory) => decoratorFactory(provider, service));
         }
 

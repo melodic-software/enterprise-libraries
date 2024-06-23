@@ -4,7 +4,7 @@ using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Example.Api.ApplicationServices.Queries.Results;
 
-namespace Example.Api.ApplicationServices.Queries.Standard;
+namespace Example.Api.ApplicationServices.Queries.ChainOfResponsibility.Simple;
 
 public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {

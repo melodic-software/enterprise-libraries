@@ -2,7 +2,6 @@
 using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 using Microsoft.Extensions.DependencyInjection;
-using static Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound.BoundHandlerRegistrationService;
 using static Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound.Delegates.QueryHandlerImplementationFactories;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound;
@@ -23,7 +22,6 @@ public static class QueryHandlerRegistrationExtensions
         where TQuery : class, IQuery<TResult>
     {
         services.Register(provider => implementationFactory(provider), configureOptions);
-        RegisterBound<TQuery, TResult>(services);
     }
 
     /// <summary>
@@ -39,6 +37,5 @@ public static class QueryHandlerRegistrationExtensions
         where TQuery : class, IQuery<TResult>
     {
         services.Register(CreateSimpleQueryHandler<TQuery, TResult>, configureOptions);
-        RegisterBound<TQuery, TResult>(services);
     }
 }
