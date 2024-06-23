@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
@@ -47,7 +48,7 @@ internal static class RegistrationContextExtensions
         RegistrationOptions<TQuery, TResult> options)
         where TQuery : class, IQuery
     {
-        // Register the primary.
+        // Register the standard.
         registrationContext.Add(
             ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TQuery, TResult>),
@@ -56,10 +57,19 @@ internal static class RegistrationContextExtensions
             )
         );
 
-        // Register the alternative.
+        // Register the unbound.
         registrationContext.Add(
             ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TResult>),
+                ImplementationFactory<TQuery, TResult>,
+                options.ServiceLifetime
+            )
+        );
+
+        // Register the non-generic.
+        registrationContext.Add(
+            ServiceDescriptor.Describe(
+                typeof(IHandleQuery),
                 ImplementationFactory<TQuery, TResult>,
                 options.ServiceLifetime
             )

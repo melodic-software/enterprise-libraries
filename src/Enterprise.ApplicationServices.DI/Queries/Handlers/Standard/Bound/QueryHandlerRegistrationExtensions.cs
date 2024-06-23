@@ -1,9 +1,9 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
-using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
-using Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 using Microsoft.Extensions.DependencyInjection;
+using static Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound.BoundHandlerRegistrationService;
+using static Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound.Delegates.QueryHandlerImplementationFactories;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Bound;
 
@@ -22,7 +22,8 @@ public static class QueryHandlerRegistrationExtensions
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
         where TQuery : class, IQuery<TResult>
     {
-        services.Register((provider) => implementationFactory(provider), configureOptions);
+        services.Register(provider => implementationFactory(provider), configureOptions);
+        RegisterBound<TQuery, TResult>(services);
     }
 
     /// <summary>
@@ -35,11 +36,9 @@ public static class QueryHandlerRegistrationExtensions
     /// <param name="configureOptions"></param>
     public static void RegisterSimpleQueryHandler<TQuery, TResult>(this IServiceCollection services,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
-        where TQuery : class, IQuery
+        where TQuery : class, IQuery<TResult>
     {
-        services.Register(
-            QueryHandlerImplementationFactories.CreateSimpleQueryHandler<TQuery, TResult>,
-            configureOptions
-        );
+        services.Register(CreateSimpleQueryHandler<TQuery, TResult>, configureOptions);
+        RegisterBound<TQuery, TResult>(services);
     }
 }

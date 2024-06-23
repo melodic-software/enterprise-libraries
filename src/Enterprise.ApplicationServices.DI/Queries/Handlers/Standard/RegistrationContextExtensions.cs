@@ -1,5 +1,4 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
 using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,19 +19,9 @@ internal static class RegistrationContextExtensions
             );
         }
 
-        // Register the primary.
         registrationContext.Add(
             ServiceDescriptor.Describe(
                 typeof(IHandleQuery<TQuery, TResult>),
-                options.QueryHandlerImplementationFactory.Invoke,
-                options.ServiceLifetime
-            )
-        );
-
-        // Register the alternate.
-        registrationContext.Add(
-            ServiceDescriptor.Describe(
-                typeof(IHandleQuery<TResult>),
                 options.QueryHandlerImplementationFactory.Invoke,
                 options.ServiceLifetime
             )
