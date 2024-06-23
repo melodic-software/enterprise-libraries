@@ -26,12 +26,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-	<ItemGroup>
-    <ProjectReference Include="..\..\src\Enterprise.DI.Registration\Enterprise.DI.Registration.csproj" />
-  </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Context\Services\" />
+    <ProjectReference Include="..\..\src\Enterprise.DI.Registration\Enterprise.DI.Registration.csproj" />
   </ItemGroup>
 
 </Project>

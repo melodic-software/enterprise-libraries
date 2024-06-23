@@ -34,7 +34,6 @@
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.679" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.679" />
-    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.675" />
     <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.683" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.254" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.678" />
@@ -62,7 +61,7 @@
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.2" />

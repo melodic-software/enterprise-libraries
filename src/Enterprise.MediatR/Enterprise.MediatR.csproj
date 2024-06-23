@@ -21,8 +21,4 @@
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.677" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\Handlers\Bound\" />
-  </ItemGroup>
-
 </Project>

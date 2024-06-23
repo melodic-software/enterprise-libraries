@@ -21,9 +21,4 @@
     <PackageReference Include="Melodic.Enterprise.Middleware" Version="1.0.0-preview.16" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RegisteredServices\Mapping\" />
-    <Folder Include="RegisteredServices\Responses\" />
-  </ItemGroup>
-
 </Project>

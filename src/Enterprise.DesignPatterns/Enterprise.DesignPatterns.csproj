@@ -18,8 +18,4 @@
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Builder\" />
-  </ItemGroup>
-
 </Project>
