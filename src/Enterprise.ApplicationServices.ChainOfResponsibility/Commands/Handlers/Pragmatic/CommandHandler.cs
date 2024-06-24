@@ -2,7 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;

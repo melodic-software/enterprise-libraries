@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestOnly;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;
 
 namespace Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;

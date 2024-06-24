@@ -1,5 +1,5 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse.Abstract;
 using Enterprise.FluentValidation.Services;
 using FluentValidation;
 

@@ -24,7 +24,7 @@
     <PackageReference Include="Melodic.Enterprise.AutoMapper" Version="1.0.0-preview.690" />
     <PackageReference Include="Melodic.Enterprise.Cors" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.DataShaping" Version="1.0.0-preview.170" />
-    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.694" />
+    <PackageReference Include="Melodic.Enterprise.Domain.AspNetCore" Version="1.0.0-preview.696" />
     <PackageReference Include="Melodic.Enterprise.Files" Version="1.0.0-preview.16" />
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
@@ -34,7 +34,7 @@
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.679" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.686" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.692" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.696" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.254" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.495" />
