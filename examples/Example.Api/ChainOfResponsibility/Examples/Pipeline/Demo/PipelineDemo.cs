@@ -1,4 +1,4 @@
-﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Example.Api.ChainOfResponsibility.Examples.Pipeline.Models;
 
 namespace Example.Api.ChainOfResponsibility.Examples.Pipeline.Demo;

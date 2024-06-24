@@ -1,4 +1,4 @@
-﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Dependencies;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Chains.RequestOnly;
 using Enterprise.DI.Core.Registration.Abstract;
 using Example.Api.ChainOfResponsibility.Examples.Modern.Handlers;
 

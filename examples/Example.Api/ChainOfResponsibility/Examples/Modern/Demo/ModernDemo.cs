@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Chains;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Shared;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Chains.RequestOnly;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Shared.RequestOnly;
 using Example.Api.ChainOfResponsibility.Examples.Modern.Handlers;
 using Microsoft.Extensions.Logging.Abstractions;
 

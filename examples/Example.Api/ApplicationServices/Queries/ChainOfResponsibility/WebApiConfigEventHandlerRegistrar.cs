@@ -1,7 +1,7 @@
 ﻿using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.ApplicationServices.Core.Queries.Dispatching;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Example.Api.ApplicationServices.Queries.Results;
 
 namespace Example.Api.ApplicationServices.Queries.ChainOfResponsibility;

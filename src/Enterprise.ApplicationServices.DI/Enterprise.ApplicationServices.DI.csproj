@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices.ChainOfResponsibility" Version="1.0.0-preview.690" />
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices.Decorators" Version="1.0.0-preview.690" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices.ChainOfResponsibility" Version="1.0.0-preview.694" />
+    <PackageReference Include="Melodic.Enterprise.ApplicationServices.Decorators" Version="1.0.0-preview.694" />
     <PackageReference Include="Melodic.Enterprise.DI.Registration" Version="1.0.0-preview.675" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>

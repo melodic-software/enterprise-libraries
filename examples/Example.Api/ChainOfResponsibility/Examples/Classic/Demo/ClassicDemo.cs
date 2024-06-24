@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Chains;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Shared;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Chains.RequestOnly;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Shared.RequestOnly;
 using Example.Api.ChainOfResponsibility.Examples.Classic.Handlers;
 
 namespace Example.Api.ChainOfResponsibility.Examples.Classic.Demo;

@@ -5,18 +5,18 @@ using Serilog.Context;
 
 namespace Enterprise.Serilog.MediatR;
 
-public class SerilogLoggingBehaviorServiceDecorator : ILoggingBehaviorService
+public class SerilogLoggingBehaviorServiceDecorator : IRequestLoggingBehaviorService
 {
-    private readonly ILoggingBehaviorService _decorated;
+    private readonly IRequestLoggingBehaviorService _decorated;
 
     private const string Errors = "Errors";
 
-    public SerilogLoggingBehaviorServiceDecorator(ILoggingBehaviorService decorated)
+    public SerilogLoggingBehaviorServiceDecorator(IRequestLoggingBehaviorService decorated)
     {
         _decorated = decorated;
     }
 
-    public void LogApplicationServiceError(ILogger logger, IEnumerable<IError> errors, string typeName)
+    public void LogApplicationServiceError(ILogger logger, IEnumerable<IError> errors, string requestTypeName)
     {
         errors = errors.ToList();
 
@@ -27,7 +27,7 @@ public class SerilogLoggingBehaviorServiceDecorator : ILoggingBehaviorService
         // It requires the log context enricher to be enabled in the logger configuration.
         using (LogContext.PushProperty(Errors, propertyValue, true))
         {
-            _decorated.LogApplicationServiceError(logger, errors, typeName);
+            _decorated.LogApplicationServiceError(logger, errors, requestTypeName);
         }
     }
 }

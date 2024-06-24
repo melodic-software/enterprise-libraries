@@ -2,7 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse.Abstract;
 using Enterprise.Events.Facade.Abstract;
 using Enterprise.Library.Core.Attributes;
 using static Enterprise.ApplicationServices.Core.Commands.Handlers.Validation.CommandHandlerTypeValidationService;

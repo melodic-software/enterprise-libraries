@@ -12,8 +12,8 @@ public static class MediatRServiceRegistrar
         // TODO: We need to ensure there aren't conflicting registrations with other providers, etc.
         builder.Services.AddTransient(provider =>
         {
-            ILoggingBehaviorService loggingBehaviorService = new LoggingBehaviorService();
-            ILoggingBehaviorService serilogDecorator = new SerilogLoggingBehaviorServiceDecorator(loggingBehaviorService);
+            IRequestLoggingBehaviorService loggingBehaviorService = new RequestLoggingBehaviorService();
+            IRequestLoggingBehaviorService serilogDecorator = new SerilogLoggingBehaviorServiceDecorator(loggingBehaviorService);
             return serilogDecorator;
         });
     }

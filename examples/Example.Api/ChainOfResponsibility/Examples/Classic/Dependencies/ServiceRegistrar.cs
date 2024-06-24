@@ -1,4 +1,4 @@
-﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Dependencies;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Chains.RequestOnly;
 using Enterprise.DI.Core.Registration.Abstract;
 using Example.Api.ChainOfResponsibility.Examples.Classic.Handlers;
 

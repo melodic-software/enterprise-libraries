@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Handlers;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Classic.Handlers.RequestOnly;
 
 namespace Example.Api.ChainOfResponsibility.Examples.Classic.Handlers;
 

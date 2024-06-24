@@ -1,5 +1,5 @@
-﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.Generic;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse;
 using Enterprise.DI.Core.Registration.Abstract;
 using Example.Api.ChainOfResponsibility.Examples.Pipeline.Handlers;
 using Example.Api.ChainOfResponsibility.Examples.Pipeline.Models;

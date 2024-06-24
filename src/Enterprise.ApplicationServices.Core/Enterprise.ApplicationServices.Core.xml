@@ -171,7 +171,7 @@
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#DesignPatterns#ChainOfResponsibility#Pipeline#Handlers#IHandler{TQuery,TResult}#HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#DesignPatterns#ChainOfResponsibility#Pipeline#Handlers#RequestResponse#Abstract#IHandler{TQuery,TResult}#HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Handlers.IHandleQuery`2">
