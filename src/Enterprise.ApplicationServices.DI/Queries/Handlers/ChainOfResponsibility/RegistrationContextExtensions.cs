@@ -3,8 +3,7 @@ using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 

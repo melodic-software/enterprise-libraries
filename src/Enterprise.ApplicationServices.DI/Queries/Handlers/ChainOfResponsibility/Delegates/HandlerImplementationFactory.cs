@@ -1,4 +1,4 @@
-﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers;
+﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse.Abstract;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
 

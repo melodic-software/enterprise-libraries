@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic.Delegates;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Pragmatic;

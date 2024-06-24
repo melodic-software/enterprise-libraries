@@ -1,7 +1,7 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestOnly;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility;

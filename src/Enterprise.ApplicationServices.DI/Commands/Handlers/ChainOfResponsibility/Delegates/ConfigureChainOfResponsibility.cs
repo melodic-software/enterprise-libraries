@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestOnly;
 
 namespace Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates;
 

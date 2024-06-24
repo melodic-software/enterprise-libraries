@@ -2,8 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Handlers;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains;
-using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Dependencies;
+using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 
