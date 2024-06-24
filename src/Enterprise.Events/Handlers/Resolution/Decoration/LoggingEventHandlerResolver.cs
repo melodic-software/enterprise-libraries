@@ -19,9 +19,7 @@ public class LoggingEventHandlerResolver : IResolveEventHandlers
 
     public Task<IEnumerable<IHandleEvent>> ResolveAsync(IEvent @event)
     {
-        Type eventType = @event.GetType();
-
-        using (_logger.BeginScope("Event: {EventType}", eventType.Name))
+        using (_logger.BeginScope("Event: {@Event}", @event))
         {
             return _decoratedResolver.ResolveAsync(@event);
         }
@@ -29,9 +27,7 @@ public class LoggingEventHandlerResolver : IResolveEventHandlers
 
     public Task<IEnumerable<IHandleEvent<T>>> ResolveAsync<T>(T @event) where T : IEvent
     {
-        Type eventType = typeof(T);
-
-        using (_logger.BeginScope("Event: {EventType}", eventType.Name))
+        using (_logger.BeginScope("Event: {@Event}", @event))
         {
             return _decoratedResolver.ResolveAsync(@event);
         }

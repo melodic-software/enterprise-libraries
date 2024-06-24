@@ -13,6 +13,7 @@ internal sealed class ServiceRegistrar : IRegisterServices
         services.RegisterChainOfResponsibility<MyRequest, MyResponse>()
             .WithSuccessor<RequestLoggingHandler<MyRequest, MyResponse>>()
             .WithSuccessor<RequestExceptionHandler<MyRequest, MyResponse>>()
+            .WithSuccessor<NullRequestHandler<MyRequest, MyResponse>>()
             .WithSuccessor<FirstPipelineHandler>()
             .WithSuccessor<SecondPipelineHandler>();
     }

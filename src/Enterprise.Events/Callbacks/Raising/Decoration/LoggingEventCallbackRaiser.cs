@@ -35,7 +35,7 @@ public class LoggingEventCallbackRaiser : IRaiseEventCallbacks
 
     public void RaiseCallbacks<TEvent>(TEvent @event) where TEvent : IEvent
     {
-        using (_logger.BeginScope("Event: {EventType}", @event.GetType().Name))
+        using (_logger.BeginScope("Event: {@Event}", @event))
         {
             _logger.LogDebug("Raising event callbacks.");
             _decoratedCallbackRaiser.RaiseCallbacks(@event);

@@ -56,7 +56,7 @@ public class HttpContextDomainEventQueueService : IDomainEventQueue
 
     private void Enqueue(IDomainEvent domainEvent, ConcurrentQueue<IDomainEvent> domainEventQueue)
     {
-        using (_logger.BeginScope("Domain Event Type: {DomainEventType}, Domain Event Id: {DomainEventId}", domainEvent.GetType().Name, domainEvent.Id))
+        using (_logger.BeginScope("Domain Event: {@DomainEvent}", domainEvent))
         {
             bool alreadyQueued = domainEventQueue.Any(x => x.Id == domainEvent.Id);
 

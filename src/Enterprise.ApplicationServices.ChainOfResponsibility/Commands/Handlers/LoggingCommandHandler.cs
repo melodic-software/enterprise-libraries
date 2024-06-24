@@ -15,9 +15,7 @@ public class LoggingCommandHandler<TCommand> : IHandler<TCommand>
 
     public async Task HandleAsync(TCommand request, SuccessorDelegate next, CancellationToken cancellationToken = default)
     {
-        Type commandType = typeof(TCommand);
-
-        using (_logger.BeginScope("Command: {CommandType}", commandType.Name))
+        using (_logger.BeginScope("Command: {@Command}", request))
         {
             _logger.LogDebug("Executing command.");
             await next();

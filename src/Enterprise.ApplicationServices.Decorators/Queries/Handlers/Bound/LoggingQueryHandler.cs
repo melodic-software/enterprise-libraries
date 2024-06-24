@@ -20,13 +20,7 @@ public class LoggingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQ
 
     public override async Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken = default)
     {
-        Type queryType = typeof(TQuery);
-        Type innermostHandlerType = Innermost.GetType();
-
-        // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
-        // Maybe we do that in the base?
-
-        using (_logger.BeginScope("Query Handler: {QueryHandlerType}, Query: {QueryType}", innermostHandlerType.Name, queryType.Name))
+        using (_logger.BeginScope("Query Handler: {@QueryHandler}, Query: {@Query}", Innermost, query))
         {
             _logger.LogDebug("Executing query.");
             TResult result = await Decorated.HandleAsync(query, cancellationToken);

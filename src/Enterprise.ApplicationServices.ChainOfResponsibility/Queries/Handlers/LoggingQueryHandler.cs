@@ -15,9 +15,7 @@ public class LoggingQueryHandler<TQuery, TResult> : IHandler<TQuery, TResult>
 
     public async Task<TResult?> HandleAsync(TQuery request, SuccessorDelegate<TResult> next, CancellationToken cancellationToken = default)
     {
-        Type queryType = typeof(TQuery);
-
-        using (_logger.BeginScope("Query: {QueryType}", queryType.Name))
+        using (_logger.BeginScope("Query: {@Query}", request))
         {
             _logger.LogDebug("Executing query.");
             TResult result = await next();

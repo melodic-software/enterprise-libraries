@@ -33,7 +33,7 @@ public static class ModernDemo
         ], NullLogger<ResponsibilityChain<Document>>.Instance);
 
         // Get a pre-configured orchestrator instance from the DI container.
-        using var scope = services.CreateScope();
+        using IServiceScope scope = services.CreateScope();
 
         // Typically you wouldn't need this, but we've registered two examples (classic and modern).
         // Normally you'd register one or the other for the specific request type.

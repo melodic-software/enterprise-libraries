@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Reflection;
+using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
+using Enterprise.MediatR.Behaviors.Logging.Services;
+using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -7,13 +9,20 @@ namespace Enterprise.MediatR.Behaviors.Logging;
 
 public class RequestLoggingBehavior<TRequest, TResult> :
     IPipelineBehavior<TRequest, TResult>
-    where TRequest : IRequest<TResult>
+    where TRequest : notnull
 {
     private readonly ILogger<RequestLoggingBehavior<TRequest, TResult>> _logger;
+    private readonly IRequestLoggingBehaviorService _loggingBehaviorService;
 
-    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger)
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger) : this(logger, new RequestLoggingBehaviorService())
+    {
+
+    }
+
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger, IRequestLoggingBehaviorService loggingBehaviorService)
     {
         _logger = logger;
+        _loggingBehaviorService = loggingBehaviorService;
     }
 
     public async Task<TResult> Handle(TRequest request,
@@ -23,40 +32,39 @@ public class RequestLoggingBehavior<TRequest, TResult> :
         ArgumentNullException.ThrowIfNull(request);
 
         Type requestType = request.GetType();
-
-        LogProperties(request, requestType);
+        string requestTypeName = requestType.Name;
 
         var stopWatch = Stopwatch.StartNew();
 
-        TResult result = await next();
+        using IDisposable scope = _logger.BeginScope("{@Request}", request);
 
-        _logger.LogInformation("Handled {RequestName}, with {Result} in {Milliseconds} ms", 
-            requestType.Name, typeof(TResult).Name, stopWatch.ElapsedMilliseconds);
+        _logger.LogInformation("Executing request.");
+        TResult result = await next();
+        HandleResult(result, requestTypeName);
 
         stopWatch.Stop();
+
+        _logger.LogInformation("Handled \"{Request}\" in {Milliseconds} ms.",
+            requestTypeName, stopWatch.ElapsedMilliseconds);
 
         return result;
     }
 
-    private void LogProperties(TRequest request, Type requestType)
+    private void HandleResult(TResult genericResult, string requestTypeName)
     {
-        if (!_logger.IsEnabled(LogLevel.Debug))
+        if (genericResult is not Result result)
         {
+            _logger.LogInformation("Request execution completed.");
             return;
         }
 
-        _logger.LogDebug("Handling {RequestName}.", requestType.Name);
-
-        // This is using reflection! It could be a performance concern.
-        // This may not be something we want to enable in production.
-        // We can restrict by environment, OR by log level.
-        // For now, we're just going to default to only run if the debugging log level is enabled.
-        IList<PropertyInfo> props = new List<PropertyInfo>(requestType.GetProperties());
-
-        foreach (PropertyInfo prop in props)
+        if (result.IsSuccess)
         {
-            object? propValue = prop.GetValue(request, null);
-            _logger.LogDebug("Property {Property} : {@Value}", prop.Name, propValue);
+            _logger.LogInformation("Request was successful.");
+        }
+        else
+        {
+            _loggingBehaviorService.LogApplicationServiceError(_logger, result.Errors, requestTypeName);
         }
     }
 }

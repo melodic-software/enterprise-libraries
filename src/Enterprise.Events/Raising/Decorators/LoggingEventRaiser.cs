@@ -26,7 +26,7 @@ public class LoggingEventRaiser : DecoratorBase<IRaiseEvents>, IRaiseEvents
 
     public async Task RaiseAsync(IEvent @event)
     {
-        using (_logger.BeginScope("Event: {EventType}", @event.GetType().Name))
+        using (_logger.BeginScope("Event: {@Event}", @event))
         {
             await Decorated.RaiseAsync(@event);
         }

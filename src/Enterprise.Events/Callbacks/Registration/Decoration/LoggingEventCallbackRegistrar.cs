@@ -19,7 +19,7 @@ public class LoggingEventCallbackRegistrar : IEventCallbackRegistrar
 
     public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
-        using (_logger.BeginScope("Event: {EventType}", typeof(TEvent).Name))
+        using (_logger.BeginScope("Event Type: {EventType}", typeof(TEvent).Name))
         {
             _logger.LogDebug("Registering event callback.");
             _decoratedRegistrar.RegisterEventCallback(action);

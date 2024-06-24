@@ -21,15 +21,9 @@ public class LoggingCommandHandler<TCommand, TResult> : CommandHandlerDecoratorB
 
     public override async Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken = default)
     {
-        Type commandType = typeof(TCommand);
-        Type innermostHandlerType = Innermost.GetType();
-        
         TResult result;
 
-        // TODO: Do we want to add a scope (or log statement) that describes the decorator chain?
-        // Maybe we do that in the base?
-
-        using (_logger.BeginScope("Command Handler: {CommandHandlerType}, Command: {CommandType}", innermostHandlerType.Name, commandType.Name))
+        using (_logger.BeginScope("Command Handler: {@CommandHandler}, Command: {@Command}", Innermost, command))
         {
             _logger.LogDebug("Executing command.");
             result = await Decorated.HandleAsync(command, cancellationToken);

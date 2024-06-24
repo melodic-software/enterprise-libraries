@@ -21,4 +21,8 @@
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.677" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Behaviors\ErrorHandling\" />
+  </ItemGroup>
+
 </Project>

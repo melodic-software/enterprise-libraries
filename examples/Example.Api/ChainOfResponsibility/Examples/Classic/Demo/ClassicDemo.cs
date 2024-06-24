@@ -29,7 +29,7 @@ public static class ClassicDemo
         ]);
 
         // Get a pre-configured orchestrator instance from the DI container.
-        using var scope = services.CreateScope();
+        using IServiceScope scope = services.CreateScope();
 
         // Typically you wouldn't need this, but we've registered two examples (classic and modern).
         // Normally you'd register one or the other for the specific request type.
@@ -49,9 +49,9 @@ public static class ClassicDemo
             chainOfResponsibility?.Handle(invalidDocument);
             Console.WriteLine("Invalid document is valid.");
         }
-        catch (ValidationException e)
+        catch (ValidationException ex)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(ex);
         }
     }
 }
