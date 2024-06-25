@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Library.Core" Version="1.0.0-preview.676" />
     <PackageReference Include="Melodic.Enterprise.Options.Core" Version="1.0.0-preview.397" />
-    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.675" />
+    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.711" />
   </ItemGroup>
 
 </Project>
