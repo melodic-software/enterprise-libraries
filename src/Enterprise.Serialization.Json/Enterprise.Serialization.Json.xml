@@ -4,5 +4,21 @@
         <name>Enterprise.Serialization.Json</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.Serialization.Json.Abstract.Composite.IJsonSerializer">
+            <summary>
+            This composite interface provides both serialization and deserialization functionality.
+            If you only need one or the other, consider using <see cref="T:Enterprise.Serialization.Json.Abstract.ISerializeJson"/> or <see cref="T:Enterprise.Serialization.Json.Abstract.IDeserializeJson"/>.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Serialization.Json.Abstract.IDeserializeJson">
+            <summary>
+            Deserializes JSON strings into object instances.
+            </summary>
+        </member>
+        <member name="T:Enterprise.Serialization.Json.Abstract.ISerializeJson">
+            <summary>
+            Serializes objects into JSON strings.
+            </summary>
+        </member>
     </members>
 </doc>

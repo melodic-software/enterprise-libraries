@@ -24,7 +24,7 @@ public sealed class MediatREventDispatcher : EventDispatcher
         _publisher = publisher;
     }
 
-    public override IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
+    protected override IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
     {
         if (eventHandlers.Count <= 0)
         {
@@ -54,7 +54,7 @@ public sealed class MediatREventDispatcher : EventDispatcher
         return filteredHandlers;
     }
 
-    public override Task OnNoHandlersRegistered(IEvent @event)
+    protected override Task OnNoHandlersRegistered(IEvent @event)
     {
         if (_handlersFiltered)
         {
@@ -68,14 +68,9 @@ public sealed class MediatREventDispatcher : EventDispatcher
     }
 
     /// <inheritdoc />
-    public override async Task DispatchAsync(IEvent @event)
+    protected override async Task OnDispatchCompleteAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
-        // Use the base behavior.
-        // Part of which we've overridden.
-        await base.DispatchAsync(@event);
-
-        // At this point we've safely filtered out handlers
-        // that would be executed twice with the use of the MediatR publisher.
+        // At this point we've safely filtered out handlers that would be executed twice with the use of the MediatR publisher.
         await PublishAsync(@event);
     }
 

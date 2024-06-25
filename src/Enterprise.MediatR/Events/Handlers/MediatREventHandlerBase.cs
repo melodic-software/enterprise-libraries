@@ -9,6 +9,6 @@ public abstract class MediatREventHandlerBase<T> : EventHandlerBase<T>, INotific
 {
     public async Task Handle(T notification, CancellationToken cancellationToken)
     {
-        await HandleAsync(notification);
+        await HandleAsync(notification, cancellationToken);
     }
 }
