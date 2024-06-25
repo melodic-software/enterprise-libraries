@@ -1,6 +1,7 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Handlers.RequestResponse;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Shared.RequestResponse;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Enterprise.DesignPatterns.ChainOfResponsibility.Modern.Chains.RequestResponse;
 
@@ -8,6 +9,12 @@ public class ResponsibilityChain<TRequest, TResponse> : IResponsibilityChain<TRe
 {
     private readonly ILogger<ResponsibilityChain<TRequest, TResponse>> _logger;
     private readonly IReadOnlyCollection<IHandler<TRequest, TResponse?>> _handlers;
+
+    public ResponsibilityChain(IEnumerable<IHandler<TRequest, TResponse?>> handlers)
+        : this(handlers, NullLogger<ResponsibilityChain<TRequest, TResponse>>.Instance)
+    {
+
+    }
 
     public ResponsibilityChain(IEnumerable<IHandler<TRequest, TResponse?>> handlers, ILogger<ResponsibilityChain<TRequest, TResponse>> logger)
     {
