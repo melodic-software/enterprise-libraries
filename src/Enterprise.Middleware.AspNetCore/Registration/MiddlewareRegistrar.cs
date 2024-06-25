@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Enterprise.Middleware.AspNetCore.Registration;
 
-internal static class AppMiddlewareRegistrar
+internal static class MiddlewareRegistrar
 {
     /// <summary>
-    /// Automatically resolves instances of <see cref="IRegisterAppMiddleware"/> and invokes the registration method.
-    /// This allows for automatic wiring up of application specific middleware in the request pipeline.
+    /// Automatically resolves instances of <see cref="IRegisterMiddleware"/> and invokes the registration method.
+    /// This allows for automatic wiring up of middleware at a specific point in the request pipeline.
     /// </summary>
     /// <param name="app"></param>
-    public static void UseAppMiddleware(this WebApplication app)
+    public static void UseMiddleware(this WebApplication app)
     {
         RegistrationMethodInvocationService.InvokeUsing(
             new RegistrationMethodConfig(
-                typeof(IRegisterAppMiddleware),
-                nameof(IRegisterAppMiddleware.RegisterAppMiddleware),
+                typeof(IRegisterMiddleware),
+                nameof(IRegisterMiddleware.RegisterMiddleware),
                 MethodParamsAreValid,
                 [app]
             )
