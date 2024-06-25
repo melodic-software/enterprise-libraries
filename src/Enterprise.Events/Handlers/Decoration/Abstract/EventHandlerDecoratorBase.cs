@@ -14,13 +14,13 @@ public abstract class EventHandlerDecoratorBase<T> : DecoratorBase<IHandleEvent<
     }
 
     /// <inheritdoc />
-    public Task HandleAsync(IEvent @event)
+    public Task HandleAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
         ValidateType(@event, this);
         var typedEvent = (T)@event;
-        return HandleAsync(typedEvent);
+        return HandleAsync(typedEvent, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task HandleAsync(T @event);
+    public abstract Task HandleAsync(T @event, CancellationToken cancellationToken = default);
 }

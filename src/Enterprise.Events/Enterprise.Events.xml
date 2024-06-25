@@ -113,7 +113,10 @@
             <param name="decoratorService">Service to access decorated instances of handlers.</param>
             <param name="logger">Logger for logging operations within the dispatcher.</param>
         </member>
-        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent)">
+        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent[],System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.Events.Dispatching.Abstract.EventDispatcherBase.DispatchAsync(Enterprise.Events.Model.IEvent,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.Events.Dispatching.Decoration.CallbackRaisingEventDispatchDecorator">
@@ -121,16 +124,16 @@
             This decorator ensures that callbacks are raised after events have been dispatched.
             </summary>
         </member>
-        <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
+        <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(Enterprise.Events.Model.IEvent,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(`0)">
+        <member name="M:Enterprise.Events.Handlers.Abstract.EventHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Events.Handlers.Decoration.Abstract.EventHandlerDecoratorBase`1.HandleAsync(Enterprise.Events.Model.IEvent)">
+        <member name="M:Enterprise.Events.Handlers.Decoration.Abstract.EventHandlerDecoratorBase`1.HandleAsync(Enterprise.Events.Model.IEvent,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.Events.Handlers.Decoration.Abstract.EventHandlerDecoratorBase`1.HandleAsync(`0)">
+        <member name="M:Enterprise.Events.Handlers.Decoration.Abstract.EventHandlerDecoratorBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.Events.Handlers.Resolution.Abstract.EventHandlerResolverBase.ResolveAsync(Enterprise.Events.Model.IEvent)">

@@ -13,8 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.673" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

@@ -5,5 +5,5 @@ namespace Enterprise.Events.Handlers.Abstract;
 
 public interface IHandleEvent<in T> : IHandleEvent where T : IEvent
 {
-    Task HandleAsync(T @event);
+    Task HandleAsync(T @event, CancellationToken cancellationToken = default);
 }

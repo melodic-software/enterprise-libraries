@@ -13,9 +13,9 @@ public class NullEventValidationEventHandler<T> : EventHandlerDecoratorBase<T> w
 
     }
 
-    public override Task HandleAsync(T? @event)
+    public override Task HandleAsync(T? @event, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(@event);
-        return Decorated.HandleAsync(@event);
+        return Decorated.HandleAsync(@event, cancellationToken);
     }
 }

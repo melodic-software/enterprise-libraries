@@ -26,7 +26,16 @@ public abstract class EventDispatcherBase : IDispatchEvents
     }
 
     /// <inheritdoc />
-    public virtual async Task DispatchAsync(IEvent @event)
+    public async Task DispatchAsync(IEvent[] events, CancellationToken cancellationToken = default)
+    {
+        foreach (IEvent @event in events)
+        {
+            await DispatchAsync(@event, cancellationToken);
+        }
+    }
+
+    /// <inheritdoc />
+    public virtual async Task DispatchAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
         Logger.LogDebug("Resolving event handlers.");
         ICollection<IHandleEvent> eventHandlers = (await ResolveEventHandlers(@event)).ToList();
@@ -52,11 +61,13 @@ public abstract class EventDispatcherBase : IDispatchEvents
 
         foreach (IHandleEvent eventHandler in filteredHandlers)
         {
-            await ProcessEventHandlerAsync(eventHandler, @event);
+            await ProcessEventHandlerAsync(eventHandler, @event, cancellationToken);
         }
 
         Logger.LogDebug("Event handlers processed.");
     }
+
+    
 
     public virtual IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
     {
@@ -69,7 +80,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
         return Task.CompletedTask;
     }
 
-    protected virtual async Task ProcessEventHandlerAsync(IHandleEvent eventHandler, IEvent @event)
+    protected virtual async Task ProcessEventHandlerAsync(IHandleEvent eventHandler, IEvent @event, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -79,7 +90,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
             Type eventHandlerType = innerHandler.GetType();
 
             Logger.LogDebug("Executing event handler: {EventHandlerType}", eventHandlerType.Name);
-            await eventHandler.HandleAsync(@event);
+            await eventHandler.HandleAsync(@event, cancellationToken);
             Logger.LogDebug("Event handled by: {EventHandlerType}.", eventHandlerType.Name);
         }
         catch (Exception ex)

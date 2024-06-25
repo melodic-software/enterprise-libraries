@@ -29,7 +29,7 @@
     <PackageReference Include="Melodic.Enterprise.Hosting.AspNetCore" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.679" />
-    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.686" />
+    <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.678" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.679" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.678" />

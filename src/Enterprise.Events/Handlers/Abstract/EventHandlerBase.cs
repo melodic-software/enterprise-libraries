@@ -6,7 +6,7 @@ namespace Enterprise.Events.Handlers.Abstract;
 public abstract class EventHandlerBase<T> : IHandleEvent<T> where T : IEvent
 {
     /// <inheritdoc />
-    public Task HandleAsync(IEvent @event)
+    public Task HandleAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
         ValidateType(@event, this);
 
@@ -14,9 +14,9 @@ public abstract class EventHandlerBase<T> : IHandleEvent<T> where T : IEvent
         var typedEvent = (T)@event;
 
         // Delegate to the typed HandleAsync method.
-        return HandleAsync(typedEvent);
+        return HandleAsync(typedEvent, cancellationToken);
     }
 
     /// <inheritdoc />
-    public abstract Task HandleAsync(T @event);
+    public abstract Task HandleAsync(T @event, CancellationToken cancellationToken = default);
 }

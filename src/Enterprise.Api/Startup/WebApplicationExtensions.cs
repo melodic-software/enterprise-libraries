@@ -1,7 +1,6 @@
 ﻿using Enterprise.Api.Caching;
 using Enterprise.Api.Controllers;
 using Enterprise.Api.ErrorHandling;
-using Enterprise.Api.Middleware.Custom;
 using Enterprise.Api.Middleware.IgnoreFavicon;
 using Enterprise.Api.Middleware.RootRedirect;
 using Enterprise.Api.Minimal;
@@ -10,6 +9,7 @@ using Enterprise.Api.Swagger;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Middleware.AspNetCore.RegisteredServices;
+using Enterprise.Middleware.AspNetCore.Registration;
 using Enterprise.Monitoring.Health.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -88,7 +88,7 @@ public static class WebApplicationExtensions
 
         // This is an extensibility hook for custom application specific middleware registrations.
         // TODO: Do we need to provide middleware hooks for specific blocks here? Further up the chain?
-        app.UseAppMiddleware();
+        app.UseMiddleware();
 
         // This will map controllers (if enabled).
         app.MapControllers();

@@ -16,11 +16,11 @@ public class ErrorHandlingEventHandler<T> : EventHandlerDecoratorBase<T> where T
         _logger = logger;
     }
 
-    public override Task HandleAsync(T @event)
+    public override Task HandleAsync(T @event, CancellationToken cancellationToken = default)
     {
         try
         {
-            return Decorated.HandleAsync(@event);
+            return Decorated.HandleAsync(@event, cancellationToken);
         }
         catch (Exception exception)
         {

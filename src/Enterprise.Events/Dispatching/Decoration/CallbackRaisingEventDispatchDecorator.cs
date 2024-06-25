@@ -20,9 +20,17 @@ public class CallbackRaisingEventDispatchDecorator : DecoratorBase<IDispatchEven
         _callbackService = callbackService;
     }
 
-    public async Task DispatchAsync(IEvent @event)
+    public async Task DispatchAsync(IEvent[] events, CancellationToken cancellationToken = default)
     {
-        await Decorated.DispatchAsync(@event);
+        foreach (IEvent @event in events)
+        {
+            await DispatchAsync(@event, cancellationToken); 
+        }
+    }
+
+    public async Task DispatchAsync(IEvent @event, CancellationToken cancellationToken = default)
+    {
+        await Decorated.DispatchAsync(@event, cancellationToken);
         RaiseCallbacks(@event);
     }
 

@@ -18,12 +18,12 @@ public class LoggingEventHandler<T> : EventHandlerDecoratorBase<T> where T : IEv
         _logger = logger;
     }
 
-    public override async Task HandleAsync(T @event)
+    public override async Task HandleAsync(T @event, CancellationToken cancellationToken = default)
     {
         using (_logger.BeginScope("Event Handler: {@EventHandler}, Event: {@Event}", Innermost, @event))
         {
             _logger.LogDebug("Handling event.");
-            await Decorated.HandleAsync(@event);
+            await Decorated.HandleAsync(@event, cancellationToken);
             _logger.LogDebug("Event was handled successfully.");
         }
     }
