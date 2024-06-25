@@ -4,5 +4,10 @@
         <name>Enterprise.ModularMonoliths</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.ModularMonoliths.Model.IModule">
+            <summary>
+            Represents a module in a modular monolith.
+            </summary>
+        </member>
     </members>
 </doc>

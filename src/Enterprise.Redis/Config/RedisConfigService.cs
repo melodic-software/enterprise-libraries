@@ -23,7 +23,7 @@ public static class RedisConfigService
             return;
         }
 
-        string? redisConnectionString = configuration.GetConnectionString(options.RedisConnectionStringName);
+        string? redisConnectionString = configuration.GetConnectionString(options.ConnectionStringName);
 
         if (string.IsNullOrWhiteSpace(redisConnectionString))
         {

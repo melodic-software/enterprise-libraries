@@ -27,18 +27,56 @@ public static class CorsConfigurations
         });
     };
 
-    public static ConfigureCors StandardCorsConfiguration => (options, policyName, allowedOrigins) =>
+    public static ConfigureCors StandardCorsConfiguration => (policyName, options, customOptions) =>
     {
         if (CorsPolicyService.PolicyExists(options, policyName))
         {
             return;
         }
 
+        string[] allowedOrigins = customOptions.AllowedOrigins.Select(x => x.Trim()).Distinct().ToArray();
+        string[] allowedMethods = customOptions.AllowedMethods.Select(x => x.Trim()).Distinct().ToArray();
+        string[] allowedHeaders = customOptions.AllowedHeaders.Select(x => x.Trim()).Distinct().ToArray();
+        string[] exposedHeaders = customOptions.ExposedHeaders.Select(x => x.Trim()).Distinct().ToArray();
+
+        bool noWildcard = allowedOrigins.Any(x => x == "*");
+        bool allowCredentials = customOptions.AllowCredentials && noWildcard;
+
         options.AddPolicy(policyName, corsPolicyBuilder =>
         {
-            corsPolicyBuilder.WithOrigins(allowedOrigins)
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+            corsPolicyBuilder.WithOrigins(allowedOrigins);
+
+            if (allowedMethods.Any())
+            {
+                corsPolicyBuilder.WithMethods(allowedMethods);
+            }
+            else
+            {
+                corsPolicyBuilder.AllowAnyMethod();
+            }
+
+            if (allowedHeaders.Any())
+            {
+                corsPolicyBuilder.WithHeaders(allowedHeaders);
+            }
+            else
+            {
+                corsPolicyBuilder.AllowAnyHeader();
+            }
+
+            if (exposedHeaders.Any())
+            {
+                corsPolicyBuilder.WithExposedHeaders(exposedHeaders);
+            }
+
+            if (allowCredentials)
+            {
+                corsPolicyBuilder.AllowCredentials();
+            }
+            else
+            {
+                corsPolicyBuilder.DisallowCredentials();
+            }
         });
     };
 }

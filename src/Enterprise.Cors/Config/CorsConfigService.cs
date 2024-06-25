@@ -34,29 +34,38 @@ public static class CorsConfigService
 
         if (options.CustomConfigure != null)
         {
-            // allow for full customization
+            // Allow for full customization
             services.AddCors(options.CustomConfigure);
             return;
         }
 
         if (!environment.IsProduction())
         {
-            // this should only be used in pre-production environments
+            // This should only be used in pre-production environments
             services.AddCors(RelaxedCorsConfiguration);
             return;
         }
 
         string policyName = CorsPolicyNames.DefaultPolicyName;
-        string[] allowedOrigins = options.AllowedOrigins.Distinct().ToArray();
+
+        string[] allowedOrigins = options.AllowedOrigins
+            .Select(x => x.Trim())
+            .Distinct()
+            .ToArray();
 
         if (!allowedOrigins.Any())
         {
             PreStartupLogger.Instance.LogError("CORS has been enabled, but no origins are allowed.");
         }
 
+        if (allowedOrigins.Any(x => x == "*"))
+        {
+            throw new Exception("The wildcard origin \"*\" cannot be used in production. It is not secure.");
+        }
+
         services.AddCors(corsOptions =>
         {
-            StandardCorsConfiguration(corsOptions, policyName, allowedOrigins);
+            StandardCorsConfiguration(policyName, corsOptions, options);
         });
     }
 

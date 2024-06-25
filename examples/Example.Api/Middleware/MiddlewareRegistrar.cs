@@ -1,11 +1,11 @@
-﻿using Enterprise.Api.Middleware.Custom;
+﻿using Enterprise.Middleware.AspNetCore.Registration.Abstract;
 
 namespace Example.Api.Middleware;
 
-public class MiddlewareRegistrar : IRegisterAppMiddleware
+public class MiddlewareRegistrar : IRegisterMiddleware
 {
-    public static void RegisterAppMiddleware(WebApplication app)
+    public static void RegisterMiddleware(WebApplication app)
     {
-        
+
     }
 }

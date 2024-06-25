@@ -5,6 +5,6 @@ public class RedisOptions
     public const string ConfigSectionKey = "Custom:Redis";
 
     public bool EnableRedis { get; set; }
-    public string RedisConnectionStringName { get; set; } = string.Empty;
-    public string RedisInstanceName { get; set; } = string.Empty;
+    public string ConnectionStringName { get; set; } = string.Empty;
+    public string InstanceName { get; set; } = string.Empty;
 }

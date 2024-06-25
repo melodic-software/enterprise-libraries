@@ -114,19 +114,6 @@
             <param name="httpContext"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.Api.Middleware.Custom.AppMiddlewareRegistrar.UseAppMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-            Automatically resolves instances of <see cref="T:Enterprise.Api.Middleware.Custom.IRegisterAppMiddleware"/> and invokes the registration method.
-            This allows for automatic wiring up of application specific middleware in the request pipeline.
-            </summary>
-            <param name="app"></param>
-        </member>
-        <member name="M:Enterprise.Api.Middleware.Custom.IRegisterAppMiddleware.RegisterAppMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-            Registers application specific middleware components in the request pipeline.
-            </summary>
-            <param name="app">The web application used for registration.</param>
-        </member>
         <member name="T:Enterprise.Api.Middleware.IgnoreFavicon.IgnoreFaviconMiddleware">
             <summary>
             Most browsers default to requesting a favicon whenever the user visits a new website.

@@ -35,7 +35,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
     }
 
     /// <inheritdoc />
-    public virtual async Task DispatchAsync(IEvent @event, CancellationToken cancellationToken = default)
+    public async Task DispatchAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
         Logger.LogDebug("Resolving event handlers.");
         ICollection<IHandleEvent> eventHandlers = (await ResolveEventHandlers(@event)).ToList();
@@ -44,6 +44,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
         if (eventHandlers.Count <= 0)
         {
             await OnNoHandlersRegistered(@event);
+            await OnDispatchCompleteAsync(@event, cancellationToken);
             return;
         }
 
@@ -54,6 +55,7 @@ public abstract class EventDispatcherBase : IDispatchEvents
         if (!filteredHandlers.Any())
         {
             await OnNoHandlersRegistered(@event);
+            await OnDispatchCompleteAsync(@event, cancellationToken);
             return;
         }
 
@@ -65,22 +67,11 @@ public abstract class EventDispatcherBase : IDispatchEvents
         }
 
         Logger.LogDebug("Event handlers processed.");
-    }
 
+        await OnDispatchCompleteAsync(@event, cancellationToken);
+    }
     
-
-    public virtual IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
-    {
-        return eventHandlers;
-    }
-
-    public virtual Task OnNoHandlersRegistered(IEvent @event)
-    {
-        Logger.LogInformation("No event handlers registered for event.");
-        return Task.CompletedTask;
-    }
-
-    protected virtual async Task ProcessEventHandlerAsync(IHandleEvent eventHandler, IEvent @event, CancellationToken cancellationToken = default)
+    protected async Task ProcessEventHandlerAsync(IHandleEvent eventHandler, IEvent @event, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -101,4 +92,20 @@ public abstract class EventDispatcherBase : IDispatchEvents
     }
 
     protected abstract Task<IEnumerable<IHandleEvent>> ResolveEventHandlers(IEvent @event);
+
+    protected virtual IEnumerable<IHandleEvent> FilterHandlers(ICollection<IHandleEvent> eventHandlers, IEvent @event)
+    {
+        return eventHandlers;
+    }
+
+    protected virtual Task OnNoHandlersRegistered(IEvent @event)
+    {
+        Logger.LogInformation("No event handlers registered for event.");
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task OnDispatchCompleteAsync(IEvent @event, CancellationToken cancellationToken = default)
+    {
+        return Task.CompletedTask;
+    }
 }
