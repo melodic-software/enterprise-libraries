@@ -4,5 +4,18 @@
         <name>Enterprise.Middleware.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.Middleware.AspNetCore.Registration.Abstract.IRegisterMiddleware.RegisterMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Registers middleware components in the request pipeline.
+            </summary>
+            <param name="app">The web application used for registration.</param>
+        </member>
+        <member name="M:Enterprise.Middleware.AspNetCore.Registration.MiddlewareRegistrar.UseMiddleware(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Automatically resolves instances of <see cref="T:Enterprise.Middleware.AspNetCore.Registration.Abstract.IRegisterMiddleware"/> and invokes the registration method.
+            This allows for automatic wiring up of middleware at a specific point in the request pipeline.
+            </summary>
+            <param name="app"></param>
+        </member>
     </members>
 </doc>

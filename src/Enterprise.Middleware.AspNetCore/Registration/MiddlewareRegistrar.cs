@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Enterprise.Middleware.AspNetCore.Registration;
 
-internal static class MiddlewareRegistrar
+public static class MiddlewareRegistrar
 {
     /// <summary>
     /// Automatically resolves instances of <see cref="IRegisterMiddleware"/> and invokes the registration method.
