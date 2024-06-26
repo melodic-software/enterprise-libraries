@@ -5,7 +5,7 @@ using Enterprise.Api.Minimal;
 using Enterprise.Api.Options;
 using Enterprise.Api.Security;
 using Enterprise.Api.Serialization;
-using Enterprise.Api.Swagger;
+using Enterprise.Api.Swagger.Config;
 using Enterprise.Api.Versioning;
 using Enterprise.Applications.DI.Registration.Services;
 using Enterprise.AutoMapper;

@@ -1,4 +1,5 @@
-﻿using Enterprise.Api.Swagger.Options;
+﻿using Enterprise.Api.Swagger.Config;
+using Enterprise.Api.Swagger.Options;
 using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +10,7 @@ using static Enterprise.Api.Swagger.Constants.SwaggerConstants;
 using static Enterprise.Api.Swagger.SwaggerGen.SwaggerGenConfigurerRegistrar;
 using static Enterprise.Api.Swagger.UI.SwaggerUIConfigurer;
 
-namespace Enterprise.Api.Swagger;
+namespace Enterprise.Api.Swagger.Config;
 // https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle
 
 public static class SwaggerConfigService
@@ -38,7 +39,7 @@ public static class SwaggerConfigService
         //services.AddSwaggerGenNewtonsoftSupport();
     }
 
-    
+
 
     /// <summary>
     /// This will add the middleware to the pipeline that generates the OpenAPI specification,

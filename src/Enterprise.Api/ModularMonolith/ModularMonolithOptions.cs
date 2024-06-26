@@ -2,7 +2,7 @@
 
 public class ModularMonolithOptions
 {
-    public const string ConfigSectionKey = "Cusom:ModularMonolith";
+    public const string ConfigSectionKey = "Custom:ModularMonolith";
 
     public bool EnableModularMonolith { get; set; }
 }

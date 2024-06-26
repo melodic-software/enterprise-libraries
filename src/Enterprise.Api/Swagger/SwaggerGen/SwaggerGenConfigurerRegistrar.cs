@@ -1,4 +1,5 @@
 ﻿using Enterprise.Api.Controllers.Options;
+using Enterprise.Api.Swagger.Config;
 using Enterprise.Api.Swagger.Options;
 using Enterprise.Api.Versioning.Options;
 using Microsoft.Extensions.Configuration;

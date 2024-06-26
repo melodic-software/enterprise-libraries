@@ -5,7 +5,7 @@ using Enterprise.Api.Middleware.IgnoreFavicon;
 using Enterprise.Api.Middleware.RootRedirect;
 using Enterprise.Api.Minimal;
 using Enterprise.Api.Security;
-using Enterprise.Api.Swagger;
+using Enterprise.Api.Swagger.Config;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
 using Enterprise.Middleware.AspNetCore.RegisteredServices;

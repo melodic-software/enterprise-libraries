@@ -16,7 +16,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using static Enterprise.Api.Swagger.Documents.DocumentInclusionService;
 using static Enterprise.Api.Swagger.Documents.SwaggerDocumentService;
 
-namespace Enterprise.Api.Swagger;
+namespace Enterprise.Api.Swagger.Config;
 
 public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOptions>
 {
@@ -140,7 +140,7 @@ public class SwaggerGenOptionsConfigurer : IConfigureNamedOptions<SwaggerGenOpti
             VersioningConstants.CustomVersionRequestHeader,
             // Add other version parameter names as needed.
         ];
-        
+
         options.OperationFilter<NonApplicableParamFilter>();
         options.OperationFilter<RemoveVersionParamsFilter>(mediaTypeVersioningEnabled, allVersionNames);
         options.OperationFilter<SetDefaultVersionParamValueFilter>(allVersionNames);
