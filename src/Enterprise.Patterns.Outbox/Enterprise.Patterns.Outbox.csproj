@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DateTimes" Version="1.0.0-preview.675" />
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.708" />
-    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.711" />
+    <PackageReference Include="Melodic.Enterprise.Serialization.Json" Version="1.0.0-preview.713" />
   </ItemGroup>
 
 </Project>
