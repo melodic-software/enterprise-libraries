@@ -2,10 +2,12 @@
 using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.ApplicationServices.Core.Queries.Dispatching;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
+using Enterprise.DI.Core.Registration.Attributes;
 using Example.Api.ApplicationServices.Queries.Results;
 
 namespace Example.Api.ApplicationServices.Queries.ChainOfResponsibility;
 
+[ExcludeRegistrations]
 public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
     public static void RegisterHandlers(WebApiConfigEvents events)

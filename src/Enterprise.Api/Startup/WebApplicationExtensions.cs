@@ -5,6 +5,7 @@ using Enterprise.Api.Middleware.IgnoreFavicon;
 using Enterprise.Api.Middleware.RootRedirect;
 using Enterprise.Api.Minimal;
 using Enterprise.Api.Security;
+using Enterprise.Api.SignalR.Config;
 using Enterprise.Api.Swagger.Config;
 using Enterprise.Cors.Config;
 using Enterprise.Logging.AspNetCore.Middleware;
@@ -95,6 +96,9 @@ public static class WebApplicationExtensions
 
         // This will register minimal API endpoints.
         app.MapEndpoints();
+
+        // Map SignalR hubs.
+        app.UseSignalR();
 
         // This locks down all controllers / endpoints.
         // Used the [AllowAnonymous] attribute on a controller or endpoint that needs to be publicly accessible.

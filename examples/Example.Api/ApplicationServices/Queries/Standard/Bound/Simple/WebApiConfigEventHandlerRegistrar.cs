@@ -1,10 +1,12 @@
 ﻿using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Events.Abstract;
 using Enterprise.ApplicationServices.Core.Queries.Dispatching;
+using Enterprise.DI.Core.Registration.Attributes;
 using Example.Api.ApplicationServices.Queries.Results;
 
 namespace Example.Api.ApplicationServices.Queries.Standard.Bound.Simple;
 
+[ExcludeRegistrations]
 public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
     public static void RegisterHandlers(WebApiConfigEvents events)

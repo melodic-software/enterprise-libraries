@@ -1,9 +1,11 @@
 ﻿using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Events.Abstract;
+using Enterprise.DI.Core.Registration.Attributes;
 using Enterprise.Events.Dispatching.Abstract;
 
 namespace Example.Api.Events;
 
+[ExcludeRegistrations]
 public class WebApiConfigEventHandlerRegistrar : IRegisterWebApiConfigEventHandlers
 {
     public static void RegisterHandlers(WebApiConfigEvents events)

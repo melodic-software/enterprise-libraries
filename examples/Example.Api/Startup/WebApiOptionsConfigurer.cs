@@ -10,6 +10,12 @@ internal sealed class WebApiOptionsConfigurer : IConfigureWebApiOptions
         options.ConfigureSignalR(signalROptions =>
         {
             signalROptions.SignalREnabled = true;
+
+            signalROptions.ConfigureHubOptions = hubOptions =>
+            {
+
+            };
+
             signalROptions.MapHubs = builder =>
             {
                 // https://www.youtube.com/watch?v=2i-HxCgIEuI

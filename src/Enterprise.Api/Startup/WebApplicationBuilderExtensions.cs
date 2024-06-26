@@ -5,6 +5,7 @@ using Enterprise.Api.Minimal;
 using Enterprise.Api.Options;
 using Enterprise.Api.Security;
 using Enterprise.Api.Serialization;
+using Enterprise.Api.SignalR.Config;
 using Enterprise.Api.Swagger.Config;
 using Enterprise.Api.Versioning;
 using Enterprise.Applications.DI.Registration.Services;
@@ -54,6 +55,8 @@ public static class WebApplicationBuilderExtensions
         });
 
         builder.Services.ConfigureControllers(builder.Configuration);
+
+        builder.Services.ConfigureSignalR(builder.Configuration);
 
         builder.Services.ConfigureCaching(builder.Environment, builder.Configuration);
         builder.Services.ConfigureResponseCaching();
