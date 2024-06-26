@@ -580,6 +580,14 @@
             when the application is running in specific environments.
             </summary>
         </member>
+        <member name="M:Enterprise.Api.Swagger.Config.SwaggerConfigService.UseSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            This will add the middleware to the pipeline that generates the OpenAPI specification,
+            and the middleware that uses that spec to generate the Swagger UI.
+            Swagger can conditionally be enabled/disabled via configuration, but can never be enabled in production (for security reasons).
+            </summary>
+            <param name="app"></param>
+        </member>
         <member name="T:Enterprise.Api.Swagger.Documents.Filters.EnvironmentFilter">
             <summary>
             Filters out Swagger endpoints that are not intended for use outside the development environment.
@@ -806,14 +814,6 @@
             <param name="apiDescriptions"></param>
             <param name="logger"></param>
             <returns></returns>
-        </member>
-        <member name="M:Enterprise.Api.Swagger.SwaggerConfigService.UseSwagger(Microsoft.AspNetCore.Builder.WebApplication)">
-            <summary>
-            This will add the middleware to the pipeline that generates the OpenAPI specification,
-            and the middleware that uses that spec to generate the Swagger UI.
-            Swagger can conditionally be enabled/disabled via configuration, but can never be enabled in production (for security reasons).
-            </summary>
-            <param name="app"></param>
         </member>
         <member name="M:Enterprise.Api.Validation.ValidationProblemExtensions.ToValidationProblem(Microsoft.AspNetCore.Mvc.ValidationProblemDetails)">
             <summary>

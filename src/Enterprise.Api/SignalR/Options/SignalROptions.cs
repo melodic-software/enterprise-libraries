@@ -2,9 +2,9 @@
 
 namespace Enterprise.Api.SignalR.Options;
 
-internal class SignalROptions
+public class SignalROptions
 {
-    public const string ConfigSectionKey = "Custom:ModularMonolith";
+    public const string ConfigSectionKey = "Custom:SignalR";
 
     public bool SignalREnabled { get; set; } = true;
     public Action<IEndpointRouteBuilder>? MapHubs { get; set; } = _ => { };

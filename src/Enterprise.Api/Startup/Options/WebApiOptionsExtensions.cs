@@ -2,6 +2,7 @@
 using Enterprise.Api.ErrorHandling.Options;
 using Enterprise.Api.Minimal.Options;
 using Enterprise.Api.Security.Options;
+using Enterprise.Api.SignalR.Options;
 using Enterprise.Api.Swagger.Options;
 using Enterprise.Api.Versioning.Options;
 using Enterprise.AutoMapper.Options;
@@ -108,6 +109,11 @@ public static class WebApiOptionsExtensions
     }
 
     public static void ConfigureSerilog(this WebApiOptions options, Configure<SerilogOptions> configure)
+    {
+        options.Configure(configure);
+    }
+
+    public static void ConfigureSignalR(this WebApiOptions options, Configure<SignalROptions> configure)
     {
         options.Configure(configure);
     }
