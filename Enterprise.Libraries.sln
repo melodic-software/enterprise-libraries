@@ -349,13 +349,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Messaging.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.DI.Registration.Tests.Unit", "tests\Enterprise.DI.Registration.Tests.Unit\Enterprise.DI.Registration.Tests.Unit.csproj", "{CC5B5711-D2D0-4085-B56D-5FA04D819F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Patterns.Inbox", "src\Enterprise.Patterns.Inbox\Enterprise.Patterns.Inbox.csproj", "{AB1C82D5-F546-4299-B986-784A44C088E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Patterns.Inbox", "src\Enterprise.Patterns.Inbox\Enterprise.Patterns.Inbox.csproj", "{AB1C82D5-F546-4299-B986-784A44C088E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Patterns.Saga", "src\Enterprise.Patterns.Saga\Enterprise.Patterns.Saga.csproj", "{812CF6EF-45B4-4060-AC88-BCF7A786366C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.Patterns.Saga", "src\Enterprise.Patterns.Saga\Enterprise.Patterns.Saga.csproj", "{812CF6EF-45B4-4060-AC88-BCF7A786366C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{34668CBD-629E-42DB-9F67-CBDD595D5F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.MassTransit", "src\Enterprise.MassTransit\Enterprise.MassTransit.csproj", "{4C6BAB78-4D91-490C-99EE-B77CA9429A6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enterprise.MassTransit", "src\Enterprise.MassTransit\Enterprise.MassTransit.csproj", "{4C6BAB78-4D91-490C-99EE-B77CA9429A6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

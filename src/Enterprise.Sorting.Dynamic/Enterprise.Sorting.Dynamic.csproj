@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Sorting" Version="1.0.0-preview.480" />
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.2" />
   </ItemGroup>
 
 </Project>
