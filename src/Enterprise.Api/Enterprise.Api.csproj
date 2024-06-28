@@ -32,7 +32,7 @@
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.716" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.717" />
-    <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.716" />
+    <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.723" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.716" />
     <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.719" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.254" />
