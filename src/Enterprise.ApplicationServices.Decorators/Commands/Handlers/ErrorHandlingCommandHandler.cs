@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Microsoft.Extensions.Logging;

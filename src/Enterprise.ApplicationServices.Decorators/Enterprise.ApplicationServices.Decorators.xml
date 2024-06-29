@@ -4,34 +4,34 @@
         <name>Enterprise.ApplicationServices.Decorators</name>
     </assembly>
     <members>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Abstract.CommandHandlerDecoratorBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract.CommandHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract.CommandHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#Strict#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract.CommandHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract.CommandHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract.CommandHandlerDecoratorBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#IHandleQuery{TQuery,TResult}#HandleAsync(`0,System.Threading.CancellationToken)">

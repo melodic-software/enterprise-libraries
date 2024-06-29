@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
-using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 using Enterprise.Events.Facade.Abstract;
 using MediatR;
 
