@@ -49,6 +49,7 @@ public partial class Result : IResult
     public static implicit operator Result(Error error) => Failure(error);
     public static implicit operator Result(Error[] errors) => Failure(errors.ToList());
     public static implicit operator Result(List<Error> errors) => Failure(errors);
+    public static implicit operator List<IError>(Result result) => result.Errors;
 
     public override string ToString()
     {

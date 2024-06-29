@@ -78,4 +78,5 @@ public partial class Result<TValue> : Result, IResult<TValue>
     public static implicit operator Result<TValue>(Error error) => Failure(error);
     public static implicit operator Result<TValue>(Error[] errors) => Failure(errors.ToList());
     public static implicit operator Result<TValue>(List<Error> errors) => Failure(errors);
+    public static implicit operator TValue?(Result<TValue> result) => result.IsSuccess ? result.Value : default;
 }

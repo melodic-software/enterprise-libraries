@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Dispatching;
-using Enterprise.ApplicationServices.Core.Commands.Model;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 

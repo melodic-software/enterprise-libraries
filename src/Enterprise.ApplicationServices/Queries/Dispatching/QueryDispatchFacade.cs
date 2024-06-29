@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Dispatching;
-using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
 using Enterprise.Events.Model;
 

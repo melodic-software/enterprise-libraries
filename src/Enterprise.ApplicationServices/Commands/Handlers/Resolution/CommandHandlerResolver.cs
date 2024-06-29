@@ -1,8 +1,8 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.Commands.Handlers.Resolution;

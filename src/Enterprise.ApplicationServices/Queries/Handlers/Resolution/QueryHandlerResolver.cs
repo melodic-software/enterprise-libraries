@@ -1,8 +1,8 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
-using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enterprise.ApplicationServices.Queries.Handlers.Resolution;
