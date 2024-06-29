@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 using Example.Api.ApplicationServices.Queries.Results;
 
 namespace Example.Api.ApplicationServices.Queries.Standard.Bound;
