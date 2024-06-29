@@ -82,6 +82,7 @@
     <Folder Include="ModularMonolith\Communication\Synchronous\" />
     <Folder Include="SignalR\Config\" />
     <Folder Include="SignalR\Hubs\" />
+    <Folder Include="Startup\Errors\" />
     <Folder Include="Swagger\SwaggerGen\" />
   </ItemGroup>
   

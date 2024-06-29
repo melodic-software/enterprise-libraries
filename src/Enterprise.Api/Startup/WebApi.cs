@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using static Enterprise.Api.Startup.Errors.IgnoredExceptionService;
 
 namespace Enterprise.Api.Startup;
 
@@ -72,7 +73,7 @@ public static class WebApi
 
             await RunApplicationAsync(app);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ExceptionShouldNotBeIgnored(ex))
         {
             PreStartupLogger.Instance.LogError(ex, "An error has occurred during API configuration.");
             await Events.RaiseConfigurationErrorOccurred(ex);
@@ -155,6 +156,7 @@ public static class WebApi
     private static void MapApplicationUptimeResource(WebApplication app)
     {
         // TODO: Add configuration around what this path is.
+        // TODO: Add constants for route.
         app.MapGet("/application-uptime", [HttpCacheIgnore] async (context) =>
         {
             TimeSpan elapsed = Stopwatch.Elapsed;
