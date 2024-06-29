@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 
 public class LoggingQueryHandler<TQuery, TResult> : QueryHandlerDecoratorBase<TQuery, TResult>
-    where TQuery : class, IQuery
+    where TQuery : class, IBaseQuery
 {
     private readonly ILogger<LoggingQueryHandler<TQuery, TResult>> _logger;
 
