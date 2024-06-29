@@ -1,5 +1,4 @@
-﻿using Enterprise.Api.Swagger.Config;
-using Enterprise.Api.Swagger.Options;
+﻿using Enterprise.Api.Swagger.Options;
 using Enterprise.Options.Core.Services.Singleton;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

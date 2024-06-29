@@ -37,7 +37,7 @@ public static class DatabaseMigrationService
 
             T dbContext = dbContextResult.DbContext;
 
-            List<string> pendingMigrations = (await dbContext.Database.GetPendingMigrationsAsync()).ToList();
+            var pendingMigrations = (await dbContext.Database.GetPendingMigrationsAsync()).ToList();
 
             if (!pendingMigrations.Any())
             {
