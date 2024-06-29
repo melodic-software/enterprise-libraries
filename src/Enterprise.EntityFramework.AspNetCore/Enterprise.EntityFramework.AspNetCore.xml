@@ -4,6 +4,16 @@
         <name>Enterprise.EntityFramework.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationExtensions.MigrateAsync``1(Microsoft.AspNetCore.Builder.WebApplication,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            Apply migrations for the provided EF database context.
+            The migration strategy will depend on the host environment.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="app"></param>
+            <param name="seedAction"></param>
+            <returns></returns>
+        </member>
         <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.DatabaseMigrationService.EnsureNoPendingMigrationsAsync``1(Microsoft.AspNetCore.Builder.WebApplication)">
             <summary>
             This ensures that migrations must be run before the application has been deployed and can start up.
@@ -12,6 +22,13 @@
             <param name="app"></param>
             <returns></returns>
             <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Enterprise.EntityFramework.AspNetCore.Migration.Environments.PreProdEnvironmentMigrationService.MigratePreProdEnvironmentAsync``1(Microsoft.AspNetCore.Builder.WebApplication)">
+            <summary>
+            Configures deployed non-production environments.
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -1,4 +1,4 @@
-﻿using Enterprise.Domain.Events.Model.Abstract;
+﻿using Enterprise.DomainDrivenDesign.Entities.EventRecording;
 
 namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 
@@ -14,39 +14,7 @@ namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 /// <typeparam name="TId">The type of the identifier for the aggregate root (entity).</typeparam>
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId : IEquatable<TId>
 {
-    /// <summary>
-    /// This is the collection of internal domain events.
-    /// These are changes that have been made and recorded within the aggregate root.
-    /// </summary>
-    protected readonly List<IDomainEvent> DomainEvents = [];
-
     protected AggregateRoot(TId id) : base(id)
-    {
-    }
-
-    public IReadOnlyList<IDomainEvent> GetDomainEvents() => DomainEvents.ToList().AsReadOnly();
-
-    public void ClearDomainEvents() => DomainEvents.Clear();
-
-    /// <summary>
-    /// Record a domain event that has occurred within the aggregate boundary.
-    /// </summary>
-    /// <param name="domainEvent"></param>
-    protected virtual void Record(IDomainEvent domainEvent)
-    {
-        // Prevent recording of duplicate events.
-        if (DomainEvents.Any(x => x.Id == domainEvent.Id))
-        {
-            return;
-        }
-
-        DomainEvents.Add(domainEvent);
-    }
-}
-
-public class AggregateRoot : AggregateRoot<Guid>
-{
-    protected AggregateRoot(Guid id) : base(id)
     {
     }
 }

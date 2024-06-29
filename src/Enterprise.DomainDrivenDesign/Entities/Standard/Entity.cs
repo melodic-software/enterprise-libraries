@@ -1,8 +1,8 @@
 ﻿using Enterprise.Domain.Entities;
-using Enterprise.DomainDrivenDesign.Entities.Extensions;
+using Enterprise.DomainDrivenDesign.Entities.Equality;
 using Enterprise.Reflection.Types;
 
-namespace Enterprise.DomainDrivenDesign.Entities;
+namespace Enterprise.DomainDrivenDesign.Entities.Standard;
 
 // TODO: What about natural keys?
 // Would we just provide another property and have the ID just return another named property of the same type?
@@ -98,17 +98,5 @@ public abstract class Entity<TId> : IEntity, IEquatable<Entity<TId>> where TId :
     public override string ToString()
     {
         return GetType().Name;
-    }
-}
-
-/// <summary>
-/// Represents the base class for entities in a domain-driven design context.
-/// Entities are objects with a distinct identity that runs through time and different states.
-/// This abstract class provides a standard way to define entities with a unique identifier (GUID).
-/// </summary>
-public abstract class Entity : Entity<Guid>
-{
-    protected Entity(Guid id) : base(id)
-    {
     }
 }

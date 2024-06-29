@@ -17,10 +17,8 @@ public class SqlConnectionFactory : IDbConnectionFactory
 
     public async ValueTask<IDbConnection> OpenConnectionAsync()
     {
-        SqlConnection connection = new SqlConnection(_connectionString);
-
+        var connection = new SqlConnection(_connectionString);
         await connection.OpenAsync();
-
         return connection;
     }
 }

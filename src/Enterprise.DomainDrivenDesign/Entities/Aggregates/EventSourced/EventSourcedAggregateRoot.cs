@@ -2,7 +2,7 @@
 using Enterprise.EventSourcing.Entities;
 using Enterprise.EventSourcing;
 
-namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
+namespace Enterprise.DomainDrivenDesign.Entities.Aggregates.EventSourced;
 
 /// <summary>
 /// Extends the aggregate root with event sourcing capabilities.
@@ -10,11 +10,9 @@ namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 /// This class supports operations for loading historical events, taking and applying snapshots, and managing versioning for concurrency control.
 /// </summary>
 /// <typeparam name="TId">The type of the identifier for the aggregate root.</typeparam>
-public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEventSourcedEntity 
+public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEventSourcedEntity
     where TId : IEquatable<TId>
 {
-    private int _version;
-
     // TODO: move the optimistic concurrence properties into a base implementation?
     // See comment on the aggregate root entity.
 
@@ -22,7 +20,7 @@ public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEven
     /// Gets the current version of the aggregate.
     /// This is used for concurrency control and event ordering.
     /// </summary>
-    public int Version => _version;
+    public int Version { get; private set; }
 
     protected EventSourcedAggregateRoot(TId id) : base(id) { }
 
@@ -105,13 +103,6 @@ public abstract class EventSourcedAggregateRoot<TId> : AggregateRoot<TId>, IEven
 
         DomainEvents.Add(domainEvent);
 
-        _version++;
-    }
-}
-
-public abstract class EventSourcedAggregateRoot : EventSourcedAggregateRoot<Guid>
-{
-    protected EventSourcedAggregateRoot(Guid id) : base(id)
-    {
+        Version++;
     }
 }

@@ -21,7 +21,7 @@ public static class DomainEventRecordingExtensions
     public static ICollection<T> GetDomainEvents<T>(this IGetDomainEvents entity) where T : IDomainEvent
     {
         IReadOnlyList<IDomainEvent> domainEvents = entity.GetDomainEvents();
-        List<T> typedEvents = domainEvents.OfType<T>().ToList();
+        var typedEvents = domainEvents.OfType<T>().ToList();
         return typedEvents;
     }
 }

@@ -18,4 +18,9 @@
     <PackageReference Include="Melodic.Enterprise.ValueObjects" Version="1.0.0-preview.626" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Aggregates\EventSourced\NonGeneric\" />
+    <Folder Include="Entities\Standard\NonGeneric\" />
+  </ItemGroup>
+
 </Project>
