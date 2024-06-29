@@ -1,5 +1,6 @@
 ﻿using Enterprise.DI.Core.Registration.Abstract;
 using Enterprise.EntityFramework.EntityDeletion;
+using Enterprise.EntityFramework.Interceptors.Demo;
 using Enterprise.EntityFramework.Outbox;
 using Enterprise.Patterns.Outbox.Factory;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,15 @@ internal sealed class InterceptorRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
+        services.TryAddScoped(provider =>
+        {
+            ILogger<CustomDbCommandInterceptor> logger = provider.GetRequiredService<ILogger<CustomDbCommandInterceptor>>();
+
+            return new CustomDbCommandInterceptor(logger);
+        });
+
+        services.TryAddScoped(provider => new QueryHintInterceptor());
+
         services.TryAddScoped(provider =>
         {
             ILogger<EntityDeletionInterceptor> logger = provider.GetRequiredService<ILogger<EntityDeletionInterceptor>>();
