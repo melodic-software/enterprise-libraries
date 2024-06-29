@@ -1,5 +1,6 @@
 ﻿using Enterprise.Domain.Entities;
 using Enterprise.Domain.Events;
+using Enterprise.DomainDrivenDesign.Entities.EventRecording;
 
 namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 
@@ -13,4 +14,4 @@ namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 /// Aggregates can contain other aggregate references, but they can only be identifier references, and not aggregate objects.
 /// Aggregate entities should not be referenced from outside the aggregate root. Those external references should point to the aggregate root and not the entity type.
 /// </summary>
-public interface IAggregateRoot : IEntity, IGetDomainEvents, IClearDomainEvents;
+public interface IAggregateRoot : IEventRecordingEntity;
