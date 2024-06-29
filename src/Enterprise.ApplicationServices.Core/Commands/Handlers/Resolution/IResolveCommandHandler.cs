@@ -16,7 +16,7 @@ public interface IResolveCommandHandler
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command) where TCommand : class, ICommand;
+    IHandleCommand<TCommand> GetCommandHandler<TCommand>(TCommand command) where TCommand : class, ICommand;
 
     /// <summary>
     /// Get the handler implementation that can handle the given command.
@@ -25,6 +25,6 @@ public interface IResolveCommandHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand, TResult> GetHandlerFor<TCommand, TResult>(TCommand command)
+    IHandleCommand<TCommand, TResult> GetCommandHandler<TCommand, TResult>(TCommand command)
         where TCommand : class, ICommand<TResult>;
 }
