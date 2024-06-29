@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
-using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 using Enterprise.ApplicationServices.Queries.Handlers.Simple.Bound;
 using Enterprise.Events.Facade.Abstract;
 using Microsoft.Extensions.DependencyInjection;

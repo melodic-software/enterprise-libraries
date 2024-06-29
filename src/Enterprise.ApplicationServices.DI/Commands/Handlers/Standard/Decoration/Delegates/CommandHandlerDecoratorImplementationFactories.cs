@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using FluentValidation;

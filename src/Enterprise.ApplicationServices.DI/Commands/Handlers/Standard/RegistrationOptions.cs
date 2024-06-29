@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Options;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration.Delegates;

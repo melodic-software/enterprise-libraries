@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 
 namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
 

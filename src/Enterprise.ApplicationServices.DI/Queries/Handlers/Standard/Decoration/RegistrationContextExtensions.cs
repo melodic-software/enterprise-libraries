@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
 using Enterprise.DI.Registration.Context;
 using Enterprise.DI.Registration.Context.Delegates;
@@ -11,14 +11,14 @@ public static class RegistrationContextExtensions
     public static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         params QueryHandlerDecoratorImplementationFactory<TQuery, TResult>[] decoratorFactories)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         return registrationContext.WithDecorators(decoratorFactories.AsEnumerable());
     }
 
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDefaultDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>>
             defaultDecoratorImplementationFactories = QueryHandlerDecoratorImplementationFactories.GetDefault<TQuery, TResult>();
@@ -29,7 +29,7 @@ public static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterWithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         registrationContext.AddQueryHandler(options);
 
@@ -44,7 +44,7 @@ public static class RegistrationContextExtensions
     private static RegistrationContext<IHandleQuery<TQuery, TResult>> WithDecorators<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> implementationFactories) 
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         DecoratorFactory<IHandleQuery<TQuery, TResult>>[] decoratorFactories = implementationFactories
             .Select(implementationFactory =>

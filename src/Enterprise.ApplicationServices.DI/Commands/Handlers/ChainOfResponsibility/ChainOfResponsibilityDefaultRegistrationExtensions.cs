@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.ChainOfResponsibility.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestOnly;
 using Microsoft.Extensions.DependencyInjection;

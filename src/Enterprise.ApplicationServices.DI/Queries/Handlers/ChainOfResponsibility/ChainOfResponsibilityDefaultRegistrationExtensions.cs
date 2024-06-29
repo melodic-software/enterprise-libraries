@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.ChainOfResponsibility.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Chains.RequestResponse;
 using Microsoft.Extensions.DependencyInjection;

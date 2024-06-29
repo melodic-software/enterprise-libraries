@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Delegates;
@@ -48,7 +49,7 @@ public static class QueryHandlerRegistrationExtensions
     internal static void Register<TQuery, TResult>(this IServiceCollection services,
         Func<IServiceProvider, IHandleQuery<TQuery, TResult>> implementationFactory,
         ConfigureOptions<TQuery, TResult>? configureOptions = null)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         ArgumentNullException.ThrowIfNull(implementationFactory);
         var options = new RegistrationOptions<TQuery, TResult>(implementationFactory);
@@ -63,7 +64,7 @@ public static class QueryHandlerRegistrationExtensions
     private static RegistrationContext<IHandleQuery<TQuery, TResult>> RegisterQueryHandler<TQuery, TResult>(
         this IServiceCollection services,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext = services
             .BeginRegistration<IHandleQuery<TQuery, TResult>>();

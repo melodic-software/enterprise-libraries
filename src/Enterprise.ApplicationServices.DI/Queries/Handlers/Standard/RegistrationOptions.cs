@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Options;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration.Delegates;
 
@@ -7,7 +7,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard;
 
 public sealed class RegistrationOptions<TQuery, TResult> :
     RegistrationOptionsBase<TQuery, TResult>
-    where TQuery : class, IQuery
+    where TQuery : class, IBaseQuery    
 {
     /// <summary>
     /// Register decorators for the query handler.

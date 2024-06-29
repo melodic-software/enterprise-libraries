@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.ChainOfResponsibility.Delegates;
 using Enterprise.ApplicationServices.DI.Queries.Handlers.Shared.Delegates;
 using Enterprise.DI.Registration.Context;

@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Shared.Delegates;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Decoration;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Standard.Delegates;

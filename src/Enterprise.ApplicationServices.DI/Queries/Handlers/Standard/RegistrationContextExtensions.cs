@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.DI.Registration.Context;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +10,7 @@ internal static class RegistrationContextExtensions
     internal static RegistrationContext<IHandleQuery<TQuery, TResult>> AddQueryHandler<TQuery, TResult>(
         this RegistrationContext<IHandleQuery<TQuery, TResult>> registrationContext,
         RegistrationOptions<TQuery, TResult> options)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         if (options.QueryHandlerImplementationFactory == null)
         {

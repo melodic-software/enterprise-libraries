@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using FluentValidation;
@@ -11,7 +11,7 @@ namespace Enterprise.ApplicationServices.DI.Queries.Handlers.Standard.Decoration
 public static class QueryHandlerDecoratorImplementationFactories
 {
     public static IEnumerable<QueryHandlerDecoratorImplementationFactory<TQuery, TResult>> GetDefault<TQuery, TResult>()
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         return
         [

@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.ApplicationServices.DI.Commands.Handlers.Options.Delegates;
 using Microsoft.Extensions.DependencyInjection;
 
