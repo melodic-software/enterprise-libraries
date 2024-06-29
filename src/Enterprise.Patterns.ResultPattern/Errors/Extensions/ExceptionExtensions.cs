@@ -22,14 +22,14 @@ public static class ExceptionExtensions
         return Result.Failure(error);
     }
 
-    public static Result<T> ToResult<T>(this Exception exception)
+    public static Result<TValue> ToResult<TValue>(this Exception exception)
     {
         ExceptionError error = exception.ToError();
-        return Result<T>.Failure(error);
+        return Result<TValue>.Failure(error);
     }
 
-    public static Result<T> ToResult<T>(this ExceptionError error)
+    public static Result<TValue> ToResult<TValue>(this ExceptionError error)
     {
-        return Result<T>.Failure(error);
+        return Result<TValue>.Failure(error);
     }
 }

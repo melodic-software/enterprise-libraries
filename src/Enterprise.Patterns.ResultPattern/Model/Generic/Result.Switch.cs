@@ -2,9 +2,9 @@
 
 namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
-public partial class Result<T>
+public partial class Result<TValue>
 {
-    public void Switch(Action<T> onSuccess, Action<IEnumerable<IError>> onError)
+    public void Switch(Action<TValue> onSuccess, Action<IEnumerable<IError>> onError)
     {
         if (IsSuccess)
         {
@@ -16,7 +16,7 @@ public partial class Result<T>
         }
     }
 
-    public async Task SwitchAsync(Func<T, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
+    public async Task SwitchAsync(Func<TValue, Task> onSuccess, Func<IEnumerable<IError>, Task> onErrorAsync)
     {
         if (IsSuccess)
         {
@@ -28,7 +28,7 @@ public partial class Result<T>
         }
     }
 
-    public void SwitchFirst(Action<T> onSuccess, Action<IError> onFirstError)
+    public void SwitchFirst(Action<TValue> onSuccess, Action<IError> onFirstError)
     {
         if (IsSuccess)
         {
@@ -40,7 +40,7 @@ public partial class Result<T>
         }
     }
 
-    public async Task SwitchFirstAsync(Func<T, Task> onSuccess, Func<IError, Task> onFirstErrorAsync)
+    public async Task SwitchFirstAsync(Func<TValue, Task> onSuccess, Func<IError, Task> onFirstErrorAsync)
     {
         if (IsSuccess)
         {

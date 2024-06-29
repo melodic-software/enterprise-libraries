@@ -2,14 +2,14 @@
 
 namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
-public partial class Result<T>
+public partial class Result<TValue>
 {
-    public Result<TOut> Then<TOut>(Func<T, Result<TOut>> onSuccess)
+    public Result<TOut> Then<TOut>(Func<TValue, Result<TOut>> onSuccess)
     {
         return IsSuccess ? onSuccess(Value) : Errors.ToResult<TOut>();
     }
 
-    public Result<T> Then(Action<T> onSuccess)
+    public Result<TValue> Then(Action<TValue> onSuccess)
     {
         if (IsSuccess)
         {
@@ -17,15 +17,15 @@ public partial class Result<T>
             return this;
         }
 
-        return Errors.ToResult<T>();
+        return Errors.ToResult<TValue>();
     }
 
-    public Result<TOut> Then<TOut>(Func<T, TOut> onSuccess)
+    public Result<TOut> Then<TOut>(Func<TValue, TOut> onSuccess)
     {
         return IsSuccess ? onSuccess(Value) : Errors.ToResult<TOut>();
     }
 
-    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<Result<TOut>>> onSuccessAsync)
+    public async Task<Result<TOut>> ThenAsync<TOut>(Func<TValue, Task<Result<TOut>>> onSuccessAsync)
     {
         if (IsSuccess)
         {
@@ -35,17 +35,17 @@ public partial class Result<T>
         return Errors.ToResult<TOut>();
     }
 
-    public async Task<Result<T>> ThenAsync(Func<T, Task> onSuccessAsync)
+    public async Task<Result<TValue>> ThenAsync(Func<TValue, Task> onSuccessAsync)
     {
         if (IsSuccess)
         {
             await onSuccessAsync(Value).ConfigureAwait(false);
         }
 
-        return Errors.ToResult<T>();
+        return Errors.ToResult<TValue>();
     }
 
-    public async Task<Result<TOut>> ThenAsync<TOut>(Func<T, Task<TOut>> onSuccessAsync)
+    public async Task<Result<TOut>> ThenAsync<TOut>(Func<TValue, Task<TOut>> onSuccessAsync)
     {
         return IsSuccess ? await onSuccessAsync(Value).ConfigureAwait(false) : Errors.ToResult<TOut>();
     }

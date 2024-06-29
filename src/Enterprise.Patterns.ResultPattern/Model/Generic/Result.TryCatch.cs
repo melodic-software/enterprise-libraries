@@ -3,9 +3,9 @@ using Enterprise.Patterns.ResultPattern.Errors.Model;
 
 namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
-public partial class Result<T>
+public partial class Result<TValue>
 {
-    public Result<TOut> TryCatch<TOut>(Func<T, Result<TOut>> func)
+    public Result<TOut> TryCatch<TOut>(Func<TValue, Result<TOut>> func)
     {
         try
         {
@@ -17,7 +17,7 @@ public partial class Result<T>
         }
     }
 
-    public Result<TOut> TryCatch<TOut>(Func<T, TOut> func, Error error)
+    public Result<TOut> TryCatch<TOut>(Func<TValue, TOut> func, Error error)
     {
         try
         {
@@ -29,7 +29,7 @@ public partial class Result<T>
         }
     }
 
-    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<T, Task<Result<TOut>>> func)
+    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<TValue, Task<Result<TOut>>> func)
     {
         try
         {
@@ -41,7 +41,7 @@ public partial class Result<T>
         }
     }
 
-    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<T, Task<TOut>> func, Error error)
+    public async Task<Result<TOut>> TryCatchAsync<TOut>(Func<TValue, Task<TOut>> func, Error error)
     {
         try
         {

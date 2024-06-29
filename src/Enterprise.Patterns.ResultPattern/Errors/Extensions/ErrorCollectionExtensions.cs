@@ -36,5 +36,5 @@ public static class ErrorCollectionExtensions
     }
 
     public static Result ToResult(this IEnumerable<IError> errors) => Result.Failure(errors);
-    public static Result<T> ToResult<T>(this IEnumerable<IError> errors) => Result<T>.Failure(errors);
+    public static Result<TValue> ToResult<TValue>(this IEnumerable<IError> errors) => Result<TValue>.Failure(errors);
 }

@@ -10,12 +10,12 @@ namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 /// <summary>
 /// This is the generic variant of <see cref="Result"/> that specifies a typed value.
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public partial class Result<T> : Result, IResult<T>
+/// <typeparam name="TValue"></typeparam>
+public partial class Result<TValue> : Result, IResult<TValue>
 {
     private const string FailedResultValueAccessErrorMessage = "Cannot access the value of a failed result.";
 
-    private readonly T? _value;
+    private readonly TValue? _value;
 
     /// <summary>
     /// Gets the value of the result. 
@@ -23,7 +23,7 @@ public partial class Result<T> : Result, IResult<T>
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown when the result is a failure and this property is accessed.</exception>
     [NotNull]
-    public T Value
+    public TValue Value
     {
         get
         {
@@ -49,12 +49,12 @@ public partial class Result<T> : Result, IResult<T>
         }
     }
 
-    protected internal Result(T? value, IEnumerable<IError> errors) : base(errors)
+    protected internal Result(TValue? value, IEnumerable<IError> errors) : base(errors)
     {
         _value = value;
     }
 
-    protected internal Result(T? value) : base([])
+    protected internal Result(TValue? value) : base([])
     {
         _value = value;
     }
@@ -64,18 +64,18 @@ public partial class Result<T> : Result, IResult<T>
     /// </summary>
     /// <param name="value">The value to wrap.</param>
     /// <returns>An instance of <see cref="Result{T}"/> containing the provided value.</returns>
-    public static Result<T> From(T? value)
+    public static Result<TValue> From(TValue? value)
     {
-        return new Result<T>(value);
+        return new Result<TValue>(value);
     }
 
-    public static Result<T> Success(T value) => new(value);
-    public static new Result<T> Failure(IError error) => new(default, [error]);
-    public static new Result<T> Failure(IEnumerable<IError> errors) => new(default, errors);
-    public static Result<T> Create(T? value) => value is not null ? Success(value) : Failure(Error.NullValue());
+    public static Result<TValue> Success(TValue value) => new(value);
+    public static new Result<TValue> Failure(IError error) => new(default, [error]);
+    public static new Result<TValue> Failure(IEnumerable<IError> errors) => new(default, errors);
+    public static Result<TValue> Create(TValue? value) => value is not null ? Success(value) : Failure(Error.NullValue());
 
-    public static implicit operator Result<T>(T? value) => Create(value);
-    public static implicit operator Result<T>(Error error) => Failure(error);
-    public static implicit operator Result<T>(Error[] errors) => Failure(errors.ToList());
-    public static implicit operator Result<T>(List<Error> errors) => Failure(errors);
+    public static implicit operator Result<TValue>(TValue? value) => Create(value);
+    public static implicit operator Result<TValue>(Error error) => Failure(error);
+    public static implicit operator Result<TValue>(Error[] errors) => Failure(errors.ToList());
+    public static implicit operator Result<TValue>(List<Error> errors) => Failure(errors);
 }

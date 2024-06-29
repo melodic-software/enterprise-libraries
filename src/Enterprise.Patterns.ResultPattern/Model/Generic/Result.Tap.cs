@@ -1,8 +1,8 @@
 ﻿namespace Enterprise.Patterns.ResultPattern.Model.Generic;
 
-public partial class Result<T>
+public partial class Result<TValue>
 {
-    public Result<T> Tap(Action<T> action)
+    public Result<TValue> Tap(Action<TValue> action)
     {
         if (IsSuccess)
         {
@@ -12,7 +12,7 @@ public partial class Result<T>
         return this;
     }
 
-    public async Task<Result<T>> TapAsync(Func<T, Task> actionAsync)
+    public async Task<Result<TValue>> TapAsync(Func<TValue, Task> actionAsync)
     {
         if (IsSuccess)
         {

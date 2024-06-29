@@ -4,5 +4,5 @@ namespace Enterprise.Patterns.ResultPattern.Extensions.Generic;
 
 public static partial class ResultExtensions
 {
-    public static Result<T> ToResult<T>(T value) => value;
+    public static Result<TValue> ToResult<TValue>(TValue value) => value;
 }

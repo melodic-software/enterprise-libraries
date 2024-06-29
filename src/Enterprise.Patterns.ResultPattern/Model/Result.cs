@@ -39,12 +39,12 @@ public partial class Result : IResult
     }
 
     public static Result Success() => new();
-    public static Result<T> Success<T>(T value) => new(value);
+    public static Result<TValue> Success<TValue>(TValue value) => new(value);
     public static Result Failure(IError error) => new([error]);
     public static Result Failure(IEnumerable<IError> errors) => new(errors);
-    public static Result<T> Failure<T>(IError error) => new(default, [error]);
-    public static Result<T> Failure<T>(IEnumerable<IError> errors) => new(default, errors);
-    public static Result<T> Create<T>(T? value) => value is not null ? Success(value) : Failure<T>(Error.NullValue());
+    public static Result<TValue> Failure<TValue>(IError error) => new(default, [error]);
+    public static Result<TValue> Failure<TValue>(IEnumerable<IError> errors) => new(default, errors);
+    public static Result<TValue> Create<TValue>(TValue? value) => value is not null ? Success(value) : Failure<TValue>(Error.NullValue());
 
     public static implicit operator Result(Error error) => Failure(error);
     public static implicit operator Result(Error[] errors) => Failure(errors.ToList());

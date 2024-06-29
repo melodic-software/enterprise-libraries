@@ -11,5 +11,5 @@ public static class ErrorExtensions
 {
     public static bool IsTrueError(this IError error) => error.Descriptors.ContainTrueError();
     public static Result ToResult(this IError error) => Result.Failure(error);
-    public static Result<T> ToResult<T>(this IError error) => Result<T>.Failure(error);
+    public static Result<TValue> ToResult<TValue>(this IError error) => Result<TValue>.Failure(error);
 }
