@@ -1,23 +1,23 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Validation;
 
 public static class QueryHandlerTypeValidationService
 {
     public static void ValidateType<TQuery, TResult>(TQuery query, IHandleQuery<TResult> queryHandler)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }
 
     public static void ValidateType<TQuery, TResult>(TQuery query, IHandleQuery<TQuery, TResult> queryHandler)
-        where TQuery : class, IQuery
+        where TQuery : class, IBaseQuery
     {
         ValidateType(query, typeof(TQuery), queryHandler);
     }
 
-    public static void ValidateType<TResult>(IQuery query, Type expectedQueryType, IHandleQuery<TResult> queryHandler)
+    public static void ValidateType<TResult>(IBaseQuery query, Type expectedQueryType, IHandleQuery<TResult> queryHandler)
     {
         Type queryType = query.GetType();
 

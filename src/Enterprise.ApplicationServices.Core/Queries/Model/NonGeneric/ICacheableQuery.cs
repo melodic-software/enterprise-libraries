@@ -1,4 +1,4 @@
-﻿namespace Enterprise.ApplicationServices.Core.Queries.Model;
+﻿namespace Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 
 /// <summary>
 /// A query that can be cached.

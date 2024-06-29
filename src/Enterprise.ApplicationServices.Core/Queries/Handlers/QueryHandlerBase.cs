@@ -1,5 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.Core.Standard;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse.Abstract;
@@ -23,13 +24,13 @@ public abstract class QueryHandlerBase<TQuery, TResult> :
     }
 
     /// <inheritdoc />
-    async Task<object?> IHandleQuery.HandleAsync(IQuery query, CancellationToken cancellationToken)
+    async Task<object?> IHandleQuery.HandleAsync(IBaseQuery query, CancellationToken cancellationToken)
     {
         return await HandleAsync(query, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default)
+    public async Task<TResult> HandleAsync(IBaseQuery query, CancellationToken cancellationToken = default)
     {
         ValidateType(query, this);
         var typedQuery = (TQuery)query;

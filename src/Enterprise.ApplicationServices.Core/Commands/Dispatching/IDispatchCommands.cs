@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
 

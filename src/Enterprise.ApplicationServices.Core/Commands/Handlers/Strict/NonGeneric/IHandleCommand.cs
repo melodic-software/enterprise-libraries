@@ -1,7 +1,7 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Base;
 using Enterprise.ApplicationServices.Core.Standard;
 
-namespace Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric;
+namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric;
 
 /// <summary>
 /// Handles commands.
@@ -14,5 +14,5 @@ public interface IHandleCommand : IApplicationService
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task HandleAsync(ICommand command, CancellationToken cancellationToken = default);
+    public Task HandleAsync(IBaseCommand command, CancellationToken cancellationToken = default);
 }

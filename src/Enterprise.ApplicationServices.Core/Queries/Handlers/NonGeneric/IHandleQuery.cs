@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 using Enterprise.ApplicationServices.Core.Standard;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
@@ -14,5 +14,5 @@ public interface IHandleQuery : IApplicationService
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task<object?> HandleAsync(IQuery query, CancellationToken cancellationToken = default);
+    public Task<object?> HandleAsync(IBaseQuery query, CancellationToken cancellationToken = default);
 }

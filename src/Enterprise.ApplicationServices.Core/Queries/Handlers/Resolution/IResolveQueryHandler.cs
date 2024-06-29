@@ -1,6 +1,6 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
-using Enterprise.ApplicationServices.Core.Queries.Model;
-using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution;
 

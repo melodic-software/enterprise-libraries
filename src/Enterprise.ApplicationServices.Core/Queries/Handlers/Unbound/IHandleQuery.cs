@@ -1,5 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric;
-using Enterprise.ApplicationServices.Core.Queries.Model;
+using Enterprise.ApplicationServices.Core.Queries.Model.Base;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound;
 
@@ -16,5 +16,5 @@ public interface IHandleQuery<TResult> : IHandleQuery
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    new Task<TResult> HandleAsync(IQuery query, CancellationToken cancellationToken = default);
+    new Task<TResult> HandleAsync(IBaseQuery query, CancellationToken cancellationToken = default);
 }

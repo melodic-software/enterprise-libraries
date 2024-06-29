@@ -1,4 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.Library.Core.Attributes;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;

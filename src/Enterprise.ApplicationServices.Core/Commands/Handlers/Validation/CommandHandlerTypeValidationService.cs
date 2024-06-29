@@ -1,23 +1,25 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric;
-using Enterprise.ApplicationServices.Core.Commands.Model;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric;
+using Enterprise.ApplicationServices.Core.Commands.Model.Base;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Validation;
 
 public static class CommandHandlerTypeValidationService
 {
-    public static void ValidateType<TCommand>(ICommand command, IHandleCommand commandHandler)
+    public static void ValidateType<TCommand>(TCommand command, IHandleCommand commandHandler)
+        where TCommand : class, IBaseCommand
+    {
+        ValidateType(command, typeof(TCommand), commandHandler);
+    }
+
+    public static void ValidateType<TCommand>(TCommand command, IHandleCommand<TCommand> commandHandler)
         where TCommand : class, ICommand
     {
         ValidateType(command, typeof(TCommand), commandHandler);
     }
 
-    public static void ValidateType<TCommand>(ICommand command, IHandleCommand<TCommand> commandHandler)
-        where TCommand : class, ICommand
-    {
-        ValidateType(command, typeof(TCommand), commandHandler);
-    }
-
-    public static void ValidateType(ICommand command, Type expectedCommandType, IHandleCommand commandHandler)
+    public static void ValidateType(IBaseCommand command, Type expectedCommandType, IHandleCommand commandHandler)
     {
         Type commandType = command.GetType();
 

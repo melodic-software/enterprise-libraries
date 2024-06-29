@@ -4,48 +4,6 @@
         <name>Enterprise.ApplicationServices.Core</name>
     </assembly>
     <members>
-        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1">
-            <summary>
-            A base implementation of a command handler that supports the raising of events.
-            </summary>
-            <typeparam name="TCommand"></typeparam>
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1">
-            <summary>
-            Handles commands of a specific type.
-            </summary>
-            <typeparam name="TCommand"></typeparam>
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1.HandleAsync(`0,System.Threading.CancellationToken)">
-            <summary>
-            Handle the command.
-            </summary>
-            <param name="command"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric.IHandleCommand">
-            <summary>
-            Handles commands.
-            </summary>
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.NonGeneric.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
-            <summary>
-            Handle the command.
-            </summary>
-            <param name="command"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2">
             <summary>
             A pragmatic base implementation of a command handler that returns a result.
@@ -53,10 +11,10 @@
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.ICommand,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.Enterprise#ApplicationServices#Core#Commands#Handlers#Strict#IHandleCommand{TCommand}#HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.CommandHandlerBase`2.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
@@ -71,7 +29,7 @@
             According to Bertrand Meyer, commands (in CQS) return void (there is no return value).
             Typically, the client of the command handler needs to know if the operation succeeded or failed.
             This is a pragmatic interface that allows a return value.
-            Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Handlers.IHandleCommand`1"/> is preferred.
+            Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.IHandleCommand`1"/> is preferred.
             </summary>
             <typeparam name="TCommand"></typeparam>
             <typeparam name="TResult"></typeparam>
@@ -106,10 +64,53 @@
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Commands.Model.ICommand">
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.CommandHandlerBase`1">
+            <summary>
+            A base implementation of a command handler that supports the raising of events.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.CommandHandlerBase`1.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.CommandHandlerBase`1.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.CommandHandlerBase`1.HandleAsync(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.IHandleCommand`1">
+            <summary>
+            Handles commands of a specific type.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.IHandleCommand`1.HandleAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handle the command.
+            </summary>
+            <param name="command"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric.IHandleCommand">
+            <summary>
+            Handles commands.
+            </summary>
+        </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric.IHandleCommand.HandleAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
+            <summary>
+            Handle the command.
+            </summary>
+            <param name="command"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand">
             <summary>
             This is a marker interface that signifies that an implementing class is a command object.
             It is used primarily for constraint purposes.
+            This interface allows for referring to all variations of command objects.
             </summary>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic.ICommand`1">
@@ -118,9 +119,15 @@
             It is used primarily for constraint purposes.
             According to Bertrand Meyer, commands don't have a return value. They return void.
             This interface is a pragmatic compromise that allows for defining a result associated with the command.
-            Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Model.ICommand"/> is preferred.
+            Use of this interface is acceptable; however, <see cref="T:Enterprise.ApplicationServices.Core.Commands.Model.Strict.ICommand"/> is preferred.
             </summary>
             <typeparam name="TResult"></typeparam>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Commands.Model.Strict.ICommand">
+            <summary>
+            This is a marker interface that signifies that an implementing class is a command object.
+            It is used primarily for constraint purposes.
+            </summary>
         </member>
         <member name="T:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.IHandleQuery`2">
             <summary>
@@ -165,10 +172,10 @@
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Bound.QueryHandlerBase`2.Enterprise#DesignPatterns#ChainOfResponsibility#Pipeline#Handlers#RequestResponse#Abstract#IHandler{TQuery,TResult}#HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
@@ -212,7 +219,7 @@
             Handles queries.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric.IHandleQuery.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.NonGeneric.IHandleQuery.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <summary>
             Handle the query and return a result object.
             </summary>
@@ -227,10 +234,10 @@
             <typeparam name="TQuery"></typeparam>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.QueryHandlerBase`2.HandleAsync(`0,Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates.SuccessorDelegate{`1},System.Threading.CancellationToken)">
@@ -244,7 +251,7 @@
             Resolves query handler implementations that can handle specific queries.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.IQuery)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery)">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -252,7 +259,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.Alternate.IQuery{``0})">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``0})">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -269,7 +276,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(Enterprise.ApplicationServices.Core.Queries.Model.Alternate.IQuery{``1})">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``1})">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -285,7 +292,7 @@
             </summary>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound.IHandleQuery`1.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.IQuery,System.Threading.CancellationToken)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Unbound.IHandleQuery`1.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
             <summary>
             Handle the query and return the typed result.
             </summary>
@@ -293,13 +300,20 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Alternate.ICacheableQuery`1">
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery">
+            <summary>
+            This is a marker interface that signifies that an implementing class is a query object.
+            It is used primarily for constraint purposes.
+            This interface allows for referring to all variations of query objects.
+            </summary>
+        </member>
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Generic.ICacheableQuery`1">
             <summary>
             A query that can be cached.
             </summary>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Alternate.IQuery`1">
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery`1">
             <summary>
             This is a marker interface that signifies that an implementing class is a query object.
             It is used primarily for constraint purposes.
@@ -307,22 +321,22 @@
             </summary>
             <typeparam name="TResult"></typeparam>
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.ICacheableQuery">
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.ICacheableQuery">
             <summary>
             A query that can be cached.
             </summary>
         </member>
-        <member name="P:Enterprise.ApplicationServices.Core.Queries.Model.ICacheableQuery.CacheKey">
+        <member name="P:Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.ICacheableQuery.CacheKey">
             <summary>
             The unique cache identifier associated with the query.
             </summary>
         </member>
-        <member name="P:Enterprise.ApplicationServices.Core.Queries.Model.ICacheableQuery.Expiration">
+        <member name="P:Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.ICacheableQuery.Expiration">
             <summary>
             The total time to live duration.
             </summary>
         </member>
-        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.IQuery">
+        <member name="T:Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery">
             <summary>
             This is a marker interface that signifies that an implementing class is a query object.
             It is used primarily for constraint purposes.

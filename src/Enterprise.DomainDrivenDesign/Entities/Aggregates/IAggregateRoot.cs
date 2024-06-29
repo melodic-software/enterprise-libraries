@@ -1,6 +1,4 @@
-﻿using Enterprise.Domain.Entities;
-using Enterprise.Domain.Events;
-using Enterprise.DomainDrivenDesign.Entities.EventRecording;
+﻿using Enterprise.DomainDrivenDesign.Entities.EventRecording;
 
 namespace Enterprise.DomainDrivenDesign.Entities.Aggregates;
 

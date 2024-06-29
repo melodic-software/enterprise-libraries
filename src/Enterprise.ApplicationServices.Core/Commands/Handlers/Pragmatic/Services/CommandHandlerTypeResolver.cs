@@ -1,5 +1,5 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model;
-using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic.Services;
 
@@ -29,13 +29,8 @@ public static class CommandHandlerTypeResolver
             i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommand<>)
         );
 
-        if (commandInterface == null)
-        {
-            return null;
-        }
-
         // Get the type argument of ICommand<>.
-        Type resultType = commandInterface.GetGenericArguments().First();
+        Type resultType = commandInterface?.GetGenericArguments().First();
 
         return resultType;
     }

@@ -1,4 +1,6 @@
-﻿using Enterprise.Library.Core.Attributes;
+﻿using Enterprise.ApplicationServices.Core.Commands.Model.Base;
+using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
+using Enterprise.Library.Core.Attributes;
 using MediatR;
 
 namespace Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
@@ -12,4 +14,4 @@ namespace Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 /// </summary>
 /// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(ICommand))]
-public interface ICommand<out TResult> : ICommand, IRequest<TResult>;
+public interface ICommand<out TResult> : IBaseCommand, IRequest<TResult>;

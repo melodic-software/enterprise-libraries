@@ -1,7 +1,9 @@
-﻿using Enterprise.Library.Core.Attributes;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model.Base;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
+using Enterprise.Library.Core.Attributes;
 using MediatR;
 
-namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+namespace Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 
 /// <summary>
 /// This is a marker interface that signifies that an implementing class is a query object.
@@ -10,4 +12,4 @@ namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
 /// </summary>
 /// <typeparam name="TResult"></typeparam>
 [AlternativeTo(typeof(IQuery))]
-public interface IQuery<out TResult> : IQuery, IRequest<TResult>;
+public interface IQuery<out TResult> : IBaseQuery, IRequest<TResult>;

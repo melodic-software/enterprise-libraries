@@ -1,4 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 
 namespace Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
 

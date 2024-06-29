@@ -1,6 +1,7 @@
-﻿using Enterprise.Library.Core.Attributes;
+﻿using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
+using Enterprise.Library.Core.Attributes;
 
-namespace Enterprise.ApplicationServices.Core.Queries.Model.Alternate;
+namespace Enterprise.ApplicationServices.Core.Queries.Model.Generic;
 
 /// <summary>
 /// A query that can be cached.
