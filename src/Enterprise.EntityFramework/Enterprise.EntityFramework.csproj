@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.731" />
+    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.732" />
     <PackageReference Include="Melodic.Enterprise.Hosting" Version="1.0.0-preview.202" />
     <PackageReference Include="Melodic.Enterprise.Patterns.Outbox" Version="1.0.0-preview.715" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
