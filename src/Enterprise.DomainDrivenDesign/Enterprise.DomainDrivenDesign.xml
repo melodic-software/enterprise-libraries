@@ -114,6 +114,8 @@
         <member name="T:Enterprise.DomainDrivenDesign.Entities.EventRecording.IEventRecordingEntity">
             <summary>
             Implementations provide access to and allow direct clearing of any recorded domain events.
+            It is expected that recording is not public behavior.
+            If public access to recording events is desired, also implement <see cref="T:Enterprise.Domain.Events.IRecordDomainEvents"/>
             </summary>
         </member>
         <member name="P:Enterprise.DomainDrivenDesign.Entities.Standard.Entity`1.Id">

@@ -192,7 +192,7 @@
             <summary>
             This is the generic variant of <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result"/> that specifies a typed value.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="TValue"></typeparam>
         </member>
         <member name="P:Enterprise.Patterns.ResultPattern.Model.Generic.Result`1.Value">
             <summary>

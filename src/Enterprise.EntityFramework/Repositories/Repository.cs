@@ -1,4 +1,4 @@
-﻿using Enterprise.DomainDrivenDesign.Entities;
+﻿using Enterprise.DomainDrivenDesign.Entities.Standard;
 using Microsoft.EntityFrameworkCore;
 
 // Generic repositories are generally considered to be something to avoid.
