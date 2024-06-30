@@ -4,5 +4,12 @@
         <name>Enterprise.Exceptions</name>
     </assembly>
     <members>
+        <member name="T:Enterprise.Exceptions.Model.MedleyException">
+            <summary>
+            This should only be used whenever we run into a situation we do not know how to handle.
+            Otherwise, the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result" /> should be used to return a failure itself.
+            In general, throwing exceptions in the code is not desired if we know how to handle that particular case.
+            </summary>
+        </member>
     </members>
 </doc>

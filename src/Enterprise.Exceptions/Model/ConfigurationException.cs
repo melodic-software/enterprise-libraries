@@ -1,4 +1,4 @@
-﻿namespace Enterprise.Exceptions;
+﻿namespace Enterprise.Exceptions.Model;
 
 public class ConfigurationException : Exception
 {

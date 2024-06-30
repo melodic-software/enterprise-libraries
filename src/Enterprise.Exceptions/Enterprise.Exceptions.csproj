@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.740" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.495" />
   </ItemGroup>
 
