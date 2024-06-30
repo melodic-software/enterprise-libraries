@@ -30,7 +30,7 @@
     <PackageReference Include="Melodic.Enterprise.Http.AspNetCore" Version="1.0.0-preview.449" />
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.764" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
-    <PackageReference Include="Melodic.Enterprise.ModularMonoliths" Version="1.0.0-preview.769" />
+    <PackageReference Include="Melodic.Enterprise.ModularMonoliths" Version="1.0.0-preview.772" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.764" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.763" />
