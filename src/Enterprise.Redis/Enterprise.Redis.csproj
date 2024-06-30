@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.715" />
+    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.496" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.762" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
