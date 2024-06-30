@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Enterprise.Serialization.Json.Microsoft.JsonNamingPolicies;
 
 namespace Enterprise.Api.Controllers.Formatters;
 
@@ -78,7 +79,7 @@ public static class FormatterConfigService
         JsonSerializerOptions defaultSerializerOptions = JsonSerializerOptionsService.GetDefaultOptions();
 
         serializerOptions.PropertyNamingPolicy = defaultSerializerOptions.PropertyNamingPolicy;
-        serializerOptions.DictionaryKeyPolicy = defaultSerializerOptions.DictionaryKeyPolicy;
+        serializerOptions.DictionaryKeyPolicy = new CustomJsonCamelCaseNamingPolicy();
         serializerOptions.PropertyNameCaseInsensitive = defaultSerializerOptions.PropertyNameCaseInsensitive;
         serializerOptions.ReferenceHandler = defaultSerializerOptions.ReferenceHandler;
         serializerOptions.WriteIndented = defaultSerializerOptions.WriteIndented;

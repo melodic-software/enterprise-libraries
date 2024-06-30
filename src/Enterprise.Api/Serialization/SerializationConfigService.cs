@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Enterprise.Serialization.Json.Microsoft;
+using Enterprise.Serialization.Json.Microsoft.JsonNamingPolicies;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +26,7 @@ public static class SerializationConfigService
         JsonSerializerOptions defaultSerializerOptions = JsonSerializerOptionsService.GetDefaultOptions();
 
         serializerOptions.PropertyNamingPolicy = defaultSerializerOptions.PropertyNamingPolicy;
-        serializerOptions.DictionaryKeyPolicy = defaultSerializerOptions.DictionaryKeyPolicy;
+        serializerOptions.DictionaryKeyPolicy = new CustomJsonCamelCaseNamingPolicy();
         serializerOptions.PropertyNameCaseInsensitive = defaultSerializerOptions.PropertyNameCaseInsensitive;
         serializerOptions.ReferenceHandler = defaultSerializerOptions.ReferenceHandler;
         serializerOptions.WriteIndented = defaultSerializerOptions.WriteIndented;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
+using Enterprise.Serialization.Json.Microsoft.JsonNamingPolicies;
 using Enterprise.Validation.Exceptions;
 using Enterprise.Validation.Extensions;
 
@@ -57,6 +58,7 @@ public class ValidationExceptionHandler : IExceptionHandler
     private static async Task CreateJsonResponseAsync(HttpContext httpContext, Dictionary<string, string[]> dictionary, CancellationToken cancellationToken)
     {
         JsonSerializerOptions serializerOptions = JsonSerializerOptionsService.GetDefaultOptions();
+        serializerOptions.DictionaryKeyPolicy = new CustomJsonCamelCaseNamingPolicy();
         await httpContext.Response.WriteAsJsonAsync(dictionary, serializerOptions, cancellationToken: cancellationToken);
     }
 }
