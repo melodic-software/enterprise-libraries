@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enterprise.MediatR.Behaviors.Caching;
 
-internal sealed class QueryCachingBehavior<TRequest, TResult> : 
+public sealed class QueryCachingBehavior<TRequest, TResult> : 
     IPipelineBehavior<TRequest, TResult>
     where TRequest : ICacheableQuery
 {
