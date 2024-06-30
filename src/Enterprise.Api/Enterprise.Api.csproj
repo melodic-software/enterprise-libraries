@@ -31,12 +31,12 @@
     <PackageReference Include="Melodic.Enterprise.Logging.AspNetCore" Version="1.0.0-preview.764" />
     <PackageReference Include="Melodic.Enterprise.MediatR.Behaviors" Version="1.0.0-preview.779" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
-    <PackageReference Include="Melodic.Enterprise.ModularMonoliths" Version="1.0.0-preview.772" />
+    <PackageReference Include="Melodic.Enterprise.ModularMonoliths" Version="1.0.0-preview.780" />
     <PackageReference Include="Melodic.Enterprise.Monitoring" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.MultiTenancy.AspNetCore" Version="1.0.0-preview.764" />
     <PackageReference Include="Melodic.Enterprise.Quartz" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.Redis" Version="1.0.0-preview.764" />
-    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.767" />
+    <PackageReference Include="Melodic.Enterprise.Serilog.AspNetCore" Version="1.0.0-preview.780" />
     <PackageReference Include="Melodic.Enterprise.Sqlite" Version="1.0.0-preview.731" />
     <PackageReference Include="Melodic.Enterprise.Traceability" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.Validation" Version="1.0.0-preview.495" />
