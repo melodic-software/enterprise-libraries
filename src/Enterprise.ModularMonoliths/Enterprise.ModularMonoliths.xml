@@ -4,9 +4,22 @@
         <name>Enterprise.ModularMonoliths</name>
     </assembly>
     <members>
+        <member name="M:Enterprise.ModularMonoliths.Configuration.WebApplicationBuilderExtensions.RegisterModuleConfig(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            If the app has been configured as a modular monolith,
+            this will add any module specific JSON config files that follow the convention.
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
         <member name="T:Enterprise.ModularMonoliths.Model.IModule">
             <summary>
             Represents a module in a modular monolith.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ModularMonoliths.Options.ModularMonolithOptions.JsonSettingsFileNameSearchPattern">
+            <summary>
+            The search pattern used for JSON files containing application settings.
             </summary>
         </member>
     </members>
