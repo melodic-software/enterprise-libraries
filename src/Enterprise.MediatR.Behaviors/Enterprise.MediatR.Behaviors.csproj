@@ -12,7 +12,7 @@
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.497" />
     <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.772" />
     <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.740" />
-    <PackageReference Include="Melodic.Enterprise.Serilog" Version="1.0.0-preview.766" />
+    <PackageReference Include="Melodic.Enterprise.Serilog" Version="1.0.0-preview.777" />
   </ItemGroup>
 
 </Project>
