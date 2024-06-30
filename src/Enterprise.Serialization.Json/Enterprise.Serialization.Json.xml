@@ -20,5 +20,12 @@
             Serializes objects into JSON strings.
             </summary>
         </member>
+        <member name="T:Enterprise.Serialization.Json.Microsoft.JsonNamingPolicies.CustomJsonCamelCaseNamingPolicy">
+            <summary>
+            This was adapted from the .NET 8 JsonCamelCaseNamingPolicy.
+            The core logic hasn't changed, but the original implementation didn't accomodate for "." characters.
+            This resulted in half camel cased dictionary keys for things like translated error collections from the result pattern.
+            </summary>
+        </member>
     </members>
 </doc>
