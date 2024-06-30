@@ -12,33 +12,17 @@ public class RequestLoggingBehavior<TRequest, TResult> :
     where TRequest : notnull
 {
     private const string ErrorsPropertyName = "Errors";
-    private const string ModulePropertyName = "Module";
     private readonly ILogger<RequestLoggingBehavior<TRequest, TResult>> _logger;
-    private readonly IModuleNameService _moduleNameService;
 
-    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger, IModuleNameService moduleNameService)
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger)
     {
         _logger = logger;
-        _moduleNameService = moduleNameService;
     }
 
     public async Task<TResult> Handle(TRequest request,
         RequestHandlerDelegate<TResult> next,
         CancellationToken cancellationToken)
     {
-        ArgumentNullException.ThrowIfNull(request);
-
-        Type requestType = request.GetType();
-        string requestTypeName = requestType.Name;
-
-        // If the application is configured as a modular monolith, 
-        // the name will be returned based on a specific convention.
-        string moduleName = _moduleNameService.GetModuleName(requestType);
-
-        using IDisposable? moduleLogContext = !string.IsNullOrWhiteSpace(moduleName) ? 
-            LogContext.PushProperty(ModulePropertyName, moduleName) : 
-            null;
-        
         using IDisposable loggerScope = _logger.BeginScope("{@Request}", request);
 
         var stopWatch = Stopwatch.StartNew();
