@@ -13,6 +13,9 @@
         <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.RegisterEventCallback``1(System.Action{``0})">
             <inheritdoc />
         </member>
+        <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.DispatchAsync(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Enterprise.ApplicationServices.Commands.Dispatching.CommandDispatchFacade.DispatchAsync``1(``0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -52,16 +55,16 @@
         <member name="M:Enterprise.ApplicationServices.Queries.Dispatching.QueryDispatchFacade.ClearCallbacks">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery)">
+        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetHandlerFor``1(Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``0})">
+        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetHandlerFor``1(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``0})">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetQueryHandler``2(``0)">
+        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetHandlerFor``2(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetQueryHandler``2(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``1})">
+        <member name="M:Enterprise.ApplicationServices.Queries.Handlers.Resolution.QueryHandlerResolver.GetHandlerFor``2(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``1})">
             <inheritdoc />
         </member>
         <member name="T:Enterprise.ApplicationServices.Queries.Handlers.Simple.Bound.SimpleQueryHandler`2">
