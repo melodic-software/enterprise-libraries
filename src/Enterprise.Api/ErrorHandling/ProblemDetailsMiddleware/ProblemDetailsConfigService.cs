@@ -11,13 +11,14 @@ public static class ProblemDetailsConfigService
     {
         // The default out of the box Microsoft "ProblemDetails" registrations.
         services.AddProblemDetails();
-
+        
         // This configures the problem details using the "Hellang" middleware.
         HellangMiddlewareService.AddProblemDetails(services, environment, configuration);
     }
 
     internal static void UseProblemDetails(this WebApplication app)
     {
+        // This adds the "Hellang" problem details middleware to the request pipeline (if configured).
         HellangMiddlewareService.UseProblemDetails(app);
     }
 }

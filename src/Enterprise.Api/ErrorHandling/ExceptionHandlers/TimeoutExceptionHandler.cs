@@ -16,18 +16,18 @@ public class TimeOutExceptionHandler : IExceptionHandler
 
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "A timeout occurred.");
-
         if (exception is not TimeoutException)
         {
             return false;
         }
 
+        _logger.LogError(exception, "A timeout occurred.");
+
         int statusCode = StatusCodes.Status408RequestTimeout;
 
         httpContext.Response.StatusCode = statusCode;
 
-        ProblemDetails problemDetails = new ProblemDetails
+        var problemDetails = new ProblemDetails
         {
             Status = statusCode, 
             Type = exception.GetType().Name,

@@ -1,5 +1,4 @@
-﻿using Enterprise.Exceptions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Enterprise.EntityFramework.AspNetCore.Concurrency;

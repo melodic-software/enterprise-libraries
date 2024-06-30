@@ -1,7 +1,6 @@
 ﻿using Enterprise.Api.Constants;
 using Enterprise.Api.ErrorHandling.Constants;
 using Enterprise.Api.ErrorHandling.Options;
-using Enterprise.Exceptions;
 using Enterprise.Exceptions.Model;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Validation.Exceptions;
