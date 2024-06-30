@@ -31,13 +31,11 @@ internal sealed class MediatRBehaviorConfigurationService : IConfigureWebApiOpti
 
             if (modularMonolithOptions.EnableModularMonolith)
             {
-                // TODO: Add behavior that logs module name / pushes property 
-                //defaultRegistrations.Add(new(typeof(ModularMonolithRequestLoggingBehavior<,>), ServiceLifetime.Scoped));
+                defaultRegistrations.Add(new(typeof(ModularMonolithRequestLoggingBehavior<,>), ServiceLifetime.Scoped));
             }
-
-            // These apply to all requests.
+            
             defaultRegistrations.Add(new(typeof(RequestLoggingBehavior<,>), ServiceLifetime.Scoped));
-            defaultRegistrations.Add(new(typeof(RequestErrorHandlingBehavior<,>)));
+            defaultRegistrations.Add(new(typeof(RequestExceptionHandlingBehavior<,>)));
             defaultRegistrations.Add(new(typeof(NullRequestValidationBehavior<,>)));
             defaultRegistrations.Add(new(typeof(RequestFluentValidationBehavior<,>)));
 

@@ -101,6 +101,11 @@
             <param name="errors"></param>
             <returns></returns>
         </member>
+        <member name="P:Enterprise.Api.ErrorHandling.Options.ErrorHandlingOptions.UseHellangMiddleware">
+            <summary>
+            Determines if the Hellang middleware will be used or if standard exception handling middleware will be used.
+            </summary>
+        </member>
         <member name="P:Enterprise.Api.ErrorHandling.Options.ErrorHandlingOptions.InternalServerErrorResponseDetailMessage">
             <summary>
             This is the friendly message that will be returned when internal server errors occur (500 status code).

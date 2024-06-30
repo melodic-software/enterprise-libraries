@@ -2,5 +2,5 @@
 
 public static class ApiBehaviorConstants
 {
-    public const string InternalServerErrorMessage = "Something went wrong internally, please contact support.";
+    public const string InternalServerErrorMessage = "Oops, something went wrong... Please contact support.";
 }

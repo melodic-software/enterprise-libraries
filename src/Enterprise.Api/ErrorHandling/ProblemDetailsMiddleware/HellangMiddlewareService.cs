@@ -2,6 +2,7 @@
 using Enterprise.Api.ErrorHandling.Constants;
 using Enterprise.Api.ErrorHandling.Options;
 using Enterprise.Exceptions;
+using Enterprise.Exceptions.Model;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Validation.Exceptions;
 using Enterprise.Validation.Extensions;
@@ -15,6 +16,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ApplicationException = System.ApplicationException;
 
 namespace Enterprise.Api.ErrorHandling.ProblemDetailsMiddleware;
 
@@ -24,6 +26,11 @@ internal static class HellangMiddlewareService
     {
         ErrorHandlingOptions options = OptionsInstanceService.Instance
             .GetOptionsInstance<ErrorHandlingOptions>(configuration, ErrorHandlingOptions.ConfigSectionKey);
+
+        if (!options.UseHellangMiddleware)
+        {
+            return;
+        }
 
         // Only show exception details in non production environments.
         bool includeExceptionDetails = !environment.IsProduction();
@@ -100,13 +107,22 @@ internal static class HellangMiddlewareService
                 return problemDetails;
             });
 
-            // This is an application "fault", which is semantically different from an "error".
+            // These are application "faults", which are semantically different from an "error".
             o.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
+            o.MapToStatusCode<ApplicationException>(StatusCodes.Status500InternalServerError);
         });
     }
 
     internal static void UseProblemDetails(WebApplication app)
     {
+        ErrorHandlingOptions options = OptionsInstanceService.Instance
+            .GetOptionsInstance<ErrorHandlingOptions>(app.Configuration, ErrorHandlingOptions.ConfigSectionKey);
+
+        if (!options.UseHellangMiddleware)
+        {
+            return;
+        }
+
         ProblemDetailsExtensions.UseProblemDetails(app);
     }
 }
