@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 using Enterprise.Api.Diagnostics;
-using Enterprise.Api.ModularMonolith.Configuration;
 using Enterprise.Api.Startup.Events;
 using Enterprise.Api.Startup.Options;
 using Enterprise.Applications.DI.ServiceCollection;
 using Enterprise.Logging.Core.Loggers;
+using Enterprise.ModularMonoliths.Configuration;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

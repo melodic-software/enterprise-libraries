@@ -16,6 +16,7 @@ using Enterprise.Logging.Options;
 using Enterprise.Logging.Providers;
 using Enterprise.Logging.TraceListeners;
 using Enterprise.MediatR.Options;
+using Enterprise.ModularMonoliths.Options;
 using Enterprise.Monitoring.Health.Options;
 using Enterprise.Multitenancy.Options;
 using Enterprise.Options.Core.Delegates;
@@ -89,6 +90,11 @@ public static class WebApiOptionsExtensions
     }
 
     public static void ConfigureMinimalApi(this WebApiOptions options, Configure<MinimalApiOptions> configure)
+    {
+        options.Configure(configure);
+    }
+
+    public static void ConfigureModularMonolith(this WebApiOptions options, Configure<ModularMonolithOptions> configure)
     {
         options.Configure(configure);
     }

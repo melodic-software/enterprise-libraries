@@ -263,14 +263,6 @@
             <param name="input">The string to be split.</param>
             <returns>An array of split strings.</returns>
         </member>
-        <member name="M:Enterprise.Api.ModularMonolith.Configuration.WebApplicationBuilderExtensions.RegisterModuleConfig(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
-            <summary>
-            If the app has been configured as a modular monolith,
-            this will add any module specific JSON config files that follow the convention.
-            </summary>
-            <param name="builder"></param>
-            <returns></returns>
-        </member>
         <member name="M:Enterprise.Api.Options.DefaultOptionsService.RegisterDefaults">
             <summary>
             Specify default object instances.
