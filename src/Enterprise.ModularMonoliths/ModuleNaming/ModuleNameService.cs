@@ -34,9 +34,9 @@ public class ModuleNameService : IModuleNameService
 
         if (_options.UseTruncatedModuleFormat)
         {
-            return type.FullName!.Split(',')[0];
+            return type.FullName!.Split('.')[0];
         }
 
-        return type.FullName!;
+        return null;
     }
 }

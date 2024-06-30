@@ -2,5 +2,5 @@
 
 public interface IModuleNameService
 {
-    public string GetModuleName(Type type);
+    public string? GetModuleName(Type type);
 }

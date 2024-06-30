@@ -34,7 +34,7 @@ public class ModuleStateService : IModuleStateService
 
     public bool ModuleEnabled(Type type)
     {
-        string moduleName = _moduleNameService.GetModuleName(type);
-        return ModuleEnabled(moduleName);
+        string? moduleName = _moduleNameService.GetModuleName(type);
+        return !string.IsNullOrWhiteSpace(moduleName) && ModuleEnabled(moduleName);
     }
 }
