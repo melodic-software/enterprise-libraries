@@ -1,4 +1,5 @@
-﻿using Enterprise.Logging.Core.Loggers;
+﻿using Enterprise.Exceptions.Model;
+using Enterprise.Logging.Core.Loggers;
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Redis.Options;
 using Microsoft.Extensions.Configuration;

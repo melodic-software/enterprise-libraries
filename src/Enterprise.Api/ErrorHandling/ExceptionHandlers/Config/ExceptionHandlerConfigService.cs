@@ -19,6 +19,7 @@ public static class ExceptionHandlerConfigService
         }
 
         // https://www.milanjovanovic.tech/blog/global-error-handling-in-aspnetcore-8
+        // https://anthonygiretti.com/2023/06/14/asp-net-core-8-improved-exception-handling-with-iexceptionhandler/
         // NOTE: This will not be run if the Hellang middleware is registered.
 
         //services.AddExceptionHandler<DefaultExceptionHandler>();

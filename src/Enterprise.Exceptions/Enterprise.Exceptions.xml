@@ -4,7 +4,7 @@
         <name>Enterprise.Exceptions</name>
     </assembly>
     <members>
-        <member name="T:Enterprise.Exceptions.Model.MedleyException">
+        <member name="T:Enterprise.Exceptions.Model.ApplicationException">
             <summary>
             This should only be used whenever we run into a situation we do not know how to handle.
             Otherwise, the <see cref="T:Enterprise.Patterns.ResultPattern.Model.Result" /> should be used to return a failure itself.
