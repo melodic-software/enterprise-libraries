@@ -9,12 +9,12 @@ namespace Enterprise.Exceptions.Model;
 /// Otherwise, the <see cref="Result" /> should be used to return a failure itself.
 /// In general, throwing exceptions in the code is not desired if we know how to handle that particular case.
 /// </summary>
-public sealed class MedleyException : Exception
+public sealed class ApplicationException : Exception
 {
     public string RequestName { get; }
     public Error? Error { get; }
 
-    public MedleyException(string requestName, Exception? innerException = default, Error? error = null)
+    public ApplicationException(string requestName, Exception? innerException = default, Error? error = null)
         : base(ApplicationExceptionMessage, innerException)
     {
         RequestName = requestName;
