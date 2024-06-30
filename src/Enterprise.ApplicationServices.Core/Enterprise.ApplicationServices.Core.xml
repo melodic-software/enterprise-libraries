@@ -47,6 +47,13 @@
             Resolves command handler implementations that can handle specific commands.
             </summary>
         </member>
+        <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler.GetHandlerFor(Enterprise.ApplicationServices.Core.Commands.Model.Base.IBaseCommand)">
+            <summary>
+            Get the handler implementation that can handle the given command.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
         <member name="M:Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution.IResolveCommandHandler.GetHandlerFor``1(``0)">
             <summary>
             Get the handler implementation that can handle the given command.
@@ -251,7 +258,7 @@
             Resolves query handler implementations that can handle specific queries.
             </summary>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetHandlerFor``1(Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric.IQuery)">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -259,7 +266,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``1(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``0})">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetHandlerFor``1(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``0})">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -267,7 +274,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(``0)">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetHandlerFor``2(``0)">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
@@ -276,7 +283,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetQueryHandler``2(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``1})">
+        <member name="M:Enterprise.ApplicationServices.Core.Queries.Handlers.Resolution.IResolveQueryHandler.GetHandlerFor``2(Enterprise.ApplicationServices.Core.Queries.Model.Generic.IQuery{``1})">
             <summary>
             Get the handler implementation that can handle the given query.
             </summary>
