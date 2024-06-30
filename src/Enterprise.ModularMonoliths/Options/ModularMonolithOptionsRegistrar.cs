@@ -10,5 +10,7 @@ internal sealed class ModularMonolithOptionsRegistrar : IRegisterOptions
     public static void RegisterOptions(IServiceCollection services, IConfiguration configuration)
     {
         services.RegisterOptions<ModularMonolithOptions>(configuration, ModularMonolithOptions.ConfigSectionKey);
+        services.RegisterOptions<ModuleNamingOptions>(configuration, ModuleNamingOptions.ConfigSectionKey);
+        services.RegisterOptions<ModuleStateOptions>(configuration, ModuleStateOptions.ConfigSectionKey);
     }
 }
