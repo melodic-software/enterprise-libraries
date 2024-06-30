@@ -1,5 +1,7 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric;
+using Enterprise.ApplicationServices.Core.Commands.Model.Base;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 
@@ -13,10 +15,18 @@ public interface IResolveCommandHandler
     /// <summary>
     /// Get the handler implementation that can handle the given command.
     /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public IHandleCommand GetHandlerFor(IBaseCommand command);
+
+    /// <summary>
+    /// Get the handler implementation that can handle the given command.
+    /// </summary>
     /// <typeparam name="TCommand"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand> GetCommandHandler<TCommand>(TCommand command) where TCommand : class, ICommand;
+    public IHandleCommand<TCommand> GetHandlerFor<TCommand>(TCommand command)
+        where TCommand : class, ICommand;
 
     /// <summary>
     /// Get the handler implementation that can handle the given command.
@@ -25,6 +35,6 @@ public interface IResolveCommandHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    IHandleCommand<TCommand, TResult> GetCommandHandler<TCommand, TResult>(TCommand command)
+    public IHandleCommand<TCommand, TResult> GetHandlerFor<TCommand, TResult>(TCommand command)
         where TCommand : class, ICommand<TResult>;
 }

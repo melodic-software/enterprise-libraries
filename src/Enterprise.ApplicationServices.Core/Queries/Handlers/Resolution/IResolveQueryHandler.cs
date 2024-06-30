@@ -15,7 +15,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery query);
+    public IHandleQuery<TResult> GetHandlerFor<TResult>(IQuery query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
@@ -23,7 +23,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery<TResult> query);
+    public IHandleQuery<TResult> GetHandlerFor<TResult>(IQuery<TResult> query);
 
     /// <summary>
     /// Get the handler implementation that can handle the given query.
@@ -32,7 +32,7 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
+    public IHandleQuery<TQuery, TResult> GetHandlerFor<TQuery, TResult>(TQuery query)
         where TQuery : class, IQuery;
 
     /// <summary>
@@ -42,6 +42,6 @@ public interface IResolveQueryHandler
     /// <typeparam name="TResult"></typeparam>
     /// <param name="query"></param>
     /// <returns></returns>
-    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
+    public IHandleQuery<TQuery, TResult> GetHandlerFor<TQuery, TResult>(IQuery<TResult> query)
         where TQuery : class, IQuery<TResult>;
 }
