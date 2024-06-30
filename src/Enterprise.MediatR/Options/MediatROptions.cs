@@ -19,7 +19,7 @@ public class MediatROptions
     /// Allows for providing a custom behavior pipeline.
     /// This will override any default behavior, so be sure to include all behaviors needed for the application in a specific order.
     /// </summary>
-    public List<BehaviorRegistration> BehaviorRegistrations { get; } = [];
+    public List<BehaviorRegistration> BehaviorRegistrations { get; set; } = [];
 
     /// <summary>
     /// This allows for complete customization and control over the MediatR config.

@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using static Enterprise.Reflection.Types.GenericInterfaceTypeService;
 
-namespace Enterprise.MediatR.Events.Dispatching;
+namespace Enterprise.Events.MediatR.Dispatching;
 
 public sealed class MediatREventDispatcher : EventDispatcher
 {

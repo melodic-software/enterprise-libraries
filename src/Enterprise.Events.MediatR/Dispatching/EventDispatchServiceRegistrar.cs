@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace Enterprise.MediatR.Events.Dispatching;
+namespace Enterprise.Events.MediatR.Dispatching;
 
 internal sealed class EventDispatchServiceRegistrar : IRegisterServices
 {

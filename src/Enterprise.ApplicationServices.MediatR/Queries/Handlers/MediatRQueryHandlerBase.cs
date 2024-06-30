@@ -1,13 +1,13 @@
-﻿using Enterprise.ApplicationServices.Core.Queries.Handlers.Bound;
-using Enterprise.ApplicationServices.Core.Queries.Model.Generic;
+﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
+using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.Events.Facade.Abstract;
 using MediatR;
 
-namespace Enterprise.MediatR.Queries.Handlers.Bound;
+namespace Enterprise.ApplicationServices.MediatR.Queries.Handlers;
 
 public abstract class MediatRQueryHandlerBase<TQuery, TResult>
     : QueryHandlerBase<TQuery, TResult>, IRequestHandler<TQuery, TResult>
-    where TQuery : class, IQuery<TResult>, IRequest<TResult>
+    where TQuery : class, IQuery, IRequest<TResult>
 {
     protected MediatRQueryHandlerBase(IEventRaisingFacade eventRaisingFacade) : base(eventRaisingFacade)
     {

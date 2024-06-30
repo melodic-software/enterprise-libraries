@@ -9,11 +9,6 @@ internal static class BehaviorRegistrar
     {
         IReadOnlyCollection<BehaviorRegistration> behaviorRegistrations = options.BehaviorRegistrations;
 
-        if (!behaviorRegistrations.Any())
-        {
-            behaviorRegistrations = BehaviorRegistrations.Default();
-        }
-
         foreach (BehaviorRegistration behaviorRegistration in behaviorRegistrations)
         {
             mediatRServiceConfiguration.AddOpenBehavior(behaviorRegistration.Type, behaviorRegistration.ServiceLifetime);

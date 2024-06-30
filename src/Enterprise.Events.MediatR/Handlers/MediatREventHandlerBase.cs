@@ -2,7 +2,7 @@
 using Enterprise.Events.Model;
 using MediatR;
 
-namespace Enterprise.MediatR.Events.Handlers;
+namespace Enterprise.Events.MediatR.Handlers;
 
 public abstract class MediatREventHandlerBase<T> : EventHandlerBase<T>, INotificationHandler<T>
     where T : IEvent, INotification

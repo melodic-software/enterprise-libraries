@@ -22,5 +22,31 @@
             The search pattern used for JSON files containing application settings.
             </summary>
         </member>
+        <member name="P:Enterprise.ModularMonoliths.Options.ModuleNamingOptions.UseExplicitModuleFormat">
+            <summary>
+            This means all module projects should follow an explicit format.
+            The module name is contained in the third segment.
+            Ex: "Evently.Modules.Events.Domain".
+            </summary>
+        </member>
+        <member name="P:Enterprise.ModularMonoliths.Options.ModuleNamingOptions.UseTruncatedModuleFormat">
+            <summary>
+            This means all module projects do not start with the name of the bootstrapping application.
+            This also means the explicit word "module" is not used.
+            It is expected for the module name to be the first segment.
+            EX: "Events.Domain".
+            </summary>
+        </member>
+        <member name="P:Enterprise.ModularMonoliths.Options.ModuleNamingOptions.UseModuleAttributes">
+            <summary>
+            This will search for any assembly attributes when resolving module name association.
+            </summary>
+        </member>
+        <member name="P:Enterprise.ModularMonoliths.Options.ModuleStateOptions.ConfigSettingKeyName">
+            <summary>
+            This is the config setting that drives whether a module is enabled.
+            If this is not configured or is mistyped, the default assumption is that the module is not enabled.
+            </summary>
+        </member>
     </members>
 </doc>
