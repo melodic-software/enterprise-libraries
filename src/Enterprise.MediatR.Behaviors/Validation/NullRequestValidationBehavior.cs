@@ -3,7 +3,7 @@
 namespace Enterprise.MediatR.Behaviors.Validation;
 
 public class NullRequestValidationBehavior<TRequest, TResult>
-    : IPipelineBehavior<TRequest, TResult> where TRequest : notnull
+    : IPipelineBehavior<TRequest, TResult> where TRequest : class
 {
     public async Task<TResult> Handle(TRequest request, RequestHandlerDelegate<TResult> next, CancellationToken cancellationToken)
     {

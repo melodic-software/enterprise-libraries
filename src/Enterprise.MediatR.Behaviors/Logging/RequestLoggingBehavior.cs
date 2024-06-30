@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Enterprise.ModularMonoliths.ModuleNaming;
 using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -9,7 +8,7 @@ namespace Enterprise.MediatR.Behaviors.Logging;
 
 public class RequestLoggingBehavior<TRequest, TResult> :
     IPipelineBehavior<TRequest, TResult>
-    where TRequest : notnull
+    where TRequest : class
 {
     private const string ErrorsPropertyName = "Errors";
     private readonly ILogger<RequestLoggingBehavior<TRequest, TResult>> _logger;

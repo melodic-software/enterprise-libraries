@@ -5,7 +5,7 @@ using MediatR;
 namespace Enterprise.MediatR.Behaviors.Validation;
 
 public class RequestFluentValidationBehavior<TRequest, TResult>
-    : IPipelineBehavior<TRequest, TResult> where TRequest : notnull
+    : IPipelineBehavior<TRequest, TResult> where TRequest : class
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators;
 

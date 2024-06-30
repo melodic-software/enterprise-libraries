@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Enterprise.ModularMonoliths.ModuleNaming;
+﻿using Enterprise.ModularMonoliths.ModuleNaming;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -12,7 +7,7 @@ namespace Enterprise.MediatR.Behaviors.Logging;
 
 public class ModularMonolithRequestLoggingBehavior<TRequest, TResult> :
     IPipelineBehavior<TRequest, TResult>
-    where TRequest : notnull
+    where TRequest : class
 {
     private const string ModulePropertyName = "Module";
     private readonly ILogger<ModularMonolithRequestLoggingBehavior<TRequest, TResult>> _logger;

@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.783" />
-    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.496" />
+    <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.790" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.782" />
     <PackageReference Include="Melodic.Enterprise.Reflection.Attributes" Version="1.0.0-preview.495" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
