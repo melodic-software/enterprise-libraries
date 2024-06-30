@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.Events" Version="1.0.0-preview.708" />
-    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.765" />
+    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.772" />
   </ItemGroup>
 
 </Project>

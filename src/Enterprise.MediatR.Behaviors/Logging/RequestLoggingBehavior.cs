@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics;
-using Enterprise.MediatR.Behaviors.Logging.Services.Abstract;
-using Enterprise.MediatR.Behaviors.Logging.Services;
 using Enterprise.Patterns.ResultPattern.Model;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 
 namespace Enterprise.MediatR.Behaviors.Logging;
 
@@ -11,18 +10,12 @@ public class RequestLoggingBehavior<TRequest, TResult> :
     IPipelineBehavior<TRequest, TResult>
     where TRequest : notnull
 {
+    private const string Errors = "Errors";
     private readonly ILogger<RequestLoggingBehavior<TRequest, TResult>> _logger;
-    private readonly IRequestLoggingBehaviorService _loggingBehaviorService;
 
-    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger) : this(logger, new RequestLoggingBehaviorService())
-    {
-
-    }
-
-    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger, IRequestLoggingBehaviorService loggingBehaviorService)
+    public RequestLoggingBehavior(ILogger<RequestLoggingBehavior<TRequest, TResult>> logger)
     {
         _logger = logger;
-        _loggingBehaviorService = loggingBehaviorService;
     }
 
     public async Task<TResult> Handle(TRequest request,
@@ -40,7 +33,7 @@ public class RequestLoggingBehavior<TRequest, TResult> :
 
         _logger.LogInformation("Executing request.");
         TResult result = await next();
-        HandleResult(result, requestTypeName);
+        HandleResult(result);
 
         stopWatch.Stop();
 
@@ -50,7 +43,7 @@ public class RequestLoggingBehavior<TRequest, TResult> :
         return result;
     }
 
-    private void HandleResult(TResult genericResult, string requestTypeName)
+    private void HandleResult(TResult genericResult)
     {
         if (genericResult is not Result result)
         {
@@ -64,7 +57,15 @@ public class RequestLoggingBehavior<TRequest, TResult> :
         }
         else
         {
-            _loggingBehaviorService.LogApplicationServiceError(_logger, result.Errors, requestTypeName);
+            var propertyValue = result.Errors.Select(x => new { x.Code, x.Message }).ToList();
+
+            // https://github.com/serilog/serilog/wiki/Enrichment
+            // This is a form of log enrichment that acts similarly to logging scopes.
+            // It requires the log context enricher to be enabled in the logger configuration.
+            using (LogContext.PushProperty(Errors, propertyValue, true))
+            {
+                _logger.LogInformation("Request failed with errors. {@Errors}", result.Errors);
+            }
         }
     }
 }

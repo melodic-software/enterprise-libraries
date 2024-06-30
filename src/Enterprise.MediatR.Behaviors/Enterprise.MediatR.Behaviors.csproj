@@ -10,8 +10,9 @@
     <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.764" />
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.763" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.497" />
-    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.765" />
+    <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.772" />
     <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.740" />
+    <PackageReference Include="Melodic.Enterprise.Serilog" Version="1.0.0-preview.766" />
   </ItemGroup>
 
 </Project>
