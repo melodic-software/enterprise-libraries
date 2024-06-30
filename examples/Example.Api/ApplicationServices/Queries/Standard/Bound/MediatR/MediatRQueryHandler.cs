@@ -1,6 +1,6 @@
 ﻿
+using Enterprise.ApplicationServices.MediatR.Queries.Handlers.Bound;
 using Enterprise.Events.Facade.Abstract;
-using Enterprise.MediatR.Queries.Handlers.Bound;
 using Example.Api.ApplicationServices.Queries.Results;
 
 namespace Example.Api.ApplicationServices.Queries.Standard.Bound.MediatR;

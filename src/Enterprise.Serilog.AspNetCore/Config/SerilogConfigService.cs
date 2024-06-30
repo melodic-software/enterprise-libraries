@@ -2,7 +2,6 @@
 using Enterprise.Options.Core.Services.Singleton;
 using Enterprise.Serilog.AspNetCore.Lifecycle;
 using Enterprise.Serilog.AspNetCore.RequestCorrelation;
-using Enterprise.Serilog.MediatR;
 using Enterprise.Serilog.Options;
 using Enterprise.Serilog.Options.Delegates;
 using Enterprise.Serilog.Templating;
@@ -46,8 +45,6 @@ public static class SerilogConfigService
             preserveStaticLogger: false,
             writeToProviders: false
         );
-
-        builder.RegisterMediatRServices();
     }
 
     public static void UseSerilog(this WebApplication app)

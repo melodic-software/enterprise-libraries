@@ -46,15 +46,15 @@ public static class WebApi
 
             PreStartupLogger.Instance.LogInformation("Beginning configuration.");
 
-            // This is the primary hook for applications to configure the API.
-            // This must be placed first in case the application decides to wire up event handlers.
-            WebApiOptionConfigurer.Configure(Options);
+            // These have to be in place before the first lifecycle event is raised.
+            // This allows the application to add additional configuration at specific points in the lifecycle.
             WebApiConfigEventHandlerRegistrar.RegisterHandlers(Events);
 
             // This is the first extensibility hook that allows for pre-configuration.
             await Events.RaiseConfigurationStarted(args);
 
             WebApplicationBuilder builder = await CreateBuilderAsync();
+            WebApiOptionConfigurer.Configure(Options, builder.Configuration);
 
             // Execute deferred configurations with the actual configuration and environment.
             PreStartupLogger.Instance.LogInformation("Executing deferred option configuration.");

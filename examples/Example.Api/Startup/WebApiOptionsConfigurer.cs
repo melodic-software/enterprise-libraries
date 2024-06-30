@@ -5,7 +5,7 @@ namespace Example.Api.Startup;
 
 internal sealed class WebApiOptionsConfigurer : IConfigureWebApiOptions
 {
-    public static void Configure(WebApiOptions options)
+    public static void Configure(WebApiOptions options, IConfiguration configuration)
     {
         options.ConfigureSignalR(signalROptions =>
         {

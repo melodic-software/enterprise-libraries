@@ -3,6 +3,7 @@ using Enterprise.Api.Startup.Options.Abstract;
 using Enterprise.Applications.DI.Registration.Methods;
 using Enterprise.Logging.Core.Loggers;
 using Enterprise.Reflection.Assemblies.Delegates;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Enterprise.Api.Startup.Options;
@@ -14,8 +15,9 @@ public static class WebApiOptionConfigurer
     /// This allows for automatic wiring up of API configuration and keeps that concern separated.
     /// </summary>
     /// <param name="options"></param>
+    /// <param name="configuration"></param>
     /// <param name="getAssemblies"></param>
-    public static void Configure(WebApiOptions options, GetAssemblies? getAssemblies = null)
+    public static void Configure(WebApiOptions options, IConfiguration configuration, GetAssemblies? getAssemblies = null)
     {
         PreStartupLogger.Instance.LogInformation("Applying dynamic configuration for web API options.");
 
@@ -24,7 +26,7 @@ public static class WebApiOptionConfigurer
                 typeof(IConfigureWebApiOptions),
                 nameof(IConfigureWebApiOptions.Configure),
                 MethodParamsAreValid,
-                [options],
+                [options, configuration],
                 getAssemblies: getAssemblies
             )
         );
@@ -33,6 +35,7 @@ public static class WebApiOptionConfigurer
     }
 
     private static bool MethodParamsAreValid(ParameterInfo[] methodParameters) =>
-        methodParameters.Length == 1 &&
-        methodParameters[0].ParameterType == typeof(WebApiOptions);
+        methodParameters.Length == 2 &&
+        methodParameters[0].ParameterType == typeof(WebApiOptions) &&
+        methodParameters[1].ParameterType == typeof(IConfiguration);
 }

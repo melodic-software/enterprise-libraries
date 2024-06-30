@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
+﻿using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric;

@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Enterprise.Api\Enterprise.Api.csproj" />
+    <ProjectReference Include="..\..\src\Enterprise.ApplicationServices.MediatR\Enterprise.ApplicationServices.MediatR.csproj" />
+    <ProjectReference Include="..\..\src\Enterprise.Events.MediatR\Enterprise.Events.MediatR.csproj" />
     <ProjectReference Include="..\..\src\Enterprise.ApplicationServices.DI\Enterprise.ApplicationServices.DI.csproj" />
     <ProjectReference Include="..\Example.AdditionalProject\Example.AdditionalProject.csproj" />
   </ItemGroup>

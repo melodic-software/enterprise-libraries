@@ -503,12 +503,13 @@
             This is required if no AutoLoad assembly attribute is defined.
             </summary>
         </member>
-        <member name="M:Enterprise.Api.Startup.Options.WebApiOptionConfigurer.Configure(Enterprise.Api.Startup.Options.WebApiOptions,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
+        <member name="M:Enterprise.Api.Startup.Options.WebApiOptionConfigurer.Configure(Enterprise.Api.Startup.Options.WebApiOptions,Microsoft.Extensions.Configuration.IConfiguration,Enterprise.Reflection.Assemblies.Delegates.GetAssemblies)">
             <summary>
             Dynamically resolves instances of <see cref="T:Enterprise.Api.Startup.Options.Abstract.IConfigureWebApiOptions"/> and invokes the configure method.
             This allows for automatic wiring up of API configuration and keeps that concern separated.
             </summary>
             <param name="options"></param>
+            <param name="configuration"></param>
             <param name="getAssemblies"></param>
         </member>
         <member name="T:Enterprise.Api.Startup.WebApi">

@@ -1,6 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Queries.Handlers;
 using Enterprise.ApplicationServices.Core.Queries.Model.Base;
-using Enterprise.ApplicationServices.Core.Queries.Model.NonGeneric;
 using Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
 using Enterprise.FluentValidation.Services;

@@ -1,4 +1,4 @@
-﻿using Enterprise.MediatR.Events.Handlers;
+﻿using Enterprise.Events.MediatR.Handlers;
 
 namespace Example.Api.Events.MediatR;
 
