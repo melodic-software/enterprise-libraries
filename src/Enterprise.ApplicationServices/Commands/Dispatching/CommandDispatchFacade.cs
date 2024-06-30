@@ -1,4 +1,5 @@
 ﻿using Enterprise.ApplicationServices.Core.Commands.Dispatching;
+using Enterprise.ApplicationServices.Core.Commands.Model.Base;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 using Enterprise.Events.Callbacks.Facade.Abstractions;
@@ -21,6 +22,12 @@ public class CommandDispatchFacade : ICommandDispatchFacade
     public void RegisterEventCallback<TEvent>(Action<TEvent> action) where TEvent : IEvent
     {
         _eventCallbackService.RegisterEventCallback(action);
+    }
+
+    /// <inheritdoc />
+    public async Task DispatchAsync(IBaseCommand command, CancellationToken cancellationToken = default)
+    {
+        await _commandDispatcher.DispatchAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />

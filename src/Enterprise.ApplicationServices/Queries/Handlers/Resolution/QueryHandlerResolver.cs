@@ -17,7 +17,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery query)
+    public IHandleQuery<TResult> GetHandlerFor<TResult>(IQuery query)
     {
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
@@ -25,7 +25,7 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TResult> GetQueryHandler<TResult>(IQuery<TResult> query)
+    public IHandleQuery<TResult> GetHandlerFor<TResult>(IQuery<TResult> query)
     {
         Type queryType = query.GetType();
         Type handlerType = typeof(IHandleQuery<,>).MakeGenericType(queryType, typeof(TResult));
@@ -33,14 +33,14 @@ public class QueryHandlerResolver : IResolveQueryHandler
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(TQuery query)
+    public IHandleQuery<TQuery, TResult> GetHandlerFor<TQuery, TResult>(TQuery query)
         where TQuery : class, IQuery
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();
     }
 
     /// <inheritdoc />
-    public IHandleQuery<TQuery, TResult> GetQueryHandler<TQuery, TResult>(IQuery<TResult> query)
+    public IHandleQuery<TQuery, TResult> GetHandlerFor<TQuery, TResult>(IQuery<TResult> query)
         where TQuery : class, IQuery<TResult>
     {
         return _serviceProvider.GetRequiredService<IHandleQuery<TQuery, TResult>>();

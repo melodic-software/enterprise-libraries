@@ -2,6 +2,8 @@
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Resolution;
 using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict;
+using Enterprise.ApplicationServices.Core.Commands.Handlers.Strict.NonGeneric;
+using Enterprise.ApplicationServices.Core.Commands.Model.Base;
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.Core.Commands.Model.Strict;
 
@@ -14,6 +16,12 @@ public class CommandDispatcher : IDispatchCommands
     public CommandDispatcher(IResolveCommandHandler commandHandlerResolver)
     {
         _commandHandlerResolver = commandHandlerResolver;
+    }
+
+    public async Task DispatchAsync(IBaseCommand command, CancellationToken cancellationToken = default)
+    {
+        IHandleCommand commandHandler = _commandHandlerResolver.GetHandlerFor(command);
+        await commandHandler.HandleAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />
