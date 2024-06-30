@@ -5,6 +5,9 @@ namespace Enterprise.ApplicationServices.Core.Commands.Dispatching;
 
 public interface IDispatchCommands
 {
-    Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : ICommand;
-    Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default) where TCommand : ICommand<TResult>;
+    Task DispatchAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
+        where TCommand : class, ICommand;
+
+    Task<TResult> DispatchAsync<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default)
+        where TCommand : class, ICommand<TResult>;
 }
