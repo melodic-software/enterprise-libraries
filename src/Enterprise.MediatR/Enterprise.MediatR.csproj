@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.3.0" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.762" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.782" />
     <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.675" />
   </ItemGroup>
 

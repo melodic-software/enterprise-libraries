@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Melodic.Enterprise.DI.Core" Version="1.0.0-preview.673" />
     <PackageReference Include="Melodic.Enterprise.Middleware.AspNetCore" Version="1.0.0-preview.705" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.762" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.782" />
   </ItemGroup>
 
 
