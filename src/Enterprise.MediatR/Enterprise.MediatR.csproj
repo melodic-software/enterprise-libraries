@@ -18,7 +18,7 @@
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.715" />
     <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.744" />
     <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.497" />
-    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.715" />
+    <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.762" />
   </ItemGroup>
 
   <ItemGroup>
