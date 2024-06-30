@@ -14,15 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.3.0" />
-    <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.764" />
-    <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.763" />
-    <PackageReference Include="Melodic.Enterprise.DomainDrivenDesign" Version="1.0.0-preview.744" />
-    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.497" />
     <PackageReference Include="Melodic.Enterprise.Options" Version="1.0.0-preview.762" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Behaviors\ErrorHandling\" />
+    <PackageReference Include="Melodic.Enterprise.Reflection" Version="1.0.0-preview.675" />
   </ItemGroup>
 
 </Project>

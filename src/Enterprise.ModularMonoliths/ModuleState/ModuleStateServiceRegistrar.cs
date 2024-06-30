@@ -9,14 +9,14 @@ namespace Enterprise.ModularMonoliths.ModuleState;
 
 internal sealed class ModuleStateServiceRegistrar : IRegisterServices
 {
-    public static void RegisterServices(IServiceCollection services, IConfiguration _)
+    public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IModuleStateService>(provider =>
         {
-            IConfiguration configuration = provider.GetRequiredService<IConfiguration>();
+            IConfiguration scopedConfiguration = provider.GetRequiredService<IConfiguration>();
             IOptions<ModuleStateOptions> moduleStateOptions = provider.GetRequiredService<IOptions<ModuleStateOptions>>();
             IModuleNameService moduleNameService = provider.GetRequiredService<IModuleNameService>();
-            return new ModuleStateService(configuration, moduleStateOptions, moduleNameService);
+            return new ModuleStateService(scopedConfiguration, moduleStateOptions, moduleNameService);
         });
     }
 }

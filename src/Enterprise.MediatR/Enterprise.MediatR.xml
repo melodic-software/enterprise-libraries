@@ -24,14 +24,6 @@
             </summary>
             <param name="assembly"></param>
         </member>
-        <member name="M:Enterprise.MediatR.Behaviors.BehaviorRegistrations.Default">
-            <summary>
-            These are the default behavior registrations.
-            </summary>
-        </member>
-        <member name="M:Enterprise.MediatR.Events.Dispatching.MediatREventDispatcher.OnDispatchCompleteAsync(Enterprise.Events.Model.IEvent,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="P:Enterprise.MediatR.Options.MediatROptions.EnableMediatR">
             <summary>
             Determines if MediatR services will be registered.
