@@ -23,8 +23,9 @@ public static class ExceptionHandlerConfigService
         // NOTE: This will not be run if the Hellang middleware is registered.
 
         //services.AddExceptionHandler<DefaultExceptionHandler>();
-        services.AddExceptionHandler<GlobalExceptionHandler>();
+
         services.AddExceptionHandler<TimeOutExceptionHandler>();
         services.AddExceptionHandler<ValidationExceptionHandler>();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
     }
 }

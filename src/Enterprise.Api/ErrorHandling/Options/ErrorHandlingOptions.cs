@@ -9,7 +9,7 @@ public class ErrorHandlingOptions
     /// <summary>
     /// Determines if the Hellang middleware will be used or if standard exception handling middleware will be used.
     /// </summary>
-    public bool UseHellangMiddleware { get; set; }
+    public bool UseHellangMiddleware { get; set; } = true;
 
     /// <summary>
     /// This is the friendly message that will be returned when internal server errors occur (500 status code).
