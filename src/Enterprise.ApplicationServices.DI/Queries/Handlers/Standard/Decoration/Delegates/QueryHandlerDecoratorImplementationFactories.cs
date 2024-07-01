@@ -19,7 +19,8 @@ public static class QueryHandlerDecoratorImplementationFactories
             {
                 IGetDecoratedInstance decoratorService = provider.GetRequiredService<IGetDecoratedInstance>();
                 IEnumerable<IValidator<TQuery>> validators = provider.GetServices<IValidator<TQuery>>();
-                IHandleQuery<TQuery, TResult> decorator = new FluentValidationQueryHandler<TQuery, TResult>(queryHandler, decoratorService, validators);
+                ILogger<FluentValidationQueryHandler<TQuery, TResult>> logger = provider.GetRequiredService<ILogger<FluentValidationQueryHandler<TQuery, TResult>>>();
+                IHandleQuery<TQuery, TResult> decorator = new FluentValidationQueryHandler<TQuery, TResult>(queryHandler, decoratorService, validators, logger);
                 return decorator;
             }, (provider, queryHandler) =>
             {

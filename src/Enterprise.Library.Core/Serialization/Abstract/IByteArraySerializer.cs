@@ -3,6 +3,6 @@
 public interface IByteArraySerializer
 {
     byte[] Serialize<T>(T value);
-    T Deserialize<T>(byte[] bytes);
-    object Deserialize(byte[] bytes, Type type);
+    T? Deserialize<T>(byte[] bytes);
+    object? Deserialize(byte[] bytes, Type type);
 }

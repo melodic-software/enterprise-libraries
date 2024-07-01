@@ -37,7 +37,7 @@ public static class RedisConfigService
         {
             // This is a connection to our Redis interface.
             // We register it as a singleton because it will be resolved internally by some services we'll be using.
-            // TODO: use async version of this?
+            // TODO: Cane we use the async version of this?
             IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
             services.TryAddSingleton(connectionMultiplexer);
 

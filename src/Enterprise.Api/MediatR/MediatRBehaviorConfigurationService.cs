@@ -37,7 +37,7 @@ internal sealed class MediatRBehaviorConfigurationService : IConfigureWebApiOpti
             defaultRegistrations.Add(new(typeof(RequestLoggingBehavior<,>), ServiceLifetime.Scoped));
             defaultRegistrations.Add(new(typeof(RequestExceptionHandlingBehavior<,>)));
             defaultRegistrations.Add(new(typeof(NullRequestValidationBehavior<,>)));
-            defaultRegistrations.Add(new(typeof(RequestFluentValidationBehavior<,>)));
+            defaultRegistrations.Add(new(typeof(UseCaseFluentValidationBehavior<,>)));
 
             // These apply to specific requests.
             defaultRegistrations.Add(new(typeof(QueryCachingBehavior<,>)));

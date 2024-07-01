@@ -12,6 +12,9 @@ internal sealed class CachingServiceRegistrar : IRegisterServices
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
+        // TODO: Provide configuration around this registration.
+        // What if the consuming app doesn't have a distributed cache implementation?
+
         services.TryAddSingleton(provider =>
         {
             // This will require a registration of IDistributedCache.
