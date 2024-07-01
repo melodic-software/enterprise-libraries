@@ -13,7 +13,7 @@ namespace Enterprise.FluentValidation.Services.Generic;
 
 public static class FluentValidationService
 {
-    public static async Task<TResult> ExecuteValidationAsync<TResult>(IReadOnlyCollection<IValidator> validators, IValidationContext validationContext)
+    public static async Task<TResult?> ExecuteValidationAsync<TResult>(IReadOnlyCollection<IValidator> validators, IValidationContext validationContext)
     {
         ValidationResult[] validationResults = await Task.WhenAll(validators.Select(v => v.ValidateAsync(validationContext)));
         TResult? result = ProcessResults<TResult>(validationResults);
