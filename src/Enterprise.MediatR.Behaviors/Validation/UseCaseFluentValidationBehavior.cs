@@ -1,5 +1,4 @@
-﻿using Enterprise.ApplicationServices.Core.Commands.Model.Base;
-using Enterprise.ApplicationServices.Core.UseCases;
+﻿using Enterprise.ApplicationServices.Core.UseCases;
 using Enterprise.FluentValidation.Services.Generic;
 using FluentValidation;
 using MediatR;
@@ -11,12 +10,12 @@ namespace Enterprise.MediatR.Behaviors.Validation;
 /// </summary>
 /// <typeparam name="TRequest"></typeparam>
 /// <typeparam name="TResult"></typeparam>
-public class CommandFluentValidationBehavior<TRequest, TResult>
+public class UseCaseFluentValidationBehavior<TRequest, TResult>
     : IPipelineBehavior<TRequest, TResult> where TRequest : IUseCase
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators;
 
-    public CommandFluentValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+    public UseCaseFluentValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators.ToList();
     }
