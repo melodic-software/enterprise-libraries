@@ -32,7 +32,7 @@ public class FluentValidationCommandHandler<TCommand> : IHandler<TCommand>
 
         _logger.LogDebug("Executing fluent validation.");
         await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
-        _logger.LogDebug("Fluent validation succeeded.");
+        _logger.LogDebug("Fluent validation completed.");
 
         await next();
     }

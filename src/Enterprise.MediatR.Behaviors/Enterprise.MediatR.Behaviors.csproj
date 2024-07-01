@@ -10,7 +10,7 @@
     <PackageReference Include="Melodic.Enterprise.ApplicationServices" Version="1.0.0-preview.784" />
     <PackageReference Include="Melodic.Enterprise.Caching" Version="1.0.0-preview.783" />
     <PackageReference Include="Melodic.Enterprise.Exceptions" Version="1.0.0-preview.795" />
-    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.791" />
+    <PackageReference Include="Melodic.Enterprise.FluentValidation" Version="1.0.0-preview.799" />
     <PackageReference Include="Melodic.Enterprise.MediatR" Version="1.0.0-preview.783" />
     <PackageReference Include="Melodic.Enterprise.ModularMonoliths" Version="1.0.0-preview.785" />
     <PackageReference Include="Melodic.Enterprise.Patterns.ResultPattern" Version="1.0.0-preview.740" />

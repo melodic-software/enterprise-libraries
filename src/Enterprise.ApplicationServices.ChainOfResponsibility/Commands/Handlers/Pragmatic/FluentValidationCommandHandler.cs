@@ -1,6 +1,6 @@
 ﻿using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Delegates;
 using Enterprise.DesignPatterns.ChainOfResponsibility.Pipeline.Handlers.RequestResponse.Abstract;
-using Enterprise.FluentValidation.Services;
+using Enterprise.FluentValidation.Services.Generic;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 
@@ -30,8 +30,13 @@ public class FluentValidationCommandHandler<TCommand, TResult> : IHandler<TComma
         IValidationContext validationContext = new ValidationContext<TCommand>(request);
 
         _logger.LogDebug("Executing fluent validation.");
-        await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
-        _logger.LogDebug("Fluent validation succeeded.");
+        TResult? result = await FluentValidationService.ExecuteValidationAsync<TResult>(_validators, validationContext);
+        _logger.LogDebug("Fluent validation completed.");
+
+        if (!Equals(result, default(TResult)))
+        {
+            return result;
+        }
 
         return await next();
     }

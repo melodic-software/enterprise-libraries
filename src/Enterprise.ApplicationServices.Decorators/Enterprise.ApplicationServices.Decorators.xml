@@ -28,17 +28,5 @@
         <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#NonGeneric#IHandleQuery#HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(Enterprise.ApplicationServices.Core.Queries.Model.Base.IBaseQuery,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.Enterprise#ApplicationServices#Core#Queries#Handlers#IHandleQuery{TQuery,TResult}#HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Enterprise.ApplicationServices.Decorators.Queries.Handlers.Bound.Abstract.QueryHandlerDecoratorBase`2.HandleAsync(`0,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
     </members>
 </doc>

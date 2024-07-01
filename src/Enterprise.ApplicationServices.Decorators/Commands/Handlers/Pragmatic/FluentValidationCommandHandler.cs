@@ -2,7 +2,7 @@
 using Enterprise.ApplicationServices.Core.Commands.Model.Pragmatic;
 using Enterprise.ApplicationServices.Decorators.Commands.Handlers.Pragmatic.Abstract;
 using Enterprise.DesignPatterns.Decorator.Services.Abstract;
-using Enterprise.FluentValidation.Services;
+using Enterprise.FluentValidation.Services.Generic;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 
@@ -34,8 +34,13 @@ public class FluentValidationCommandHandler<TCommand, TResult> : CommandHandlerD
         IValidationContext validationContext = new ValidationContext<TCommand>(command);
 
         _logger.LogDebug("Executing fluent validation.");
-        await FluentValidationService.ExecuteValidationAsync(_validators, validationContext);
-        _logger.LogDebug("Fluent validation succeeded.");
+        TResult? result = await FluentValidationService.ExecuteValidationAsync<TResult>(_validators, validationContext);
+        _logger.LogDebug("Fluent validation completed.");
+
+        if (!Equals(result, default(TResult)))
+        {
+            return result;
+        }
 
         return await Decorated.HandleAsync(command, cancellationToken);
     }
